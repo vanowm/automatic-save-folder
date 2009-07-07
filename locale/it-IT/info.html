@@ -1,0 +1,300 @@
+﻿<html>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<body style="background-color:#FFFFFF;">
+<center><font size="+1"><b>Automatic Save Folder V0.9.3</b></font></center>
+<center>by Cyan</center>
+<br /><b><u>Importante</u></b>:
+<br />
+<br />Questa estensione funziona solamente se si usa la finestra di download (quella che chiede di aprire, eseguire o salvare file su disco)
+<br/><img src="chrome://asf/skin/screen_save_80fr.png" />
+<br />Se Firefox non mostra tale finestra, l'estensione non funzionerà.
+<br />
+<br />
+<br />Se qualche filtro non funziona, accertartati che Firefox non usi un altro processo sul file scaricato:
+<br />
+<br />1. 
+<br />&nbsp;&nbsp; Vai sul menu "Strumenti" e "Opzioni...".
+<br />2.
+<br />&nbsp;&nbsp; - Per utenti di Firefox 3: vai sul tab "Applicazioni"
+<br />&nbsp;&nbsp; - Per utenti di precedenti versioni di Firefox: Vai sul tab "Contenuti" e clicca su "gestisci..." in basso a destra.
+<br />3.
+<br />&nbsp;&nbsp; Verifica se il file che vuoi scaricare sia impostato su "Chiedi ogni volta".
+<br /><img src="chrome://asf/skin/screen_apps_fr.png" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Come si usa</u></b>:
+<br />
+<br />
+<br />Questa estensione permette di definire, usando dei filtri, quale cartella verrà scelta automaticamente quando scarichi i tuoi file.
+<br />
+<br /><u>Regole dei filtri</u>:
+<br />- I filtri sono definiti usando il nome del file e il dominio.
+<br />Attenzione: Per il dominio non usare l'inidirizzo corrente del sito, ma il server dove si trova il file.
+<br />- I filtri devono corrispondere al nome del file o al dominio. Per esempio non scrivere <b>"google.com"</b> ma solo <b>google.com</b> (senza doppi apici)
+<br />- Puoi usare i caratteri wildcard <b>*</b> (asterisco) per rimpiazzare parti del filtro: <b>wiki*.org</b>
+<br />- L'asterisco non serve all'inizio e alla fine della stringa usata come filtro. Scrivere <b>*wiki*</b> o <b>wiki</b> è la stessa cosa. 
+<br />- La stessa cosa vale per il filtro sul nome file: <b>*.zip</b> o <b>.zip</b> funzionano allo stesso modo.
+<br />- I filtri sono verificati da quello più in alto a quello più basso e il processo termina quando un filtro corrisponde al file da scaricare. Abbi cura di ordinare i tuoi filtri di conseguenza.
+<br />- I filtri non sono 'case insensitive', cioè non c'è nessuna differenza tra parole scritte in maiuscolo o in minuscolo quando viene processato un filtro.
+<br />
+<br />
+<br />Questa estensione può essere usata con espressioni regolari.
+<br />Puoi leggere dal menu l'aiuto sulle espressioni regolari sulla finestra di aggiunta e modifica filtri.
+<br />
+<br />
+<br />Sono disponibili variabili dinamiche per creare directory quando si salva, chiamate con la data, col nome del file o col nome del dominio.
+<br />Puoi controllare il tab delle opzioni per vedere la lista dei tag dinamici.
+<br />
+<br />
+<br />
+<br /><u>Un po di esempi sui filtri</u>:
+<br />
+<br />Se vuoi che tutti i file eseguibili <b>.exe</b> vengano salvati su una cartella specifica:
+<br />- <b>dominio</b>: tutti
+<br />- <b>filter</b>: .exe
+<br />- <b>cartella</b>: la tua cartella per i file eseguibili
+<br />
+<br />
+<br />Se invece vuoi che tutti i file di un particolare sito (per esempio mozilla.org) vengano scaricati sulla cartella Mozilla:
+<br />- <b>dominio</b>: mozilla.org
+<br />- <b>filtro</b>: tutti
+<br />- <b>cartella</b>: la tua cartella Mozilla
+<br />
+<br />
+<br />Oppure, se hai bisogno di avere tutti i file zip <b>.zip</b> da mozilla.org, e lasciare gli altri file nella cartella precedente:
+<br />- <b>dominio</b>: mozilla
+<br />- <b>filtro</b>: .zip
+<br />- <b>cartella</b>: la tua cartella Mozilla per i file zip
+<br />e metti questo filtro sopra il precedente. Ricorda che i filtri vengono controllati dall'alto verso il basso.
+<br />
+<br />
+<br />Per finire, puoi definire filtri con un nome più completo, e non solo dall'estensione del file:
+<br />- <b>dominio</b>: tutti
+<br />- <b>filtro</b>: firefox*.exe
+<br />- <b>cartella</b>: la tua cartella per tutte le versioni del programma di istallazione di Firefox
+<br />
+<br />
+<br /><u>Ecco qualche esempio di variabili dinamiche e "capture":</u> :
+<br />
+<br />Per scaricare tutte le nightly build di firefox in una sottocartella di D:\firefox :
+<br />- <b>dominio</b> : Tutti
+<br />- <b>filtro</b> : firefox*pre
+<br />- <b>cartella</b> : D:\firefox\Nightly\%Y%-%m%-%d%
+<br />L'estensione creerà una sottocartella chiamata con la data di quel giorno. Per esempio "2009-12-04", dove verrà salvato il file.
+<br />
+<br />
+<br />Per scaricare un file in base alla sua estensione:
+<br />- <b>dominio</b> : Tutti
+<br />- <b>filtro</b> : Tutti
+<br />- <b>cartella</b> : D:\download\%asf_x%
+<br />L'estensione creerà una sottocartella chiamata "zip" per i file .zip, "rar" per i file .rar, etc., dove verranno salvati i file.
+<br />
+<br />
+<br />Per creare oppure no sottocartelle differenti in base al nome del file :
+<br />
+<br />Esempio : Vogliamo salvare i video chiamati "La_mia_vacanza_data-di-viaggio.avi".
+<br />I video hanno i sottotitoli nel formato .srt per spiegare la vacanza, 
+ci sono anche file .zip con le foto del viaggio, 
+e i video possono escarticati con l'estensione .avi, .torrent or .nzb (newsgroup).
+<br />
+<br />".avi" e ".srt" andranno nella cartella D:\video\vacation .
+<br />".zip", ".torrent" e ".nzb" andranno rispettivamente nelle sottocartelle D:\video\vacanze\zip, D:\video\vacanze\torrent and D:\video\vacanze\nzb.
+<br />
+<br />- <b>dominio</b> : Tutti
+<br />- <b>filtro</b> : /^La_mia_vacanza.*\.(avi|srt|zip|torrent|nzb)$/
+<br />- <b>cartella</b> : D:\video\vacanza\%asf_rf%(zip|torrent|nzb)$%asf_rf%
+<br />
+<br />Spiegazione dei filtri :
+<br />I filtri saranno attivati per tutti i file che cominciano con "La_mia_vacanza" e che finiscono con l'estensione disponibili (avi, srt, zip, torrent o nzb).
+<br />La cartella creata dipenderà dal filtro: %asf_rf% analizza il nome del file scaricato con l'espressione regolare contenuta fra i due %asf_rf% : se il file finisce con "zip", "torrent" o "nzb", la parte catturata dall'espressione regolare creerà la sottocartella.
+<br />Se nessuna di quelle estensioni non è trovata, l'espressione regolare non farà nulla, non verrà creata nessuna sottocartella e i file verranno scaricati nella cartella in D:\video\vacanze\
+<br />
+<br />Nota: Puoi mettere quanti tag vuoi per la cartella principale.
+<br />I filtri possono essere:
+<br />- <b>filtro</b> : /.*\.(avi|srt|zip|torrent|nzb)$/
+<br />- <b>cartella</b> : D:\video\%asf_rf%(vacanza|matrimonio)%asf_rf%\%asf_rf%(zip|torrent|nzb)$%asf_rf%
+<br />In questo cartello, verrà creata la cartella "vacanze" verrà creata solo se il nome contiene "vacanze".
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Problemi noti</u></b>:
+<br />
+<br />- Per alcuni utenti, ASF suggerisce solo la cartella di default invece della cartella del filtro.
+<br />Non ci sono abbastanza commenti da parte degli uteniti per capire bene il problema.
+<br />Perfavore contattare l'autore se sei uno di tali utenti e vuoi aiutare a correggere il problema.
+<br />
+<br />- Se i filtri contenevano caratteri unicode nella versione precedente (precedente alla 0.9.3), il percorso del filtro potrebbe apparire vuoto, ma funziona.
+<br />Perfavore, edita i filtri e specifica il percorso manualmente.
+<br />
+<br />- I filtri dei domini sono fatti nel referer URL se il dominio hostato non corrisponde al filtro.
+<br />Può dare problemi sulla validazione del filtro quando l'utente non prova a validarlo.
+<br />Se tale problema capita, cancellerò quest'opzione (perfavore lasciate dei commenti su questa opzione: utile o no?).
+<br />
+<br />
+<br />
+<br /><b><u>Da fare</u></b>:
+<br />
+<br />Sto cercando aiuto su:
+<br />- Abilitare filtri quando si usa il menu del tasto destro "Salva destinazione con nome..." e "Salva immagine con nome...".
+<br />- Aggiungere caratteristiche o rimpiazzare il menu opzioni "Applicazioni" di Firefox.
+<br />
+<br />Puoi contattarmi se hai bisogno di aiuto o suggerimenti:
+<br />http://asf.mangaheart.org
+<br />o
+<br />https://addons.mozilla.org/fr/firefox/addon/4781
+<br />
+<br />
+<br /><b><u>Storico versioni</u></b>:
+<br />
+<br /><pre>
+
++ aggiunto
+- rimosso
+* risolto o cambiato
+
+
+Version 0.9.3: (2009 07 05)
++ Aggiunto il numero di versione nel titolo della finestra di configurazione principale
++ Aggiunta l'opzione di eseguire doppio click sul campo del percorso per aprire la finestra di selezione.
++ Nuovi tab per separare filtri, opzioni, aiuto e l'elenco di versioni.
++ Possibilità di creare variabili dinamiche per creare cartelle. (Grazie a Ted per la cattura del gruppo col $1)
++ Opzione per attivare o disattivare le variabili dinamiche (Modalità avanzata).
++ Nuovo menu contestuale sulla lista dei filtri per duplicare un filtro, spostarlo su o giù con un click.
++ [Sperimentale] Per facilitare l'uso quando il dominio hostato è random (es. per scaricare firefox su mozilla.org):
+  Controllare i filtri con l'URI corrente se il dominio hostato non corrisponde.
+  Attenzione all'ordine dei filtri: Prima viene controllato il file del dominio, dopo l'indirizzo  del sito corrente.
+  I dati usati per selezionare il dominio come "precedente" è ancora uno dei file hostati sul dominio.
++ Limitata la larghezza della finestra di salvataggio (Grazie a Julien)
++ Aggiunta l'opzione per mostrare un menu con la lista nella finestra di salvataggio per selezionare la cartella di salvataggio da tale lista. 
+* Correzione per il percorso in unicode (i filtri che usano caratteri unicode nella versione 0.9.2 potrbbero essere rimossti, perfavore riscriverli a mano).
+* Correzione per il parametro editabile dei nuovi filtri creati.
+* Cambiato il modo in cui i link nella finestra "about..." funzionano. Adesso apriranno un nuovo tab.
+* Finetra e menu pi grandi per una visibilità migliore.
+* Codice semplificato per muovere i filtri su e giu.
+* Codice semplificato per il caricamento e l'autocompletamento dei dati nella finestra "aggiungi".
+* Migliore visibilità: Tutte le finestra possono essere ridimensionate e il contenuto verrà aggiusato di conseguenza.
+* Corretto il bug che non faceva caricare e leggere preferenze non definite o non esistenti nella about:config (Grazie a Martin)
+* Script riscritto completamente per usare namespace Globa (chiesto da mozilla.com per pubblicare l'estensione)
+* Codice scritto in modo più chiaro e con commenti.
+  
+
+Versione 0.9.2: (2009 01 26)
+* Correzione per Vista: Forzata la variabile browser.download.folderList a "2" quando si apre la finestra delle preferenze di ASF.
+* Corretta la colonna "attiva", i filtri non potevano essere temporaneamente attivati o disattivati.
+*Compatibilià con i temi: Adesso vengono usati i colori di default, tutto il testo dovrebbe essere visibile correttamente.
+ Le immagini sono state aggiornate in modo da rimanere visibili sui temi scuri.
+* Firefox 3.1b2, 3.1b3, 3.5b4
+ 
+ 
+Versione 0.9.1: (2008 11 01)
++ Traduzione italiana di Scognito.
++ Aggiunto un radio menu mentre si salva, che permette all'utente di scegliere velocemente fra le ultime due cartelle.
+  La seconda scelta compare solamente se è diversa dalla prima.
+* Corretto un bug dello script sulla verifica del filtro mentre "Usa l'ultima cartella" era selezionata (grazie a Carsten)
+* Nascosta l'opzione "Ha effetto su 'salva come...'" su Firefox 3, questa opzione è usata automaticamente.
+* Rimosso il popup "Aggiungi un filtro" mentre si salva. Ha creato il problema del focus e un errore sul posizionamento della finestra.
+  Il collegamento è ancora qui e apre la finestra principale per permettere all'utente di aggiungere o modificare filtri.
+  Mentre si aggiunge un filtro usando questo collegamento, il campo verrà inserito automaticamente riempito col nome del file corrente e col dominio.
+* Risolto un bug su Firefox 3 e Windows Vista: Cambiato un opzione interna di firefox che permette all'utente di usare cartelle definite. (Thanks to Carsten)
+  (browser.download.folderList = 2) Su Windows Vista, il valore è settato a 1.
+  I possibili valori sono: 0 = desktop ; 1 = cartella di download predefinita; 2 = scelta utente.
+* Risolto il percorso specificato sulle finestre di downloa su Firefox 3.
+* Risolto il doppio click sui filtri. Adesso i campi non sono editabili su Firefox 3.
+
+
+
+Versione 0.9.0: (2008 06 28)
++ Funziona con Firefox 3.0.*
++ Aggiunto un nuovo bottone per informazioni su aiuti e informazioni su come usare l'estensione.
++ Nuovo menu che permette di modificare un filtro prima si dalvare il file, con i campi dominio e file riempiti con le proprietà del download corrente.
+  Dopo aver aggiunto un filtro in questo modo, i filtri sono controllati di nuovo e applicati al file appena scaricato.
+  Problema noto: Può capitare un problema di focus mentre si chiude il pannelo dei filtri.
+- Tolta l'opzione per attivare o disattivare l'estensione. Per disabilitarla temporaneamente, usa il gestore delle estensioni.
+* Nuovo modo di controllare i filtri (addEventlistener invece di OnLoad), per una migliore compatibilità con altre estensioni.
+* Corretta la colonna per filtro "Attivo" che non era nascosta correttamente.
+
+
+Versione 0.8.7: (2008 01 06)
++ ...versioni per Windows and Linux (e forse Mac ? Perfavore qualcuno potrebbe testare ?)
++ Compatibile con Firefox 3.0 beta (giusto qualche cambiamento sullo script).
+* Il bottone Invio ha effetto sui vari pulsanti (Ok, Aggiungi, Modifica). Nelle precedenti versioni era sul pulsante "Cancel".
+
+
+Versione 0.8.6 - Linux fix: (2008 01 04)
+* Cambiati i bottoni "OK" che non comparivano nel menu principale su Linux.
+Informazioni:
+Su Linux, c'è solo il bottone "chiudi" e i bottoni di controllo sono salvati automaticamente quando richiesto dall'utente. Sfortunatamente l'array Table non è salvato in questo processo.
+Ho rimosso il bottone "Accetta" e l'ho cambiato con uno fatto traimte script "Salva e chiudi".
+
+
+Versione 0.8.6: (2007 07 09)
+* Correzioni di parole e frasi. Grazie al commento di Goofy di Mozilla.org.
+
+
+Versione 0.8.5: (2007 04 01)
++ Aggiunta l'opzione per mostrare qualche informazione sulla finestra di download.
++ Aggiunta l'opzione per mantenere in memoria il dominio da cui viene il file.
+* La cartella di default funziona anche quando nessun filtro è impostato.
+* Cambiato il modo in cui compare la finestra d'aiuto delle espressioni regolari. Viene usato un Iframe e una pagina html invece del dtd di Xul
+
+
+Versione 0.8.4: (2007 02 24)
++ Traduzione francese
+* File di traduzione convertiti in utf-8.
+
+
+Versione 0.8.3: (2007 02 17)
++ Aggiunto qualche esempio e piccoli suggerimenti sulle espressioni regolari. Si trova sulla finestra Aggiungi e Modifica filtro.
+
+
+Versione 0.8.2:(2007 02 15)
+Primo rilascio pubblico.
++ Aggiunta l'opzione per impostare il percorso del menu salva pagina Web (File, salva pagina con nome...)
+
+
+Versione 0.8.1:
+* Selezione cartella: La finestra della selezione della cartella si basa sulla cartella scelta precedentemente. Prima si apriva su una cartella a caso tra: documents and settings, desktop o la cartella dell'utente.
+* Restrizioni sulla selezione della cartella: tolta la possibilità di scrivere il percorso manualmente, adesso solo il bottone "Seleziona..." è valido per la selezione della cartella di destinazione.
+
+
+Versione 0.8.0:
+Funzioni:
++ Filtri ordinati per priorità (opzioni per muovere i filtri su e giu)
++ Funziona con filtri normali, wildcard e RegExp.
++ La cartella si puà selezionare manualmente o col bottone "Seleziona".
++ Modifica di un filtro tramite doppio click sulla lista dei filtri.
++ Skin della GUI con immagini.
+</pre>
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Thanks</u></b>:
+<br />
+<br />- Goofy, Haynee: Per aver letto e corretto le traduzioni in inglese e francese.
+<br />- MrCOLOMBO: Grazie per le idee, ma ho dovuto usare il menu corrente con il popup per mantere controlli sulla sicurezza.
+<br />- Photonic: Per avermi fatto notare il prombema con il menu "Applicazioni" di Firefox :)
+<br />- Carsten: Per l'aiuto su un errore dello script e l'opzione di Firefox su Windows Vista che non faceva funzionare i filtri.
+<br />- Martin: Help with finding the bug when reading a Firefox preference not set or empty.
+<br />- Ted Gifford: Script modification allowing group capture in dynamic variables.
+<br />
+<br />
+<br /><b><u>Translators</u></b>:
+<br />- English : Cyan.
+<br />- French : Cyan.
+<br />- Italian : Scognito.
+<br />
+<br />
+</body>
+</html>

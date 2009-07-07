@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<?xml-stylesheet href="chrome://asf/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://asf/locale/asf.dtd">
+<overlay id="asf-overlay-preferences"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<menupopup id="menu_ToolsPopup">
+		<menuitem insertafter="sanitizeItem" id="asf-option" label="&asf.label;" 
+            oncommand="window.openDialog('chrome://asf/content/options.xul','Automatic_Save_Folder_Preferences','chrome,centerscreen,resizable=yes, dialog=no');" />
+  </menupopup>
+</overlay>

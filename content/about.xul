@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://asf/locale/about.dtd">
+<dialog title="&about;" 
+			orient="vertical" 
+			autostretch="always" 
+			onload="sizeToContent()" 
+			buttons="accept" 
+			xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script type="application/javascript" src="chrome://global/content/contentAreaUtils.js"/>
+<groupbox align="center" orient="horizontal">
+	<vbox>
+		<hbox flex="1">
+			<image src="chrome://asf/skin/asf-icon.png"/>
+			<text value="Automatic save folder" style="font-weight: bold; font-size: x-large;"/>
+		</hbox>
+		<text value="&version;"/>
+		
+		<separator/>
+		<vbox flex="1">
+			<text value="&createdBy;" style="font-weight: bold;"/>
+			<text value="&createdBy.name;"/>
+		</vbox>
+		<separator/>
+		<vbox flex="1">
+			<text value="&contributor;" style="font-weight: bold;"/>
+			<text value="&contributor.name;"/>
+			<text value="&contributor2.name;"/>
+		</vbox>
+		
+		<separator/>
+		<text value="&homepage;" style="font-weight: bold;"/>
+		<text value="Automatic Save Folder"	class="text-link" onclick="window.close(); openURL('http://asf.mangaheart.org');"/>
+		<text value="http://mozilla.org" class="text-link" onclick="window.close(); openURL('https://addons.mozilla.org/fr/firefox/addon/4781');"/>
+		<separator class="thin"/>
+	</vbox>
+</groupbox>
+</dialog>

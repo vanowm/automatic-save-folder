@@ -1,0 +1,172 @@
+﻿<html>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<body style="background-color:#FFFFFF;">
+<br />L'expression régulière (appelé Reg. exp., Regex. ou Regexp) est une méthode de filtrage permettant de définir plusieurs masques complexe en un seul filtre.
+<br />
+<br />Avec les expressions régulières vous pouvez filtrer des noms de fichiers ou de domaines qui pourraient être difficile à effectuer avec le simple astérisque '*'.
+<br />
+<br /><b>Note 1</b> : Tous les filtres ignorent la casse (les majuscules et minuscules sont interprétés de la même façon).
+<br /><b>Note 2</b> : Les expressions régulières nécessitent dans cette extension d'être entourés par des slashs / /. Tous les exemples décrits ci-dessous omettent les slashs de début et de fin de filtre afin de faciliter la lisibilité. Lorsque vous cochez la case Regexp dans la fenêtre du filtre, les slashs / / s'ajoutent automatiquement.
+<br />
+<br />
+<br />Pour créer les filtres, il y a plusieurs caractères spéciaux à connaître :
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>.</b>
+<br />Le point . remplace n'importe quel caractère, limité à un seul caractère (une lettre, un nombre ou un espace). 'g..gle' correspond donc à google et tous les autres mots commençant par 'g' suivi de 2 caractères quelconque et terminant par 'gle'.
+<br />
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>*</b>
+<br />L'astérisque * permet de répéter plusieurs fois le caractère précédant. 
+<br />go*gle correspondra donc à gogle, google, gooooooooooogle, etc.
+<br />'.*' (Un point suivi d'un astérisque) correspond à une suite de plusieurs lettres quelconques : plusieurs fois 1 seul caractère.
+<br />'.*' utilisé seul définit donc la totalité du nom de domaine ou du nom de fichier à filtrer, par conséquent cela correspond à l'option 'Tous' de la fenêtre d'ajout et d'édition des filtres.
+<br />
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>^</b>
+<br />Le circonflexe ^ permet de repérer le début d'une ligne. '^http' ne cherchera que les http en début de domaine.
+<br />Le filtrage sera donc correct pour 'http://test.com' mais ne sera pas bon pour 'ftp://http_test.com' car 'http' n'est pas en début de ligne mais au centre.
+<br />
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>$</b>
+<br />Le signe dollar $ permet de repérer la fin de phrase ou de ligne. 'com$' correspondant a tout ce qui termine par com.
+<br />Le filtrage sera donc correct dans 'http://test.com' mais ne sera pas bon pour 'http://computer.net' car 'com' n'est pas en fin de ligne mais au centre.
+<br />
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>\</b> suivi d'une lettre
+<br />\d capture les décimales (nombres)
+<br />\s capture tous les espace blanc (espace, tab, etc.)
+<br />\w capture un mot (séparé par des espaces, début ou fin de ligne)
+<br />\b permet de repérer le début et la fin d'un mot. '\barc\b' permettra de repérer le mot 'arc' s'il est employé seul, et ne fonctionnera pas sur le mot 'parc' ni sur 'arctique'.
+<br />\uFFFF avec FFFF = code hexadécimal, permet de capturer les caractères unicodes correspondant au code hexadécimal.
+<br />Exemple \u00E0 capturera 'à'<br />
+<br />
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>{ }</b>
+<br />Les accolades {} permettent de définir le nombre de répétition du caractère qui le précède, exemple go{2}gle = google (caractère o répété 2 fois)
+<br />Il est possible de définir le nombre minimum et maximum : 'go{0,2}gle' correspondra à ggle, gogle et google
+<br />
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>( )</b> et <b>( | )</b>
+<br />Les parenthèses permettent de définir un groupe de lettre consécutive. Utilisé conjointement avec un pipe | cela permet de définir plusieurs choix possible.
+<br />(aaaa|bbbb|cccc) capturera n'importe lequel de ces groupe de caractère aaaa or bbbb or cccc, mais pas plusieurs.
+<br />(b|g)oogle ne correspond qu'à boogle ou google, et non pas bgoogle
+<br />Vous pouvez appliquer des filtres sur les parenthèses :
+<br />'(b|g){1,2}oogle' permet de capturer une à deux fois les lettres parmi b ou g, suivi de 'oogle'.
+<br />boogle, bboogle, google, ggoogle, bgoogle, gboogle sont tous correct.
+<br />'(b|g)*oogle' permet de capturer un nombre infini de b, de g ou des deux avant 'oogle'.
+<br />
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>?</b>
+<br />Le point d'interrogation ? permet de définir des données optionnelles.
+<br />Par exemple les fichiers mpeg peuvent être de type '.mpg' ou '.mpeg'. L'expression régulière corresondante sera 'mpe?g'
+<br />Nov(embre)? capturera Nov et Novembre
+<br />Le ? correspond à l'expression régulière {0,1}
+<br />Nov(embre)? = Nov(embre){0,1}
+<br />
+<br />Le caractère * suivi d'un ? permet de rendre le * fénéant au lieu d'avare, exemple :
+<br />Les données : "C'est un test"
+<br />Le filtre : "t.*t" capturera du premier au dernier T, soit "t un test", l'astérisque est avare et capture le plus de lettres possibles.
+<br />Le filtre : "t.*?t" ne capturera cependant que le premier groupe de T, c'est à dire "t un t", l'astérisque est fénéante et la capture s'arrete au premier résultat rencontré (de gauche à droite).
+<br />
+<br />
+<br /><b><u>Caractère spécial</u></b> : <b>[ ]</b>
+<br />Les crochets [ ] servent à définir une rangée ou un groupe de caractère possible.
+<br />Contrairement aux parenthèses, les caractères dans le crochet ne forment pas un tout, elles sont indépendantes.
+<br />Nov[embr] correspond à Nove, Novm, Novb et Novr.
+<br />Le signe moins '-' entre deux caractères permet de définit une rangé de lettre :
+<br />[a-z] signifie 'toutes les lettres entre a et z'.
+<br />
+<br />Vous pouvez utiliser plusieurs signe moins '-' dans un même crochet. [a-zA-Z] définit toutes les lettres alphabétiques minuscules et majuscules. [a-zA-Z0-9] correspondra à tous les caractères alphanumériques
+<br />Vous pouvez spécifier n'importe quel caractère entre crochet : [_+.()a-d] capturera toutes les lettres entre 'a et d' ainsi que le _ le + le point et les parenthèses.
+<br />Pour capturer le signe moins '-', il faut le placer en premier [-a-z] capturera le signe moins '-' et les lettres de a à z.
+<br />Vous pouvez aussi utiliser les caractères spéciaux entre crochet. Par exemple pour capturer les lettres et les espaces [a-zA-Z\s]
+<br />
+<br />
+<br />Les crochets ne correspondent qu'à une seule lettre.
+<br />Pour définir une option sur plusieurs lettres :
+<br />t[se]*t
+<br />Correspond aussi bien à 'tet' ou 'tst' qu'à 'test' ou 'tset', ou encore 'tessst'
+<br />t[es]{0,2}
+<br />Correspond à t, te, ts, tee, tss, tes, tse
+<br />
+<br />
+<br />
+<br />
+<br />Comme tous les caractères spéciaux ci-dessus sont utilisés pour le fonctionnement des expressions régulières, si vous devez filtrer ces lettres dans vos noms de domaine ou de fichier, vous devrez utiliser le caractère spécial anti-slash.
+<br />Par exemple pour filtrer un fichier 'mon_fichier(2007).jpg' il faudra mettre un antislash devant les parentheses : mon_fichier\(2007\)\.jpg
+<br />
+<br />Notez que tous ces caractère devront avoir un antislash :
+<br />\ => \\         . => \.         * => \*           ? => \?         ^ => \^
+<br />$ => \$         (=> \(         ) => \)          { => \{           } => \}       
+<br />[ => \[         ] => \]         / => \/            + => \+
+<br />
+<br />
+<br />
+<br />
+<br />Il existe beaucoup d'autres méthodes de filtrage en utilisant les expressions régulières qui ne peuvent être expliquées ici.
+<br />Si vous voulez vous renseigner, vous pourrez trouver de la documentation et des exemples sur ces sites : 
+<br />http://www.regular-expressions.info/tutorial.html
+<br />http://www.javascriptkit.com/jsref/regexp.shtml
+<br />(en français) https://developer.mozilla.org/fr/Guide_JavaScript_1.5/Expressions_rationnelles
+<br />
+<br />
+<br />
+<br /><b><u>Quelques exemples</u></b> :
+<br />
+<br />Pour filtrer tous les .rar et les fichiers en .r01 .rxx :
+<br />r(ar|\d{2}) 
+<br />Cela signifie 'r' suivi soit de 'ar' soit de 2 décimales
+<br />
+<br />Pour filtrer tous les http en .com :
+<br />^http.*\.com$
+<br />Cela signifie tout ce qui commce par 'http' (grâce au ^), suivi d'aucune ou de n'importe quel lettre(s) un nombre indéfini de fois, terminant par '.com' (grâce au $).
+<br />
+<br />Pour capturer un domaine, qu'il y ait les www ou non :
+<br /> ^http:\/\/(|www\.)google\.com
+<br />Cela signifie tout ce qui commence par 'http' (grace au ^), suivi d'un deux point ':', suivi de deux slash '\/\/', suivi soit de 'www' et d'un point '\.' soit de rien, suivi du nom du domaine (ici 'google.com')
+<br />Note : Les slashs et les points sont antislashés car ce sont des caractères spéciaux.
+<br />
+<br />
+<br />
+<br /><b><u>Exemples de filtres sur les noms de fichier</u></b> :
+<br />
+<br />Pour filtrer toutes les archives : 
+<br />.*\.(z(ip|\d{2})|r(ar|\d{2})|jar|bz2|gz|tar|rpm|7z)$
+<br />
+<br />Pour filtrer toutes les vidéos :
+<br />.*\.(mp(eg?|[g4])|rm|avi|mov|divx|asf|qt|wmv|ram|m1v|m2v|rv|vob|asx)$
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Comparaisons de filtres sur les noms de domaine</u></b> :
+<br />
+<br />Pour filtrer tous les protocoles ftp :
+<br />Avec regexp : ^ftp:\/\/.*
+<br />Sans regexp : ftp://
+<br />
+<br />Pour filtrer un domaine particulier :
+<br />Avec regexp : ^http:\/\/(|www\.)domain\.com$
+<br />Sans regexp : http://*domain.com
+<br />(Sans regexp le filtre fonctionnera bien pour http://domain.com ou pour http://www.domain.com, mais il filtrera aussi http://pas_le_bon.domain.com)
+<br />
+<br />
+<br />Pour filtrer tous les domaines contenant 'oogle' :
+<br />Avec regexp : .*oogle.*
+<br />Sans regexp : oogle
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Conclusion</u></b> :
+<br />Les expressions régulières permettent de mieux gérer les filtres, mais c'est parfois beaucoup plus rapide d'utiliser l'astérisque.
+<br />Les expressions régulières sont utiles uniquement sur les filtrages complexes.
+<br />
+</body>
+</html>

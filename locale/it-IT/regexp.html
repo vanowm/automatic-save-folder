@@ -1,0 +1,128 @@
+﻿<html>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->	
+<body style="background-color:#FFFFFF;">
+
+Un Espressione Regolare (Reg. exp., or Regexp) è un metodo di matching per definire molti filtri su una linea.
+<br />
+<br />Con le Regexp puoi filtrare il nome del file o dominio che sarebbe difficile da filtrare con il solto asterisco '*'.
+<br />
+<br /><b>Nota 1</b> : Tutti i filtri sono 'case insensitive' (non c'è distinzione fra maiuscole e minuscole).
+<br /><b>Nota 2</b> : Le regexp in questo plugin hanno bisogno di essere racchiuse all'interno di una coppia di caratteri / / . Tutti gli esempi che seguono non comprendono / / all'inizio e alla fine del filtro per essere leggibili facilmente. Quando selezioni dalla checkbox 'regexp' nella finestra dei filtri, gli / / verranno inseriti automaticamente.
+<br />
+<br />
+<br />Per definire i filtri bisogna conoscere alcuni caratteri speciali:
+<br />
+<br /><b><u>Carattere speciale </u></b> : .
+<br />Il punto . rimpiazza qualsiasi carattere singolo(una lettere, numero o spazio). g..gle corrisponde a 'google' e ad altre parole che cominciano per 'g', seguite da 2 caratteri, e che termina con 'gle'.
+<br />
+<br />
+<br /><b><u>Carattere speciale </u></b> : *
+<br />il simbolo * ripete l'ultimo carattere (.* indica una qualsiasi stringa, cioè molte volte un carattere)
+<br />
+<br />
+<br /><b><u>Carattere speciale</u></b> : ^
+<br />^ significa all'inizio della stringa (^http indica solo l'occorrenza all'inizio. Va bene per  http://test.com ma non per ftp://http_test.com)
+<br />
+<br />
+<br /><b><u>Carattere speciale</u></b> : $
+<br />$ indica la fine della stringa ( com$ indica solo la fine. Va bene per http://test.com ma non per http://computer.net)
+<br />
+<br />
+<br /><b><u>Carattere speciale</u></b> : { }
+<br />{x} indica qualsiasi carattere x volte, ad esempio tor{2}ent = torrent (corrisponde a 2 volte 'r')
+<br />
+<br />
+<br /><b><u>Special character</u></b> : \
+<br />\d corrisponde qualsiasi cifra (numero)
+<br />\s corrisponde a qualsiasi spazio (anche tab, ecc.)
+<br />\w corrisponde a qualsiasi parola
+<br />\b corrisponde ai bordi della stringa ( \barco\b = corrisponde solo la parola arco, non arco di 'parco', e neppure 'arcobaleno')
+<br />\uFFFF con FFFF = codice esadecimale, corrisponde al carattere unicode in esadecimale. Esempio \u00E0 corrisponde ad à
+<br />
+<br />
+<br /><b><u>Carattere speciale</u></b> : ?
+<br />? indica la presenza o assenza del carattere: i file mpeg possono essere .mpg or .mpeg, la regexp sarà mpe?g
+<br />Nov(embre)? indica Nov o Novembre
+<br />
+<br />
+<br /><b><u>Carattere speciale</u></b> : ( ) e |
+<br />la parentesi e il pipe (aaaa|bbbb|cccc) prende qualsiasi carattere che sia aaaa o bbbb o cccc ecc.
+<br />
+<br />
+<br /><b><u>Carattere speciale</u></b> : [ ]
+<br />Le parentesi quadre [ ] sono utili per definire una corrispondenza di molti caratteri. v[eo]lo corrisponde alle parole velo e volo.
+<br />Il meno - fra le parentesi quadre corrisponde a una serie di caratteri:
+<br />[a-z] significa qualsiasi carattere dalla a alla z. c[a-z]ne corrisponde a cane, cbne, ccne, ...m czne.
+<br />
+<br />Puoi usare molti - fra le stesse parenetesi quadre, ad esempio [a-zA-Z] corrisponde a tutti i caratteri dell'alfabeto. [a-zA-Z0-9] per tutti i caratteri alfanumerici
+<br />[a-cn-o] per indicare qualsiasi lettera tra la a e la c, e dalla n alla o.
+<br />[-a-z] per indicare - (meno) e dalla alla alla z.
+<br />
+<br />
+<br />
+<br />Se all'interno di un filtro c'è bisogno di riportare il simbolo dei caratteri sopra riportati bisogna eseguire il cosidetto escape, cioè far precedere il simbolo con un un backslash \. Ad esempio dominio.com diventa dominio\.com
+<br />
+<br />\ -> \\         . -> \.         * -> \*           ? -> \?         ^ -> \^
+<br />$ -> \$         ( -> \(         ) -> \)          { -> \{           } -> \}       
+<br />[ -> \[         ] -> \]         / -> \/
+<br />
+<br />
+<br />
+<br />
+<br />Esistono molti metodi di filtro e possiblità che non possono essere spiegati qui.
+<br />Trovi la documentazione su: http://www.regular-expressions.info/tutorial.html
+<br />O per i principianti: http://www.javascriptkit.com/jsref/regexp.shtml
+<br />
+<br />
+<br />
+<br /><b><u>Alcuni esempi</u></b> :
+<br />
+<br />qualsiasi .rar e .r01 .rxx files :
+<br /> r(ar|\d{2}) significa r + ar, o r + due decimali
+<br />
+<br />qualsiasi http in .com :
+<br />^http.*\.com$
+<br />
+<br />qualsiasi dominio, indipendentemente che ci sia http davanti :
+<br /> ^http:\/\/(|www\.)dominio.com
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Esempi su filtri dei nomi dei file</u></b> :
+<br />
+<br />Filtro su tutti gli archivi : 
+<br />.*\.(z(ip|\d{2})|r(ar|\d{2})|jar|bz2|gz|tar|rpm|7z)$
+<br />
+<br />Filtro su tutte le immagini
+<br />.*\.(jpe?g|jpe|gif|png|tiff?|bmp|ico)$
+<br />
+<br />Filtro su tutte le video
+<br />.*\.(mp(eg?|[g4])|rm|avi|mov|mkv|divx|asf|qt|wmv|ram|m1v|m2v|rv|vob|asx|og(g|v)|flv)$
+<br />
+<br />
+<br /><b><u>Esempi su filtri del dominio</u></b> :
+<br />
+<br />Filtro su tutti i siti ftp
+<br />regexp : ^ftp:\/\/.*
+<br />non regexp : ftp://*
+<br />
+<br />Filtro su un particolare dominio
+<br />regexp : ^http:\/\/(|www\.)dominio\.com$
+<br />non regexp : http://*dominio.com
+<br />(ma il non regexp, corrisponderà http://domain.com, http://www.domain.com, ma anche http://il.cattivo.dominio.com)
+<br />
+<br />
+<br />qualsiasi dominio con 'oogle' dentro:
+<br />regexp : .*oogle.*
+<br />non regexp : *oogle*
+<br />
+
+</body>
+</html>

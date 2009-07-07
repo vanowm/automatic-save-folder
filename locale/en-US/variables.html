@@ -1,0 +1,82 @@
+﻿<html>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<body>
+<table border="0" style="font-size:12px; margin-top:0px;">
+	<tr>
+		<td align="left" valign="top">
+			<u style="font-size:15px">Year</u><br/>
+			<b>%Y%</b> = 2009, 2012<br/>
+			<b>%y%</b> = 09, 12<br/>
+			
+		</td>
+		<td align="left" valign="top">
+			<u style="font-size:15px">Month</u><br/>
+			<b>%m%</b> = 01 to 12<br/>
+			<b>%n%</b> = 1 to 12<br/>
+		</td>
+		<td align="left" valign="top">
+			<u style="font-size:15px">Day</u> :<br/>
+			<b>%d%</b> = 01 to 31<br/>
+			<b>%j%</b> = 1 to 31<br/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="top">
+			<br/>
+			<u style="font-size:15px">Special tags</u> :<br/>
+			<table style="font-size:12px;">
+				<tr>
+					<td valign="top"><b>%asf_D%</b></td><td>= Domain name. (Without http://)</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_F%</b></td><td>= File name with the extension.</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_Fx%</b></td><td>= File name without the extension.</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_d%</b></td><td>= "Domain" field from the filter used. (Forbidden characters will be deleted. If no filter is found, the current domain is used)</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_f%</b></td><td>= "File name" field from the filter used. (Forbidden characters will be deleted. If no filter is found, the current file name is used)</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_x%</b></td><td>= File extension. (Without the dot)</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="top">
+			<br/>
+			<u style="font-size:15px">capture tags</u> :<br/>
+							
+				<b>$&lt;number&gt;d</b> = Return the captured data using parentheses in the "domain" filter. &lt;number&gt; refer to the parenthesis number, from 1 to 9.
+				<br/>
+				<br/>
+				<b>$&lt;number&gt;f</b> =  Return the captured data using parentheses in the "file name" filter. &lt;number&gt; refer to the parenthesis number, from 1 to 9.
+					<br/>Example, on this filter:  mozilla_(firefox)_3.5.(exe), <b>$1f</b> will capture firefox, and <b>$2f</b> will capture "exe".
+				<br/>
+				<br/>	
+				<b>%asf_rd%</b><u>regular expression</u><b>%asf_rd%</b><br/>
+				Check the full domain with the regular expression contained between the two tags <b>%asf_rd%</b> and return the captured data.
+				<br/>
+				<br/>
+				<b>%asf_rf%</b><u>regular expression</u><b>%asf_rf%</b><br/>
+				Check the file name with the regular expression contained between the two tags <b>%asf_rf%</b> and return the captured data.
+				<br/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="top">
+			<br/>
+			<b>ATTENTION</b> : If the result for the saving path has forbidden characters (the : or the ?"*\/<>|: under Windows), the extension will cease to function. Be sure to check your filters if the extension doesn't work anymore.<br/>
+		</td>
+	</tr>
+</table></body></html>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<?xml-stylesheet href="chrome://asf/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://asf/locale/asf.dtd">
+<overlay id="asf-overlay-download" 
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/x-javascript" src="chrome://asf/content/asf_download.js" />
+
+<vbox id="container"> 
+
+	<groupbox id="asf_dloptions" style="visibility: collapse;" flex="1">
+	<caption label="Automatic Save Folder"/>
+	<vbox>
+		<radiogroup id="asf_radio_savepath" align="left">
+				<radio id="asf_savefolder" value="0" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath()"/>
+				<radio id="asf_lastpath" value="1" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath()"/>
+				<vbox id="asf_radiogroup_pathselect" style="visibility: collapse;">
+					<radio id="asf_pathselect" value="2" width="280" crop="center" label="&asf.pathselect.label;" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath()"/>
+					<hbox>
+						<description value="       "/><menulist id="asf_folder_list" width="280">
+						</menulist>
+					</hbox>
+				</vbox>				
+		</radiogroup>
+		<separator class="thin"/>
+		<hbox>
+			<image src="chrome://asf/skin/add.png" onclick="window.openDialog('chrome://asf/content/options.xul','asf_option','chrome, centerscreen, resizable=yes, dialog=no, modal=no');" />
+			<description onclick="window.openDialog('chrome://asf/content/options.xul','asf_option','chrome, centerscreen, resizable=yes, dialog=no, modal=no');">&asf.addedit.label;</description>
+		</hbox>	
+	</vbox>
+
+	</groupbox>
+</vbox>	
+</overlay>

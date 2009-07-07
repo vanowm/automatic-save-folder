@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://asf/skin/style.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://asf/locale/asf.dtd">
+
+<prefwindow
+			id="asf_pref"
+			autostretch="always"
+			buttons="accept, cancel"
+			defaultButton="accept"
+			onload="automatic_save_folder.asf_load();"
+			ondialogaccept="automatic_save_folder.asf_savepref();"
+			xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title; (&asf.version;)"
+>
+<prefpane id="asf-options"  style="padding:1px !important" flex="1" >
+	<script type="application/x-javascript" src="chrome://asf/content/asf.js"/>
+	<preferences>
+		<preference id="asf_lastdir" name="extensions.asf.lastdir" type="bool"/>
+		<preference id="asf_keeptemp" name="extensions.asf.keeptemp" type="bool"/>
+		<preference id="asf_viewdloption" name="extensions.asf.viewdloption" type="bool"/>
+		<preference id="asf_viewpathselect" name="extensions.asf.viewpathselect" type="bool"/>
+		<preference id="asf_savetype" name="extensions.asf.savetype" type="int"/>
+		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
+	</preferences>
+	<menupopup id="contextpopup">
+		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
+		<menuitem label="&asf.copy.popup;" oncommand="automatic_save_folder.asf_duplicate();"/>
+		<menuitem label="&asf.delete.popup;" oncommand="automatic_save_folder.asf_delete();"/>
+		<menuitem label="&asf.bottom.popup;" oncommand="automatic_save_folder.move('bottom');"/>
+	</menupopup>
+	<vbox>
+		<tabbox>
+			<tabs>
+				<tab id="asf-filterstab" style="-moz-appearance: none" orient="vertical" selected="true" label="&asf.filters.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-filters');" />
+				<tab id="asf-optionstab" style="-moz-appearance: none" orient="vertical"                 label="&asf.options.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-options');" />
+				<tab id="asf-informationstab" style="-moz-appearance: none" orient="vertical"            label="&asf.info.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-informations');" />
+			</tabs>
+			<tabpanels hidden="true">
+				<tabpanel />
+				<tabpanel />
+				<tabpanel />
+			</tabpanels>
+		</tabbox>
+	</vbox>
+	<vbox id="asf-tab-filters" hidden="false" flex="1000" >
+		<groupbox flex="1" >
+			<caption label="&asf.filters.label;"/>
+			<hbox flex="1" >
+				<tree flex="1" id="asf-filterList" width="376" height="200" seltype="single" hidecolumnpicker="false" 
+					enableColumnDrag="true" disableKeyNavigation="true" editable="true"
+					onselect="automatic_save_folder.asf_treeSelected();">
+					<treecols >
+						<treecol id="asf-column-Domain" label="&asf.tree.column.domain;" flex="1" persist="width ordinal hidden"/>
+						<splitter class="tree-splitter"/>
+						<treecol id="asf-column-filename" label="&asf.tree.column.filename;" flex="1" persist="width ordinal hidden"/>
+						<splitter class="tree-splitter"/>
+						<treecol id="asf-column-LocalFolder" label="&asf.tree.column.localfolder;" flex="1" persist="width ordinal hidden"/>
+						<splitter class="tree-splitter"/>
+						<treecol id="asf-column-Enabled" label="&asf.tree.column.enabled;" flex="0" persist="width ordinal hidden" type="checkbox" editable="true" hidden="true" />
+					</treecols>
+					<treechildren id="asf-filterChilds" context="contextpopup" ondblclick="event.preventDefault();window.openDialog('chrome://asf/content/edit.xul','asf_addedit','chrome, centerscreen, resizable=no, dialog=no, modal=yes');"/>
+				</tree>
+				<vbox>
+					<button id="asf-move-up" label="&asf.options.move.up;" oncommand="automatic_save_folder.move('up')"/>
+					<button id="asf-add" image="chrome://asf/skin/add.png" label="&asf.options.add;" onclick="window.openDialog('chrome://asf/content/add.xul','asf_addedit','chrome, centerscreen, resizable=no, dialog=no, modal=yes');"/>
+					<button id="asf-edit" label="&asf.options.edit;" oncommand="window.openDialog('chrome://asf/content/edit.xul','asf_addedit','chrome, centerscreen, resizable=no, dialog=no, modal=yes');"/>
+					<button id="asf-delete" label="&asf.options.delete;" oncommand="automatic_save_folder.asf_delete()"/>
+					<button id="asf-move-down" label="&asf.options.move.down;" oncommand="automatic_save_folder.move('down')"/>
+				</vbox>
+			</hbox>
+		</groupbox>
+		<groupbox flex="0">
+			<caption label="&asf.default.label;"/>
+			<radiogroup id="radio-savetype" align="left" preference="asf_savetype">
+				<radio id="asf-last-radio" value="0" label="&asf.lastselected.label;" oncommand="automatic_save_folder.asf_toggleradio()"/>
+				<hbox>	
+					<radio id="asf-choose-radio" value="1" label="&asf.defaultfolder.label;" oncommand="automatic_save_folder.asf_toggleradio()"/>
+					<textbox id="asf-default-folder" width="350" ondblclick="automatic_save_folder.browsedir()"/>
+					<button id="asf-select-folder" label="&asf.selectfolder.label;" oncommand="automatic_save_folder.browsedir()"/>
+				</hbox>
+				<hbox pack="end"><description value="  " /><checkbox id="asf-keeptemp-check" preference="asf_keeptemp" label="&asf.keeptemp.label;"/>
+				</hbox>
+			</radiogroup>
+		</groupbox>
+		<groupbox hidden="true">
+			<textbox id="asf-pickup" value="&asf.selectfolder.pickup;" />
+			<textbox id="asf-current-domain" value="" />
+			<textbox id="asf-current-filename" value="" />
+		</groupbox>
+	</vbox>
+	<vbox id="asf-tab-options" hidden="true" flex="1000">
+		<groupbox id="asf-options" flex="1">
+			<caption label="&asf.options.label;"/>
+			<separator class="thin"/>
+			<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
+			<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" oncommand="automatic_save_folder.toggle_options();"/>
+			<hbox><description value="	" /><description id="asf-viewdloptiondesc" >&asf.viewdloption.label;</description></hbox>
+			<hbox><description value="	" /><checkbox id="asf-viewpathselect" preference="asf_viewpathselect" label="&asf.viewpathselect.bool;"/></hbox>
+			<hbox><description value="		" /><description id="asf-viewpathselectdesc" >&asf.viewpathselect.label;</description></hbox>
+			<separator />
+			<checkbox id="asf-variablemode" preference="asf_variablemode" label="&asf.variablemode.bool;" oncommand="automatic_save_folder.asf_variablemode()"/>
+			<hbox><description value="	" /><description id="asf-variablemodedesc1" >&asf.variablemode1.label;</description></hbox>
+			<hbox><description value="	" /><description id="asf-variablemodedesc2" >&asf.variablemode2.label;</description></hbox>
+			<hbox><description value="	" /><description id="asf-variablemodedesc3" >&asf.variablemode3.label;</description></hbox>
+			<hbox flex="1">
+			   <description value="	" />
+			   <groupbox flex="1" style="padding:0px !important;">
+				  <caption label="&asf.variables.label;"/>
+					 <iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:123px;"
+					 src="chrome://asf/locale/variables.html"
+					 />
+			   </groupbox>
+			</hbox>
+		</groupbox>
+	</vbox>
+	<vbox id="asf-tab-informations" hidden="true" flex="1000" >
+		<groupbox id="asf-informations" flex="1" >
+			<caption label="&asf.info.title;"/>
+			<iframe flex="1" id="iframe_info" class="plain" style="background-color:#FFFFFF; min-height:305px;"
+					width="580"
+					src="chrome://asf/locale/info.html"
+			/>
+		</groupbox>
+	</vbox>	
+</prefpane>
+</prefwindow>

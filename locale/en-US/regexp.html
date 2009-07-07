@@ -1,0 +1,144 @@
+﻿<html>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<body style="background-color:#FFFFFF;">
+
+The Regular Expression (Reg. exp., or Regexp) is a matching method to define many filters in one line.
+<br />
+<br />With the Regexp you can filter filename or domain that would be difficult to filter with the usual asterisk '*'.
+<br />
+<br /><b>Note 1</b> : All the filters are case insensitive.
+<br /><b>Note 2</b> : The regexp in this plugin needs to be capture inside a / / statement. All the examples below are writen without the / / at the beginning and the end of the filters in order to be easily readable. When you check the checkbox 'regexp' in the filter window, the / / will be added automatically.
+<br />
+<br />
+<br />To define the filters, there are specials characters to know :
+<br />
+<br /><b><u>Special character</u></b> : .
+<br />The dot . replaces any 1 character (a letter, number or space). g..gle matches google and any other word starting with 'g' followed by 2 characters and finishing with 'gle'.
+<br />
+<br />
+<br /><b><u>Special character</u></b> : *
+<br />the * repeats the last character (.* matches any string = many time 1 character)
+<br />
+<br />
+<br /><b><u>Special character</u></b> : ^
+<br />^ means beginning of the string (^http only matches first occurence. good on http://test.com not good in ftp://http_test.com)
+<br />
+<br />
+<br /><b><u>Special character</u></b> : $
+<br />$ means end of the string ( com$ matches ending occurence. good in http://test.com and not good in http://computer.net)
+<br />
+<br />
+<br /><b><u>Special character</u></b> : { }
+<br />{x} matches any character x time, example tor{2}ent = torrent (check for 2 'r')
+<br />
+<br />
+<br /><b><u>Special character</u></b> : \
+<br />\d matches any decimal (number)
+<br />\s matches any  whitespace character (space, tab, etc.)
+<br />\w matches any word
+<br />\b matches any word boundary ( \barc\b = only the word arc, not the arc in parc, nor the arc in arctic)
+<br />\uFFFF with FFFF = hexadecimal code, matches the unicode character from the hexadecimal code. example \u00E0 matches à
+<br />
+<br />
+<br /><b><u>Special character</u></b> : ?
+<br />? matches if the character is present or not : mpeg files can be .mpg or .mpeg, the regexp would be mpe?g
+<br />Nov(ember)? will matche Nov or November
+<br />
+<br />
+<br /><b><u>Special character</u></b> : ( ) and |
+<br />The parenthesis and pipe (aaaa|bbbb|cccc) can capture any matching character either aaaa or bbbb or cccc etc.
+<br />
+<br />
+<br /><b><u>Special character</u></b> : [ ]
+<br />The bracket [ ] is useful to define a match for many characters. r[aio]se matches the words rase, rise and rose.
+<br />The minus - in the bracket defines a range of characters :
+<br />[a-z] meanse any characters from a to z. r[a-z]se matches rase, rbse, rcse, ..., rzse.
+<br />
+<br />You can use many - in the same bracket [a-zA-Z] to match all alphabetic characters. [a-zA-Z0-9] to match all alphanumerics
+<br />[a-cn-o] to match any letters from a to c and from n to o.
+<br />[-a-z] to match - (minus) and a to z.
+<br />
+<br />
+<br />The bracket only correspond to one letter.
+<br />To define an option on several letters :
+<br />t[se]*t
+<br />Corresponds as much as 'tet' or 'tst' or 'test' or 'tset', or finally 'tessst'
+<br />t[es]{0,2}
+<br />Corresponds to t, te, ts, tee, tss, tes, tse
+<br />
+<br />
+<br />
+<br />You need to escape the above characters if you use it in a filter. domain.com become domain\.com
+<br />
+<br />\ -> \\         . -> \.         * -> \*           ? -> \?         ^ -> \^
+<br />$ -> \$         ( -> \(         ) -> \)          { -> \{           } -> \}       
+<br />[ -> \[         ] -> \]         / -> \/
+<br />
+<br />
+<br />
+<br />
+<br />There are many more filtering methods and possibilities that cannot be explained here.
+<br />You can read this documentation : http://www.regular-expressions.info/tutorial.html
+<br />Or this one for beginners : http://www.javascriptkit.com/jsref/regexp.shtml
+<br />
+<br />
+<br />
+<br /><b><u>Some examples</u></b> :
+<br />
+<br />To match any .rar and .r01 .rxx files :
+<br /> r(ar|\d{2}) means r + ar, or r + 2 decimals
+<br />
+<br />To match any http in .com :
+<br />^http.*\.com$
+<br />
+<br />To match a domain, regardless if there is www or not in the path :
+<br /> ^http:\/\/(|www\.)domain\.com
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Filter examples on filenames</u></b> :
+<br />
+<br />To filter all the archive files : 
+<br />.*\.(z(ip|\d{2})|r(ar|\d{2})|jar|bz2|gz|tar|rpm|7z)$
+<br />
+<br />Filter all the images :
+<br />.*\.(jpe?g|jpe|gif|png|tiff?|bmp|ico)$
+<br />
+<br />To filter all the videos :
+<br />.*\.(mp(eg?|[g4])|rm|avi|mov|mkv|divx|asf|qt|wmv|ram|m1v|m2v|rv|vob|asx|og(g|v)|flv)$
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Filter examples on domains</u></b> :
+<br />
+<br />Filter all the ftp protocol
+<br />regexp : ^ftp:\/\/.*
+<br />non regexp : ftp://*
+<br />
+<br />filter on a particular domain
+<br />regexp : ^http:\/\/(|www\.)domain\.com$
+<br />non regexp : http://*domain.com
+<br />(but with non regexp, it will matches http://domain.com, http://www.domain.com, but will also matches http://the.bad.domain.com)
+<br />
+<br />
+<br />to match any domain with 'oogle' in it :
+<br />regexp : .*oogle.*
+<br />non regexp : *oogle*
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Conclusion</u></b> :
+<br />Regular expressions permit a better use of filters, but it can be sometimes much more faster to use simple widlcard *.
+<br />Regular expressions are useful only on complex matching.
+<br />
+</body>
+</html>

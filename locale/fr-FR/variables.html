@@ -1,0 +1,82 @@
+﻿<html>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<body>
+<table border="0" style="font-size:12px; margin-top:0px;">
+	<tr>
+		<td align="left" valign="top">
+			<u style="font-size:15px">Année</u><br/>
+			<b>%Y%</b> = 2009, 2012<br/>
+			<b>%y%</b> = 09, 12<br/>
+			
+		</td>
+		<td align="left" valign="top">
+			<u style="font-size:15px">Mois</u><br/>
+			<b>%m%</b> = 01 à 12<br/>
+			<b>%n%</b> = 1 à 12<br/>
+		</td>
+		<td align="left" valign="top">
+			<u style="font-size:15px">Jour</u> :<br/>
+			<b>%d%</b> = 01 à 31<br/>
+			<b>%j%</b> = 1 à 31<br/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="top">
+			<br/>
+			<u style="font-size:15px">Variables spéciales</u> :<br/>
+			<table style="font-size:12px;">
+				<tr>
+					<td valign="top"><b>%asf_D%</b></td><td>= Domaine d'hébergement. (Sans http://)</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_F%</b></td><td>= Nom du fichier complet.</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_Fx%</b></td><td>= Nom du fichier sans l'extension.</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_d%</b></td><td>= Champs "Domaine" du filtre utilisé. (Les caractères incompatibles seront supprimés. Si aucun filtre n'est trouvé, le domaine courant est utilisé)</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_f%</b></td><td>= Champs "Nom de fichier" du filtre utilisé. (Les caractères incompatibles seront supprimés. Si aucun filtre n'est trouvé, le nom du fichier courant est utilisé)</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_x%</b></td><td>= Extension du fichier. (Sans le point)</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="top">
+			<br/>
+			<u style="font-size:15px">Variables de capture</u> :<br/>
+			
+				<b>$&lt;numéro&gt;d</b> = Retourne le contenu de la capture à l'aide des parenthèses présentes dans le filtre "Domaine". &lt;numéro&gt; correspond au numéro de la parenthèse, de 1 à 9.
+				<br/>
+				<br/>
+				<b>$&lt;numéro&gt;f</b> = Retourne le contenu de la capture à l'aide des parenthèses présentes dans le filtre "Nom de fichier". &lt;numéro&gt; correspond au numéro de la parenthèse, de 1 à 9.
+					<br/>Exemple, sur ce filtre :  mozilla_(firefox)_3.5.(exe), <b>$1f</b> capturera firefox, et <b>$2f</b> capturera "exe". 
+				<br/>
+				<br/>			
+				<b>%asf_rd%</b><u>expression régulière</u><b>%asf_rd%</b><br/>
+				Examine le nom du domaine complet avec l'expression régulière contenue entre les deux balises <b>%asf_rd%</b> et retourne la capture de l'évaluation.
+				<br/>
+				<br/>
+				<b>%asf_rf%</b><u>expression régulière</u><b>%asf_rf%</b><br/>
+				Examine le nom du fichier avec l'expression régulière contenue entre les deux balises <b>%asf_rf%</b> et retourne la capture de l'évaluation.
+				<br/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="top">
+			<br/>
+			<b>ATTENTION</b> : Si le résultat retourné pour le chemin d'enregistrement contient des caractères interdits (le : ou les ?"*\/<>|: sous Windows), l'extension ne fonctionnera pas. Vérifiez bien vos filtres si l'extension ne fonctionne plus.<br/>
+		</td>
+	</tr>
+</table></body></html>

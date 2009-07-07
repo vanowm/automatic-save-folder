@@ -1,0 +1,81 @@
+﻿<!-- ASF -->
+<!ENTITY asf.version "0.9.3">
+
+<!-- browser and save dialog-->
+<!ENTITY prefwindow.title "Automatic Save Folder Preferences">
+<!ENTITY asf.label "Automatic Save Folder...">
+<!ENTITY asf.addedit.label "Add or edit a filter">
+<!ENTITY asf.pathselect.label "Available filter's path:">
+
+<!-- Filters tab - top -->
+<!ENTITY asf.filters.label "Filters">
+<!ENTITY asf.tree.column.domain "Domain">
+<!ENTITY asf.tree.column.filename "File name">
+<!ENTITY asf.tree.column.localfolder "Local folder">
+<!ENTITY asf.tree.column.enabled "Active">
+<!ENTITY asf.options.move.up "">
+<!ENTITY asf.options.move.down "">
+<!ENTITY asf.options.edit "Edit">
+<!ENTITY asf.options.delete "">
+<!ENTITY asf.options.add "">
+
+<!-- Filters tab - bottom -->
+<!ENTITY asf.lastdir.bool "Affect the folder for the 'save as...' command when a filter matches">
+<!ENTITY asf.default.label "If the file doesn't match any filter, save to:">
+<!ENTITY asf.lastselected.label "The last folder">
+<!ENTITY asf.defaultfolder.label "This folder: ">
+<!ENTITY asf.selectfolder.label "Select...">
+<!ENTITY asf.keeptemp.label "Use the last folder if the file is from the same hosted domain than the previously downloaded file.">
+
+<!-- preference file pickup -->
+<!ENTITY asf.selectfolder.pickup "Select the default folder if no filter is found">
+
+<!-- popup -->
+<!ENTITY asf.top.popup "Move to Top">
+<!ENTITY asf.copy.popup "Duplicate">
+<!ENTITY asf.delete.popup "Delete">
+<!ENTITY asf.bottom.popup "Move to Bottom">
+
+<!-- Options tab -->
+<!ENTITY asf.options.label "Options">
+<!ENTITY asf.viewdloption.bool "View options when downloading">
+<!ENTITY asf.viewdloption.label "Allow you to see the last two destination folders and a link to add or edit the filters">
+<!ENTITY asf.viewpathselect.bool "View the filter's list">
+<!ENTITY asf.viewpathselect.label "Activate a menulist with all the filter's path.">
+<!ENTITY asf.variablemode.bool "Advanced mode :">
+<!ENTITY asf.variablemode1.label "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day ">
+<!ENTITY asf.variablemode2.label "or the file name.">
+<!ENTITY asf.variablemode3.label "Note : Attention to uppercase and lowercase.">
+<!ENTITY asf.variables.label "Tags list :">
+
+<!-- About tab-->
+<!ENTITY asf.info.label "About...">
+<!ENTITY asf.info.title "Automatic Save Folder">
+
+<!-- preference add & edit-->
+<!ENTITY buttonlabelextra1 "OK">
+<!ENTITY asf.add.title "Add a new filter">
+<!ENTITY asf.edit.title "Edit a filter">
+<!ENTITY asf.addedit.filter.label "Filters">
+<!ENTITY asf.addedit.help.label "Help">
+<!ENTITY asf.addedit.domain.label "Domain">
+<!ENTITY asf.addedit.filename.label "file name">
+<!ENTITY asf.addedit.folder.label "Local Folder">
+<!ENTITY asf.addedit.regexp "Regexp">
+<!ENTITY asf.addedit.all "All">
+<!ENTITY asf.addedit.regexp.exemple "Examples of regular expressions : ">
+<!ENTITY asf.addedit.regexphelp.label "Regexp help">
+
+<!ENTITY asf.addedit.inforegexp1 "The filters can be :">
+<!ENTITY asf.addedit.inforegexp2 "Defined : file_to_download.zip">
+<!ENTITY asf.addedit.inforegexp3 "Partial or wildcarded : file*.zip">
+<!ENTITY asf.addedit.inforegexp4 "Regexp. : .*(.rar|.zip)$">
+
+<!ENTITY asf.addedit.nodata.domain "The domain is empty. Please choose 'all' or enter filter for the domain">
+<!ENTITY asf.addedit.nodata.filename "The filename is empty. Please choose 'all' or enter a filter for the filename">
+<!ENTITY asf.addedit.nodata.folder "The folder is empty. Please select a destination folder for this filter">
+
+<!-- Regular expression Help dialog -->
+<!ENTITY asf.regexp.title "Regular Expressions">
+<!ENTITY asf.regexp.label "Help and examples :">
+

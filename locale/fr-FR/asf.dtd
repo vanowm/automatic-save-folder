@@ -1,0 +1,81 @@
+﻿<!-- ASF -->
+<!ENTITY asf.version "0.9.3">
+
+<!-- browser and save dialog-->
+<!ENTITY prefwindow.title "Préférences pour Automatic Save Folder">
+<!ENTITY asf.label "Automatic Save Folder...">
+<!ENTITY asf.addedit.label "Ajouter ou éditer un filtre">
+<!ENTITY asf.pathselect.label "Liste des filtres :">
+
+<!-- Filters tab - top -->
+<!ENTITY asf.filters.label "Filtres">
+<!ENTITY asf.tree.column.domain "Domaine">
+<!ENTITY asf.tree.column.filename "Nom de fichier">
+<!ENTITY asf.tree.column.localfolder "Dossier local">
+<!ENTITY asf.tree.column.enabled "Actif">
+<!ENTITY asf.options.move.up "">
+<!ENTITY asf.options.move.down "">
+<!ENTITY asf.options.edit "Éditer">
+<!ENTITY asf.options.delete "">
+<!ENTITY asf.options.add "">
+
+<!-- Filters tab - bottom -->
+<!ENTITY asf.lastdir.bool "Modifier aussi le dossier d'enregistrement utilisé par le menu 'Enregistrer sous...'">
+<!ENTITY asf.default.label "Dossier d'enregistrement lorsqu'aucun filtre n'est trouvé :">
+<!ENTITY asf.lastselected.label "Le dernier dossier utilisé">
+<!ENTITY asf.defaultfolder.label "Ce dossier : ">
+<!ENTITY asf.selectfolder.label "Sélectionner...">
+<!ENTITY asf.keeptemp.label "Utiliser le dernier dossier si le téléchargement provient du même domaine d'hébergement que le précédent fichier.">
+
+<!-- preference file pickup -->
+<!ENTITY asf.selectfolder.pickup "Selectionnez le dossier de destination par défaut, lorsqu'aucun filtre n'est trouvé">
+
+<!-- popup -->
+<!ENTITY asf.top.popup "Déplacer au début">
+<!ENTITY asf.copy.popup "Dupliquer">
+<!ENTITY asf.delete.popup "Supprimer">
+<!ENTITY asf.bottom.popup "Déplacer à la fin">
+
+<!-- Options tab -->
+<!ENTITY asf.options.label "Options">
+<!ENTITY asf.viewdloption.bool "Afficher les options lors de l'enregistrement">
+<!ENTITY asf.viewdloption.label "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
+<!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">
+<!ENTITY asf.viewpathselect.label "Active le menu déroulant contenant le chemin de chaque filtre.">
+<!ENTITY asf.variablemode.bool "Mode avancé :">
+<!ENTITY asf.variablemode1.label "Permet d'éditer le chemin d'enregistrement des filtres manuellement et d'ajouter des variables dynamiques,">
+<!ENTITY asf.variablemode2.label "comme la date du jour ou le domaine d'hébergement.">
+<!ENTITY asf.variablemode3.label "Note : Attention aux majuscules et minuscules.">
+<!ENTITY asf.variables.label "Liste des balises :">
+
+<!-- About tab-->
+<!ENTITY asf.info.label "À propos...">
+<!ENTITY asf.info.title "Automatic Save Folder">
+
+<!-- preference add & edit-->
+<!ENTITY buttonlabelextra1 "OK">
+<!ENTITY asf.add.title "Ajouter un nouveau filtre">
+<!ENTITY asf.edit.title "Editer un filtre">
+<!ENTITY asf.addedit.filter.label "Filtres">
+<!ENTITY asf.addedit.help.label "Aide">
+<!ENTITY asf.addedit.domain.label "Domaine">
+<!ENTITY asf.addedit.filename.label "Nom de fichier">
+<!ENTITY asf.addedit.folder.label "Dossier local">
+<!ENTITY asf.addedit.regexp "Regexp">
+<!ENTITY asf.addedit.all "Tous">
+<!ENTITY asf.addedit.regexp.exemple "Exemples d'expressions régulières : ">
+<!ENTITY asf.addedit.regexphelp.label "Aide pour les Regexp.">
+
+<!ENTITY asf.addedit.inforegexp1 "Les filtres peuvent être :">
+<!ENTITY asf.addedit.inforegexp2 "Définis : fichier_a_telecharger.zip">
+<!ENTITY asf.addedit.inforegexp3 "Partiels : fichier*.zip">
+<!ENTITY asf.addedit.inforegexp4 "Expression régulière : .*(.rar|.zip)$">
+
+<!ENTITY asf.addedit.nodata.domain "Le domaine est vide. Veuillez sélectionner 'Tous' ou entrer un filtre pour le domaine">
+<!ENTITY asf.addedit.nodata.filename "Le nom de fichier est vide. Veuillez séléctionner 'Tous' ou entrer un filtre pour le nom de fichier">
+<!ENTITY asf.addedit.nodata.folder "Le dossier n'est pas défini. Veuillez séléctionner un dossier de destination pour ce filtre">
+
+<!-- Regular expression Help dialog -->
+<!ENTITY asf.regexp.title "Expressions Régulières">
+<!ENTITY asf.regexp.label "Aide et exemples :">
+

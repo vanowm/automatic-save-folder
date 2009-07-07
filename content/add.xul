@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://asf/locale/asf.dtd">
+
+<dialog title="&asf.add.title;" 
+	orient="vertical" autostretch="always" 
+	onload="automatic_save_folder.add_load();" 
+	buttons="extra1, extra2, cancel" 
+	defaultButton="extra1"
+	buttonlabelextra1="&buttonlabelextra1;"
+	ondialogextra1="automatic_save_folder.asf_add()"
+	ondialogcancel="window.opener.focus;window.close();"
+	buttonlabelextra2="&asf.addedit.regexphelp.label;"
+	ondialogextra2="window.openDialog('chrome://asf/content/regexp.xul','asf_regexp_help','chrome, centerscreen, resizable=yes, dialog=no');"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script type="application/x-javascript" src="chrome://asf/content/asf_addedit.js"/>
+<groupbox align="center" orient="horizontal">
+	<caption label="&asf.addedit.filter.label;" />
+	<vbox>
+		<description value="&asf.addedit.domain.label;" />
+		<radiogroup id="radio-addedit-domain" align="left">
+			<radio id="asf-addedit-radio-domain-all" value="0" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
+			<hbox>
+				<radio id="asf-addedit-radio-domain" value="1" label="=" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
+				<textbox id="asf-addedit-domain" width="200" onchange="automatic_save_folder.testRegexp('asf-addedit-domain-regexp', 'asf-addedit-domain');"/>
+				<checkbox id="asf-addedit-domain-regexp" label="&asf.addedit.regexp;" oncommand="automatic_save_folder.makeRegexp('asf-addedit-domain-regexp', 'asf-addedit-domain');"/>
+			</hbox>
+		</radiogroup>
+		<separator class="thin"/>
+		
+		<description value="&asf.addedit.filename.label;"/>
+		<radiogroup id="radio-addedit-filename" align="left">
+			<radio id="asf-addedit-radio-filename-all" value="0" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_filename()"/>
+			<hbox>
+				<radio id="asf-addedit-radio-filename" value="1" label="=" oncommand="automatic_save_folder.asf_toggleradio_filename()"/>
+				<textbox id="asf-addedit-filename" width="200" onchange="automatic_save_folder.testRegexp('asf-addedit-filename-regexp', 'asf-addedit-filename')"/>
+				<checkbox id="asf-addedit-filename-regexp" label="&asf.addedit.regexp;" oncommand="automatic_save_folder.makeRegexp('asf-addedit-filename-regexp', 'asf-addedit-filename');"/>
+			</hbox>
+		</radiogroup>
+		<separator class="thin"/>
+		
+		<description value="&asf.addedit.folder.label;"/>
+		<hbox>
+			<textbox id="asf-addedit-folder" readonly="true" width="240"  ondblclick="automatic_save_folder.browsedir_addedit()"/>
+			<button id="asf-addedit-select-folder" label="&asf.selectfolder.label;" oncommand="automatic_save_folder.browsedir_addedit()"/>
+		</hbox>
+		
+	</vbox>
+</groupbox>
+
+<groupbox align="center" orient="horizontal">
+	<caption label="&asf.addedit.help.label;"/>
+	<vbox>
+		<description value="&asf.addedit.inforegexp1;"/>
+		<description value="&asf.addedit.inforegexp2;"/>
+		<description value="&asf.addedit.inforegexp3;"/>
+		<description value="&asf.addedit.inforegexp4;"/>
+	</vbox>
+</groupbox>
+
+<description id="popup-nodata-domain" style="display:none" value="&asf.addedit.nodata.domain;"/>
+<description id="popup-nodata-filename" style="display:none" value="&asf.addedit.nodata.filename;"/>
+<description id="popup-nodata-folder" style="display:none" value="&asf.addedit.nodata.folder;"/>
+
+</dialog>

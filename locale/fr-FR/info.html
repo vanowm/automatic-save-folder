@@ -1,0 +1,300 @@
+﻿<html>
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<body style="background-color:#FFFFFF;">
+<center><font size="+1"><b>Automatic Save Folder V0.9.3</b></font></center>
+<center>par Cyan</center>
+<br /><b><u>Important</u></b> :
+<br />
+<br />- Cette extension fonctionne uniquement si la fenêtre de téléchargement s'affiche :
+<br/><img src="chrome://asf/skin/screen_save_80fr.png" />
+<br />Par conséquent, le clic-droit "télécharger la cible sous..." ne fonctionne pas avec cette extension.
+<br />
+<br />De même, si une étape de téléchargement prévue par Firefox empêche cette fenêtre de s'afficher, l'extension ne fonctionnera pas.
+<br />Si certains filtres ne fonctionnent pas, veuillez vérifier que Firefox ne lance pas un traitement différent sur le fichier téléchargé.
+<br />Par exemple pour les fichier .rar :
+<br /> 
+<br />1.&nbsp;&nbsp; Allez dans le menu "Outils" de Firefox puis "Options...".
+<br />
+<br />2. - Pour les utilisateurs de Firefox 3 : Allez sur l'onglet "Applications".
+<br />&nbsp;&nbsp;&nbsp; - Pour les utilisateurs d'une version précédente : Allez sur l'onglet "Contenu" puis cliquez sur le bouton "Gérer...".
+<br />
+<br />3.&nbsp;&nbsp; Vérifiez que l'extension de fichier que vous souhaitez télécharger soit bien positionnée sur "Toujours demander".
+<br /><img src="chrome://asf/skin/screen_apps_fr.png" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Fonctionnement</u></b> :
+<br />
+<br />
+<br />Cette extension permet de définir, à l'aide de filtres, le répertoire qui vous sera automatiquement proposé par la fenêtre d'enregistrement de vos fichiers.
+<br />
+<br /><u>Les règles à suivre</u> :
+<br />- Les filtres sont définis à l'aide du nom du fichier et du domaine d'hébergement.
+<br />Attention : pour le domaine d'hébergement il ne s'agit pas du site où vous vous trouvez, mais du serveur où se trouve le fichier.
+<br />- Les filtres doivent contenir le texte correspondant au nom de fichier ou de domaine. Par exemple n'indiquez pas <b>"google.fr"</b> mais simplement <b>google.fr</b> (sans les guillemets).
+<br />- Vous pouvez utiliser le caractère <b>*</b> (astérisque) pour remplacer une partie du filtre : <b>wiki*.org</b>
+<br />- L'astérisque n'est pas nécessaire en début et fin de filtre. Écrire <b>*wiki*</b> ou <b>wiki</b> revient au même. (Les astérisques sont ajoutés automatiquement en début et fin de filtre lors de l'enregistrement)
+<br />- Tout comme les extensions de fichier : <b>*.zip</b> ou <b>.zip</b> fonctionnent de la même manière.
+<br />- Les filtres sont vérifiés de haut en bas et la vérification s'arrête lorsqu'un filtre correspond au fichier téléchargé. Veillez à bien organiser vos filtres.
+<br />- Les filtres sont insensibles à la casse, il n'y a aucune différence entre les majuscules et les minuscules lors du filtrage.
+<br />
+<br />
+<br />Pour plus de souplesse, cette extension accepte aussi les expressions régulières.
+<br />Pour plus de renseignements sur les expressions régulières, reportez-vous au menu d'aide présent dans la fenêtre d'ajout et d'édition des filtres.
+<br />
+<br />
+<br />Des variables dynamiques sont à votre dispositions afin de créer des dossiers spécifiques lors de l'enregistrement, suivant la date du jour ou les noms de fichier et de domaine.
+<br />Reportez vous au menu d'option pour la liste des balises.
+<br />
+<br />
+<br />
+<br /><u>Voici quelques exemples</u> :
+<br />
+<br />Si vous souhaitez que tous vos fichiers exécutables <b>.exe</b> soient enregistrés dans un répertoire spécifique :
+<br />- <b>domaine</b> : Tous
+<br />- <b>filtre</b> : .exe
+<br />- <b>dossier</b> : votre répertoire des programmes
+<br />
+<br />
+<br />Si maintenant vous voulez que tous les fichiers provenant d'un site en particulier (par exemple mozilla.org) soient enregistrés dans un répertoire Mozilla :
+<br />- <b>domaine</b> : mozilla.org
+<br />- <b>filtre</b> : Tous
+<br />- <b>dossier</b> : votre répertoire Mozilla
+<br />
+<br />
+<br />Ensuite, si vous voulez trier les fichiers <b>.zip</b> provenant de mozilla.org, et laisser les autres fichiers dans l'ancien répertoire :
+<br />- <b>domaine</b> : mozilla
+<br />- <b>filtre</b> : .zip
+<br />- <b>dossier</b> : votre répertoire Mozilla pour les .zip
+<br />Et placez votre filtre au-dessus du filtre précédent. Rappelez-vous que les filtres sont vérifiés de haut en bas.
+<br />
+<br />
+<br />Et enfin, vous pouvez aussi définir des noms complets, pas seulement des extensions :
+<br />- <b>domaine</b> : Tous
+<br />- <b>filtre</b> : firefox*.exe
+<br />- <b>dossier</b> : votre répertoire pour les programmes d'installation de Firefox
+<br />
+<br />
+<br /><u>Voici quelques exemples avec les variables dynamiques et les variables de capture</u> :
+<br />
+<br />Pour trier tous les nighlty build de firefox dans un sous-dossier de D:\firefox :
+<br />- <b>domaine</b> : Tous
+<br />- <b>filtre</b> : firefox*pre
+<br />- <b>dossier</b> : D:\firefox\Nightly\%Y%-%m%-%d%
+<br />L'extension créera un sous-dossier nommé avec la date du jour, par exemple "2009-04-12", dans lequel sera enregistré votre fichier.
+<br />
+<br />
+<br />Pour trier un fichier suivant son extension :
+<br />- <b>domaine</b> : Tous
+<br />- <b>filtre</b> : Tous
+<br />- <b>dossier</b> : D:\download\%asf_x%
+<br />L'extension créera un sous-dossier nommé "zip" pour les fichier .zip, "rar" pour les .rar, etc. dans lequel sera enregistré votre fichier.
+<br />
+<br />
+<br />Pour créer ou non des sous dossiers différents suivant le fichier :
+<br />
+<br />Exemple de consignes : Nous souhaitons télécharger des vidéos nommées "Mes_vacances_date-du-sejour.avi".
+<br />Les vidéos comportent des sous-titres .srt pour expliquer le voyage, 
+des fichiers .zip sont également disponibles contenant des photos du séjour, 
+les vidéos peuvent être distribuées en .avi, .torrent ou .nzb (newsgroup).
+<br />
+<br />Les ".avi" et ".srt" devront aller dans le dossier D:\video\vacances.
+<br />Les ".zip", ".torrent" et ".nzb" devront aller respectivement dans leur sous-dossier D:\video\vacances\zip, D:\video\vacances\torrent et D:\video\vacances\nzb.
+<br />
+<br />- <b>domaine</b> : Tous
+<br />- <b>filtre</b> : /^Mes_vacances.*\.(avi|srt|zip|torrent|nzb)$/
+<br />- <b>dossier</b> : D:\video\vacances\%asf_rf%(zip|torrent|nzb)$%asf_rf%
+<br />
+<br />Explication du filtrage :
+<br />Le filtre sera déclenché pour tous les fichiers commençant par "Mes_vacances" et terminant par une des extensions possibles (avi, srt, zip, torrent ou nzb).
+<br />Le dossier créé dépendra du filtrage : La balise %asf_rf% analyse le nom du fichier téléchargé avec l'expression régulière contenue entre les deux balises : Si le fichier comporte "zip", "torrent" ou "nzb" en fin de nom, la portion capturée par l'expression régulière sert à créér le sous-dossier.
+<br />Si aucune de ses trois extensions n'est trouvée, l'expression régulière ne renvoit rien, et aucun sous-dossier n'est créé, les fichiers seront téléchargé dans D:\video\vacances\
+<br />
+<br />Note : Vous pouvez placer autant de balises que vous le souhaitez dans le chemin d'enregistrement.
+<br />Le filtre aurait pu être :
+<br />- <b>filtre</b> : /.*\.(avi|srt|zip|torrent|nzb)$/
+<br />- <b>dossier</b> : D:\video\%asf_rf%(vacances|mariage)%asf_rf%\%asf_rf%(zip|torrent|nzb)$%asf_rf%
+<br />Dans ce cas, le sous dossier "vacances" est crée uniquement si le nom de fichier contient "vacances".
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Problèmes connus</u></b> :
+<br />
+<br />- For some users , ASF only suggest default folder instad of filter's folder.
+<br />Pas assez de retours d'utilisateurs ayant rencontrés ce problème. 
+<br />Veuillez contacter l'auteur par mail si vous êtes dans ce cas et souhaitez aider à corriger ce problème.
+<br />
+<br />- Si vous utilisiez des caractères unicodes dans une version inférieur à 0.9.3, le chemin local peut apparaître vide, mais fonctionne toujours correctement.
+<br />Veuillez éditer les filtres dans ce cas et redéfinir les chemins manuellement.
+<br />
+<br />- [expérimental] Le filtrage du domaine se fait maintenant avec l'URL du referer si le domaine d'hébergement ne correspond pas au filtre.
+<br />Cela peut engendrer des problèmes de validation du filtre alors qu'on ne le souhaite pas. 
+<br />Si cela pose trop de problèmes, je supprimerai cette option (Merci de laisser vos commentaires à propos de cette option : utile ou génante ?).
+<br />
+<br />
+<br />
+<br /><b><u>Prévisions et demande d'aide</u></b> :
+<br />
+<br />Je cherche de l'aide pour :
+<br />- Prise en compte du menu clic droit "Enregistrer la cible du liens sous..." et "Enregistrer l'image sous...".
+<br />
+<br />Vous pouvez me contacter si vous souhaitez apporter votre aide ou proposer de nouvelles idées :
+<br />http://asf.mangaheart.org
+<br />ou
+<br />https://addons.mozilla.org/fr/firefox/addon/4781
+<br />
+<br />
+<br />
+<br /><b><u>Historique</u></b> :
+<br />
+<br /><pre>
+
++ Ajout
+- Suppression
+* Correction ou modification
+
+
+Version 0.9.3: (2009 07 05)
++ Ajout du numéro de version dans la barre de titre du menu principal.
++ Possibilité d'ouvrir l'explorateur de dossier en double-cliquant sur le champs du chemin d'enregistrement.
++ Ajout d'onglets pour séparer les filtres, les options, l'aide et l'historique des versions.
++ Ajout des variables dynamiques pour le chemin d'enregistrement du fichier. (Merci à Ted pour la capture des groupe avec $1)
++ Option permétant d'activer ou désactiver les variables dynamiques (Mode avancé).
++ Ajout d'un menu contextuel sur les filtres permettant de dupliquer ou déplacer un filtre en début ou fin de tableau.
++ [Experimental] Pour plus de facilité lorsque le domaine d'hébergement est aléatoire (ex. pour télécharger firefox sur mozilla.org) :
+  Vérification du filtre avec l'URL du site courant si le domaine d'hébergement du fichier ne retourne pas de résultat.
+  Attention à l'ordre de filtrage : En premier le domaine d'hébergement du fichier est vérifié, puis l'adresse du site où se trouve le lien.
+  Les données utilisés pour vérifier le domaine précédent reste celui d'hébergement du fichier.
++ Limite la taille maximum de la fenêtre d'enregistrement à la résolution de l'écran principal. (Merci à Julien)
++ Ajout d'une option permettant d'afficher un menu déroulant sur la fenêtre de sauvegarde contenant la liste des dossiers définit par les filtres.
+* Enregistrement des données au format unicode (Les filtres présents dans les versions précédentes contenant des caractères accentués peuvent ne plus fonctionner. Vous devrez les redéfinir).
+* Correction du paramètre d'édition par double-clic sur un filtre venant d'être ajouté.
+* Modification du mode d'ouverture des liens de la fenêtre "à propos de...". Les liens s'ouvrent maintenant dans un nouvel onglet.
+* Agrandissement de certains menus pour plus de lisibilité.
+* simplification du code pour le déplacement haut/bas des filtres.
+* simplification du code de chargement des données courantes pour l'autocomplétion du menu "Ajouter".
+* Meilleure visibilité : Les zones de texte s'agrandissent maintenant avec le changement de taille des fenêtres de préférence et d'aides.
+* Correction du bug qui empechait la lecture des préférences non définies ou inexistantes dans about:config. (Merci à Martin)
+* Modification complète du script en Global Namespace, demandé par mozilla.org afin de sousmettre l'extension en zone public.
+* Simplifications des fonctions du script et ajout des commentaires du code.
+
+
+Version 0.9.2 : (2009 01 26)
+* Correction pour Vista : Mise à jour forcée de la variable browser.download.folderList à "2" lors de l'ouverture de la fenêtre d'option d'ASF.
+* Correction de la colonne "actif", les filtres ne pouvaient plus être activés ou désactivés temporairement depuis la Version 0.8.7.
+* Compatibilité des thèmes : Les couleurs par défauts sont maintenant utilisées, tous les textes devraient être visibles correctement.
+  Les images ont été améliorées afin d'être visibles sur les thèmes sombres.
+* Agrandissement de la zone des filtres.
+
+
+Version 0.9.1 : (2008 11 01)
++ Traduction italienne par Scognito.
++ Ajout d'un menu à puces lors de l'enregistrement, permettant de sélectionner rapidement les deux derniers dossiers en mémoire.
+  Le deuxième choix n'apparait que s'il est différent du premier.
+* Correction d'un bug lors de la vérification des filtres si l'option "Utiliser le dernier dossier" était sélectionné. (Merci à Carsten)
+* Correction d'un bug sur Firefox3 et Windows Vista : Modification d'une option interne à Firefox permettant de changer le dossier d'enregistrement manuellement. (Merci à Carsten)
+  (browser.download.folderList = 2) Sur Windows Vista, la valeur par défaut est à 1.
+  Les différentes valeurs possibles sont : 0 = Bureau ; 1 = Dossier d'enregistrement par défaut ; 2 = Choix laissé à l'utilisateur.
+* Suppression de l'option "affecter aussi enregistrer sous..." pour firefox3, puisque cette valeur est utilisée automatiquement.
+* Suppression du popup "+ Ajouter un filtre" lors de l'enregistrement. Cela causait des problèmes de priorité de focus et de position de fenêtres.
+  Le lien n'ouvre plus que le menu principal permettant de modifier ou ajouter un filtre manuellement.
+  Lors de l'ajout d'un filtre en passant par ce menu, les champs seront tout de même pré-remplis avec le nom de fichier et le domaine.
+* Correction du chemin spécifié dans la fenêtre de téléchargement sur Firefox3. Le chemin n'était pas mis correctement à jour suivant les options cochées.
+* Désactivation de l'édition des cellules du tableau lors d'un double-clic.
+  Depuis Firefox 3, double cliquer sur une cellule permet de l'éditer directement sans passer par la fenêtre d'édition. L'édition n'était alors pas enregistrée correctement.
+
+
+Version 0.9.0 : (2008 06 28)
++ Compatible avec Firefox 3.0.*
++ Ajout d'un bouton d'informations et d'aide à l'utilisation de l'extension.
++ Nouveau menu permettant d'ajouter des filtres juste avant l'enregistrement du fichier, avec les champs domaine et fichier pré-remplis.
+  Après l'ajout d'un filtre de cette manière, les filtres sont à nouveau vérifiés afin de prendre en compte le fichier en cours de téléchargement.
+  Bug connu : un problème de retour à la fenêtre active peut survenir lors de la fermeture des filtres.
+- Suppression de l'option permettant de désactiver l'extension. Afin de la désactiver temporairement, veuillez utiliser le gestionnaire d'extension.
+* Changement de la façon dont les filtres sont exécutés (addEventlistener à la place de OnLoad), pour une meilleure compatibilité avec les autres extensions.
+* Correction de la colonne "Actif" qui ne restait pas masquée correctement.
+
+
+Version 0.8.7 : (2008 01 06)
++ Version unique pour Windows et Linux (et peut être Mac ?).
++ Compatible avec Firefox 3.0 beta (quelques modifications apportées au code).
+* La touche entrée du clavier correspond maintenant aux boutons d'acceptations (OK, Ajouter, Editer). Auparavant le bouton par défaut était "Annuler".
+
+
+Version 0.8.6 - Linux fix : (2008 01 04)
+* Modification des boutons "OK" qui n'apparaissent pas dans la fenêtre principale sur Linux.
+Info :
+Sur Linux, il n'y a que le bouton "Fermer" et les cases à cocher sont enregistrées dès qu'elles sont modifiées par l'utilisateur. Malheureusement les tableaux ne sont pas pris en compte à la fermeture.
+J'ai donc supprimé le bouton "Accept" et je l'ai remplacé par un bouton "sauver et fermer".
+
+
+Version 0.8.6 : (2007 07 09)
+* Correction orthographique et syntaxique. Merci à Goofy sur Mozilla.org
+
+
+Version 0.8.5 : (2007 04 01)
++ Ajout d'une option pour afficher des informations dans la fenêtre de téléchargement.
++ Ajout d'une option pour mémoriser le dernier domaine sur lequel les fichiers ont été téléchargés.
+* L'option du dossier par défaut fonctionne maintenant même si aucun filtre n'est défini dans la liste.
+* Modification de la page d'aide pour les expressions régulières. Utilisation d'un iframe et d'une page html à la place du xul/dtd.
+
+
+Version 0.8.4 : (2007 02 24)
++ Traduction de l'extension en français.
+* Conversion des fichiers de localisation en utf-8.
+
+
+Version 0.8.3 : (2007 02 17)
++ Ajout d'exemples et une courte explication concernant l'utilisation des expressions régulières, accessible dans la fenêtre d'ajout et d'édition des filtres.
+
+
+Version 0.8.2 :(2007 02 15)
+Première version publique.
++ Ajout d'une option pour agir en même temps sur le chemin d'enregistrement des pages Web (note : le menu "fichier/enregistrer sous..." de Firefox).
+
+
+Version 0.8.1 :
+* Sélection des dossiers : la fenêtre de sélection s'ouvre sur le dossier déjà sélectionné. Avant elle s'ouvrait sur un dossier aléatoire parmi : documents and settings, bureau et le dossier personnel.
+* Restriction pour la sélection des dossiers : suppression de la possibilité d'écrire le chemin au clavier, seul le bouton "Sélectionner..." est valide pour choisir les dossiers de destination.
+
+
+Version 0.8.0 :
+Fonctionnalités :
++ Positionnement des filtres par priorité (option pour monter et descendre les filtres).
++ Reconnaissance des filtres normaux, masqués et RegExp. (Expression régulière).
++ Sélection des dossiers manuellement et par menu interactif (bouton "sélectionner...").
++ Edition des filtres par double-clic sur les filtres.
++ Skin de l'interface avec des images.
+</pre>
+<br />
+<br />
+<br />
+<br />
+<br /><b><u>Remerciements</u></b> :
+<br />
+<br />- Goofy, Haynee : Relecture et correction d'orthographe en francais et anglais.
+<br />- MrCOLOMBO : Merci pour les suggestions, mais par soucis de sécurité j'ai utilisé le menu existant.
+<br />- Photonic : Merci pour l'information à propos du menu Application de firefox :)
+<br />- Carsten: Correction d'une erreur dans le script et information concernant une option de Firefox sur Windows Vista empéchant les filtres de fonctionner.
+<br />- Martin: Aide à la correction d'un bug lors de la lecture des préférences de firefox non définies ou inexistantes.
+<br />- Ted Gifford: Modification du script permettant la capture des groupes dans les variables dynamiques.
+<br />
+<br />
+<br /><b><u>Traducteurs</u></b>:
+<br />- Anglais : Cyan.
+<br />- Français : Cyan.
+<br />- Italien : Scognito.
+<br />
+<br />
+</body>
+</html>

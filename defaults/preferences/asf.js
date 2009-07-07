@@ -1,0 +1,16 @@
+ pref("extensions.asf.lastdir", true);
+ pref("extensions.asf.keeptemp", true);
+ pref("extensions.asf.viewdloption", false);
+ pref("extensions.asf.viewpathselect", false);
+ pref("extensions.asf.savetype", 0);
+ pref("extensions.asf.defaultfolder", "");
+ pref("extensions.asf.tempdomain", "");
+ pref("extensions.asf.filtersNumber", 0);
+ pref("extensions.asf.lastpath", "");
+ pref("extensions.asf.variablemode", false); 
+// See http://kb.mozillazine.org/Localize_extension_descriptions
+pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.properties");
+// See http://developer.mozilla.org/En/Download_Manager_preferences   or    http://kb.mozillazine.org/About:config_entries
+// it make automatic saving to the right folder - 0= desktop, 1= system download dir, 2= user define
+// does only affect the user if useDownloadDir = true  ---- if "always ask the destination folder" is selected in FF options, it has no effect on the user.
+ pref("browser.download.folderList", 2);
