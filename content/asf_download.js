@@ -280,7 +280,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			}
 			asf_filename = this.loadUnicodeString("extensions.asf.filters"+ idx +".filename");
 			// Trim the / / if filename is regexp
-			if (this.is_regexp(asf_domain))
+			if (this.is_regexp(asf_filename))
 			{
 				asf_filename = asf_filename.substring(1, asf_filename.length);
 				asf_filename = asf_filename.substring(0, asf_filename.length -1);
