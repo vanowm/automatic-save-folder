@@ -38,7 +38,7 @@
 		<separator/>
 		<text value="&homepage;" style="font-weight: bold;"/>
 		<text value="Automatic Save Folder"	class="text-link" onclick="window.close(); openURL('http://asf.mangaheart.org');"/>
-		<text value="http://mozilla.org" class="text-link" onclick="window.close(); openURL('https://addons.mozilla.org/fr/firefox/addon/4781');"/>
+		<text value="http://mozilla.org" class="text-link" onclick="window.close(); openURL('https://addons.mozilla.org/firefox/addon/4781');"/>
 		<separator class="thin"/>
 	</vbox>
 </groupbox>
