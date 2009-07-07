@@ -28,7 +28,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
                                .getService(Components.interfaces.nsIVersionComparator),
 							   
 	asf_setdir: function () {
-		// I don't understand why "this.function" doesn't work with addEventListener even using "with" method, only onclick from the Xul events works. 
+		// I don't understand why "this".function_name doesn't work with addEventListener even using "with" method, only onclick from the Xul events works. 
 		// So I use this tweak to call functions and properties from its name "automatic_save_folder" instead of "this"
 		
 		// Setting private variables usable in this function
@@ -56,6 +56,13 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var domain = 		document.getElementById("source").value ;
 		var filename = 		document.getElementById("location").value ;
 		
+		// debug : show the full downloaded link  http://abc.xyz/def/file.ext
+		// Can use this new function to get free from the need of the download window.
+		//var url = dialog.mLauncher.source.spec;
+		//alert(url);
+		
+		
+		
 		
 		// load prefmanager data
 		var savetype = 			prefManager.getIntPref("extensions.asf.savetype");	
@@ -75,6 +82,9 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		if (firefoxversion == "3")   // take the download.lastDir if it's FF3
 		{
 			var folder = ASF.loadUnicodeString("browser.download.lastDir");
+			if (folder == "") 
+			{ // it's when lastDir doesn't exist yet, ff3 bug ?
+			}
 		}
 		else // else if it's not FF3 (it's 1.5 or 2), read Download.dir
 		{
@@ -257,7 +267,21 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		if (!path) return false;
 		if (this.trim(path).length==0) return false;
 		
-		objdate = new Date();
+		var objdate = new Date();
+		
+		// make the array with the month's name in the stringbundle of the locale language path.
+
+		var stringbundle = document.getElementById('automatic_save_folder_bundles');
+
+		var fullmonthname = new Array();
+		var abbrmonthname = new Array();
+		for (var i = 1 ; i<= 12 ; i++)
+		{
+			fullmonthname[i-1] = stringbundle.getString("month"+i+"_full");
+			abbrmonthname[i-1] = stringbundle.getString("month"+i+"_abbr");
+		}
+		
+		
 		const ZERO = "0";  // leading zero
 		
 		// load the domain and the filename of the saved file	
@@ -266,6 +290,10 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var filename = 	document.getElementById("location").value ;
 		var file_name = filename.replace (/\.(?!.*\.).*$/i, "");  // Trim from the last dot to the end of the file = remove extension
 		var extension = filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
+		
+		
+		
+		
 		
 		// check the filter's data
 		var asf_domain = "";
@@ -389,6 +417,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 										// Month
 										.replace(/%m%/g, ((objdate.getMonth()+1) <10) ? (ZERO + (objdate.getMonth()+1)) : objdate.getMonth()+1)  // = number of the month : 01 to 12
 										.replace(/%n%/g, objdate.getMonth()+1)  // 8, 9, 10, (no leading 0)
+										.replace(/%F%/g, fullmonthname[objdate.getMonth()])  // full month name
+										.replace(/%M%/g, abbrmonthname[objdate.getMonth()])  // abbreviated month name
 										// Day
 										.replace(/%d%/g, ((objdate.getDate()) <10) ? (ZERO + (objdate.getDate())) : objdate.getDate())  // = number of the day : 01 to 31
 										.replace(/%j%/g, objdate.getDate())  // = number of the day  1 to 31 (no leading 0)
@@ -479,10 +509,6 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		// alert("first screen : " + screen.width + "x" + screen.height);
 		asf_dloptions.style.maxWidth = screen.width -200 +"px";
 		
-		// debug : show the full downloaded link
-		//var url = dialog.mLauncher.source.spec;
-		//alert(url);
-
 	},
 
 

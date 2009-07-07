@@ -14,7 +14,9 @@
 <script type="application/x-javascript" src="chrome://asf/content/asf_download.js" />
 
 <vbox id="container"> 
-
+<stringbundleset id="automatic_save_folder_bundleset">
+	<stringbundle id="automatic_save_folder_bundles" src="chrome://asf/locale/asf.properties"/>
+</stringbundleset>
 	<groupbox id="asf_dloptions" style="visibility: collapse;" flex="1">
 	<caption label="Automatic Save Folder"/>
 	<vbox>
