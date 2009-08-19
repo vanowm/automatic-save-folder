@@ -285,7 +285,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	// ADD new filter in tree
 	//
 	asf_add: function () {
-
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 	// get the domain
 	//
 		var domain_radio = document.getElementById('radio-addedit-domain');
@@ -390,11 +390,10 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			filter.focus();
 			window.close();
 			
-			//needed for linux (and Mac ?): autosaved when editing filters
-			if (navigator.appVersion.indexOf("Win")!=-1) { } // = Windows
-			else
+			//autosave when adding a filter
+			if (instantApply)
 			{
-			//save the filters
+				//save the filters
 				window.opener.automatic_save_folder.asf_savefilters();
 			}
 		}
@@ -402,7 +401,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
 
 	asf_edit: function () {
-		
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 	// get the domain
 	// 
 		var domain_radio = document.getElementById('radio-addedit-domain');
@@ -493,9 +492,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			tree.focus();
 			window.close();
 			
-			//needed for linux (and Mac ?): autosaved when editing filters
-			if (navigator.appVersion.indexOf("Win")!=-1) { } // = Windows
-			else
+			//autosave when editing a filter
+			if (instantApply)
 			{
 			//save the filters
 				window.opener.automatic_save_folder.asf_savefilters();

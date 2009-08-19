@@ -25,8 +25,7 @@ var automatic_save_folder = {
 
 		versionChecker: Components.classes["@mozilla.org/xpcom/version-comparator;1"]
 	                               .getService(Components.interfaces.nsIVersionComparator),
-								   
-	
+		
 	asf_load: function () {
 		
 		var firefoxversion = "";
@@ -264,6 +263,7 @@ var automatic_save_folder = {
 
 	// Code from captain.at, modified by Cyan (CASSAR Eric)
 	move: function (direction) {
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var treename = "asf-filterList";
 		
 		var tree = document.getElementById(treename);
@@ -310,10 +310,9 @@ var automatic_save_folder = {
 		}
 		
 		
-		//needed for linux (and Mac ?): autosaved when moving filters
-		if (navigator.appVersion.indexOf("Win")!=-1) { } // = Windows
-		else
-		{ 
+		//autosave when moving filters
+		if (instantApply)
+		{
 			//save the filters
 			this.asf_savefilters();
 		}
@@ -337,7 +336,7 @@ var automatic_save_folder = {
 		idx = parent.childNodes.length-1; 
 		tree.view.selection.select(idx);
 		for (var i = idx ; i > originidx ; i--) // move the new copy 1 line above the original item
-		{										// so the filter auto-saving process for linux (present in the move() function) works
+		{										// so the filter auto-saving process for instantApply (present in the move() function) works
 			this.move("up");					// even if the user duplicate the bottom filter, it will move from 1 step
 		}
 		return false;
@@ -345,6 +344,7 @@ var automatic_save_folder = {
 	
 	
 	asf_delete: function () {
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var filter = document.getElementById('asf-filterList');
 		var rules = document.getElementById('asf-filterChilds');
 		if (filter.view.selection.count > 0) 
@@ -355,10 +355,9 @@ var automatic_save_folder = {
 				rules.removeChild(rules.childNodes[i]);
 			}
 		}
-		//needed for linux (and Mac ?): autosaved when moving filters
-		if (navigator.appVersion.indexOf("Win")!=-1) { } // = Windows
-		else
-		{ 
+
+		if (instantApply)
+		{
 			//save the filters
 			this.asf_savefilters();
 		}
@@ -391,11 +390,10 @@ var automatic_save_folder = {
 			document.getElementById("asf-default-folder").value = asf_url;
 		}
 		
-		//needed for linux (and Mac ?): autosaved when changing folder
-		if (navigator.appVersion.indexOf("Win")!=-1) { } // = Windows, then do nothing
-		else
+		//needed to save unicode paths using instantApply
+		if (instantApply)
 		{
-			//save the default folder right after editing, no need to click the accept button.
+			//save the default folder right after editing
 			var default_folder = document.getElementById("asf-default-folder").value;
 			this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);
 		}
