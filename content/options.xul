@@ -68,7 +68,11 @@
 						<splitter class="tree-splitter"/>
 						<treecol id="asf-column-Enabled" label="&asf.tree.column.enabled;" flex="0" persist="width ordinal hidden" type="checkbox" editable="true" hidden="true" />
 					</treecols>
-					<treechildren id="asf-filterChilds" context="contextpopup" ondblclick="event.preventDefault();window.openDialog('chrome://asf/content/edit.xul','asf_addedit','chrome, centerscreen, resizable=no, dialog=no, modal=yes');"/>
+					<treechildren 
+					ondragstart="automatic_save_folder.dragstart(event)"
+					ondragover="automatic_save_folder.dragover(event)"
+					ondragexit="automatic_save_folder.dragdrop(event)"
+					id="asf-filterChilds" context="contextpopup" ondblclick="event.preventDefault();window.openDialog('chrome://asf/content/edit.xul','asf_addedit','chrome, centerscreen, resizable=no, dialog=no, modal=yes');"/>
 				</tree>
 				<vbox>
 					<button id="asf-move-up" label="&asf.options.move.up;" oncommand="automatic_save_folder.move('up')"/>

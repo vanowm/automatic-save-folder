@@ -215,6 +215,7 @@ var automatic_save_folder = {
 	
 	},
 	
+	
    asf_selecttab: function(tabID) {
 	  
 	  // Use this system for tab, because css for tab is not the same color as config window color, and I don't want to force any color by default so user can use new firefox theme's colors.
@@ -318,7 +319,65 @@ var automatic_save_folder = {
 		}
 		return false;
 	},
-
+	
+	
+	dragstart: function(event) {
+		var treename = "asf-filterList";
+		var tree = document.getElementById(treename);
+		var listBox = document.getElementById("asf-filterList");
+		var idx  = listBox.currentIndex; //number of the selected line in tree
+		var currentitem = tree.treeBoxObject.view.getItemAtIndex(idx);
+			
+		//event.dataTransfer.setData('application/x-moz-node', currentitem);  // send node data
+		event.dataTransfer.setData('user/define', idx);  // send index data as text (but to prevent drop on text field, let's use custom set)
+	},
+	
+	
+	dragover: function (event) {
+		//var isNode = event.dataTransfer.types.contains("application/x-moz-node");
+		var isDefine = event.dataTransfer.types.contains("user/define");
+		if (isDefine)
+		{
+			event.preventDefault();
+			event.dataTransfer.effectAllowed = "move";
+			event.dataTransfer.dropEffect = "move";
+		}
+	},
+	
+	
+	dragdrop: function (event) {
+		//var currentitem = event.dataTransfer.getData("application/x-moz-node");
+		//var currentitem_idx = event.dataTransfer.getData("text/plain");
+		var currentitem_idx = event.dataTransfer.getData("user/define");
+		if (currentitem_idx!="")
+		{
+			var treename = "asf-filterList";
+			var tree = document.getElementById(treename);
+			var currentitem = tree.treeBoxObject.view.getItemAtIndex(currentitem_idx);
+			
+			try 
+			{
+				var targetitem_idx = tree.treeBoxObject.getRowAt(event.pageX, event.pageY);
+				var targetitem = tree.treeBoxObject.view.getItemAtIndex(targetitem_idx);
+				var parent = targetitem.parentNode;		
+				
+				if (currentitem_idx > targetitem_idx) parent.insertBefore(currentitem, targetitem);
+				if (currentitem_idx < targetitem_idx) parent.insertBefore(currentitem, targetitem.nextSibling);
+				tree.view.selection.select(targetitem_idx); // reselect the moved filter
+				
+				// Now check is the user has InstantApply option to save the filter's order.
+				var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
+				if (instantApply)
+				{
+					//save the filters
+					this.asf_savefilters();
+				}
+			}
+			catch(e){} // if the user point outside of the filter tree (because using dragexit instead of dragdrop (dragdrop is not working)).
+		} 
+		event.preventDefault();
+	},
+	
 	
 	asf_duplicate: function () {
 		var treename = "asf-filterList";
@@ -365,7 +424,7 @@ var automatic_save_folder = {
 		//detect remaining filters, unhighlight, and change right buttons states
 		this.asf_treeSelected();
 	},
-
+	
 	
 	// next 2 functions : Code inspired from DTA (browsedir & createValidDestination)
 	browsedir: function () {
