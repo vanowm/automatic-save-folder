@@ -27,9 +27,6 @@
 <!ENTITY asf.selectfolder.label "Sélectionner...">
 <!ENTITY asf.keeptemp.label "Utiliser le dernier dossier si le téléchargement provient du même domaine d'hébergement que le précédent fichier.">
 
-<!-- preference file pickup -->
-<!ENTITY asf.selectfolder.pickup "Selectionnez le dossier de destination par défaut, lorsqu'aucun filtre n'est trouvé">
-
 <!-- popup -->
 <!ENTITY asf.top.popup "Déplacer au début">
 <!ENTITY asf.copy.popup "Dupliquer">

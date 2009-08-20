@@ -27,9 +27,6 @@
 <!ENTITY asf.selectfolder.label "Select...">
 <!ENTITY asf.keeptemp.label "Use the last folder if the file is from the same hosted domain than the previously downloaded file.">
 
-<!-- preference file pickup -->
-<!ENTITY asf.selectfolder.pickup "Select the default folder if no filter is found">
-
 <!-- popup -->
 <!ENTITY asf.top.popup "Move to Top">
 <!ENTITY asf.copy.popup "Duplicate">

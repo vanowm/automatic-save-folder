@@ -89,11 +89,13 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
 	browsedir_addedit: function () {
 		var current_folder_input = document.getElementById("asf-addedit-folder").value;
-		  
+		var stringbundle = document.getElementById('automatic_save_folder_bundles');
+				
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		
-		fp.init(window, "", nsIFilePicker.modeGetFolder);
+		var filepickerdescription = stringbundle.getString("select_folder");
+		fp.init(window, filepickerdescription, nsIFilePicker.modeGetFolder);
 		//fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 		
 		// locate current directory

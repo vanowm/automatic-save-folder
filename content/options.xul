@@ -29,6 +29,9 @@
 		<preference id="asf_savetype" name="extensions.asf.savetype" type="int"/>
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
 	</preferences>
+	<stringbundleset id="automatic_save_folder_bundleset">
+		<stringbundle id="automatic_save_folder_bundles" src="chrome://asf/locale/asf.properties"/>
+	</stringbundleset>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
 		<menuitem label="&asf.copy.popup;" oncommand="automatic_save_folder.asf_duplicate();"/>
@@ -90,7 +93,6 @@
 			</radiogroup>
 		</groupbox>
 		<groupbox hidden="true">
-			<textbox id="asf-pickup" value="&asf.selectfolder.pickup;" />
 			<textbox id="asf-current-domain" value="" />
 			<textbox id="asf-current-filename" value="" />
 		</groupbox>

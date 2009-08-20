@@ -370,11 +370,12 @@ var automatic_save_folder = {
 	// next 2 functions : Code inspired from DTA (browsedir & createValidDestination)
 	browsedir: function () {
 		var current_folder_input = document.getElementById("asf-default-folder").value;
+		var stringbundle = document.getElementById('automatic_save_folder_bundles');
 		
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		
-		var filepickerdescription = document.getElementById("asf-pickup").value;
+		var filepickerdescription = stringbundle.getString("select_default_folder");
 		fp.init(window, filepickerdescription, nsIFilePicker.modeGetFolder);
 		//fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 		
