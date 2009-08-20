@@ -511,9 +511,20 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 	},
 
+	indexInArray: function (arr,val){
+		val = val.replace(/\\/g,'\\\\');
+		var test_regexp = new RegExp("^"+val+"$");
+		var data = "";
+		for(var i=0;i<arr.length;i++) 
+		{
+			if(test_regexp.test(arr[i])) return i;
+		}
+		return -1;
+	} ,
 
 	read_all_filterpath: function() {
-		
+		var ASF = automatic_save_folder; // ASF is just a shortcut to automatic_save_folder
+		var variable_mode = ASF.prefManager.getBoolPref("extensions.asf.variablemode");
 		var list = document.getElementById('asf_folder_list');
 		var menupopup = document.createElement('menupopup');
 		
@@ -528,11 +539,24 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}
 		
 		// Write each path to the menupopup
+		var pathlist = new Array();
+		pathlist[0] = this.loadUnicodeString("extensions.asf.defaultfolder");
+		var j = 0;
 		for (var i = 0; i < nbrfilters; i++)
 		{
 		// read the filter number x
 		path = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");
 		
+		if ( ASF.indexInArray(pathlist, path) < 0) { pathlist[++j]= path;}
+		}
+		
+		var pathlist_sort_alpha = true;   // let the user choose in next release.
+		if (pathlist_sort_alpha) pathlist.sort(); 
+		
+		for (var i = 0; i < pathlist.length; i++)
+		{
+		path = pathlist[i];
+		path = variable_mode == true? ASF.createfolder(path) : path; 
 		var menuitem = document.createElement('menuitem');
 		menuitem.setAttribute('label', path);
 		menuitem.setAttribute('crop', 'center');
@@ -540,15 +564,6 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		menuitem.setAttribute('oncommand', "automatic_save_folder.asf_select_savepath(this)");
 		menupopup.appendChild(menuitem);
 		}
-		
-		// Add the default folder
-		var defaultfolder = this.loadUnicodeString("extensions.asf.defaultfolder");
-		var menuitem = document.createElement('menuitem');
-		menuitem.setAttribute('label', defaultfolder);
-		menuitem.setAttribute('crop', 'center');
-		menuitem.setAttribute('value', defaultfolder);
-		menuitem.setAttribute('oncommand', "automatic_save_folder.asf_select_savepath(this)");
-		menupopup.appendChild(menuitem);
 		
 		// Populate the path list into the menu
 		list.appendChild(menupopup);

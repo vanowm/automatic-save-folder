@@ -27,9 +27,6 @@
 <!ENTITY asf.selectfolder.label "Seleziona...">
 <!ENTITY asf.keeptemp.label "Usa l'ultima cartella se il file viene dallo stesso dominio dell'ultimo file scaricato.">
 
-<!-- preference file pickup -->
-<!ENTITY asf.selectfolder.pickup "Seleziona la cartella predefinita se nessun filtro corrisponde">
-
 <!-- popup -->
 <!ENTITY asf.top.popup "Sposta su">
 <!ENTITY asf.copy.popup "Duplica">
