@@ -71,6 +71,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
 		var tempdomain = 		ASF.loadUnicodeString("extensions.asf.tempdomain");
 		var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
+		var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
 		
 		// If variable/Advanced mode is ON, let's check the variables and replace to create the new defaultfolder
 		if (variable_mode == true) 
@@ -231,17 +232,26 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
 			{
 				ASF.saveUnicodeString("browser.download.lastDir", folder);
-			}	
+			}
 		}
 		
 		// in every case, set the new file hosted domain to tempdomain
 		ASF.saveUnicodeString("extensions.asf.tempdomain", domain);
 		
-		// show or hide the asf option on saving window
-		ASF.show_dloptions();
-
+		// Automatic saving when clicking on a link. The save dialog still flash onscreen very quicly.
+		if (dialogaccept)
+		{
+			window.close();
+			return dialog.onOK(); 
+		}
+		else
+		{
+			// show or hide the asf option on saving window
+			ASF.show_dloptions();
+		}
+		
 	},
-
+	
 	
 	loadUnicodeString: function (pref_place) {
 		try 
@@ -505,7 +515,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		
 		
-		// Set the max width to the size of the screen minus 200px. Added for Mac users with long path choice.
+		// Set the max width to the size of the screen minus 200px. Added for Mac OSX users with long path choice.
 		// alert("first screen : " + screen.width + "x" + screen.height);
 		asf_dloptions.style.maxWidth = screen.width -200 +"px";
 		
@@ -686,7 +696,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
 // Ted Gifford, start block	
        var res = string.match(test_regexp);
-       return res;
+       if (res) return res;
+	   return false
 // Ted Gifford, end block	
 
 	},

@@ -28,6 +28,7 @@
 		<preference id="asf_viewpathselect" name="extensions.asf.viewpathselect" type="bool"/>
 		<preference id="asf_savetype" name="extensions.asf.savetype" type="int"/>
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
+		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
 	</preferences>
 	<stringbundleset id="automatic_save_folder_bundleset">
 		<stringbundle id="automatic_save_folder_bundles" src="chrome://asf/locale/asf.properties"/>
@@ -106,6 +107,7 @@
 			<caption label="&asf.options.label;"/>
 			<separator class="thin"/>
 			<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
+			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;"/>
 			<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" oncommand="automatic_save_folder.toggle_options();"/>
 			<hbox><description value="	" /><description id="asf-viewdloptiondesc" >&asf.viewdloption.label;</description></hbox>
 			<hbox><description value="	" /><checkbox id="asf-viewpathselect" preference="asf_viewpathselect" label="&asf.viewpathselect.bool;"/></hbox>
@@ -119,7 +121,7 @@
 			   <description value="	" />
 			   <groupbox flex="1" style="padding:0px !important;">
 				  <caption label="&asf.variables.label;"/>
-					 <iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:123px;"
+					 <iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:90px;"
 					 src="chrome://asf/locale/variables.html"
 					 />
 			   </groupbox>

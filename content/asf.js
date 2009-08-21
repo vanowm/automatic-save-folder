@@ -201,7 +201,11 @@ var automatic_save_folder = {
 	toggle_options: function () {
 		var select_option = document.getElementById("asf-viewdloption");
 		var select_list = document.getElementById("asf-viewpathselect");
-	
+		var dialogaccept = document.getElementById("asf-dialogaccept");
+		
+		// if the option is opened from the saving window, disable the autosave feature (Not working when set from here.)
+		dialogaccept.disabled = (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") ? true : false ;
+		
 		if (select_option.checked == false)
 			{
 				select_list.checked = false;
@@ -543,25 +547,19 @@ var automatic_save_folder = {
 	asf_savepref: function () {
 	//save the filters
 		this.asf_savefilters();
-
+		
 	//save the default folder
 		var default_folder = document.getElementById("asf-default-folder").value;
 		this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);
-
-	//rescan filters data to update the unknownContentType.xul if it was openned with it.
-		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") // if the option is opened from the saving window
-		{ 
-			window.opener.automatic_save_folder.asf_setdir();		// rescan the filters to set the good folder
-		}	
-
+		
 	//close the options	
 		window.close();
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") // if the option is opened from the saving window
-		{ 
+		{ 	
+			window.opener.automatic_save_folder.asf_setdir();		// rescan the filters to set the good folder
 			window.opener.sizeToContent();
 		}		
 		window.opener.focus;
-			
 	}
 	
 };

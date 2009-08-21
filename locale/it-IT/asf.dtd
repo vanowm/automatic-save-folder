@@ -39,6 +39,7 @@
 <!ENTITY asf.viewdloption.label "(permette di vedere le due ultime cartelle di destinazione e un collegamento per aggiungere o modificare filtri)">
 <!ENTITY asf.viewpathselect.bool "Vedi la lista dei filtri">
 <!ENTITY asf.viewpathselect.label "Visualizza un menu con la lista di tutti i percorsi dei filtri.">
+<!ENTITY asf.dialogaccept.bool "Automatically accept the download (no need to click the 'OK' button).">
 <!ENTITY asf.variablemode.bool "Modalità avanzata :">
 <!ENTITY asf.variablemode1.label "Permette di editare i percorsi di salvataggi manualmente e aggiungere variabili dinamiche,">
 <!ENTITY asf.variablemode2.label "come la data del giorno o il nome del file.">

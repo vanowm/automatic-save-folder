@@ -39,6 +39,7 @@
 <!ENTITY asf.viewdloption.label "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
 <!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">
 <!ENTITY asf.viewpathselect.label "Active le menu déroulant contenant le chemin de chaque filtre.">
+<!ENTITY asf.dialogaccept.bool "Accepter le téléchargement automatiquement (Pas besoin de cliquer sur le bouton 'OK').">
 <!ENTITY asf.variablemode.bool "Mode avancé :">
 <!ENTITY asf.variablemode1.label "Permet d'éditer le chemin d'enregistrement des filtres manuellement et d'ajouter des variables dynamiques,">
 <!ENTITY asf.variablemode2.label "comme la date du jour ou le domaine d'hébergement.">
