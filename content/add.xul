@@ -21,9 +21,6 @@
 	ondialogextra2="window.openDialog('chrome://asf/content/regexp.xul','asf_regexp_help','chrome, centerscreen, resizable=yes, dialog=no');"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script type="application/x-javascript" src="chrome://asf/content/asf_addedit.js"/>
-<stringbundleset id="automatic_save_folder_bundleset">
-	<stringbundle id="automatic_save_folder_bundles" src="chrome://asf/locale/asf.properties"/>
-</stringbundleset>
 <groupbox align="center" orient="horizontal">
 	<caption label="&asf.addedit.filter.label;" />
 	<vbox>
@@ -51,7 +48,7 @@
 		
 		<description value="&asf.addedit.folder.label;"/>
 		<hbox>
-			<textbox id="asf-addedit-folder" readonly="true" width="240"  ondblclick="automatic_save_folder.browsedir_addedit()"/>
+			<textbox id="asf-addedit-folder" readonly="true" width="240" ondblclick="automatic_save_folder.browsedir_addedit()"/>
 			<button id="asf-addedit-select-folder" label="&asf.selectfolder.label;" oncommand="automatic_save_folder.browsedir_addedit()"/>
 		</hbox>
 		

@@ -17,42 +17,38 @@
 	buttonlabelextra1="&buttonlabelextra1;"
 	ondialogextra1="automatic_save_folder.asf_edit()"
 	ondialogcancel="window.opener.focus;window.close();"	
-	buttonlabelextra2="regexp help"
+	buttonlabelextra2="&asf.addedit.regexphelp.label;"
 	ondialogextra2="window.openDialog('chrome://asf/content/regexp.xul','asf_regexp_help','chrome, centerscreen, resizable=yes, dialog=no');"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script type="application/x-javascript" src="chrome://asf/content/asf_addedit.js"/>
-<stringbundleset id="automatic_save_folder_bundleset">
-	<stringbundle id="automatic_save_folder_bundles" src="chrome://asf/locale/asf.properties"/>
-</stringbundleset>
 <groupbox align="center" orient="horizontal">
 	<caption label="&asf.addedit.filter.label;"/>
-	<vbox>	
-	
+	<vbox>		
 		<description value="&asf.addedit.domain.label;"/>
 		<radiogroup id="radio-addedit-domain" align="left">
-		<radio id="asf-addedit-radio-domain-all" value="0" selected="true" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
-		<hbox>
-			<radio id="asf-addedit-radio-domain" value="1" label="=" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
-			<textbox id="asf-addedit-domain" width="200" onchange="automatic_save_folder.testRegexp('asf-addedit-domain-regexp', 'asf-addedit-domain');"/>
-			<checkbox id="asf-addedit-domain-regexp" label="&asf.addedit.regexp;" oncommand="automatic_save_folder.makeRegexp('asf-addedit-domain-regexp', 'asf-addedit-domain');"/>
-		</hbox>
+			<radio id="asf-addedit-radio-domain-all" value="0" selected="true" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
+			<hbox>
+				<radio id="asf-addedit-radio-domain" value="1" label="=" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
+				<textbox id="asf-addedit-domain" width="200" onchange="automatic_save_folder.testRegexp('asf-addedit-domain-regexp', 'asf-addedit-domain');"/>
+				<checkbox id="asf-addedit-domain-regexp" label="&asf.addedit.regexp;" oncommand="automatic_save_folder.makeRegexp('asf-addedit-domain-regexp', 'asf-addedit-domain');"/>
+			</hbox>
 		</radiogroup>
 		<separator class="thin"/>
 		
 		<description value="&asf.addedit.filename.label;"/>
 		<radiogroup id="radio-addedit-filename" align="left">
-		<radio id="asf-addedit-radio-filename-all" value="0" selected="true" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_filename()"/>
-		<hbox>
-			<radio id="asf-addedit-radio-filename" value="1" label="=" oncommand="automatic_save_folder.asf_toggleradio_filename()"/>
-			<textbox id="asf-addedit-filename" width="200" onchange="automatic_save_folder.testRegexp('asf-addedit-filename-regexp', 'asf-addedit-filename')"/>
-		<checkbox id="asf-addedit-filename-regexp" label="&asf.addedit.regexp;" oncommand="automatic_save_folder.makeRegexp('asf-addedit-filename-regexp', 'asf-addedit-filename');"/>
-		</hbox>
+			<radio id="asf-addedit-radio-filename-all" value="0" selected="true" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_filename()"/>
+			<hbox>
+				<radio id="asf-addedit-radio-filename" value="1" label="=" oncommand="automatic_save_folder.asf_toggleradio_filename()"/>
+				<textbox id="asf-addedit-filename" width="200" onchange="automatic_save_folder.testRegexp('asf-addedit-filename-regexp', 'asf-addedit-filename')"/>
+				<checkbox id="asf-addedit-filename-regexp" label="&asf.addedit.regexp;" oncommand="automatic_save_folder.makeRegexp('asf-addedit-filename-regexp', 'asf-addedit-filename');"/>
+			</hbox>
 		</radiogroup>
 		<separator class="thin"/>
 
 		<description value="&asf.addedit.folder.label;"/>		
 		<hbox>
-			<textbox id="asf-addedit-folder" readonly="true" width="230" ondblclick="automatic_save_folder.browsedir_addedit()"/>
+			<textbox id="asf-addedit-folder" readonly="true" width="240" ondblclick="automatic_save_folder.browsedir_addedit()"/>
 			<button id="asf-addedit-select-folder" label="&asf.selectfolder.label;" oncommand="automatic_save_folder.browsedir_addedit()"/>
 		</hbox>
 		

@@ -25,6 +25,11 @@ var automatic_save_folder = {
 
 		versionChecker: Components.classes["@mozilla.org/xpcom/version-comparator;1"]
 	                               .getService(Components.interfaces.nsIVersionComparator),
+								   
+		stringbundle: Components.classes["@mozilla.org/intl/stringbundle;1"]
+                   .getService(Components.interfaces.nsIStringBundleService)
+                   .createBundle("chrome://asf/locale/asf.properties"),
+				   
 		
 	asf_load: function () {
 		
@@ -72,8 +77,8 @@ var automatic_save_folder = {
 		// alert(navigator.appVersion.indexOf("Win"));
 
 	},
-
-
+	
+	
 	asf_loadpref: function () {
 		var nbrRow = this.prefManager.getIntPref("extensions.asf.filtersNumber", 0);
 		
@@ -114,8 +119,8 @@ var automatic_save_folder = {
 				
 		}
 	},
-
-
+	
+	
 	// Called whenever a list box is selected
 	asf_treeSelected: function () {
 		var deleteButton   = document.getElementById("asf-delete");
@@ -171,8 +176,8 @@ var automatic_save_folder = {
 			moveUpButton.image = "chrome://asf/skin/up_disabled.png";
 		}	
 	},
-
-
+	
+	
 	asf_toggleradio: function () {
 		var select_last_radio = document.getElementById("asf-last-radio");
 		var select_choose_radio = document.getElementById("asf-choose-radio");
@@ -196,9 +201,9 @@ var automatic_save_folder = {
 			select_keeptemp_chk.disabled = false;
 		}
 	},
-
 	
-	toggle_options: function () {
+	
+	toggle_options: function () {  // called whenever the Options tab is selected
 		var select_option = document.getElementById("asf-viewdloption");
 		var select_list = document.getElementById("asf-viewpathselect");
 		var dialogaccept = document.getElementById("asf-dialogaccept");
@@ -210,13 +215,37 @@ var automatic_save_folder = {
 			{
 				select_list.checked = false;
 				select_list.disabled = true;
-				this.prefManager.setBoolPref("extensions.asf.viewpathselect",false)
 			}
 		if (select_option.checked == true)
 			{
 				select_list.disabled = false;
 			}
+			
+		// Print informations about Download sort conflict with right-click
+		// And disable the checkbox
+		document.getElementById("asf-rightclickdesc-DSort").hidden = true;
+		var Dsort_installed = this.DownloadSort();		
+		if (Dsort_installed)
+		{
+			var asf_rightclick = document.getElementById("asf-rightclick");
+			asf_rightclick.disabled = true;
+			
+			document.getElementById("asf-rightclickdesc").hidden = true;
+			document.getElementById("asf-rightclickdesc-DSort").hidden = false;
+		}
+		
+	},
 	
+	
+	toggle_rightclick: function () {
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
+		
+		if (instantApply)
+		{
+		var status = document.getElementById("asf-rightclick").checked;
+		this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", status == true ? 0 : 1000 );
+		}
+
 	},
 	
 	
@@ -225,15 +254,16 @@ var automatic_save_folder = {
 	  // Use this system for tab, because css for tab is not the same color as config window color, and I don't want to force any color by default so user can use new firefox theme's colors.
       document.getElementById("asf-tab-filters").hidden = true;
       document.getElementById("asf-tab-options").hidden = true;
+      document.getElementById("asf-tab-dynamics").hidden = true;
       document.getElementById("asf-tab-informations").hidden = true;
 	  
       
       document.getElementById(tabID).hidden = false;  
 	  if(tabID == "asf-tab-options") this.toggle_options();
-      window.sizeToContent();
+      //window.sizeToContent();
    },
-   
-   
+	
+	
 	asf_variablemode: function() {
 		var select_variable_mode = document.getElementById("asf-variablemode");
 		var select_folder_input = document.getElementById("asf-default-folder");
@@ -249,7 +279,7 @@ var automatic_save_folder = {
 		
 
 	},
-
+	
 	
 	asf_getdomain: function () {  // Save the domain and filename in a hidden field, to be used by the "add" button for auto-complete field.
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")  // if the option is opened from the saving window
@@ -265,7 +295,7 @@ var automatic_save_folder = {
 		}
 	},
 	
-
+	
 	// Code from captain.at, modified by Cyan (CASSAR Eric)
 	move: function (direction) {
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
@@ -433,12 +463,11 @@ var automatic_save_folder = {
 	// next 2 functions : Code inspired from DTA (browsedir & createValidDestination)
 	browsedir: function () {
 		var current_folder_input = document.getElementById("asf-default-folder").value;
-		var stringbundle = document.getElementById('automatic_save_folder_bundles');
 		
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		
-		var filepickerdescription = stringbundle.getString("select_default_folder");
+		var filepickerdescription = this.stringbundle.GetStringFromName("select_default_folder");
 		fp.init(window, filepickerdescription, nsIFilePicker.modeGetFolder);
 		//fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 		
@@ -455,6 +484,7 @@ var automatic_save_folder = {
 		}
 		
 		//needed to save unicode paths using instantApply
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		if (instantApply)
 		{
 			//save the default folder right after editing
@@ -462,8 +492,8 @@ var automatic_save_folder = {
 			this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);
 		}
 	},
-
-
+	
+	
 	createValidDestination: function (path) {
 		if (!path) return false;
 		if (this.trim(path).length==0) return false;
@@ -476,7 +506,7 @@ var automatic_save_folder = {
 			} catch(e) {return false;}
 		return directory;
 	},
-
+	
 	// removed unicodepath, unicodestring is working fine.
 /*
 	loadUnicodeFolder: function (pref_place) {
@@ -491,8 +521,8 @@ var automatic_save_folder = {
 		this.prefManager.setComplexValue(pref_place, Components.interfaces.nsILocalFile, directory);
 	},
 */	
-
-
+	
+	
 	loadUnicodeString: function (pref_place) {
 		
 		return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
@@ -511,6 +541,17 @@ var automatic_save_folder = {
 	
 	trim: function (string)	{
 		return string.replace(/(^\s*)|(\s*$)/g,'');
+	},
+	
+	
+	DownloadSort: function() {	
+		// Check for Download sort add-on, if enabled return true. (works only on 3.x ?)
+		var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
+		var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+		var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
+		
+		if (DownloadSort >= 0) return true;
+		return false;	
 	},
 	
 	
@@ -542,15 +583,37 @@ var automatic_save_folder = {
          
       }
 	},
+	
+	
+	asf_saveoptions: function() {
+		//Save the View_path_list options
+		var view_list = document.getElementById("asf-viewpathselect").checked;
+		this.prefManager.setBoolPref("extensions.asf.viewpathselect",view_list)
+		
+		
+		//save the rightclick (set timeout for header(Content-Disposition:) true = 0, false = 1000)
+		// Only if DownloadSort is not enabled (prevent conflict)
+		var Dsort_installed = this.DownloadSort();		
+		if (Dsort_installed == false)
+		{
+			var rightclick = document.getElementById("asf-rightclick").checked;
+			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", rightclick == true ? 0 : 1000);
+		}
 
+		
+		//save the default folder (filters tab)
+		var default_folder = document.getElementById("asf-default-folder").value;
+		this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);	
+
+	},
+	
 	
 	asf_savepref: function () {
 	//save the filters
 		this.asf_savefilters();
 		
-	//save the default folder
-		var default_folder = document.getElementById("asf-default-folder").value;
-		this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);
+	//save the options
+		this.asf_saveoptions();
 		
 	//close the options	
 		window.close();

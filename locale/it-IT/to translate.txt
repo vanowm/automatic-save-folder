@@ -1,0 +1,11 @@
+
+asf.properties :
+2 to end
+
+asf.dtd :
+42-48
+
+Variables.html :
+
+22-23
+62-66

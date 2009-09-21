@@ -10,7 +10,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://asf/locale/asf.dtd">
 <overlay id="asf-overlay-preferences"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-
+	<script type="application/x-javascript" src="chrome://asf/content/asf_right_click.js"/>
 	<menupopup id="menu_ToolsPopup">
 		<menuitem insertafter="sanitizeItem" id="asf-option" label="&asf.label;" 
             oncommand="window.openDialog('chrome://asf/content/options.xul','Automatic_Save_Folder_Preferences','chrome,centerscreen,resizable=yes, dialog=no');" />

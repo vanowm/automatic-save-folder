@@ -89,12 +89,14 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
 	browsedir_addedit: function () {
 		var current_folder_input = document.getElementById("asf-addedit-folder").value;
-		var stringbundle = document.getElementById('automatic_save_folder_bundles');
+		var stringbundle = Components.classes['@mozilla.org/intl/stringbundle;1'].
+											getService(Ci.nsIStringBundleService).  
+                           createBundle('chrome://asf/locale/asf.properties');
 				
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		
-		var filepickerdescription = stringbundle.getString("select_folder");
+		var filepickerdescription = stringbundle.GetStringFromName("select_folder");
 		fp.init(window, filepickerdescription, nsIFilePicker.modeGetFolder);
 		//fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 		

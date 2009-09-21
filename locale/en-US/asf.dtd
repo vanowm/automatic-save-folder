@@ -39,8 +39,14 @@
 <!ENTITY asf.viewdloption.label "Allow you to see the last two destination folders and a link to add or edit the filters">
 <!ENTITY asf.viewpathselect.bool "View the list of folders">
 <!ENTITY asf.viewpathselect.label "Activate a drop-down menu with all the filter's path.">
-<!ENTITY asf.dialogaccept.bool "Automatically accept the download (no need to click the 'OK' button).">
-<!ENTITY asf.variablemode.bool "Advanced mode :">
+<!ENTITY asf.dialogaccept.bool "Automatically accept the download.">
+<!ENTITY asf.rightclick.bool "Right-Click enabled">
+<!ENTITY asf.rightclick.label "Right-click 'save as...' functionnality doesn't work with downloading redirection scripts. &#xA;Firefox proposed filename will stay as 'script_name.php' instead of the real target filename. &#xA;Disable this feature if you need the right-click to save a redirection link. Single left-click is not affected.">
+<!ENTITY asf.rightclick.DSort.label "Download sort extension has beed detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Add-on manager.">
+
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Dynamic folders">
+<!ENTITY asf.variablemode.bool "Enabled">
 <!ENTITY asf.variablemode1.label "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day ">
 <!ENTITY asf.variablemode2.label "or the file name.">
 <!ENTITY asf.variablemode3.label "Note : Attention to uppercase and lowercase.">

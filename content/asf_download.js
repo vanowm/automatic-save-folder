@@ -281,14 +281,16 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		// make the array with the month's name in the stringbundle of the locale language path.
 
-		var stringbundle = document.getElementById('automatic_save_folder_bundles');
+		var stringbundle = Components.classes['@mozilla.org/intl/stringbundle;1'].
+											getService(Ci.nsIStringBundleService).  
+                           createBundle('chrome://asf/locale/asf.properties');
 
 		var fullmonthname = new Array();
 		var abbrmonthname = new Array();
 		for (var i = 1 ; i<= 12 ; i++)
 		{
-			fullmonthname[i-1] = stringbundle.getString("month"+i+"_full");
-			abbrmonthname[i-1] = stringbundle.getString("month"+i+"_abbr");
+			fullmonthname[i-1] = stringbundle.GetStringFromName("month"+i+"_full");
+			abbrmonthname[i-1] = stringbundle.GetStringFromName("month"+i+"_abbr");
 		}
 		
 		

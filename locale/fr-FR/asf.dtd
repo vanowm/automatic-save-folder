@@ -40,7 +40,13 @@
 <!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">
 <!ENTITY asf.viewpathselect.label "Active le menu déroulant contenant le chemin de chaque filtre.">
 <!ENTITY asf.dialogaccept.bool "Accepter le téléchargement automatiquement (Pas besoin de cliquer sur le bouton 'OK').">
-<!ENTITY asf.variablemode.bool "Mode avancé :">
+<!ENTITY asf.rightclick.bool "Clic-droit activé">
+<!ENTITY asf.rightclick.label "La fonction clic-droit 'enregistrer la cible sous...' ne fonctionne pas avec les script de redirection de fichiers. &#xA;Le nom de fichier proposé par Firefox reste 'nom_du_script.php' au lieu du vrai nom du fichier téléchargé. &#xA;Désactivez temporairement cette option si vous devez utiliser le clic-droit pour sauvegarder un fichier provenant d'un script de redirection. Le clic-gauche n'est pas affecté.">
+<!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &#xA;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu 'outils/modules complémentaires...' afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
+
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Dossiers dynamiques">
+<!ENTITY asf.variablemode.bool "Activés">
 <!ENTITY asf.variablemode1.label "Permet d'éditer le chemin d'enregistrement des filtres manuellement et d'ajouter des variables dynamiques,">
 <!ENTITY asf.variablemode2.label "comme la date du jour ou le domaine d'hébergement.">
 <!ENTITY asf.variablemode3.label "Note : Attention aux majuscules et minuscules.">

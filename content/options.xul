@@ -29,10 +29,8 @@
 		<preference id="asf_savetype" name="extensions.asf.savetype" type="int"/>
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
 		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
+		<preference id="asf_rightclick" name="extensions.asf.rightclick" type="bool"/>
 	</preferences>
-	<stringbundleset id="automatic_save_folder_bundleset">
-		<stringbundle id="automatic_save_folder_bundles" src="chrome://asf/locale/asf.properties"/>
-	</stringbundleset>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
 		<menuitem label="&asf.copy.popup;" oncommand="automatic_save_folder.asf_duplicate();"/>
@@ -44,9 +42,11 @@
 			<tabs>
 				<tab id="asf-filterstab" style="-moz-appearance: none" orient="vertical" selected="true" label="&asf.filters.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-filters');" />
 				<tab id="asf-optionstab" style="-moz-appearance: none" orient="vertical"                 label="&asf.options.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-options');" />
+				<tab id="asf-dynamicstab" style="-moz-appearance: none" orient="vertical"                 label="&asf.dynamics.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-dynamics');" />
 				<tab id="asf-informationstab" style="-moz-appearance: none" orient="vertical"            label="&asf.info.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-informations');" />
 			</tabs>
 			<tabpanels hidden="true">
+				<tabpanel />
 				<tabpanel />
 				<tabpanel />
 				<tabpanel />
@@ -113,15 +113,25 @@
 			<hbox><description value="	" /><checkbox id="asf-viewpathselect" preference="asf_viewpathselect" label="&asf.viewpathselect.bool;"/></hbox>
 			<hbox><description value="		" /><description id="asf-viewpathselectdesc" >&asf.viewpathselect.label;</description></hbox>
 			<separator />
+			<checkbox id="asf-rightclick" preference="asf_rightclick" label="&asf.rightclick.bool;" oncommand="automatic_save_folder.toggle_rightclick();"/>
+			<description id="asf-rightclickdesc" style="margin-left:25px;white-space: pre-wrap">&asf.rightclick.label;</description>
+			<description id="asf-rightclickdesc-DSort" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.DSort.label;</description>
+		</groupbox>
+	</vbox>
+	<vbox id="asf-tab-dynamics" hidden="true" flex="1000">
+		<groupbox id="asf-dynamics" flex="1">
+			<caption label="&asf.dynamics.label;"/>
+			<separator class="thin"/>
 			<checkbox id="asf-variablemode" preference="asf_variablemode" label="&asf.variablemode.bool;" oncommand="automatic_save_folder.asf_variablemode()"/>
 			<hbox><description value="	" /><description id="asf-variablemodedesc1" >&asf.variablemode1.label;</description></hbox>
 			<hbox><description value="	" /><description id="asf-variablemodedesc2" >&asf.variablemode2.label;</description></hbox>
 			<hbox><description value="	" /><description id="asf-variablemodedesc3" >&asf.variablemode3.label;</description></hbox>
+			<separator />
 			<hbox flex="1">
 			   <description value="	" />
 			   <groupbox flex="1" style="padding:0px !important;">
 				  <caption label="&asf.variables.label;"/>
-					 <iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:90px;"
+					 <iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:120px;"
 					 src="chrome://asf/locale/variables.html"
 					 />
 			   </groupbox>
