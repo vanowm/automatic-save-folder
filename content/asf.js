@@ -30,22 +30,22 @@ var automatic_save_folder = {
                    .getService(Components.interfaces.nsIStringBundleService)
                    .createBundle("chrome://asf/locale/asf.properties"),
 				   
+		firefoxversion : "",	
 		
 	asf_load: function () {
 		
-		var firefoxversion = "";
 		if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
 		{
-			 firefoxversion = "3";
+			this.firefoxversion = "3";
 		}
 		else 
 		{
-			 firefoxversion = "2";
+			this.firefoxversion = "2";
 		}
 		
 		
 		// init the preference for firefox 3
-		if (firefoxversion == "3")
+		if (this.firefoxversion == "3")
 		{	
 			// set lastdir to "enable" if the user just updated from previous version and had it disabled	
 			var lastdir = document.getElementById("asf-lasdir");
@@ -224,8 +224,18 @@ var automatic_save_folder = {
 		// Print informations about Download sort conflict with right-click
 		// And disable the checkbox
 		document.getElementById("asf-rightclickdesc-DSort").hidden = true;
-		var Dsort_installed = this.DownloadSort();		
-		if (Dsort_installed)
+		document.getElementById("asf-rightclickdesc-ff2").hidden = true;
+		var Dsort_installed = this.DownloadSort();	
+		
+		if (this.firefoxversion == 2)  // display a message "right click disabled on Firefox 2, update to Firefox 3)
+		{
+			var asf_rightclick = document.getElementById("asf-rightclick");
+			asf_rightclick.disabled = true;
+			
+			document.getElementById("asf-rightclickdesc").hidden = true;
+			document.getElementById("asf-rightclickdesc-ff2").hidden = false;
+		}
+		if (Dsort_installed && this.firefoxversion ==3) // if Firefox 3 + Download sort, display a message "right click disabled"
 		{
 			var asf_rightclick = document.getElementById("asf-rightclick");
 			asf_rightclick.disabled = true;
@@ -594,7 +604,7 @@ var automatic_save_folder = {
 		//save the rightclick (set timeout for header(Content-Disposition:) true = 0, false = 1000)
 		// Only if DownloadSort is not enabled (prevent conflict)
 		var Dsort_installed = this.DownloadSort();		
-		if (Dsort_installed == false)
+		if ((Dsort_installed == false) && this.firefoxversion == 3) // only for firefox 3, Firefox2 doesn't use rightclick
 		{
 			var rightclick = document.getElementById("asf-rightclick").checked;
 			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", rightclick == true ? 0 : 1000);

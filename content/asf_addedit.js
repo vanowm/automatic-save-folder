@@ -90,7 +90,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	browsedir_addedit: function () {
 		var current_folder_input = document.getElementById("asf-addedit-folder").value;
 		var stringbundle = Components.classes['@mozilla.org/intl/stringbundle;1'].
-											getService(Ci.nsIStringBundleService).  
+											getService(Components.interfaces.nsIStringBundleService).  
                            createBundle('chrome://asf/locale/asf.properties');
 				
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;

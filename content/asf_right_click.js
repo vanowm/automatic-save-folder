@@ -45,13 +45,8 @@ var automatic_save_folder = {
 			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
 			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
 			
-			if (DownloadSort >= 0)
-			{
-				// alert ("Download sort extension detected")
-			}
-			else // Download Sort is not enabled, load ASF rightclick replacement.
-			{
-			
+			if ( (DownloadSort == -1) && (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "3.0") >= 0) ) // Download Sort is not enabled, load ASF rightclick replacement && Firefox 3.0 min
+			{			
 				// Not working like I would like :(
 				/*
 				// Replace first line of ORIGinal firefox rightclick function, to add ASF function to it. might Works with every firefox version :) 
@@ -61,7 +56,8 @@ var automatic_save_folder = {
 				window.getTargetFile = asf_getTargetFile;
 				*/
 				
-				// replace the ORIGinal firefox function with the custom one. (only working on 3.x ?)
+				// replace the ORIGinal firefox function with the custom one. (only working on 3.x) 
+				// (2.x doesn't know Cc"@mozilla.org/privatebrowsing;1") -> just disable rightclick to let 2.x users still uses asf main functionnality
 				window.getTargetFile = automatic_save_folder.asf_getTargetFile;
 				
 				// only "save image as..." is working until right click timeout set to 0 

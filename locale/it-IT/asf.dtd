@@ -41,8 +41,9 @@
 <!ENTITY asf.viewpathselect.label "Visualizza un menu con la lista di tutti i percorsi dei filtri.">
 <!ENTITY asf.dialogaccept.bool "Automatically accept the download.">
 <!ENTITY asf.rightclick.bool "Right-Click enabled">
-<!ENTITY asf.rightclick.label "Right click 'save as...' functionnality doesn't work with downloading redirection scripts. &#xA;Firefox proposed filename will stay as 'script_name.php' instead of the real target filename. &#xA;Disable this feature if you need the right-click to save a redirection link. Single left-click is not affected.">
-<!ENTITY asf.rightclick.DSort.label "Download sort extension has beed detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Add-on manager.">
+<!ENTITY asf.rightclick.label "The right-click 'save as...' functionality doesn't work with downloading redirection scripts. &#xA;Firefox proposed filename will stay as 'script_name.php' instead of the real target filename. &#xA;Disable this feature if you need the right-click to save a redirection link. Single left-click is not affected.">
+<!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Add-on manager.">
+<!ENTITY asf.rightclick.ff2.label "The right-click 'save as...' functionality doesn't work on Firefox 1.5 or 2.*, please upgrade to Firefox 3.x to use it.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamic folders">

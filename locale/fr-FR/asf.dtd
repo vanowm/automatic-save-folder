@@ -39,10 +39,11 @@
 <!ENTITY asf.viewdloption.label "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
 <!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">
 <!ENTITY asf.viewpathselect.label "Active le menu déroulant contenant le chemin de chaque filtre.">
-<!ENTITY asf.dialogaccept.bool "Accepter le téléchargement automatiquement (Pas besoin de cliquer sur le bouton 'OK').">
+<!ENTITY asf.dialogaccept.bool "Accepter le téléchargement automatiquement.">
 <!ENTITY asf.rightclick.bool "Clic-droit activé">
 <!ENTITY asf.rightclick.label "La fonction clic-droit 'enregistrer la cible sous...' ne fonctionne pas avec les script de redirection de fichiers. &#xA;Le nom de fichier proposé par Firefox reste 'nom_du_script.php' au lieu du vrai nom du fichier téléchargé. &#xA;Désactivez temporairement cette option si vous devez utiliser le clic-droit pour sauvegarder un fichier provenant d'un script de redirection. Le clic-gauche n'est pas affecté.">
 <!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &#xA;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu 'outils/modules complémentaires...' afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
+<!ENTITY asf.rightclick.ff2.label "La fonction clic-droit 'enregistrer la cible sous...' ne fonctionne pas avec firefox 1.5 et 2.* ; Installez Firefox 3.x pour pouvoir utiliser cette fonctionnalité.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dossiers dynamiques">
@@ -59,7 +60,7 @@
 <!-- preference add & edit-->
 <!ENTITY buttonlabelextra1 "OK">
 <!ENTITY asf.add.title "Ajouter un nouveau filtre">
-<!ENTITY asf.edit.title "Editer un filtre">
+<!ENTITY asf.edit.title "Éditer un filtre">
 <!ENTITY asf.addedit.filter.label "Filtres">
 <!ENTITY asf.addedit.help.label "Aide">
 <!ENTITY asf.addedit.domain.label "Domaine">
@@ -76,8 +77,8 @@
 <!ENTITY asf.addedit.inforegexp4 "Expression régulière : .*(.rar|.zip)$">
 
 <!ENTITY asf.addedit.nodata.domain "Le domaine est vide. Veuillez sélectionner 'Tous' ou entrer un filtre pour le domaine">
-<!ENTITY asf.addedit.nodata.filename "Le nom de fichier est vide. Veuillez séléctionner 'Tous' ou entrer un filtre pour le nom de fichier">
-<!ENTITY asf.addedit.nodata.folder "Le dossier n'est pas défini. Veuillez séléctionner un dossier de destination pour ce filtre">
+<!ENTITY asf.addedit.nodata.filename "Le nom de fichier est vide. Veuillez sélectionner 'Tous' ou entrer un filtre pour le nom de fichier">
+<!ENTITY asf.addedit.nodata.folder "Le dossier n'est pas défini. Veuillez sélectionner un dossier de destination pour ce filtre">
 
 <!-- Regular expression Help dialog -->
 <!ENTITY asf.regexp.title "Expressions Régulières">
