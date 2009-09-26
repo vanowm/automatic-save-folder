@@ -3,9 +3,14 @@ asf.properties :
 2 to end
 
 asf.dtd :
-42-49
+42-50
 
 Variables.html :
 
 22-23
 62-66
+
+info.html :
+Rewrite the line 14 to 19 (now it's working with right click), check the en-US/info.html to see the changes.
+138-139 actual (134-135 after 14-19 done)
+158-172 actual (154-168 after 14-19 done)

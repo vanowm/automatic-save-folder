@@ -41,13 +41,13 @@
 <!ENTITY asf.viewpathselect.label "Visualizza un menu con la lista di tutti i percorsi dei filtri.">
 <!ENTITY asf.dialogaccept.bool "Automatically accept the download.">
 <!ENTITY asf.rightclick.bool "Activate the filtering on the Right-Click menu 'Save link as...'">
-<!ENTITY asf.rightclick.label "The right-click 'Save link as...' functionality doesn't work with file's redirection scripts. &#xA;Temporarily disable this feature if you need to use the right-click to save a redirection link. &#xA;&#xA;This option doesn't affect the menus 'Save image as...', nor 'Save as... (CTRL+S)'.">
+<!ENTITY asf.rightclick.label "The right-click 'Save link as...' functionality doesn't work with file's redirection scripts. &#xA;Temporarily disable this feature if you need to use the right-click to save a redirection link. &#xA;&#xA;This option doesn't affect the menus 'Save image as...', nor 'Save as... (Ctrl+S)'.">
 <!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Add-on manager.">
 <!ENTITY asf.rightclick.ff2.label "The right-click 'save as...' functionality doesn't work on Firefox 1.5 or 2.*, please upgrade to Firefox 3.x to use it.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamic folders">
-<!ENTITY asf.variablemode.bool "Modalità avanzata :">
+<!ENTITY asf.variablemode.bool "Enabled :">
 <!ENTITY asf.variablemode1.label "Permette di editare i percorsi di salvataggi manualmente e aggiungere variabili dinamiche,">
 <!ENTITY asf.variablemode2.label "come la data del giorno o il nome del file.">
 <!ENTITY asf.variablemode3.label "Nota : Attenziona ai caratteri maiuscoli e minuscoli.">

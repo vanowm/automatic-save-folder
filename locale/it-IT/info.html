@@ -18,14 +18,12 @@
 <br />
 <br />Se qualche filtro non funziona, accertartati che Firefox non usi un altro processo sul file scaricato:
 <br />
-<br />1. 
-<br />&nbsp;&nbsp; Vai sul menu "Strumenti" e "Opzioni...".
-<br />2.
-<br />&nbsp;&nbsp; - Per utenti di Firefox 3: vai sul tab "Applicazioni"
-<br />&nbsp;&nbsp; - Per utenti di precedenti versioni di Firefox: Vai sul tab "Contenuti" e clicca su "gestisci..." in basso a destra.
-<br />3.
-<br />&nbsp;&nbsp; Verifica se il file che vuoi scaricare sia impostato su "Chiedi ogni volta".
-<br /><img src="chrome://asf/skin/screen_apps_fr.png" />
+<ol>
+	<li>Vai sul menu "Strumenti" e "Opzioni...".</li>
+	<li>- Per utenti di Firefox 3: vai sul tab "Applicazioni"
+  <br />- Per utenti di precedenti versioni di Firefox: Vai sul tab "Contenuti" e clicca su "gestisci..." in basso a destra.</li>
+	<li>Verifica se il file che vuoi scaricare sia impostato su "Chiedi ogni volta".</li>
+</ol><img src="chrome://asf/skin/screen_apps_fr.png" />
 <br />
 <br />
 <br />
@@ -39,7 +37,6 @@
 <br />
 <br /><u>Regole dei filtri</u>:
 <br />- I filtri sono definiti usando il nome del file e il dominio.
-<br />Attenzione: Per il dominio non usare l'inidirizzo corrente del sito, ma il server dove si trova il file.
 <br />- I filtri devono corrispondere al nome del file o al dominio. Per esempio non scrivere <b>"google.com"</b> ma solo <b>google.com</b> (senza doppi apici)
 <br />- Puoi usare i caratteri wildcard <b>*</b> (asterisco) per rimpiazzare parti del filtro: <b>wiki*.org</b>
 <br />- L'asterisco non serve all'inizio e alla fine della stringa usata come filtro. Scrivere <b>*wiki*</b> o <b>wiki</b> è la stessa cosa. 
@@ -134,37 +131,48 @@ e i video possono escarticati con l'estensione .avi, .torrent or .nzb (newsgroup
 <br />Non ci sono abbastanza commenti da parte degli uteniti per capire bene il problema.
 <br />Perfavore contattare l'autore se sei uno di tali utenti e vuoi aiutare a correggere il problema.
 <br />
-<br />- Se i filtri contenevano caratteri unicode nella versione precedente (precedente alla 0.9.3), il percorso del filtro potrebbe apparire vuoto, ma funziona.
-<br />Perfavore, edita i filtri e specifica il percorso manualmente.
-<br />
-<br />- I filtri dei domini sono fatti nel referer URL se il dominio hostato non corrisponde al filtro.
-<br />Può dare problemi sulla validazione del filtro quando l'utente non prova a validarlo.
-<br />Se tale problema capita, cancellerò quest'opzione (perfavore lasciate dei commenti su questa opzione: utile o no?).
-<br />
 <br />
 <br />
 <br /><b><u>Da fare</u></b>:
 <br />
-<br />Sto cercando aiuto su:
-<br />- Abilitare filtri quando si usa il menu del tasto destro "Salva destinazione con nome..." e "Salva immagine con nome...".
-<br />- Aggiungere caratteristiche o rimpiazzare il menu opzioni "Applicazioni" di Firefox.
+<br />- Use Sqlite database to store filters data for more per-filter's options.
+<br />- Release a new website in English (Currently in development).
 <br />
 <br />Puoi contattarmi se hai bisogno di aiuto o suggerimenti:
 <br />http://asf.mangaheart.org
 <br />o
-<br />https://addons.mozilla.org/fr/firefox/addon/4781
+<br />http://addons.mozilla.org/addon/4781
+<br />
 <br />
 <br />
 <br /><b><u>Storico versioni</u></b>:
 <br />
 <br /><pre>
 
-+ aggiunto
-- rimosso
-* risolto o cambiato
++ Aggiunto
+- Rimosso
+* Cambiato
+! Risolto 
 
 
-Version 0.9.3: (2009 07 05)
+Versione 0.9.4: (2009 10 xx)
++ Add filtering on Right-Click menus "Save link as...", "Save image as..." and "Save as...(Ctrl+S)"
+  (Doesn't work with Firefox 3.x and is not compatible with Download Sort add-on. If you have both activated, Download Sort prevails)
++ Add dynamic variables %F% for the month name, and %M% for the abbeviated one.
++ Make Windows and Mac OSX works with Firefox option "browser.preferences.instantApply" to save the filters right after a modification (Option by default on Linux)
++ Add Drag and Drop feature on the filter's listing to set filter's order quicly.
++ Add an option to automaticaly accept the download (User requested). Great for a use with Firefox saving option "Save file to"
+* In the drop-down menu on the save dialog : List the folders alphabetically, keep only one instance of each and activate the dynamic renaming if checked in options.
+* New tab to split options
+! Correct links to Mozilla website, which were force to the French page.
+! Correct filtering checking in advanced mode (dynamic variables enabled)
+
+Other updates :
++ Source code and revisions available on http://code.google.com/p/automatic-save-folder
+* Add-on now in public area on http://addons.mozilla.org/addon/4781 ; Thanks to users for your support, your comments and suggestions.
+
+
+Versione 0.9.3: (2009 07 05)
 + Aggiunto il numero di versione nel titolo della finestra di configurazione principale
 + Aggiunta l'opzione di eseguire doppio click sul campo del percorso per aprire la finestra di selezione.
 + Nuovi tab per separare filtri, opzioni, aiuto e l'elenco di versioni.
@@ -178,39 +186,39 @@ Version 0.9.3: (2009 07 05)
 + Limitata la larghezza della finestra di salvataggio (Grazie a Julien)
 + Aggiunta l'opzione per mostrare un menu con la lista nella finestra di salvataggio per selezionare la cartella di salvataggio da tale lista. 
 * Correzione per il percorso in unicode (i filtri che usano caratteri unicode nella versione 0.9.2 potrbbero essere rimossti, perfavore riscriverli a mano).
-* Correzione per il parametro editabile dei nuovi filtri creati.
 * Cambiato il modo in cui i link nella finestra "about..." funzionano. Adesso apriranno un nuovo tab.
 * Finetra e menu pi grandi per una visibilità migliore.
 * Codice semplificato per muovere i filtri su e giu.
 * Codice semplificato per il caricamento e l'autocompletamento dei dati nella finestra "aggiungi".
 * Migliore visibilità: Tutte le finestra possono essere ridimensionate e il contenuto verrà aggiusato di conseguenza.
-* Corretto il bug che non faceva caricare e leggere preferenze non definite o non esistenti nella about:config (Grazie a Martin)
 * Script riscritto completamente per usare namespace Globa (chiesto da mozilla.com per pubblicare l'estensione)
 * Codice scritto in modo più chiaro e con commenti.
+! Correzione per il parametro editabile dei nuovi filtri creati.
+! Corretto il bug che non faceva caricare e leggere preferenze non definite o non esistenti nella about:config (Grazie a Martin)
   
 
 Versione 0.9.2: (2009 01 26)
-* Correzione per Vista: Forzata la variabile browser.download.folderList a "2" quando si apre la finestra delle preferenze di ASF.
-* Corretta la colonna "attiva", i filtri non potevano essere temporaneamente attivati o disattivati.
 *Compatibilià con i temi: Adesso vengono usati i colori di default, tutto il testo dovrebbe essere visibile correttamente.
  Le immagini sono state aggiornate in modo da rimanere visibili sui temi scuri.
 * Firefox 3.1b2, 3.1b3, 3.5b4
+! Correzione per Vista: Forzata la variabile browser.download.folderList a "2" quando si apre la finestra delle preferenze di ASF.
+! Corretta la colonna "attiva", i filtri non potevano essere temporaneamente attivati o disattivati.
  
  
 Versione 0.9.1: (2008 11 01)
 + Traduzione italiana di Scognito.
 + Aggiunto un radio menu mentre si salva, che permette all'utente di scegliere velocemente fra le ultime due cartelle.
   La seconda scelta compare solamente se è diversa dalla prima.
-* Corretto un bug dello script sulla verifica del filtro mentre "Usa l'ultima cartella" era selezionata (grazie a Carsten)
 * Nascosta l'opzione "Ha effetto su 'salva come...'" su Firefox 3, questa opzione è usata automaticamente.
 * Rimosso il popup "Aggiungi un filtro" mentre si salva. Ha creato il problema del focus e un errore sul posizionamento della finestra.
   Il collegamento è ancora qui e apre la finestra principale per permettere all'utente di aggiungere o modificare filtri.
   Mentre si aggiunge un filtro usando questo collegamento, il campo verrà inserito automaticamente riempito col nome del file corrente e col dominio.
-* Risolto un bug su Firefox 3 e Windows Vista: Cambiato un opzione interna di firefox che permette all'utente di usare cartelle definite. (Thanks to Carsten)
+* Risolto il doppio click sui filtri. Adesso i campi non sono editabili su Firefox 3.
+! Corretto un bug dello script sulla verifica del filtro mentre "Usa l'ultima cartella" era selezionata (grazie a Carsten)
+! Risolto un bug su Firefox 3 e Windows Vista: Cambiato un opzione interna di firefox che permette all'utente di usare cartelle definite. (Thanks to Carsten)
   (browser.download.folderList = 2) Su Windows Vista, il valore è settato a 1.
   I possibili valori sono: 0 = desktop ; 1 = cartella di download predefinita; 2 = scelta utente.
-* Risolto il percorso specificato sulle finestre di downloa su Firefox 3.
-* Risolto il doppio click sui filtri. Adesso i campi non sono editabili su Firefox 3.
+! Risolto il percorso specificato sulle finestre di downloa su Firefox 3.
 
 
 
@@ -222,7 +230,7 @@ Versione 0.9.0: (2008 06 28)
   Problema noto: Può capitare un problema di focus mentre si chiude il pannelo dei filtri.
 - Tolta l'opzione per attivare o disattivare l'estensione. Per disabilitarla temporaneamente, usa il gestore delle estensioni.
 * Nuovo modo di controllare i filtri (addEventlistener invece di OnLoad), per una migliore compatibilità con altre estensioni.
-* Corretta la colonna per filtro "Attivo" che non era nascosta correttamente.
+! Corretta la colonna per filtro "Attivo" che non era nascosta correttamente.
 
 
 Versione 0.8.7: (2008 01 06)
@@ -288,6 +296,7 @@ Funzioni:
 <br />- Carsten: Per l'aiuto su un errore dello script e l'opzione di Firefox su Windows Vista che non faceva funzionare i filtri.
 <br />- Martin: Help with finding the bug when reading a Firefox preference not set or empty.
 <br />- Ted Gifford: Script modification allowing group capture in dynamic variables.
+<br />- Narayan: English correction.
 <br />
 <br />
 <br /><b><u>Translators</u></b>:
