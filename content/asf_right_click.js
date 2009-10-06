@@ -292,6 +292,7 @@ var automatic_save_folder = {
 		var tempdomain = 		ASF.loadUnicodeString("extensions.asf.tempdomain");
 		var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
 		var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
+		var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");	
 		
 		// If variable/Advanced mode is ON, let's check the variables and replace to create the new defaultfolder
 		if (variable_mode == true) 
@@ -342,11 +343,11 @@ var automatic_save_folder = {
 			// Check the domain	
 				dom_regexp = ASF.test_regexp(filters[i][0], domain);  // hosted Domain
 				
-			// Check the referer domain name if hosted domain checking returned false. In next releases, will be a proper option
-				if (dom_regexp == false)
+			// Check the current website URL if hosted domain checking returned false.
+				if (!dom_regexp && use_currentURL)
 				{
-					var referer = document.getElementById("urlbar").value;
-					dom_regexp = ASF.test_regexp(filters[i][0], referer); // check the filter domain with the Referer domain only if the hosted domain doesn't match
+					var currentURL = document.getElementById("urlbar").value;
+					dom_regexp = ASF.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
 				}
 				
 			// Check the filename	

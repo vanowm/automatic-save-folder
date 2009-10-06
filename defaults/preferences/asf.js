@@ -16,3 +16,4 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
  pref("browser.download.folderList", 2);
  pref("extensions.asf.dialogaccept", false);
  pref("extensions.asf.rightclick", true);
+ pref("extensions.asf.usecurrenturl", false);

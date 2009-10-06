@@ -30,6 +30,7 @@
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
 		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
 		<preference id="asf_rightclick" name="extensions.asf.rightclick" type="bool"/>
+		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
 	</preferences>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
@@ -108,6 +109,7 @@
 			<separator class="thin"/>
 			<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
 			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;"/>
+			<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
 			<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" oncommand="automatic_save_folder.toggle_options();"/>
 			<hbox><description value="	" /><description id="asf-viewdloptiondesc" >&asf.viewdloption.label;</description></hbox>
 			<hbox><description value="	" /><checkbox id="asf-viewpathselect" preference="asf_viewpathselect" label="&asf.viewpathselect.bool;"/></hbox>

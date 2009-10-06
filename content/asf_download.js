@@ -122,16 +122,18 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 				dom_regexp = false ; // reset the matching string for the "for" loop
 				file_regexp = false ; // same as above
 			// Check the domain	
-				dom_regexp = ASF.test_regexp(filters[i][0], "source");  // hosted Domain
+				dom_regexp = ASF.test_regexp(filters[i][0], domain);  // hosted Domain
 				
-			// Check the referer domain name if hosted domain checking returned false. In next releases, will be a proper option
-				if (dom_regexp == false)
+			// Check the current website URL if hosted domain checking returned false.
+				if (!dom_regexp && use_currentURL)
 				{
-					dom_regexp = ASF.test_regexp(filters[i][0], "referer"); // check the filter domain with the Referer domain only if the hosted domain doesn't match
+					var uCT = document.getElementById("unknownContentType");
+					var currentURL = uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
+					dom_regexp = ASF.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
 				}
 				
 			// Check the filename	
-				file_regexp = ASF.test_regexp(filters[i][1], "location"); // Filename
+				file_regexp = ASF.test_regexp(filters[i][1], filename); // Filename
 				
 				// debug
 				// alert ("i = "+i+"\n domain match = "+dom_regexp+"\n file match = "+file_regexp);
@@ -637,20 +639,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}
 	},
 	
-	test_regexp: function (filters, input) {
+	test_regexp: function (filters, string) {
 
-		// input can be "source" for domain name, "location" for file name,  ...
-		if ( (input == "source") || (input == "location") )
-		{	
-			var string = document.getElementById(input).value ;
-		}
-		// ... or "referer" for referer's domain name (the place where the link is, and not the file)
-		else // if (input == "referer")
-		{
-			var uCT = document.getElementById("unknownContentType");
-			var string = uCT.parentNode.defaultView.opener.location.host; // look for the referer host name in the DOM.
-		}
-		
 		// Steps :
 		// 1 - Check if the filter is a regular expression
 		// 2 - if not regexp : add the backslah to special characters and .* to the start and end of the string to convert it into a regexp form
