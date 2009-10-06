@@ -1,4 +1,4 @@
-/* ***** BEGIN LICENSE BLOCK *****
+﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
 Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			  2009 Ted Gifford - Dynamic variable capturing 
@@ -538,7 +538,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var ASF = automatic_save_folder; // ASF is just a shortcut to automatic_save_folder
 		var variable_mode = ASF.prefManager.getBoolPref("extensions.asf.variablemode");
 		var list = document.getElementById('asf_folder_list');
-		var menupopup = document.createElement('menupopup');
+		var menupopup = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menupopup');
 		
 		// Check if there is any filter in list
 		var nbrfilters = 	this.prefManager.getIntPref("extensions.asf.filtersNumber");		
@@ -569,7 +569,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		{
 		path = pathlist[i];
 		path = variable_mode == true? ASF.createfolder(path) : path; 
-		var menuitem = document.createElement('menuitem');
+		var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
 		menuitem.setAttribute('label', path);
 		menuitem.setAttribute('crop', 'center');
 		menuitem.setAttribute('value', path);

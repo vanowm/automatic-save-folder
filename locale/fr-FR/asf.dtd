@@ -41,9 +41,8 @@
 <!ENTITY asf.viewpathselect.label "Active le menu déroulant contenant le chemin de chaque filtre.">
 <!ENTITY asf.dialogaccept.bool "Accepter le téléchargement automatiquement.">
 <!ENTITY asf.rightclick.bool "Activer le filtrage sur le menu clic-droit 'Enregistrer la cible du lien sous...'.">
-<!ENTITY asf.rightclick.label "La fonction clic-droit 'enregistrer la cible du lien sous...' ne fonctionne pas avec les script de redirection de fichiers. &#xA;Désactivez temporairement cette option si vous devez utiliser le clic-droit pour sauvegarder un fichier provenant d'un script de redirection. &#xA;&#xA;Cette option n'affecte pas les menus 'Enregistrer l'image sous...', ni 'Enregistrer sous... (Ctrl+S)'.">
+<!ENTITY asf.rightclick.label "Note : Activer le filtrage sur ce menu empêche Firefox de récupérer le nom du fichier cible lors d'un téléchargement avec redirection.&#xA;Désactivez temporairement cette option si vous souhaitez que Firefox lise correctement le nom du fichier fourni par l'entête. Seuls les redirections de fichiers ont ce problème, pour les liens directs laissez la case cochée. &#xA;&#xA;Cette option ne désactive pas le filtrage sur les menus 'Enregistrer l'image sous...' ni 'Enregistrer sous... (Ctrl+S)'.">
 <!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &#xA;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu 'outils/modules complémentaires...' afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
-<!ENTITY asf.rightclick.ff2.label "La fonction clic-droit 'enregistrer la cible sous...' ne fonctionne pas avec firefox 1.5 et 2.* ; Installez Firefox 3.x pour pouvoir utiliser cette fonctionnalité.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dossiers dynamiques">

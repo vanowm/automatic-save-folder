@@ -1,4 +1,4 @@
-/* ***** BEGIN LICENSE BLOCK *****
+﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
 Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			  2009 Ted Gifford - Dynamic variable capturing 
@@ -45,7 +45,7 @@ var automatic_save_folder = {
 			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
 			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
 			
-			if ( (DownloadSort == -1) && (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "3.0") >= 0) ) // Download Sort is not enabled, load ASF rightclick replacement && Firefox 3.0 min
+			if ( (DownloadSort == -1) && (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "2.0") >= 0) ) // Download Sort is not enabled, load ASF rightclick replacement && Firefox 2.0 min
 			{			
 				// Not working like I would like :(
 				/*
@@ -56,20 +56,26 @@ var automatic_save_folder = {
 				window.getTargetFile = asf_getTargetFile;
 				*/
 				
-				// replace the ORIGinal firefox function with the custom one. (only working on 3.x) 
-				// (2.x doesn't know Cc"@mozilla.org/privatebrowsing;1") -> just disable rightclick to let 2.x users still uses asf main functionnality
+				// replace the ORIGinal firefox function with the custom one. (original from Firefox 3.5.4) 
+				// (Firefox 2.x doesn't know Cc"@mozilla.org/privatebrowsing;1" and returns a warning in the console, but right-click filtering is working.)
 				window.getTargetFile = automatic_save_folder.asf_getTargetFile;
 				
-				// only "save image as..." is working until right click timeout set to 0 
-				// But timeout=0 prevent firefox from reading header(Content-Disposition:)
-				// So let's put to 0 only when the user want to use it
-				// and set it back to 1000 (default) when exiting Firefox to prevent blocking the user to 0
-				// if add-on is removed without reseting the timeout first.
-				var asf_rightclick = prefs.getBoolPref("extensions.asf.rightclick");
-				prefs.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclick == true ? 0 : 1000);
-				
-				var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-				obsSvc.addObserver(automatic_save_folder.asf_quitObserver, "quit-application-requested", false);
+				if (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "3.0") >= 0)
+				{
+					// Starting from firefox 3.0 there is a timeout when downloading with right-click to read header(Content-Disposition:) to rename the file in the file_explorer suggested filename.
+					// When timeout is set to 1000 ms (default), ASF right-click filtering is not working.
+					// When timeout is set to 0ms, ASF right-click filtering is working, but header renaming is not working anymore.
+					// And when set to ~8ms, Header renaming is working but ASF is filtering on the previous filename (before the renaming).
+					
+					// Set to 0 only when the user want to use it
+					// and set it back to 1000 (default) when exiting Firefox
+					// to prevent blocking the user to 0 if add-on is removed without reseting the timeout first.
+					var asf_rightclick = prefs.getBoolPref("extensions.asf.rightclick");
+					prefs.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclick == true ? 0 : 1000);
+					
+					var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+					obsSvc.addObserver(automatic_save_folder.asf_quitObserver, "quit-application-requested", false);
+				}
 			}
 		}
 		
@@ -134,13 +140,13 @@ var automatic_save_folder = {
 		{
 			var lastDir;
 			if (inPrivateBrowsing && gDownloadLastDir.file)
-			lastDir = gDownloadLastDir.file;
+				lastDir = gDownloadLastDir.file;
 			else
-			lastDir = prefs.getComplexValue("lastDir", nsILocalFile);
+				lastDir = prefs.getComplexValue("lastDir", nsILocalFile);
 			if ((!aSkipPrompt || !useDownloadDir) && lastDir.exists())
-			dir = lastDir;
+				dir = lastDir;
 			else
-			dir = dnldMgr.userDownloadsDirectory;
+				dir = dnldMgr.userDownloadsDirectory;
 		} catch(ex) {
 			dir = dnldMgr.userDownloadsDirectory;
 		}
@@ -339,7 +345,8 @@ var automatic_save_folder = {
 			// Check the referer domain name if hosted domain checking returned false. In next releases, will be a proper option
 				if (dom_regexp == false)
 				{
-					dom_regexp = ASF.test_regexp(filters[i][0], "referer"); // check the filter domain with the Referer domain only if the hosted domain doesn't match
+					var referer = document.getElementById("urlbar").value;
+					dom_regexp = ASF.test_regexp(filters[i][0], referer); // check the filter domain with the Referer domain only if the hosted domain doesn't match
 				}
 				
 			// Check the filename	

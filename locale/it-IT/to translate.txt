@@ -3,7 +3,7 @@ asf.properties :
 2 to end
 
 asf.dtd :
-42-50
+42-49
 
 Variables.html :
 

@@ -1,4 +1,4 @@
-/* ***** BEGIN LICENSE BLOCK *****
+﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
 Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
@@ -366,12 +366,12 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			// adding into the tree		
 			var filter = window.opener.document.getElementById('asf-filterList');
 			var rules = window.opener.document.getElementById('asf-filterChilds');
-			var item = window.opener.document.createElement('treeitem');
-			var row = window.opener.document.createElement('treerow');
-			var c1 = window.opener.document.createElement('treecell');
-			var c2 = window.opener.document.createElement('treecell');  
-			var c3 = window.opener.document.createElement('treecell');
-			var c4 = window.opener.document.createElement('treecell');
+			var item = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treeitem');
+			var row = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treerow');
+			var c1 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
+			var c2 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');  
+			var c3 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
+			var c4 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
 			c1.setAttribute('label', domain);
 			c2.setAttribute('label', filename);
 			c3.setAttribute('label', folder);
@@ -387,7 +387,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			rules.appendChild(item);
 			
 			//select the new filter	
-			idx = rules.childNodes.length-1; 
+			var idx = rules.childNodes.length-1; 
 			filter.view.selection.select(idx);
 			filter.boxObject.ensureRowIsVisible(idx);
 		 

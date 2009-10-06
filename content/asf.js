@@ -1,4 +1,4 @@
-/* ***** BEGIN LICENSE BLOCK *****
+﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
 Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
@@ -97,12 +97,12 @@ var automatic_save_folder = {
 			// adding into the tree		
 			var filter = document.getElementById('asf-filterList');
 			var rules = document.getElementById('asf-filterChilds');
-			var item = document.createElement('treeitem');
-			var row = document.createElement('treerow');
-			var c1 = document.createElement('treecell');
-			var c2 = document.createElement('treecell');  
-			var c3 = document.createElement('treecell');
-			var c4 = document.createElement('treecell');
+			var item = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treeitem');
+			var row = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treerow');
+			var c1 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
+			var c2 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');  
+			var c3 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
+			var c4 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
 			c1.setAttribute('label', domain);
 			c2.setAttribute('label', filename);
 			c3.setAttribute('label', folder);
@@ -224,24 +224,23 @@ var automatic_save_folder = {
 		// Print informations about Download sort conflict with right-click
 		// And disable the checkbox
 		document.getElementById("asf-rightclickdesc-DSort").hidden = true;
-		document.getElementById("asf-rightclickdesc-ff2").hidden = true;
 		var Dsort_installed = this.DownloadSort();	
 		
-		if (this.firefoxversion == 2)  // display a message "right click disabled on Firefox 2, update to Firefox 3)
-		{
-			var asf_rightclick = document.getElementById("asf-rightclick");
-			asf_rightclick.disabled = true;
-			
-			document.getElementById("asf-rightclickdesc").hidden = true;
-			document.getElementById("asf-rightclickdesc-ff2").hidden = false;
-		}
-		if (Dsort_installed && this.firefoxversion ==3) // if Firefox 3 + Download sort, display a message "right click disabled"
+		if (Dsort_installed) // if Download sort is installed, display a message "right click disabled"
 		{
 			var asf_rightclick = document.getElementById("asf-rightclick");
 			asf_rightclick.disabled = true;
 			
 			document.getElementById("asf-rightclickdesc").hidden = true;
 			document.getElementById("asf-rightclickdesc-DSort").hidden = false;
+		}
+		else
+		{
+			if (this.firefoxversion == 2)  // Right-click is always working without header renaming on Firefox 2 (no option for Timeout), let's hide this menu
+			{
+				document.getElementById("asf-rightclick").hidden = true;
+				document.getElementById("asf-rightclickdesc").hidden = true;
+			}
 		}
 		
 	},
@@ -604,7 +603,7 @@ var automatic_save_folder = {
 		//save the rightclick (set timeout for header(Content-Disposition:) true = 0, false = 1000)
 		// Only if DownloadSort is not enabled (prevent conflict)
 		var Dsort_installed = this.DownloadSort();		
-		if ((Dsort_installed == false) && this.firefoxversion == 3) // only for firefox 3, Firefox2 doesn't use rightclick
+		if ((Dsort_installed == false) && this.firefoxversion == 3) // only for firefox 3, Firefox2 doesn't use timeout option
 		{
 			var rightclick = document.getElementById("asf-rightclick").checked;
 			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", rightclick == true ? 0 : 1000);
