@@ -72,6 +72,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var tempdomain = 		ASF.loadUnicodeString("extensions.asf.tempdomain");
 		var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
 		var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
+		var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");	
 		
 		// If variable/Advanced mode is ON, let's check the variables and replace to create the new defaultfolder
 		if (variable_mode == true) 
