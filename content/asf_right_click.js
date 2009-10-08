@@ -513,11 +513,12 @@ var automatic_save_folder = {
 		// var extension = filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
 		
 		var domain = 	aFpP.fileInfo.uri.host ;
+		var scheme = 	aFpP.fileInfo.uri.scheme ;
 		var filename = 	aFpP.fileInfo.fileName ;
 		var file_name = aFpP.fileInfo.fileBaseName ;
 		var extension = aFpP.fileInfo.fileExt ;
 		
-		
+		//alert ("domain = "+scheme+"://"+domain);
 		
 		// check the filter's data
 		var asf_domain = "";
@@ -548,7 +549,7 @@ var automatic_save_folder = {
 		if (path.search("%asf_rd%") != -1)
 		{
 			// get the domain with the protocol
-			var domainp = 	document.getElementById("source").value ;
+			var domainp = 	scheme+"://"+domain ;
 			
 			// extract the filter part
 			var matches = path.match(/%asf_rd%.*?%asf_rd%/g);        // matches is an array

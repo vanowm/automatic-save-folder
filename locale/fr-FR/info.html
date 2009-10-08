@@ -158,6 +158,7 @@ Version 0.9.4 : (2009 10 xx)
 + Prise en compte pour Windows et Mac OSX de l'option "browser.preferences.instantApply" afin de sauvegarder les filtres des leur modification (option par défaut sur Linux).
 + Ajout du Glisser-déposer (Drag and Drop) dans la liste des filtres pour les repositionner rapidement.
 + Ajout d'une option pour accepter le téléchargement du fichier automatiquement. Parfait pour un fonctionnement avec l'option de sauvegarde de Firefox "Enregistrer le fichier dans le dossier"
++ Ajout d'une option pour utiliser l'adresse du site courant avec le domaine du filtre si le domaine d'hébergement ne correspond pas.
 * Dans le menu déroulant sur la fenêtre de sauvegarde : Listing des dossiers par ordre alphabétique, suppression des doublons et nom de dossier dynamique si l'option est activée.
 * Nouvel onglet pour séparer les options
 ! Correction des liens vers Mozilla qui forçait le chargement de la page en Français.
@@ -165,7 +166,8 @@ Version 0.9.4 : (2009 10 xx)
 
 Autres mises à jour :
 + Code source et révisions disponibles sur http://code.google.com/p/automatic-save-folder
-* Extension en zone publique sur http://addons.mozilla.org/addon/4781 ; Merci aux utilisateurs pour votre soutien, vos commentaires et suggestions.
+* Extension en zone publique sur http://addons.mozilla.org/addon/4781 ; Merci pour votre soutien, vos commentaires et suggestions.
+* Nouveau site web plurilingue pour l'extension (Informations, Téléchargements, Forum) : http://asf.mangaheart.org
 
 
 Version 0.9.3 : (2009 07 05)
@@ -181,24 +183,23 @@ Version 0.9.3 : (2009 07 05)
   Les données utilisés pour vérifier le domaine précédent reste celui d'hébergement du fichier.
 + Limite la taille maximum de la fenêtre d'enregistrement à la résolution de l'écran principal. (Merci à Julien)
 + Ajout d'une option permettant d'afficher un menu déroulant sur la fenêtre de sauvegarde contenant la liste des dossiers définit par les filtres.
-* Enregistrement des données au format unicode (Les filtres présents dans les versions précédentes contenant des caractères accentués peuvent ne plus fonctionner. Vous devrez les redéfinir).
-! Correction du paramètre d'édition par double-clic sur un filtre venant d'être ajouté.
 * Modification du mode d'ouverture des liens de la fenêtre "à propos de...". Les liens s'ouvrent maintenant dans un nouvel onglet.
 * Agrandissement de certains menus pour plus de lisibilité.
 * simplification du code pour le déplacement haut/bas des filtres.
 * simplification du code de chargement des données courantes pour l'auto-complétion du menu "Ajouter".
 * Meilleure visibilité : Les zones de texte s'agrandissent maintenant avec le changement de taille des fenêtres de préférence et d'aides.
-! Correction du bug qui empêchait la lecture des préférences non définies ou inexistantes dans about:config. (Merci à Martin)
 * Modification complète du script en Global Namespace, demandé par mozilla.org afin de sous-mettre l'extension en zone public.
 * Simplifications des fonctions du script et ajout des commentaires du code.
+! Enregistrement des données au format unicode (Les filtres présents dans les versions précédentes contenant des caractères accentués peuvent ne plus fonctionner. Vous devrez les redéfinir).
+! Correction du paramètre d'édition par double-clic sur un filtre venant d'être ajouté.
+! Correction du bug qui empêchait la lecture des préférences non définies ou inexistantes dans about:config. (Merci à Martin)
 
 
 Version 0.9.2 : (2009 01 26)
-! Correction pour Vista : Mise à jour forcée de la variable browser.download.folderList à "2" lors de l'ouverture de la fenêtre d'option d'ASF.
-! Correction de la colonne "actif", les filtres ne pouvaient plus être activés ou désactivés temporairement depuis la Version 0.8.7.
 * Compatibilité des thèmes : Les couleurs par défauts sont maintenant utilisées, tous les textes devraient être visibles correctement.
   Les images ont été améliorées afin d'être visibles sur les thèmes sombres.
-* Agrandissement de la zone des filtres.
+! Correction pour Vista : Mise à jour forcée de la variable browser.download.folderList à "2" lors de l'ouverture de la fenêtre d'option d'ASF.
+! Correction de la colonne "actif", les filtres ne pouvaient plus être activés ou désactivés temporairement depuis la Version 0.8.7.
 
 
 Version 0.9.1 : (2008 11 01)

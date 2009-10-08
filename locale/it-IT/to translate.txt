@@ -13,4 +13,4 @@ Variables.html :
 info.html :
 Rewrite the line 14 to 19 (now it's working with right click), check the en-US/info.html to see the changes.
 138-139 actual (134-135 after 14-19 done)
-158-172 actual (154-168 after 14-19 done)
+158-173 actual (154-169 after 14-19 done)

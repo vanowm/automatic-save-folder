@@ -158,6 +158,7 @@ Version 0.9.4: (2009 10 xx)
 + Make Windows and Mac OSX works with Firefox option "browser.preferences.instantApply" to save the filters right after a modification (Option by default on Linux)
 + Add Drag and Drop feature on the filter's listing to set filter's order quickly.
 + Add an option to automatically accept the download (User requested). Great for a use with Firefox saving option "Save file to"
++ Add an option to choose if you want to use the current website URL to verify the filters if the hosted domain doesn't match.
 * In the drop-down menu on the save dialog : List the folders alphabetically, keep only one instance of each and activate the dynamic renaming if checked in options.
 * New tab to split options
 ! Correct links to Mozilla website, which were force to the French page.
@@ -165,7 +166,8 @@ Version 0.9.4: (2009 10 xx)
 
 Other updates :
 + Source code and revisions available on http://code.google.com/p/automatic-save-folder
-* Add-on now in public area on http://addons.mozilla.org/addon/4781 ; Thanks to users for your support, your comments and suggestions.
+* Add-on now in public area on http://addons.mozilla.org/addon/4781 ; Thank you for your support, your comments and suggestions.
+* New website in english for the add-on (Information, Download, Forum) : http://asf.mangaheart.org
 
 
 Version 0.9.3: (2009 07 05)
@@ -181,7 +183,6 @@ Version 0.9.3: (2009 07 05)
   The data used to mark a domain as "previous" is still the one from the file hosted domain.
 + Limit the saving window width to the user main screen size. (Thanks to Julien)
 + Add an option to show a menu list on the saving window to select the saving folder from the filter's list.
-* Correction for Unicode path (filters using Unicode character in version 0.9.2 might be deleted, please rewrite them manually).
 * Changed the way the links in the "about..." window works. Now it will open in a new tab.
 * Bigger menu and window for better visibility.
 * Code simplification for moving filters up/down.
@@ -189,6 +190,7 @@ Version 0.9.3: (2009 07 05)
 * Better visibility : All the windows are now drag-able and the content fit accordingly.
 * Complete script recoding to Global namespace (asked by Mozilla.com to submit the extension in public area)
 * cleaner code and comments.
+! Correction for Unicode path (filters using Unicode character in version 0.9.2 might be deleted, please rewrite them manually).
 ! Correction of the editable parameter of new created filters.
 ! Bug correction preventing the loading and reading of undefined or non existing preferences in about:config. (Thanks to Martin)
 
@@ -196,7 +198,6 @@ Version 0.9.3: (2009 07 05)
 Version 0.9.2: (2009 01 26)
 * Compatibility with Themes: The default colors are now used, all the text should be correctly visible.
   The pictures have been updated to be visible on dark themes.
-* Edited between 0.9.2 and 0.9.3: Firefox 3.1b2, 3.1b3, 3.5b4
 ! Correction for Vista: Forced the variable browser.download.folderList to "2" when opening the ASF preferences window.
 ! Corrected the "active" column, the filters couldn't be activated or deactivated temporarily.
 
