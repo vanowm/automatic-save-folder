@@ -280,6 +280,11 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		if (!path) return false;
 		if (this.trim(path).length==0) return false;
 		
+		Date.prototype.getWeek = function() // Add the getWeek() function do date()
+		{
+			var onejan = new Date(this.getFullYear(),0,1);
+			return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+		} 
 		var objdate = new Date();
 		
 		// make the array with the month's name in the stringbundle of the locale language path.
@@ -290,10 +295,17 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
 		var fullmonthname = new Array();
 		var abbrmonthname = new Array();
+		var fulldayname = new Array();
+		var abbrdayname = new Array();
 		for (var i = 1 ; i<= 12 ; i++)
 		{
 			fullmonthname[i-1] = stringbundle.GetStringFromName("month"+i+"_full");
 			abbrmonthname[i-1] = stringbundle.GetStringFromName("month"+i+"_abbr");
+		}
+		for (var i = 0 ; i<= 6 ; i++)
+		{
+			fulldayname[i] = stringbundle.GetStringFromName("day"+i+"_full");
+			abbrdayname[i] = stringbundle.GetStringFromName("day"+i+"_abbr");
 		}
 		
 		
@@ -434,6 +446,11 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 										.replace(/%n%/g, objdate.getMonth()+1)  // 8, 9, 10, (no leading 0)
 										.replace(/%F%/g, fullmonthname[objdate.getMonth()])  // full month name
 										.replace(/%M%/g, abbrmonthname[objdate.getMonth()])  // abbreviated month name
+										// Week
+										.replace(/%W%/g, ((objdate.getWeek()) <10) ? (ZERO + (objdate.getWeek())) : objdate.getWeek())  // = number of the week : 01 to 54
+										.replace(/%w%/g, objdate.getDay())  // = Day of the week, from 0 (sunday) to 6 (saturday)
+										.replace(/%l%/g, fulldayname[objdate.getDay()])  // = Full day name
+										.replace(/%D%/g, abbrdayname[objdate.getDay()])  // = Abbreviated day name
 										// Day
 										.replace(/%d%/g, ((objdate.getDate()) <10) ? (ZERO + (objdate.getDate())) : objdate.getDate())  // = number of the day : 01 to 31
 										.replace(/%j%/g, objdate.getDate())  // = number of the day  1 to 31 (no leading 0)
