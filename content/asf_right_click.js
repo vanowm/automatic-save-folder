@@ -236,12 +236,11 @@ var automatic_save_folder = {
 			}
 			aFpP.file = file;
 		}
-
+		
 		return true;
 	},
-		
-		
-		
+	
+	
 	rightclick_setdir: function(aFpP) {
 		
 		//alert ("debug full uri : "+aFpP.fileInfo.uri.spec);
@@ -275,13 +274,9 @@ var automatic_save_folder = {
 		var domain = aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host ;
 		var filename = aFpP.fileInfo.fileName
 		
-		
-		// debug : show the full downloaded link  http://abc.xyz/def/file.ext
-		// Can use this new function to get free from the need of the download window.
-		//var url = dialog.mLauncher.source.spec;
-		//alert(url);
-		
-		
+		// For Ctrl+S, if pagename.ext is not on the URL document.title is used as filename, add .htm to the filename
+		var page_title = document.title.replace(" - Mozilla Firefox", "");
+		if (filename == page_title) filename = filename+".htm";
 		
 		
 		// load prefmanager data
@@ -471,7 +466,7 @@ var automatic_save_folder = {
 		{ }
 		return "";
 	},
-
+	
 	
 	saveUnicodeString: function (pref_place,pref_data) {
 		var str = Components.classes["@mozilla.org/supports-string;1"]
@@ -486,6 +481,11 @@ var automatic_save_folder = {
 		if (!path) return false;
 		if (this.trim(path).length==0) return false;
 		
+		Date.prototype.getWeek = function() // Add the getWeek() function do date()
+		{
+			var onejan = new Date(this.getFullYear(),0,1);
+			return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+		}
 		var objdate = new Date();
 		
 		// make the array with the month's name in the stringbundle of the locale language path.
@@ -496,10 +496,17 @@ var automatic_save_folder = {
 		
 		var fullmonthname = new Array();
 		var abbrmonthname = new Array();
+		var fulldayname = new Array();
+		var abbrdayname = new Array();
 		for (var i = 1 ; i<= 12 ; i++)
 		{
 			fullmonthname[i-1] = stringbundle.GetStringFromName("month"+i+"_full");
 			abbrmonthname[i-1] = stringbundle.GetStringFromName("month"+i+"_abbr");
+		}
+		for (var i = 0 ; i<= 6 ; i++)
+		{
+			fulldayname[i] = stringbundle.GetStringFromName("day"+i+"_full");
+			abbrdayname[i] = stringbundle.GetStringFromName("day"+i+"_abbr");
 		}
 		
 		
@@ -644,6 +651,11 @@ var automatic_save_folder = {
 										.replace(/%n%/g, objdate.getMonth()+1)  // 8, 9, 10, (no leading 0)
 										.replace(/%F%/g, fullmonthname[objdate.getMonth()])  // full month name
 										.replace(/%M%/g, abbrmonthname[objdate.getMonth()])  // abbreviated month name
+										// Week
+										.replace(/%W%/g, ((objdate.getWeek()) <10) ? (ZERO + (objdate.getWeek())) : objdate.getWeek())  // = number of the week : 01 to 54
+										.replace(/%w%/g, objdate.getDay())  // = Day of the week, from 0 (sunday) to 6 (saturday)
+										.replace(/%l%/g, fulldayname[objdate.getDay()])  // = Full day name
+										.replace(/%D%/g, abbrdayname[objdate.getDay()])  // = Abbreviated day name
 										// Day
 										.replace(/%d%/g, ((objdate.getDate()) <10) ? (ZERO + (objdate.getDate())) : objdate.getDate())  // = number of the day : 01 to 31
 										.replace(/%j%/g, objdate.getDate())  // = number of the day  1 to 31 (no leading 0)
@@ -678,18 +690,14 @@ var automatic_save_folder = {
 		}
 */  
 	},
-
+	
 	
 	trim: function (string)	{
 		return string.replace(/(^\s*)|(\s*$)/g,'');
 	},
 	
-
 	
-	
-	
-	
-		indexInArray: function (arr,val){
+	indexInArray: function (arr,val){
 		val = val.replace(/\\/g,'\\\\');
 		var test_regexp = new RegExp("^"+val+"$");
 		var data = "";
@@ -699,10 +707,9 @@ var automatic_save_folder = {
 		}
 		return -1;
 	} ,
-
 	
 	
-		test_regexp: function (filters, string) {
+	test_regexp: function (filters, string) {
 
 		
 		// Steps :
@@ -757,8 +764,8 @@ var automatic_save_folder = {
 // Ted Gifford, end block	
 
 	},
-
-
+	
+	
 	is_regexp: function (string) {
 		if ((string.substring(0,1) == "/") && (string.substr(string.length - 1, 1) == "/"))
 		{
@@ -769,16 +776,6 @@ var automatic_save_folder = {
 			return false;
 		}
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	}
