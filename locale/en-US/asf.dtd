@@ -39,23 +39,27 @@
 <!ENTITY asf.viewdloption.label "Allow you to see the last two destination folders and a link to add or edit the filters">
 <!ENTITY asf.viewpathselect.bool "View the list of folders">
 <!ENTITY asf.viewpathselect.label "Activate a drop-down menu with all the filter's path.">
-<!ENTITY asf.dialogaccept.bool "Automatically accept the download.">
+<!ENTITY asf.dialogaccept.bool "Automatically accept the &#34;What should Firefox do with this file&#34; dialog windows.">
 <!ENTITY asf.rightclick.bool "Activate the filtering on the Right-Click menu 'Save link as...'">
 <!ENTITY asf.rightclick.label "Note: Activating the filtering on this menu prevent Firefox to read the file's target name if it is from a redirection download.&#xA;Temporarily disable this feature if you want Firefox to read the filename provided by the header. Only files from a redirection download have this problem, for direct download links leave this option checked.&#xA;&#xA;This option doesn't disable the filtering on the menus 'Save image as...' nor 'Save as... (Ctrl+S)'.">
-<!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Add-on manager.">
+<!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Extension manager.">
 <!ENTITY asf.usecurrenturl.bool "Use the current website URL to verify the filter's domain if the hosted domain doesn't match.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamic folders">
-<!ENTITY asf.variablemode.bool "Enabled">
+<!ENTITY asf.variablemode.bool "Enable">
 <!ENTITY asf.variablemode1.label "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day ">
 <!ENTITY asf.variablemode2.label "or the file name.">
 <!ENTITY asf.variablemode3.label "Note : Attention to uppercase and lowercase.">
 <!ENTITY asf.variables.label "Tags list :">
 
+<!-- help tab-->
+<!ENTITY asf.help.label "  Help  ">
+<!ENTITY asf.help.title "Help">
+
 <!-- About tab-->
-<!ENTITY asf.info.label "About...">
-<!ENTITY asf.info.title "Automatic Save Folder">
+<!ENTITY asf.about.label "About...">
+<!ENTITY asf.about.title "About Automatic Save Folder">
 
 <!-- preference add & edit-->
 <!ENTITY buttonlabelextra1 "OK">
@@ -82,5 +86,5 @@
 
 <!-- Regular expression Help dialog -->
 <!ENTITY asf.regexp.title "Regular Expressions">
-<!ENTITY asf.regexp.label "Help and examples :">
+<!ENTITY asf.regexp.label "Help and examples">
 

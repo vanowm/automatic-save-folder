@@ -1,0 +1,139 @@
+﻿<!-- browser and save dialog-->
+<!ENTITY Intro_1 "The Regular Expression (Reg. exp., or Regexp) is a matching method to define many filters in one line.">
+<!ENTITY Intro_2 "With the Regexp you can filter filename or domain that would be difficult to filter with the usual asterisk '*'.">
+
+<!ENTITY Note1.title "Note 1">
+<!ENTITY Note1.text "All the filters are case insensitive.">
+<!ENTITY Note2.title "Note 2">
+<!ENTITY Note2.text "The regexp in this plugin needs to be capture inside a / / statement.
+All the examples below are writen without the / / at the beginning and the end of the filters in order to be easily readable.
+When you check the checkbox 'regexp' in the filter window, the / / will be added automatically.">
+
+<!ENTITY Title_1 "The special tags">
+<!ENTITY Intro_3 "The same way the * character (asterisk) is used in common filter to replace an undertermined number of letters, 
+the regular expression use many special characters to match different group of letters :">
+
+<!ENTITY The.dot.title "The dot .">
+<!ENTITY The.dot.text "The dot . matches any character one time (a letter, a number, a symbol or a space).<br />
+'g..gle' matches google and any other word starting with 'g' followed by any 2 characters and finishing with 'gle'.">
+
+<!ENTITY The.asterisk.title "The asterisk *">
+<!ENTITY The.asterisk.text "The asterisk repeats from 0 to many times the previous chatacter.<br />
+'go*gle' will correspond to gogle, google, goooooooooogle, etc.<br />
+'.*' (a dot followed by an asterisk) correspond to many times any character.<br />
+.* used alone will match all the filter's domain name or the filter's file name,
+so this is what is used when you select &#34;All&#34; in the filter creation window.">
+
+<!ENTITY The.caret.title "The caret ^">
+<!ENTITY The.caret.text "The caret ^ is used to detect the begining of a line. '^http' will look for 'http' only at the begining of the domain.<br />
+The filtering will be correct for 'http://test.com' but will not for 'ftp://http_test.com' because http is not at the begining but in the middle.">
+
+<!ENTITY The.dollar.title "The dollar $">
+<!ENTITY The.dollar.text "Le dollar dollar $ is used to detect the end of the line. 'com$' will match every string ending with 'com'.<br />
+The filtering will be correct for 'http://test.com' but will not for 'http://computer.net' because 'com' is not at the end of the line but in the middle.">
+
+<!ENTITY The.braces.title "The braces {}">
+<!ENTITY The.braces.text "The braces is used to define the number of previous character iteration, example go{2}gle = google (the o character is repeated 2 times)<br />
+It's possible to define the minimum and maximum: 'go{0,2}gle' will match either ggle, gogle or google.">
+
+<!ENTITY The.parenthesis.title "The parentheses ( ) and the pipe |">
+<!ENTITY The.parenthesis.text "The parentheses allow consecutive group of letter definition. Used in conjonction with the pipe it can define multiple choices<br />
+(aaaa|bbbb|cccc) will match any of these characters group aaaa or bbbb or cccc, but not more than once.
+(b|g)oogle matches either boogle or google, but never bgoogle<br />
+<br />
+You can apply options to the parenthesis group:<br />
+'(b|g){1,2}oogle' can capture one or two times the letters from either b or g, followed by 'oogle'<br />
+boogle, bboogle, google, ggoogle, bgoogle, gboogle will all match.<br />
+<br />
+'(b|g)*oogle' can capture an infinite number of both mixed b and g before 'oogle'.">
+
+<!ENTITY The.question.title "The questions mark ?">
+<!ENTITY The.question.text "The questions mark ? is used to set the optional state on the previous character or group.<br />
+For example, the mpeg files can be of file type '.mpg' or '.mpeg'. The corresponding regular expression is 'mpe?g'<br />
+Nov(ember)? will match Nov and November<br />
+The question mark is a shortcut of the regular expression {0,1}<br />
+Nov(ember)? = Nov(ember){0,1}<br />
+<br />
+The question mark is also used to transform a Regular expression state from greedy (default) to lazy, example :<br />
+The data : &#34;This is a test&#34;<br />
+Filter 1 : &#34;t.*t&#34; will capture from the first to the last T, in other word all the string &#34;This is a test&#34;, the asterisk tag is greedy and matches the more characters he can find.<br />
+Filter 2 : &#34;t.*?t&#34; will capture from the first T to the first encountered T folowing it, it will return &#34;This is a t&#34;, the asterisk is now lazy and stops at the first occurence it finds (from left to right).">
+
+<!ENTITY The.bracket.title "The brackets [ ]">
+<!ENTITY The.bracket.text "The brackets are used to define a range or group of possible characters.<br />
+Unlike the parentheses, the characters inside the brackets are not concidered a single word, but independant letters.<br />
+Nov[embr] will match one of the inside letter, not all of them : Nove, Novm, Novb or Novr.<br />
+<br />
+The minus - between two characters defines a range of allowed characters :<br />
+[a-z] means any characters from a to z.<br />
+<br />
+You can use more than one minus sign in a bracket. [a-zA-Z] defines all the lower and upper case alphabetical letters. [a-zA-Z0-9] will match all the alphanumeric characters.<br />
+You can define any characters and entity characters in the brackets: [_+.()a-d\s] will match the letters 'from a and d' plus the _, the +, the dot, the parentheses and the space.<br />
+to match the minus sign '-', you need to type it first [-a-z] will match the minus sign '-' and the letters from a to z.<br />
+<br />
+<br />
+The brackets matches only one letter, but you can define more than one this way:<br />
+t[se]*t matches many time any of these letters : 'tet', 'tst', 'test', 'tset' or even 'tesssst'<br /> 
+t[es]{0,2} matches t, te, ts, tee, tss, tes and tse">
+
+<!ENTITY The.backslash.title "The backslash \ followed by a letter">
+<!ENTITY The.backslash.text "\d matches the numbers<br />
+\s matches blanck spaces (space, tab, etc.)<br />
+\w matches a word (group of letters separated by spaces, start or end of line)<br />
+\b detect the begining and the end of a word. '\barc\b' will detect the word 'arc' if it is written this way, but will not work on the word 'archer'.<br />
+\uFFFF with FFFF being an hexadecimal code, matches the unicode character from the hexadecimal code.<br />
+Example \u00A9 matches '©'.">
+
+<!ENTITY The.backslash.info "As all the above tags are used for the regular expression function, if you need to filter one of those letters in your file or domain, you will need to escape it with a backslash.<br />
+For example, to filter the file 'my_file(2007).jpg', you must use a backslash before the parentheses and the point : my_file\(2007\)\.jpg <br />
+<br />
+All these characters will need to be escaped with a backslashe :">
+
+<!-- feel free to add a link to a Regexp website on your own language -->
+<!ENTITY Regexp.links "There are a lot of filtering method using Regular Expression which can't be explained here.<br />
+If you want to find out, you can check documentation and examples on these websites: <br />
+http://www.regular-expressions.info/tutorial.html<br />
+http://www.javascriptkit.com/jsref/regexp.shtml">
+
+<!ENTITY Example_1.title "Some examples">
+<!ENTITY Example_1.text "To filter all the .rar and .r01 .rxx files:<br />
+r(ar|\d{2}) <br />
+It means 'r' followed by either 'ar' or 2 digits<br />
+<br />
+To match any http in .com:<br />
+^http.*\.com$<br />
+It means everything starting with 'http' (accomplished with the ^), followed by none or any letters undetermined number of time, finishing with '.com' (accomplished with the $).<br />
+<br />
+To match a domain, regardless if there is www or not in the path:<br />
+ ^http:\/\/(|www\.)mozilla\.org<br />
+It means everything starting with 'http' (accomplished with the ^), followed with a ':', followed with 2 slashes '\/\/', followed either with nothing or 'www' and a dot '\.', followed with the domain name (ici 'mozilla.org')<br />
+Note : the slashes and the point are escaped with a backslash because if not, they would used as tags by the Regular Expression.">
+
+<!ENTITY Example_2.title "Filter examples on filenames">
+<!ENTITY Example_2.text "To filter all the archive files: <br />
+.*\.(z(ip|\d{2})|r(ar|\d{2})|jar|bz2|gz|tar|rpm|7z)$<br />
+<br />
+To filter all the videos:<br />
+.*\.(mp(eg?|[g4])|rm|avi|mov|divx|asf|qt|wmv|ram|m1v|m2v|rv|vob|asx)$<br />
+<br />
+Filter all the images:<br />
+.*\.(jpe?g|jpe|gif|png|tiff?|bmp|ico)$"> 
+
+<!ENTITY Example_3.title "Filter examples on domains">
+<!ENTITY Example_3.text "Filter all the ftp protocol:<br />
+With regexp. : ^ftp:\/\/.*<br />
+Without regexp. : ftp://<br />
+<br />
+filter on a particular domain:<br />
+With regexp. : ^http:\/\/(|www\.)domain\.com$<br />
+Without regexp. : http://*domain.com<br />
+(Without regexp. the filter will work either for http://domain.com or http://www.domain.com, but it will also match http://not_the_good.domain.com)<br />
+<br />
+<br />
+to match any domain with 'oogle' in it:<br />
+With regexp : .*oogle.*<br />
+Without regexp : oogle">
+
+<!ENTITY Conclusion.title "Conclusion">
+<!ENTITY Conclusion.text "Regular expressions permit a better use of filters, but it can be sometimes much more faster to use simple widlcard *.<br />
+Regular expressions are useful only on complex matching.">

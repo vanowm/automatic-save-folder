@@ -13,6 +13,7 @@
 <prefwindow
 			id="asf_pref"
 			autostretch="always"
+			persist="screenX screenY"
 			buttons="accept, cancel"
 			defaultButton="accept"
 			onload="automatic_save_folder.asf_load();"
@@ -44,9 +45,11 @@
 				<tab id="asf-filterstab" style="-moz-appearance: none" orient="vertical" selected="true" label="&asf.filters.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-filters');" />
 				<tab id="asf-optionstab" style="-moz-appearance: none" orient="vertical"                 label="&asf.options.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-options');" />
 				<tab id="asf-dynamicstab" style="-moz-appearance: none" orient="vertical"                 label="&asf.dynamics.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-dynamics');" />
-				<tab id="asf-informationstab" style="-moz-appearance: none" orient="vertical"            label="&asf.info.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-informations');" />
+				<tab id="asf-helptab" style="-moz-appearance: none" orient="vertical"            label="&asf.help.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-help');" />
+				<tab id="asf-abouttab" style="-moz-appearance: none" orient="vertical"            label="&asf.about.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-about');" />
 			</tabs>
 			<tabpanels hidden="true">
+				<tabpanel />
 				<tabpanel />
 				<tabpanel />
 				<tabpanel />
@@ -134,20 +137,29 @@
 			   <groupbox flex="1" style="padding:0px !important;">
 				  <caption label="&asf.variables.label;"/>
 					 <iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:120px;"
-					 src="chrome://asf/locale/variables.html"
+					 src="chrome://asf/content/help/variables.xhtml"
 					 />
 			   </groupbox>
 			</hbox>
 		</groupbox>
 	</vbox>
-	<vbox id="asf-tab-informations" hidden="true" flex="1000" >
-		<groupbox id="asf-informations" flex="1" >
-			<caption label="&asf.info.title;"/>
+	<vbox id="asf-tab-help" hidden="true" flex="1000" >
+		<groupbox id="asf-help" flex="1" >
+			<caption label="&asf.help.title;"/>
 			<iframe flex="1" id="iframe_info" class="plain" style="background-color:#FFFFFF; min-height:305px;"
 					width="580"
-					src="chrome://asf/locale/info.html"
+					src="chrome://asf/content/help/help.xhtml"
 			/>
 		</groupbox>
-	</vbox>	
+	</vbox>
+	<vbox id="asf-tab-about" hidden="true" flex="1000" >
+		<groupbox id="asf-about" flex="1" >
+			<caption label="&asf.about.title;"/>
+			<iframe flex="1" id="iframe_info" class="plain" style="background-color:#FFFFFF; min-height:305px;"
+					width="580"
+					src="chrome://asf/content/help/about.xhtml"
+			/>
+		</groupbox>
+	</vbox>
 </prefpane>
 </prefwindow>

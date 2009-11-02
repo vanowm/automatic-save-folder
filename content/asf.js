@@ -264,7 +264,8 @@ var automatic_save_folder = {
       document.getElementById("asf-tab-filters").hidden = true;
       document.getElementById("asf-tab-options").hidden = true;
       document.getElementById("asf-tab-dynamics").hidden = true;
-      document.getElementById("asf-tab-informations").hidden = true;
+      document.getElementById("asf-tab-help").hidden = true;
+      document.getElementById("asf-tab-about").hidden = true;
 	  
       
       document.getElementById(tabID).hidden = false;  

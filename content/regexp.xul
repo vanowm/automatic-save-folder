@@ -9,7 +9,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://asf/locale/asf.dtd">
 
-<dialog flex="1000" title="&asf.info.title;" 
+<dialog flex="1000" title="&asf.regexp.title;" 
 	orient="vertical"
 	buttons="accept" 
 	ondialogaccept="window.opener.focus;window.close();"
@@ -19,7 +19,7 @@
 
 	<iframe flex="1" id="mytextbox" class="plain" style="background-color:#FFFFFF; min-height:300px;"
 			width="580"
-			src="chrome://asf/locale/regexp.html"
+			src="chrome://asf/content/help/regexp.xhtml"
 	/>
 </groupbox>	
 </dialog>

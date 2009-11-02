@@ -1,0 +1,85 @@
+﻿<!ENTITY info.domain "Dominio :">
+<!ENTITY info.filename "File :">
+<!ENTITY info.folder "Cartella :">
+<!ENTITY info.all "Tutti">
+<!ENTITY info.dynamicfilter "Dinamiche filtri">
+<!ENTITY info.capturefilter "Capture filtri">
+
+<!ENTITY info.important.title "Importante">
+<!ENTITY info.important.text1 "Questa estensione funziona solamente se si usa la finestra di download (quella che chiede di aprire, eseguire o salvare file su disco)<br />Se Firefox non mostra tale finestra, l'estensione non funzionerà.">
+<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (80 denote image shrink to 80%, I find 100% a little too big) -->
+<!ENTITY info.important.pict1 "screen_save_80fr.png">
+<!ENTITY info.important.text2 "Se qualche filtro non funziona, accertartati che Firefox non usi un altro processo sul file scaricato:">
+<!ENTITY info.important.text3 "Vai sul menu &#34;Strumenti&#34; e &#34;Opzioni...&#34;.">
+<!ENTITY info.important.text4 "- Per utenti di Firefox 3: vai sul tab &#34;Applicazioni&#34;<br />
+- Per utenti di precedenti versioni di Firefox: Vai sul tab &#34;Contenuti&#34; e clicca su &#34;gestisci...&#34; in basso a destra.">
+<!ENTITY info.important.text5 "Verifica se il file che vuoi scaricare sia impostato su &#34;Chiedi ogni volta&#34;.">
+<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
+<!ENTITY info.important.pict2 "screen_apps_fr.png">
+
+
+<!ENTITY info.howtouse.title "Come si usa">
+<!ENTITY info.howtouse.text1 "Questa estensione permette di definire, usando dei filtri, quale cartella verrà scelta automaticamente quando scarichi i tuoi file.">
+
+<!ENTITY info.filterrules.title "Regole dei filtri">
+<!ENTITY info.filterrules.rule1 "I filtri sono definiti usando il nome del file e il dominio.">
+<!ENTITY info.filterrules.rule2 "I filtri devono corrispondere al nome del file o al dominio. Per esempio non scrivere <b>&#34;google.com&#34;</b> ma solo <b>google.com</b> (senza doppi apici)">
+<!ENTITY info.filterrules.rule3 "Puoi usare i caratteri wildcard <b>*</b> (asterisco) per rimpiazzare parti del filtro: <b>wiki*.org</b>">
+<!ENTITY info.filterrules.rule4 "L'asterisco non serve all'inizio e alla fine della stringa usata come filtro. Scrivere <b>*wiki*</b> o <b>wiki</b> è la stessa cosa.">
+<!ENTITY info.filterrules.rule5 "La stessa cosa vale per il filtro sul nome file: <b>*.zip</b> o <b>.zip</b> funzionano allo stesso modo.">
+<!ENTITY info.filterrules.rule6 "I filtri sono verificati da quello più in alto a quello più basso e il processo termina quando un filtro corrisponde al file da scaricare. Abbi cura di ordinare i tuoi filtri di conseguenza.">
+<!ENTITY info.filterrules.rule7 "I filtri non sono 'case insensitive', cioè non c'è nessuna differenza tra parole scritte in maiuscolo o in minuscolo quando viene processato un filtro.">
+
+<!ENTITY info.howtouse.text2 "Questa estensione può essere usata con espressioni regolari.">
+<!ENTITY info.howtouse.text3 "Puoi leggere dal menu l'aiuto sulle espressioni regolari sulla finestra di aggiunta e modifica filtri.">
+<!ENTITY info.howtouse.text4 "Sono disponibili variabili dinamiche per creare directory quando si salva, chiamate con la data, col nome del file o col nome del dominio.<br />Puoi controllare il tab delle opzioni per vedere la lista dei tag dinamici.">
+
+
+<!ENTITY info.basicexample.title "Un po di esempi sui filtri">
+
+<!ENTITY info.basicexample.text1 "Se vuoi che tutti i file eseguibili <b>.exe</b> vengano salvati su una cartella specifica:">
+<!ENTITY info.basicexample.text2 "la tua cartella per i file eseguibili">
+
+<!ENTITY info.basicexample.text3 "Se invece vuoi che tutti i file di un particolare sito (per esempio mozilla.org) vengano scaricati sulla cartella Mozilla:">
+<!ENTITY info.basicexample.text4 "la tua cartella Mozilla">
+
+<!ENTITY info.basicexample.text5 "Oppure, se hai bisogno di avere tutti i file zip <b>.zip</b> da mozilla.org, e lasciare gli altri file nella cartella precedente:">
+<!ENTITY info.basicexample.text6 "la tua cartella Mozilla per i file zip">
+<!ENTITY info.basicexample.text7 "e metti questo filtro sopra il precedente. Ricorda che i filtri vengono controllati dall'alto verso il basso.">
+
+<!ENTITY info.basicexample.text8 "Per finire, puoi definire filtri con un nome più completo, e non solo dall'estensione del file:">
+<!ENTITY info.basicexample.text9 "la tua cartella per tutte le versioni del programma di istallazione di Firefox">
+
+
+<!ENTITY info.advancedexample.title "Ecco qualche esempio di variabili dinamiche e &#34;capture&#34;:">
+<!ENTITY info.advancedexample.text1 "">
+
+<!ENTITY info.advancedexample.text2 "Per scaricare tutte le nightly build di firefox in una sottocartella di D:\Download\firefox :">
+<!-- replace the percent with entity &#37 and the quote with &#34 -->
+<!ENTITY info.advancedexample.text3 "D:\Download\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
+<!ENTITY info.advancedexample.text4 "L'estensione creerà una sottocartella chiamata con la data di quel giorno. Per esempio &#34;2009-12-04&#34;, dove verrà salvato il file.">
+
+<!ENTITY info.advancedexample.text5 "Per scaricare un file in base alla sua estensione:">
+<!ENTITY info.advancedexample.text6 "D:\Download\&#37;asf_x&#37;">
+<!ENTITY info.advancedexample.text7 "L'estensione creerà una sottocartella chiamata &#34;zip&#34; per i file .zip, &#34;rar&#34; per i file .rar, etc., dove verranno salvati i file.">
+
+<!ENTITY info.advancedexample.text8 "">
+<!ENTITY info.advancedexample.text9 "">
+<!ENTITY info.advancedexample.text10 "">
+
+<!ENTITY info.advancedexample.text11 "Per creare oppure no sottocartelle differenti in base al nome del file :">
+<!ENTITY info.advancedexample.text12 "Esempio : Vogliamo salvare i video chiamati &#34;La_mia_vacanza_data-di-viaggio.avi&#34;.<br />
+I video hanno i sottotitoli nel formato .srt per spiegare la vacanza, 
+ci sono anche file .zip con le foto del viaggio, 
+e i video possono escarticati con l'estensione .avi, .torrent or .nzb (newsgroup).<br /><br />
+&#34;.avi&#34; e &#34;.srt&#34; andranno nella cartella D:\video\vacanza .<br />
+&#34;.zip&#34;, &#34;.torrent&#34; e &#34;.nzb&#34; andranno rispettivamente nelle sottocartelle D:\video\vacanze\zip, D:\video\vacanze\torrent and D:\video\vacanze\nzb.">
+<!ENTITY info.advancedexample.text13 "/^La_mia_vacanza.*\.(avi|srt|zip|torrent|nzb)$/">
+<!ENTITY info.advancedexample.text14 "D:\video\vacanza\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;">
+<!ENTITY info.advancedexample.text15 "Spiegazione dei filtri :<br />
+I filtri saranno attivati per tutti i file che cominciano con &#34;La_mia_vacanza&#34; e che finiscono con l'estensione disponibili (avi, srt, zip, torrent o nzb).<br />
+La cartella creata dipenderà dal filtro: &#37;asf_rf&#37; analizza il nome del file scaricato con l'espressione regolare contenuta fra i due &#37;asf_rf&#37; : se il file finisce con &#34;zip&#34;, &#34;torrent&#34; o &#34;nzb&#34;, la parte catturata dall'espressione regolare creerà la sottocartella.<br />
+Se nessuna di quelle estensioni non è trovata, l'espressione regolare non farà nulla, non verrà creata nessuna sottocartella e i file verranno scaricati nella cartella in D:\video\vacanze\">
+<!ENTITY info.advancedexample.text16 "Nota: Puoi mettere quanti tag vuoi per la cartella principale.<br />I filtri possono essere:">
+<!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(vacanza|matrimonio)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
+In questo cartello, verrà creata la cartella &#34;vacanze&#34; verrà creata solo se il nome contiene &#34;vacanze&#34;.">

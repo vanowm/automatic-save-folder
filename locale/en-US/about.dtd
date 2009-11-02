@@ -1,8 +1,151 @@
-﻿<!ENTITY about "About Automatic Save Folder">
-<!ENTITY version "Version: 0.9.4b">
+﻿<!-- ASF -->
+<!ENTITY asf.version "0.9.4b">
+
+<!-- Mini about box from addon manager -->
+<!ENTITY about "About Automatic Save Folder">
+<!ENTITY version "Version: ">
 <!ENTITY createdBy "Created By:">
 <!ENTITY createdBy.name "Cyan (CASSAR Éric)">
 <!ENTITY contributor "Thanks:">
 <!ENTITY contributor.name "Thank you to everyone who helped and left comments">
 <!ENTITY contributor2.name "on various websites to make this add-on better">
-<!ENTITY homepage "Home Pages:">
+<!ENTITY homepage "Home Page:">
+
+<!-- About tab -->
+<!ENTITY about.madeby_authorname "By Cyan">
+
+<!ENTITY about.links.title "Links">
+<!ENTITY about.links.mainwebsite.title "Main website">
+<!ENTITY about.links.mozilla.title "Add-on page on Mozilla">
+
+<!ENTITY about.history.title "History">
+<!ENTITY about.add "Added">
+<!ENTITY about.delete "Removed">
+<!ENTITY about.change "Changed">
+<!ENTITY about.fix "Fixed">
+<!ENTITY about.version.title "Version">
+
+<!-- Replace the percent % with entity &#37 and the quote " with &#34 , no need to use <br/> tags for newlines it uses <pre> tags, keep the 2 begining spaces to create indentation) -->
+<!ENTITY about.version.094 "+ Add filtering on Right-Click menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as...(Ctrl+S)&#34;
+  (Need at least Firefox 2.0 and is not compatible with Download Sort add-on. If you have both activated, Download Sort prevails)
++ Add dynamic variables &#37;F&#37; for the month name, and &#37;M&#37; for the abbreviated one.
++ Make Windows and Mac OSX works with Firefox option &#34;browser.preferences.instantApply&#34; to save the filters right after a modification (Option by default on Linux)
++ Add Drag and Drop feature on the filter's listing to set filter's order quickly.
++ Add an option to automatically accept the download (User requested). Great for a use with Firefox saving option &#34;Save file to&#34;
++ Add an option to choose if you want to use the current website URL to verify the filters if the hosted domain doesn't match.
+* In the drop-down menu on the save dialog : List the folders alphabetically, keep only one instance of each and activate the dynamic renaming if checked in options.
+* New tab to split options
+! Correct links to Mozilla website, which were forced to the French page.
+! Correct filtering checking in advanced mode (dynamic variables enabled)
+
+Other updates :
++ Source code and revisions available on http://code.google.com/p/automatic-save-folder
+* Add-on now in public area on http://addons.mozilla.org/addon/4781 ; Thank you for your support, your comments and suggestions.
+* New website in english for the add-on (Information, Download, Forum) : http://asf.mangaheart.org">
+
+<!ENTITY about.version.093 "+ Added the version number in the main configuration window title.
++ Add option to double click a Path field to open the explorer window.
++ New tabs to separate filters, options, help and versions history.
++ New dynamic variable to create folders. (Thanks to Ted for the group capture with $1)
++ Option to activate or deactivate the dynamic variables (Advanced mode).
++ New context menu on the filter list to duplicate a filter, or move to top/bottom in one click.
++ [Experimental] For ease to use when the hosted domain is random (ex. to download Firefox on Mozilla.org):
+  Check the filter with the current URI if the hosted domain file doesn't match.
+  Attention to the filtering order : First the file hosted domain is checked, then the current website address.
+  The data used to mark a domain as &#34;previous&#34; is still the one from the file hosted domain.
++ Limit the saving window width to the user main screen size. (Thanks to Julien)
++ Add an option to show a menu list on the saving window to select the saving folder from the filter's list.
+* Changed the way the links in the &#34;about...&#34; window works. Now it will open in a new tab.
+* Bigger menu and window for better visibility.
+* Code simplification for moving filters up/down.
+* Code simplification for the loading and auto-filling data in the &#34;add&#34; window.
+* Better visibility : All the windows are now drag-able and the content fit accordingly.
+* Complete script recoding to Global namespace (asked by Mozilla.com to submit the extension in public area)
+* cleaner code and comments.
+! Correction for Unicode path (filters using Unicode character in version 0.9.2 might be deleted, please rewrite them manually).
+! Correction of the editable parameter of new created filters.
+! Bug correction preventing the loading and reading of undefined or non existing preferences in about:config. (Thanks to Martin)">
+
+<!ENTITY about.version.092 "* Compatibility with Themes: The default colors are now used, all the text should be correctly visible.
+  The pictures have been updated to be visible on dark themes.
+! Correction for Vista: Forced the variable browser.download.folderList to &#34;2&#34; when opening the ASF preferences window.
+! Corrected the &#34;active&#34; column, the filters couldn't be activated or deactivated temporarily.">
+
+<!ENTITY about.version.091 "+ Italian localization by Scognito.
++ Added a radio menu while saving, allowing the user to choose quickly between the last two folders.
+  The second choice appears only if it's different from the first one.
+* Hide the option &#34;Affect the 'save as...'&#34; on Firefox 3, this option is used automatically.
+* Removed the &#34;Add a filter&#34; pop-up while saving. It made some focus problem and a window position error.
+  The link is still here and open now the main window to allow the user to add or edit existing filters.
+  While adding a filter using this link, the field will be auto-filled with current file name and domain.
+* Deactivate the double-clicking on filters. Now the fields are not editable on Firefox 3.
+  Since Firefox 3, double-clicking on a tree cell allow the user to edit it's content without the edit window. The changes weren't therefore saved correctly.
+! Corrected a script bug on filter verification while &#34;use the last folder&#34; was selected. (Thanks to Carsten)
+! Fixed a bug on Firefox 3 and Windows Vista: Changed an internal Firefox option allowing the user to use defined folders. (Thanks to Carsten)
+  (browser.download.folderList = 2) On Windows Vista, the default value is set to 1.
+  Different possible values are : 0 = desktop ; 1 = default saving folder ; 2 = user choice.
+! Fixed the specified path on the saving windows on Firefox3.">
+
+<!ENTITY about.version.090 "+ Work with Firefox 3.0.*
++ Added a new button for informations and help on using the extension.
++ New menu allowing you to add a filter just before saving the file, with Domain and file areas filled with the current download properties.
+  After adding a filter that way, the filters are checked again to apply the new filter to the current downloaded file.
+  Known bug: A window focus problem can occur while closing the filter panel.
+- Drop of the option to activate or deactivate the extension. To deactivate it temporarily, please use the extension manager.
+* New way to check the filters (addEventlistener instead of OnLoad), for a better compatibility with other extensions.
+! Corrected the per filter &#34;Active&#34; column properties which didn't stay hidden correctly.">
+
+<!ENTITY about.version.087 "+ Compatible with Firefox 3.0 beta (few changes to the script).
+* The Enter key is now affected to the accept button (Ok, Add, Edit). On the previous version, it was on the Cancel button.
+! Only one version for Windows and Linux (and maybe Mac ? Can someone test it please ?)">
+
+<!ENTITY about.version.086fix "* Changes on the &#34;OK&#34; buttons which didn't appear in the main option panel in Linux.
+Info:
+On Linux, there is only a &#34;Close&#34; button and the checking button are saved automatically when checked by the user. Unfortunately the Table array is not saved on this process.
+I removed the &#34;Accept&#34; button and replaced it with a scripted one &#34;Save and close&#34;.">
+
+<!ENTITY about.version.086 "* Words and sentences correction. Thanks to Goofy's comment from mozilla.org.">
+
+<!ENTITY about.version.085 "+ Added an option to show some informations on the downloading window.
++ Added an option to keep in memory the domain the file came from.
+* Default folder is now working even if no filter is set.
+* Changed the way the Regular expressions help window is shown. Use of an Iframe and an html page instead of Xul's dtd">
+
+<!ENTITY about.version.084 "+ French translation
+* Converted the localisation files to utf-8.">
+
+<!ENTITY about.version.083 "+ Added some examples and short help on how regular expressions are working. Available in the Add and Edit filter window.">
+
+<!ENTITY about.version.082 "First public release.
++ Added an option to affect the path of the Web page saving menu (File, save as...)">
+
+<!ENTITY about.version.081 "* Folder selection: The picking window opens now on the previously chosen folder. Before, it opened on a random one from: documents and settings, desktop et the user folder.
+* Restriction of the folder selection: removed the possibility to write the path manually, now only the &#34;Select...&#34; button is valid to select the destination folder.">
+
+<!ENTITY about.version.080 "Functions:
++ Priority sorting filter (option to move up or down the filters)
++ Work with normal, wildcard, and RegExp. filters.
++ Select folder manually or with a Select button.
++ Edit a filter with Double-click on the filters in the list.
++ Skin of the GUI with pictures.">
+
+<!ENTITY about.thanks.title "Thanks to">
+
+<!ENTITY about.programmation.title "Programmation">
+<!ENTITY about.programmation.content "I would like to thanks specially:<br />
+- DownThemAll and Download sort extension's authors, from who I learned a lot by looking at their source code.<br />
+- http://captain.at, late xulplanet.com, http://xulfr.org, for their Xul and javascript ressources.<br />
+<br />
+And contributors:<br />
+- Carsten, Ted Gifford">
+
+<!ENTITY about.bugreport.title "Bugs report">
+<!ENTITY about.bugreport.content "- Photonic, Martin">
+
+<!ENTITY about.translation.title "Translation">
+<!ENTITY about.translation.content "- English : Cyan.<br />
+- French : Cyan.<br />
+- Italian : Scognito.<br />
+- Babelzilla.org team and translators<br />
+- Correction by : Goofy, Haynee, Narayan.<br />">
+

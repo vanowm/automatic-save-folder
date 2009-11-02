@@ -1,0 +1,39 @@
+﻿<!-- browser and save dialog-->
+<!ENTITY Year "Année">
+
+<!ENTITY Month "Mois">
+<!ENTITY Month.wleadingzero "01 à 12">
+<!ENTITY Month.woleadingzero "1 à 12">
+<!ENTITY Month.fullname "Janvier">
+<!ENTITY Month.abbr "Jan">
+
+<!ENTITY Week "Semaine">
+<!ENTITY Week.wleadingzero "01 à 52">
+<!ENTITY DayOfTheWeek "0 (Dimanche) à 6">
+<!ENTITY DayOfTheWeek.fullname "Lundi">
+<!ENTITY DayOfTheWeek.abbr "Lun">
+
+<!ENTITY Day "Jour">
+<!ENTITY Day.wleadingzero "01 à 31">
+<!ENTITY Day.woleadingzero "1 à 31">
+
+<!ENTITY Special.tags "Variables spéciales">
+<!ENTITY asf_D "Domaine d'hébergement. (Sans http://)">
+<!ENTITY asf_F "Nom du fichier complet.">
+<!ENTITY asf_Fx "Nom du fichier sans l'extension.">
+<!ENTITY asf_d "Champs &#34;Domaine&#34; du filtre utilisé. (Les caractères incompatibles seront supprimés. Si aucun filtre n'est trouvé, le domaine courant est utilisé)">
+<!ENTITY asf_f "Champs &#34;Nom de fichier&#34; du filtre utilisé. (Les caractères incompatibles seront supprimés. Si aucun filtre n'est trouvé, le nom du fichier courant est utilisé)">
+<!ENTITY asf_x "Extension du fichier. (Sans le point)">
+
+
+<!ENTITY Capture.tags "Variables de capture">
+<!ENTITY number "numéro">
+<!ENTITY Capture.d "Retourne le contenu de la capture à l'aide des parenthèses présentes dans le filtre &#34;Domaine&#34;. &lt;numéro&gt; correspond au numéro de la parenthèse, de 1 à 9.">
+<!ENTITY Capture.f "Retourne le contenu de la capture à l'aide des parenthèses présentes dans le filtre &#34;Nom de fichier&#34;. &lt;numéro&gt; correspond au numéro de la parenthèse, de 1 à 9.">
+<!ENTITY Capture.example "Exemple, sur ce filtre :  mozilla_(firefox)_3.5.(exe), <b>$1f</b> capturera firefox, et <b>$2f</b> capturera &#34;exe&#34;.">
+<!ENTITY Regexp "expression régulière">
+<!ENTITY Capture.rd "Examine le nom du domaine complet avec l'expression régulière contenue entre les deux balises <b>&#37;asf_rd&#37;</b> et retourne la capture de l'évaluation.">
+<!ENTITY Capture.rf "Examine le nom du fichier avec l'expression régulière contenue entre les deux balises <b>&#37;asf_rf&#37;</b> et retourne la capture de l'évaluation.">
+
+<!ENTITY Attention "ATTENTION">
+<!ENTITY Attention.text "Si le résultat retourné pour le chemin d'enregistrement contient des caractères interdits (le : ou les ?&#34;*\/&lt;&gt;|: sous Windows), l'extension ne fonctionnera pas. Vérifiez bien vos filtres si l'extension ne fonctionne plus.">

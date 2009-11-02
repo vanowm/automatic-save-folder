@@ -1,0 +1,89 @@
+﻿<!ENTITY info.domain "Domaine :">
+<!ENTITY info.filename "Fichier :">
+<!ENTITY info.folder "Dossier :">
+<!ENTITY info.all "Tous">
+<!ENTITY info.dynamicfilter "Filtre dynamique">
+<!ENTITY info.capturefilter "Filtre de capture">
+
+<!ENTITY info.important.title "Important">
+<!ENTITY info.important.text1 "Le filtrage sur les téléchargements normaux (simple clic, ou téléchargement automatique) ne fonctionne que si la fenêtre de téléchargement &#34;Que doit faire Firefox avec ce fichier ?&#34; s'affiche :<br />">
+<!-- Screenshot from your language. Take a screen of the 'What should Firefox do with this file?' saving window (80 denote image shrink to 80%, I find 100% a little too big) -->
+<!ENTITY info.important.pict1 "screen_save_80fr.png">
+<!ENTITY info.important.text2 "Par conséquent, vérifiez que Firefox ne lance pas un traitement différent sur le fichier empêchant la fenêtre de s'afficher en suivant ces instructions :">
+<!ENTITY info.important.text3 "Allez dans le menu &#34;Outils&#34; de Firefox puis &#34;Options...&#34;.">
+<!ENTITY info.important.text4 "- Pour les utilisateurs de Firefox 3 : Allez sur l'onglet &#34;Applications&#34;.
+  <br />- Pour les utilisateurs d'une version précédente : Allez sur l'onglet &#34;Contenu&#34; puis cliquez sur le bouton &#34;Gérer...&#34;.">
+<!ENTITY info.important.text5 "Vérifiez que l'extension de fichier que vous souhaitez télécharger soit bien positionnée sur &#34;Toujours demander&#34;.">
+<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' selected -->
+<!ENTITY info.important.pict2 "screen_apps_fr.png">
+
+
+<!ENTITY info.howtouse.title "Fonctionnement">
+<!ENTITY info.howtouse.text1 "Cette extension permet de définir, à l'aide de filtres, le répertoire qui vous sera automatiquement proposé par la fenêtre d'enregistrement de vos fichiers.">
+
+<!ENTITY info.filterrules.title "Les règles à suivre">
+<!ENTITY info.filterrules.rule1 "Les filtres sont définis à l'aide du nom et du domaine d'hébergement du fichier.">
+<!ENTITY info.filterrules.rule2 "Les filtres doivent contenir le texte correspondant au nom de fichier ou de domaine. Par exemple n'indiquez pas <strong>&#34;google.fr&#34;</strong> mais simplement <strong>google.fr</strong> (sans les guillemets).">
+<!ENTITY info.filterrules.rule3 "Vous pouvez utiliser le caractère <strong>*</strong> (astérisque) pour remplacer une partie du filtre : <strong>wiki*.org</strong>">
+<!ENTITY info.filterrules.rule4 "L'astérisque n'est pas nécessaire en début et fin de filtre. Écrire <strong>*wiki*</strong> ou <strong>wiki</strong> revient au même. (Les astérisques sont ajoutés automatiquement en début et fin de filtre lors de l'enregistrement)">
+<!ENTITY info.filterrules.rule5 "Tout comme les extensions de fichier : <strong>*.zip</strong> ou <strong>.zip</strong> fonctionnent de la même manière.">
+<!ENTITY info.filterrules.rule6 "Les filtres sont vérifiés de haut en bas et la vérification s'arrête lorsqu'un filtre correspond au fichier téléchargé. Veillez à bien organiser vos filtres.">
+<!ENTITY info.filterrules.rule7 "Les filtres sont insensibles à la casse, il n'y a aucune différence entre les majuscules et les minuscules lors du filtrage.">
+
+<!ENTITY info.howtouse.text2 "Pour une plus grande souplesse, Automatic Save Folder accepte aussi les expressions régulières.">
+<!ENTITY info.howtouse.text3 "Pour plus de renseignements sur les expressions régulières, reportez-vous au menu d'aide présent dans la fenêtre d'ajout et d'édition des filtres, aussi disponible sur le site de l'extension ou sur le site http://www.regular-expressions.info/ (en anglais).">
+<!ENTITY info.howtouse.text4 "Des variables dynamiques sont à votre dispositions afin de créer des dossiers spécifiques lors de l'enregistrement, suivant la date du jour ou les noms de fichier et de domaine. <br />Reportez vous à l'onglet &#34;Dossiers dynamiques&#34; pour la liste des balises.">
+
+
+<!ENTITY info.basicexample.title "Voici quelques exemples de filtres simples">
+
+<!ENTITY info.basicexample.text1 "Si vous souhaitez que tous vos fichiers exécutables <strong>.exe</strong> soient enregistrés dans un répertoire spécifique :">
+<!ENTITY info.basicexample.text2 "Le répertoire où vous souhaitez enregistrer vos programmes">
+
+<!ENTITY info.basicexample.text3 "Si maintenant vous voulez que tous les fichiers provenant d'un site en particulier (par exemple mozilla.org) soient enregistrés dans un répertoire Mozilla :">
+<!ENTITY info.basicexample.text4 "Votre répertoire Mozilla">
+
+<!ENTITY info.basicexample.text5 "Ensuite, si vous voulez trier les fichiers <strong>.zip</strong> provenant de mozilla.org, et laisser les autres extensions de fichiers provenant aussi de mozilla.org dans l'ancien répertoire :">
+<!ENTITY info.basicexample.text6 "votre répertoire Mozilla pour les .zip">
+<!ENTITY info.basicexample.text7 "Et placez votre filtre au-dessus du filtre précédent. Rappelez-vous que les filtres sont vérifiés de haut en bas.">
+
+<!ENTITY info.basicexample.text8 "Et enfin, vous pouvez aussi définir des noms complets, pas seulement des extensions :">
+<!ENTITY info.basicexample.text9 "votre répertoire pour les programmes d'installation de Firefox">
+
+
+<!ENTITY info.advancedexample.title "Voici des exemples de filtres utilisant les variables dynamiques et les variables de capture">
+<!ENTITY info.advancedexample.text1 "Attention : Pour que tous ces filtres fonctionnent correctement, n'oubliez pas de cocher la case située sur l'onglet Dossiers Dynamiques">
+
+<!ENTITY info.advancedexample.text2 "Pour classer tous les nighlty build de firefox dans un sous-dossier de D:\Téléchargements\firefox :">
+<!-- replace the percent with entity &#37 and the quote with &#34 -->
+<!ENTITY info.advancedexample.text3 "D:\Téléchargements\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
+<!ENTITY info.advancedexample.text4 "L'extension créera un sous-dossier nommé avec la date du jour, par exemple &#34;2009-04-12&#34;, dans lequel sera enregistré votre fichier.">
+
+<!ENTITY info.advancedexample.text5 "Pour classer un fichier suivant son extension :">
+<!ENTITY info.advancedexample.text6 "D:\Téléchargements\&#37;asf_x&#37;">
+<!ENTITY info.advancedexample.text7 "L'extension créera un sous-dossier nommé &#34;zip&#34; pour les fichier .zip, &#34;rar&#34; pour les .rar, etc. dans lequel sera enregistré votre fichier.">
+
+<!ENTITY info.advancedexample.text8 "Pour classer les programmes d'installation de Firefox dans des dossiers portant le numéro de version">
+<!ENTITY info.advancedexample.text9 "D:\Téléchargements\Firefox\$1f">
+<!ENTITY info.advancedexample.text10 "Lors de la vérification, les parenthèses ne sont pas prises en compte, et le filtre se comporte comme s'il s'agissait de &#34;Firefox Setup *.exe&#34;<br />
+$1f correspond au contenu de la 1ere parenthèse du filtre sur le nom de fichier, soit le numéro de version <br />
+ Le fichier &#34;Firefox Setup 3.5.4.exe&#34; sera donc enregistré dans le répertoire D:\Téléchargements\Firefox\3.5.4\">
+
+
+
+
+
+<!ENTITY info.advancedexample.text11 "Pour créer ou non des sous-dossiers différents suivant le contenu du nom de fichier :">
+<!ENTITY info.advancedexample.text12 "Exemple de consignes : Nous souhaitons télécharger des vidéos nommées &#34;Mes_vacances_date-du-sejour.avi&#34;.<br />
+Les vidéos comportent des sous-titres .srt pour expliquer le voyage, des fichiers .zip sont également disponibles contenant des photos du séjour, les vidéos peuvent être distribuées en .avi, .torrent ou .nzb (newsgroup).<br />
+<br />Les &#34;.avi&#34; et &#34;.srt&#34; devront aller dans le dossier D:\video\vacances. <br />
+Les &#34;.zip&#34;, &#34;.torrent&#34; et &#34;.nzb&#34; devront aller respectivement dans leur sous-dossier D:\video\vacances\zip, D:\video\vacances\torrent et D:\video\vacances\nzb.">
+<!ENTITY info.advancedexample.text13 "/^Mes_vacances.*\.(avi|srt|zip|torrent|nzb)$/">
+<!ENTITY info.advancedexample.text14 "D:\video\vacances\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;">
+<!ENTITY info.advancedexample.text15 "Explication du filtrage :<br />
+Le filtre sera déclenché pour tous les fichiers commençant par &#34;Mes_vacances&#34; et terminant par une des extensions possibles (avi, srt, zip, torrent ou nzb).<br />
+Le dossier créé dépendra du filtrage : La balise &#37;asf_rf&#37; analyse le nom du fichier téléchargé avec l'expression régulière contenue entre les deux balises : Si le fichier comporte &#34;zip&#34;, &#34;torrent&#34; ou &#34;nzb&#34; en fin de nom, la portion capturée par l'expression régulière sert à créer le sous-dossier.<br />
+Si aucune de ses trois extensions n'est trouvée, l'expression régulière ne renvoie rien, et aucun sous-dossier n'est créé, les fichiers seront téléchargé dans D:\video\vacances\">
+<!ENTITY info.advancedexample.text16 "Note : Vous pouvez placer autant de balises que vous le souhaitez dans le chemin d'enregistrement.<br /> Le filtre aurait pu être :">
+<!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(vacances|mariage)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
+Dans ce cas, le premier sous-dossier &#34;vacances&#34; est crée uniquement si le nom de fichier contient &#34;vacances&#34;.">

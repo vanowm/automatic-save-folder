@@ -1,0 +1,39 @@
+﻿<!-- browser and save dialog-->
+<!ENTITY Year "Year">
+
+<!ENTITY Month "Month">
+<!ENTITY Month.wleadingzero "01 to 12">
+<!ENTITY Month.woleadingzero "1 to 12">
+<!ENTITY Month.fullname "January">
+<!ENTITY Month.abbr "Jan">
+
+<!ENTITY Week "Week">
+<!ENTITY Week.wleadingzero "01 to 52">
+<!ENTITY DayOfTheWeek "0 (Sunday) to 6">
+<!ENTITY DayOfTheWeek.fullname "Monday">
+<!ENTITY DayOfTheWeek.abbr "Mon">
+
+<!ENTITY Day "Day">
+<!ENTITY Day.wleadingzero "01 to 31">
+<!ENTITY Day.woleadingzero "1 to 31">
+
+<!ENTITY Special.tags "Special tags">
+<!ENTITY asf_D "Domain name. (Without http://)">
+<!ENTITY asf_F "File name with the extension.">
+<!ENTITY asf_Fx "File name without the extension.">
+<!ENTITY asf_d "&#34;Domain&#34; field from the used filter. (Forbidden characters will be deleted. If no filter is found, the current domain is used)">
+<!ENTITY asf_f "&#34;File name&#34; field from the used filter. (Forbidden characters will be deleted. If no filter is found, the current file name is used)">
+<!ENTITY asf_x "File extension. (Without the dot)">
+
+
+<!ENTITY Capture.tags "Capture tags">
+<!ENTITY number "number">
+<!ENTITY Capture.d "Return the captured data using parentheses in the &#34;domain&#34; filter. &lt;number&gt; refer to the parenthesis number, from 1 to 9.">
+<!ENTITY Capture.f "Return the captured data using parentheses in the &#34;file name&#34; filter. &lt;number&gt; refer to the parenthesis number, from 1 to 9.">
+<!ENTITY Capture.example "Example, on this filter:  mozilla_(firefox)_3.5.(exe), <b>$1f</b> will capture firefox, and <b>$2f</b> will capture &#34;exe&#34;.">
+<!ENTITY Regexp "regular expression">
+<!ENTITY Capture.rd "Check the full domain with the regular expression contained between the two tags <b>&#37;asf_rd&#37;</b> and return the captured data.">
+<!ENTITY Capture.rf "Check the file name with the regular expression contained between the two tags <b>&#37;asf_rf&#37;</b> and return the captured data.">
+
+<!ENTITY Attention "ATTENTION">
+<!ENTITY Attention.text "If the result for the saving path has forbidden characters (the : or the ?&#34;*\/&lt;&gt;|: under Windows), the extension will cease to function. Be sure to check your filters if the extension doesn't work anymore.">

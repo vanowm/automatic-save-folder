@@ -1,8 +1,151 @@
-﻿<!ENTITY about "À Propos d'Automatic save folder">
-<!ENTITY version "Version : 0.9.4b">
+﻿<!-- ASF -->
+<!ENTITY asf.version "0.9.4b">
+
+<!-- Mini about box from addon manager -->
+<!ENTITY about "À Propos d'Automatic save folder">
+<!ENTITY version "Version : ">
 <!ENTITY createdBy "Extension créée par :">
 <!ENTITY createdBy.name "Cyan (CASSAR Éric)">
 <!ENTITY contributor "Remerciements :">
 <!ENTITY contributor.name "Merci à tous ceux qui ont testé et laissé des commentaires">
 <!ENTITY contributor2.name "sur les sites pour l'amélioration de l'extension">
 <!ENTITY homepage "Site web :">
+
+<!-- About tab -->
+<!ENTITY about.madeby_authorname "Par Cyan">
+
+<!ENTITY about.links.title "Liens">
+<!ENTITY about.links.mainwebsite.title "Site principal">
+<!ENTITY about.links.mozilla.title "Page de l'extension sur Mozilla">
+
+<!ENTITY about.history.title "Historique">
+<!ENTITY about.add "Ajout">
+<!ENTITY about.delete "Suppression">
+<!ENTITY about.change "Modification">
+<!ENTITY about.fix "Correction">
+<!ENTITY about.version.title "Version">
+
+<!-- Remplacer les % par l'entité &#37 et les " par &#34 , pas besoin des <br/> pour les sauts de ligne le tag <pre> est utilisé, gardez les deux espaces en début de ligne pour l'indentation -->
+<!ENTITY about.version.094 "+ Ajout du filtrage avec les menus du clic-droit &#34;Enregistrer la cible sous...&#34;, &#34;Enregistrer l'image sous...&#34; et &#34;Enregistrer sous...(Ctrl+S)&#34;
+  (Ne fonctionne qu'à partir de Firefox 2.0 et est incompatible avec l'extension Download Sort. Si les deux extensions sont activées, Download Sort est prioritaire)
++ Ajout des variables dynamiques &#37;F&#37; pour le nom du mois, et &#37;M&#37; pour son abréviation.
++ Prise en compte pour Windows et Mac OSX de l'option &#34;browser.preferences.instantApply&#34; afin de sauvegarder les filtres des leur modification (option par défaut sur Linux).
++ Ajout du Glisser-déposer (Drag and Drop) dans la liste des filtres pour les repositionner rapidement.
++ Ajout d'une option pour accepter le téléchargement du fichier automatiquement. Parfait pour un fonctionnement avec l'option de sauvegarde de Firefox &#34;Enregistrer le fichier dans le dossier&#34;
++ Ajout d'une option pour utiliser l'adresse du site courant avec le domaine du filtre si le domaine d'hébergement ne correspond pas.
+* Dans le menu déroulant sur la fenêtre de sauvegarde : Listing des dossiers par ordre alphabétique, suppression des doublons et nom de dossier dynamique si l'option est activée.
+* Nouvel onglet pour séparer les options
+! Correction des liens vers Mozilla qui forçait le chargement de la page en Français.
+! Correction d'une vérification du filtrage en mode avancé (Variables dynamiques).
+
+Autres mises à jour :
++ Code source et révisions disponibles sur http://code.google.com/p/automatic-save-folder
+* Extension en zone publique sur http://addons.mozilla.org/addon/4781 ; Merci pour votre soutien, vos commentaires et suggestions.
+* Nouveau site web pour l'extension (Informations, Assistance, Betatest, Forum) : http://asf.mangaheart.org">
+
+<!ENTITY about.version.093 "+ Ajout du numéro de version dans la barre de titre du menu principal.
++ Possibilité d'ouvrir l'explorateur de dossier en double-cliquant sur le champs du chemin d'enregistrement.
++ Ajout d'onglets pour séparer les filtres, les options, l'aide et l'historique des versions.
++ Ajout des variables dynamiques pour le chemin d'enregistrement du fichier. (Merci à Ted pour la capture des groupe avec $1)
++ Option permettant d'activer ou désactiver les variables dynamiques (Mode avancé).
++ Ajout d'un menu contextuel sur les filtres permettant de dupliquer ou déplacer un filtre en début ou fin de tableau.
++ [Expérimental] Pour plus de facilité lorsque le domaine d'hébergement est aléatoire (ex. pour télécharger firefox sur mozilla.org) :
+  Vérification du filtre avec l'URL du site courant si le domaine d'hébergement du fichier ne retourne pas de résultat.
+  Attention à l'ordre de filtrage : En premier le domaine d'hébergement du fichier est vérifié, puis l'adresse du site où se trouve le lien.
+  Les données utilisés pour vérifier le domaine précédent reste celui d'hébergement du fichier.
++ Limite la taille maximum de la fenêtre d'enregistrement à la résolution de l'écran principal. (Merci à Julien)
++ Ajout d'une option permettant d'afficher un menu déroulant sur la fenêtre de sauvegarde contenant la liste des dossiers définit par les filtres.
+* Modification du mode d'ouverture des liens de la fenêtre &#34;à propos de...&#34;. Les liens s'ouvrent maintenant dans un nouvel onglet.
+* Agrandissement de certains menus pour plus de lisibilité.
+* simplification du code pour le déplacement haut/bas des filtres.
+* simplification du code de chargement des données courantes pour l'auto-complétion du menu &#34;Ajouter&#34;.
+* Meilleure visibilité : Les zones de texte s'agrandissent maintenant avec le changement de taille des fenêtres de préférence et d'aides.
+* Modification complète du script en Global Namespace, demandé par mozilla.org afin de sous-mettre l'extension en zone public.
+* Simplifications des fonctions du script et ajout des commentaires du code.
+! Enregistrement des données au format unicode (Les filtres présents dans les versions précédentes contenant des caractères accentués peuvent ne plus fonctionner. Vous devrez les redéfinir).
+! Correction du paramètre d'édition par double-clic sur un filtre venant d'être ajouté.
+! Correction du bug qui empêchait la lecture des préférences non définies ou inexistantes dans about:config. (Merci à Martin)">
+
+<!ENTITY about.version.092 "* Compatibilité des thèmes : Les couleurs par défauts sont maintenant utilisées, tous les textes devraient être visibles correctement.
+  Les images ont été améliorées afin d'être visibles sur les thèmes sombres.
+! Correction pour Vista : Mise à jour forcée de la variable browser.download.folderList à &#34;2&#34; lors de l'ouverture de la fenêtre d'option d'ASF.
+! Correction de la colonne &#34;actif&#34;, les filtres ne pouvaient plus être activés ou désactivés temporairement depuis la Version 0.8.7.">
+
+<!ENTITY about.version.091 "+ Traduction italienne par Scognito.
++ Ajout d'un menu à puces lors de l'enregistrement, permettant de sélectionner rapidement les deux derniers dossiers en mémoire.
+  Le deuxième choix n'apparaît que s'il est différent du premier.
+* Suppression de l'option &#34;affecter aussi enregistrer sous...&#34; pour firefox3, puisque cette valeur est utilisée automatiquement.
+* Suppression du popup &#34;+ Ajouter un filtre&#34; lors de l'enregistrement. Cela causait des problèmes de priorité de focus et de position de fenêtres.
+  Le lien n'ouvre plus que le menu principal permettant de modifier ou ajouter un filtre manuellement.
+  Lors de l'ajout d'un filtre en passant par ce menu, les champs seront tout de même pré-remplis avec le nom de fichier et le domaine.
+* Désactivation de l'édition des cellules du tableau lors d'un double-clic.
+  Depuis Firefox 3, double cliquer sur une cellule permet de l'éditer directement sans passer par la fenêtre d'édition. L'édition n'était alors pas enregistrée correctement.
+! Correction d'un bug lors de la vérification des filtres si l'option &#34;Utiliser le dernier dossier&#34; était sélectionné. (Merci à Carsten)
+! Correction d'un bug sur Firefox3 et Windows Vista : Modification d'une option interne à Firefox permettant de changer le dossier d'enregistrement manuellement. (Merci à Carsten)
+  (browser.download.folderList = 2) Sur Windows Vista, la valeur par défaut est à 1.
+  Les différentes valeurs possibles sont : 0 = Bureau ; 1 = Dossier d'enregistrement par défaut ; 2 = Choix laissé à l'utilisateur.
+! Correction du chemin spécifié dans la fenêtre de téléchargement sur Firefox3. Le chemin n'était pas mis correctement à jour suivant les options cochées.">
+
+<!ENTITY about.version.090 "+ Compatible avec Firefox 3.0.*
++ Ajout d'un bouton d'informations et d'aide à l'utilisation de l'extension.
++ Nouveau menu permettant d'ajouter des filtres juste avant l'enregistrement du fichier, avec les champs domaine et fichier pré-remplis.
+  Après l'ajout d'un filtre de cette manière, les filtres sont à nouveau vérifiés afin de prendre en compte le fichier en cours de téléchargement.
+  Bug connu : un problème de retour à la fenêtre active peut survenir lors de la fermeture des filtres.
+- Suppression de l'option permettant de désactiver l'extension. Afin de la désactiver temporairement, veuillez utiliser le gestionnaire d'extension.
+* Changement de la façon dont les filtres sont exécutés (addEventlistener à la place de OnLoad), pour une meilleure compatibilité avec les autres extensions.
+! Correction de la colonne &#34;Actif&#34; qui ne restait pas masquée correctement.">
+
+<!ENTITY about.version.087 "+ Compatible avec Firefox 3.0 beta (quelques modifications apportées au code).
+* La touche entrée du clavier correspond maintenant aux boutons d'acceptations (OK, Ajouter, Éditer). Auparavant le bouton par défaut était &#34;Annuler&#34;.
+! Version unique pour Windows et Linux (et peut être Mac ?).">
+
+<!ENTITY about.version.086fix "* Modification des boutons &#34;OK&#34; qui n'apparaissent pas dans la fenêtre principale sur Linux.
+Info :
+Sur Linux, il n'y a que le bouton &#34;Fermer&#34; et les cases à cocher sont enregistrées dès qu'elles sont modifiées par l'utilisateur. Malheureusement les tableaux ne sont pas pris en compte à la fermeture.
+J'ai donc supprimé le bouton &#34;Accept&#34; et je l'ai remplacé par un bouton &#34;sauver et fermer&#34;.">
+
+<!ENTITY about.version.086 "* Correction orthographique et syntaxique. Merci à Goofy pour son commentaire sur Mozilla.org">
+
+<!ENTITY about.version.085 "+ Ajout d'une option pour afficher des informations dans la fenêtre de téléchargement.
++ Ajout d'une option pour mémoriser le dernier domaine sur lequel les fichiers ont été téléchargés.
+* L'option du dossier par défaut fonctionne maintenant même si aucun filtre n'est défini dans la liste.
+* Modification de la page d'aide pour les expressions régulières. Utilisation d'un iframe et d'une page html à la place du xul/dtd.">
+
+<!ENTITY about.version.084 "+ Traduction de l'extension en français.
+* Conversion des fichiers de localisation en utf-8.">
+
+<!ENTITY about.version.083 "+ Ajout d'exemples et une courte explication concernant l'utilisation des expressions régulières, accessible dans la fenêtre d'ajout et d'édition des filtres.">
+
+<!ENTITY about.version.082 "Première version publique.
++ Ajout d'une option pour agir en même temps sur le chemin d'enregistrement des pages Web (note : le menu &#34;fichier/enregistrer sous...&#34; de Firefox).">
+
+<!ENTITY about.version.081 "* Sélection des dossiers : la fenêtre de sélection s'ouvre sur le dossier déjà sélectionné. Avant elle s'ouvrait sur un dossier aléatoire parmi : documents and settings, bureau et le dossier personnel.
+* Restriction pour la sélection des dossiers : suppression de la possibilité d'écrire le chemin au clavier, seul le bouton &#34;Sélectionner...&#34; est valide pour choisir les dossiers de destination.">
+
+<!ENTITY about.version.080 "Fonctionnalités :
++ Positionnement des filtres par priorité (option pour monter et descendre les filtres).
++ Reconnaissance des filtres normaux, masqués et RegExp. (Expression régulière).
++ Sélection des dossiers manuellement et par menu interactif (bouton &#34;sélectionner...&#34;).
++ Édition des filtres par double-clic sur les filtres.
++ Skin de l'interface avec des images.">
+
+<!ENTITY about.thanks.title "Remerciements">
+
+<!ENTITY about.programmation.title "Programmation">
+<!ENTITY about.programmation.content "Je remercie particulièrement :<br />
+- Les auteurs des extensions DownThemAll et Download sort. L'analyse de leur code source m'a permis d'améliorer Automatic Save Folder.<br />
+- http://captain.at, l'ancien xulplanet.com, http://xulfr.org, et http://www.hevanet.com/acorbin/xul/top.xul, pour leur ressources en Xul et javascript.<br />
+<br />
+Ainsi que les contributeurs :<br />
+- Carsten, Ted Gifford">
+
+<!ENTITY about.bugreport.title "Rapport d'erreurs">
+<!ENTITY about.bugreport.content "- Photonic, Martin">
+
+<!ENTITY about.translation.title "Traductions">
+<!ENTITY about.translation.content "- Anglais : Cyan.<br />
+- Français : Cyan.<br />
+- Italien : Scognito.<br />
+- L'équipe et les traducteurs de Babelzilla.org<br />
+- Relecture et correction par : Goofy, Haynee, Narayan.<br />">
+

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" [
+<!ENTITY % variablesDTD SYSTEM "chrome://asf/locale/variables.dtd" >
+%variablesDTD;
+]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- ***** BEGIN LICENSE BLOCK *****
+	Copyright 2007-2009 Eric Cassar (Cyan)
+
+    This file is part of "Automatic Save Folder".
+    You may find the license in the LICENSE file
+
+    ***** END LICENSE BLOCK ***** -->
+<body>
+<table border="0" style="font-size:12px; margin-top:0px;">
+	<tr>
+		<td align="left" valign="top">
+			<u style="font-size:15px">&Year;</u><br/>
+			<b>%Y%</b> = 2009, 2012<br/>
+			<b>%y%</b> = 09, 12<br/>
+			
+		</td>
+		<td align="left" valign="top">
+			<u style="font-size:15px">&Month;</u><br/>
+			<b>%m%</b> = &Month.wleadingzero;<br/>
+			<b>%n%</b> = &Month.woleadingzero;<br/>
+			<b>%F%</b> = &Month.fullname;<br/>
+			<b>%M%</b> = &Month.abbr;<br/>
+		</td>
+		<td align="left" valign="top">
+			<u style="font-size:15px">&Week;</u><br/>
+			<b>%W%</b> = &Week.wleadingzero;<br/>
+		</td>
+		<td align="left" valign="top">
+			<u style="font-size:15px">&Day;</u><br/>
+			<b>%d%</b> = &Day.wleadingzero;<br/>
+			<b>%j%</b> = &Day.woleadingzero;<br/>
+			<b>%w%</b> = &DayOfTheWeek;<br/>
+			<b>%l%</b> = &DayOfTheWeek.fullname;<br/>
+			<b>%D%</b> = &DayOfTheWeek.abbr;<br/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" valign="top">
+			<br/>
+			<u style="font-size:15px">&Special.tags;</u> :<br/>
+			<table style="font-size:12px;">
+				<tr>
+					<td valign="top"><b>%asf_D%</b></td><td>= &asf_D;</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_F%</b></td><td>= &asf_F;</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_Fx%</b></td><td>= &asf_Fx;</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_d%</b></td><td>= &asf_d;</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_f%</b></td><td>= &asf_f;</td>
+				</tr>
+				<tr>
+					<td valign="top"><b>%asf_x%</b></td><td>= &asf_x;</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" valign="top">
+			<br/>
+			<u style="font-size:15px">&Capture.tags;</u> :<br/>
+							
+				<b>$&lt;&number;&gt;d</b> = &Capture.d;
+				<br/>
+				<br/>
+				<b>$&lt;&number;&gt;f</b> =  &Capture.f;
+					<br/>&Capture.example;
+				<br/>
+				<br/>	
+				<b>%asf_rd%</b><u>&Regexp;</u><b>%asf_rd%</b><br/>
+				&Capture.rd;
+				<br/>
+				<br/>
+				<b>%asf_rf%</b><u>&Regexp;</u><b>%asf_rf%</b><br/>
+				&Capture.rf;
+				<br/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" valign="top">
+			<br/>
+			<b>&Attention;</b> : &Attention.text;<br/>
+		</td>
+	</tr>
+</table></body></html>

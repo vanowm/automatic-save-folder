@@ -1,0 +1,89 @@
+﻿<!ENTITY info.domain "Domain :">
+<!ENTITY info.filename "File :">
+<!ENTITY info.folder "Folder :">
+<!ENTITY info.all "All">
+<!ENTITY info.dynamicfilter "Dynamic filter">
+<!ENTITY info.capturefilter "Capture Filter">
+
+<!ENTITY info.important.title "Important">
+<!ENTITY info.important.text1 "The filtering on common downloads (simple click, or automatic download) works only if the download window &#34;What should Firefox do with this file?&#34; is shown:<br />">
+<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (80 denote image shrink to 80%, I find 100% a little too big) -->
+<!ENTITY info.important.pict1 "screen_save_80fr.png">
+<!ENTITY info.important.text2 "So, be sure to check if Firefox doesn't use another process preventing the window to appear by following this method:">
+<!ENTITY info.important.text3 "Go to the Firefox menu &#34;Tools&#34; and &#34;Options...&#34;.">
+<!ENTITY info.important.text4 "- For the Firefox 3 users: go to the &#34;Applications&#34; tab
+	<br />- For the previous Firefox versions users: Go to the &#34;Content&#34; tab and click on the &#34;Manage...&#34; at the bottom right.">
+<!ENTITY info.important.text5 "Verify if the File Type you want to download is set to &#34;Always ask&#34;.">
+<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
+<!ENTITY info.important.pict2 "screen_apps_fr.png">
+
+
+<!ENTITY info.howtouse.title "How to use">
+<!ENTITY info.howtouse.text1 "This extension allows you to define, using filters, the folder which will be automatically chosen while saving your files.">
+
+<!ENTITY info.filterrules.title "Filter rules">
+<!ENTITY info.filterrules.rule1 "The filters are defined using the file's name and the domain.">
+<!ENTITY info.filterrules.rule2 "The filters have to match the name of the file or the domain. For example do not write <b>&#34;google.com&#34;</b> but only <b>google.com</b> (without quotes)">
+<!ENTITY info.filterrules.rule3 "You can use the wildcard character <b>*</b> (asterisk) to replace parts of the filter: <b>wiki*.org</b>">
+<!ENTITY info.filterrules.rule4 "The asterisk is not needed at the beginning and end of the filter string. Writing <b>*wiki*</b> or <b>wiki</b> is the same.">
+<!ENTITY info.filterrules.rule5 "Same thing with the filename filter: <b>*.zip</b> or <b>.zip</b> will work the same way.">
+<!ENTITY info.filterrules.rule6 "The filters are verified from top to bottom and the process stops when a filter matching the downloaded file is met. Be sure to sort your filters accordingly.">
+<!ENTITY info.filterrules.rule7 "The filters are case insensitive, there is no difference between upper and lower case while the filters are processed.">
+
+<!ENTITY info.howtouse.text2 "For more flexibility, this extension accept regular expressions.">
+<!ENTITY info.howtouse.text3 "To get help with regular expression you can go to the 'add and edit filter' window, which is also available on the add-on main website or you can read this one for complete resources http://www.regular-expressions.info/.">
+<!ENTITY info.howtouse.text4 "Dynamic variables can be used to create new folders when saving, named after the date of the day, the file name, domain name, etc.<br />You can go to the Dynamic Folders tab to see the available tags.">
+
+
+<!ENTITY info.basicexample.title "Few filters examples">
+
+<!ENTITY info.basicexample.text1 "If you want all your executable files <b>.exe</b> to be saved in a specific folder:">
+<!ENTITY info.basicexample.text2 "The folder you want your executable files to be saved to.">
+
+<!ENTITY info.basicexample.text3 "Now if you want all the files from a particular website (mozilla.org for example) to be saved in a Mozilla folder:">
+<!ENTITY info.basicexample.text4 "Your Mozilla folder.">
+
+<!ENTITY info.basicexample.text5 "Then, if you need to sort all <b>.zip</b> files from mozilla.org, and leaves other files in the previous folder:">
+<!ENTITY info.basicexample.text6 "Your Mozilla folder for .zip files.">
+<!ENTITY info.basicexample.text7 "And sort this filter above the previous one. Do remember the filters are verified from top to bottom.">
+
+<!ENTITY info.basicexample.text8 "And last, you can define filters with more complete name, not only with the file extension:">
+<!ENTITY info.basicexample.text9 "Your folder for all version of Firefox installation program.">
+
+
+<!ENTITY info.advancedexample.title "Here are a few examples with Dynamic filters and Capturing filters">
+<!ENTITY info.advancedexample.text1 "Attention : In order to work correctly, don't forget to enable the option on the Dynamic Filters tab">
+
+<!ENTITY info.advancedexample.text2 "To sort out all the nightly builds of firefox in a sub-folder of D:\Download\firefox:">
+<!-- replace the percent with entity &#37 and the quote with &#34 -->
+<!ENTITY info.advancedexample.text3 "D:\Download\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
+<!ENTITY info.advancedexample.text4 "The extension will create a sub-folder named after the date of the day. For example &#34;2009-12-04&#34;, in which your file will be saved.">
+
+<!ENTITY info.advancedexample.text5 "To sort out a file according to its extension:">
+<!ENTITY info.advancedexample.text6 "D:\Download\&#37;asf_x&#37;">
+<!ENTITY info.advancedexample.text7 "The extension will create a sub-folder named &#34;zip&#34; for the .zip files, &#34;rar&#34; for .rar files, etc. in which your file will be saved.">
+
+<!ENTITY info.advancedexample.text8 "To sort all the Firefox installation package inside subfolder named after the software version:">
+<!ENTITY info.advancedexample.text9 "D:\Download\Firefox\$1f">
+<!ENTITY info.advancedexample.text10 "While checking the downloaded file with the filters, the parentheses are not took in account, and the filter will act as &#34;Firefox Setup *.exe&#34;<br />
+$1f correspond to the first parenthesis content on the filter's file name, which is the version number <br />
+The file &#34;Firefox Setup 3.5.4.exe&#34; will be saved in the folder D:\Download\Firefox\3.5.4\">
+
+
+
+
+
+<!ENTITY info.advancedexample.text11 "To create or not create different subdirectories according to the name of the file:">
+<!ENTITY info.advancedexample.text12 "Example : We wish to download videos named &#34;My_vacation_date-of-the-trip.avi&#34;.<br />
+The videos have .srt subtitles to explain the trip, .zip files are also available with photos of the trip, videos can be downloaded with .avi, .torrent or .nzb extension (newsgroup).<br />
+<br />&#34;.avi&#34; and &#34;.srt&#34; will have to go in the D:\video\vacation file. <br />
+&#34;.zip&#34;, &#34;.torrent&#34; and &#34;.nzb&#34; will have to go respectively in subdirectories D:\video\vacation\zip, D:\video\vacation\torrent and D:\video\vacation\nzb.">
+<!ENTITY info.advancedexample.text13 "/^My_vacation.*\.(avi|srt|zip|torrent|nzb)$/">
+<!ENTITY info.advancedexample.text14 "D:\video\vacation\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;">
+<!ENTITY info.advancedexample.text15 "Explanation about the filters:<br />
+The filter will be activated for all the files beginning with &#34;My_vacation&#34; and ending with one of the available extensions (avi, srt, zip, torrent or nzb).<br />
+The directory created will depend on the filtering : &#37;asf_rf&#37; analyses the name of the file downloaded with the regular expression contained between the two &#37;asf_rf&#37; : If the file ends with &#34;zip&#34;, &#34;torrent&#34; or &#34;nzb&#34;, the portion captured by the regular expression creates the subdirectory.<br />
+If none of those three extensions are found, the regular expression won't do anything, no sub-folder is created and files will be downloaded in D:\video\vacation\">
+<!ENTITY info.advancedexample.text16 "Note : You can put as many tags as you want for the main folder.<br />The filter could have been:">
+<!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(vacation|wedding)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
+In this case, the sub-folder &#34;vacation&#34; is created only if the name of the file contains &#34;vacation&#34;.">
