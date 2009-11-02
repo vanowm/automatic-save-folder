@@ -121,6 +121,7 @@
 			<checkbox id="asf-rightclick" preference="asf_rightclick" label="&asf.rightclick.bool;" oncommand="automatic_save_folder.toggle_rightclick();"/>
 			<description id="asf-rightclickdesc" style="margin-left:25px;white-space: pre-wrap">&asf.rightclick.label;</description>
 			<description id="asf-rightclickdesc-DSort" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.DSort.label;</description>
+			<description id="asf-rightclickdesc-ff2" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.ff2.label;</description>
 		</groupbox>
 	</vbox>
 	<vbox id="asf-tab-dynamics" hidden="true" flex="1000">

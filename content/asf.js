@@ -221,25 +221,27 @@ var automatic_save_folder = {
 				select_list.disabled = false;
 			}
 			
-		// Print informations about Download sort conflict with right-click
-		// And disable the checkbox
-		document.getElementById("asf-rightclickdesc-DSort").hidden = true;
-		var Dsort_installed = this.DownloadSort();	
+		// Check the right-click feature here, and prints text according to Firefox version and active addons
+		// hide all the descriptions box, and unhide the needed one 
+		document.getElementById("asf-rightclickdesc-ff2").hidden = true;     // Firefox 2, Right-click disabled message
+		document.getElementById("asf-rightclickdesc-DSort").hidden = true;   // Download sort conflit alert
+		var Dsort_installed = this.DownloadSort();
 		
-		if (Dsort_installed) // if Download sort is installed, display a message "right click disabled"
+		if (this.firefoxversion == 2)
 		{
-			var asf_rightclick = document.getElementById("asf-rightclick");
-			asf_rightclick.disabled = true;
-			
-			document.getElementById("asf-rightclickdesc").hidden = true;
-			document.getElementById("asf-rightclickdesc-DSort").hidden = false;
+			document.getElementById("asf-rightclick").hidden = true;          // Hide the right-click checkbox
+			document.getElementById("asf-rightclickdesc").hidden = true;      // Hide the right-click description
+			document.getElementById("asf-rightclickdesc-ff2").hidden = false; // Show right-click not working on Firefox 2.0
 		}
-		else
+		if (this.firefoxversion == 3)
 		{
-			if (this.firefoxversion == 2)  // Right-click is always working without header renaming on Firefox 2 (no option for Timeout), let's hide this menu
+			if (Dsort_installed) // if Download sort is installed, display a message "right click disabled"
 			{
-				document.getElementById("asf-rightclick").hidden = true;
+				var asf_rightclick = document.getElementById("asf-rightclick");
+				asf_rightclick.disabled = true;
+				
 				document.getElementById("asf-rightclickdesc").hidden = true;
+				document.getElementById("asf-rightclickdesc-DSort").hidden = false;
 			}
 		}
 		
@@ -555,12 +557,15 @@ var automatic_save_folder = {
 	
 	
 	DownloadSort: function() {	
-		// Check for Download sort add-on, if enabled return true. (works only on 3.x ?)
-		var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
-		var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
-		var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
-		
-		if (DownloadSort >= 0) return true;
+		// Check for Download sort add-on, if enabled return true. (works only on 3.x)
+		if (this.firefoxversion == 3)
+		{
+			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
+			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
+			
+			if (DownloadSort >= 0) return true;
+		}
 		return false;	
 	},
 	

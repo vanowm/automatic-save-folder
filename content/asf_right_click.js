@@ -36,45 +36,49 @@ var automatic_save_folder = {
 		{
 			asf_rightclick_loaded = true;	
 			
-			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+			// Right-click feature doesn't work on Firefox 2 (Can't detect installed add-on and prevent conflict with Download Sort)
+			if (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "3.0") >= 0)
+			{
+				var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+					
+				//replace original Rightclick menu with ASF Rightclick menu
+				// Not compatible with Download Sort extension (same function modification, it will conflict).
+				// Detect if Download Sort is installed and enabled, and activate ASF rightclick only if DSort is not already loaded.
+				var enabledItems = prefs.getCharPref("extensions.enabledItems");
+				var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+				var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
 				
-			//replace original Rightclick menu with ASF Rightclick menu
-			// Not compatible with Download Sort extension (same function modification, it will conflict).
-			// Detect if Download Sort is installed and enabled, and activate ASF rightclick only if DSort is not already loaded.
-			var enabledItems = prefs.getCharPref("extensions.enabledItems");
-			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
-			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if ( (DownloadSort == -1) && (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "2.0") >= 0) ) // Download Sort is not enabled, load ASF rightclick replacement && Firefox 2.0 min
-			{			
-				// Not working like I would like :(
-				/*
-				// Replace first line of ORIGinal firefox rightclick function, to add ASF function to it. might Works with every firefox version :) 
-				var asf_getTargetFile = ORIG_getTargetFile.toString().replace("const prefSvcContractID","automatic_save_folder.rightclick_setdir(aFpP);const prefSvcContractID");
-				asf_getTargetFile = new Function("aFpP","aSkipPrompt", asf_getTargetFile);
-				alert(asf_getTargetFile);
-				window.getTargetFile = asf_getTargetFile;
-				*/
-				
-				// replace the ORIGinal firefox function with the custom one. (original from Firefox 3.5.4) 
-				// (Firefox 2.x doesn't know Cc"@mozilla.org/privatebrowsing;1" and returns a warning in the console, but right-click filtering is working.)
-				window.getTargetFile = automatic_save_folder.asf_getTargetFile;
-				
-				if (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "3.0") >= 0)
+				if (DownloadSort == -1)  // Download Sort is not enabled, load ASF rightclick replacement && Firefox 2.0 min
 				{
-					// Starting from firefox 3.0 there is a timeout when downloading with right-click to read header(Content-Disposition:) to rename the file in the file_explorer suggested filename.
-					// When timeout is set to 1000 ms (default), ASF right-click filtering is not working.
-					// When timeout is set to 0ms, ASF right-click filtering is working, but header renaming is not working anymore.
-					// And when set to ~8ms, Header renaming is working but ASF is filtering on the previous filename (before the renaming).
+					// Not working like I would like :(
+					/*
+					// Replace first line of ORIGinal firefox rightclick function, to add ASF function to it. might Works with every firefox version :) 
+					var asf_getTargetFile = ORIG_getTargetFile.toString().replace("const prefSvcContractID","automatic_save_folder.rightclick_setdir(aFpP);const prefSvcContractID");
+					asf_getTargetFile = new Function("aFpP","aSkipPrompt", asf_getTargetFile);
+					alert(asf_getTargetFile);
+					window.getTargetFile = asf_getTargetFile;
+					*/
 					
-					// Set to 0 only when the user want to use it
-					// and set it back to 1000 (default) when exiting Firefox
-					// to prevent blocking the user to 0 if add-on is removed without reseting the timeout first.
-					var asf_rightclick = prefs.getBoolPref("extensions.asf.rightclick");
-					prefs.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclick == true ? 0 : 1000);
+					// replace the ORIGinal firefox function with the custom one. (original from Firefox 3.5.4) 
+					// (Firefox 2.x doesn't know Cc"@mozilla.org/privatebrowsing;1" and returns a warning in the console, but right-click filtering is working.)
+					window.getTargetFile = automatic_save_folder.asf_getTargetFile;
 					
-					var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-					obsSvc.addObserver(automatic_save_folder.asf_quitObserver, "quit-application-requested", false);
+					if (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "3.0") >= 0)
+					{
+						// Starting from firefox 3.0 there is a timeout when downloading with right-click to read header(Content-Disposition:) to rename the file in the file_explorer suggested filename.
+						// When timeout is set to 1000 ms (default), ASF right-click filtering is not working.
+						// When timeout is set to 0ms, ASF right-click filtering is working, but header renaming is not working anymore.
+						// And when set to ~8ms, Header renaming is working but ASF is filtering on the previous filename (before the renaming).
+						
+						// Set to 0 only when the user want to use it
+						// and set it back to 1000 (default) when exiting Firefox
+						// to prevent blocking the user to 0 if add-on is removed without reseting the timeout first.
+						var asf_rightclick = prefs.getBoolPref("extensions.asf.rightclick");
+						prefs.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclick == true ? 0 : 1000);
+						
+						var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+						obsSvc.addObserver(automatic_save_folder.asf_quitObserver, "quit-application-requested", false);
+					}
 				}
 			}
 		}
