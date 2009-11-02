@@ -48,9 +48,8 @@
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamic folders">
 <!ENTITY asf.variablemode.bool "Enable">
-<!ENTITY asf.variablemode1.label "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day ">
-<!ENTITY asf.variablemode2.label "or the file name.">
-<!ENTITY asf.variablemode3.label "Note : Attention to uppercase and lowercase.">
+<!ENTITY asf.variablemode1.label "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day or the file name.">
+<!ENTITY asf.variablemode2.label "Note : Attention to uppercase and lowercase.">
 <!ENTITY asf.variables.label "Tags list :">
 
 <!-- help tab-->

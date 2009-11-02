@@ -114,9 +114,9 @@
 			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;"/>
 			<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
 			<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" oncommand="automatic_save_folder.toggle_options();"/>
-			<hbox><description value="	" /><description id="asf-viewdloptiondesc" >&asf.viewdloption.label;</description></hbox>
-			<hbox><description value="	" /><checkbox id="asf-viewpathselect" preference="asf_viewpathselect" label="&asf.viewpathselect.bool;"/></hbox>
-			<hbox><description value="		" /><description id="asf-viewpathselectdesc" >&asf.viewpathselect.label;</description></hbox>
+			<description id="asf-viewdloptiondesc" style="vertical-align:top;margin-left:28px;white-space:pre-wrap" >&asf.viewdloption.label;</description>
+			<checkbox id="asf-viewpathselect" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" preference="asf_viewpathselect" label="&asf.viewpathselect.bool;"/>
+			<description id="asf-viewpathselectdesc" style="vertical-align:top;margin-left:48px;white-space:pre-wrap" >&asf.viewpathselect.label;</description>
 			<separator />
 			<checkbox id="asf-rightclick" preference="asf_rightclick" label="&asf.rightclick.bool;" oncommand="automatic_save_folder.toggle_rightclick();"/>
 			<description id="asf-rightclickdesc" style="margin-left:25px;white-space: pre-wrap">&asf.rightclick.label;</description>
@@ -128,12 +128,10 @@
 			<caption label="&asf.dynamics.label;"/>
 			<separator class="thin"/>
 			<checkbox id="asf-variablemode" preference="asf_variablemode" label="&asf.variablemode.bool;" oncommand="automatic_save_folder.asf_variablemode()"/>
-			<hbox><description value="	" /><description id="asf-variablemodedesc1" >&asf.variablemode1.label;</description></hbox>
-			<hbox><description value="	" /><description id="asf-variablemodedesc2" >&asf.variablemode2.label;</description></hbox>
-			<hbox><description value="	" /><description id="asf-variablemodedesc3" >&asf.variablemode3.label;</description></hbox>
+			<description id="asf-variablemodedesc1" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" >&asf.variablemode1.label;</description>
+			<description id="asf-variablemodedesc1" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" >&asf.variablemode2.label;</description>
 			<separator />
 			<hbox flex="1">
-			   <description value="	" />
 			   <groupbox flex="1" style="padding:0px !important;">
 				  <caption label="&asf.variables.label;"/>
 					 <iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:120px;"

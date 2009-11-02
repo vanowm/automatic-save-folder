@@ -48,9 +48,8 @@
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dossiers dynamiques">
 <!ENTITY asf.variablemode.bool "Activer">
-<!ENTITY asf.variablemode1.label "Permet d'éditer le chemin d'enregistrement des filtres manuellement et d'ajouter des variables dynamiques,">
-<!ENTITY asf.variablemode2.label "comme la date du jour ou le domaine d'hébergement.">
-<!ENTITY asf.variablemode3.label "Note : Attention aux majuscules et minuscules.">
+<!ENTITY asf.variablemode1.label "Permet d'éditer le chemin d'enregistrement des filtres manuellement et d'ajouter des variables dynamiques, comme la date du jour ou le domaine d'hébergement.">
+<!ENTITY asf.variablemode2.label "Note : Attention aux majuscules et minuscules.">
 <!ENTITY asf.variables.label "Liste des balises :">
 
 <!-- Help tab-->
