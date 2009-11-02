@@ -64,9 +64,4 @@
 		<description value="&asf.addedit.inforegexp4;"/>
 	</vbox>
 </groupbox>
-
-<description id="popup-nodata-domain" style="display:none" value="&asf.addedit.nodata.domain;"/>
-<description id="popup-nodata-filename" style="display:none" value="&asf.addedit.nodata.filename;"/>
-<description id="popup-nodata-folder" style="display:none" value="&asf.addedit.nodata.folder;"/>
-
 </dialog>

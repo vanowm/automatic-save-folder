@@ -80,11 +80,6 @@
 <!ENTITY asf.addedit.inforegexp3 "Parzialmente corrisposto o con wildcard: mio*.zip">
 <!ENTITY asf.addedit.inforegexp4 "Espressione regolare. : .*(.rar|.zip)$">
 
-<!ENTITY asf.addedit.nodata.domain "Il campo dominio è vuoto. Scegli 'tutti' o inserisci un filtro per il dominio">
-<!ENTITY asf.addedit.nodata.filename "Il campo Nome File è vuoto. Scegli 'tutti' o inserisci un filtro per il nome file">
-<!ENTITY asf.addedit.nodata.folder "La cartella è vuota. Scegli una cartella di destinazione per questo filtro">
-
 <!-- Regular expression Help dialog -->
 <!ENTITY asf.regexp.title "Espressioni regolari">
 <!ENTITY asf.regexp.label "Aiuti ed esempi">
-

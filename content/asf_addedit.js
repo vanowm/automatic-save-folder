@@ -19,7 +19,10 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
  var automatic_save_folder = {
 		prefManager: Components.classes["@mozilla.org/preferences-service;1"]
                          .getService(Components.interfaces.nsIPrefBranch),
-
+							
+		stringbundle: Components.classes["@mozilla.org/intl/stringbundle;1"]
+                   .getService(Components.interfaces.nsIStringBundleService)
+                   .createBundle("chrome://asf/locale/asf.properties"),
 
 	add_load: function () {
 		
@@ -89,14 +92,11 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
 	browsedir_addedit: function () {
 		var current_folder_input = document.getElementById("asf-addedit-folder").value;
-		var stringbundle = Components.classes['@mozilla.org/intl/stringbundle;1'].
-											getService(Components.interfaces.nsIStringBundleService).  
-                           createBundle('chrome://asf/locale/asf.properties');
 				
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		
-		var filepickerdescription = stringbundle.GetStringFromName("select_folder");
+		var filepickerdescription = this.stringbundle.GetStringFromName("select_folder");
 		fp.init(window, filepickerdescription, nsIFilePicker.modeGetFolder);
 		//fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 		
@@ -310,10 +310,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}
 		else
 		{
-			var err_domain = document.getElementById('popup-nodata-domain').value;
-			asfalert = alert;
-			//alert(err_domain);
-			asfalert("test");
+			var err_domain = this.stringbundle.GetStringFromName("nodata.domain");
+			alert(err_domain);
 			var error = true;
 		}
 		
@@ -337,7 +335,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}
 		else
 		{
-			var err_filename = document.getElementById('popup-nodata-filename').value;
+			var err_filename = this.stringbundle.GetStringFromName("nodata.filename");
 			alert(err_filename);
 			var error = true;
 		}
@@ -350,7 +348,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var rule = this.trim(folder.value);
 		if (rule == "")
 		{
-			var err_folder = document.getElementById('popup-nodata-folder').value;
+			var err_folder = this.stringbundle.GetStringFromName("nodata.folder");
 			alert(err_folder);
 			var error = true;
 		}
@@ -426,7 +424,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}
 		else
 		{
-			var err_domain = document.getElementById('popup-nodata-domain').value;
+			var err_domain = this.stringbundle.GetStringFromName("nodata.domain");
 			alert(err_domain);
 			var error = true;
 		}
@@ -451,7 +449,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}
 		else
 		{
-			var err_filename = document.getElementById('popup-nodata-filename').value;
+			var err_filename = this.stringbundle.GetStringFromName("nodata.filename");
 			alert(err_filename);
 			var error = true;
 		}
@@ -464,7 +462,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var rule = this.trim(folder.value);
 		if (rule == "")
 		{
-			var err_folder = document.getElementById('popup-nodata-folder').value;
+			var err_folder = this.stringbundle.GetStringFromName("nodata.folder");
 			alert(err_folder);
 			var error = true;
 		}
