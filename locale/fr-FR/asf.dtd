@@ -20,7 +20,6 @@
 <!ENTITY asf.options.add "">
 
 <!-- Filters tab - bottom -->
-<!ENTITY asf.lastdir.bool "Modifier aussi le dossier d'enregistrement utilisé par le menu 'Enregistrer sous...'">
 <!ENTITY asf.default.label "Dossier d'enregistrement lorsqu'aucun filtre n'est trouvé :">
 <!ENTITY asf.lastselected.label "Le dernier dossier utilisé">
 <!ENTITY asf.defaultfolder.label "Ce dossier : ">
@@ -35,26 +34,31 @@
 
 <!-- Options tab -->
 <!ENTITY asf.options.label "Options">
-<!ENTITY asf.useDownloadDir.bool "Ne pas afficher l'explorateur de fichier et enregistrer directement dans le dossier :">
+<!ENTITY asf.useDownloadDir.bool "Ne pas afficher l'explorateur de fichiers, et enregistrer directement dans le dossier :">
 <!ENTITY asf.desktop.label "Bureau">
 <!ENTITY asf.systemdownload.label "Téléchargements">
-<!ENTITY asf.filteredfolder.label "défini par le filtre">
+<!ENTITY asf.filteredfolder.label "Défini par les filtres">
+<!ENTITY asf.folderList.tooltip "Si le dossier &#34;Téléchargements&#34; n'existe pas, la dernière option sera utilisée.">
+<!ENTITY asf.dialogaccept.bool "Valider automatiquement la fenêtre &#34;Que doit faire Firefox avec ce fichier ?&#34;.">
 <!ENTITY asf.viewdloption.bool "Afficher les options lors de l'enregistrement">
-<!ENTITY asf.viewdloption.label "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
+<!ENTITY asf.viewdloption.tooltip "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
 <!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">
-<!ENTITY asf.viewpathselect.label "Active le menu déroulant contenant le chemin de chaque filtre.">
-<!ENTITY asf.dialogaccept.bool "Valider automatiquement la fenêtre 'Que doit faire Firefox avec ce fichier ?'.">
-<!ENTITY asf.rightclick.bool "Supprimer la temporisation et activer les filtres sur le menu clic-droit 'Enregistrer la cible du lien sous...'.">
-<!ENTITY asf.rightclick.label "Note : Supprimer la temporisation empêche Firefox de récupérer le nom du fichier cible lors d'un téléchargement avec redirection.&#xA;Désactivez temporairement cette option si vous souhaitez que Firefox lise correctement le nom du fichier fourni par l'entête. Seuls les scripts de téléchargement avec redirection de fichier ont ce problème, l'enregistrement par clic-droit sur les liens directs fonctionne correctement si la case est cochée. &#xA;&#xA;Cette option n'a pas d'effet sur les menus 'Enregistrer l'image sous...' ni 'Enregistrer sous... (Ctrl+S)'.">
-<!ENTITY asf.rightclick.ff2.label "La fonction clic-droit d'automatic save folder n'est pas compatible avec Firefox 2. Si vous souhaitez utiliser le filtres sur les téléchargements en utilisant le menu clic-droit 'Enregistrer la cible du lien sous...', vous devrez utiliser au minimum Firefox version 3.0 (Version 3.5 ou plus conseillée).">
-<!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &#xA;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu 'Outils/Modules complémentaires...' afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
+<!ENTITY asf.viewpathselect.tooltip "Active le menu déroulant contenant le chemin de chaque filtre.">
 <!ENTITY asf.usecurrenturl.bool "Utiliser l'adresse du site courant pour comparer le domaine du filtre si le domaine d'hébergement ne correspond pas.">
+<!ENTITY asf.lastdir.bool "Modifier aussi le dossier d'enregistrement utilisé par le menu 'Enregistrer sous... (Ctrl+S)'">
+<!ENTITY asf.rightclick.bool "Supprimer la temporisation et activer les filtres sur le menu clic-droit &#34;Enregistrer la cible du lien sous...&#34;.">
+<!ENTITY asf.rightclick.label "Note : Cette option n'a pas d'effet sur les menus &#34;Enregistrer l'image sous...&#34; ni &#34;Enregistrer sous... (Ctrl+S)&#34;.">
+<!ENTITY asf.rightclick.tooltip1 "Note : Supprimer la temporisation empêche Firefox de récupérer le nom du fichier cible lors d'un téléchargement avec redirection.">
+<!ENTITY asf.rightclick.tooltip2 "Désactivez temporairement cette option si vous souhaitez que Firefox lise correctement le nom du fichier fourni par l'entête.">
+<!ENTITY asf.rightclick.tooltip3 "Seuls les scripts de téléchargement avec redirection de fichier ont ce problème, l'enregistrement par clic-droit sur les liens directs fonctionne correctement si la case est cochée.">
+<!ENTITY asf.rightclick.ff2.label "La fonction clic-droit d'automatic save folder n'est pas compatible avec Firefox 2. Si vous souhaitez utiliser le filtres sur les téléchargements en utilisant le menu clic-droit &#34;Enregistrer la cible du lien sous...&#34;, vous devrez utiliser au minimum Firefox version 3.0 (Version 3.5 ou plus conseillée).">
+<!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &#xA;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu &#34;Outils/Modules complémentaires...&#34; afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dossiers dynamiques">
 <!ENTITY asf.variablemode.bool "Activer">
-<!ENTITY asf.variablemode1.label "Permet d'éditer le chemin d'enregistrement des filtres manuellement et d'ajouter des variables dynamiques, comme la date du jour ou le domaine d'hébergement.">
-<!ENTITY asf.variablemode2.label "Note : Attention aux majuscules et minuscules.">
+<!ENTITY asf.variablemode.tooltip "Permet d'éditer manuellement le chemin d'enregistrement des filtres et d'ajouter des variables dynamiques, comme la date du jour ou le domaine d'hébergement.">
+<!ENTITY asf.variablemode.label "Attention : Les majuscules et les minuscules correspondent à des balises différentes.">
 <!ENTITY asf.variables.label "Liste des balises :">
 
 <!-- Help tab-->

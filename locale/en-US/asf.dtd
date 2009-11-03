@@ -20,7 +20,6 @@
 <!ENTITY asf.options.add "">
 
 <!-- Filters tab - bottom -->
-<!ENTITY asf.lastdir.bool "Affect the folder for the 'save as...' command when a filter matches">
 <!ENTITY asf.default.label "If the file doesn't match any filter, save to:">
 <!ENTITY asf.lastselected.label "The last folder">
 <!ENTITY asf.defaultfolder.label "This folder: ">
@@ -35,26 +34,31 @@
 
 <!-- Options tab -->
 <!ENTITY asf.options.label "Options">
-<!ENTITY asf.useDownloadDir.bool "Do not show the file explorer and save to:">
+<!ENTITY asf.useDownloadDir.bool "Do not show the file explorer, and save to:">
 <!ENTITY asf.desktop.label "Desktop">
 <!ENTITY asf.systemdownload.label "Downloads">
-<!ENTITY asf.filteredfolder.label "set by the filters">
-<!ENTITY asf.viewdloption.bool "View options when downloading">
-<!ENTITY asf.viewdloption.label "Allow you to see the last two destination folders and a link to add or edit the filters">
-<!ENTITY asf.viewpathselect.bool "View the list of folders">
-<!ENTITY asf.viewpathselect.label "Activate a drop-down menu with all the filter's path.">
+<!ENTITY asf.filteredfolder.label "Set by the filters">
+<!ENTITY asf.folderList.tooltip "If the &#34;Downloads&#34; folder doesn't exist, the last choice will be used.">
 <!ENTITY asf.dialogaccept.bool "Automatically accept the &#34;What should Firefox do with this file&#34; dialog windows.">
-<!ENTITY asf.rightclick.bool "Remove the timing delay and activate the filtering on the right-click menu 'Save link as...'">
-<!ENTITY asf.rightclick.label "Note: Removing the timing delay prevent Firefox to read the file's target name if it is from a redirection download.&#xA;Temporarily disable this feature if you want Firefox to read the filename provided by the header. Only files from a download script with file redirection have this problem, saving a file from a direct download using right-click is working fine.&#xA;&#xA;This option doesn't affect the menus 'Save image as...' nor 'Save as... (Ctrl+S)'.">
-<!ENTITY asf.rightclick.ff2.label "The Automatic Save Folder's right-click feature is not available on Firefox 2. If you want to use the filters on your downloads using the right-click menu 'Save link as', you should update your Firefox version to 3.0 minimum (recommended version 3.5 or more)">
-<!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Extension manager.">
+<!ENTITY asf.viewdloption.bool "View options when downloading">
+<!ENTITY asf.viewdloption.tooltip "Allow you to see the last two destination folders and a link to add or edit the filters">
+<!ENTITY asf.viewpathselect.bool "View the list of folders">
+<!ENTITY asf.viewpathselect.tooltip "Activate a drop-down menu with all the filter's path.">
 <!ENTITY asf.usecurrenturl.bool "Use the current website URL to verify the filter's domain if the hosted domain doesn't match.">
+<!ENTITY asf.lastdir.bool "Affect the folder for the 'save as...' command when a filter matches">
+<!ENTITY asf.rightclick.bool "Remove the timing delay and activate the filtering on the right-click menu &#34;Save link as...&#34;">
+<!ENTITY asf.rightclick.label "Note: This option doesn't affect the menus &#34;Save image as...&#34; nor &#34;Save as... (Ctrl+S)&#34;.">
+<!ENTITY asf.rightclick.tooltip1 "Note: Removing the timing delay prevent Firefox to read the file's target name if it is from a redirection download.">
+<!ENTITY asf.rightclick.tooltip2 "Temporarily disable this feature if you want Firefox to read the filename provided by the header.">
+<!ENTITY asf.rightclick.tooltip3 "Only files from a download script with file redirection have this problem, saving a file from a direct download using right-click is working fine.">
+<!ENTITY asf.rightclick.ff2.label "The Automatic Save Folder's right-click feature is not available on Firefox 2. If you want to use the filters on your downloads using the right-click menu &#34;Save link as&#34;, you should update your Firefox version to 3.0 minimum (recommended version 3.5 or more)">
+<!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Extension manager.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamic folders">
 <!ENTITY asf.variablemode.bool "Enable">
-<!ENTITY asf.variablemode1.label "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day or the file name.">
-<!ENTITY asf.variablemode2.label "Note : Attention to uppercase and lowercase.">
+<!ENTITY asf.variablemode.tooltip "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day or the file name.">
+<!ENTITY asf.variablemode.label "Attention : Uppercase and lowercase tags are different.">
 <!ENTITY asf.variables.label "Tags list :">
 
 <!-- help tab-->

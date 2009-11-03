@@ -41,6 +41,23 @@
 		<menuitem label="&asf.delete.popup;" oncommand="automatic_save_folder.asf_delete();"/>
 		<menuitem label="&asf.bottom.popup;" oncommand="automatic_save_folder.move('bottom');"/>
 	</menupopup>
+	<tooltip id="tooltip_folderList" orient="vertical" style="background-color: #33DD00;" noautohide="true">
+		<description value="&asf.folderList.tooltip;"/>
+	</tooltip>
+	<tooltip id="tooltip_viewdloption" style="background-color: #33DD00;" noautohide="true">
+		<description value="&asf.viewdloption.tooltip;"/>
+	</tooltip>
+	<tooltip id="tooltip_viewpathselect" style="background-color: #33DD00;" noautohide="true">
+		<description value="&asf.viewpathselect.tooltip;"/>
+	</tooltip>
+	<tooltip id="tooltip_rightclick" orient="vertical" style="background-color: #33DD00;overflow:auto;" noautohide="true">
+		<description value="&asf.rightclick.tooltip1;"/>
+		<description value="&asf.rightclick.tooltip2;"/>
+		<description value="&asf.rightclick.tooltip3;"/>
+	</tooltip>
+	<tooltip id="tooltip_variablemode" style="background-color: #33DD00;" noautohide="true">
+		<description value="&asf.variablemode.tooltip;"/>
+	</tooltip>
 	<vbox>
 		<tabbox>
 			<tabs>
@@ -114,7 +131,7 @@
 			<separator class="thin"/>
 			<hbox>
 				<checkbox id="asf-useDownloadDir" preference="asf_useDownloadDir" label="&asf.useDownloadDir.bool;"/>
-				<menulist id="asf-folderList" preference="asf_folderList">
+				<menulist id="asf-folderList" preference="asf_folderList" tooltip="tooltip_folderList">
 					<menupopup>
 						<menuitem value="0" label="&asf.desktop.label;"></menuitem>
 						<menuitem value="1" label="&asf.systemdownload.label;"></menuitem>
@@ -122,16 +139,15 @@
 					</menupopup>
 				</menulist>
 			</hbox>
-			<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
 			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;"/>
+			<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>
+			<checkbox id="asf-viewpathselect" preference="asf_viewpathselect"  label="&asf.viewpathselect.bool;" tooltip="tooltip_viewpathselect" style="margin-left:25px;white-space:pre-wrap"/>
+			<separator class="thin"/>
 			<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
-			<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" oncommand="automatic_save_folder.toggle_options();"/>
-			<description id="asf-viewdloptiondesc" style="vertical-align:top;margin-left:28px;white-space:pre-wrap" >&asf.viewdloption.label;</description>
-			<checkbox id="asf-viewpathselect" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" preference="asf_viewpathselect" label="&asf.viewpathselect.bool;"/>
-			<description id="asf-viewpathselectdesc" style="vertical-align:top;margin-left:48px;white-space:pre-wrap" >&asf.viewpathselect.label;</description>
-			<separator />
-			<checkbox id="asf-rightclick" preference="asf_rightclick" label="&asf.rightclick.bool;" oncommand="automatic_save_folder.toggle_rightclick();"/>
-			<description id="asf-rightclickdesc" style="margin-left:25px;white-space: pre-wrap">&asf.rightclick.label;</description>
+			<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
+			<separator class="thin"/>
+			<checkbox id="asf-rightclick" preference="asf_rightclick" label="&asf.rightclick.bool;" tooltip="tooltip_rightclick" oncommand="automatic_save_folder.toggle_rightclick();"/>
+			<description id="asf-rightclickdesc" style="margin-left:25px;white-space: pre-wrap;">&asf.rightclick.label;</description>
 			<description id="asf-rightclickdesc-DSort" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.DSort.label;</description>
 			<description id="asf-rightclickdesc-ff2" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.ff2.label;</description>
 		</groupbox>
@@ -140,10 +156,9 @@
 		<groupbox id="asf-dynamics" flex="1">
 			<caption label="&asf.dynamics.label;"/>
 			<separator class="thin"/>
-			<checkbox id="asf-variablemode" preference="asf_variablemode" label="&asf.variablemode.bool;" oncommand="automatic_save_folder.asf_variablemode()"/>
-			<description id="asf-variablemodedesc1" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" >&asf.variablemode1.label;</description>
-			<description id="asf-variablemodedesc1" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" >&asf.variablemode2.label;</description>
-			<separator />
+			<checkbox id="asf-variablemode" preference="asf_variablemode" label="&asf.variablemode.bool;" tooltip="tooltip_variablemode" oncommand="automatic_save_folder.asf_variablemode()"/>
+			<description id="asf-variablemodedesc" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" >&asf.variablemode.label;</description>
+			<separator class="thin"/>
 			<hbox flex="1">
 			   <groupbox flex="1" style="padding:0px !important;">
 				  <caption label="&asf.variables.label;"/>
