@@ -35,6 +35,10 @@
 
 <!-- Options tab -->
 <!ENTITY asf.options.label "Opzioni">
+<!ENTITY asf.useDownloadDir.bool "Do not show the file explorer and save to:">
+<!ENTITY asf.desktop.label "Desktop">
+<!ENTITY asf.systemdownload.label "Downloads">
+<!ENTITY asf.filteredfolder.label "set by the filters">
 <!ENTITY asf.viewdloption.bool "Vedere le opzioni mentre scarica">
 <!ENTITY asf.viewdloption.label "(permette di vedere le due ultime cartelle di destinazione e un collegamento per aggiungere o modificare filtri)">
 <!ENTITY asf.viewpathselect.bool "Vedi la lista dei filtri">

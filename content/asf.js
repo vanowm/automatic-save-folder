@@ -52,10 +52,6 @@ var automatic_save_folder = {
 			lastdir.checked = true;  	
 			lastdir.hidden = true; // hidden on FF3, as lastdir must always be true, don't allow the user to disable it.
 			this.prefManager.setBoolPref("extensions.asf.lastdir", true);
-			
-			// set the browser.download.folderList to 2, needed for vista users to enable ASF to change the saving folder when FF download option is set to "Save the file in the folder ...".
-			// 0 = desktop ; 1 = system donwload directory ; 2 = user defined
-			this.prefManager.setIntPref("browser.download.folderList", "2");
 		}
 		
 		

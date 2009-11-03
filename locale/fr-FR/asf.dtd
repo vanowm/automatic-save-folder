@@ -35,6 +35,10 @@
 
 <!-- Options tab -->
 <!ENTITY asf.options.label "Options">
+<!ENTITY asf.useDownloadDir.bool "Ne pas afficher l'explorateur de fichier et enregistrer directement dans le dossier :">
+<!ENTITY asf.desktop.label "Bureau">
+<!ENTITY asf.systemdownload.label "Téléchargements">
+<!ENTITY asf.filteredfolder.label "défini par le filtre">
 <!ENTITY asf.viewdloption.bool "Afficher les options lors de l'enregistrement">
 <!ENTITY asf.viewdloption.label "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
 <!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">

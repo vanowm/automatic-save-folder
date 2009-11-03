@@ -21,7 +21,7 @@
 			xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title; (&asf.version;)"
 >
 <prefpane id="asf-options"  style="padding:1px !important" flex="1" >
-	<script type="application/x-javascript" src="chrome://asf/content/asf.js"/>
+	<script type="application/x-javascript" src="chrome://asf/content/asf.js"></script>
 	<preferences>
 		<preference id="asf_lastdir" name="extensions.asf.lastdir" type="bool"/>
 		<preference id="asf_keeptemp" name="extensions.asf.keeptemp" type="bool"/>
@@ -32,6 +32,8 @@
 		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
 		<preference id="asf_rightclick" name="extensions.asf.rightclick" type="bool"/>
 		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
+		<preference id="asf_useDownloadDir" name="browser.download.useDownloadDir" type="bool"/>
+		<preference id="asf_folderList" name="browser.download.folderList" type="int"/>
 	</preferences>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
@@ -110,6 +112,16 @@
 		<groupbox id="asf-options" flex="1">
 			<caption label="&asf.options.label;"/>
 			<separator class="thin"/>
+			<hbox>
+				<checkbox id="asf-useDownloadDir" preference="asf_useDownloadDir" label="&asf.useDownloadDir.bool;"/>
+				<menulist id="asf-folderList" preference="asf_folderList">
+					<menupopup>
+						<menuitem value="0" label="&asf.desktop.label;"></menuitem>
+						<menuitem value="1" label="&asf.systemdownload.label;"></menuitem>
+						<menuitem value="2" label="&asf.filteredfolder.label;"></menuitem>
+					</menupopup>
+				</menulist>
+			</hbox>
 			<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
 			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;"/>
 			<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
