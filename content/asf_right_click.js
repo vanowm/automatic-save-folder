@@ -18,6 +18,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 
  * ***** END LICENSE BLOCK ***** */
 var ORIG_getTargetFile = window.getTargetFile;
+// alert (ORIG_getTargetFile);  // uncomment to get the Firefox's getTargetFile current version in an alert box at Firefox launch. Can be copy/pasted.
+							 // or can be found in install folder : Mozilla Firefox\chrome\toolkit.jar\content\global\contentAreaUtils.js
 var asf_rightclick_loaded;
 
 var automatic_save_folder = {
@@ -37,7 +39,7 @@ var automatic_save_folder = {
 			asf_rightclick_loaded = true;	
 			
 			// Right-click feature doesn't work on Firefox 2 (Can't detect installed add-on and prevent conflict with Download Sort)
-			if (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "3.0") >= 0)
+			if (this.versionChecker.compare(this.appInfo.version, "3.0") >= 0)
 			{
 				var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 					
@@ -60,10 +62,9 @@ var automatic_save_folder = {
 					*/
 					
 					// replace the ORIGinal firefox function with the custom one. (original from Firefox 3.5.4) 
-					// (Firefox 2.x doesn't know Cc"@mozilla.org/privatebrowsing;1" and returns a warning in the console, but right-click filtering is working.)
-					window.getTargetFile = automatic_save_folder.asf_getTargetFile;
+					window.getTargetFile = this.asf_getTargetFile;
 					
-					if (automatic_save_folder.versionChecker.compare(automatic_save_folder.appInfo.version, "3.0") >= 0)
+					if (this.versionChecker.compare(this.appInfo.version, "3.0") >= 0)
 					{
 						// Starting from firefox 3.0 there is a timeout when downloading with right-click to read header(Content-Disposition:) to rename the file in the file_explorer suggested filename.
 						// When timeout is set to 1000 ms (default), ASF right-click filtering is not working.
@@ -71,13 +72,14 @@ var automatic_save_folder = {
 						// And when set to ~8ms, Header renaming is working but ASF is filtering on the previous filename (before the renaming).
 						
 						// Set to 0 only when the user want to use it
-						// and set it back to 1000 (default) when exiting Firefox
-						// to prevent blocking the user to 0 if add-on is removed without reseting the timeout first.
 						var asf_rightclick = prefs.getBoolPref("extensions.asf.rightclick");
 						prefs.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclick == true ? 0 : 1000);
 						
+						// and set it back to 1000 (default) when exiting Firefox
+						// to prevent blocking the user to 0 if add-on is removed without reseting the timeout first.
+						// (From Download sort extension)
 						var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-						obsSvc.addObserver(automatic_save_folder.asf_quitObserver, "quit-application-requested", false);
+						obsSvc.addObserver(this.asf_quitObserver, "quit-application-requested", false);
 					}
 				}
 			}
@@ -111,7 +113,7 @@ var automatic_save_folder = {
 	asf_getTargetFile: function (aFpP, /* optional */ aSkipPrompt)
 	{
 		
-		automatic_save_folder.rightclick_setdir(aFpP);
+		automatic_save_folder.rightclick_main(aFpP);
 		
 		const prefSvcContractID = "@mozilla.org/preferences-service;1";
 		const prefSvcIID = Components.interfaces.nsIPrefService;                              
@@ -245,16 +247,15 @@ var automatic_save_folder = {
 	},
 	
 	
-	rightclick_setdir: function(aFpP) {
+	rightclick_main: function(aFpP) {
 		
 		//alert ("debug full uri : "+aFpP.fileInfo.uri.spec);
 		//alert("ok");
 		
 		// Setting private variables usable in this function
-		var prefManager = automatic_save_folder.prefManager;		
-		var versionChecker = automatic_save_folder.versionChecker;
-		var appInfo = automatic_save_folder.appInfo;
-		var ASF = automatic_save_folder; // ASF is just a shortcut to automatic_save_folder
+		var prefManager = this.prefManager;		
+		var versionChecker = this.versionChecker;
+		var appInfo = this.appInfo;
 		
 		var firefoxversion = "";
 		if(versionChecker.compare(appInfo.version, "3.0") >= 0) 
@@ -286,32 +287,29 @@ var automatic_save_folder = {
 		// load prefmanager data
 		var savetype = 			prefManager.getIntPref("extensions.asf.savetype");	
 		var lastdir = 			prefManager.getBoolPref("extensions.asf.lastdir");	
-		var defaultfolder = 	ASF.loadUnicodeString("extensions.asf.defaultfolder");		
+		var defaultfolder = 	this.loadUnicodeString("extensions.asf.defaultfolder");		
 		var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
-		var tempdomain = 		ASF.loadUnicodeString("extensions.asf.tempdomain");
+		var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");
 		var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
 		var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
 		var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");	
 		
-		// If variable/Advanced mode is ON, let's check the variables and replace to create the new defaultfolder
+		// If variable/Dynamic folders mode is ON, let's check the variables and replace to create the new defaultfolder
 		if (variable_mode == true) 
 		{
-			defaultfolder = ASF.createfolder(aFpP, defaultfolder);
+			defaultfolder = this.createfolder(aFpP, defaultfolder);
 		}
 		
 		// set the last folder path used into asf.lastpath
 		if (firefoxversion == "3")   // take the download.lastDir if it's FF3
 		{
-			var folder = ASF.loadUnicodeString("browser.download.lastDir");
-			if (folder == "") 
-			{ // it's when lastDir doesn't exist yet, ff3 bug ?
-			}
+			var folder = this.loadUnicodeString("browser.download.lastDir");
 		}
 		else // else if it's not FF3 (it's 1.5 or 2), read Download.dir
 		{
-			var folder = ASF.loadUnicodeString("browser.download.dir");
+			var folder = this.loadUnicodeString("browser.download.dir");
 		}
-		ASF.saveUnicodeString("extensions.asf.lastpath", folder); // And set it to asf.lastpath to be compared later with the new path the filters will set to lastDir (or dir)
+		this.saveUnicodeString("extensions.asf.lastpath", folder); // And set it to asf.lastpath to be compared later with the new path the filters will set to lastDir (or dir)
 
 		
 		// load filters data from prefmanager into filters[]
@@ -319,9 +317,9 @@ var automatic_save_folder = {
 		var filters = new Array();
 		for ( var i = 0 ; i < nbrfilters ; i++)
 		{
-			var dom = ASF.loadUnicodeString("extensions.asf.filters"+ i +".domain");
-			var fil = ASF.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
-			var fol = ASF.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
+			var dom = this.loadUnicodeString("extensions.asf.filters"+ i +".domain");
+			var fil = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
+			var fol = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
 			var act = prefManager.getBoolPref("extensions.asf.filters"+ i +".active");	
 			filters[i] = [dom, fil, fol, act];
 		}	
@@ -340,17 +338,17 @@ var automatic_save_folder = {
 				dom_regexp = false ; // reset the matching string for the "for" loop
 				file_regexp = false ; // same as above
 			// Check the domain	
-				dom_regexp = ASF.test_regexp(filters[i][0], domain);  // hosted Domain
+				dom_regexp = this.test_regexp(filters[i][0], domain);  // hosted Domain
 				
 			// Check the current website URL if hosted domain checking returned false.
 				if (!dom_regexp && use_currentURL)
 				{
 					var currentURL = document.getElementById("urlbar").value;
-					dom_regexp = ASF.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
+					dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
 				}
 				
 			// Check the filename	
-				file_regexp = ASF.test_regexp(filters[i][1], filename); // Filename
+				file_regexp = this.test_regexp(filters[i][1], filename); // Filename
 				
 				// debug
 				// alert ("i = "+i+"\n domain match = "+dom_regexp+"\n file match = "+file_regexp);
@@ -368,10 +366,10 @@ var automatic_save_folder = {
 			{
 				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
 				{	// then change the destination folder to user choice
-					ASF.saveUnicodeString("browser.download.dir", defaultfolder);
+					this.saveUnicodeString("browser.download.dir", defaultfolder);
 					if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
 					{
-						ASF.saveUnicodeString("browser.download.lastDir", defaultfolder);
+						this.saveUnicodeString("browser.download.lastDir", defaultfolder);
 					}	
 				}	
 				else  // else, if domain is the same as the last, set the download.dir to the last folder used (else viewDownloadOption will not show the correct save path and will use the default folder)
@@ -379,13 +377,13 @@ var automatic_save_folder = {
 					  // FF1.5 or FF2 automatically update download.dir, not download.lastDir
 					if (firefoxversion == "3")
 					{
-						var lastpath = ASF.loadUnicodeString("browser.download.lastDir");  // this one is the one that will open
+						var lastpath = this.loadUnicodeString("browser.download.lastDir");  // this one is the one that will open
 						if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
 						{
-							ASF.saveUnicodeString("browser.download.lastDir", defaultfolder);
+							this.saveUnicodeString("browser.download.lastDir", defaultfolder);
 							lastpath = defaultfolder;
 						}
-						ASF.saveUnicodeString("browser.download.dir", lastpath);   // this one is the one that will be shown in ASF save option
+						this.saveUnicodeString("browser.download.dir", lastpath);   // this one is the one that will be shown in ASF save option
 					}	
 				}
 			}
@@ -396,13 +394,13 @@ var automatic_save_folder = {
 				//  FF1.5 or FF2 automatically update download.dir, not download.lastDir
 				if (firefoxversion == "3")
 				{
-					var lastpath = ASF.loadUnicodeString("browser.download.lastDir");
+					var lastpath = this.loadUnicodeString("browser.download.lastDir");
 					if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
 					{
-						ASF.saveUnicodeString("browser.download.lastDir", defaultfolder);
+						this.saveUnicodeString("browser.download.lastDir", defaultfolder);
 						lastpath = defaultfolder;
 					}
-					ASF.saveUnicodeString("browser.download.dir", lastpath);
+					this.saveUnicodeString("browser.download.dir", lastpath);
 				}	
 			
 			}
@@ -444,18 +442,18 @@ var automatic_save_folder = {
 			
 			
 			
-				folder = ASF.createfolder(aFpP, folder, idx);		
+				folder = this.createfolder(aFpP, folder, idx);		
 			}
 			
-			ASF.saveUnicodeString("browser.download.dir", folder);
+			this.saveUnicodeString("browser.download.dir", folder);
 			if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
 			{
-				ASF.saveUnicodeString("browser.download.lastDir", folder);
+				this.saveUnicodeString("browser.download.lastDir", folder);
 			}
 		}
 		
 		// in every case, set the new file hosted domain to tempdomain
-		ASF.saveUnicodeString("extensions.asf.tempdomain", domain);
+		this.saveUnicodeString("extensions.asf.tempdomain", domain);
 		
 		
 	},
@@ -783,4 +781,9 @@ var automatic_save_folder = {
 	
 	
 	}
-window.addEventListener("load", automatic_save_folder.rightclick_init, true);
+	
+	addEventListener( // Autoload
+	"load",			// After OnLoad from overlay_unknownContentType.xul file
+	function(){ automatic_save_folder.rightclick_init(); },  // Run main from automatic_save_folder to check the filters
+	false
+	);	

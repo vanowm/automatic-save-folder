@@ -26,25 +26,22 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 						
 		versionChecker: Components.classes["@mozilla.org/xpcom/version-comparator;1"]
                                .getService(Components.interfaces.nsIVersionComparator),
-							   
-	asf_setdir: function () {
-		// I don't understand why "this".function_name doesn't work with addEventListener even using "with" method, only onclick from the Xul events works. 
-		// So I use this tweak to call functions and properties from its name "automatic_save_folder" instead of "this"
+				   
+		firefoxversion : "",	
+		
+	main: function () {
 		
 		// Setting private variables usable in this function
 		var prefManager = automatic_save_folder.prefManager;		
 		var versionChecker = automatic_save_folder.versionChecker;
 		var appInfo = automatic_save_folder.appInfo;
-		var ASF = automatic_save_folder; // ASF is just a shortcut to automatic_save_folder
-		
-		var firefoxversion = "";
-		if(versionChecker.compare(appInfo.version, "3.0") >= 0) 
+		if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
 		{
-			 firefoxversion = "3";			
+			this.firefoxversion = "3";
 		}
 		else 
 		{
-			 firefoxversion = "2";
+			this.firefoxversion = "2";
 		}
 		
 		
@@ -66,35 +63,30 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		// load prefmanager data
 		var savetype = 			prefManager.getIntPref("extensions.asf.savetype");	
-		var lastdir = 			prefManager.getBoolPref("extensions.asf.lastdir");	
-		var defaultfolder = 	ASF.loadUnicodeString("extensions.asf.defaultfolder");		
+		var lastdir = 			prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
+		var defaultfolder = 	this.loadUnicodeString("extensions.asf.defaultfolder");		
 		var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
-		var tempdomain = 		ASF.loadUnicodeString("extensions.asf.tempdomain");
-		var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
+		var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");      // hosted domain from last saved file
+		var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");  // enable Variables in folder creation (dynamic Folders)
 		var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
 		var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");	
 		
-		// If variable/Advanced mode is ON, let's check the variables and replace to create the new defaultfolder
+		// If variable/Dynamic folders mode is ON, let's replace the variables to create the new defaultfolder
 		if (variable_mode == true) 
 		{
-			defaultfolder = ASF.createfolder(defaultfolder);
+			defaultfolder = this.createfolder(defaultfolder);
 		}
 		
-		// set the last folder path used into asf.lastpath
-		if (firefoxversion == "3")   // take the download.lastDir if it's FF3
+		// set the last saved path into asf.lastpath
+		if (this.firefoxversion == "3")   // take the download.lastDir if it's FF3
 		{
-			var folder = ASF.loadUnicodeString("browser.download.lastDir");
-			if (folder == "") 
-			{ // it's when lastDir doesn't exist yet, ff3 bug ?
-			}
+			var folder = this.loadUnicodeString("browser.download.lastDir");
 		}
 		else // else if it's not FF3 (it's 1.5 or 2), read Download.dir
 		{
-			var folder = ASF.loadUnicodeString("browser.download.dir");
+			var folder = this.loadUnicodeString("browser.download.dir");
 		}
-		ASF.saveUnicodeString("extensions.asf.lastpath", folder); // And set it to asf.lastpath to be compared later with the new path the filters will set to lastDir (or dir)
-		
-		
+		this.saveUnicodeString("extensions.asf.lastpath", folder); // And set it to asf.lastpath to be compared later with the new path the filters will set to lastDir (or dir)
 		
 		
 		// load filters data from prefmanager into filters[]
@@ -102,9 +94,9 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var filters = new Array();
 		for ( var i = 0 ; i < nbrfilters ; i++)
 		{
-			var dom = ASF.loadUnicodeString("extensions.asf.filters"+ i +".domain");
-			var fil = ASF.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
-			var fol = ASF.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
+			var dom = this.loadUnicodeString("extensions.asf.filters"+ i +".domain");
+			var fil = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
+			var fol = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
 			var act = prefManager.getBoolPref("extensions.asf.filters"+ i +".active");	
 			filters[i] = [dom, fil, fol, act];
 		}	
@@ -123,18 +115,18 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 				dom_regexp = false ; // reset the matching string for the "for" loop
 				file_regexp = false ; // same as above
 			// Check the domain	
-				dom_regexp = ASF.test_regexp(filters[i][0], domain);  // hosted Domain
+				dom_regexp = this.test_regexp(filters[i][0], domain);  // hosted Domain
 				
 			// Check the current website URL if hosted domain checking returned false.
 				if (!dom_regexp && use_currentURL)
 				{
 					var uCT = document.getElementById("unknownContentType");
 					var currentURL = uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
-					dom_regexp = ASF.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
+					dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
 				}
 				
 			// Check the filename	
-				file_regexp = ASF.test_regexp(filters[i][1], filename); // Filename
+				file_regexp = this.test_regexp(filters[i][1], filename); // Filename
 				
 				// debug
 				// alert ("i = "+i+"\n domain match = "+dom_regexp+"\n file match = "+file_regexp);
@@ -152,24 +144,24 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			{
 				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
 				{	// then change the destination folder to user choice
-					ASF.saveUnicodeString("browser.download.dir", defaultfolder);
+					this.saveUnicodeString("browser.download.dir", defaultfolder);
 					if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
 					{
-						ASF.saveUnicodeString("browser.download.lastDir", defaultfolder);
+						this.saveUnicodeString("browser.download.lastDir", defaultfolder);
 					}	
 				}	
 				else  // else, if domain is the same as the last, set the download.dir to the last folder used (else viewDownloadOption will not show the correct save path and will use the default folder)
 				{     // only affect Firefox3 which update download.lastDir instead of download.dir, so taking download.lastDir data to set download.dir, 
 					  // FF1.5 or FF2 automatically update download.dir, not download.lastDir
-					if (firefoxversion == "3")
+					if (this.firefoxversion == "3")
 					{
-						var lastpath = ASF.loadUnicodeString("browser.download.lastDir");  // this one is the one that will open
+						var lastpath = this.loadUnicodeString("browser.download.lastDir");  // this one is the one that will open
 						if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
 						{
-							ASF.saveUnicodeString("browser.download.lastDir", defaultfolder);
+							this.saveUnicodeString("browser.download.lastDir", defaultfolder);
 							lastpath = defaultfolder;
 						}
-						ASF.saveUnicodeString("browser.download.dir", lastpath);   // this one is the one that will be shown in ASF save option
+						this.saveUnicodeString("browser.download.dir", lastpath);   // this one is the one that will be shown in ASF save option
 					}	
 				}
 			}
@@ -178,15 +170,15 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 				// set the download.dir to the last folder used (else viewDownloadOption will not show the correct save path and will use the default folder)
 				// only affect Firefox3 which update download.lastDir instead of download.dir, so we are taking download.lastDir data to set download.dir, 
 				//  FF1.5 or FF2 automatically update download.dir, not download.lastDir
-				if (firefoxversion == "3")
+				if (this.firefoxversion == "3")
 				{
-					var lastpath = ASF.loadUnicodeString("browser.download.lastDir");
+					var lastpath = this.loadUnicodeString("browser.download.lastDir");
 					if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
 					{
-						ASF.saveUnicodeString("browser.download.lastDir", defaultfolder);
+						this.saveUnicodeString("browser.download.lastDir", defaultfolder);
 						lastpath = defaultfolder;
 					}
-					ASF.saveUnicodeString("browser.download.dir", lastpath);
+					this.saveUnicodeString("browser.download.dir", lastpath);
 				}	
 			
 			}
@@ -228,18 +220,18 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			
 			
 			
-				folder = ASF.createfolder(folder, idx);		
+				folder = this.createfolder(folder, idx);		
 			}
 			
-			ASF.saveUnicodeString("browser.download.dir", folder);
+			this.saveUnicodeString("browser.download.dir", folder);
 			if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
 			{
-				ASF.saveUnicodeString("browser.download.lastDir", folder);
+				this.saveUnicodeString("browser.download.lastDir", folder);
 			}
 		}
 		
 		// in every case, set the new file hosted domain to tempdomain
-		ASF.saveUnicodeString("extensions.asf.tempdomain", domain);
+		this.saveUnicodeString("extensions.asf.tempdomain", domain);
 		
 		// Automatic saving when clicking on a link. The save dialog still flash onscreen very quicly.
 		if (dialogaccept)
@@ -250,7 +242,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		else
 		{
 			// show or hide the asf option on saving window
-			ASF.show_dloptions();
+			this.show_dloptions();
 		}
 		
 	},
@@ -265,7 +257,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		{ }
 		return "";
 	},
-
+	
 	
 	saveUnicodeString: function (pref_place,pref_data) {
 		var str = Components.classes["@mozilla.org/supports-string;1"]
@@ -273,7 +265,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		str.data = pref_data;
 		this.prefManager.setComplexValue(pref_place, Components.interfaces.nsISupportsString, str);
 	},	
-
+	
 	
 	createfolder: function (path, idx) {
 		
@@ -485,13 +477,13 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}
 */  
 	},
-
+	
 	
 	trim: function (string)	{
 		return string.replace(/(^\s*)|(\s*$)/g,'');
 	},
 	
-
+	
 	show_dloptions: function ()	{
 		
 		var asf_dloptions = document.getElementById('asf_dloptions');
@@ -542,7 +534,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		asf_dloptions.style.maxWidth = screen.width -200 +"px";
 		
 	},
-
+	
+	
 	indexInArray: function (arr,val){
 		val = val.replace(/\\/g,'\\\\');
 		var test_regexp = new RegExp("^"+val+"$");
@@ -553,10 +546,10 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}
 		return -1;
 	} ,
-
+	
+	
 	read_all_filterpath: function() {
-		var ASF = automatic_save_folder; // ASF is just a shortcut to automatic_save_folder
-		var variable_mode = ASF.prefManager.getBoolPref("extensions.asf.variablemode");
+		var variable_mode = this.prefManager.getBoolPref("extensions.asf.variablemode");
 		var list = document.getElementById('asf_folder_list');
 		var menupopup = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menupopup');
 		
@@ -579,7 +572,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		// read the filter number x
 		path = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");
 		
-		if ( ASF.indexInArray(pathlist, path) < 0) { pathlist[++j]= path;}
+		if ( this.indexInArray(pathlist, path) < 0) { pathlist[++j]= path;}
 		}
 		
 		var pathlist_sort_alpha = true;   // let the user choose in next release.
@@ -588,7 +581,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		for (var i = 0; i < pathlist.length; i++)
 		{
 		path = pathlist[i];
-		path = variable_mode == true? ASF.createfolder(path) : path; 
+		path = variable_mode == true? this.createfolder(path) : path; 
 		var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
 		menuitem.setAttribute('label', path);
 		menuitem.setAttribute('crop', 'center');
@@ -629,7 +622,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			userchoice = asf_folder_list.value ;
 		}
 		
-		
+
 		this.saveUnicodeString("browser.download.dir", userchoice);
 		if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
 		{
@@ -637,8 +630,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		}	
 	 
 	},
-
-
+	
+	
 	asf_select_savepath: function () {	
 	
 		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	
@@ -656,6 +649,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			this.saveUnicodeString("browser.download.lastDir", asf_folder_list.value);
 		}
 	},
+	
 	
 	test_regexp: function (filters, string) {
 
@@ -711,8 +705,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 // Ted Gifford, end block	
 
 	},
-
-
+	
+	
 	is_regexp: function (string) {
 		if ((string.substring(0,1) == "/") && (string.substr(string.length - 1, 1) == "/"))
 		{
@@ -723,19 +717,13 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			return false;
 		}
 	}
-
+	
 	
 };
-	// addEventListener( // Autoload
-	// "load",			// After OnLoad from overlay_unknownContentType.xul file
-	// automatic_save_folder.asf_setdir,		// Run asf_setdir from automatic_save_folder to check the filters
-	// true
-	// );
 	
-	with(automatic_save_folder){
-		addEventListener( // Autoload
-		"load",			// After OnLoad from overlay_unknownContentType.xul file
-		asf_setdir,		// Run asf_setdir from automatic_save_folder to check the filters
-		false
-		);	
-	}
+	addEventListener( // Autoload
+	"load",			// After OnLoad from overlay_unknownContentType.xul file
+	function(){ automatic_save_folder.main(); },  // Run main from automatic_save_folder to check the filters
+	false
+	);	
+	
