@@ -200,22 +200,35 @@ var automatic_save_folder = {
 	
 	
 	toggle_options: function () {  // called whenever the Options tab is selected
-		var select_option = document.getElementById("asf-viewdloption");
-		var select_list = document.getElementById("asf-viewpathselect");
+		var viewdloption = document.getElementById("asf-viewdloption");
+		var viewpathlist = document.getElementById("asf-viewpathselect");
 		var dialogaccept = document.getElementById("asf-dialogaccept");
+		var useDownloadDir = document.getElementById("asf-useDownloadDir");
+		
+		// check if autosave is selected, if not : set the saving path to "filtered" and disable the dropdown menu.
+		if (useDownloadDir.checked == false)
+		{
+			document.getElementById("asf-folderList").value = 2;
+			document.getElementById("asf-folderList").disabled = true;
+			this.prefManager.setIntPref("browser.download.folderList",2);
+		}
+		if (useDownloadDir.checked == true)
+		{
+			document.getElementById("asf-folderList").disabled = false;			
+		}
 		
 		// if the option is opened from the saving window, disable the autosave feature (Not working when set from here.)
 		dialogaccept.disabled = (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") ? true : false ;
 		
-		if (select_option.checked == false)
-			{
-				select_list.checked = false;
-				select_list.disabled = true;
-			}
-		if (select_option.checked == true)
-			{
-				select_list.disabled = false;
-			}
+		if (viewdloption.checked == false)
+		{
+			viewpathlist.checked = false;
+			viewpathlist.disabled = true;
+		}
+		if (viewdloption.checked == true)
+		{
+			viewpathlist.disabled = false;
+		}
 			
 		// Check the right-click feature here, and prints text according to Firefox version and active addons
 		// hide all the descriptions box, and unhide the needed one 
@@ -630,7 +643,7 @@ var automatic_save_folder = {
 		window.close();
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") // if the option is opened from the saving window
 		{ 	
-			window.opener.automatic_save_folder.asf_setdir();		// rescan the filters to set the good folder
+			window.opener.automatic_save_folder.main();		// rescan the filters to set the good folder
 			window.opener.sizeToContent();
 		}		
 		window.opener.focus;
