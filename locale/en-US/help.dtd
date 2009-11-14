@@ -7,15 +7,15 @@
 
 <!ENTITY info.important.title "Important">
 <!ENTITY info.important.text1 "The filtering on common downloads (simple click, or automatic download) works only if the download window &#34;What should Firefox do with this file?&#34; is shown:<br />">
-<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (80 denote image shrink to 80%, I find 100% a little too big) -->
-<!ENTITY info.important.pict1 "screen_save_80fr.png">
+<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture to 80%, I find 100% a little too big) -->
+<!ENTITY info.important.pict1 "screen_save_en.png">
 <!ENTITY info.important.text2 "So, be sure to check if Firefox doesn't use another process preventing the window to appear by following this method:">
 <!ENTITY info.important.text3 "Go to the Firefox menu &#34;Tools&#34; and &#34;Options...&#34;.">
 <!ENTITY info.important.text4 "- For the Firefox 3 users: go to the &#34;Applications&#34; tab
 	<br />- For the previous Firefox versions users: Go to the &#34;Content&#34; tab and click on the &#34;Manage...&#34; at the bottom right.">
 <!ENTITY info.important.text5 "Verify if the File Type you want to download is set to &#34;Always ask&#34;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
-<!ENTITY info.important.pict2 "screen_apps_fr.png">
+<!ENTITY info.important.pict2 "screen_apps_en.png">
 
 
 <!ENTITY info.howtouse.title "How to use">
