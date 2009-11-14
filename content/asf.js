@@ -116,6 +116,17 @@ var automatic_save_folder = {
 		}
 	},
 	
+	save_active_state: function() {
+		//autosave the filterswhen clicking  (anywhere) on the filter tree
+		// can't detect the "active" column statut with setting an attribute. The event is set to the tree not the cell.
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
+		if (instantApply)
+		{
+			//save the filters
+			this.asf_savefilters();
+		}
+	},
+	
 	
 	// Called whenever a list box is selected
 	asf_treeSelected: function () {
