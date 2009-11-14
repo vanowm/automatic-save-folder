@@ -411,49 +411,33 @@ var automatic_save_folder = {
 		}
 		else // if a filter is found 
 		{
-			
 			var folder = filters[idx][2];
-			
 			
 			// If Advanced mode is ON, let's check the variables and create the folder
 			if (variable_mode == true) 
 			{
-
-// Ted Gifford, start block		
-			// String capture in filename with $f<1-9>
-              try {
-               //alert(file_regexp.length);
-               if (file_regexp.length > 1)
-               {
-                       //alert('munging folder: ' + folder);
-                       for (var replace_index = 1; replace_index < file_regexp.length; ++replace_index)
-                               folder = folder.replace("$"+replace_index+"f", file_regexp[replace_index]);
-                       //alert('munged folder: ' + folder);
-               }
-               } catch (e) {alert(e);}
-			// String capture in domain with $d<1-9>
-			  try {
-               //alert(dom_regexp.length);
-               if (dom_regexp.length > 1)
-               {
-                       //alert('munging folder: ' + folder);
-                       for (var replace_index = 1; replace_index < dom_regexp.length; ++replace_index)
-                               folder = folder.replace("$"+replace_index+"d", dom_regexp[replace_index]);
-                       //alert('munged folder: ' + folder);
-               }
-               } catch (e) {alert(e);}			
-// Ted Gifford, end	block
-			
-			
-			
-				folder = this.createfolder(aFpP, folder, idx);		
+				folder = this.createfolder(aFpP, folder, idx);
 			}
 			
 			this.set_savepath(folder);
 		}
 		
-		// in every case, set the new file hosted domain to tempdomain
-		this.saveUnicodeString("extensions.asf.tempdomain", domain);
+		// in every case, set the new file hosted domain to tempdomain if not in private browsing
+		var inPrivateBrowsing = false;
+		if (this.firefoxversion == 3)
+		{
+			try {
+				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
+									.getService(Components.interfaces.nsIPrivateBrowsingService);
+				inPrivateBrowsing = pbs.privateBrowsingEnabled;
+			}
+			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+			}
+		}
+		if (!inPrivateBrowsing)
+		{
+			this.saveUnicodeString("extensions.asf.tempdomain", domain);
+		}
 		
 		
 	},
@@ -569,27 +553,58 @@ var automatic_save_folder = {
 		// check the filter's data
 		var asf_domain = "";
 		var asf_filename = "";		
-		if (idx) {  // If a filter match, idx is true
+		if (idx) // If a filter match, idx is true
+		{  
 			asf_domain = this.loadUnicodeString("extensions.asf.filters"+ idx +".domain");
-			// Trim the / / if domain is regexp
-			if (this.is_regexp(asf_domain))
-			{
-				asf_domain = asf_domain.substring(1, asf_domain.length);
-				asf_domain = asf_domain.substring(0, asf_domain.length -1);
-			}
 			asf_filename = this.loadUnicodeString("extensions.asf.filters"+ idx +".filename");
-			// Trim the / / if filename is regexp
-			if (this.is_regexp(asf_filename))
-			{
-				asf_filename = asf_filename.substring(1, asf_filename.length);
-				asf_filename = asf_filename.substring(0, asf_filename.length -1);
-			}
 		}
 		else // no filter is found, use actual Domain and filename without extension
 		{
 			asf_domain = domain;
 			asf_filename = file_name;
 		}
+		
+		
+		var dom_regexp = this.test_regexp(asf_domain, scheme+"://"+domain); 
+		var file_regexp = this.test_regexp(asf_filename, filename); 
+
+// Ted Gifford, start block		
+		// String capture in filename with $<1-9>f
+		try {
+		//alert(file_regexp.length);
+			if (file_regexp.length > 1)
+			{
+				//alert('munging path: ' + path);
+				for (var replace_index = 1; replace_index < file_regexp.length; ++replace_index)
+						path = path.replace("$"+replace_index+"f", file_regexp[replace_index]);
+				//alert('munged path: ' + path);
+			}
+		} catch (e) {alert(e);}
+		// String capture in domain with $<1-9>d
+		try {
+		//alert(dom_regexp.length);
+			if (dom_regexp.length > 1)
+			{
+				//alert('munging path: ' + path);
+				for (var replace_index = 1; replace_index < dom_regexp.length; ++replace_index)
+						path = path.replace("$"+replace_index+"d", dom_regexp[replace_index]);
+				//alert('munged path: ' + path);
+			}
+		} catch (e) {alert(e);}
+// Ted Gifford, end block
+		
+		// Trim the / / if domain is regexp
+		if (this.is_regexp(asf_domain))
+		{
+			asf_domain = asf_domain.substring(1, asf_domain.length);
+			asf_domain = asf_domain.substring(0, asf_domain.length -1);
+		}		
+		// Trim the / / if filename is regexp
+		if (this.is_regexp(asf_filename))
+		{
+			asf_filename = asf_filename.substring(1, asf_filename.length);
+			asf_filename = asf_filename.substring(0, asf_filename.length -1);
+		}		
 		
 		// Check if asf_rd is present and process     asf_rd = Regexp the domain
 		if (path.search("%asf_rd%") != -1)
@@ -768,14 +783,14 @@ var automatic_save_folder = {
 		if (test_regexp == false) // replace simple wildcard and special characters with corresponding regexp
 		{
 			filters = filters.replace(/\./gi, "\\.")
-													.replace(/\*/gi, "(.)*")
+													.replace(/\*/gi, ".*")
 													.replace(/\$/gi, "\\$")
 													.replace(/\^/gi, "\\^")
 													.replace(/\+/gi, "\\+")
 													.replace(/\?/gi, ".")
 													.replace(/\|/gi, "\\|")
 													.replace(/\[/gi, "\\[")
-													.replace(/\//gi,'\\/');
+													.replace(/\//gi, "\\/");
 			filters = ".*"+filters+".*";
 		}
 		else // remove the first and last slash
