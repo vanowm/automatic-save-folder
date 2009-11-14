@@ -57,7 +57,8 @@
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamic folders">
 <!ENTITY asf.variablemode.bool "Enable">
-<!ENTITY asf.variablemode.tooltip "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day or the file name.">
+<!ENTITY asf.variablemode.tooltip1 "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day or the file name.">
+<!ENTITY asf.variablemode.tooltip2 "Attention: When Firefox is in private browsing mode, non existent dynamic folders will not be created. The last valid folder will be used instead.">
 <!ENTITY asf.variablemode.label "Attention : Uppercase and lowercase tags are different.">
 <!ENTITY asf.variables.label "Tags list :">
 

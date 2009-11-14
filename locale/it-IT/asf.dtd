@@ -57,7 +57,8 @@
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamic folders">
 <!ENTITY asf.variablemode.bool "Enable">
-<!ENTITY asf.variablemode.tooltip "Permette di editare i percorsi di salvataggi manualmente e aggiungere variabili dinamiche, come la data del giorno o il nome del file.">
+<!ENTITY asf.variablemode.tooltip1 "Permette di editare i percorsi di salvataggi manualmente e aggiungere variabili dinamiche, come la data del giorno o il nome del file.">
+<!ENTITY asf.variablemode.tooltip2 "">
 <!ENTITY asf.variablemode.label "Nota : Attenziona ai caratteri maiuscoli e minuscoli.">
 <!ENTITY asf.variables.label "Lista dei tag :">
 

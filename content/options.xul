@@ -50,13 +50,14 @@
 	<tooltip id="tooltip_viewpathselect" style="background-color: #33DD00;" noautohide="true">
 		<description value="&asf.viewpathselect.tooltip;"/>
 	</tooltip>
-	<tooltip id="tooltip_rightclick" orient="vertical" style="background-color: #33DD00;overflow:auto;" noautohide="true">
+	<tooltip id="tooltip_rightclick" orient="vertical" style="background-color: #33DD00;" noautohide="true">
 		<description value="&asf.rightclick.tooltip1;"/>
 		<description value="&asf.rightclick.tooltip2;"/>
 		<description value="&asf.rightclick.tooltip3;"/>
 	</tooltip>
-	<tooltip id="tooltip_variablemode" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.variablemode.tooltip;"/>
+	<tooltip id="tooltip_variablemode" orient="vertical" style="background-color: #33DD00;" noautohide="true">
+		<description value="&asf.variablemode.tooltip1;"/>
+		<description value="&asf.variablemode.tooltip2;"/>
 	</tooltip>
 	<vbox>
 		<tabbox>
@@ -130,7 +131,7 @@
 			<caption label="&asf.options.label;"/>
 			<separator class="thin"/>
 			<hbox>
-				<checkbox id="asf-useDownloadDir" preference="asf_useDownloadDir" label="&asf.useDownloadDir.bool;"/>
+				<checkbox id="asf-useDownloadDir" preference="asf_useDownloadDir" label="&asf.useDownloadDir.bool;" oncommand="automatic_save_folder.toggle_options();"/>
 				<menulist id="asf-folderList" preference="asf_folderList" tooltip="tooltip_folderList">
 					<menupopup>
 						<menuitem value="0" label="&asf.desktop.label;"></menuitem>

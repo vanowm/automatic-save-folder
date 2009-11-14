@@ -26,10 +26,13 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 						
 		versionChecker: Components.classes["@mozilla.org/xpcom/version-comparator;1"]
                                .getService(Components.interfaces.nsIVersionComparator),
-				   
-		firefoxversion : "",	
+				
+		firefoxversion : "",
 		
 	main: function () {
+		
+		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
+		Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
 		
 		// Setting private variables usable in this function
 		var prefManager = automatic_save_folder.prefManager;		
@@ -109,9 +112,9 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var dom_regexp = false;
 		var file_regexp = false;
 		for ( var i = 0 ; i < filters.length ; i++)
-		{		
+		{
 			if (filters[i][3] == true)  // if not temporary deactivated
-			{		
+			{
 				dom_regexp = false ; // reset the matching string for the "for" loop
 				file_regexp = false ; // same as above
 			// Check the domain	
@@ -144,43 +147,42 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			{
 				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
 				{	// then change the destination folder to user choice
-					this.saveUnicodeString("browser.download.dir", defaultfolder);
-					if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
-					{
-						this.saveUnicodeString("browser.download.lastDir", defaultfolder);
-					}	
+					this.set_savepath(defaultfolder);
 				}	
-				else  // else, if domain is the same as the last, set the download.dir to the last folder used (else viewDownloadOption will not show the correct save path and will use the default folder)
-				{     // only affect Firefox3 which update download.lastDir instead of download.dir, so taking download.lastDir data to set download.dir, 
-					  // FF1.5 or FF2 automatically update download.dir, not download.lastDir
+				else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
+				{
 					if (this.firefoxversion == "3")
 					{
-						var lastpath = this.loadUnicodeString("browser.download.lastDir");  // this one is the one that will open
-						if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
-						{
-							this.saveUnicodeString("browser.download.lastDir", defaultfolder);
-							lastpath = defaultfolder;
-						}
-						this.saveUnicodeString("browser.download.dir", lastpath);   // this one is the one that will be shown in ASF save option
-					}	
+						var lastpath = this.loadUnicodeString("browser.download.lastDir");
+					}
+					if (this.firefoxversion == "2")
+					{
+						var lastpath = this.loadUnicodeString("browser.download.dir");
+					}
+					
+					if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
+					{
+						lastpath = defaultfolder;
+					}
+					this.set_savepath(lastpath);
 				}
 			}
 			else // else, if savetype == 0  (folder is set to last folder)
 			{
-				// set the download.dir to the last folder used (else viewDownloadOption will not show the correct save path and will use the default folder)
-				// only affect Firefox3 which update download.lastDir instead of download.dir, so we are taking download.lastDir data to set download.dir, 
-				//  FF1.5 or FF2 automatically update download.dir, not download.lastDir
 				if (this.firefoxversion == "3")
 				{
 					var lastpath = this.loadUnicodeString("browser.download.lastDir");
-					if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
-					{
-						this.saveUnicodeString("browser.download.lastDir", defaultfolder);
-						lastpath = defaultfolder;
-					}
-					this.saveUnicodeString("browser.download.dir", lastpath);
-				}	
-			
+				}
+				if (this.firefoxversion == "2")
+				{
+					var lastpath = this.loadUnicodeString("browser.download.dir");
+				}
+				
+				if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
+				{
+					lastpath = defaultfolder;
+				}
+				this.set_savepath(lastpath);
 			}
 		}
 		else // if a filter is found 
@@ -223,17 +225,13 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 				folder = this.createfolder(folder, idx);		
 			}
 			
-			this.saveUnicodeString("browser.download.dir", folder);
-			if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
-			{
-				this.saveUnicodeString("browser.download.lastDir", folder);
-			}
+			this.set_savepath(folder);
 		}
 		
 		// in every case, set the new file hosted domain to tempdomain
 		this.saveUnicodeString("extensions.asf.tempdomain", domain);
 		
-		// Automatic saving when clicking on a link. The save dialog still flash onscreen very quicly.
+		// Automatic saving when clicking on a link. The save dialog still flash onscreen very quickly.
 		if (dialogaccept)
 		{
 			window.close();
@@ -245,6 +243,49 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			this.show_dloptions();
 		}
 		
+	},
+	
+	
+	set_savepath: function(path) {
+		var folderList = this.prefManager.getIntPref("browser.download.folderList");	
+		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
+		
+		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		directory.initWithPath(path);
+		
+		
+		if (this.firefoxversion == 2)
+		{
+		
+		this.saveUnicodeString("browser.download.dir", directory.path);
+		if (lastdir)
+			this.saveUnicodeString("browser.download.lastDir", directory.path);		
+		}
+		
+		if (this.firefoxversion == 3)
+		{
+			
+			var inPrivateBrowsing = false;
+			try {
+				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
+									.getService(Components.interfaces.nsIPrivateBrowsingService);
+				inPrivateBrowsing = pbs.privateBrowsingEnabled;
+			}
+			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+			}
+			
+			if (inPrivateBrowsing)
+			{
+				gDownloadLastDir.file = directory;
+			}
+			else
+			{	
+				this.saveUnicodeString("browser.download.lastDir", directory.path);
+				if (folderList == 2)
+					this.saveUnicodeString("browser.download.dir", directory.path);
+			}
+			
+		}	
 	},
 	
 	
@@ -305,13 +346,11 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		// load the domain and the filename of the saved file	
 		var domain = 	document.getElementById("source").value ;
-			domain = domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
+			domain =    domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
 		var filename = 	document.getElementById("location").value ;
 		var file_name = filename.replace (/\.(?!.*\.).*$/i, "");  // Trim from the last dot to the end of the file = remove extension
 		var extension = filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
-		
-		
-		
+
 		
 		
 		// check the filter's data
@@ -455,14 +494,14 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 										.replace(/%asf_x%/g, extension[0]);    // match the filename extension (without the dot)
 		// debug
 		// alert (path);
-		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			
-		directory.initWithPath(path);
 		return path;
 		
 // Canceled the folder creation script, so the folder will not be created if the user cancel the download
 // Firefox will create it automatically when accepting the download... under windows XP and Linux Ubuntu at least (not tested under Vista, MacOS, or any other operating system)
-/*      
+/* 
+		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		
+		directory.initWithPath(path);
 		if (directory.exists()) 
 		{
 			return path;
@@ -491,7 +530,9 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var asf_savefolder = document.getElementById('asf_savefolder');
 		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");	
 		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");	
-		var folder = this.loadUnicodeString("browser.download.dir");
+		var folder = "";
+		if (this.firefoxversion == 3) folder = this.loadUnicodeString("browser.download.lastDir");
+		if (this.firefoxversion == 2) folder = this.loadUnicodeString("browser.download.dir");
 		
 		// check the lastpath, if different than current folder, then print radio choice to user
 		// so he can choose from found filters, or last used path.
@@ -519,7 +560,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		//now, if the user checked the option to view asf on saving window, set it to visible
 		if(asf_viewdloption == true) asf_dloptions.style.visibility = "visible";
 		
-		//and last, if the user checked the option to view asf on saving window, set it to visible
+		//and last, if the user checked the option to view the path list on saving window, set it to visible
 		if((asf_viewpathselect == true) && (this.prefManager.getIntPref("extensions.asf.filtersNumber") > 0) )
 		{
 			this.read_all_filterpath();
@@ -569,10 +610,13 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var j = 0;
 		for (var i = 0; i < nbrfilters; i++)
 		{
-		// read the filter number x
-		path = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");
-		
-		if ( this.indexInArray(pathlist, path) < 0) { pathlist[++j]= path;}
+			// read the filter number x
+			path = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");
+			
+			if (this.indexInArray(pathlist, path) < 0) 
+			{ 
+				pathlist[++j]= path;
+			}
 		}
 		
 		var pathlist_sort_alpha = true;   // let the user choose in next release.
@@ -580,14 +624,14 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		for (var i = 0; i < pathlist.length; i++)
 		{
-		path = pathlist[i];
-		path = variable_mode == true? this.createfolder(path) : path; 
-		var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
-		menuitem.setAttribute('label', path);
-		menuitem.setAttribute('crop', 'center');
-		menuitem.setAttribute('value', path);
-		menuitem.setAttribute('oncommand', "automatic_save_folder.asf_select_savepath(this)");
-		menupopup.appendChild(menuitem);
+			path = pathlist[i];
+			path = variable_mode == true? this.createfolder(path) : path; 
+			var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
+			menuitem.setAttribute('label', path);
+			menuitem.setAttribute('crop', 'center');
+			menuitem.setAttribute('value', path);
+			menuitem.setAttribute('oncommand', "automatic_save_folder.asf_select_savepath(this)");
+			menupopup.appendChild(menuitem);
 		}
 		
 		// Populate the path list into the menu
@@ -598,8 +642,6 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	
 	asf_toggle_savepath: function () {
 	
-		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	
-		
 		var asf_savefolder = document.getElementById('asf_savefolder');
 		var asf_lastpath = document.getElementById('asf_lastpath');
 		var asf_pathselect = document.getElementById('asf_pathselect');
@@ -622,32 +664,20 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			userchoice = asf_folder_list.value ;
 		}
 		
-
-		this.saveUnicodeString("browser.download.dir", userchoice);
-		if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
-		{
-			this.saveUnicodeString("browser.download.lastDir", userchoice);
-		}	
+		this.set_savepath(userchoice);
 	 
 	},
 	
 	
 	asf_select_savepath: function () {	
-	
-		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	
-		
+
 		// check the third radio choice
 		var asf_radio_savepath = document.getElementById('asf_radio_savepath');
+		var asf_pathselect = document.getElementById('asf_pathselect');
 		asf_radio_savepath.value = 2;
+		asf_pathselect.checked;
 		
-		// read the selected item value
-		var asf_folder_list = document.getElementById('asf_folder_list');
-		
-		this.saveUnicodeString("browser.download.dir", asf_folder_list.value);
-		if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
-		{
-			this.saveUnicodeString("browser.download.lastDir", asf_folder_list.value);
-		}
+		this.asf_toggle_savepath();
 	},
 	
 	

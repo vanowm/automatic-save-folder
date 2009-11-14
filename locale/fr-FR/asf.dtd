@@ -57,7 +57,8 @@
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dossiers dynamiques">
 <!ENTITY asf.variablemode.bool "Activer">
-<!ENTITY asf.variablemode.tooltip "Permet d'éditer manuellement le chemin d'enregistrement des filtres et d'ajouter des variables dynamiques, comme la date du jour ou le domaine d'hébergement.">
+<!ENTITY asf.variablemode.tooltip1 "Permet d'éditer manuellement le chemin d'enregistrement des filtres et d'ajouter des variables dynamiques, comme la date du jour ou le domaine d'hébergement.">
+<!ENTITY asf.variablemode.tooltip2 "Attention : Lorsque Firefox utilise la navigation privée, les dossiers dynamiques inexistant ne seront pas créés. Le dernier dossier valide sera proposé à la place.">
 <!ENTITY asf.variablemode.label "Attention : Les majuscules et les minuscules correspondent à des balises différentes.">
 <!ENTITY asf.variables.label "Liste des balises :">
 

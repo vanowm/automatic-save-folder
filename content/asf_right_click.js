@@ -31,8 +31,9 @@ var automatic_save_folder = {
 					
 	versionChecker: Components.classes["@mozilla.org/xpcom/version-comparator;1"]
 						.getService(Components.interfaces.nsIVersionComparator),
-					
-					
+				
+		firefoxversion : "",
+		
 	rightclick_init: function() {
 		if (!asf_rightclick_loaded) 
 		{
@@ -85,8 +86,8 @@ var automatic_save_folder = {
 			}
 		}
 		
-	},	
-		
+	},
+	
 	
 	// reset Timelimit=0 to =1000 when closing Firefox 
 	// it will reset to 1000 even if closing firefox is canceled.
@@ -257,14 +258,13 @@ var automatic_save_folder = {
 		var versionChecker = this.versionChecker;
 		var appInfo = this.appInfo;
 		
-		var firefoxversion = "";
-		if(versionChecker.compare(appInfo.version, "3.0") >= 0) 
+		if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
 		{
-			 firefoxversion = "3";			
+			this.firefoxversion = "3";
 		}
 		else 
 		{
-			 firefoxversion = "2";
+			this.firefoxversion = "2";
 		}
 		
 		
@@ -301,7 +301,7 @@ var automatic_save_folder = {
 		}
 		
 		// set the last folder path used into asf.lastpath
-		if (firefoxversion == "3")   // take the download.lastDir if it's FF3
+		if (this.firefoxversion == "3")   // take the download.lastDir if it's FF3
 		{
 			var folder = this.loadUnicodeString("browser.download.lastDir");
 		}
@@ -343,6 +343,7 @@ var automatic_save_folder = {
 			// Check the current website URL if hosted domain checking returned false.
 				if (!dom_regexp && use_currentURL)
 				{
+					
 					var currentURL = document.getElementById("urlbar").value;
 					dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
 				}
@@ -366,43 +367,42 @@ var automatic_save_folder = {
 			{
 				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
 				{	// then change the destination folder to user choice
-					this.saveUnicodeString("browser.download.dir", defaultfolder);
-					if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
-					{
-						this.saveUnicodeString("browser.download.lastDir", defaultfolder);
-					}	
+					this.set_savepath(defaultfolder);
 				}	
-				else  // else, if domain is the same as the last, set the download.dir to the last folder used (else viewDownloadOption will not show the correct save path and will use the default folder)
-				{     // only affect Firefox3 which update download.lastDir instead of download.dir, so taking download.lastDir data to set download.dir, 
-					  // FF1.5 or FF2 automatically update download.dir, not download.lastDir
-					if (firefoxversion == "3")
+				else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
+				{
+					if (this.firefoxversion == "3")
 					{
-						var lastpath = this.loadUnicodeString("browser.download.lastDir");  // this one is the one that will open
-						if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
-						{
-							this.saveUnicodeString("browser.download.lastDir", defaultfolder);
-							lastpath = defaultfolder;
-						}
-						this.saveUnicodeString("browser.download.dir", lastpath);   // this one is the one that will be shown in ASF save option
-					}	
+						var lastpath = this.loadUnicodeString("browser.download.lastDir");
+					}
+					if (this.firefoxversion == "2")
+					{
+						var lastpath = this.loadUnicodeString("browser.download.dir");
+					}
+					
+					if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
+					{
+						lastpath = defaultfolder;
+					}
+					this.set_savepath(lastpath);
 				}
 			}
 			else // else, if savetype == 0  (folder is set to last folder)
 			{
-				// set the download.dir to the last folder used (else viewDownloadOption will not show the correct save path and will use the default folder)
-				// only affect Firefox3 which update download.lastDir instead of download.dir, so we are taking download.lastDir data to set download.dir, 
-				//  FF1.5 or FF2 automatically update download.dir, not download.lastDir
-				if (firefoxversion == "3")
+				if (this.firefoxversion == "3")
 				{
 					var lastpath = this.loadUnicodeString("browser.download.lastDir");
-					if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
-					{
-						this.saveUnicodeString("browser.download.lastDir", defaultfolder);
-						lastpath = defaultfolder;
-					}
-					this.saveUnicodeString("browser.download.dir", lastpath);
-				}	
-			
+				}
+				if (this.firefoxversion == "2")
+				{
+					var lastpath = this.loadUnicodeString("browser.download.dir");
+				}
+				
+				if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
+				{
+					lastpath = defaultfolder;
+				}
+				this.set_savepath(lastpath);
 			}
 		}
 		else // if a filter is found 
@@ -445,17 +445,56 @@ var automatic_save_folder = {
 				folder = this.createfolder(aFpP, folder, idx);		
 			}
 			
-			this.saveUnicodeString("browser.download.dir", folder);
-			if (lastdir == true) // set it for "save as..." on FF1.5 and FF2, on FF3 lastdir is always true
-			{
-				this.saveUnicodeString("browser.download.lastDir", folder);
-			}
+			this.set_savepath(folder);
 		}
 		
 		// in every case, set the new file hosted domain to tempdomain
 		this.saveUnicodeString("extensions.asf.tempdomain", domain);
 		
 		
+	},
+	
+	
+	set_savepath: function(path) {
+		var folderList = this.prefManager.getIntPref("browser.download.folderList");	
+		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
+		
+		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		directory.initWithPath(path);
+		
+		
+		if (this.firefoxversion == 2)
+		{
+		
+		this.saveUnicodeString("browser.download.dir", directory.path);
+		if (lastdir)
+			this.saveUnicodeString("browser.download.lastDir", directory.path);		
+		}
+		
+		if (this.firefoxversion == 3)
+		{
+			
+			var inPrivateBrowsing = false;
+			try {
+				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
+									.getService(Components.interfaces.nsIPrivateBrowsingService);
+				inPrivateBrowsing = pbs.privateBrowsingEnabled;
+			}
+			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+			}
+			
+			if (inPrivateBrowsing)
+			{
+				gDownloadLastDir.file = directory;
+			}
+			else
+			{	
+				this.saveUnicodeString("browser.download.lastDir", directory.path);
+				if (folderList == 2)
+					this.saveUnicodeString("browser.download.dir", directory.path);
+			}
+			
+		}	
 	},
 	
 	
@@ -515,12 +554,6 @@ var automatic_save_folder = {
 		const ZERO = "0";  // leading zero
 		
 		// load the domain and the filename of the saved file	
-		// var domain = 	document.getElementById("source").value ;
-			// domain = domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
-		// var filename = 	document.getElementById("location").value ;
-		// var file_name = filename.replace (/\.(?!.*\.).*$/i, "");  // Trim from the last dot to the end of the file = remove extension
-		// var extension = filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
-		
 		var domain = 	aFpP.fileInfo.uri.host ;
 		var scheme = 	aFpP.fileInfo.uri.scheme ;
 		var filename = 	aFpP.fileInfo.fileName ;
@@ -670,14 +703,14 @@ var automatic_save_folder = {
 										.replace(/%asf_x%/g, extension[0]);    // match the filename extension (without the dot)
 		// debug
 		// alert (path);
-		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			
-		directory.initWithPath(path);
 		return path;
 		
 // Canceled the folder creation script, so the folder will not be created if the user cancel the download
 // Firefox will create it automatically when accepting the download... under windows XP and Linux Ubuntu at least (not tested under Vista, MacOS, or any other operating system)
-/*      
+/* 
+		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		
+		directory.initWithPath(path);     
 		if (directory.exists()) 
 		{
 			return path;
