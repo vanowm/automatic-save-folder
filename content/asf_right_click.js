@@ -344,8 +344,12 @@ var automatic_save_folder = {
 				if (!dom_regexp && use_currentURL)
 				{
 					
-					var currentURL = document.getElementById("urlbar").value;
-					dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
+					try
+					{
+						var currentURL = document.getElementById("urlbar").value;
+						dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
+					}
+					catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain. 
 				}
 				
 			// Check the filename	
