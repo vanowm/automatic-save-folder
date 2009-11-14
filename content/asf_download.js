@@ -261,8 +261,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		if (this.firefoxversion == 2)
 		{
 		
-		this.saveUnicodeString("browser.download.dir", directory.path);
-		if (lastdir)
+			this.saveUnicodeString("browser.download.dir", directory.path);
+			if (lastdir)
 			this.saveUnicodeString("browser.download.lastDir", directory.path);		
 		}
 		
@@ -278,7 +278,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
 			}
 			
-			if (inPrivateBrowsing)
+			if (inPrivateBrowsing && directory)
 			{
 				gDownloadLastDir.file = directory;
 			}
@@ -528,15 +528,38 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	
 	
 	show_dloptions: function ()	{
-		
+
 		var asf_dloptions = document.getElementById('asf_dloptions');
 		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
 		var asf_savefolder = document.getElementById('asf_savefolder');
 		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");	
 		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");	
 		var folder = "";
-		if (this.firefoxversion == 3) folder = this.loadUnicodeString("browser.download.lastDir");
 		if (this.firefoxversion == 2) folder = this.loadUnicodeString("browser.download.dir");
+		if (this.firefoxversion == 3)
+		{
+			
+			var inPrivateBrowsing = false;
+			try {
+				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
+									.getService(Components.interfaces.nsIPrivateBrowsingService);
+				inPrivateBrowsing = pbs.privateBrowsingEnabled;
+			}
+			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+			}
+			
+			if (inPrivateBrowsing && gDownloadLastDir.file)
+			{
+				folder = gDownloadLastDir.file.path;
+			}
+			else
+			{	
+				folder = this.loadUnicodeString("browser.download.lastDir");
+			}
+			
+		}	
+		
+		
 		
 		// check the lastpath, if different than current folder, then print radio choice to user
 		// so he can choose from found filters, or last used path.

@@ -487,7 +487,7 @@ var automatic_save_folder = {
 			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
 			}
 			
-			if (inPrivateBrowsing)
+			if (inPrivateBrowsing && directory)
 			{
 				gDownloadLastDir.file = directory;
 			}
