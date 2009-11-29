@@ -38,7 +38,7 @@
 <!ENTITY asf.desktop.label "Bureau">
 <!ENTITY asf.systemdownload.label "Téléchargements">
 <!ENTITY asf.filteredfolder.label "Défini par les filtres">
-<!ENTITY asf.folderList.tooltip "Si le dossier &#34;Téléchargements&#34; n'existe pas, la dernière option sera utilisée.">
+<!ENTITY asf.folderList.tooltip "Si le dossier &#34;Téléchargements&#34; n'existe pas, l'explorateur de fichier s'affichera.">
 <!ENTITY asf.dialogaccept.bool "Valider automatiquement la fenêtre &#34;Que doit faire Firefox avec ce fichier ?&#34;.">
 <!ENTITY asf.viewdloption.bool "Afficher les options lors de l'enregistrement">
 <!ENTITY asf.viewdloption.tooltip "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
@@ -51,7 +51,7 @@
 <!ENTITY asf.rightclick.tooltip1 "Note : Supprimer la temporisation empêche Firefox de récupérer le nom du fichier cible lors d'un téléchargement avec redirection.">
 <!ENTITY asf.rightclick.tooltip2 "Désactivez temporairement cette option si vous souhaitez que Firefox lise correctement le nom du fichier fourni par l'entête.">
 <!ENTITY asf.rightclick.tooltip3 "Seuls les scripts de téléchargement avec redirection de fichier ont ce problème, l'enregistrement par clic-droit sur les liens directs fonctionne correctement si la case est cochée.">
-<!ENTITY asf.rightclick.ff2.label "La fonction clic-droit d'automatic save folder n'est pas compatible avec Firefox 2. Si vous souhaitez utiliser le filtres sur les téléchargements en utilisant le menu clic-droit &#34;Enregistrer la cible du lien sous...&#34;, vous devrez utiliser au minimum Firefox version 3.0 (Version 3.5 ou plus conseillée).">
+<!ENTITY asf.rightclick.ff2.label "La fonction clic-droit d'automatic save folder n'est pas compatible avec Firefox 2. Si vous souhaitez utiliser les filtres sur les téléchargements en utilisant le menu clic-droit &#34;Enregistrer la cible du lien sous...&#34;, vous devrez utiliser au minimum Firefox version 3.0 (Version 3.5 ou plus conseillée).">
 <!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &#xA;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu &#34;Outils/Modules complémentaires...&#34; afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
 
 <!-- Dynamics tab-->

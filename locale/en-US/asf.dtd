@@ -34,11 +34,11 @@
 
 <!-- Options tab -->
 <!ENTITY asf.options.label "Options">
-<!ENTITY asf.useDownloadDir.bool "Do not show the file explorer, and save to:">
+<!ENTITY asf.useDownloadDir.bool "Do not show the file explorer, and automatically save to:">
 <!ENTITY asf.desktop.label "Desktop">
 <!ENTITY asf.systemdownload.label "Downloads">
 <!ENTITY asf.filteredfolder.label "Set by the filters">
-<!ENTITY asf.folderList.tooltip "If the &#34;Downloads&#34; folder doesn't exist, the last choice will be used.">
+<!ENTITY asf.folderList.tooltip "If the &#34;Downloads&#34; folder doesn't exist, the file explorer will be shown.">
 <!ENTITY asf.dialogaccept.bool "Automatically accept the &#34;What should Firefox do with this file&#34; dialog windows.">
 <!ENTITY asf.viewdloption.bool "View options when downloading">
 <!ENTITY asf.viewdloption.tooltip "Allow you to see the last two destination folders and a link to add or edit the filters">
@@ -51,7 +51,7 @@
 <!ENTITY asf.rightclick.tooltip1 "Note: Removing the timing delay prevent Firefox to read the file's target name if it is from a redirection download.">
 <!ENTITY asf.rightclick.tooltip2 "Temporarily disable this feature if you want Firefox to read the filename provided by the header.">
 <!ENTITY asf.rightclick.tooltip3 "Only files from a download script with file redirection have this problem, saving a file from a direct download using right-click is working fine.">
-<!ENTITY asf.rightclick.ff2.label "The Automatic Save Folder's right-click feature is not available on Firefox 2. If you want to use the filters on your downloads using the right-click menu &#34;Save link as&#34;, you should update your Firefox version to 3.0 minimum (recommended version 3.5 or more)">
+<!ENTITY asf.rightclick.ff2.label "The Automatic Save Folder's right-click feature is not available on Firefox 2. If you want to use the filters on your downloads using the right-click menu &#34;Save link as&#34;, you should update your Firefox version to 3.0 minimum (recommended version 3.5 or more).">
 <!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &#xA;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Extension manager.">
 
 <!-- Dynamics tab-->

@@ -7,7 +7,7 @@
 
 <!ENTITY info.important.title "Important">
 <!ENTITY info.important.text1 "Le filtrage sur les téléchargements normaux (simple clic, ou téléchargement automatique) ne fonctionne que si la fenêtre de téléchargement &#34;Que doit faire Firefox avec ce fichier ?&#34; s'affiche :<br />">
-<!-- Screenshot from your language. Take a screen of the 'What should Firefox do with this file?' saving window (80 denote image shrink to 80%, I find 100% a little too big) -->
+<!-- Screenshot from your language. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big) -->
 <!ENTITY info.important.pict1 "screen_save_80fr.png">
 <!ENTITY info.important.text2 "Par conséquent, vérifiez que Firefox ne lance pas un traitement différent sur le fichier empêchant la fenêtre de s'afficher en suivant ces instructions :">
 <!ENTITY info.important.text3 "Allez dans le menu &#34;Outils&#34; de Firefox puis &#34;Options...&#34;.">
@@ -68,10 +68,6 @@
 <!ENTITY info.advancedexample.text10 "Lors de la vérification, les parenthèses ne sont pas prises en compte, et le filtre se comporte comme s'il s'agissait de &#34;Firefox Setup *.exe&#34;<br />
 $1f correspond au contenu de la 1ere parenthèse du filtre sur le nom de fichier, soit le numéro de version <br />
  Le fichier &#34;Firefox Setup 3.5.4.exe&#34; sera donc enregistré dans le répertoire D:\Téléchargements\Firefox\3.5.4\">
-
-
-
-
 
 <!ENTITY info.advancedexample.text11 "Pour créer ou non des sous-dossiers différents suivant le contenu du nom de fichier :">
 <!ENTITY info.advancedexample.text12 "Exemple de consignes : Nous souhaitons télécharger des vidéos nommées &#34;Mes_vacances_date-du-sejour.avi&#34;.<br />

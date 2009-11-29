@@ -28,15 +28,23 @@
 <!-- Replace the percent % with entity &#37 and the quote " with &#34 , no need to use <br/> tags for newlines it uses <pre> tags, keep the 2 begining spaces to create indentation) -->
 <!ENTITY about.version.094 "+ Add filtering on Right-Click menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as...(Ctrl+S)&#34;
   (Need at least Firefox 2.0 and is not compatible with Download Sort add-on. If you have both activated, Download Sort prevails)
++ ASF is now working with Private browsing, and will prevent saving any data to Firefox preferences.
+  Two things to note which change ASF behaviour: 1) The previous hosted domain will not be updated, and 2) If the destination folder doesn't exist it will not be created or suggested, and the last working folder from non private mode will be used instead.
 + Add dynamic variables &#37;F&#37; for the month name, and &#37;M&#37; for the abbreviated one.
++ Add dynamic variables for weeks: Week number &#37;W&#37;, Day of the week &#37;w&#37;, &#37;l&#37; or &#37;D&#37;
 + Make Windows and Mac OSX works with Firefox option &#34;browser.preferences.instantApply&#34; to save the filters right after a modification (Option by default on Linux)
 + Add Drag and Drop feature on the filter's listing to set filter's order quickly.
-+ Add an option to automatically accept the download (User requested). Great for a use with Firefox saving option &#34;Save file to&#34;
-+ Add an option to choose if you want to use the current website URL to verify the filters if the hosted domain doesn't match.
-* In the drop-down menu on the save dialog : List the folders alphabetically, keep only one instance of each and activate the dynamic renaming if checked in options.
-* New tab to split options
++ Add a proper way to select Firefox saving option (&#34;Always ask&#34; or &#34;Save to&#34;), and select which folder manually instead of forcing it to Userchoice (browser.downlod.folderList=2)
++ Add an option to automatically accept the &#34;what would Firefox need to do with this file?&#34; dialog windows (User requested). Use it with &#34;Do not prompt the File explorer&#34; option for even better efficiency.
++ Add an option to choose if you want to use the current website URL to verify the filters if the file's hosted domain doesn't match.
++ Display ASF icon on the add-ons manager even on disabled state, instead of the green puzzle piece (Firefox 3.6+)
+* On the download dialog's drop-down menu: Sort path list alphabetically, remove duplicates, and made them working with dynamic renaming folder if option enabled.
+* Separated the &#34;informations&#34; tab in two other tabs &#34;Help&#34; and &#34;About...&#34;.
+* Added tooltips instead of help text bellow each options (has some issues with Firefox2).
 ! Correct links to Mozilla website, which were forced to the French page.
-! Correct filtering checking in advanced mode (dynamic variables enabled)
+! Correct the filter's checking when Dynamic folder creation is enabled
+! Prevent an exception when &#34;use current website URL&#34; option is enabled and the address bar doesn't contain an URL.
+  Happened with redirection download script and Firefox closing the new empty popup window, or using middle mouse-button click on a link.
 
 Other updates :
 + Source code and revisions available on http://code.google.com/p/automatic-save-folder

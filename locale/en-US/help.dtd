@@ -7,7 +7,7 @@
 
 <!ENTITY info.important.title "Important">
 <!ENTITY info.important.text1 "The filtering on common downloads (simple click, or automatic download) works only if the download window &#34;What should Firefox do with this file?&#34; is shown:<br />">
-<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture to 80%, I find 100% a little too big) -->
+<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big)-->
 <!ENTITY info.important.pict1 "screen_save_en.png">
 <!ENTITY info.important.text2 "So, be sure to check if Firefox doesn't use another process preventing the window to appear by following this method:">
 <!ENTITY info.important.text3 "Go to the Firefox menu &#34;Tools&#34; and &#34;Options...&#34;.">
@@ -68,10 +68,6 @@
 <!ENTITY info.advancedexample.text10 "While checking the downloaded file with the filters, the parentheses are not took in account, and the filter will act as &#34;Firefox Setup *.exe&#34;<br />
 $1f correspond to the first parenthesis content on the filter's file name, which is the version number <br />
 The file &#34;Firefox Setup 3.5.4.exe&#34; will be saved in the folder D:\Download\Firefox\3.5.4\">
-
-
-
-
 
 <!ENTITY info.advancedexample.text11 "To create or not create different subdirectories according to the name of the file:">
 <!ENTITY info.advancedexample.text12 "Example : We wish to download videos named &#34;My_vacation_date-of-the-trip.avi&#34;.<br />

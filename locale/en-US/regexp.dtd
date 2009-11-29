@@ -93,7 +93,8 @@ All these characters will need to be escaped with a backslashe :">
 <!ENTITY Regexp.links "There are a lot of filtering method using Regular Expression which can't be explained here.<br />
 If you want to find out, you can check documentation and examples on these websites: <br />
 http://www.regular-expressions.info/tutorial.html<br />
-http://www.javascriptkit.com/jsref/regexp.shtml">
+http://www.javascriptkit.com/jsref/regexp.shtml
+">
 
 <!ENTITY Example_1.title "Some examples">
 <!ENTITY Example_1.text "To filter all the .rar and .r01 .rxx files:<br />

@@ -28,15 +28,23 @@
 <!-- Remplacer les % par l'entité &#37 et les " par &#34 , pas besoin des <br/> pour les sauts de ligne le tag <pre> est utilisé, gardez les deux espaces en début de ligne pour l'indentation -->
 <!ENTITY about.version.094 "+ Ajout du filtrage avec les menus du clic-droit &#34;Enregistrer la cible sous...&#34;, &#34;Enregistrer l'image sous...&#34; et &#34;Enregistrer sous...(Ctrl+S)&#34;
   (Ne fonctionne qu'à partir de Firefox 2.0 et est incompatible avec l'extension Download Sort. Si les deux extensions sont activées, Download Sort est prioritaire)
++ ASF fonctionne maintenant avec la Navigation Privée, empéchant toutes données d'être enregistrées dans les préférences de Firefox.
+  Deux choses à noter qui modifient le fonctionnement d'ASF : 1) Le précédent domaine d'hébergement ne sera pas mémorisé, et 2) Si le dossier de destination n'existe pas, il ne sera ni créé ni suggéré, et le dernier dossier valide connu en Navigation Non Privée sera utilisé à la place.
 + Ajout des variables dynamiques &#37;F&#37; pour le nom du mois, et &#37;M&#37; pour son abréviation.
++ Ajout des varables dynamiques pour la semaine : Numéro de la semaine &#37;W&#37;, Jour de la semaine &#37;w&#37;, &#37;l&#37; ou &#37;D&#37;
 + Prise en compte pour Windows et Mac OSX de l'option &#34;browser.preferences.instantApply&#34; afin de sauvegarder les filtres des leur modification (option par défaut sur Linux).
 + Ajout du Glisser-déposer (Drag and Drop) dans la liste des filtres pour les repositionner rapidement.
-+ Ajout d'une option pour accepter le téléchargement du fichier automatiquement. Parfait pour un fonctionnement avec l'option de sauvegarde de Firefox &#34;Enregistrer le fichier dans le dossier&#34;
++ Ajout d'une option pour choisir le mode d'enregistrement de Firefox (&#34;Toujours demander où enregistrer les fichiers&#34; ou &#34;Enregistrer les fichiers dans le dossier&#34;), et selectionner manuellement le dossier plutôt que de forcer sur &#34;Défini par les filtres&#34; (browser.download.folderList=2)
++ Ajout d'une option pour accepter automatiquement la fenêtre &#34;Que doit faire Firefox de ce fichier ?&#34;. Utilisez la avec l'option de sauvegarde de Firefox &#34;Enregistrer le fichier dans le dossier&#34; pour une meilleure efficacité.
 + Ajout d'une option pour utiliser l'adresse du site courant avec le domaine du filtre si le domaine d'hébergement ne correspond pas.
++ Affichage de l'icone d'ASF dans le gestionnaire d'extensions même lorsque l'extension est désactivée, plutôt que la pièce de puzzle verte (Firefox 3.6+)
 * Dans le menu déroulant sur la fenêtre de sauvegarde : Listing des dossiers par ordre alphabétique, suppression des doublons et nom de dossier dynamique si l'option est activée.
-* Nouvel onglet pour séparer les options
+* Séparation de l'onglet &#34;informations&#34; en deux onglets &#34;Aide&#34; et &#34;À propos...&#34;.
+* Ajout d'infobulles à la place du texte explicatif sous les options (Quelques problèmes rencontrés avec Firefox2).
 ! Correction des liens vers Mozilla qui forçait le chargement de la page en Français.
-! Correction d'une vérification du filtrage en mode avancé (Variables dynamiques).
+! Correction d'une vérification du filtrage lorsque les variables dynamiques étaient utilisés.
+! Correction d'une exception lorsque l'option &#34;Utiliser l'URL du site courant&#34; est activé et que la barre d'adresse ne contient pas d'URL. 
+  Se produisait généralement avec les script de redirection lorsque Firefox refermait le nouvel onglet vide, ou en cliquant sur un lien avec la molette de la souris.
 
 Autres mises à jour :
 + Code source et révisions disponibles sur http://code.google.com/p/automatic-save-folder

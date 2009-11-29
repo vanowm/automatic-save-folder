@@ -649,7 +649,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		// Write each path to the menupopup
 		var pathlist = new Array();
-		pathlist[0] = this.loadUnicodeString("extensions.asf.defaultfolder");
+		var defaultfolder = this.loadUnicodeString("extensions.asf.defaultfolder");
+		pathlist[0] =  variable_mode == true? this.createfolder(defaultfolder) : defaultfolder;
 		var j = 0;
 		for (var i = 0; i < nbrfilters; i++)
 		{

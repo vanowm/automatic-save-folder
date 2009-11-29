@@ -10,30 +10,54 @@ Tutti gli esempi che seguono non comprendono / / all'inizio e alla fine del filt
 Quando selezioni dalla checkbox 'regexp' nella finestra dei filtri, gli / / verranno inseriti automaticamente.">
 
 <!ENTITY Title_1 "">
-<!ENTITY Intro_3 "Per definire i filtri bisogna conoscere alcuni caratteri speciali:">
+<!ENTITY Intro_3 "Per definire i filtri bisogna conoscere alcuni caratteri speciali:
+">
 
 <!ENTITY The.dot.title "Il punto .">
 <!ENTITY The.dot.text "Il punto . rimpiazza qualsiasi carattere singolo(una lettere, numero o spazio).<br />
 g..gle corrisponde a 'google' e ad altre parole che cominciano per 'g', seguite da 2 caratteri, e che termina con 'gle'.">
 
 <!ENTITY The.asterisk.title "Il simbolo *">
-<!ENTITY The.asterisk.text "Il simbolo * ripete l'ultimo carattere (.* indica una qualsiasi stringa, cioè molte volte un carattere)">
+<!ENTITY The.asterisk.text "Il simbolo * ripete l'ultimo carattere (.* indica una qualsiasi stringa, cioè molte volte un carattere)
+
+
+
+">
 
 <!ENTITY The.caret.title "Il simbolo ^">
-<!ENTITY The.caret.text "^ significa all'inizio della stringa (^http indica solo l'occorrenza all'inizio. Va bene per  http://test.com ma non per ftp://http_test.com)">
+<!ENTITY The.caret.text "^ significa all'inizio della stringa (^http indica solo l'occorrenza all'inizio. Va bene per  http://test.com ma non per ftp://http_test.com)
+">
 
 <!ENTITY The.dollar.title "Il simbolo $">
-<!ENTITY The.dollar.text "$ indica la fine della stringa ( com$ indica solo la fine. Va bene per http://test.com ma non per http://computer.net)">
+<!ENTITY The.dollar.text "$ indica la fine della stringa ( com$ indica solo la fine. Va bene per http://test.com ma non per http://computer.net)
+">
 
 <!ENTITY The.braces.title "Il simbolo {}">
-<!ENTITY The.braces.text "{x} indica qualsiasi carattere x volte, ad esempio tor{2}ent = torrent (corrisponde a 2 volte 'r')">
+<!ENTITY The.braces.text "{x} indica qualsiasi carattere x volte, ad esempio tor{2}ent = torrent (corrisponde a 2 volte 'r')
+">
 
 <!ENTITY The.parenthesis.title "Le parentesi ( ) e il pipe |">
-<!ENTITY The.parenthesis.text "la parentesi e il pipe (aaaa|bbbb|cccc) prende qualsiasi carattere che sia aaaa o bbbb o cccc ecc.">
+<!ENTITY The.parenthesis.text "la parentesi e il pipe (aaaa|bbbb|cccc) prende qualsiasi carattere che sia aaaa o bbbb o cccc ecc.
+
+
+
+
+
+
+
+">
 
 <!ENTITY The.question.title "Il simbolo ?">
 <!ENTITY The.question.text "? indica la presenza o assenza del carattere: i file mpeg possono essere .mpg or .mpeg, la regexp sarà mpe?g<br />
-Nov(embre)? indica Nov o Novembre">
+Nov(embre)? indica Nov o Novembre
+
+
+
+
+
+
+
+">
 
 <!ENTITY The.bracket.title "Le parentesi quadre [ ]">
 <!ENTITY The.bracket.text "Le parentesi quadre [ ] sono utili per definire una corrispondenza di molti caratteri. v[eo]lo corrisponde alle parole velo e volo.<br />
@@ -42,7 +66,15 @@ Il meno - fra le parentesi quadre corrisponde a una serie di caratteri:<br />
 <br />
 Puoi usare molti - fra le stesse parenetesi quadre, ad esempio [a-zA-Z] corrisponde a tutti i caratteri dell'alfabeto. [a-zA-Z0-9] per tutti i caratteri alfanumerici<br />
 [a-cn-o] per indicare qualsiasi lettera tra la a e la c, e dalla n alla o.<br />
-[-a-z] per indicare - (meno) e dalla alla alla z.">
+[-a-z] per indicare - (meno) e dalla alla alla z.
+
+
+
+
+
+
+
+">
 
 <!ENTITY The.backslash.title "Il simbolo \">
 <!ENTITY The.backslash.text "\d corrisponde qualsiasi cifra (numero)<br />
@@ -52,12 +84,17 @@ Puoi usare molti - fra le stesse parenetesi quadre, ad esempio [a-zA-Z] corrispo
 \uFFFF con FFFF = codice esadecimale, corrisponde al carattere unicode in esadecimale. <br />
 Esempio \u00A9 corrisponde ad '©'.">
 
-<!ENTITY The.backslash.info "Se all'interno di un filtro c'è bisogno di riportare il simbolo dei caratteri sopra riportati bisogna eseguire il cosidetto escape, cioè far precedere il simbolo con un un backslash \. Ad esempio dominio.com diventa dominio\.com">
+<!ENTITY The.backslash.info "Se all'interno di un filtro c'è bisogno di riportare il simbolo dei caratteri sopra riportati bisogna eseguire il cosidetto escape, cioè far precedere il simbolo con un un backslash \. Ad esempio dominio.com diventa dominio\.com
+
+
+">
 
 <!-- feel free to add a link to a Regexp website on your own language -->
 <!ENTITY Regexp.links "Esistono molti metodi di filtro e possiblità che non possono essere spiegati qui.<br />
-Trovi la documentazione su: http://www.regular-expressions.info/tutorial.html: <br />
-O per i principianti: http://www.javascriptkit.com/jsref/regexp.shtml">
+Trovi la documentazione su: <br />
+http://www.regular-expressions.info/tutorial.html: <br />
+O per i principianti: http://www.javascriptkit.com/jsref/regexp.shtml
+">
 
 <!ENTITY Example_1.title "Alcuni esempi">
 <!ENTITY Example_1.text "qualsiasi .rar e .r01 .rxx files :<br />
@@ -67,7 +104,11 @@ qualsiasi http in .com :<br />
 ^http.*\.com$<br />
 <br />
 qualsiasi dominio, indipendentemente che ci sia http davanti :<br />
- ^http:\/\/(|www\.)mozilla\.org">
+ ^http:\/\/(|www\.)mozilla\.org
+ 
+ 
+ 
+">
 
 <!ENTITY Example_2.title "Esempi su filtri dei nomi dei file">
 <!ENTITY Example_2.text "Filtro su tutti gli archivi :<br />
@@ -95,4 +136,5 @@ Con regexp : .*oogle.*<br />
 Non regexp : oogle">
 
 <!ENTITY Conclusion.title "">
-<!ENTITY Conclusion.text "">
+<!ENTITY Conclusion.text "
+">

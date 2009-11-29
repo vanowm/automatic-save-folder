@@ -7,15 +7,15 @@
 
 <!ENTITY info.important.title "Importante">
 <!ENTITY info.important.text1 "Questa estensione funziona solamente se si usa la finestra di download (quella che chiede di aprire, eseguire o salvare file su disco)<br />Se Firefox non mostra tale finestra, l'estensione non funzionerà.">
-<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (80 denote image shrink to 80%, I find 100% a little too big) -->
-<!ENTITY info.important.pict1 "screen_save_80fr.png">
+<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big)  -->
+<!ENTITY info.important.pict1 "screen_save_en.png">
 <!ENTITY info.important.text2 "Se qualche filtro non funziona, accertartati che Firefox non usi un altro processo sul file scaricato:">
 <!ENTITY info.important.text3 "Vai sul menu &#34;Strumenti&#34; e &#34;Opzioni...&#34;.">
 <!ENTITY info.important.text4 "- Per utenti di Firefox 3: vai sul tab &#34;Applicazioni&#34;<br />
 - Per utenti di precedenti versioni di Firefox: Vai sul tab &#34;Contenuti&#34; e clicca su &#34;gestisci...&#34; in basso a destra.">
 <!ENTITY info.important.text5 "Verifica se il file che vuoi scaricare sia impostato su &#34;Chiedi ogni volta&#34;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
-<!ENTITY info.important.pict2 "screen_apps_fr.png">
+<!ENTITY info.important.pict2 "screen_apps_en.png">
 
 
 <!ENTITY info.howtouse.title "Come si usa">
@@ -55,7 +55,7 @@
 <!ENTITY info.advancedexample.text1 "">
 
 <!ENTITY info.advancedexample.text2 "Per scaricare tutte le nightly build di firefox in una sottocartella di D:\Download\firefox :">
-<!-- replace the percent with entity &#37 and the quote with &#34 -->
+<!-- replace the percent with entity &#37 and the quote with &#34 , you can translate 'Download' -->
 <!ENTITY info.advancedexample.text3 "D:\Download\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
 <!ENTITY info.advancedexample.text4 "L'estensione creerà una sottocartella chiamata con la data di quel giorno. Per esempio &#34;2009-12-04&#34;, dove verrà salvato il file.">
 
