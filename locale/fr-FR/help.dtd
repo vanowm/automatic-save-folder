@@ -55,7 +55,6 @@
 <!ENTITY info.advancedexample.text1 "Attention : Pour que tous ces filtres fonctionnent correctement, n'oubliez pas de cocher la case située sur l'onglet Dossiers Dynamiques">
 
 <!ENTITY info.advancedexample.text2 "Pour classer tous les nighlty build de firefox dans un sous-dossier de D:\Téléchargements\firefox :">
-<!-- replace the percent with entity &#37 and the quote with &#34 -->
 <!ENTITY info.advancedexample.text3 "D:\Téléchargements\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
 <!ENTITY info.advancedexample.text4 "L'extension créera un sous-dossier nommé avec la date du jour, par exemple &#34;2009-04-12&#34;, dans lequel sera enregistré votre fichier.">
 

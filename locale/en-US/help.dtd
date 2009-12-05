@@ -55,7 +55,6 @@
 <!ENTITY info.advancedexample.text1 "Attention : In order to work correctly, don't forget to enable the option on the Dynamic Filters tab">
 
 <!ENTITY info.advancedexample.text2 "To sort out all the nightly builds of firefox in a sub-folder of D:\Download\firefox:">
-<!-- replace the percent with entity &#37 and the quote with &#34 -->
 <!ENTITY info.advancedexample.text3 "D:\Download\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
 <!ENTITY info.advancedexample.text4 "The extension will create a sub-folder named after the date of the day. For example &#34;2009-12-04&#34;, in which your file will be saved.">
 

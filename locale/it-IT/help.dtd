@@ -55,7 +55,6 @@
 <!ENTITY info.advancedexample.text1 "">
 
 <!ENTITY info.advancedexample.text2 "Per scaricare tutte le nightly build di firefox in una sottocartella di D:\Download\firefox :">
-<!-- replace the percent with entity &#37 and the quote with &#34 , you can translate 'Download' -->
 <!ENTITY info.advancedexample.text3 "D:\Download\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
 <!ENTITY info.advancedexample.text4 "L'estensione creerà una sottocartella chiamata con la data di quel giorno. Per esempio &#34;2009-12-04&#34;, dove verrà salvato il file.">
 
