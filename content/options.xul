@@ -30,6 +30,7 @@
 		<preference id="asf_savetype" name="extensions.asf.savetype" type="int"/>
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
 		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
+		<preference id="asf_dialogacceptFiltered" name="extensions.asf.dialogacceptFiltered" type="bool"/>
 		<preference id="asf_rightclick" name="extensions.asf.rightclick" type="bool"/>
 		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
 		<preference id="asf_useDownloadDir" name="browser.download.useDownloadDir" type="bool"/>
@@ -58,6 +59,9 @@
 	<tooltip id="tooltip_variablemode" orient="vertical" style="background-color: #33DD00;" noautohide="true">
 		<description value="&asf.variablemode.tooltip1;"/>
 		<description value="&asf.variablemode.tooltip2;"/>
+	</tooltip>
+	<tooltip id="tooltip_dialogacceptFiltered" orient="vertical" style="background-color: #33DD00;" noautohide="true">
+		<description value="&asf.dialogacceptFiltered.tooltip;"/>
 	</tooltip>
 	<vbox>
 		<tabbox>
@@ -141,7 +145,8 @@
 					</menupopup>
 				</menulist>
 			</hbox>
-			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;"/>
+			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;" oncommand="automatic_save_folder.toggle_options();"/>
+			<checkbox id="asf-dialogacceptFiltered" preference="asf_dialogacceptFiltered" label="&asf.dialogacceptFiltered.bool;"  tooltip="tooltip_dialogacceptFiltered" style="margin-left:25px;"/>
 			<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>
 			<checkbox id="asf-viewpathselect" preference="asf_viewpathselect"  label="&asf.viewpathselect.bool;" tooltip="tooltip_viewpathselect" style="margin-left:25px;white-space:pre-wrap"/>
 			<separator class="thin"/>

@@ -65,14 +65,15 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		
 		// load prefmanager data
-		var savetype = 			prefManager.getIntPref("extensions.asf.savetype");	
-		var lastdir = 			prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
-		var defaultfolder = 	this.loadUnicodeString("extensions.asf.defaultfolder");		
-		var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
-		var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");      // hosted domain from last saved file
-		var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");  // enable Variables in folder creation (dynamic Folders)
-		var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
-		var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");	
+		var savetype = 				prefManager.getIntPref("extensions.asf.savetype");	
+		var lastdir = 				prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
+		var defaultfolder = 		this.loadUnicodeString("extensions.asf.defaultfolder");		
+		var keeptemp = 				prefManager.getBoolPref("extensions.asf.keeptemp");
+		var tempdomain = 			this.loadUnicodeString("extensions.asf.tempdomain");      // hosted domain from last saved file
+		var variable_mode = 		prefManager.getBoolPref("extensions.asf.variablemode");  // enable Variables in folder creation (dynamic Folders)
+		var dialogaccept = 			prefManager.getBoolPref("extensions.asf.dialogaccept");	
+		var dialogacceptFiltered = 	prefManager.getBoolPref("extensions.asf.dialogacceptFiltered");	
+		var use_currentURL = 		prefManager.getBoolPref("extensions.asf.usecurrenturl");	
 		
 		// If variable/Dynamic folders mode is ON, let's replace the variables to create the new defaultfolder
 		if (variable_mode == true) 
@@ -221,6 +222,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		
 		// Automatic saving when clicking on a link. The save dialog still flash onscreen very quickly.
+		if (dialogacceptFiltered && idx < 0) dialogaccept = false; // no filter matched, do not autoaccept the dialog
 		if (dialogaccept)
 		{
 			window.close();

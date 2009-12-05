@@ -40,6 +40,8 @@
 <!ENTITY asf.filteredfolder.label "Set by the filters">
 <!ENTITY asf.folderList.tooltip "If the &#34;Downloads&#34; folder doesn't exist, the file explorer will be shown.">
 <!ENTITY asf.dialogaccept.bool "Automatically accept the &#34;What should Firefox do with this file&#34; dialog windows.">
+<!ENTITY asf.dialogacceptFiltered.bool "Only if a filter is found">
+<!ENTITY asf.dialogacceptFiltered.tooltip "Will not automatically accept the &#34;What should Firefox do with this file&#34; dialog windows if no filter matches.">
 <!ENTITY asf.viewdloption.bool "View options when downloading">
 <!ENTITY asf.viewdloption.tooltip "Allow you to see the last two destination folders and a link to add or edit the filters">
 <!ENTITY asf.viewpathselect.bool "View the list of folders">

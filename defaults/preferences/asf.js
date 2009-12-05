@@ -15,5 +15,6 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
 // does only affect the user if useDownloadDir = true  ---- if "always ask the destination folder" is selected in FF options, it has no effect on the user.
  pref("browser.download.folderList", 2);
  pref("extensions.asf.dialogaccept", false);
+ pref("extensions.asf.dialogacceptFiltered", false);
  pref("extensions.asf.rightclick", true);
  pref("extensions.asf.usecurrenturl", false);

@@ -40,6 +40,8 @@
 <!ENTITY asf.filteredfolder.label "Défini par les filtres">
 <!ENTITY asf.folderList.tooltip "Si le dossier &#34;Téléchargements&#34; n'existe pas, l'explorateur de fichier s'affichera.">
 <!ENTITY asf.dialogaccept.bool "Valider automatiquement la fenêtre &#34;Que doit faire Firefox avec ce fichier ?&#34;.">
+<!ENTITY asf.dialogacceptFiltered.bool "Seulement si un filtre est trouvé">
+<!ENTITY asf.dialogacceptFiltered.tooltip "Ne valide pas automatiquement la fenêtre &#34;Que doit faire Firefox avec ce fichier ?&#34; si aucun filtre ne correspond.">
 <!ENTITY asf.viewdloption.bool "Afficher les options lors de l'enregistrement">
 <!ENTITY asf.viewdloption.tooltip "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
 <!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">

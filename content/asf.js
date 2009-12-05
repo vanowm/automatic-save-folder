@@ -214,6 +214,7 @@ var automatic_save_folder = {
 		var viewdloption = document.getElementById("asf-viewdloption");
 		var viewpathlist = document.getElementById("asf-viewpathselect");
 		var dialogaccept = document.getElementById("asf-dialogaccept");
+		var dialogacceptFiltered = document.getElementById("asf-dialogacceptFiltered");
 		var useDownloadDir = document.getElementById("asf-useDownloadDir");
 		
 		// check if autosave is selected, if not : set the saving path to "filtered" and disable the dropdown menu.
@@ -228,9 +229,27 @@ var automatic_save_folder = {
 			document.getElementById("asf-folderList").disabled = false;			
 		}
 		
-		// if the option is opened from the saving window, disable the autosave feature (Not working when set from here.)
-		dialogaccept.disabled = (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") ? true : false ;
 		
+		// set the sub-dialogaccept option to grey state
+		if (dialogaccept.checked == false)
+		{
+			dialogacceptFiltered.checked = false;
+			dialogacceptFiltered.disabled = true;
+		}
+		if (dialogaccept.checked == true)
+		{
+			dialogacceptFiltered.disabled = false;
+		}
+		
+		// if the option window is opened from the saving window, disable the autosave feature (Not working when set from here.)
+		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")
+		{		
+			dialogaccept.disabled = true;
+			dialogacceptFiltered.disabled = true;
+		}
+		
+		
+		// set the sub-D/L option to grey state
 		if (viewdloption.checked == false)
 		{
 			viewpathlist.checked = false;

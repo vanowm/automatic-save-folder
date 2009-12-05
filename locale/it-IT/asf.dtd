@@ -40,6 +40,8 @@
 <!ENTITY asf.filteredfolder.label "">
 <!ENTITY asf.folderList.tooltip "">
 <!ENTITY asf.dialogaccept.bool "">
+<!ENTITY asf.dialogacceptFiltered.bool "">
+<!ENTITY asf.dialogacceptFiltered.tooltip "">
 <!ENTITY asf.viewdloption.bool "Vedere le opzioni mentre scarica">
 <!ENTITY asf.viewdloption.tooltip "permette di vedere le due ultime cartelle di destinazione e un collegamento per aggiungere o modificare filtri.">
 <!ENTITY asf.viewpathselect.bool "Vedi la lista dei filtri">
