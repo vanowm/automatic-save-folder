@@ -18,6 +18,7 @@
 			defaultButton="accept"
 			onload="automatic_save_folder.asf_load();"
 			ondialogaccept="automatic_save_folder.asf_savepref();"
+			ondialogcancel="automatic_save_folder.asf_close();"
 			xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title; (&asf.version;)"
 >
 <prefpane id="asf-options"  style="padding:1px !important" flex="1" >

@@ -669,7 +669,13 @@ var automatic_save_folder = {
 	//save the options
 		this.asf_saveoptions();
 		
-	//close the options	
+	// close the preference window
+		this.asf_close();
+	},
+	
+	asf_close: function() {
+	
+		//close the options	
 		window.close();
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") // if the option is opened from the saving window
 		{ 	
@@ -677,6 +683,7 @@ var automatic_save_folder = {
 			window.opener.sizeToContent();
 		}		
 		window.opener.focus;
+	
 	}
 	
 };

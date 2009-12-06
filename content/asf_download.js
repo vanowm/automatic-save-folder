@@ -257,18 +257,21 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 								.getService(Components.interfaces.nsIProperties)
 								.get("Desk", Components.interfaces.nsILocalFile);
 
-			var dnldMgr = Components.classes["@mozilla.org/download-manager;1"]
+			if (this.firefoxversion == 3) 
+			{
+				var dnldMgr = Components.classes["@mozilla.org/download-manager;1"]
 									.getService(Components.interfaces.nsIDownloadManager);
-			var supportDownloadLabel = !dnldMgr.defaultDownloadsDirectory.equals(desk);			
-			
-			if ( (folderList == 0) || (folderList == 1 && !supportDownloadLabel) ) // if desktop or if OS doesn't support default Download dir
-			{
-				var directory = desk;
+				var supportDownloadLabel = !dnldMgr.defaultDownloadsDirectory.equals(desk);			
+				
+				if ( (folderList == 0) || (folderList == 1 && !supportDownloadLabel) ) // if desktop or if OS doesn't support default Download dir
+				{
+					var directory = desk;
+				}
+				if (folderList == 1 && supportDownloadLabel) // default Downloads folder
+				{
+					directory.initWithPath(dnldMgr.defaultDownloadsDirectory.path);
+				}
 			}
-			if (folderList == 1 && supportDownloadLabel) // default Downloads folder
-			{
-				directory.initWithPath(dnldMgr.defaultDownloadsDirectory.path);
-			}		
 		}
 		
 		
@@ -585,6 +588,17 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		var folder = "";
 		if (this.firefoxversion == 2) folder = this.loadUnicodeString("browser.download.dir");
+		if (this.firefoxversion == 2) // set the show suggested path to "..." because I didn't find how to read the default donloads folder path. (See function Set_savepath(); )
+		{
+			if (useDownloadDir && folderList == 0)  // desktop
+			{
+				folder = "...";
+			}
+			if (useDownloadDir && folderList == 1) // default Downloads folder
+			{
+				folder = "...";
+			}
+		}
 		if (this.firefoxversion == 3)
 		{
 			
