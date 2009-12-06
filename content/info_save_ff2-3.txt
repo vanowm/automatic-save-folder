@@ -1,0 +1,8 @@
+
+
+
+                                           FF2                                                   FF3
+
+browser.download.dir                 updated on file download           used by "save file to" instead of "always ask", if folderList =2
+browser.download.lastDir             updated on CTRL+S only                             Every saves (common Files and Ctrl+S)
+browser.download.folderList              not used                   set which folder will be used to save the files (0= desktop, 1= downloads, 2=user defined)

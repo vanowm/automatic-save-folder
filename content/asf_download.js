@@ -31,8 +31,6 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 	main: function () {
 		
-		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
-		Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
 		
 		// Setting private variables usable in this function
 		var prefManager = automatic_save_folder.prefManager;		
@@ -47,6 +45,11 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			this.firefoxversion = "2";
 		}
 		
+		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
+		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0) 
+		{
+			Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
+		}
 		
 		// Check if there is any filter in list
 		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");		
@@ -233,16 +236,40 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			// show or hide the asf option on saving window
 			this.show_dloptions();
 		}
-		
+	
+	return false;
 	},
 	
 	
 	set_savepath: function(path) {
 		var folderList = this.prefManager.getIntPref("browser.download.folderList");	
 		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
+		var useDownloadDir = this.prefManager.getBoolPref("browser.download.useDownloadDir");	
+		var folderList = this.prefManager.getIntPref("browser.download.folderList");
 		
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 		directory.initWithPath(path);
+		
+		// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of filtered path
+		if (useDownloadDir == true) 
+		{
+			var desk = Components.classes["@mozilla.org/file/directory_service;1"]
+								.getService(Components.interfaces.nsIProperties)
+								.get("Desk", Components.interfaces.nsILocalFile);
+
+			var dnldMgr = Components.classes["@mozilla.org/download-manager;1"]
+									.getService(Components.interfaces.nsIDownloadManager);
+			var supportDownloadLabel = !dnldMgr.defaultDownloadsDirectory.equals(desk);			
+			
+			if ( (folderList == 0) || (folderList == 1 && !supportDownloadLabel) ) // if desktop or if OS doesn't support default Download dir
+			{
+				var directory = desk;
+			}
+			if (folderList == 1 && supportDownloadLabel) // default Downloads folder
+			{
+				directory.initWithPath(dnldMgr.defaultDownloadsDirectory.path);
+			}		
+		}
 		
 		
 		if (this.firefoxversion == 2)
@@ -314,7 +341,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		// make the array with the month's name in the stringbundle of the locale language path.
 
 		var stringbundle = Components.classes['@mozilla.org/intl/stringbundle;1'].
-											getService(Ci.nsIStringBundleService).  
+											getService(Components.interfaces.nsIStringBundleService).  
                            createBundle('chrome://asf/locale/asf.properties');
 
 		var fullmonthname = new Array();
@@ -546,12 +573,16 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	
 	
 	show_dloptions: function ()	{
-
+		// read asf/content/info_save_ff2-3.txt for differences between Firefox 2 and Firefox 3 saving preferences.
 		var asf_dloptions = document.getElementById('asf_dloptions');
 		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
 		var asf_savefolder = document.getElementById('asf_savefolder');
+		var asf_folder_list = document.getElementById('asf_folder_list');
 		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");	
 		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");	
+		var useDownloadDir = this.prefManager.getBoolPref("browser.download.useDownloadDir");	
+		var folderList = this.prefManager.getIntPref("browser.download.folderList");
+		
 		var folder = "";
 		if (this.firefoxversion == 2) folder = this.loadUnicodeString("browser.download.dir");
 		if (this.firefoxversion == 3)
@@ -612,8 +643,20 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			asf_radiogroup_pathselect.style.visibility = "visible";
 		}		
 		
-		
-		
+		// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of found filters
+		if((useDownloadDir == true) && (folderList != 2)) // if set to desktop or Download
+		{
+			asf_radio_savepath.disabled = true;
+			asf_radiogroup_pathselect.disabled = true;
+			asf_folder_list.disabled = true;
+		}
+		else
+		{
+			asf_radio_savepath.disabled = false;
+			asf_radiogroup_pathselect.disabled = false;
+			asf_folder_list.disabled = false;
+		}		
+
 		
 		// Set the max width to the size of the screen minus 200px. Added for Mac OSX users with long path choice.
 		// alert("first screen : " + screen.width + "x" + screen.height);
