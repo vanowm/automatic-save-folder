@@ -41,6 +41,7 @@
 * Dans le menu déroulant sur la fenêtre de sauvegarde : Listing des dossiers par ordre alphabétique, suppression des doublons et nom de dossier dynamique si l'option est activée.
 * Séparation de l'onglet &#34;informations&#34; en deux onglets &#34;Aide&#34; et &#34;À propos...&#34;.
 * Ajout d'infobulles à la place du texte explicatif sous les options (Quelques problèmes rencontrés avec Firefox2).
+* Sur la fenêtre de sauvegarde, désactivation des suggestions de dossiers si l'option du groupe &#34;Que dois faire Firefox avec ce ficher ?&#34; n'est pas sur &#34;Enregistrer le fichier&#34;
 ! Correction des liens vers Mozilla qui forçait le chargement de la page en Français.
 ! Correction d'une vérification du filtrage lorsque les variables dynamiques étaient utilisés.
 ! Correction d'une exception lorsque l'option &#34;Utiliser l'URL du site courant&#34; est activé et que la barre d'adresse ne contient pas d'URL. 

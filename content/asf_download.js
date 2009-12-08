@@ -235,6 +235,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		{
 			// show or hide the asf option on saving window
 			this.show_dloptions();
+			this.check_uCTOption();
 		}
 	
 	return false;
@@ -679,6 +680,29 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	},
 	
 	
+	check_uCTOption: function () {
+		// Check if the user change the unkownContentType option (open with, save as, save with a download manager, etc.)
+		var save = document.getElementById("save").selected;
+		var asf_radio_savepath = document.getElementById('asf_radio_savepath');
+		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
+		var asf_folder_list = document.getElementById('asf_folder_list');
+		
+		
+		if(save) // if set to "save the file"
+		{
+			asf_radio_savepath.disabled = false;
+			asf_radiogroup_pathselect.disabled = false;
+			asf_folder_list.disabled = false;
+		}
+		else
+		{
+			asf_radio_savepath.disabled = true;
+			asf_radiogroup_pathselect.disabled = true;
+			asf_folder_list.disabled = true;
+		}
+	},
+	
+	
 	indexInArray: function (arr,val){
 		val = val.replace(/\\/g,'\\\\');
 		var test_regexp = new RegExp("^"+val+"$");
@@ -858,6 +882,12 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	addEventListener( // Autoload
 	"load",			// After OnLoad from overlay_unknownContentType.xul file
 	function(){ automatic_save_folder.main(); },  // Run main from automatic_save_folder to check the filters
+	false
+	);	
+	
+	addEventListener(
+	"click",		// After a click in the unknownContentType.xul, check if the user changed the saving option (save, open, etc.)
+	function(){ automatic_save_folder.check_uCTOption(); },  // Run main from automatic_save_folder to check the filters
 	false
 	);	
 	
