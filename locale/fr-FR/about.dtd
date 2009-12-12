@@ -28,16 +28,16 @@
 <!-- Conserver les retour à la ligne car le tag < pre > est utilisé, gardez les deux espaces en début de ligne pour l'indentation -->
 <!ENTITY about.version.094 "+ Ajout du filtrage avec les menus du clic-droit &#34;Enregistrer la cible sous...&#34;, &#34;Enregistrer l'image sous...&#34; et &#34;Enregistrer sous...(Ctrl+S)&#34;
   (Ne fonctionne qu'à partir de Firefox 2.0 et est incompatible avec l'extension Download Sort. Si les deux extensions sont activées, Download Sort est prioritaire)
-+ ASF fonctionne maintenant avec la Navigation Privée, empéchant toutes données d'être enregistrées dans les préférences de Firefox.
++ ASF fonctionne maintenant avec la Navigation Privée, empêchant toutes données d'être enregistrées dans les préférences de Firefox.
   Deux choses à noter qui modifient le fonctionnement d'ASF : 1) Le précédent domaine d'hébergement ne sera pas mémorisé, et 2) Si le dossier de destination n'existe pas, il ne sera ni créé ni suggéré, et le dernier dossier valide connu en Navigation Non Privée sera utilisé à la place.
 + Ajout des variables dynamiques &#37;F&#37; pour le nom du mois, et &#37;M&#37; pour son abréviation.
-+ Ajout des varables dynamiques pour la semaine : Numéro de la semaine &#37;W&#37;, Jour de la semaine &#37;w&#37;, &#37;l&#37; ou &#37;D&#37;
++ Ajout des variables dynamiques pour la semaine : Numéro de la semaine &#37;W&#37;, Jour de la semaine &#37;w&#37;, &#37;l&#37; ou &#37;D&#37;
 + Prise en compte pour Windows et Mac OSX de l'option &#34;browser.preferences.instantApply&#34; afin de sauvegarder les filtres des leur modification (option par défaut sur Linux).
 + Ajout du Glisser-déposer (Drag and Drop) dans la liste des filtres pour les repositionner rapidement.
-+ Ajout d'une option pour choisir le mode d'enregistrement de Firefox (&#34;Toujours demander où enregistrer les fichiers&#34; ou &#34;Enregistrer les fichiers dans le dossier&#34;), et selectionner manuellement le dossier plutôt que de forcer sur &#34;Défini par les filtres&#34; (browser.download.folderList=2)
++ Ajout d'une option pour choisir le mode d'enregistrement de Firefox (&#34;Toujours demander où enregistrer les fichiers&#34; ou &#34;Enregistrer les fichiers dans le dossier&#34;), et sélectionner manuellement le dossier plutôt que de forcer sur &#34;Défini par les filtres&#34; (browser.download.folderList=2)
 + Ajout d'une option pour accepter automatiquement la fenêtre &#34;Que doit faire Firefox de ce fichier ?&#34;. Utilisez la avec l'option de sauvegarde de Firefox &#34;Enregistrer le fichier dans le dossier&#34; pour une meilleure efficacité.
 + Ajout d'une option pour utiliser l'adresse du site courant avec le domaine du filtre si le domaine d'hébergement ne correspond pas.
-+ Affichage de l'icone d'ASF dans le gestionnaire d'extensions même lorsque l'extension est désactivée, plutôt que la pièce de puzzle verte (Firefox 3.6+)
++ Affichage de l'icône d'ASF dans le gestionnaire d'extensions même lorsque l'extension est désactivée, plutôt que la pièce de puzzle verte (Firefox 3.6+)
 * Dans le menu déroulant sur la fenêtre de sauvegarde : Listing des dossiers par ordre alphabétique, suppression des doublons et nom de dossier dynamique si l'option est activée.
 * Séparation de l'onglet &#34;informations&#34; en deux onglets &#34;Aide&#34; et &#34;À propos...&#34;.
 * Ajout d'infobulles à la place du texte explicatif sous les options (Quelques problèmes rencontrés avec Firefox2).
@@ -72,7 +72,7 @@ Autres mises à jour :
 * Meilleure visibilité : Les zones de texte s'agrandissent maintenant avec le changement de taille des fenêtres de préférence et d'aides.
 * Modification complète du script en Global Namespace, demandé par mozilla.org afin de sous-mettre l'extension en zone public.
 * Simplifications des fonctions du script et ajout des commentaires du code.
-! Enregistrement des données au format unicode (Les filtres présents dans les versions précédentes contenant des caractères accentués peuvent ne plus fonctionner. Vous devrez les redéfinir).
+! Enregistrement des données au format Unicode (Les filtres présents dans les versions précédentes contenant des caractères accentués peuvent ne plus fonctionner. Vous devrez les redéfinir).
 ! Correction du paramètre d'édition par double-clic sur un filtre venant d'être ajouté.
 ! Correction du bug qui empêchait la lecture des préférences non définies ou inexistantes dans about:config. (Merci à Martin)">
 

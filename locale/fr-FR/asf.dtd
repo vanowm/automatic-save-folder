@@ -87,7 +87,7 @@
 <!ENTITY asf.addedit.regexphelp.label "Aide pour les Regexp.">
 
 <!ENTITY asf.addedit.inforegexp1 "Les filtres peuvent être :">
-<!ENTITY asf.addedit.inforegexp2 "Définis : fichier_a_telecharger.zip">
+<!ENTITY asf.addedit.inforegexp2 "Définis : fichier_à_télécharger.zip">
 <!ENTITY asf.addedit.inforegexp3 "Partiels : fichier*.zip">
 <!ENTITY asf.addedit.inforegexp4 "Expression régulière : .*(.rar|.zip)$">
 

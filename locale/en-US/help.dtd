@@ -6,7 +6,7 @@
 <!ENTITY info.capturefilter "Capture Filter">
 
 <!ENTITY info.important.title "Important">
-<!ENTITY info.important.text1 "The filtering on common downloads (simple click, or automatic download) works only if the download window &#34;What should Firefox do with this file?&#34; is shown:<br />">
+<!ENTITY info.important.text1 "The filtering on common downloads (simple click, or automatic download) works only if the download window &#34;What should Firefox do with this file?&#34; is shown:">
 <!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big)-->
 <!ENTITY info.important.pict1 "screen_save_en.png">
 <!ENTITY info.important.text2 "So, be sure to check if Firefox doesn't use another process preventing the window to appear by following this method:">

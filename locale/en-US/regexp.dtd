@@ -6,11 +6,11 @@
 <!ENTITY Note1.text "All the filters are case insensitive.">
 <!ENTITY Note2.title "Note 2">
 <!ENTITY Note2.text "The regexp in this plugin needs to be capture inside a / / statement.
-All the examples below are writen without the / / at the beginning and the end of the filters in order to be easily readable.
+All the examples below are written without the / / at the beginning and the end of the filters in order to be easily readable.
 When you check the checkbox 'regexp' in the filter window, the / / will be added automatically.">
 
 <!ENTITY Title_1 "The special tags">
-<!ENTITY Intro_3 "The same way the * character (asterisk) is used in common filter to replace an undertermined number of letters, 
+<!ENTITY Intro_3 "The same way the * character (asterisk) is used in common filter to replace an undetermined number of letters, 
 the regular expression use many special characters to match different group of letters :">
 
 <!ENTITY The.dot.title "The dot .">
@@ -29,7 +29,7 @@ so this is what is used when you select &#34;All&#34; in the filter creation win
 The filtering will be correct for 'http://test.com' but will not for 'ftp://http_test.com' because http is not at the begining but in the middle.">
 
 <!ENTITY The.dollar.title "The dollar $">
-<!ENTITY The.dollar.text "Le dollar dollar $ is used to detect the end of the line. 'com$' will match every string ending with 'com'.<br />
+<!ENTITY The.dollar.text "The dollar $ is used to detect the end of the line. 'com$' will match every string ending with 'com'.<br />
 The filtering will be correct for 'http://test.com' but will not for 'http://computer.net' because 'com' is not at the end of the line but in the middle.">
 
 <!ENTITY The.braces.title "The braces {}">

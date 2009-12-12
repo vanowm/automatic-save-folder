@@ -276,7 +276,16 @@ var automatic_save_folder = {
 		// var domain = 		document.getElementById("source").value ;
 		// var filename = 		document.getElementById("location").value ;
 		
-		var domain = aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host ;
+		try 
+		{
+			var domain = aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host ;
+		}
+		catch(e) // If the saved data is not from an URL, use the current website URL (example : Abduction! add-on screenshot function saving the current page into image)
+		{ 
+			var domain = document.getElementById("urlbar").value; 
+			domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
+			domain = domain[0];
+		} 
 		var filename = aFpP.fileInfo.fileName
 		
 		// For Ctrl+S, if pagename.ext is not on the URL document.title is used as filename, add .htm to the filename
@@ -542,8 +551,18 @@ var automatic_save_folder = {
 		const ZERO = "0";  // leading zero
 		
 		// load the domain and the filename of the saved file	
-		var domain = 	aFpP.fileInfo.uri.host ;
-		var scheme = 	aFpP.fileInfo.uri.scheme ;
+		try
+		{
+			var domain = 	aFpP.fileInfo.uri.host ;
+			var scheme = 	aFpP.fileInfo.uri.scheme ;
+		}
+		catch(e) // If the saved data is not from an URL, use the current website URL (example : Abduction! add-on screenshot function saving the current page into image)
+		{ 
+			var domain = document.getElementById("urlbar").value; 
+			domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
+			var scheme = domain[1];
+			domain = domain[0];
+		} 
 		var filename = 	aFpP.fileInfo.fileName ;
 		var file_name = aFpP.fileInfo.fileBaseName ;
 		var extension = aFpP.fileInfo.fileExt ;
