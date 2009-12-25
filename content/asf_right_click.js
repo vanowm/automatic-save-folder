@@ -75,35 +75,12 @@ var automatic_save_folder = {
 						// Set to 0 only when the user want to use it
 						var asf_rightclick = prefs.getBoolPref("extensions.asf.rightclick");
 						prefs.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclick == true ? 0 : 1000);
-						
-						// and set it back to 1000 (default) when exiting Firefox
-						// to prevent blocking the user to 0 if add-on is removed without reseting the timeout first.
-						// (From Download sort extension)
-						var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-						obsSvc.addObserver(this.asf_quitObserver, "quit-application-requested", false);
 					}
 				}
 			}
 		}
 		
 	},
-	
-	
-	// reset Timelimit=0 to =1000 when closing Firefox 
-	// it will reset to 1000 even if closing firefox is canceled.
-	// It will cause ASF right-click to stop working until the user accept any changes in ASF main preferences. 
-	// I think it's very unlikly to happen to a lot of people, and is easily corrected by checking the preferences.
-	asf_quitObserver: {
-		observe: function(subject, topic, state) {
-		
-			//alert(topic);
-			if(topic == "quit-application-requested") {
-				var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-				prefs.setIntPref("browser.download.saveLinkAsFilenameTimeout", 1000);
-			}
-		}
-	},
-	
 	
 	
 	// Original from firefox 3.5.3
