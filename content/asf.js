@@ -211,12 +211,15 @@ var automatic_save_folder = {
 	
 	
 	toggle_options: function () {  // called whenever the Options tab is selected
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var viewdloption = document.getElementById("asf-viewdloption");
 		var viewpathlist = document.getElementById("asf-viewpathselect");
 		var dialogaccept = document.getElementById("asf-dialogaccept");
 		var dialogacceptFiltered = document.getElementById("asf-dialogacceptFiltered");
 		var useDownloadDir = document.getElementById("asf-useDownloadDir");
-		
+		var asf_userightclick = document.getElementById("asf-userightclick");
+		var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout");
+				
 		// check if autosave is selected, if not : set the saving path to "filtered" and disable the dropdown menu.
 		if (useDownloadDir.checked == false)
 		{
@@ -260,6 +263,16 @@ var automatic_save_folder = {
 			viewpathlist.disabled = false;
 		}
 			
+		// set the sub-rightclick option to grey state
+		if (asf_userightclick.checked == false)
+		{
+			asf_rightclicktimeout.disabled = true;
+		}
+		if (asf_userightclick.checked == true)
+		{
+			asf_rightclicktimeout.disabled = false;
+		}
+			
 		// Check the right-click feature here, and prints text according to Firefox version and active addons
 		// hide all the descriptions box, and unhide the needed one 
 		document.getElementById("asf-rightclickdesc-ff2").hidden = true;     // Firefox 2, Right-click disabled message
@@ -268,34 +281,62 @@ var automatic_save_folder = {
 		
 		if (this.firefoxversion == 2)
 		{
-			document.getElementById("asf-rightclick").hidden = true;          // Hide the right-click checkbox
-			document.getElementById("asf-rightclickdesc").hidden = true;      // Hide the right-click description
+			document.getElementById("asf-userightclick").hidden = true;       // Hide the right-click checkbox
+			document.getElementById("asf-rightclicktimeout").hidden = true;   // Hide the right-click timeout checkbox
 			document.getElementById("asf-rightclickdesc-ff2").hidden = false; // Show right-click not working on Firefox 2.0
 		}
 		if (this.firefoxversion == 3)
 		{
 			if (Dsort_installed) // if Download sort is installed, display a message "right click disabled"
 			{
-				var asf_rightclick = document.getElementById("asf-rightclick");
-				asf_rightclick.disabled = true;
+
+				asf_userightclick.disabled = true;
+				asf_rightclicktimeout.disabled = true;
 				
-				document.getElementById("asf-rightclickdesc").hidden = true;
 				document.getElementById("asf-rightclickdesc-DSort").hidden = false;
 			}
 		}
 		
+		if (instantApply) // bug with sub-options status set by javascript
+		{
+			this.asf_saveoptions();
+		}
 	},
 	
 	
-	toggle_rightclick: function () {
+	toggle_userightclick: function () {
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
+		var asf_userightclick = document.getElementById("asf-userightclick");
+		var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout");
+		
+		// set the sub-rightclick option to grey state
+		if (asf_userightclick.checked == false)
+		{
+			asf_rightclicktimeout.checked = false;
+			asf_rightclicktimeout.disabled = true;
+		}
+		if (asf_userightclick.checked == true)
+		{
+			asf_rightclicktimeout.disabled = false;
+			asf_rightclicktimeout.checked = true;
+		}
+		
+		if (instantApply) // bug with sub-options status set by javascript
+		{
+			this.asf_saveoptions();
+		}
+
+	},
+	
+	
+	toggle_rightclicktimeout: function () {
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		
 		if (instantApply)
 		{
-		var status = document.getElementById("asf-rightclick").checked;
-		this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", status == true ? 0 : 1000 );
+			var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout").checked;
+			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclicktimeout == true ? 0 : 1000 );
 		}
-
 	},
 	
 	
@@ -650,15 +691,22 @@ var automatic_save_folder = {
 		var Dsort_installed = this.DownloadSort();		
 		if ((Dsort_installed == false) && this.firefoxversion == 3) // only for firefox 3, Firefox2 doesn't use timeout option
 		{
-			var rightclick = document.getElementById("asf-rightclick").checked;
-			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", rightclick == true ? 0 : 1000);
+			var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout").checked;
+			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclicktimeout == true ? 0 : 1000);
 		}
 
-		
 		//save the default folder (filters tab)
 		var default_folder = document.getElementById("asf-default-folder").value;
 		this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);	
 
+		
+		// bug from both instantApply and non instantApply, when changing checked state with javascript the state is not saved
+		// so for all the sub-option, let's save manually :
+		this.prefManager.setBoolPref("extensions.asf.viewpathselect", document.getElementById("asf-viewpathselect").checked);
+		this.prefManager.setBoolPref("extensions.asf.rightclicktimeout", document.getElementById("asf-rightclicktimeout").checked);
+		this.prefManager.setBoolPref("extensions.asf.dialogacceptFiltered", document.getElementById("asf-dialogacceptFiltered").checked);
+		
+		
 	},
 	
 	

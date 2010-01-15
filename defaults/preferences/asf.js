@@ -16,6 +16,7 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
  pref("browser.download.folderList", 2);
  pref("extensions.asf.dialogaccept", false);
  pref("extensions.asf.dialogacceptFiltered", false);
- pref("extensions.asf.rightclick", true);
+ pref("extensions.asf.userightclick", true);
+ pref("extensions.asf.rightclicktimeout", true);
  pref("browser.download.saveLinkAsFilenameTimeout", 0); // set the default value to userpref.js to prevent main pref.js modification and restore default value on ASF uninstall.
  pref("extensions.asf.usecurrenturl", false);

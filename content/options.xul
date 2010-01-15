@@ -32,7 +32,8 @@
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
 		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
 		<preference id="asf_dialogacceptFiltered" name="extensions.asf.dialogacceptFiltered" type="bool"/>
-		<preference id="asf_rightclick" name="extensions.asf.rightclick" type="bool"/>
+		<preference id="asf_userightclick" name="extensions.asf.userightclick" type="bool"/>
+		<preference id="asf_rightclicktimeout" name="extensions.asf.rightclicktimeout" type="bool"/>
 		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
 		<preference id="asf_useDownloadDir" name="browser.download.useDownloadDir" type="bool"/>
 		<preference id="asf_folderList" name="browser.download.folderList" type="int"/>
@@ -52,10 +53,14 @@
 	<tooltip id="tooltip_viewpathselect" style="background-color: #33DD00;" noautohide="true">
 		<description value="&asf.viewpathselect.tooltip;"/>
 	</tooltip>
-	<tooltip id="tooltip_rightclick" orient="vertical" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.rightclick.tooltip1;"/>
-		<description value="&asf.rightclick.tooltip2;"/>
-		<description value="&asf.rightclick.tooltip3;"/>
+	<tooltip id="tooltip_userightclick" orient="vertical" style="background-color: #33DD00;" noautohide="true">
+		<description value="&asf.userightclick.tooltip;"/>
+	</tooltip>
+	<tooltip id="tooltip_rightclicktimeout" orient="vertical" style="background-color: #33DD00;" noautohide="true">
+		<description value="&asf.rightclicktimeout.tooltip1;"/>
+		<description value="&asf.rightclicktimeout.tooltip2;"/>
+		<description value="&asf.rightclicktimeout.tooltip3;"/>
+		<description value="&asf.rightclicktimeout.tooltip4;"/>
 	</tooltip>
 	<tooltip id="tooltip_variablemode" orient="vertical" style="background-color: #33DD00;" noautohide="true">
 		<description value="&asf.variablemode.tooltip1;"/>
@@ -154,8 +159,8 @@
 			<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
 			<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
 			<separator class="thin"/>
-			<checkbox id="asf-rightclick" preference="asf_rightclick" label="&asf.rightclick.bool;" tooltip="tooltip_rightclick" oncommand="automatic_save_folder.toggle_rightclick();"/>
-			<description id="asf-rightclickdesc" style="margin-left:25px;white-space: pre-wrap;">&asf.rightclick.label;</description>
+			<checkbox id="asf-userightclick" preference="asf_userightclick" label="&asf.userightclick.bool;" tooltip="tooltip_userightclick" oncommand="automatic_save_folder.toggle_userightclick();"/>
+			<checkbox id="asf-rightclicktimeout" preference="asf_rightclicktimeout" label="&asf.rightclicktimeout.bool;" tooltip="tooltip_rightclicktimeout" style="margin-left:25px;" oncommand="automatic_save_folder.toggle_rightclicktimeout();"/>
 			<description id="asf-rightclickdesc-DSort" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.DSort.label;</description>
 			<description id="asf-rightclickdesc-ff2" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.ff2.label;</description>
 		</groupbox>

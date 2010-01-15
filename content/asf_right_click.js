@@ -42,12 +42,10 @@ var automatic_save_folder = {
 			// Right-click feature doesn't work on Firefox 2 (Can't detect installed add-on and prevent conflict with Download Sort)
 			if (this.versionChecker.compare(this.appInfo.version, "3.0") >= 0)
 			{
-				var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-					
 				//replace original Rightclick menu with ASF Rightclick menu
 				// Not compatible with Download Sort extension (same function modification, it will conflict).
 				// Detect if Download Sort is installed and enabled, and activate ASF rightclick only if DSort is not already loaded.
-				var enabledItems = prefs.getCharPref("extensions.enabledItems");
+				var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
 				var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
 				var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
 				
@@ -65,17 +63,15 @@ var automatic_save_folder = {
 					// replace the ORIGinal firefox function with the custom one. (original from Firefox 3.5.4) 
 					window.getTargetFile = this.asf_getTargetFile;
 					
-					if (this.versionChecker.compare(this.appInfo.version, "3.0") >= 0)
-					{
-						// Starting from firefox 3.0 there is a timeout when downloading with right-click to read header(Content-Disposition:) to rename the file in the file_explorer suggested filename.
-						// When timeout is set to 1000 ms (default), ASF right-click filtering is not working.
-						// When timeout is set to 0ms, ASF right-click filtering is working, but header renaming is not working anymore.
-						// And when set to ~8ms, Header renaming is working but ASF is filtering on the previous filename (before the renaming).
-						
-						// Set to 0 only when the user want to use it
-						var asf_rightclick = prefs.getBoolPref("extensions.asf.rightclick");
-						prefs.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclick == true ? 0 : 1000);
-					}
+					// Starting from firefox 3.0 there is a timeout when downloading with right-click to read header(Content-Disposition:) to rename the file in the file_explorer suggested filename.
+					// When timeout is set to 1000 ms (default), ASF right-click filtering is not working.
+					// When timeout is set to 0ms, ASF right-click filtering is working, but header renaming is not working anymore.
+					// And when set to ~8ms, Header renaming is working but ASF is filtering on the previous filename (before the renaming).
+					
+					// Set to 0 only when the user want to use it
+					var asf_rightclicktimeout = this.prefManager.getBoolPref("extensions.asf.rightclicktimeout");
+					this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclicktimeout == true ? 0 : 1000);
+					
 				}
 			}
 		}
@@ -227,139 +223,161 @@ var automatic_save_folder = {
 	
 	rightclick_main: function(aFpP) {
 		
-		//alert ("debug full uri : "+aFpP.fileInfo.uri.spec);
-		//alert("ok");
-		
-		// Setting private variables usable in this function
-		var prefManager = this.prefManager;		
-		var versionChecker = this.versionChecker;
-		var appInfo = this.appInfo;
-		
-		if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
+		//check if the rightclick filtering is enabled
+		var userightclick = this.prefManager.getBoolPref("extensions.asf.userightclick");
+		if (userightclick)
 		{
-			this.firefoxversion = "3";
-		}
-		else 
-		{
-			this.firefoxversion = "2";
-		}
-		
-		
-		// Check if there is any filter in list
-		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");		
+			//alert ("debug full uri : "+aFpP.fileInfo.uri.spec);
+			//alert("ok");
 			
+			// Setting private variables usable in this function
+			var prefManager = this.prefManager;		
+			var versionChecker = this.versionChecker;
+			var appInfo = this.appInfo;
 			
-		// load the domain and the filename of the saved file (copy the data from the firefox saving window)
-		// var domain = 		document.getElementById("source").value ;
-		// var filename = 		document.getElementById("location").value ;
-		
-		try 
-		{
-			var domain = aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host ;
-		}
-		catch(e) // If the saved data is not from an URL, use the current website URL (example : Abduction! add-on screenshot function saving the current page into image)
-		{ 
-			var domain = document.getElementById("urlbar").value; 
-			domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
-			domain = domain[0];
-		} 
-		var filename = aFpP.fileInfo.fileName
-		
-		// For Ctrl+S, if pagename.ext is not on the URL document.title is used as filename, add .htm to the filename
-		var page_title = document.title.replace(" - Mozilla Firefox", "");
-		if (filename == page_title) filename = filename+".htm";
-		
-		
-		// load prefmanager data
-		var savetype = 			prefManager.getIntPref("extensions.asf.savetype");	
-		var lastdir = 			prefManager.getBoolPref("extensions.asf.lastdir");	
-		var defaultfolder = 	this.loadUnicodeString("extensions.asf.defaultfolder");		
-		var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
-		var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");
-		var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
-		var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
-		var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");	
-		
-		// If variable/Dynamic folders mode is ON, let's check the variables and replace to create the new defaultfolder
-		if (variable_mode == true) 
-		{
-			defaultfolder = this.createfolder(aFpP, defaultfolder);
-		}
-		
-		// set the last folder path used into asf.lastpath
-		if (this.firefoxversion == "3")   // take the download.lastDir if it's FF3
-		{
-			var folder = this.loadUnicodeString("browser.download.lastDir");
-		}
-		else // else if it's not FF3 (it's 1.5 or 2), read Download.dir
-		{
-			var folder = this.loadUnicodeString("browser.download.dir");
-		}
-		this.saveUnicodeString("extensions.asf.lastpath", folder); // And set it to asf.lastpath to be compared later with the new path the filters will set to lastDir (or dir)
-
-		
-		// load filters data from prefmanager into filters[]
-		// filters[filternumber][label]		
-		var filters = new Array();
-		for ( var i = 0 ; i < nbrfilters ; i++)
-		{
-			var dom = this.loadUnicodeString("extensions.asf.filters"+ i +".domain");
-			var fil = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
-			var fol = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
-			var act = prefManager.getBoolPref("extensions.asf.filters"+ i +".active");	
-			filters[i] = [dom, fil, fol, act];
-		}	
-		
-		
-		// 
-		// Start checking the filters with the downloaded file
-		//
-		var idx = -1 ;
-		var dom_regexp = false;
-		var file_regexp = false;
-		for ( var i = 0 ; i < filters.length ; i++)
-		{		
-			if (filters[i][3] == true)  // if not temporary deactivated
-			{		
-				dom_regexp = false ; // reset the matching string for the "for" loop
-				file_regexp = false ; // same as above
-			// Check the domain	
-				dom_regexp = this.test_regexp(filters[i][0], domain);  // hosted Domain
-				
-			// Check the current website URL if hosted domain checking returned false.
-				if (!dom_regexp && use_currentURL)
-				{
-					
-					try
-					{
-						var currentURL = document.getElementById("urlbar").value;
-						dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
-					}
-					catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain. 
-				}
-				
-			// Check the filename	
-				file_regexp = this.test_regexp(filters[i][1], filename); // Filename
-				
-				// debug
-				// alert ("i = "+i+"\n domain match = "+dom_regexp+"\n file match = "+file_regexp);
-				if (dom_regexp && file_regexp)
-				{
-					var idx = i;
-					break;
-				}			
-			}
-		} // end filters loop
-		
-		if (idx < 0) // if no filters matched
-		{
-			if(savetype == 1)  // and folder is set to user choice
+			if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
 			{
-				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
-				{	// then change the destination folder to user choice
-					this.set_savepath(defaultfolder);
-				}	
-				else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
+				this.firefoxversion = "3";
+			}
+			else 
+			{
+				this.firefoxversion = "2";
+			}
+			
+			
+			// Check if there is any filter in list
+			var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");		
+				
+				
+			// load the domain and the filename of the saved file (copy the data from the firefox saving window)
+			// var domain = 		document.getElementById("source").value ;
+			// var filename = 		document.getElementById("location").value ;
+			
+			try 
+			{
+				var domain = aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host ;
+			}
+			catch(e) // If the saved data is not from an URL, use the current website URL (example : Abduction! add-on screenshot function saving the current page into image)
+			{ 
+				var domain = document.getElementById("urlbar").value; 
+				domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
+				domain = domain[0];
+			} 
+			var filename = aFpP.fileInfo.fileName
+			
+			// For Ctrl+S, if pagename.ext is not on the URL document.title is used as filename, add .htm to the filename
+			var page_title = document.title.replace(" - Mozilla Firefox", "");
+			if (filename == page_title) filename = filename+".htm";
+			
+			
+			// load prefmanager data
+			var savetype = 			prefManager.getIntPref("extensions.asf.savetype");	
+			var lastdir = 			prefManager.getBoolPref("extensions.asf.lastdir");	
+			var defaultfolder = 	this.loadUnicodeString("extensions.asf.defaultfolder");		
+			var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
+			var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");
+			var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
+			var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
+			var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");	
+			
+			// If variable/Dynamic folders mode is ON, let's check the variables and replace to create the new defaultfolder
+			if (variable_mode == true) 
+			{
+				defaultfolder = this.createfolder(aFpP, defaultfolder);
+			}
+			
+			// set the last folder path used into asf.lastpath
+			if (this.firefoxversion == "3")   // take the download.lastDir if it's FF3
+			{
+				var folder = this.loadUnicodeString("browser.download.lastDir");
+			}
+			else // else if it's not FF3 (it's 1.5 or 2), read Download.dir
+			{
+				var folder = this.loadUnicodeString("browser.download.dir");
+			}
+			this.saveUnicodeString("extensions.asf.lastpath", folder); // And set it to asf.lastpath to be compared later with the new path the filters will set to lastDir (or dir)
+
+			
+			// load filters data from prefmanager into filters[]
+			// filters[filternumber][label]		
+			var filters = new Array();
+			for ( var i = 0 ; i < nbrfilters ; i++)
+			{
+				var dom = this.loadUnicodeString("extensions.asf.filters"+ i +".domain");
+				var fil = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
+				var fol = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
+				var act = prefManager.getBoolPref("extensions.asf.filters"+ i +".active");	
+				filters[i] = [dom, fil, fol, act];
+			}	
+			
+			
+			// 
+			// Start checking the filters with the downloaded file
+			//
+			var idx = -1 ;
+			var dom_regexp = false;
+			var file_regexp = false;
+			for ( var i = 0 ; i < filters.length ; i++)
+			{		
+				if (filters[i][3] == true)  // if not temporary deactivated
+				{		
+					dom_regexp = false ; // reset the matching string for the "for" loop
+					file_regexp = false ; // same as above
+				// Check the domain	
+					dom_regexp = this.test_regexp(filters[i][0], domain);  // hosted Domain
+					
+				// Check the current website URL if hosted domain checking returned false.
+					if (!dom_regexp && use_currentURL)
+					{
+						
+						try
+						{
+							var currentURL = document.getElementById("urlbar").value;
+							dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
+						}
+						catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain. 
+					}
+					
+				// Check the filename	
+					file_regexp = this.test_regexp(filters[i][1], filename); // Filename
+					
+					// debug
+					// alert ("i = "+i+"\n domain match = "+dom_regexp+"\n file match = "+file_regexp);
+					if (dom_regexp && file_regexp)
+					{
+						var idx = i;
+						break;
+					}			
+				}
+			} // end filters loop
+			
+			if (idx < 0) // if no filters matched
+			{
+				if(savetype == 1)  // and folder is set to user choice
+				{
+					if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
+					{	// then change the destination folder to user choice
+						this.set_savepath(defaultfolder);
+					}	
+					else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
+					{
+						if (this.firefoxversion == "3")
+						{
+							var lastpath = this.loadUnicodeString("browser.download.lastDir");
+						}
+						if (this.firefoxversion == "2")
+						{
+							var lastpath = this.loadUnicodeString("browser.download.dir");
+						}
+						
+						if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
+						{
+							lastpath = defaultfolder;
+						}
+						this.set_savepath(lastpath);
+					}
+				}
+				else // else, if savetype == 0  (folder is set to last folder)
 				{
 					if (this.firefoxversion == "3")
 					{
@@ -377,54 +395,36 @@ var automatic_save_folder = {
 					this.set_savepath(lastpath);
 				}
 			}
-			else // else, if savetype == 0  (folder is set to last folder)
+			else // if a filter is found 
 			{
-				if (this.firefoxversion == "3")
+				var folder = filters[idx][2];
+				
+				// If Advanced mode is ON, let's check the variables and create the folder
+				if (variable_mode == true) 
 				{
-					var lastpath = this.loadUnicodeString("browser.download.lastDir");
-				}
-				if (this.firefoxversion == "2")
-				{
-					var lastpath = this.loadUnicodeString("browser.download.dir");
+					folder = this.createfolder(aFpP, folder, idx);
 				}
 				
-				if (lastpath == "") // if no path is returned (first time using lastDir, or the user reseted the content manually in about:config)
-				{
-					lastpath = defaultfolder;
-				}
-				this.set_savepath(lastpath);
+				this.set_savepath(folder);
 			}
-		}
-		else // if a filter is found 
-		{
-			var folder = filters[idx][2];
 			
-			// If Advanced mode is ON, let's check the variables and create the folder
-			if (variable_mode == true) 
+			// in every case, set the new file hosted domain to tempdomain if not in private browsing
+			var inPrivateBrowsing = false;
+			if (this.firefoxversion == 3)
 			{
-				folder = this.createfolder(aFpP, folder, idx);
+				try {
+					var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
+										.getService(Components.interfaces.nsIPrivateBrowsingService);
+					inPrivateBrowsing = pbs.privateBrowsingEnabled;
+				}
+				catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+				}
 			}
-			
-			this.set_savepath(folder);
-		}
-		
-		// in every case, set the new file hosted domain to tempdomain if not in private browsing
-		var inPrivateBrowsing = false;
-		if (this.firefoxversion == 3)
-		{
-			try {
-				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
-									.getService(Components.interfaces.nsIPrivateBrowsingService);
-				inPrivateBrowsing = pbs.privateBrowsingEnabled;
-			}
-			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+			if (!inPrivateBrowsing)
+			{
+				this.saveUnicodeString("extensions.asf.tempdomain", domain);
 			}
 		}
-		if (!inPrivateBrowsing)
-		{
-			this.saveUnicodeString("extensions.asf.tempdomain", domain);
-		}
-		
 		
 	},
 	
