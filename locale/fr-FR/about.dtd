@@ -38,6 +38,7 @@
 + Ajout d'une option pour accepter automatiquement la fenêtre &#34;Que doit faire Firefox de ce fichier ?&#34;. Utilisez la avec l'option de sauvegarde de Firefox &#34;Enregistrer le fichier dans le dossier&#34; pour une meilleure efficacité.
 + Ajout d'une option pour utiliser l'adresse du site courant avec le domaine du filtre si le domaine d'hébergement ne correspond pas.
 + Affichage de l'icône d'ASF dans le gestionnaire d'extensions même lorsque l'extension est désactivée, plutôt que la pièce de puzzle verte (Firefox 3.6+)
++ Ajout d'une option permettant de choisir le style d'affichage du groupe ASF, et ajout d'un lien sur le nom du groupe pour afficher/masquer son contenu.
 * Dans le menu déroulant sur la fenêtre de sauvegarde : Listing des dossiers par ordre alphabétique, suppression des doublons et nom de dossier dynamique si l'option est activée.
 * Séparation de l'onglet &#34;informations&#34; en deux onglets &#34;Aide&#34; et &#34;À propos...&#34;.
 * Ajout d'infobulles à la place du texte explicatif sous les options (Quelques problèmes rencontrés avec Firefox2).
@@ -47,6 +48,7 @@
 ! Correction d'une exception lorsque l'option &#34;Utiliser l'URL du site courant&#34; est activé et que la barre d'adresse ne contient pas d'URL. 
   Se produisait généralement avec les script de redirection lorsque Firefox refermait le nouvel onglet vide, ou en cliquant sur un lien avec la molette de la souris.
 ! En utilisant l'option InstantApply, les filtres suggérés n'étaient pas rechargés à la fermeture de la fenêtre de préférences.
+! En utilisant l'option InstantApply, les sous-options qui se dé-sélectionnaient visuellement n'étaient pas enregistrées.
 
 Autres mises à jour :
 + Code source et révisions disponibles sur http://code.google.com/p/automatic-save-folder
@@ -153,9 +155,12 @@ Ainsi que les contributeurs :<br />
 <!ENTITY about.bugreport.content "- Photonic, Martin">
 
 <!ENTITY about.translation.title "Traductions">
-<!ENTITY about.translation.content "- Anglais : Cyan.<br />
-- Français : Cyan.<br />
-- Italien : Scognito.<br />
-- L'équipe et les traducteurs de Babelzilla.org<br />
-- Relecture et correction par : Goofy, Haynee, Narayan.<br />">
+<!ENTITY about.translation.content "- Traducteurs indépendants et l'équipe de traduction de Babelzilla : <br />
+- de : Michael Baer<br />
+- en-US : Cyan, Narayan<br />
+- es : RigoNet<br />
+- fr : Cyan, Goofy, Haynee<br />
+- id : dimassony<br />
+- it : Scognito.<br />
+- pt-BR : petruc<br />">
 

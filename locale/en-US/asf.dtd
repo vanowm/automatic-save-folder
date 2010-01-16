@@ -44,6 +44,10 @@
 <!ENTITY asf.dialogacceptFiltered.tooltip "Will not automatically accept the &#34;What should Firefox do with this file&#34; dialog windows if no filter matches.">
 <!ENTITY asf.viewdloption.bool "View options when downloading">
 <!ENTITY asf.viewdloption.tooltip "Allow you to see the last two destination folders and a link to add or edit the filters">
+<!ENTITY asf.viewdloptionType0.label "Always show">
+<!ENTITY asf.viewdloptionType1.label "Always minimize">
+<!ENTITY asf.viewdloptionType2.label "Minimize if disabled">
+<!ENTITY asf.viewdloptionType3.label "Hide if disabled">
 <!ENTITY asf.viewpathselect.bool "View the list of folders">
 <!ENTITY asf.viewpathselect.tooltip "Activate a drop-down menu with all the filter's path.">
 <!ENTITY asf.usecurrenturl.bool "Use the current website URL to verify the filter's domain if the hosted domain doesn't match.">

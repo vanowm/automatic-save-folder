@@ -15,8 +15,8 @@
 
 <vbox id="container"> 
 	<groupbox id="asf_dloptions" style="visibility: collapse;" flex="1">
-	<caption label="Automatic Save Folder"/>
-	<vbox>
+	<caption label="Automatic Save Folder" onclick="automatic_save_folder.toggle_dloptionsContent();"/>
+	<vbox id="asf_dloptions_content" style="visibility: visible;" >
 		<radiogroup id="asf_radio_savepath" align="left">
 				<radio id="asf_savefolder" value="0" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath()"/>
 				<radio id="asf_lastpath" value="1" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath()"/>
@@ -26,7 +26,7 @@
 						<description value="       "/><menulist id="asf_folder_list" width="280">
 						</menulist>
 					</hbox>
-				</vbox>				
+				</vbox>
 		</radiogroup>
 		<separator class="thin"/>
 		<hbox>

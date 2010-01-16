@@ -582,9 +582,10 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
 		var asf_savefolder = document.getElementById('asf_savefolder');
 		var asf_folder_list = document.getElementById('asf_folder_list');
-		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");	
-		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");	
-		var useDownloadDir = this.prefManager.getBoolPref("browser.download.useDownloadDir");	
+		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");
+		var asf_viewdloptionType = this.prefManager.getIntPref("extensions.asf.viewdloptionType");
+		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");
+		var useDownloadDir = this.prefManager.getBoolPref("browser.download.useDownloadDir");
 		var folderList = this.prefManager.getIntPref("browser.download.folderList");
 		
 		var folder = "";
@@ -627,7 +628,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		// check the lastpath, if different than current folder, then print radio choice to user
 		// so he can choose from found filters, or last used path.
-		var lastpath = this.loadUnicodeString("extensions.asf.lastpath");	
+		var lastpath = this.loadUnicodeString("extensions.asf.lastpath");
 		var asf_lastpath = document.getElementById('asf_lastpath');
 		
 		if ( (lastpath == folder) || (lastpath == "") )  // if same or empty (first time using ASF), do not show radio for lastpath choice
@@ -649,34 +650,51 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		
 		//now, if the user checked the option to view asf on saving window, set it to visible
-		if(asf_viewdloption == true) asf_dloptions.style.visibility = "visible";
-		
-		//and last, if the user checked the option to view the path list on saving window, set it to visible
-		if((asf_viewpathselect == true) && (this.prefManager.getIntPref("extensions.asf.filtersNumber") > 0) )
+		if(asf_viewdloption == true) 
 		{
-			this.read_all_filterpath();
-			asf_radiogroup_pathselect.style.visibility = "visible";
-		}		
-		
-		// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of found filters
-		if((useDownloadDir == true) && (folderList != 2)) // if set to desktop or Download
-		{
-			asf_radio_savepath.disabled = true;
-			asf_radiogroup_pathselect.disabled = true;
-			asf_folder_list.disabled = true;
-		}
-		else
-		{
-			asf_radio_savepath.disabled = false;
-			asf_radiogroup_pathselect.disabled = false;
-			asf_folder_list.disabled = false;
-		}		
+			if(asf_viewdloptionType == 0) asf_dloptions.style.visibility = "visible";
+			
+			if(asf_viewdloptionType == 1) 
+			{
+				asf_dloptions.style.visibility = "visible";
+				document.getElementById('asf_dloptions_content').style.visibility = "collapse";
+			}
+			
+			
+			
+			//and last, if the user checked the option to view the path list on saving window, set it to visible
+			if((asf_viewpathselect == true) && (this.prefManager.getIntPref("extensions.asf.filtersNumber") > 0) )
+			{
+				this.read_all_filterpath();
+				asf_radiogroup_pathselect.style.visibility = "visible";
+			}
+			
+			// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of found filters
+			if((useDownloadDir == true) && (folderList != 2)) // if set to desktop or Download
+			{
+				asf_radio_savepath.disabled = true;
+				asf_radiogroup_pathselect.disabled = true;
+				asf_folder_list.disabled = true;
+			}
+			else
+			{
+				asf_radio_savepath.disabled = false;
+				asf_radiogroup_pathselect.disabled = false;
+				asf_folder_list.disabled = false;
+			}		
 
-		
-		// Set the max width to the size of the screen minus 200px. Added for Mac OSX users with long path choice.
-		// alert("first screen : " + screen.width + "x" + screen.height);
-		asf_dloptions.style.maxWidth = screen.width -200 +"px";
-		
+			
+			// Set the max width to the size of the screen minus 200px. Added for Mac OSX users with long path choice.
+			// alert("first screen : " + screen.width + "x" + screen.height);
+			asf_dloptions.style.maxWidth = screen.width -200 +"px";	
+		}
+	},
+	
+	
+	toggle_dloptionsContent: function(){
+		var asf_dloptions_content = document.getElementById('asf_dloptions_content').style.visibility;
+		document.getElementById('asf_dloptions_content').style.visibility = (asf_dloptions_content == "visible" ? "collapse" : "visible");
+		window.sizeToContent();
 	},
 	
 	
@@ -686,19 +704,47 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var asf_radio_savepath = document.getElementById('asf_radio_savepath');
 		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
 		var asf_folder_list = document.getElementById('asf_folder_list');
+		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");	
+		var asf_viewdloptionType = this.prefManager.getIntPref("extensions.asf.viewdloptionType");
 		
+		// Workaround for bug 439323 (if call when not needed, dosen't work anymore)
+		// https://bugzilla.mozilla.org/show_bug.cgi?id=439323
+		var initialState = document.getElementById('asf_dloptions_content').style.visibility ;
 		
-		if(save) // if set to "save the file"
+		if (asf_viewdloption)
 		{
-			asf_radio_savepath.disabled = false;
-			asf_radiogroup_pathselect.disabled = false;
-			asf_folder_list.disabled = false;
-		}
-		else
-		{
-			asf_radio_savepath.disabled = true;
-			asf_radiogroup_pathselect.disabled = true;
-			asf_folder_list.disabled = true;
+			if(save) // if set to "save the file"
+			{
+				asf_radio_savepath.disabled = false;
+				asf_radiogroup_pathselect.disabled = false;
+				asf_folder_list.disabled = false;
+				if ((asf_viewdloptionType == 2) || (asf_viewdloptionType == 3))
+				{
+					document.getElementById('asf_dloptions').style.visibility = "visible";
+					document.getElementById('asf_dloptions_content').style.visibility = "visible";
+				}
+			}
+			else
+			{
+				asf_radio_savepath.disabled = true;
+				asf_radiogroup_pathselect.disabled = true;
+				asf_folder_list.disabled = true;
+				if (asf_viewdloptionType == 2) // minimize only
+				{
+					document.getElementById('asf_dloptions').style.visibility = "visible";
+					document.getElementById('asf_dloptions_content').style.visibility = "collapse";
+				}
+				if (asf_viewdloptionType == 3)
+				{
+					document.getElementById('asf_dloptions').style.visibility = "collapse";
+					document.getElementById('asf_dloptions_content').style.visibility = "collapse";
+				}
+			}
+			
+			if (initialState != document.getElementById('asf_dloptions_content').style.visibility)
+			{
+				window.sizeToContent();
+			}
 		}
 	},
 	
@@ -721,7 +767,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var menupopup = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menupopup');
 		
 		// Check if there is any filter in list
-		var nbrfilters = 	this.prefManager.getIntPref("extensions.asf.filtersNumber");		
+		var nbrfilters = 	this.prefManager.getIntPref("extensions.asf.filtersNumber");
 		var path = "";
 		
 		// Delete active list before repopulating (if editing filter and coming back to saving window)
@@ -750,6 +796,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		var pathlist_sort_alpha = true;   // let the user choose in next release.
 		if (pathlist_sort_alpha) pathlist.sort(); 
 		
+		
 		for (var i = 0; i < pathlist.length; i++)
 		{
 			path = pathlist[i];
@@ -764,8 +811,8 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		// Populate the path list into the menu
 		list.appendChild(menupopup);
-		
-	},	
+		list.selectedIndex = 0;
+	},
 	
 	
 	asf_toggle_savepath: function () {
@@ -886,7 +933,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	);	
 	
 	addEventListener(
-	"click",		// After a click in the unknownContentType.xul, check if the user changed the saving option (save, open, etc.)
+	"command",		// After a click in the unknownContentType.xul, check if the user changed the saving option (save, open, etc.)
 	function(){ automatic_save_folder.check_uCTOption(); },  // Run main from automatic_save_folder to check the filters
 	false
 	);	

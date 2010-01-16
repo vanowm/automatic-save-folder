@@ -1,6 +1,7 @@
- pref("extensions.asf.lastdir", true);
+﻿ pref("extensions.asf.lastdir", true);
  pref("extensions.asf.keeptemp", true);
  pref("extensions.asf.viewdloption", false);
+ pref("extensions.asf.viewdloptionType", 0);
  pref("extensions.asf.viewpathselect", false);
  pref("extensions.asf.savetype", 0);
  pref("extensions.asf.defaultfolder", "");

@@ -38,6 +38,7 @@
 + Add an option to automatically accept the &#34;what would Firefox need to do with this file?&#34; dialog windows (User requested). Use it with &#34;Do not prompt the File explorer&#34; option for even better efficiency.
 + Add an option to choose if you want to use the current website URL to verify the filters if the file's hosted domain doesn't match.
 + Display ASF icon on the add-ons manager even on disabled state, instead of the green puzzle piece (Firefox 3.6+)
++ Added a display option to show or hide the ASF option box, and added a link on the box name to show/hide the ASF option box content.
 * On the download dialog's drop-down menu: Sort path list alphabetically, remove duplicates, and made them working with dynamic renaming folder if option enabled.
 * Separated the &#34;informations&#34; tab in two other tabs &#34;Help&#34; and &#34;About...&#34;.
 * Added tooltips instead of help text bellow each options (has some issues with Firefox2).
@@ -47,6 +48,7 @@
 ! Prevent an exception when &#34;use current website URL&#34; option is enabled and the address bar doesn't contain an URL.
   Happened with redirection download script and Firefox closing the new empty popup window, or using middle mouse-button click on a link.
 ! When using instantApply, the suggested filters weren't refreshed after closing the preference window.
+! Fixed a bug where sub-options were auto unchecked visually but not saved when using instantApply feature.
 
 Other updates :
 + Source code and revisions available on http://code.google.com/p/automatic-save-folder
@@ -152,10 +154,13 @@ And contributors:<br />
 <!ENTITY about.bugreport.title "Bugs report">
 <!ENTITY about.bugreport.content "- Photonic, Martin">
 
-<!ENTITY about.translation.title "Translation">
-<!ENTITY about.translation.content "- English : Cyan.<br />
-- French : Cyan.<br />
-- Italian : Scognito.<br />
-- Babelzilla.org team and translators<br />
-- Correction by : Goofy, Haynee, Narayan.<br />">
+<!ENTITY about.translation.title "Translations">
+<!ENTITY about.translation.content "- Independant translators and Babelzilla translation team: <br />
+- de : Michael Baer<br />
+- en-US : Cyan, Narayan<br />
+- es : RigoNet<br />
+- fr : Cyan, Goofy, Haynee<br />
+- id : dimassony<br />
+- it : Scognito.<br />
+- pt-BR : petruc<br />">
 

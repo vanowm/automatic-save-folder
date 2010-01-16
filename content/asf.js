@@ -213,6 +213,7 @@ var automatic_save_folder = {
 	toggle_options: function () {  // called whenever the Options tab is selected
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var viewdloption = document.getElementById("asf-viewdloption");
+		var viewdloptionType = document.getElementById("asf-viewdloptionType");
 		var viewpathlist = document.getElementById("asf-viewpathselect");
 		var dialogaccept = document.getElementById("asf-dialogaccept");
 		var dialogacceptFiltered = document.getElementById("asf-dialogacceptFiltered");
@@ -255,11 +256,13 @@ var automatic_save_folder = {
 		// set the sub-D/L option to grey state
 		if (viewdloption.checked == false)
 		{
+			viewdloptionType.disabled = true;
 			viewpathlist.checked = false;
 			viewpathlist.disabled = true;
 		}
 		if (viewdloption.checked == true)
 		{
+			viewdloptionType.disabled = false;
 			viewpathlist.disabled = false;
 		}
 			

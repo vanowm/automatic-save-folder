@@ -28,6 +28,7 @@
 		<preference id="asf_keeptemp" name="extensions.asf.keeptemp" type="bool"/>
 		<preference id="asf_viewdloption" name="extensions.asf.viewdloption" type="bool"/>
 		<preference id="asf_viewpathselect" name="extensions.asf.viewpathselect" type="bool"/>
+		<preference id="asf_viewdloptionType" name="extensions.asf.viewdloptionType" type="int"/>
 		<preference id="asf_savetype" name="extensions.asf.savetype" type="int"/>
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
 		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
@@ -153,7 +154,17 @@
 			</hbox>
 			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;" oncommand="automatic_save_folder.toggle_options();"/>
 			<checkbox id="asf-dialogacceptFiltered" preference="asf_dialogacceptFiltered" label="&asf.dialogacceptFiltered.bool;"  tooltip="tooltip_dialogacceptFiltered" style="margin-left:25px;"/>
-			<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>
+			<hbox>
+				<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>
+				<menulist id="asf-viewdloptionType" preference="asf_viewdloptionType">
+					<menupopup>
+						<menuitem value="0" label="&asf.viewdloptionType0.label;"></menuitem>
+						<menuitem value="1" label="&asf.viewdloptionType1.label;"></menuitem>
+						<menuitem value="2" label="&asf.viewdloptionType2.label;"></menuitem>
+						<menuitem value="3" label="&asf.viewdloptionType3.label;"></menuitem>
+					</menupopup>
+				</menulist>
+			</hbox>
 			<checkbox id="asf-viewpathselect" preference="asf_viewpathselect"  label="&asf.viewpathselect.bool;" tooltip="tooltip_viewpathselect" style="margin-left:25px;white-space:pre-wrap"/>
 			<separator class="thin"/>
 			<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
