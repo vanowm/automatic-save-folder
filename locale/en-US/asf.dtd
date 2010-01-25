@@ -13,6 +13,7 @@
 <!ENTITY asf.tree.column.filename "File name">
 <!ENTITY asf.tree.column.localfolder "Local folder">
 <!ENTITY asf.tree.column.enabled "Active">
+<!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter's tab, you can write 'up' if you want -->
 <!ENTITY asf.options.move.up " ">
 <!ENTITY asf.options.move.down " ">
 <!ENTITY asf.options.edit "Edit">

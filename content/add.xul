@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ***** BEGIN LICENSE BLOCK *****
-	Copyright 2007-2009 Eric Cassar (Cyan)
+	Copyright 2007-2010 Éric Cassar (Cyan)
 
     This file is part of "Automatic Save Folder".
     You may find the license in the LICENSE file
@@ -48,7 +48,7 @@
 		
 		<description value="&asf.addedit.folder.label;"/>
 		<hbox>
-			<textbox id="asf-addedit-folder" readonly="true" width="240" ondblclick="automatic_save_folder.browsedir_addedit()"/>
+			<menulist editable="true" id="asf-addedit-folder" readonly="true" width="240" onload="automatic_save_folder.read_all_filterpath()" ondblclick="automatic_save_folder.browsedir_addedit()"/>
 			<button id="asf-addedit-select-folder" label="&asf.selectfolder.label;" oncommand="automatic_save_folder.browsedir_addedit()"/>
 		</hbox>
 		

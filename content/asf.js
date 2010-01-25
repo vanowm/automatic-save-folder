@@ -1,6 +1,6 @@
 ﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
-Copyright (C) 2007-2009 Eric Cassar (Cyan).
+Copyright (C) 2007-2010 Éric Cassar (Cyan).
 
     "Automatic Save Folder" is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -115,6 +115,7 @@ var automatic_save_folder = {
 				
 		}
 	},
+	
 	
 	save_active_state: function() {
 		//autosave the filterswhen clicking  (anywhere) on the filter tree
@@ -568,7 +569,7 @@ var automatic_save_folder = {
 		
 		// locate current directory
 		current_folder_input = this.createValidDestination(current_folder_input);	
-		if (current_folder_input != false) fp.displayDirectory = current_folder_input;
+		if (current_folder_input !== false) fp.displayDirectory = current_folder_input;
 		
 		var rv = fp.show();
 		if (rv == nsIFilePicker.returnOK)
@@ -599,7 +600,7 @@ var automatic_save_folder = {
 			if (directory.exists()) 
 				return directory;
 			} catch(e) {return false;}
-		return directory;
+		return false;
 	},
 	
 	// removed unicodepath, unicodestring is working fine.
@@ -723,6 +724,7 @@ var automatic_save_folder = {
 	// close the preference window
 		this.asf_close();
 	},
+	
 	
 	asf_close: function() {
 	

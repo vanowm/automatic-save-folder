@@ -1,6 +1,6 @@
 ﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
-Copyright (C) 2007-2009 Eric Cassar (Cyan).
+Copyright (C) 2007-2010 Éric Cassar (Cyan).
 
     "Automatic Save Folder" is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -82,14 +82,25 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 	
 	
 	edit_load: function () {
-
+	
 	sizeToContent();
 	this.asf_loadData();
 	this.asf_toggleradio_domain();
 	this.asf_toggleradio_filename();
 	}, 
-
-
+	
+	
+	loadUnicodeString: function (pref_place) {
+		try 
+		{
+			return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
+		}
+		catch (e)
+		{ }
+		return "";
+	},
+	
+	
 	browsedir_addedit: function () {
 		var current_folder_input = document.getElementById("asf-addedit-folder").value;
 				
@@ -102,7 +113,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 		
 		// locate current directory
 		current_folder_input = this.createValidDestination(current_folder_input);	
-		if (current_folder_input != false) fp.displayDirectory = current_folder_input;
+		if (current_folder_input !== false) fp.displayDirectory = current_folder_input;
 		
 		var rv = fp.show();
 		if (rv == nsIFilePicker.returnOK)
@@ -125,7 +136,7 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 			if (directory.exists()) 
 				return directory;
 			} catch(e) {return false;}
-		return directory;
+		return false;
 	},
 
 
@@ -501,5 +512,75 @@ Copyright (C) 2007-2009 Eric Cassar (Cyan).
 				window.opener.automatic_save_folder.asf_savefilters();
 			}
 		}
+	},
+	
+	
+	//
+	// the 2 functions bellow are the drop-down path menu for the "add & edit" window
+	//
+	read_all_filterpath: function() {
+		var list = document.getElementById('asf-addedit-folder');
+		var menupopup = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menupopup');
+		var tree = window.opener.document.getElementById("asf-filterList");
+		
+		// Check if there is any filter in list
+		var nbrfilters = tree.view.rowCount;
+		var path = "";
+		
+	
+		// Delete active list before repopulating (righ-clicking the menu sends an onLoad event again)
+		for (var i=list.childNodes.length-1 ; i>=0 ; i--) 
+		{
+			list.removeChild(list.childNodes[i]);
+		}
+		
+		// Write each path to the menupopup
+		var pathlist = new Array();
+		var defaultfolder = window.opener.document.getElementById("asf-default-folder").value;
+		pathlist[0] = defaultfolder;
+		var j = 0;
+		for (var i = 0; i < nbrfilters; i++)
+		{
+			// read the filter number i
+			path = tree.view.getCellText(i,tree.columns.getColumnAt("2"));
+			
+			if (this.indexInArray(pathlist, path) < 0) 
+			{ 
+				pathlist[++j]= path;
+			}
+		}
+		
+		var pathlist_sort_alpha = true;   // let the user choose in next release.
+		if (pathlist_sort_alpha) pathlist.sort(); 
+		
+		
+		for (var i = 0; i < pathlist.length; i++)
+		{
+			path = pathlist[i];
+			
+			var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
+			menuitem.setAttribute('label', path);
+			menuitem.setAttribute('crop', 'center');
+			menuitem.setAttribute('value', path);
+			menupopup.appendChild(menuitem);
+		}
+		
+		// Populate the path list into the menu
+		list.appendChild(menupopup);
+
+	},
+	
+	
+	indexInArray: function (arr,val){
+		val = val.replace(/\\/g,'\\\\');
+		var test_regexp = new RegExp("^"+val+"$");
+		var data = "";
+		for(var i=0;i<arr.length;i++) 
+		{
+			if(test_regexp.test(arr[i])) return i;
+		}
+		return -1;
 	}
+	
+	
 };

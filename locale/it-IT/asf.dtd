@@ -13,11 +13,12 @@
 <!ENTITY asf.tree.column.filename "Nome file">
 <!ENTITY asf.tree.column.localfolder "Cartella locale">
 <!ENTITY asf.tree.column.enabled "Attivo">
-<!ENTITY asf.options.move.up "">
-<!ENTITY asf.options.move.down "">
+<!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter's tab, you can write 'up' if you want -->
+<!ENTITY asf.options.move.up " ">
+<!ENTITY asf.options.move.down " ">
 <!ENTITY asf.options.edit "Modifica">
-<!ENTITY asf.options.delete "">
-<!ENTITY asf.options.add "">
+<!ENTITY asf.options.delete " ">
+<!ENTITY asf.options.add " ">
 
 <!-- preference bottom -->
 <!ENTITY asf.default.label "Cartella per salvare il file se nessun filtro corrisponde:">
@@ -44,15 +45,21 @@
 <!ENTITY asf.dialogacceptFiltered.tooltip "">
 <!ENTITY asf.viewdloption.bool "Vedere le opzioni mentre scarica">
 <!ENTITY asf.viewdloption.tooltip "permette di vedere le due ultime cartelle di destinazione e un collegamento per aggiungere o modificare filtri.">
+<!ENTITY asf.viewdloptionType0.label "">
+<!ENTITY asf.viewdloptionType1.label "">
+<!ENTITY asf.viewdloptionType2.label "">
+<!ENTITY asf.viewdloptionType3.label "">
 <!ENTITY asf.viewpathselect.bool "Vedi la lista dei filtri">
 <!ENTITY asf.viewpathselect.tooltip "Visualizza un menu con la lista di tutti i percorsi dei filtri.">
 <!ENTITY asf.usecurrenturl.bool "">
 <!ENTITY asf.lastdir.bool "Ha effetto sulla cartella per il comando 'Salva come...' quando un filtro corrisponde">
-<!ENTITY asf.rightclick.bool "">
-<!ENTITY asf.rightclick.label "">
-<!ENTITY asf.rightclick.tooltip1 "">
-<!ENTITY asf.rightclick.tooltip2 "">
-<!ENTITY asf.rightclick.tooltip3 "">
+<!ENTITY asf.userightclick.bool "">
+<!ENTITY asf.userightclick.tooltip "">
+<!ENTITY asf.rightclicktimeout.bool "">
+<!ENTITY asf.rightclicktimeout.tooltip1 "">
+<!ENTITY asf.rightclicktimeout.tooltip2 "">
+<!ENTITY asf.rightclicktimeout.tooltip3 "">
+<!ENTITY asf.rightclicktimeout.tooltip4 "">
 <!ENTITY asf.rightclick.ff2.label "">
 <!ENTITY asf.rightclick.DSort.label "">
 

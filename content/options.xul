@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ***** BEGIN LICENSE BLOCK *****
-	Copyright 2007-2009 Eric Cassar (Cyan)
+	Copyright 2007-2010 Éric Cassar (Cyan)
 
     This file is part of "Automatic Save Folder".
     You may find the license in the LICENSE file
@@ -22,7 +22,7 @@
 			xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title; (&asf.version;)"
 >
 <prefpane id="asf-options"  style="padding:1px !important" flex="1" >
-	<script type="application/x-javascript" src="chrome://asf/content/asf.js"></script>
+	<script type="application/x-javascript" src="chrome://asf/content/asf.js"/>
 	<preferences>
 		<preference id="asf_lastdir" name="extensions.asf.lastdir" type="bool"/>
 		<preference id="asf_keeptemp" name="extensions.asf.keeptemp" type="bool"/>
