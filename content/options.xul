@@ -136,6 +136,7 @@
 		<groupbox hidden="true">
 			<textbox id="asf-current-domain" value="" />
 			<textbox id="asf-current-filename" value="" />
+			<textbox id="asf-current-url" value="" />
 		</groupbox>
 	</vbox>
 	<vbox id="asf-tab-options" hidden="true" flex="1000">
@@ -184,12 +185,12 @@
 			<description id="asf-variablemodedesc" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" >&asf.variablemode.label;</description>
 			<separator class="thin"/>
 			<hbox flex="1">
-			   <groupbox flex="1" style="padding:0px !important;">
-				  <caption label="&asf.variables.label;"/>
-					 <iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:120px;"
-					 src="chrome://asf/content/help/variables.xhtml"
-					 />
-			   </groupbox>
+				<groupbox flex="1" style="padding:0px !important;">
+					<caption label="&asf.variables.label;"/>
+					<iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:120px;"
+					src="chrome://asf/content/help/variables.xhtml"
+					/>
+				</groupbox>
 			</hbox>
 		</groupbox>
 	</vbox>

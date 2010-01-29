@@ -1,7 +1,7 @@
 ﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
 Copyright (C) 2007-2010 Éric Cassar (Cyan).
-			  2009 Ted Gifford - Dynamic variable capturing 
+			  2009 Ted Gifford - Dynamic variable capturing
 
     "Automatic Save Folder" is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,31 +30,31 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		firefoxversion : "",
 		
 	main: function () {
-		
-		
+
+
 		// Setting private variables usable in this function
-		var prefManager = automatic_save_folder.prefManager;		
+		var prefManager = automatic_save_folder.prefManager;
 		var versionChecker = automatic_save_folder.versionChecker;
 		var appInfo = automatic_save_folder.appInfo;
-		if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
+		if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0)
 		{
 			this.firefoxversion = "3";
 		}
-		else 
+		else
 		{
 			this.firefoxversion = "2";
 		}
 		
 		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
-		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0) 
+		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)
 		{
 			Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
 		}
 		
 		// Check if there is any filter in list
-		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");		
-			
-			
+		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
+		
+		
 		// load the domain and the filename of the saved file (copy the data from the firefox saving window)
 		var domain = 		document.getElementById("source").value ;
 		var filename = 		document.getElementById("location").value ;
@@ -68,18 +68,18 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		
 		// load prefmanager data
-		var savetype = 				prefManager.getIntPref("extensions.asf.savetype");	
+		var savetype = 				prefManager.getIntPref("extensions.asf.savetype");
 		var lastdir = 				prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
-		var defaultfolder = 		this.loadUnicodeString("extensions.asf.defaultfolder");		
+		var defaultfolder = 		this.loadUnicodeString("extensions.asf.defaultfolder");
 		var keeptemp = 				prefManager.getBoolPref("extensions.asf.keeptemp");
 		var tempdomain = 			this.loadUnicodeString("extensions.asf.tempdomain");      // hosted domain from last saved file
 		var variable_mode = 		prefManager.getBoolPref("extensions.asf.variablemode");  // enable Variables in folder creation (dynamic Folders)
-		var dialogaccept = 			prefManager.getBoolPref("extensions.asf.dialogaccept");	
-		var dialogacceptFiltered = 	prefManager.getBoolPref("extensions.asf.dialogacceptFiltered");	
-		var use_currentURL = 		prefManager.getBoolPref("extensions.asf.usecurrenturl");	
+		var dialogaccept = 			prefManager.getBoolPref("extensions.asf.dialogaccept");
+		var dialogacceptFiltered = 	prefManager.getBoolPref("extensions.asf.dialogacceptFiltered");
+		var use_currentURL = 		prefManager.getBoolPref("extensions.asf.usecurrenturl");
 		
 		// If variable/Dynamic folders mode is ON, let's replace the variables to create the new defaultfolder
-		if (variable_mode == true) 
+		if (variable_mode == true)
 		{
 			defaultfolder = this.createfolder(defaultfolder);
 		}
@@ -97,19 +97,19 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		
 		// load filters data from prefmanager into filters[]
-		// filters[filternumber][label]		
+		// filters[filternumber][label]
 		var filters = new Array();
 		for ( var i = 0 ; i < nbrfilters ; i++)
 		{
 			var dom = this.loadUnicodeString("extensions.asf.filters"+ i +".domain");
-			var fil = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
-			var fol = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
-			var act = prefManager.getBoolPref("extensions.asf.filters"+ i +".active");	
+			var fil = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");
+			var fol = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");
+			var act = prefManager.getBoolPref("extensions.asf.filters"+ i +".active");
 			filters[i] = [dom, fil, fol, act];
-		}	
+		}
 		
 		
-		// 
+		//
 		// Start checking the filters with the downloaded file
 		//
 		var idx = -1 ;
@@ -121,7 +121,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			{
 				dom_regexp = false ; // reset the matching string for the "for" loop
 				file_regexp = false ; // same as above
-			// Check the domain	
+			// Check the domain
 				dom_regexp = this.test_regexp(filters[i][0], domain);  // hosted Domain
 				
 			// Check the current website URL if hosted domain checking returned false.
@@ -133,10 +133,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 						var currentURL = uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
 						dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
 					}
-					catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain. 
+					catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain.
 				}
 				
-			// Check the filename	
+			// Check the filename
 				file_regexp = this.test_regexp(filters[i][1], filename); // Filename
 				
 				// debug
@@ -145,7 +145,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				{
 					var idx = i;
 					break;
-				}			
+				}
 			}
 		} // end filters loop
 		
@@ -156,7 +156,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
 				{	// then change the destination folder to user choice
 					this.set_savepath(defaultfolder);
-				}	
+				}
 				else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
 				{
 					if (this.firefoxversion == "3")
@@ -193,12 +193,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				this.set_savepath(lastpath);
 			}
 		}
-		else // if a filter is found 
+		else // if a filter is found
 		{
 			var folder = filters[idx][2];
 			
 			// If Advanced mode is ON, let's check the variables and create the folder
-			if (variable_mode == true) 
+			if (variable_mode == true)
 			{
 				folder = this.createfolder(folder, idx);
 			}
@@ -229,40 +229,40 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		if (dialogaccept)
 		{
 			window.close();
-			return dialog.onOK(); 
+			return dialog.onOK();
 		}
 		else
 		{
 			// show or hide the asf option on saving window
 			this.show_dloptions();
-			this.check_uCTOption();
+			this.check_uCTOption(true);
 		}
-	
+		
 	return false;
 	},
 	
 	
 	set_savepath: function(path) {
-		var folderList = this.prefManager.getIntPref("browser.download.folderList");	
+		var folderList = this.prefManager.getIntPref("browser.download.folderList");
 		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
-		var useDownloadDir = this.prefManager.getBoolPref("browser.download.useDownloadDir");	
+		var useDownloadDir = this.prefManager.getBoolPref("browser.download.useDownloadDir");
 		var folderList = this.prefManager.getIntPref("browser.download.folderList");
 		
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 		directory.initWithPath(path);
 		
 		// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of filtered path
-		if (useDownloadDir == true) 
+		if (useDownloadDir == true)
 		{
 			var desk = Components.classes["@mozilla.org/file/directory_service;1"]
 								.getService(Components.interfaces.nsIProperties)
 								.get("Desk", Components.interfaces.nsILocalFile);
-
-			if (this.firefoxversion == 3) 
+			
+			if (this.firefoxversion == 3)
 			{
 				var dnldMgr = Components.classes["@mozilla.org/download-manager;1"]
 									.getService(Components.interfaces.nsIDownloadManager);
-				var supportDownloadLabel = !dnldMgr.defaultDownloadsDirectory.equals(desk);			
+				var supportDownloadLabel = !dnldMgr.defaultDownloadsDirectory.equals(desk);
 				
 				if ( (folderList == 0) || (folderList == 1 && !supportDownloadLabel) ) // if desktop or if OS doesn't support default Download dir
 				{
@@ -281,12 +281,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 			this.saveUnicodeString("browser.download.dir", directory.path);
 			if (lastdir)
-			this.saveUnicodeString("browser.download.lastDir", directory.path);		
+			this.saveUnicodeString("browser.download.lastDir", directory.path);
 		}
 		
 		if (this.firefoxversion == 3)
 		{
-			
+		
 			var inPrivateBrowsing = false;
 			try {
 				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
@@ -301,18 +301,18 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				gDownloadLastDir.file = directory;
 			}
 			else
-			{	
+			{
 				this.saveUnicodeString("browser.download.lastDir", directory.path);
 				if (folderList == 2)
 					this.saveUnicodeString("browser.download.dir", directory.path);
 			}
 			
-		}	
+		}
 	},
 	
 	
 	loadUnicodeString: function (pref_place) {
-		try 
+		try
 		{
 			return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
 		}
@@ -327,7 +327,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 					.createInstance(Components.interfaces.nsISupportsString);
 		str.data = pref_data;
 		this.prefManager.setComplexValue(pref_place, Components.interfaces.nsISupportsString, str);
-	},	
+	},
 	
 	
 	createfolder: function (path, idx) {
@@ -338,16 +338,18 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		Date.prototype.getWeek = function() // Add the getWeek() function do date()
 		{
 			var onejan = new Date(this.getFullYear(),0,1);
-			return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
-		} 
+			var week = Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+			if (onejan.getDay() > 4) week--;  // if the first week does not contain a thrusday, it's not the first week (and return as week 0)
+			return week;
+		}
 		var objdate = new Date();
 		
 		// make the array with the month's name in the stringbundle of the locale language path.
-
+		
 		var stringbundle = Components.classes['@mozilla.org/intl/stringbundle;1'].
-											getService(Components.interfaces.nsIStringBundleService).  
+											getService(Components.interfaces.nsIStringBundleService).
                            createBundle('chrome://asf/locale/asf.properties');
-
+		
 		var fullmonthname = new Array();
 		var abbrmonthname = new Array();
 		var fulldayname = new Array();
@@ -366,20 +368,20 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		const ZERO = "0";  // leading zero
 		
-		// load the domain and the filename of the saved file	
+		// load the domain and the filename of the saved file
 		var domain = 	document.getElementById("source").value ;
 			domain =    domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
 		var filename = 	document.getElementById("location").value ;
 		var file_name = filename.replace (/\.(?!.*\.).*$/i, "");  // Trim from the last dot to the end of the file = remove extension
 		var extension = filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
-
+		
 		
 		
 		// check the filter's data
 		var asf_domain = "";
-		var asf_filename = "";		
+		var asf_filename = "";
 		if (idx)  // If a filter match, idx is true
-		{ 
+		{
 			asf_domain = this.loadUnicodeString("extensions.asf.filters"+ idx +".domain");
 			asf_filename = this.loadUnicodeString("extensions.asf.filters"+ idx +".filename");
 		}
@@ -390,10 +392,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		
 		
-		var dom_regexp = this.test_regexp(asf_domain, document.getElementById("source").value); 
-		var file_regexp = this.test_regexp(asf_filename, filename); 
-
-// Ted Gifford, start block		
+		var dom_regexp = this.test_regexp(asf_domain, document.getElementById("source").value);
+		var file_regexp = this.test_regexp(asf_filename, filename);
+		
+// Ted Gifford, start block
 		// String capture in filename with $<1-9>f
 		try {
 		//alert(file_regexp.length);
@@ -423,7 +425,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		{
 			asf_domain = asf_domain.substring(1, asf_domain.length);
 			asf_domain = asf_domain.substring(0, asf_domain.length -1);
-		}		
+		}
 		// Trim the / / if filename is regexp
 		if (this.is_regexp(asf_filename))
 		{
@@ -444,14 +446,14 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				var datareg = "";
 				var result = new Array();
 				var matchreplace = new Array();
-				for (var i = 0, len = matches.length; i < len; i++) 
+				for (var i = 0, len = matches.length; i < len; i++)
 				{
 					datareg = matches[i].replace(/%asf_rd%/g, '');  // remove the %asf_rf% to keep only the regexp
 					datareg = new RegExp(datareg, 'i');				//  create the regexp
 					//alert("reg="+datareg);
 					result = domainp.match(datareg);    // Check it on the domain with protocol
 					
-					if (result == null) 
+					if (result == null)
 					{
 						matchreplace[i] = ""; // if no result, replace with nothing instead of null
 					}
@@ -461,13 +463,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 					}
 					//alert("matchreplace["+i+"]="+matchreplace[i]);
 				}
-				for (var i = 0, len = matches.length; i < len; i++) 
+				for (var i = 0, len = matches.length; i < len; i++)
 				{
 					path = path.replace(matches[i], matchreplace[i]);  // replace each variable in the path
 				}
 			}
 		}
-
+		
 		
 		// Check if asf_rf is present and process     asf_rf = Regexp the filename
 		if (path.search("%asf_rf%") != -1 )
@@ -479,14 +481,14 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				var datareg = "";
 				var result = new Array();
 				var matchreplace = new Array();
-				for (var i = 0, len = matches.length; i < len; i++) 
+				for (var i = 0, len = matches.length; i < len; i++)
 				{
 					datareg = matches[i].replace(/%asf_rf%/g, '');  // remove the %asf_rf% to keep only the regexp
 					datareg = new RegExp(datareg, 'i');				//  create the regexp
 					//alert("reg="+datareg);
 					result = filename.match(datareg);    // Check it
 					
-					if (result == null) 
+					if (result == null)
 					{
 						matchreplace[i] = ""; // if no result, replace with nothing instead of null
 					}
@@ -496,7 +498,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 					}
 					//alert("matchreplace["+i+"]="+matchreplace[i]);
 				}
-				for (var i = 0, len = matches.length; i < len; i++) 
+				for (var i = 0, len = matches.length; i < len; i++)
 				{
 					path = path.replace(matches[i], matchreplace[i]);  // replace each variable in the path
 				}
@@ -506,7 +508,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		
 		// remove special characters from filters :
-		// forbidden on windows  \ / : * ? " < > | 
+		// forbidden on windows  \ / : * ? " < > |
 		if (navigator.appVersion.indexOf("Win")!=-1) // = Windows
 		{
 			asf_domain = asf_domain.replace(/[\/\:\*\?\"\<\>\|]/g,'');
@@ -519,7 +521,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			asf_domain = asf_domain.replace(/[\/\:]/g,'');
 			asf_filename = asf_filename.replace(/[\/\:]/g,'');
 			file_name = file_name.replace(/[\/\:]/g,'');
-		}		
+		}
 		
 		// replace the string here		// Year
 			path = path					.replace(/%Y%/g, objdate.getFullYear())  // full year format = 2009
@@ -551,23 +553,23 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 // Canceled the folder creation script, so the folder will not be created if the user cancel the download
 // Firefox will create it automatically when accepting the download... under windows XP and Linux Ubuntu at least (not tested under Vista, MacOS, or any other operating system)
-/* 
+/*
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 		
 		directory.initWithPath(path);
-		if (directory.exists()) 
+		if (directory.exists())
 		{
 			return path;
 		}
 		else  // if it doesn't exist, create it
-		{			
-			if( !directory.exists() || !directory.isDirectory() )   
-			{   
+		{
+			if( !directory.exists() || !directory.isDirectory() )
+			{
 				directory.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0777);
 			}
 			return path;
 		}
-*/  
+*/
 	},
 	
 	
@@ -603,7 +605,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		if (this.firefoxversion == 3)
 		{
-			
+		
 			var inPrivateBrowsing = false;
 			try {
 				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
@@ -618,11 +620,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				folder = gDownloadLastDir.file.path;
 			}
 			else
-			{	
+			{
 				folder = this.loadUnicodeString("browser.download.lastDir");
 			}
 			
-		}	
+		}
 		
 		
 		
@@ -650,11 +652,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		
 		//now, if the user checked the option to view asf on saving window, set it to visible
-		if(asf_viewdloption == true) 
+		if(asf_viewdloption == true)
 		{
 			if(asf_viewdloptionType == 0) asf_dloptions.style.visibility = "visible";
 			
-			if(asf_viewdloptionType == 1) 
+			if(asf_viewdloptionType == 1)
 			{
 				asf_dloptions.style.visibility = "visible";
 				document.getElementById('asf_dloptions_content').style.visibility = "collapse";
@@ -667,6 +669,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			{
 				this.read_all_filterpath();
 				asf_radiogroup_pathselect.style.visibility = "visible";
+			}
+			else
+			{
+				asf_radiogroup_pathselect.style.visibility = "collapse";
 			}
 			
 			// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of found filters
@@ -681,12 +687,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				asf_radio_savepath.disabled = false;
 				asf_radiogroup_pathselect.disabled = false;
 				asf_folder_list.disabled = false;
-			}		
-
+			}
+			
 			
 			// Set the max width to the size of the screen minus 200px. Added for Mac OSX users with long path choice.
 			// alert("first screen : " + screen.width + "x" + screen.height);
-			asf_dloptions.style.maxWidth = screen.width -200 +"px";	
+			asf_dloptions.style.maxWidth = screen.width -200 +"px";
 		}
 	},
 	
@@ -698,13 +704,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	},
 	
 	
-	check_uCTOption: function () {
+	check_uCTOption: function (FirstTime) {
 		// Check if the user change the unkownContentType option (open with, save as, save with a download manager, etc.)
 		var save = document.getElementById("save").selected;
 		var asf_radio_savepath = document.getElementById('asf_radio_savepath');
 		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
 		var asf_folder_list = document.getElementById('asf_folder_list');
-		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");	
+		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");
 		var asf_viewdloptionType = this.prefManager.getIntPref("extensions.asf.viewdloptionType");
 		
 		// Workaround for bug 439323 (if call when not needed, dosen't work anymore)
@@ -741,7 +747,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				}
 			}
 			
-			if (initialState != document.getElementById('asf_dloptions_content').style.visibility)
+			if ( (initialState != document.getElementById('asf_dloptions_content').style.visibility) && (FirstTime != true) ) // FirstTime is also a workaround of sizeToContent bug (which is called onLoad uCT)
 			{
 				window.sizeToContent();
 			}
@@ -753,7 +759,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		val = val.replace(/\\/g,'\\\\');
 		var test_regexp = new RegExp("^"+val+"$");
 		var data = "";
-		for(var i=0;i<arr.length;i++) 
+		for(var i=0;i<arr.length;i++)
 		{
 			if(test_regexp.test(arr[i])) return i;
 		}
@@ -771,7 +777,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var path = "";
 		
 		// Delete active list before repopulating (if editing filter and coming back to saving window)
-		for (var i=list.childNodes.length-1 ; i>=0 ; i--) 
+		for (var i=list.childNodes.length-1 ; i>=0 ; i--)
 		{
 			list.removeChild(list.childNodes[i]);
 		}
@@ -787,14 +793,14 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			path = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");
 			path = variable_mode == true? this.createfolder(path, i) : path;
 			
-			if (this.indexInArray(pathlist, path) < 0) 
-			{ 
+			if (this.indexInArray(pathlist, path) < 0)
+			{
 				pathlist[++j]= path;
 			}
 		}
 		
 		var pathlist_sort_alpha = true;   // let the user choose in next release.
-		if (pathlist_sort_alpha) pathlist.sort(); 
+		if (pathlist_sort_alpha) pathlist.sort();
 		
 		
 		for (var i = 0; i < pathlist.length; i++)
@@ -816,7 +822,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	
 	
 	asf_toggle_savepath: function () {
-	
+		
 		var asf_savefolder = document.getElementById('asf_savefolder');
 		var asf_lastpath = document.getElementById('asf_lastpath');
 		var asf_pathselect = document.getElementById('asf_pathselect');
@@ -840,12 +846,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		
 		this.set_savepath(userchoice);
-	 
+		
 	},
 	
 	
-	asf_select_savepath: function () {	
-
+	asf_select_savepath: function () {
+	
 		// check the third radio choice
 		var asf_radio_savepath = document.getElementById('asf_radio_savepath');
 		var asf_pathselect = document.getElementById('asf_pathselect');
@@ -902,13 +908,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		// }
 		
 		// return(false);
-
-// Ted Gifford, start block	
-       var res = string.match(test_regexp);
-       if (res) return res;
-	   return false
-// Ted Gifford, end block	
-
+		
+// Ted Gifford, start block
+		var res = string.match(test_regexp);
+		if (res) return res;
+		return false
+// Ted Gifford, end block
+		
 	},
 	
 	
@@ -925,16 +931,15 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	
 	
 };
-	
+
 	addEventListener( // Autoload
 	"load",			// After OnLoad from overlay_unknownContentType.xul file
 	function(){ automatic_save_folder.main(); },  // Run main from automatic_save_folder to check the filters
 	false
-	);	
-	
+	);
+
 	addEventListener(
 	"command",		// After a click in the unknownContentType.xul, check if the user changed the saving option (save, open, etc.)
 	function(){ automatic_save_folder.check_uCTOption(); },  // Run main from automatic_save_folder to check the filters
 	false
-	);	
-	
+	);

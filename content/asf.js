@@ -29,8 +29,8 @@ var automatic_save_folder = {
 		stringbundle: Components.classes["@mozilla.org/intl/stringbundle;1"]
                    .getService(Components.interfaces.nsIStringBundleService)
                    .createBundle("chrome://asf/locale/asf.properties"),
-				   
-		firefoxversion : "",	
+				
+		firefoxversion : "",
 		
 	asf_load: function () {
 		
@@ -47,19 +47,20 @@ var automatic_save_folder = {
 		// init the preference for firefox 3
 		if (this.firefoxversion == "3")
 		{	
-			// set lastdir to "enable" if the user just updated from previous version and had it disabled	
+			// set lastdir to "enable" if the user just updated from previous version and had it disabled
 			var lastdir = document.getElementById("asf-lasdir");
-			lastdir.checked = true;  	
+			lastdir.checked = true;
 			lastdir.hidden = true; // hidden on FF3, as lastdir must always be true, don't allow the user to disable it.
 			this.prefManager.setBoolPref("extensions.asf.lastdir", true);
 		}
 		
 		
+		this.asf_getdomain(); // Run this to get the current domain and filename from the download window to pre-fill the fields in "add filter".
 		this.asf_loadpref();  // Load the preferences and the filter's array content
 		this.asf_treeSelected(); // set the button to disabled state because no filter is selected when openning
 		this.asf_toggleradio(); // set the radio choice to the right place
 		this.asf_variablemode(); // check if variable mode is on or off, and change mode if needed
-		this.asf_getdomain(); // Run this to get the current domain and filename from the download window to pre-fill the fields in "add filter".
+		
 		
 		
 		//Detect OS
@@ -68,13 +69,13 @@ var automatic_save_folder = {
 		// if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
 		// if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
 		// if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
-
+		
 		// alert('Your OS: '+OSName);
 		// alert(navigator.appVersion.indexOf("Win"));
-
+		
 	},
-	
-	
+
+
 	asf_loadpref: function () {
 		var nbrRow = this.prefManager.getIntPref("extensions.asf.filtersNumber", 0);
 		
@@ -86,11 +87,11 @@ var automatic_save_folder = {
 		for ( var i = 0 ; i < nbrRow ; i++)
 		{
 			var domain = this.loadUnicodeString("extensions.asf.filters"+ i +".domain");
-			var filename = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
-			var folder = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
-			var active = this.prefManager.getBoolPref("extensions.asf.filters"+ i +".active");	
+			var filename = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");
+			var folder = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");
+			var active = this.prefManager.getBoolPref("extensions.asf.filters"+ i +".active");
 			
-			// adding into the tree		
+			// adding into the tree
 			var filter = document.getElementById('asf-filterList');
 			var rules = document.getElementById('asf-filterChilds');
 			var item = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treeitem');
@@ -111,14 +112,18 @@ var automatic_save_folder = {
 			row.appendChild(c3);
 			row.appendChild(c4);
 			item.appendChild(row);
+			
 			rules.appendChild(item);
-				
+			
 		}
+		
+		// set the row's color
+		this.set_row_color();
 	},
-	
-	
+
+
 	save_active_state: function() {
-		//autosave the filterswhen clicking  (anywhere) on the filter tree
+		//autosave the filters when clicking (anywhere) on the filter tree
 		// can't detect the "active" column statut with setting an attribute. The event is set to the tree not the cell.
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		if (instantApply)
@@ -126,9 +131,12 @@ var automatic_save_folder = {
 			//save the filters
 			this.asf_savefilters();
 		}
+		
+		// set the row's color
+		this.set_row_color();
 	},
-	
-	
+
+
 	// Called whenever a list box is selected
 	asf_treeSelected: function () {
 		var deleteButton   = document.getElementById("asf-delete");
@@ -182,10 +190,116 @@ var automatic_save_folder = {
 			moveDownButton.image   = "chrome://asf/skin/down_disabled.png";
 			moveUpButton.disabled   = true;
 			moveUpButton.image = "chrome://asf/skin/up_disabled.png";
-		}	
+		}
 	},
+
+
+	set_row_color: function () {
 	
-	
+		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")
+		{
+			
+		// Load current file info (source, location and current website URL)
+			var domain = document.getElementById("asf-current-domain").value;
+			var filename = document.getElementById("asf-current-filename").value;
+			var currentURL = document.getElementById("asf-current-url").value;
+			var treename = "asf-filterList";
+			var tree = document.getElementById(treename);
+			var maxidx = tree.view.rowCount;
+			var use_currentURL = document.getElementById("asf-usecurrenturl").checked;
+			var dom, fil, fol, act, color, dom_regexp, file_regexp ;
+			
+			for ( var idx = 0; idx < maxidx ; idx++)
+			{
+		// read current row data
+				dom = tree.view.getCellText(idx,tree.columns.getColumnAt(0));
+				fil = tree.view.getCellText(idx,tree.columns.getColumnAt(1));
+				fol = tree.view.getCellText(idx,tree.columns.getColumnAt(2));
+				act = tree.view.getCellValue(idx,tree.columns.getColumnAt(3));
+				act = (act == "true" ? true : false) ;
+				
+		//Check filters here (see asf_download.js for source comments)
+				dom_regexp = false ; // reset the matching string for the "for" loop
+				file_regexp = false ; // same as above
+				
+				dom_regexp = this.test_regexp(dom, domain);  // hosted Domain
+				if (!dom_regexp && use_currentURL)
+				{
+					dom_regexp = this.test_regexp(dom, currentURL);  // current URL if hosted Domain returns false
+				}
+				file_regexp = this.test_regexp(fil, filename); // Filename
+				
+				
+			//set or remove Attribute color
+				color = (act == true ? "FilterTestPass" : "FilterTestFail");
+				var currentitem = tree.treeBoxObject.view.getItemAtIndex(idx);
+				
+				
+				if (dom_regexp && file_regexp)
+				{
+					currentitem.firstChild.setAttribute('properties', color); 
+				}
+				else
+				{
+					currentitem.firstChild.removeAttribute('properties'); 
+				}
+			}
+			
+			// enable this to remove the color of the selected item (but works only with mouse-click, not keyboard arrows)
+			// if(tree.currentIndex > -1)
+			// {
+			// 	currentitem = tree.view.getItemAtIndex(tree.currentIndex);
+			// 	currentitem.firstChild.removeAttribute('properties');
+			// }
+		}
+	},
+
+
+	test_regexp: function (filters, string) {
+		
+		var test_regexp = this.is_regexp(filters);   // True or False
+		if (test_regexp == false) // replace simple wildcard and special characters with corresponding regexp
+		{
+			filters = filters.replace(/\./gi, "\\.")
+													.replace(/\*/gi, ".*")
+													.replace(/\$/gi, "\\$")
+													.replace(/\^/gi, "\\^")
+													.replace(/\+/gi, "\\+")
+													.replace(/\?/gi, ".")
+													.replace(/\|/gi, "\\|")
+													.replace(/\[/gi, "\\[")
+													.replace(/\//gi, "\\/");
+			filters = ".*"+filters+".*";
+		}
+		else // remove the first and last slash
+		{
+			filters = filters.substring(1, filters.length);
+			filters = filters.substring(0, filters.length -1);
+		}
+		
+		// initialize the regular expression search
+		var test_regexp = new RegExp(filters, "i");  // put the slash back and the gi option (g = global seach, i = case insensitive)
+		
+		if (string.match(test_regexp)) // if something match
+		{
+			 return(true);
+		}
+		return(false);
+	},
+
+
+	is_regexp: function (string) {
+		if ((string.substring(0,1) == "/") && (string.substr(string.length - 1, 1) == "/"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	},
+
+
 	asf_toggleradio: function () {
 		var select_last_radio = document.getElementById("asf-last-radio");
 		var select_choose_radio = document.getElementById("asf-choose-radio");
@@ -200,7 +314,7 @@ var automatic_save_folder = {
 			select_folder_btn.disabled   = true;
 			select_keeptemp_chk.disabled = true;
 		}
-
+		
 		if(select_choose_radio.selected == true)
 		{
 			select_folder_input.disabled = false;
@@ -209,8 +323,8 @@ var automatic_save_folder = {
 			select_keeptemp_chk.disabled = false;
 		}
 	},
-	
-	
+
+
 	toggle_options: function () {  // called whenever the Options tab is selected
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var viewdloption = document.getElementById("asf-viewdloption");
@@ -221,7 +335,7 @@ var automatic_save_folder = {
 		var useDownloadDir = document.getElementById("asf-useDownloadDir");
 		var asf_userightclick = document.getElementById("asf-userightclick");
 		var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout");
-				
+		
 		// check if autosave is selected, if not : set the saving path to "filtered" and disable the dropdown menu.
 		if (useDownloadDir.checked == false)
 		{
@@ -231,7 +345,7 @@ var automatic_save_folder = {
 		}
 		if (useDownloadDir.checked == true)
 		{
-			document.getElementById("asf-folderList").disabled = false;			
+			document.getElementById("asf-folderList").disabled = false;
 		}
 		
 		
@@ -248,7 +362,7 @@ var automatic_save_folder = {
 		
 		// if the option window is opened from the saving window, disable the autosave feature (Not working when set from here.)
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")
-		{		
+		{
 			dialogaccept.disabled = true;
 			dialogacceptFiltered.disabled = true;
 		}
@@ -266,7 +380,7 @@ var automatic_save_folder = {
 			viewdloptionType.disabled = false;
 			viewpathlist.disabled = false;
 		}
-			
+		
 		// set the sub-rightclick option to grey state
 		if (asf_userightclick.checked == false)
 		{
@@ -276,7 +390,7 @@ var automatic_save_folder = {
 		{
 			asf_rightclicktimeout.disabled = false;
 		}
-			
+		
 		// Check the right-click feature here, and prints text according to Firefox version and active addons
 		// hide all the descriptions box, and unhide the needed one 
 		document.getElementById("asf-rightclickdesc-ff2").hidden = true;     // Firefox 2, Right-click disabled message
@@ -293,7 +407,6 @@ var automatic_save_folder = {
 		{
 			if (Dsort_installed) // if Download sort is installed, display a message "right click disabled"
 			{
-
 				asf_userightclick.disabled = true;
 				asf_rightclicktimeout.disabled = true;
 				
@@ -306,8 +419,8 @@ var automatic_save_folder = {
 			this.asf_saveoptions();
 		}
 	},
-	
-	
+
+
 	toggle_userightclick: function () {
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var asf_userightclick = document.getElementById("asf-userightclick");
@@ -329,10 +442,10 @@ var automatic_save_folder = {
 		{
 			this.asf_saveoptions();
 		}
-
+		
 	},
-	
-	
+
+
 	toggle_rightclicktimeout: function () {
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		
@@ -342,28 +455,29 @@ var automatic_save_folder = {
 			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclicktimeout == true ? 0 : 1000 );
 		}
 	},
-	
-	
-   asf_selecttab: function(tabID) {
-	  
-	  // Use this system for tab, because css for tab is not the same color as config window color, and I don't want to force any color by default so user can use new firefox theme's colors.
-      document.getElementById("asf-tab-filters").hidden = true;
-      document.getElementById("asf-tab-options").hidden = true;
-      document.getElementById("asf-tab-dynamics").hidden = true;
-      document.getElementById("asf-tab-help").hidden = true;
-      document.getElementById("asf-tab-about").hidden = true;
-	  
-      
-      document.getElementById(tabID).hidden = false;  
-	  if(tabID == "asf-tab-options") this.toggle_options();
-      //window.sizeToContent();
-   },
-	
-	
+
+
+	asf_selecttab: function(tabID) {
+		
+		// Use this system for tab, because css for tab is not the same color as config window color, and I don't want to force any color by default so user can use new firefox theme's colors.
+		document.getElementById("asf-tab-filters").hidden = true;
+		document.getElementById("asf-tab-options").hidden = true;
+		document.getElementById("asf-tab-dynamics").hidden = true;
+		document.getElementById("asf-tab-help").hidden = true;
+		document.getElementById("asf-tab-about").hidden = true;
+		
+		
+		document.getElementById(tabID).hidden = false;  
+		if(tabID == "asf-tab-options") this.toggle_options();
+		if(tabID == "asf-tab-filters") this.set_row_color();
+		//window.sizeToContent();
+	},
+
+
 	asf_variablemode: function() {
 		var select_variable_mode = document.getElementById("asf-variablemode");
 		var select_folder_input = document.getElementById("asf-default-folder");
-	
+		
 		if(select_variable_mode.checked == true)
 		{
 			select_folder_input.readOnly   = false;
@@ -373,25 +487,29 @@ var automatic_save_folder = {
 			select_folder_input.readOnly   = true;
 		}
 		
-
+		
 	},
-	
-	
+
+
 	asf_getdomain: function () {  // Save the domain and filename in a hidden field, to be used by the "add" button for auto-complete field.
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")  // if the option is opened from the saving window
 		{	
 			var currentdomain = window.opener.document.getElementById("source").value;
 			var currentfilename = window.opener.document.getElementById("location").value ;
+			var uCT = window.opener.document.getElementById("unknownContentType");
+			var currentURL = uCT.parentNode.defaultView.opener.location.host;	
 			
 			var domain = document.getElementById("asf-current-domain");
 			var filename = document.getElementById("asf-current-filename");
+			var URL = document.getElementById("asf-current-url");
 			
 			domain.value = currentdomain ;
 			filename.value = currentfilename ;
+			URL.value = currentURL;
 		}
 	},
-	
-	
+
+
 	// Code from captain.at, modified by Cyan (CASSAR Eric)
 	move: function (direction) {
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
@@ -400,21 +518,20 @@ var automatic_save_folder = {
 		var tree = document.getElementById(treename);
 		var idx = tree.currentIndex;
 		if (idx == -1) return false;
-		var maxidx = this.prefManager.getIntPref("extensions.asf.filtersNumber");
 		
 		var dir = 1;
 		if ((direction == "up") || (direction == "top"))
 		{
 			dir = -1;
-		}	
+		}
 		var currentitem = tree.treeBoxObject.view.getItemAtIndex(idx);
 		var parent = currentitem.parentNode;
 		if ((direction == "up") || (direction == "down"))  // read the next or previous entry only if function is called from the button clic (not from the popup choice)
-		{	
+		{
 			var previousitem = tree.treeBoxObject.view.getItemAtIndex(idx + dir); 
 		}
-
-
+		
+		
 		if (direction == "up") 
 		{
 			parent.insertBefore(currentitem, previousitem);
@@ -449,20 +566,19 @@ var automatic_save_folder = {
 		}
 		return false;
 	},
-	
-	
+
+
 	dragstart: function(event) {
 		var treename = "asf-filterList";
 		var tree = document.getElementById(treename);
-		var listBox = document.getElementById("asf-filterList");
-		var idx  = listBox.currentIndex; //number of the selected line in tree
+		var idx  = tree.currentIndex; //number of the selected line in tree
 		var currentitem = tree.treeBoxObject.view.getItemAtIndex(idx);
-			
+		
 		//event.dataTransfer.setData('application/x-moz-node', currentitem);  // send node data
 		event.dataTransfer.setData('user/define', idx);  // send index data as text (but to prevent drop on text field, let's use custom set)
 	},
-	
-	
+
+
 	dragover: function (event) {
 		//var isNode = event.dataTransfer.types.contains("application/x-moz-node");
 		var isDefine = event.dataTransfer.types.contains("user/define");
@@ -473,8 +589,8 @@ var automatic_save_folder = {
 			event.dataTransfer.dropEffect = "move";
 		}
 	},
-	
-	
+
+
 	dragdrop: function (event) {
 		//var currentitem = event.dataTransfer.getData("application/x-moz-node");
 		//var currentitem_idx = event.dataTransfer.getData("text/plain");
@@ -507,8 +623,8 @@ var automatic_save_folder = {
 		} 
 		event.preventDefault();
 	},
-	
-	
+
+
 	asf_duplicate: function () {
 		var treename = "asf-filterList";
 		
@@ -530,8 +646,8 @@ var automatic_save_folder = {
 		}
 		return false;
 	},
-	
-	
+
+
 	asf_delete: function () {
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var filter = document.getElementById('asf-filterList');
@@ -544,7 +660,7 @@ var automatic_save_folder = {
 				rules.removeChild(rules.childNodes[i]);
 			}
 		}
-
+		
 		if (instantApply)
 		{
 			//save the filters
@@ -554,8 +670,8 @@ var automatic_save_folder = {
 		//detect remaining filters, unhighlight, and change right buttons states
 		this.asf_treeSelected();
 	},
-	
-	
+
+
 	// next 2 functions : Code inspired from DTA (browsedir & createValidDestination)
 	browsedir: function () {
 		var current_folder_input = document.getElementById("asf-default-folder").value;
@@ -568,7 +684,7 @@ var automatic_save_folder = {
 		//fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 		
 		// locate current directory
-		current_folder_input = this.createValidDestination(current_folder_input);	
+		current_folder_input = this.createValidDestination(current_folder_input);
 		if (current_folder_input !== false) fp.displayDirectory = current_folder_input;
 		
 		var rv = fp.show();
@@ -588,13 +704,13 @@ var automatic_save_folder = {
 			this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);
 		}
 	},
-	
-	
+
+
 	createValidDestination: function (path) {
 		if (!path) return false;
 		if (this.trim(path).length==0) return false;
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			
+		
 		try {
 			directory.initWithPath(path);
 			if (directory.exists()) 
@@ -602,7 +718,8 @@ var automatic_save_folder = {
 			} catch(e) {return false;}
 		return false;
 	},
-	
+
+
 	// removed unicodepath, unicodestring is working fine.
 /*
 	loadUnicodeFolder: function (pref_place) {
@@ -616,15 +733,14 @@ var automatic_save_folder = {
 		directory.initWithPath(path);
 		this.prefManager.setComplexValue(pref_place, Components.interfaces.nsILocalFile, directory);
 	},
-*/	
-	
-	
+*/
+
+
 	loadUnicodeString: function (pref_place) {
-		
 		return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
-	},	
-	
-	
+	},
+
+
 	saveUnicodeString: function (pref_place,pref_data) {
 		if (this.trim(pref_data).length==0) return false;
 		var str = Components.classes["@mozilla.org/supports-string;1"]
@@ -632,15 +748,15 @@ var automatic_save_folder = {
 		str.data = this.trim(pref_data);
 		this.prefManager.setComplexValue(pref_place, Components.interfaces.nsISupportsString, str);
 		return false ;
-	},	
-	
-	
-	trim: function (string)	{
+	},
+
+
+	trim: function (string) {
 		return string.replace(/(^\s*)|(\s*$)/g,'');
 	},
-	
-	
-	DownloadSort: function() {	
+
+
+	DownloadSort: function() {
 		// Check for Download sort add-on, if enabled return true. (works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
@@ -650,40 +766,39 @@ var automatic_save_folder = {
 			
 			if (DownloadSort >= 0) return true;
 		}
-		return false;	
+		return false;
 	},
-	
-	
+
+
 	asf_savefilters: function () {
 	//save the filters list	
 		var tree = document.getElementById("asf-filterList");
 		var listBox = document.getElementById("asf-filterList");
-      
-      this.asf_selecttab("asf-tab-filters");  // Go back to the Filters tabs in order to read and save the Tree data (it doesn't work it it's hidden)
-      
-      var nbrRow = listBox.view.rowCount;
-      
-      // set the number of filter in the tree
-      this.prefManager.setIntPref("extensions.asf.filtersNumber", nbrRow);
-      
-      
-      for (var i=0; i < nbrRow ; i++)
-      {
-         var domain = tree.view.getCellText(i,tree.columns.getColumnAt("0"));
-         var filename = tree.view.getCellText(i,tree.columns.getColumnAt("1"));
-         var folder = tree.view.getCellText(i,tree.columns.getColumnAt("2"));
-         var active = tree.view.getCellValue(i,tree.columns.getColumnAt("3"));
-         active = (active == "true" ? true : false) ;
-         
-         this.saveUnicodeString("extensions.asf.filters"+ i +".domain", domain);
-         this.saveUnicodeString("extensions.asf.filters"+ i +".filename", filename);
-         this.saveUnicodeString("extensions.asf.filters"+ i +".folder", folder);
-         this.prefManager.setBoolPref("extensions.asf.filters"+ i +".active", active);
-         
-      }
+		
+		this.asf_selecttab("asf-tab-filters");  // Go back to the Filters tabs in order to read and save the Tree data (it doesn't work it it's hidden)
+		
+		var nbrRow = listBox.view.rowCount;
+		
+		// set the number of filter in the tree
+		this.prefManager.setIntPref("extensions.asf.filtersNumber", nbrRow);
+		
+		
+		for (var i=0; i < nbrRow ; i++)
+		{
+			var domain = tree.view.getCellText(i,tree.columns.getColumnAt("0"));
+			var filename = tree.view.getCellText(i,tree.columns.getColumnAt("1"));
+			var folder = tree.view.getCellText(i,tree.columns.getColumnAt("2"));
+			var active = tree.view.getCellValue(i,tree.columns.getColumnAt("3"));
+			active = (active == "true" ? true : false) ;
+			
+			this.saveUnicodeString("extensions.asf.filters"+ i +".domain", domain);
+			this.saveUnicodeString("extensions.asf.filters"+ i +".filename", filename);
+			this.saveUnicodeString("extensions.asf.filters"+ i +".folder", folder);
+			this.prefManager.setBoolPref("extensions.asf.filters"+ i +".active", active);
+		}
 	},
-	
-	
+
+
 	asf_saveoptions: function() {
 		//Save the View_path_list options
 		var view_list = document.getElementById("asf-viewpathselect").checked;
@@ -692,17 +807,17 @@ var automatic_save_folder = {
 		
 		//save the rightclick (set timeout for header(Content-Disposition:) true = 0, false = 1000)
 		// Only if DownloadSort is not enabled (prevent conflict)
-		var Dsort_installed = this.DownloadSort();		
+		var Dsort_installed = this.DownloadSort();
 		if ((Dsort_installed == false) && this.firefoxversion == 3) // only for firefox 3, Firefox2 doesn't use timeout option
 		{
 			var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout").checked;
 			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclicktimeout == true ? 0 : 1000);
 		}
-
+		
 		//save the default folder (filters tab)
 		var default_folder = document.getElementById("asf-default-folder").value;
 		this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);	
-
+		
 		
 		// bug from both instantApply and non instantApply, when changing checked state with javascript the state is not saved
 		// so for all the sub-option, let's save manually :
@@ -712,8 +827,8 @@ var automatic_save_folder = {
 		
 		
 	},
-	
-	
+
+
 	asf_savepref: function () {
 	//save the filters
 		this.asf_savefilters();
@@ -724,19 +839,19 @@ var automatic_save_folder = {
 	// close the preference window
 		this.asf_close();
 	},
-	
-	
+
+
 	asf_close: function() {
-	
+		
 		//close the options	
 		window.close();
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") // if the option is opened from the saving window
-		{ 	
+		{
 			window.opener.automatic_save_folder.main();		// rescan the filters to set the good folder
 			window.opener.sizeToContent();
-		}		
+		}
 		window.opener.focus;
-	
 	}
+	
 	
 };

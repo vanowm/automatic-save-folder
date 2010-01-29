@@ -79,17 +79,16 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		this.asf_toggleradio_domain();
 		this.asf_toggleradio_filename();
 	},
-	
-	
+
+
 	edit_load: function () {
-	
-	sizeToContent();
-	this.asf_loadData();
-	this.asf_toggleradio_domain();
-	this.asf_toggleradio_filename();
-	}, 
-	
-	
+		sizeToContent();
+		this.asf_loadData();
+		this.asf_toggleradio_domain();
+		this.asf_toggleradio_filename();
+	},
+
+
 	loadUnicodeString: function (pref_place) {
 		try 
 		{
@@ -99,11 +98,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		{ }
 		return "";
 	},
-	
-	
+
+
 	browsedir_addedit: function () {
 		var current_folder_input = document.getElementById("asf-addedit-folder").value;
-				
+		
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		
@@ -130,12 +129,14 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		if (!path) return false;
 		if (this.trim(path).length==0) return false;
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			
-		try {
+		
+		try 
+		{
 			directory.initWithPath(path);
 			if (directory.exists()) 
 				return directory;
-			} catch(e) {return false;}
+		}
+		catch(e) {return false;}
 		return false;
 	},
 
@@ -265,7 +266,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		document.getElementById(input_regexp).value = filter.value;
 	},
 
-	
+
 	is_regexp: function (string) {
 		
 		if ((string.substring(0,1) == "/") && (string.substr(string.length - 1, 1) == "/"))
@@ -289,13 +290,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 	},
 
-	
-	trim: function (string)
-	{
+
+	trim: function (string) {
 		return string.replace(/(^\s*)|(\s*$)/g,'');
 	},
 
-	
+
 	//
 	// ADD new filter in tree
 	//
@@ -335,12 +335,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		{
 			var rule = "/.*/";
 		}
-	    else
+		else
 		{
 			var rule = this.trim(filename.value);
 		}
 		
-	   if (rule != "") 
+		if (rule != "") 
 		{
 			var filename = rule;
 		}
@@ -372,7 +372,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			
 		if (error != true)
 		{
-			// adding into the tree		
+			// adding into the tree
 			var filter = window.opener.document.getElementById('asf-filterList');
 			var rules = window.opener.document.getElementById('asf-filterChilds');
 			var item = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treeitem');
@@ -399,7 +399,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			var idx = rules.childNodes.length-1; 
 			filter.view.selection.select(idx);
 			filter.boxObject.ensureRowIsVisible(idx);
-		 
+			
 			filter.focus();
 			window.close();
 			
@@ -409,6 +409,9 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				//save the filters
 				window.opener.automatic_save_folder.asf_savefilters();
 			}
+			
+			// set the row's color
+			window.opener.automatic_save_folder.set_row_color();
 		}
 	},
 
@@ -486,7 +489,8 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		{		
 			var tree = window.opener.document.getElementById("asf-filterList") ;
 			var idx = tree.currentIndex;
-			if (idx < 0) {
+			if (idx < 0) 
+			{
 				return;
 			}
 			
@@ -511,10 +515,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			//save the filters
 				window.opener.automatic_save_folder.asf_savefilters();
 			}
+			
+			// set the row's color
+			window.opener.automatic_save_folder.set_row_color();
 		}
 	},
-	
-	
+
+
 	//
 	// the 2 functions bellow are the drop-down path menu for the "add & edit" window
 	//
@@ -527,7 +534,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var nbrfilters = tree.view.rowCount;
 		var path = "";
 		
-	
+		
 		// Delete active list before repopulating (righ-clicking the menu sends an onLoad event again)
 		for (var i=list.childNodes.length-1 ; i>=0 ; i--) 
 		{
@@ -544,7 +551,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			// read the filter number i
 			path = tree.view.getCellText(i,tree.columns.getColumnAt("2"));
 			
-			if (this.indexInArray(pathlist, path) < 0) 
+			if (this.indexInArray(pathlist, path) < 0)
 			{ 
 				pathlist[++j]= path;
 			}
@@ -567,11 +574,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		// Populate the path list into the menu
 		list.appendChild(menupopup);
-
+		
 	},
-	
-	
-	indexInArray: function (arr,val){
+
+
+	indexInArray: function (arr,val) {
 		val = val.replace(/\\/g,'\\\\');
 		var test_regexp = new RegExp("^"+val+"$");
 		var data = "";
@@ -581,6 +588,6 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		return -1;
 	}
-	
-	
+
+
 };

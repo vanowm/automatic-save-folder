@@ -9,21 +9,21 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://asf/locale/asf.dtd">
 
-<dialog title="&asf.edit.title;" 
-	orient="vertical" autostretch="always" 
-	onload="automatic_save_folder.edit_load();" 
-	buttons="extra1, extra2, cancel" 
+<dialog title="&asf.edit.title;"
+	orient="vertical" autostretch="always"
+	onload="automatic_save_folder.edit_load();"
+	buttons="extra1, extra2, cancel"
 	defaultButton="extra1"
 	buttonlabelextra1="&buttonlabelextra1;"
 	ondialogextra1="automatic_save_folder.asf_edit()"
-	ondialogcancel="window.opener.focus;window.close();"	
+	ondialogcancel="window.opener.focus;window.close();"
 	buttonlabelextra2="&asf.addedit.regexphelp.label;"
 	ondialogextra2="window.openDialog('chrome://asf/content/regexp.xul','asf_regexp_help','chrome, centerscreen, resizable=yes, dialog=no');"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script type="application/x-javascript" src="chrome://asf/content/asf_addedit.js"/>
 <groupbox align="center" orient="horizontal">
 	<caption label="&asf.addedit.filter.label;"/>
-	<vbox>		
+	<vbox>
 		<description value="&asf.addedit.domain.label;"/>
 		<radiogroup id="radio-addedit-domain" align="left">
 			<radio id="asf-addedit-radio-domain-all" value="0" selected="true" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
