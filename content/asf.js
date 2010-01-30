@@ -118,7 +118,7 @@ var automatic_save_folder = {
 		}
 		
 		// set the row's color
-		this.set_row_color();
+		this.set_row_color(true);
 	},
 
 
@@ -194,7 +194,7 @@ var automatic_save_folder = {
 	},
 
 
-	set_row_color: function () {
+	set_row_color: function (FirstTime) {
 	
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")
 		{
@@ -208,6 +208,7 @@ var automatic_save_folder = {
 			var maxidx = tree.view.rowCount;
 			var use_currentURL = document.getElementById("asf-usecurrenturl").checked;
 			var dom, fil, fol, act, color, dom_regexp, file_regexp ;
+			var found = false;
 			
 			for ( var idx = 0; idx < maxidx ; idx++)
 			{
@@ -234,10 +235,17 @@ var automatic_save_folder = {
 				color = (act == true ? "FilterTestPass" : "FilterTestFail");
 				var currentitem = tree.treeBoxObject.view.getItemAtIndex(idx);
 				
-				
 				if (dom_regexp && file_regexp)
 				{
 					currentitem.firstChild.setAttribute('properties', color); 
+					
+					// Autoselect the first matching filter.
+					if (FirstTime && !found)
+					{
+						tree.view.selection.select(idx);
+						tree.treeBoxObject.ensureRowIsVisible(idx);
+						found = true;
+					}
 				}
 				else
 				{
@@ -246,11 +254,11 @@ var automatic_save_folder = {
 			}
 			
 			// enable this to remove the color of the selected item (but works only with mouse-click, not keyboard arrows)
-			// if(tree.currentIndex > -1)
-			// {
-			// 	currentitem = tree.view.getItemAtIndex(tree.currentIndex);
-			// 	currentitem.firstChild.removeAttribute('properties');
-			// }
+			if(tree.currentIndex > -1)
+			{
+				currentitem = tree.view.getItemAtIndex(tree.currentIndex);
+				currentitem.firstChild.removeAttribute('properties');
+			}
 		}
 	},
 
@@ -557,6 +565,7 @@ var automatic_save_folder = {
 			}
 		}
 		
+		tree.treeBoxObject.ensureRowIsVisible(idx);
 		
 		//autosave when moving filters
 		if (instantApply)

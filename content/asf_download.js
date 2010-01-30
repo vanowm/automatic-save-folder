@@ -338,7 +338,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		Date.prototype.getWeek = function() // Add the getWeek() function do date()
 		{
 			var onejan = new Date(this.getFullYear(),0,1);
-			var week = Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+			var week = Math.ceil((((this - onejan) / 86400000) + onejan.getDay()-1)/7);
 			if (onejan.getDay() > 4) week--;  // if the first week does not contain a thrusday, it's not the first week (and return as week 0)
 			return week;
 		}
