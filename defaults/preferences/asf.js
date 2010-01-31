@@ -12,7 +12,7 @@
 // See http://kb.mozillazine.org/Localize_extension_descriptions
 pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.properties");
 // See http://developer.mozilla.org/En/Download_Manager_preferences   or    http://kb.mozillazine.org/About:config_entries
-// it make automatic saving to the right folder - 0= desktop, 1= system download dir, 2= user define
+// it makes automatic saving to the right folder - 0= desktop, 1= system download dir, 2= user define
 // does only affect the user if useDownloadDir = true  ---- if "always ask the destination folder" is selected in FF options, it has no effect on the user.
  pref("browser.download.folderList", 2);
  pref("extensions.asf.dialogaccept", false);

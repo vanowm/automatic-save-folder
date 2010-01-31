@@ -191,6 +191,7 @@ var automatic_save_folder = {
 			moveUpButton.disabled   = true;
 			moveUpButton.image = "chrome://asf/skin/up_disabled.png";
 		}
+		this.set_row_color();
 	},
 
 
@@ -253,12 +254,20 @@ var automatic_save_folder = {
 				}
 			}
 			
-			// enable this to remove the color of the selected item (but works only with mouse-click, not keyboard arrows)
-			if(tree.currentIndex > -1)
+			// enable this to set black border to the selected colored row
+			if((tree.currentIndex > -1) && (tree.view.getItemAtIndex(tree.currentIndex).firstChild.hasAttribute('properties')) )
 			{
 				currentitem = tree.view.getItemAtIndex(tree.currentIndex);
-				currentitem.firstChild.removeAttribute('properties');
+				color = currentitem.firstChild.getAttribute('properties');
+				if (color == "FilterTestPass") currentitem.firstChild.setAttribute('properties', "FilterTestPassSelected"); 
+				if (color == "FilterTestFail") currentitem.firstChild.setAttribute('properties', "FilterTestFailSelected"); 
 			}
+			// enable this to remove the color of the selected item
+			// if((tree.currentIndex > -1) && (tree.view.getItemAtIndex(tree.currentIndex).firstChild.hasAttribute('properties')) )
+			// {
+				// currentitem = tree.view.getItemAtIndex(tree.currentIndex);
+				// currentitem.firstChild.removeAttribute('properties');
+			// }
 		}
 	},
 
@@ -565,6 +574,7 @@ var automatic_save_folder = {
 			}
 		}
 		
+		idx = tree.currentIndex;
 		tree.treeBoxObject.ensureRowIsVisible(idx);
 		
 		//autosave when moving filters

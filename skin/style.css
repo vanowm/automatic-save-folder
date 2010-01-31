@@ -23,3 +23,17 @@ treechildren::-moz-tree-row(FilterTestFail)
 {
   background-color: #F9CBCB;
 }
+
+treechildren::-moz-tree-row(FilterTestPassSelected)
+{
+  background-color: #CDFFB5;
+  border: solid 1px #000000;
+  color: #000000;
+}
+
+treechildren::-moz-tree-row(FilterTestFailSelected)
+{
+  background-color: #F9CBCB;
+  border: solid 1px #000000;
+  color: #000000;
+}

@@ -44,7 +44,7 @@
 * Separated the &#34;informations&#34; tab in two other tabs &#34;Help&#34; and &#34;About...&#34;.
 * Added tooltips instead of help text bellow each options (has some issues with Firefox2).
 * On the download dialog, disable the suggested folders if the &#34;What should Firefox do with this file?&#34; group's option is not set to &#34;Save File&#34;
-* Added a drop-down menu on the Add&Edit window for quick access to the folders already added from the available filter's list.
+* Added a drop-down menu on the Add&amp;Edit window for quick access to the folders already added from the available filter's list.
 ! Correct links to Mozilla website, which were forced to the French page.
 ! Correct the filter's checking when Dynamic folder creation is enabled
 ! Prevent an exception when &#34;use current website URL&#34; option is enabled and the address bar doesn't contain an URL.
