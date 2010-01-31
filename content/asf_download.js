@@ -699,7 +699,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	
 	toggle_dloptionsContent: function(){
 		var asf_dloptions_content = document.getElementById('asf_dloptions_content').style.visibility;
+		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");
+		
 		document.getElementById('asf_dloptions_content').style.visibility = (asf_dloptions_content == "visible" ? "collapse" : "visible");
+		if (asf_viewpathselect) // fix for linux (nested box visibility doesn't work)
+		{
+			document.getElementById('asf_radiogroup_pathselect').style.visibility = (asf_dloptions_content == "visible" ? "collapse" : "visible");
+		}
 		window.sizeToContent();
 	},
 	
@@ -712,6 +718,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var asf_folder_list = document.getElementById('asf_folder_list');
 		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");
 		var asf_viewdloptionType = this.prefManager.getIntPref("extensions.asf.viewdloptionType");
+		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");
 		
 		// Workaround for bug 439323 (if call when not needed, dosen't work anymore)
 		// https://bugzilla.mozilla.org/show_bug.cgi?id=439323
@@ -728,6 +735,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				{
 					document.getElementById('asf_dloptions').style.visibility = "visible";
 					document.getElementById('asf_dloptions_content').style.visibility = "visible";
+					if (asf_viewpathselect) // fix for linux (nested box visibility doesn't work)
+					{
+						document.getElementById('asf_radiogroup_pathselect').style.visibility = "visible";
+					}
 				}
 			}
 			else
@@ -739,11 +750,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				{
 					document.getElementById('asf_dloptions').style.visibility = "visible";
 					document.getElementById('asf_dloptions_content').style.visibility = "collapse";
+					document.getElementById('asf_radiogroup_pathselect').style.visibility = "collapse"; // fix for linux (nested box visibility doesn't work)
 				}
 				if (asf_viewdloptionType == 3)
 				{
 					document.getElementById('asf_dloptions').style.visibility = "collapse";
 					document.getElementById('asf_dloptions_content').style.visibility = "collapse";
+					document.getElementById('asf_radiogroup_pathselect').style.visibility = "collapse"; // fix for linux (nested box visibility doesn't work)
 				}
 			}
 			

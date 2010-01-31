@@ -78,6 +78,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		sizeToContent();
 		this.asf_toggleradio_domain();
 		this.asf_toggleradio_filename();
+		this.read_all_filterpath();
 	},
 
 
@@ -86,6 +87,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		this.asf_loadData();
 		this.asf_toggleradio_domain();
 		this.asf_toggleradio_filename();
+		this.read_all_filterpath();
 	},
 
 

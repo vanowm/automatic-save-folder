@@ -48,7 +48,7 @@
 
 		<description value="&asf.addedit.folder.label;"/>		
 		<hbox>
-			<menulist editable="true" id="asf-addedit-folder" readonly="true" width="240" onload="automatic_save_folder.read_all_filterpath()" ondblclick="automatic_save_folder.browsedir_addedit()"/>
+			<menulist editable="true" id="asf-addedit-folder" readonly="true" width="240" ondblclick="automatic_save_folder.browsedir_addedit()"/>
 			<button id="asf-addedit-select-folder" label="&asf.selectfolder.label;" oncommand="automatic_save_folder.browsedir_addedit()"/>
 		</hbox>
 		
