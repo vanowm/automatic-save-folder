@@ -239,6 +239,9 @@ var automatic_save_folder = {
 				if (dom_regexp && file_regexp)
 				{
 					currentitem.firstChild.setAttribute('properties', color); 
+					currentitem.firstChild.children[0].removeAttribute('properties');
+					currentitem.firstChild.children[1].removeAttribute('properties');
+					currentitem.firstChild.children[2].removeAttribute('properties');
 					
 					// Autoselect the first matching filter.
 					if (FirstTime && !found)
@@ -251,6 +254,9 @@ var automatic_save_folder = {
 				else
 				{
 					currentitem.firstChild.removeAttribute('properties'); 
+					currentitem.firstChild.children[0].removeAttribute('properties');
+					currentitem.firstChild.children[1].removeAttribute('properties');
+					currentitem.firstChild.children[2].removeAttribute('properties');
 				}
 			}
 			
@@ -259,8 +265,22 @@ var automatic_save_folder = {
 			{
 				currentitem = tree.view.getItemAtIndex(tree.currentIndex);
 				color = currentitem.firstChild.getAttribute('properties');
-				if (color == "FilterTestPass") currentitem.firstChild.setAttribute('properties', "FilterTestPassSelected"); 
-				if (color == "FilterTestFail") currentitem.firstChild.setAttribute('properties', "FilterTestFailSelected"); 
+				if (color == "FilterTestPass") 
+				{
+					currentitem.firstChild.setAttribute('properties', "FilterTestPassSelected");
+					currentitem.firstChild.children[0].setAttribute('properties', "FilterTestPassSelected");
+					currentitem.firstChild.children[1].setAttribute('properties', "FilterTestPassSelected");
+					currentitem.firstChild.children[2].setAttribute('properties', "FilterTestPassSelected");
+				}
+				if (color == "FilterTestFail")
+				{
+					currentitem.firstChild.setAttribute('properties', "FilterTestFailSelected");
+					currentitem.firstChild.children[0].setAttribute('properties', "FilterTestFailSelected");
+					currentitem.firstChild.children[1].setAttribute('properties', "FilterTestFailSelected");
+					currentitem.firstChild.children[2].setAttribute('properties', "FilterTestFailSelected");
+				}
+				
+
 			}
 			// enable this to remove the color of the selected item
 			// if((tree.currentIndex > -1) && (tree.view.getItemAtIndex(tree.currentIndex).firstChild.hasAttribute('properties')) )

@@ -14,6 +14,7 @@ treechildren::-moz-tree-checkbox(disabled)
   list-style-image: none;
 }
 
+  /* filtered row color */
 treechildren::-moz-tree-row(FilterTestPass)
 {
   background-color: #CDFFB5;
@@ -24,16 +25,26 @@ treechildren::-moz-tree-row(FilterTestFail)
   background-color: #F9CBCB;
 }
 
+  /* filtered & selected row color */
 treechildren::-moz-tree-row(FilterTestPassSelected)
 {
   background-color: #CDFFB5;
   border: solid 1px #000000;
-  color: #000000;
 }
 
 treechildren::-moz-tree-row(FilterTestFailSelected)
 {
   background-color: #F9CBCB;
   border: solid 1px #000000;
+}
+
+  /* filtered & selected row text color */
+treechildren::-moz-tree-cell-text(FilterTestPassSelected)
+{
+  color: #000000;
+}
+
+treechildren::-moz-tree-cell-text(FilterTestFailSelected)
+{
   color: #000000;
 }
