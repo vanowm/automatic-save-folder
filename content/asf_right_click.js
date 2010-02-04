@@ -17,9 +17,6 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
     along with "Automatic Save Folder".  If not, see <http://www.gnu.org/licenses/>.
 
  * ***** END LICENSE BLOCK ***** */
-var ORIG_getTargetFile = window.getTargetFile;
-// alert (ORIG_getTargetFile);  // uncomment to get the Firefox's getTargetFile current version in an alert box at Firefox launch. Can be copy/pasted.
-							 // or can be found in install folder : Mozilla Firefox\chrome\toolkit.jar\content\global\contentAreaUtils.js
 var asf_rightclick_loaded;
 
 var automatic_save_folder = {
@@ -32,18 +29,18 @@ var automatic_save_folder = {
 	versionChecker: Components.classes["@mozilla.org/xpcom/version-comparator;1"]
 						.getService(Components.interfaces.nsIVersionComparator),
 				
-		firefoxversion : "",
+	firefoxversion : "",
 		
 	rightclick_init: function() {
 		if (!asf_rightclick_loaded) 
 		{
-			asf_rightclick_loaded = true;	
+			asf_rightclick_loaded = true;
 			
 			// Right-click feature doesn't work on Firefox 2 (Can't detect installed add-on and prevent conflict with Download Sort)
 			if (this.versionChecker.compare(this.appInfo.version, "3.0") >= 0)
 			{
-				//replace original Rightclick menu with ASF Rightclick menu
-				// Not compatible with Download Sort extension (same function modification, it will conflict).
+				// Replace original Right-click menu with ASF Right-click menu
+				// Not compatible with Download Sort extension (Dsort rewrites the whole function, it will conflict with ASF).
 				// Detect if Download Sort is installed and enabled, and activate ASF rightclick only if DSort is not already loaded.
 				var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
 				var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
@@ -51,17 +48,21 @@ var automatic_save_folder = {
 				
 				if (DownloadSort == -1)  // Download Sort is not enabled, load ASF rightclick replacement && Firefox 2.0 min
 				{
-					// Not working like I would like :(
-					/*
-					// Replace first line of ORIGinal firefox rightclick function, to add ASF function to it. might Works with every firefox version :) 
-					var asf_getTargetFile = ORIG_getTargetFile.toString().replace("const prefSvcContractID","automatic_save_folder.rightclick_setdir(aFpP);const prefSvcContractID");
-					asf_getTargetFile = new Function("aFpP","aSkipPrompt", asf_getTargetFile);
-					alert(asf_getTargetFile);
-					window.getTargetFile = asf_getTargetFile;
-					*/
-					
-					// replace the ORIGinal firefox function with the custom one. (original from Firefox 3.5.4) 
-					window.getTargetFile = this.asf_getTargetFile;
+					// adding ASF filtering function at the beginning of the getTargetFile function.
+					// Code from Paolo Amadini, MAF add-on developer. Thank you !
+					if (window.getTargetFile) 
+					{
+						// Save a reference to the original function
+						var original_getTargetFile = window.getTargetFile;
+						// Override the original function
+						window.getTargetFile = function() 
+						{
+							// Call our function before the original one
+							automatic_save_folder.rightclick_main.apply(automatic_save_folder, arguments);
+							// Execute the original function and propagate the return value
+							return original_getTargetFile.apply(window, arguments);
+						}
+					}
 					
 					// Starting from firefox 3.0 there is a timeout when downloading with right-click to read header(Content-Disposition:) to rename the file in the file_explorer suggested filename.
 					// When timeout is set to 1000 ms (default), ASF right-click filtering is not working.
@@ -71,153 +72,10 @@ var automatic_save_folder = {
 					// Set to 0 only when the user want to use it
 					var asf_rightclicktimeout = this.prefManager.getBoolPref("extensions.asf.rightclicktimeout");
 					this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclicktimeout == true ? 0 : 1000);
-					
 				}
 			}
 		}
 		
-	},
-	
-	
-	// Original from firefox 3.5.3
-	// I tried to "live-patch" the user function, using 
-	// asf_getTargetFile = ORIG_getTargetFile.toString().replace("first line","first line + ASF")
-	// But there's no way to revert it to a function, asf_getTargetFile = asf_getTargetFile.toFunction() is not working (it wrap it into an anonymous function).
-	// See lines ~40 for the test
-	asf_getTargetFile: function (aFpP, /* optional */ aSkipPrompt)
-	{
-		
-		automatic_save_folder.rightclick_main(aFpP);
-		
-		const prefSvcContractID = "@mozilla.org/preferences-service;1";
-		const prefSvcIID = Components.interfaces.nsIPrefService;                              
-		var prefs = Components.classes[prefSvcContractID]
-							.getService(prefSvcIID).getBranch("browser.download.");
-		
-		const nsILocalFile = Components.interfaces.nsILocalFile;
-		
-		var inPrivateBrowsing = false;
-		try 
-		{
-			var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
-							.getService(Components.interfaces.nsIPrivateBrowsingService);
-			inPrivateBrowsing = pbs.privateBrowsingEnabled;
-		}
-		catch (e) {	}
-		
-		// For information on download folder preferences, see
-		// mozilla/browser/components/preferences/main.js
-		
-		var useDownloadDir = prefs.getBoolPref("useDownloadDir");
-		var dir = null;
-		
-		// Default to lastDir if useDownloadDir is false, and lastDir
-		// is configured and valid. Otherwise, use the user's default
-		// downloads directory configured through download prefs.
-		var dnldMgr = Components.classes["@mozilla.org/download-manager;1"]
-								.getService(Components.interfaces.nsIDownloadManager);
-		try 
-		{
-			var lastDir;
-			if (inPrivateBrowsing && gDownloadLastDir.file)
-				lastDir = gDownloadLastDir.file;
-			else
-				lastDir = prefs.getComplexValue("lastDir", nsILocalFile);
-			if ((!aSkipPrompt || !useDownloadDir) && lastDir.exists())
-				dir = lastDir;
-			else
-				dir = dnldMgr.userDownloadsDirectory;
-		} catch(ex) {
-			dir = dnldMgr.userDownloadsDirectory;
-		}
-		
-		if (!aSkipPrompt || !useDownloadDir || !dir || (dir && !dir.exists())) 
-		{
-			if (!dir || (dir && !dir.exists())) 
-			{
-				// Default to desktop.
-				var fileLocator = Components.classes["@mozilla.org/file/directory_service;1"]
-											.getService(Components.interfaces.nsIProperties);
-				dir = fileLocator.get("Desk", nsILocalFile);
-			}
-			
-			var fp = makeFilePicker();
-			var titleKey = aFpP.fpTitleKey || "SaveLinkTitle";
-			var bundle = getStringBundle();
-			fp.init(window, bundle.GetStringFromName(titleKey), 
-					Components.interfaces.nsIFilePicker.modeSave);
-			
-			fp.defaultExtension = aFpP.fileInfo.fileExt;
-			fp.defaultString = getNormalizedLeafName(aFpP.fileInfo.fileName,
-													aFpP.fileInfo.fileExt);
-			appendFiltersForContentType(fp, aFpP.contentType, aFpP.fileInfo.fileExt,
-										aFpP.saveMode);
-			
-			if (dir)
-			fp.displayDirectory = dir;
-			
-			if (aFpP.isDocument) 
-			{
-				try {
-					fp.filterIndex = prefs.getIntPref("save_converter_index");
-				}
-				catch (e) {}
-			}
-			
-			if (fp.show() == Components.interfaces.nsIFilePicker.returnCancel || !fp.file)
-			return false;
-			
-			// Do not store the last save directory as a pref inside the private browsing mode
-			var directory = fp.file.parent.QueryInterface(nsILocalFile);
-			if (inPrivateBrowsing)
-			gDownloadLastDir.file = directory;
-			else
-			prefs.setComplexValue("lastDir", nsILocalFile, directory);
-			
-			fp.file.leafName = validateFileName(fp.file.leafName);
-			aFpP.saveAsType = fp.filterIndex;
-			aFpP.file = fp.file;
-			aFpP.fileURL = fp.fileURL;
-			
-			if (aFpP.isDocument)
-				prefs.setIntPref("save_converter_index", aFpP.saveAsType);
-		}
-		else 
-		{
-			dir.append(getNormalizedLeafName(aFpP.fileInfo.fileName,
-											aFpP.fileInfo.fileExt));
-			var file = dir;
-			
-			// Since we're automatically downloading, we don't get the file picker's 
-			// logic to check for existing files, so we need to do that here.
-			//
-			// Note - this code is identical to that in
-			//   mozilla/toolkit/mozapps/downloads/src/nsHelperAppDlg.js.in
-			// If you are updating this code, update that code too! We can't share code
-			// here since that code is called in a js component.
-			var collisionCount = 0;
-			while (file.exists()) 
-			{
-				collisionCount++;
-				if (collisionCount == 1)
-				{
-					// Append "(2)" before the last dot in (or at the end of) the filename
-					// special case .ext.gz etc files so we don't wind up with .tar(2).gz
-					if (file.leafName.match(/\.[^\.]{1,3}\.(gz|bz2|Z)$/i))
-						file.leafName = file.leafName.replace(/\.[^\.]{1,3}\.(gz|bz2|Z)$/i, "(2)$&");
-					else
-						file.leafName = file.leafName.replace(/(\.[^\.]*)?$/, "(2)$&");
-				}
-				else
-				{
-					// replace the last (n) in the filename with (n+1)
-					file.leafName = file.leafName.replace(/^(.*\()\d+\)/, "$1" + (collisionCount+1) + ")");
-				}
-			}
-			aFpP.file = file;
-		}
-		
-		return true;
 	},
 	
 	
