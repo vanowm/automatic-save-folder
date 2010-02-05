@@ -260,34 +260,39 @@ var automatic_save_folder = {
 				}
 			}
 			
-			// enable this to set black border to the selected colored row
-			if((tree.currentIndex > -1) && (tree.view.getItemAtIndex(tree.currentIndex).firstChild.hasAttribute('properties')) )
+			// rowmatchinghighlight : color = keep the colored row even if selected | system = revert back to system highlight color if selected
+			var rowmatchinghighlight = this.readHiddenPref("extensions.asf.rowmatchinghighlight", "char", "color");	// let the user choose in next release.
+			if (rowmatchinghighlight == "color")
 			{
-				currentitem = tree.view.getItemAtIndex(tree.currentIndex);
-				color = currentitem.firstChild.getAttribute('properties');
-				if (color == "FilterTestPass") 
+				// enable this to set black border to the selected colored row
+				if((tree.currentIndex > -1) && (tree.view.getItemAtIndex(tree.currentIndex).firstChild.hasAttribute('properties')) )
 				{
-					currentitem.firstChild.setAttribute('properties', "FilterTestPassSelected");
-					currentitem.firstChild.children[0].setAttribute('properties', "FilterTestPassSelected");
-					currentitem.firstChild.children[1].setAttribute('properties', "FilterTestPassSelected");
-					currentitem.firstChild.children[2].setAttribute('properties', "FilterTestPassSelected");
+					currentitem = tree.view.getItemAtIndex(tree.currentIndex);
+					color = currentitem.firstChild.getAttribute('properties');
+					if (color == "FilterTestPass") 
+					{
+						currentitem.firstChild.setAttribute('properties', "FilterTestPassSelected");
+						currentitem.firstChild.children[0].setAttribute('properties', "FilterTestPassSelected");
+						currentitem.firstChild.children[1].setAttribute('properties', "FilterTestPassSelected");
+						currentitem.firstChild.children[2].setAttribute('properties', "FilterTestPassSelected");
+					}
+					if (color == "FilterTestFail")
+					{
+						currentitem.firstChild.setAttribute('properties', "FilterTestFailSelected");
+						currentitem.firstChild.children[0].setAttribute('properties', "FilterTestFailSelected");
+						currentitem.firstChild.children[1].setAttribute('properties', "FilterTestFailSelected");
+						currentitem.firstChild.children[2].setAttribute('properties', "FilterTestFailSelected");
+					}
 				}
-				if (color == "FilterTestFail")
-				{
-					currentitem.firstChild.setAttribute('properties', "FilterTestFailSelected");
-					currentitem.firstChild.children[0].setAttribute('properties', "FilterTestFailSelected");
-					currentitem.firstChild.children[1].setAttribute('properties', "FilterTestFailSelected");
-					currentitem.firstChild.children[2].setAttribute('properties', "FilterTestFailSelected");
-				}
-				
-
 			}
-			// enable this to remove the color of the selected item
-			// if((tree.currentIndex > -1) && (tree.view.getItemAtIndex(tree.currentIndex).firstChild.hasAttribute('properties')) )
-			// {
-				// currentitem = tree.view.getItemAtIndex(tree.currentIndex);
-				// currentitem.firstChild.removeAttribute('properties');
-			// }
+			else // enable this to remove the color of the selected item
+			{
+				if((tree.currentIndex > -1) && (tree.view.getItemAtIndex(tree.currentIndex).firstChild.hasAttribute('properties')) )
+				{
+					currentitem = tree.view.getItemAtIndex(tree.currentIndex);
+					currentitem.firstChild.removeAttribute('properties');
+				}
+			}
 		}
 	},
 
@@ -806,6 +811,24 @@ var automatic_save_folder = {
 			if (DownloadSort >= 0) return true;
 		}
 		return false;
+	},
+
+
+	readHiddenPref: function(pref_place, type, ret) {
+		try 
+		{
+			switch (type)
+			{
+				case "bool": return this.prefManager.getBoolPref(pref_place);
+				case "int" : return this.prefManager.getIntPref(pref_place);
+				case "char": return this.prefManager.getCharPref(pref_place);
+				case "complex": return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
+			}
+		} 
+		catch(e) 
+		{
+			return ret; // return default value if pref doesn't exist
+		} 
 	},
 
 

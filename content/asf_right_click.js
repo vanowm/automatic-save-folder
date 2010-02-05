@@ -460,6 +460,11 @@ var automatic_save_folder = {
 			asf_filename = asf_filename.substring(0, asf_filename.length -1);
 		}		
 		
+		// read the userpref to define if regexp is case insensitive (default true)
+		var param = "";
+		var regexp_caseinsensitive = this.readHiddenPref("extensions.asf.regexp_caseinsensitive", "bool", true); // let the user choose in next release.
+		if (regexp_caseinsensitive) param = "i";
+		
 		// Check if asf_rd is present and process     asf_rd = Regexp the domain
 		if (path.search("%asf_rd%") != -1)
 		{
@@ -476,7 +481,7 @@ var automatic_save_folder = {
 				for (var i = 0, len = matches.length; i < len; i++) 
 				{
 					datareg = matches[i].replace(/%asf_rd%/g, '');  // remove the %asf_rf% to keep only the regexp
-					datareg = new RegExp(datareg, 'i');				//  create the regexp
+					datareg = new RegExp(datareg, param);			//  create the regexp
 					//alert("reg="+datareg);
 					result = domainp.match(datareg);    // Check it on the domain with protocol
 					
@@ -511,7 +516,7 @@ var automatic_save_folder = {
 				for (var i = 0, len = matches.length; i < len; i++) 
 				{
 					datareg = matches[i].replace(/%asf_rf%/g, '');  // remove the %asf_rf% to keep only the regexp
-					datareg = new RegExp(datareg, 'i');				//  create the regexp
+					datareg = new RegExp(datareg, param);			//  create the regexp
 					//alert("reg="+datareg);
 					result = filename.match(datareg);    // Check it
 					
@@ -618,7 +623,6 @@ var automatic_save_folder = {
 	
 	
 	test_regexp: function (filters, string) {
-
 		
 		// Steps :
 		// 1 - Check if the filter is a regular expression
@@ -654,7 +658,10 @@ var automatic_save_folder = {
 		}
 		
 		// initialize the regular expression search
-		var test_regexp = new RegExp(filters, "i");  // put the slash back and the gi option (g = global seach, i = case insensitive)
+		var param = "";
+		var regexp_caseinsensitive = this.readHiddenPref("extensions.asf.regexp_caseinsensitive", "bool", true); // let the user choose in next release.
+		if (regexp_caseinsensitive) param = "i";
+		var test_regexp = new RegExp(filters, param);  // put the slash back and the gi option (g = global seach, i = case insensitive)
 		// Edited to only "i" option by Ted.
 		
 		// Step 3 & 4
@@ -683,10 +690,26 @@ var automatic_save_folder = {
 		{
 			return false;
 		}
-	}
+	},
 	
 	
+	readHiddenPref: function(pref_place, type, ret) {
+		try 
+		{
+			switch (type)
+			{
+				case "bool": return this.prefManager.getBoolPref(pref_place);
+				case "int" : return this.prefManager.getIntPref(pref_place);
+				case "char": return this.prefManager.getCharPref(pref_place);
+				case "complex": return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
+			}
+		} 
+		catch(e) 
+		{
+			return ret; // return default value if pref doesn't exist
+		} 
 	}
+}
 	
 	addEventListener( // Autoload
 	"load",			// After OnLoad from overlay_unknownContentType.xul file

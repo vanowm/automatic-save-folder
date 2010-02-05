@@ -545,9 +545,23 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		// Write each path to the menupopup
 		var pathlist = new Array();
+		var pathlist_defaultforceontop = this.readHiddenPref("extensions.asf.pathlist_defaultforceontop", "bool", false); // let the user choose in next release.
 		var defaultfolder = window.opener.document.getElementById("asf-default-folder").value;
-		pathlist[0] = defaultfolder;
 		var j = 0;
+		if (pathlist_defaultforceontop)
+		{
+			var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
+			menuitem.setAttribute('label', defaultfolder);
+			menuitem.setAttribute('crop', 'center');
+			menuitem.setAttribute('value', defaultfolder);
+			menupopup.appendChild(menuitem);
+		}
+		else
+		{
+			pathlist[0] = defaultfolder;
+			j++;
+		}
+		
 		for (var i = 0; i < nbrfilters; i++)
 		{
 			// read the filter number i
@@ -555,11 +569,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			
 			if (this.indexInArray(pathlist, path) < 0)
 			{ 
-				pathlist[++j]= path;
+				pathlist[j++]= path;
 			}
 		}
 		
-		var pathlist_sort_alpha = true;   // let the user choose in next release.
+		var pathlist_sort_alpha = this.readHiddenPref("extensions.asf.pathlist_alphasort", "bool", true); // let the user choose in next release.
 		if (pathlist_sort_alpha) pathlist.sort(); 
 		
 		
@@ -589,7 +603,23 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			if(test_regexp.test(arr[i])) return i;
 		}
 		return -1;
+	},
+
+
+	readHiddenPref: function(pref_place, type, ret) {
+		try 
+		{
+			switch (type)
+			{
+				case "bool": return this.prefManager.getBoolPref(pref_place);
+				case "int" : return this.prefManager.getIntPref(pref_place);
+				case "char": return this.prefManager.getCharPref(pref_place);
+				case "complex": return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
+			}
+		} 
+		catch(e) 
+		{
+			return ret; // return default value if pref doesn't exist
+		} 
 	}
-
-
 };

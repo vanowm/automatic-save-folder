@@ -433,6 +433,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			asf_filename = asf_filename.substring(0, asf_filename.length -1);
 		}
 		
+		// read the userpref to define if regexp is case insensitive (default true)
+		var param = "";
+		var regexp_caseinsensitive = this.readHiddenPref("extensions.asf.regexp_caseinsensitive", "bool", true); // let the user choose in next release.
+		if (regexp_caseinsensitive) param = "i";
+		
 		// Check if asf_rd is present and process     asf_rd = Regexp the domain
 		if (path.search("%asf_rd%") != -1)
 		{
@@ -449,7 +454,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				for (var i = 0, len = matches.length; i < len; i++)
 				{
 					datareg = matches[i].replace(/%asf_rd%/g, '');  // remove the %asf_rf% to keep only the regexp
-					datareg = new RegExp(datareg, 'i');				//  create the regexp
+					datareg = new RegExp(datareg, param);			//  create the regexp
 					//alert("reg="+datareg);
 					result = domainp.match(datareg);    // Check it on the domain with protocol
 					
@@ -484,7 +489,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				for (var i = 0, len = matches.length; i < len; i++)
 				{
 					datareg = matches[i].replace(/%asf_rf%/g, '');  // remove the %asf_rf% to keep only the regexp
-					datareg = new RegExp(datareg, 'i');				//  create the regexp
+					datareg = new RegExp(datareg, param);			//  create the regexp
 					//alert("reg="+datareg);
 					result = filename.match(datareg);    // Check it
 					
@@ -797,9 +802,23 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		// Write each path to the menupopup
 		var pathlist = new Array();
+		var pathlist_defaultforceontop = this.readHiddenPref("extensions.asf.pathlist_defaultforceontop", "bool", false); // let the user choose in next release.
 		var defaultfolder = this.loadUnicodeString("extensions.asf.defaultfolder");
-		pathlist[0] =  variable_mode == true? this.createfolder(defaultfolder) : defaultfolder;
 		var j = 0;
+		if (pathlist_defaultforceontop)
+		{
+			var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
+			menuitem.setAttribute('label', defaultfolder);
+			menuitem.setAttribute('crop', 'center');
+			menuitem.setAttribute('value', defaultfolder);
+			menupopup.appendChild(menuitem);
+		}
+		else
+		{
+			pathlist[0] =  variable_mode == true? this.createfolder(defaultfolder) : defaultfolder;
+			j++;
+		}
+		
 		for (var i = 0; i < nbrfilters; i++)
 		{
 			// read the filter number x
@@ -807,12 +826,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			path = variable_mode == true? this.createfolder(path, i) : path;
 			
 			if (this.indexInArray(pathlist, path) < 0)
-			{
-				pathlist[++j]= path;
+			{ 
+				pathlist[j++]= path;
 			}
 		}
 		
-		var pathlist_sort_alpha = true;   // let the user choose in next release.
+		var pathlist_sort_alpha = this.readHiddenPref("extensions.asf.pathlist_alphasort", "bool", true); // let the user choose in next release.
 		if (pathlist_sort_alpha) pathlist.sort();
 		
 		
@@ -876,7 +895,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	
 	
 	test_regexp: function (filters, string) {
-
+		
 		// Steps :
 		// 1 - Check if the filter is a regular expression
 		// 2 - if not regexp : add the backslah to special characters and .* to the start and end of the string to convert it into a regexp form
@@ -911,7 +930,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		
 		// initialize the regular expression search
-		var test_regexp = new RegExp(filters, "i");  // put the slash back and the gi option (g = global seach, i = case insensitive)
+		var param = "";
+		var regexp_caseinsensitive = this.readHiddenPref("extensions.asf.regexp_caseinsensitive", "bool", true); // let the user choose in next release.
+		if (regexp_caseinsensitive) param = "i";
+		var test_regexp = new RegExp(filters, param);  // put the slash back and the gi option (g = global seach, i = case insensitive)
 		// Edited to only "i" option by Ted.
 		
 		// Step 3 & 4
@@ -940,9 +962,25 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		{
 			return false;
 		}
+	},
+	
+	
+	readHiddenPref: function(pref_place, type, ret) {
+		try 
+		{
+			switch (type)
+			{
+				case "bool": return this.prefManager.getBoolPref(pref_place);
+				case "int" : return this.prefManager.getIntPref(pref_place);
+				case "char": return this.prefManager.getCharPref(pref_place);
+				case "complex": return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
+			}
+		} 
+		catch(e) 
+		{
+			return ret; // return default value if pref doesn't exist
+		} 
 	}
-	
-	
 };
 
 	addEventListener( // Autoload
