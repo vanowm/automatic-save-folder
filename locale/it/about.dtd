@@ -15,8 +15,8 @@
 <!ENTITY about.madeby_authorname "By Cyan">
 
 <!ENTITY about.links.title "Links">
-<!ENTITY about.links.mainwebsite.title "">
-<!ENTITY about.links.mozilla.title "">
+<!ENTITY about.links.mainwebsite.title "Main website">
+<!ENTITY about.links.mozilla.title "Add-on page on Mozilla">
 
 <!ENTITY about.history.title "Storico versioni">
 <!ENTITY about.add "Aggiunto">
