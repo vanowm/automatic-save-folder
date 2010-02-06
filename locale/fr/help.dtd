@@ -8,7 +8,7 @@
 <!ENTITY info.important.title "Important">
 <!ENTITY info.important.text1 "Le filtrage sur les téléchargements normaux (simple clic, ou téléchargement automatique) ne fonctionne que si la fenêtre de téléchargement &#34;Que doit faire Firefox avec ce fichier ?&#34; s'affiche :">
 <!-- Screenshot from your language. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big) -->
-<!ENTITY info.important.pict1 "screen_save_80fr.png">
+<!ENTITY info.important.pict1 "screen_save_fr.png">
 <!ENTITY info.important.text2 "Par conséquent, vérifiez que Firefox ne lance pas un traitement différent sur le fichier empêchant la fenêtre de s'afficher en suivant ces instructions :">
 <!ENTITY info.important.text3 "Allez dans le menu &#34;Outils&#34; de Firefox puis &#34;Options...&#34;.">
 <!ENTITY info.important.text4 "- Pour les utilisateurs de Firefox 3 : Allez sur l'onglet &#34;Applications&#34;.

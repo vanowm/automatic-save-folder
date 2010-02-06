@@ -7,7 +7,7 @@
 <!ENTITY Month.fullname "Gennaio">
 <!ENTITY Month.abbr "Gen">
 
-<!ENTITY Week "">
+<!ENTITY Week "Settimana">
 <!ENTITY Week.wleadingzero "da 01 a 52">
 <!ENTITY DayOfTheWeek "da 0 (Domenica) a 6">
 <!ENTITY DayOfTheWeek.fullname "Lunedì">
@@ -25,11 +25,11 @@
 <!ENTITY asf_f "Campo &#34;Nome file&#34; dal filtro usato. (I caratteri non permessi verranno rimossi. Se nessun filtro viene trovato, viene usato il file corrente)">
 <!ENTITY asf_x "Estensione file. (Senza il punto)">
 
-<!ENTITY Capture.tags "">
-<!ENTITY number "">
-<!ENTITY Capture.d "">
-<!ENTITY Capture.f "">
-<!ENTITY Capture.example "">
+<!ENTITY Capture.tags "Capture tags">
+<!ENTITY number "number">
+<!ENTITY Capture.d "Return the captured data using parentheses in the &#34;domain&#34; filter. &lt;number&gt; refer to the parenthesis number, from 1 to 9.">
+<!ENTITY Capture.f "Return the captured data using parentheses in the &#34;file name&#34; filter. &lt;number&gt; refer to the parenthesis number, from 1 to 9.">
+<!ENTITY Capture.example "Example, on this filter:  mozilla_(firefox)_3.5.(exe), <b>$1f</b> will capture firefox, and <b>$2f</b> will capture &#34;exe&#34;.">
 <!ENTITY Regexp "Espressione regolare">
 <!ENTITY Capture.rd "Controlla il dominio completo con l'espressione regolare contenuta tra i due tag <b>&#37;asf_rd&#37;</b> e ritorna i dati presi.">
 <!ENTITY Capture.rf "Controlla il nome del file con l'espressione regolare contenuta tra i due tag <b>&#37;asf_rf&#37;</b> e ritorna i dati presi.">

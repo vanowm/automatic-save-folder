@@ -9,72 +9,72 @@
 Tutti gli esempi che seguono non comprendono / / all'inizio e alla fine del filtro per essere leggibili facilmente. 
 Quando selezioni dalla checkbox 'regexp' nella finestra dei filtri, gli / / verranno inseriti automaticamente.">
 
-<!ENTITY Title_1 "">
-<!ENTITY Intro_3 "Per definire i filtri bisogna conoscere alcuni caratteri speciali:
-">
+<!ENTITY Title_1 "The special tags">
+<!ENTITY Intro_3 "The same way the * character (asterisk) is used in common filter to replace an undetermined number of letters, 
+the regular expression use many special characters to match different group of letters :">
 
 <!ENTITY The.dot.title "Il punto .">
 <!ENTITY The.dot.text "Il punto . rimpiazza qualsiasi carattere singolo(una lettere, numero o spazio).<br />
 g..gle corrisponde a 'google' e ad altre parole che cominciano per 'g', seguite da 2 caratteri, e che termina con 'gle'.">
 
 <!ENTITY The.asterisk.title "Il simbolo *">
-<!ENTITY The.asterisk.text "Il simbolo * ripete l'ultimo carattere (.* indica una qualsiasi stringa, cioè molte volte un carattere)
-
-
-
-">
+<!ENTITY The.asterisk.text "Il simbolo * ripete l'ultimo carattere (.* indica una qualsiasi stringa, cioè molte volte un carattere).<br />
+'go*gle' will correspond to gogle, google, goooooooooogle, etc.<br />
+'.*' (a dot followed by an asterisk) correspond to many times any character.<br />
+.* used alone will match all the filter's domain name or the filter's file name,
+so this is what is used when you select &#34;All&#34; in the filter creation window.">
 
 <!ENTITY The.caret.title "Il simbolo ^">
-<!ENTITY The.caret.text "^ significa all'inizio della stringa (^http indica solo l'occorrenza all'inizio. Va bene per  http://test.com ma non per ftp://http_test.com)
-">
+<!ENTITY The.caret.text "^ significa all'inizio della stringa (^http indica solo l'occorrenza all'inizio. Va bene per  http://test.com ma non per ftp://http_test.com)<br />
+The filtering will be correct for 'http://test.com' but will not for 'ftp://http_test.com' because http is not at the begining but in the middle.">
 
 <!ENTITY The.dollar.title "Il simbolo $">
-<!ENTITY The.dollar.text "$ indica la fine della stringa ( com$ indica solo la fine. Va bene per http://test.com ma non per http://computer.net)
-">
+<!ENTITY The.dollar.text "$ indica la fine della stringa ( com$ indica solo la fine. Va bene per http://test.com ma non per http://computer.net)<br />
+The filtering will be correct for 'http://test.com' but will not for 'http://computer.net' because 'com' is not at the end of the line but in the middle.">
 
 <!ENTITY The.braces.title "Il simbolo {}">
-<!ENTITY The.braces.text "{x} indica qualsiasi carattere x volte, ad esempio tor{2}ent = torrent (corrisponde a 2 volte 'r')
-">
+<!ENTITY The.braces.text "{x} indica qualsiasi carattere x volte, ad esempio tor{2}ent = torrent (corrisponde a 2 volte 'r')<br />
+It's possible to define the minimum and maximum: 'go{0,2}gle' will match either ggle, gogle or google.">
 
 <!ENTITY The.parenthesis.title "Le parentesi ( ) e il pipe |">
-<!ENTITY The.parenthesis.text "la parentesi e il pipe (aaaa|bbbb|cccc) prende qualsiasi carattere che sia aaaa o bbbb o cccc ecc.
-
-
-
-
-
-
-
-">
+<!ENTITY The.parenthesis.text "The parentheses allow consecutive group of letter definition. Used in conjonction with the pipe it can define multiple choices<br />
+(aaaa|bbbb|cccc) will match any of these characters group aaaa or bbbb or cccc, but not more than once.
+(b|g)oogle matches either boogle or google, but never bgoogle<br />
+<br />
+You can apply options to the parenthesis group:<br />
+'(b|g){1,2}oogle' can capture one or two times the letters from either b or g, followed by 'oogle'<br />
+boogle, bboogle, google, ggoogle, bgoogle, gboogle will all match.<br />
+<br />
+'(b|g)*oogle' can capture an infinite number of both mixed b and g before 'oogle'.">
 
 <!ENTITY The.question.title "Il simbolo ?">
-<!ENTITY The.question.text "? indica la presenza o assenza del carattere: i file mpeg possono essere .mpg or .mpeg, la regexp sarà mpe?g<br />
-Nov(embre)? indica Nov o Novembre
-
-
-
-
-
-
-
-">
+<!ENTITY The.question.text "? indica la presenza o assenza del carattere.<br />
+i file mpeg possono essere .mpg or .mpeg, la regexp sarà mpe?g<br />
+Nov(embre)? indica Nov o Novembre<br />
+The question mark is a shortcut of the regular expression {0,1}<br />
+Nov(ember)? = Nov(ember){0,1}<br />
+<br />
+The question mark is also used to transform a Regular expression state from greedy (default) to lazy, example :<br />
+The data : &#34;This is a test&#34;<br />
+Filter 1 : &#34;t.*t&#34; will capture from the first to the last T, in other word all the string &#34;This is a test&#34;, the asterisk tag is greedy and matches the more characters he can find.<br />
+Filter 2 : &#34;t.*?t&#34; will capture from the first T to the first encountered T folowing it, it will return &#34;This is a t&#34;, the asterisk is now lazy and stops at the first occurence it finds (from left to right).">
 
 <!ENTITY The.bracket.title "Le parentesi quadre [ ]">
-<!ENTITY The.bracket.text "Le parentesi quadre [ ] sono utili per definire una corrispondenza di molti caratteri. v[eo]lo corrisponde alle parole velo e volo.<br />
+<!ENTITY The.bracket.text "Le parentesi quadre [ ] sono utili per definire una corrispondenza di molti caratteri.<br />
+Unlike the parentheses, the characters inside the brackets are not concidered a single word, but independant letters.<br />
+v[eo]lo corrisponde alle parole velo e volo.<br />
+<br />
 Il meno - fra le parentesi quadre corrisponde a una serie di caratteri:<br />
-[a-z] significa qualsiasi carattere dalla a alla z. c[a-z]ne corrisponde a cane, cbne, ccne, ...m czne.<br />
+[a-z] significa qualsiasi carattere dalla a alla z.<br />
 <br />
 Puoi usare molti - fra le stesse parenetesi quadre, ad esempio [a-zA-Z] corrisponde a tutti i caratteri dell'alfabeto. [a-zA-Z0-9] per tutti i caratteri alfanumerici<br />
 [a-cn-o] per indicare qualsiasi lettera tra la a e la c, e dalla n alla o.<br />
-[-a-z] per indicare - (meno) e dalla alla alla z.
-
-
-
-
-
-
-
-">
+[-a-z] per indicare - (meno) e dalla alla alla z.<br />
+<br />
+<br />
+The brackets matches only one letter, but you can define more than one this way:<br />
+t[se]*t matches many time any of these letters : 'tet', 'tst', 'test', 'tset' or even 'tesssst'<br /> 
+t[es]{0,2} matches t, te, ts, tee, tss, tes and tse">
 
 <!ENTITY The.backslash.title "Il simbolo \">
 <!ENTITY The.backslash.text "\d corrisponde qualsiasi cifra (numero)<br />
@@ -84,10 +84,10 @@ Puoi usare molti - fra le stesse parenetesi quadre, ad esempio [a-zA-Z] corrispo
 \uFFFF con FFFF = codice esadecimale, corrisponde al carattere unicode in esadecimale. <br />
 Esempio \u00A9 corrisponde ad '©'.">
 
-<!ENTITY The.backslash.info "Se all'interno di un filtro c'è bisogno di riportare il simbolo dei caratteri sopra riportati bisogna eseguire il cosidetto escape, cioè far precedere il simbolo con un un backslash \. Ad esempio dominio.com diventa dominio\.com
-
-
-">
+<!ENTITY The.backslash.info "Se all'interno di un filtro c'è bisogno di riportare il simbolo dei caratteri sopra riportati bisogna eseguire il cosidetto escape, cioè far precedere il simbolo con un un backslash \.<br />
+Ad esempio dominio.com diventa dominio\.com<br />
+<br />
+All these characters will need to be escaped with a backslashe :">
 
 <!-- feel free to add a link to a Regexp website on your own language -->
 <!ENTITY Regexp.links "Esistono molti metodi di filtro e possiblità che non possono essere spiegati qui.<br />
@@ -98,17 +98,17 @@ O per i principianti: http://www.javascriptkit.com/jsref/regexp.shtml
 
 <!ENTITY Example_1.title "Alcuni esempi">
 <!ENTITY Example_1.text "qualsiasi .rar e .r01 .rxx files :<br />
-r(ar|\d{2}) significa r + ar, o r + due decimali<br />
+r(ar|\d{2}) <br />
+significa r + ar, o r + due decimali<br />
 <br />
 qualsiasi http in .com :<br />
 ^http.*\.com$<br />
+It means everything starting with 'http' (accomplished with the ^), followed by none or any letters undetermined number of time, finishing with '.com' (accomplished with the $).<br />
 <br />
 qualsiasi dominio, indipendentemente che ci sia http davanti :<br />
  ^http:\/\/(|www\.)mozilla\.org
- 
- 
- 
-">
+It means everything starting with 'http' (accomplished with the ^), followed with a ':', followed with 2 slashes '\/\/', followed either with nothing or 'www' and a dot '\.', followed with the domain name (ici 'mozilla.org')<br />
+Note : the slashes and the point are escaped with a backslash because if not, they would used as tags by the Regular Expression.">
 
 <!ENTITY Example_2.title "Esempi su filtri dei nomi dei file">
 <!ENTITY Example_2.text "Filtro su tutti gli archivi :<br />
@@ -135,6 +135,6 @@ qualsiasi dominio con 'oogle' dentro :<br />
 Con regexp : .*oogle.*<br />
 Non regexp : oogle">
 
-<!ENTITY Conclusion.title "">
-<!ENTITY Conclusion.text "
-">
+<!ENTITY Conclusion.title "Conclusion">
+<!ENTITY Conclusion.text "Regular expressions permit a better use of filters, but it can be sometimes much more faster to use simple widlcard *.<br />
+Regular expressions are useful only on complex matching.">

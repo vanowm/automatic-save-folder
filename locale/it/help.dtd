@@ -52,7 +52,7 @@
 
 
 <!ENTITY info.advancedexample.title "Ecco qualche esempio di variabili dinamiche e &#34;capture&#34;:">
-<!ENTITY info.advancedexample.text1 "">
+<!ENTITY info.advancedexample.text1 "Attention : In order to work correctly, don't forget to enable the option on the Dynamic Filters tab">
 
 <!ENTITY info.advancedexample.text2 "Per scaricare tutte le nightly build di firefox in una sottocartella di D:\Download\firefox :">
 <!ENTITY info.advancedexample.text3 "D:\Download\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
@@ -62,16 +62,16 @@
 <!ENTITY info.advancedexample.text6 "D:\Download\&#37;asf_x&#37;">
 <!ENTITY info.advancedexample.text7 "L'estensione creerà una sottocartella chiamata &#34;zip&#34; per i file .zip, &#34;rar&#34; per i file .rar, etc., dove verranno salvati i file.">
 
-<!ENTITY info.advancedexample.text8 "">
-<!ENTITY info.advancedexample.text9 "">
-<!ENTITY info.advancedexample.text10 "">
+<!ENTITY info.advancedexample.text8 "To sort all the Firefox installation package inside subfolder named after the software version:">
+<!ENTITY info.advancedexample.text9 "D:\Download\Firefox\$1f">
+<!ENTITY info.advancedexample.text10 "While checking the downloaded file with the filters, the parentheses are not took in account, and the filter will act as &#34;Firefox Setup *.exe&#34;<br />
+$1f correspond to the first parenthesis content on the filter's file name, which is the version number <br />
+The file &#34;Firefox Setup 3.5.4.exe&#34; will be saved in the folder D:\Download\Firefox\3.5.4\">
 
 <!ENTITY info.advancedexample.text11 "Per creare oppure no sottocartelle differenti in base al nome del file :">
 <!ENTITY info.advancedexample.text12 "Esempio : Vogliamo salvare i video chiamati &#34;La_mia_vacanza_data-di-viaggio.avi&#34;.<br />
-I video hanno i sottotitoli nel formato .srt per spiegare la vacanza, 
-ci sono anche file .zip con le foto del viaggio, 
-e i video possono escarticati con l'estensione .avi, .torrent or .nzb (newsgroup).<br /><br />
-&#34;.avi&#34; e &#34;.srt&#34; andranno nella cartella D:\video\vacanza .<br />
+I video hanno i sottotitoli nel formato .srt per spiegare la vacanza, ci sono anche file .zip con le foto del viaggio, e i video possono escarticati con l'estensione .avi, .torrent or .nzb (newsgroup).<br />
+<br />&#34;.avi&#34; e &#34;.srt&#34; andranno nella cartella D:\video\vacanza .<br />
 &#34;.zip&#34;, &#34;.torrent&#34; e &#34;.nzb&#34; andranno rispettivamente nelle sottocartelle D:\video\vacanze\zip, D:\video\vacanze\torrent and D:\video\vacanze\nzb.">
 <!ENTITY info.advancedexample.text13 "/^La_mia_vacanza.*\.(avi|srt|zip|torrent|nzb)$/">
 <!ENTITY info.advancedexample.text14 "D:\video\vacanza\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;">

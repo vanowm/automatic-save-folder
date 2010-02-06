@@ -1,5 +1,5 @@
 ﻿<!-- ASF -->
-<!ENTITY asf.version "0.9.4b">
+<!ENTITY asf.version "1.0">
 
 <!-- Mini about box from addon manager -->
 <!ENTITY about "About Automatic Save Folder">
@@ -26,7 +26,7 @@
 <!ENTITY about.version.title "Version">
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 begining spaces to create indentation -->
-<!ENTITY about.version.094 "+ Add filtering on Right-Click menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as...(Ctrl+S)&#34;
+<!ENTITY about.version.100 "+ Add filtering on Right-Click menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as...(Ctrl+S)&#34;
   (Need at least Firefox 2.0 and is not compatible with Download Sort add-on. If you have both activated, Download Sort prevails)
 + ASF is now working with Private browsing, and will prevent saving any data to Firefox preferences.
   Two things to note which change ASF behavior: 1) The previous hosted domain will not be updated, and 2) If the destination folder doesn't exist it will not be created or suggested, and the last working folder from non private mode will be used instead.
@@ -158,14 +158,9 @@ And contributors:<br />
 
 <!ENTITY about.translation.title "Translations">
 <!ENTITY about.translation.content "- Independant translators and Babelzilla translation team: <br />
-- de : Michael Baer<br />
 - en-US : Cyan, Narayan<br />
-- es : RigoNet<br />
 - fr : Cyan, Goofy, Haynee<br />
-- id : dimassony<br />
 - it : Scognito.<br />
-- pt-BR : petruc<br />
 - ru : MrCOLOMBO<br />
-- zh-TW : justin9711<br />
 ">
 
