@@ -1,7 +1,7 @@
 content	asf	content/
 locale	asf	en-US	locale/en-US/
-locale	asf	fr-FR	locale/fr-FR/
-locale	asf	it-IT	locale/it-IT/
+locale	asf	fr		locale/fr/
+locale	asf	it		locale/it/
 skin	asf	classic/1.0	skin/
 overlay	chrome://browser/content/browser.xul	chrome://asf/content/overlay_preferences.xul
 overlay	chrome://mozapps/content/downloads/unknownContentType.xul	chrome://asf/content/overlay_unknownContentType.xul
