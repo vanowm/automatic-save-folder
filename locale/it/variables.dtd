@@ -25,7 +25,6 @@
 <!ENTITY asf_f "Campo &#34;Nome file&#34; dal filtro usato. (I caratteri non permessi verranno rimossi. Se nessun filtro viene trovato, viene usato il file corrente)">
 <!ENTITY asf_x "Estensione file. (Senza il punto)">
 
-
 <!ENTITY Capture.tags "">
 <!ENTITY number "">
 <!ENTITY Capture.d "">

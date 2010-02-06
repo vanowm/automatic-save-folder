@@ -1,0 +1,103 @@
+﻿<!-- ASF -->
+<!ENTITY asf.version "0.9.4b">
+
+<!-- browser and save dialog-->
+<!ENTITY prefwindow.title "Настройки Automatic Save Folder">
+<!ENTITY asf.label "Automatic Save Folder...">
+<!ENTITY asf.addedit.label "Добавить или изменить фильтр">
+<!ENTITY asf.pathselect.label "Доступные пути фильтра:">
+
+<!-- Filters tab - top -->
+<!ENTITY asf.filters.label "Фильтры">
+<!ENTITY asf.tree.column.domain "Домен">
+<!ENTITY asf.tree.column.filename "Имя файла">
+<!ENTITY asf.tree.column.localfolder "Папка для сохранения">
+<!ENTITY asf.tree.column.enabled "Архив">
+<!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter's tab, you can write 'up' if you want -->
+<!ENTITY asf.options.move.up " ">
+<!ENTITY asf.options.move.down " ">
+<!ENTITY asf.options.edit "Edit">
+<!ENTITY asf.options.delete " ">
+<!ENTITY asf.options.add " ">
+
+<!-- Filters tab - bottom -->
+<!ENTITY asf.default.label "Если файл не соответствует ни одному фильтру сохранить в:">
+<!ENTITY asf.lastselected.label "Последняя папка">
+<!ENTITY asf.defaultfolder.label "Эта папка: ">
+<!ENTITY asf.selectfolder.label "Выбрать...">
+<!ENTITY asf.keeptemp.label "Используйте последнюю папку при загрузке файла с того же домена что и последний загруженный файл.">
+
+<!-- popup -->
+<!ENTITY asf.top.popup "Переместить в начало">
+<!ENTITY asf.copy.popup "Создать дубликат">
+<!ENTITY asf.delete.popup "Удалить">
+<!ENTITY asf.bottom.popup "Переместить в конец">
+
+<!-- Options tab -->
+<!ENTITY asf.options.label "Опции">
+<!ENTITY asf.useDownloadDir.bool "Не предлагать выбор папки и автоматически сохранить в:">
+<!ENTITY asf.desktop.label "Рабочий стол">
+<!ENTITY asf.systemdownload.label "Загрузки">
+<!ENTITY asf.filteredfolder.label "Использовать фильтры">
+<!ENTITY asf.folderList.tooltip "Если папка &#34;Загрузки&#34; не существует, будет предложено выбрать папку.">
+<!ENTITY asf.dialogaccept.bool "Автоматически использовать настройку  &#34;Как FireFox следует обработать это файл&#34;.">
+<!ENTITY asf.dialogacceptFiltered.bool "Только если найден фильтр">
+<!ENTITY asf.dialogacceptFiltered.tooltip "Не будет автоматически использовать настройку &#34;Как FireFox следует обработать это файл&#34; если не найдено подходящего фильтра.">
+<!ENTITY asf.viewdloption.bool "Показывать опции при загрузке">
+<!ENTITY asf.viewdloption.tooltip "Показывать две последних использованных папки и кнопку для добавления и редактирования фильтров">
+<!ENTITY asf.viewdloptionType0.label "Всегда показывать">
+<!ENTITY asf.viewdloptionType1.label "Всегда минимизировать">
+<!ENTITY asf.viewdloptionType2.label "Минимизировать если отключено">
+<!ENTITY asf.viewdloptionType3.label "Скрыть если отключено">
+<!ENTITY asf.viewpathselect.bool "Показывать список папок">
+<!ENTITY asf.viewpathselect.tooltip "Активировать меню перетаскивания мышкой для всех папок фильтров.">
+<!ENTITY asf.usecurrenturl.bool "Использовать пусть из строки адреса если не найден фильтр для домена загружаемого файла.">
+<!ENTITY asf.lastdir.bool "Изменять папку для команды 'сохранить как...' когда есть подходящий фильтр">
+<!ENTITY asf.userightclick.bool "Использовать фильтры в меню">
+<!ENTITY asf.userightclick.tooltip "Использовать фильтры  для меню &#34;Сохранить ссылку как...&#34;, &#34;Сохранить картинку как...&#34; и &#34;Сохранить как... (Ctrl+S)&#34;">
+<!ENTITY asf.rightclicktimeout.bool "Убрать задержку по времени и активировать фильтры для меню правой кнопки мыши &#34;Сохранить ссылку как...&#34;">
+<!ENTITY asf.rightclicktimeout.tooltip1 "Убрать задержку по времени не позволяющую Firefox прочитать имя файла для перенаправленной загрузки и позволить это сделать Automatic Save Folder.">
+<!ENTITY asf.rightclicktimeout.tooltip2 "Временно отключить это опцию если вы хотите разрешить Firefox прочитать имя файла из заголовка (фильтры не будут доступны).">
+<!ENTITY asf.rightclicktimeout.tooltip3 "Использовать только для скриптов с перенаправлением загрузок.">
+<!ENTITY asf.rightclicktimeout.tooltip4 "На заметку: Опция не имеет влияния на меню &#34;Сохранить картинку как...&#34; и  &#34;Сохранить как... (Ctrl+S)&#34;.">
+<!ENTITY asf.rightclick.ff2.label "Меню Automatic Save Folder по правой кнопке мыши не доступно для Firefox 2. Если вы хотите иметь возможность использовать фильтры для меню правой кнопки мыши &#34;Сохранить ссылку как...&#34;, вы должны обновить Firefox до версии 3.0 (рекомендуемая версия 3.5 или выше).">
+<!ENTITY asf.rightclick.DSort.label "Обнаружено дополнение 'Download sort'. Меню Automatic Save Folder по правой кнопке мыши не будет доступно пока вы не отключите 'Download Sort' в списке дополнений.">
+
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Динамические папки">
+<!ENTITY asf.variablemode.bool "Включить">
+<!ENTITY asf.variablemode.tooltip1 "Позволяет вам редактировать вручную пути сохранения и добавлять динамические переменные, такие как дата и имя файла.">
+<!ENTITY asf.variablemode.tooltip2 "Внимание: Если вы находитесь в режиме приватного просмотра, Firefox не сможет создать папку если она не существует. Будет предложена последняя папка использованная до включения режима приватного просмотра.">
+<!ENTITY asf.variablemode.label "Внимание: Теги с большими и маленькими буквами различаются.">
+<!ENTITY asf.variables.label "Список тегов:">
+
+<!-- help tab-->
+<!ENTITY asf.help.label "  Помощь  ">
+<!ENTITY asf.help.title "Помощь">
+
+<!-- About tab-->
+<!ENTITY asf.about.label "О дополнении...">
+<!ENTITY asf.about.title "О Automatic Save Folder">
+
+<!-- preference add & edit-->
+<!ENTITY buttonlabelextra1 "OK">
+<!ENTITY asf.add.title "Добавить новый фильтр">
+<!ENTITY asf.edit.title "Изменить фильтр">
+<!ENTITY asf.addedit.filter.label "Фильтры">
+<!ENTITY asf.addedit.help.label "Помощь">
+<!ENTITY asf.addedit.domain.label "Домен">
+<!ENTITY asf.addedit.filename.label "Имя файла">
+<!ENTITY asf.addedit.folder.label "Локальная папка">
+<!ENTITY asf.addedit.regexp "Рег.выражения">
+<!ENTITY asf.addedit.all "Все">
+<!ENTITY asf.addedit.regexp.exemple "Примеры регулярных выражений: ">
+<!ENTITY asf.addedit.regexphelp.label "Помощь по рег. выражениям">
+
+<!ENTITY asf.addedit.inforegexp1 "Фильтры могут быть :">
+<!ENTITY asf.addedit.inforegexp2 "Определенные : file_to_download.zip">
+<!ENTITY asf.addedit.inforegexp3 "Частичные с маской : file*.zip">
+<!ENTITY asf.addedit.inforegexp4 "Рег. выражения. : .*(.rar|.zip)$">
+
+<!-- Regular expression Help dialog -->
+<!ENTITY asf.regexp.title "Регулярные выражения">
+<!ENTITY asf.regexp.label "Помощь и примеры">

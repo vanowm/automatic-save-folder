@@ -25,7 +25,6 @@
 <!ENTITY asf_f "&#34;File name&#34; field from the used filter. (Forbidden characters will be deleted. If no filter is found, the current file name is used)">
 <!ENTITY asf_x "File extension. (Without the dot)">
 
-
 <!ENTITY Capture.tags "Capture tags">
 <!ENTITY number "number">
 <!ENTITY Capture.d "Return the captured data using parentheses in the &#34;domain&#34; filter. &lt;number&gt; refer to the parenthesis number, from 1 to 9.">

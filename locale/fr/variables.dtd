@@ -25,7 +25,6 @@
 <!ENTITY asf_f "Champs &#34;Nom de fichier&#34; du filtre utilisé. (Les caractères incompatibles seront supprimés. Si aucun filtre n'est trouvé, le nom du fichier courant est utilisé)">
 <!ENTITY asf_x "Extension du fichier. (Sans le point)">
 
-
 <!ENTITY Capture.tags "Variables de capture">
 <!ENTITY number "numéro">
 <!ENTITY Capture.d "Retourne le contenu de la capture à l'aide des parenthèses présentes dans le filtre &#34;Domaine&#34;. &lt;numéro&gt; correspond au numéro de la parenthèse, de 1 à 9.">

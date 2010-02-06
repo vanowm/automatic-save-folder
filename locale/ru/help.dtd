@@ -1,0 +1,91 @@
+﻿<!ENTITY info.domain "Домен :">
+<!ENTITY info.filename "Файл :">
+<!ENTITY info.folder "Папка :">
+<!ENTITY info.all "Все">
+<!ENTITY info.dynamicfilter "Динамический фильтр">
+<!ENTITY info.capturefilter "Фильтр захвата">
+
+<!ENTITY info.important.title "Важно">
+<!ENTITY info.important.text1 "Фильтрация для загрузок (простым нажатием или автоматическая загрузка), работает только в случае если показывается окно &#34;Сохранение файла&#34;:">
+<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big)-->
+<!ENTITY info.important.pict1 "screen_save_ru.png">
+<!ENTITY info.important.text2 "Убедитесь, что FireFox, не использует другое действие, предотвращающее появление окна загрузки следующим образом:">
+<!ENTITY info.important.text3 "В FireFox откройте меню &#34;Инструменты&#34; далее &#34;Настройки...&#34;.">
+<!ENTITY info.important.text4 "- Для FireFox 3: Откройте закладку &#34;Приложения&#34;
+        <br />- Для FireFox 2: Откройте в закладку &#34;Содержимое&#34; и нажмите на &#34;Управление...&#34; внизу справа.">
+<!ENTITY info.important.text5 "Проверьте чтобы у типа загружаемого файла было установлено действие &#34;Всегда спрашивать&#34;.">
+<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
+<!ENTITY info.important.pict2 "screen_apps_ru.png">
+
+
+<!ENTITY info.howtouse.title "Как использовать">
+<!ENTITY info.howtouse.text1 "Это дополнение позволяет Вам, используя фильтры, указать папку для сохранения загружаемого файла.">
+
+<!ENTITY info.filterrules.title "Правила для фильтров">
+<!ENTITY info.filterrules.rule1 "Фильтр определяется на основе имени файла или домена.">
+<!ENTITY info.filterrules.rule2 "Фильтр должен совпадать с одним из полей - имя файла или домен. Не используйте кавычки.<br/>Пример: вместо <b>&#34;google.com&#34;</b> нужно использовать <b>google.com</b> (без кавычек)">
+<!ENTITY info.filterrules.rule3 "Разрешено использование символа маски <b>*</b> (звездочка), чтобы заменить часть строки фильтра.<br/>Пример: <b>goog*.com</b>">
+<!ENTITY info.filterrules.rule4 "Использование звездочки в начале или конце имени домена не требуется.<br/>Пример: <b>*google.com*</b> и <b>google.com</b> дадут одинаковый результат.">
+<!ENTITY info.filterrules.rule5 "Использование звездочки в начале или конце имени файла не требуется.<br/>Пример: <b>*.zip</b>  <b>.zip</b> дадут одинаковый результат.">
+<!ENTITY info.filterrules.rule6 "Фильтры обрабатываются в порядке сверху-вниз, обработка завершается на первом подходящем фильтре. Используйте возможность изменения позиции фильтра в списке.">
+<!ENTITY info.filterrules.rule7 "Фильры не чувствительны к регистру.<br/>Пример: <b>GOOGLE.COM</b> и <b>google.com</b> дадут одинаковый результат.">
+
+<!ENTITY info.howtouse.text2 "Для большей гибкости дополнение использует регулярные выражения.">
+<!ENTITY info.howtouse.text3 "Чтобы получить справку по регулярным выражениям  перейдите в закладку &#34;Фильтры&#34; нажмите кнопку &#34;Добавить фильтр&#34; и
+в открывшемся окне нажмите кнопку &#34;Помощь по регулярным выражениям&#34;. 
+Так же помощь доступна на сайтах:<br/>
+<b>http://www.regular-expressions.info</b> - Справочник и ресурсы по регулярным выражениям (англ.)<br/>
+<b>http://www.pcre.ru/docs/javascript</b> - Примеры и документация по регулярным выражениям (рус.)">
+<!ENTITY info.howtouse.text4 "Динамические переменные используются для создания папок, именованных по дате, имени файла, имени домена и т.д.<br />
+Список доступных тегов находятся в закладке &#34;Динамические папки&#34;.">
+
+
+<!ENTITY info.basicexample.title "Несколько примеров фильтров">
+
+<!ENTITY info.basicexample.text1 "Сохранение всех исполняемых файлов (*.exe) в папку &#34;D:\Download\Exe&#34;:">
+<!ENTITY info.basicexample.text2 "D:\Download\Exe">
+
+<!ENTITY info.basicexample.text3 "Сохранение всех файлов с определенного домена (<b>Пример</b>: &#34;mozilla.org&#34;) в папку &#34;D:\Download\Mozilla&#34;:">
+<!ENTITY info.basicexample.text4 "D:\Download\Mozilla">
+
+<!ENTITY info.basicexample.text5 "Сохранение &#34;.zip&#34; файлов с домена &#34;mozilla.org&#34; в отдельную папку &#34;D:\Download\Mozilla\Zip&#34;. Другие файлы сохраняются в предыдущую:">
+<!ENTITY info.basicexample.text6 "D:\Download\Mozilla\Zip">
+<!ENTITY info.basicexample.text7 "Поместите в списке этот фильтр выше предыдущего фильтра для  &#34;mozilla.org&#34;. Помните, что обработка фильтров идет сверху-вниз.">
+
+<!ENTITY info.basicexample.text8 "Сохранение программы для установки &#34;Firefox&#34; с любого домена в отдельную папку &#34;D:\Download\FireFox&#34;.">
+<!ENTITY info.basicexample.text9 "D:\Download\FireFox.">
+
+
+<!ENTITY info.advancedexample.title "Несколько примеров динамических фильтров и фильтров захвата">
+<!ENTITY info.advancedexample.text1 "Внимание: Для работы фильтров не забудьте включить опцию использования Динамических фильтров в настройках дополнения.">
+
+<!ENTITY  info.advancedexample.text2  "<b>Задача:</b>Сортировка ночных сборок FireFox в подкаталог D:\Download\FireFox:<br/>">
+<!ENTITY info.advancedexample.text3 "D:\Download\FireFox\Nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
+<!ENTITY info.advancedexample.text4 "<br/><b>Результат:</b> Будут созданы подкаталоги для каждой даты.<br/><b>Пример</b>: &#34;D:\Download\FireFox\Nightly\2009-12-04&#34;">
+
+<!ENTITY info.advancedexample.text5 "<b>Задача:</b>Сортировка по типу файла:<br/>">
+<!ENTITY info.advancedexample.text6 "D:\Download\&#37;asf_x&#37;">
+<!ENTITY info.advancedexample.text7 "<br/><b>Результат:</b>Будут созданы подкаталоги для каждого типа файлов.
+<br/><b>Пример</b>: &#34;D:\Download\zip&#34; для .zip файлов, &#34;D:\Download\rar&#34; для .rar файлов и так для каждого типа сохраняемых файлов.">
+
+<!ENTITY info.advancedexample.text8 "<b>Задача:</b> Сортировка дистрибутивов FireFox в подкаталоги по номеру версии:<br/>">
+<!ENTITY info.advancedexample.text9 "D:\Download\Firefox\$1f">
+<!ENTITY info.advancedexample.text10 "<br/><b>Результат:</b> Во время проверки фильтров скобки в поле &#34;Имя файла&#34; не будут учитываться и фильтр будет работать так же как &#34;Firefox Setup *.exe&#34;<br />
+$1f соответствует первой паре скобок в поле &#34;Имя файла&#34;, в нашем случае это номер версии.
+<br/><b>Пример</b>: Файл &#34;Firefox Setup 3.5.4.exe&#34; будет сохранен в папку &#34;D:\Download\Firefox\3.5.4\&#34;">
+
+<!ENTITY info.advancedexample.text11 "<b>Задача:</b> Создавать или не создавать подкаталоги в зависимости от имени файла:">
+<!ENTITY info.advancedexample.text12 "Например сохраняем видео файлы, именованные как &#34;Мой_отпуск_дата-поездки.avi&#34;.<br />
+Видео имеет файл субтитров .srt с описанием путешествия, так же доступны .zip файлы с фотографиями поездки, видео могут иметь .avi, .torrent или .nzb расширения.<br />
+&#34;.avi&#34; и &#34;.srt&#34; будут размещены в папке D:\Видео\Отпуск . <br />
+&#34;.zip&#34;, &#34;.torrent&#34; и &#34;.nzb&#34; будут соответственно размещены в D:\Видео\Отпуск\zip, D:\Видео\Отпуск\torrent и D:\Видео\Отпуск\nzb.">
+<!ENTITY info.advancedexample.text13 "/^Мой_отпуск.*\.(avi|srt|zip|torrent|nzb)$/">
+<!ENTITY info.advancedexample.text14 "D:\Видео\Отпуск\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;">
+<!ENTITY info.advancedexample.text15 "<b>Результат:</b><br />
+Фильтр активируется для всех файлов, начинающихся с &#34;Мой_отпуск&#34; и заканчивающихся одним из расширений (avi, srt, zip, torrent or nzb).<br />
+Каталог создается в зависимости от фильтра : &#37;asf_rf&#37; , который анализирует имя загружаемого файла при помощи регулярного выражения, заключенного в скобки между двумя тегами &#37;asf_rf&#37; :
+Если файл заканчивается на &#34;zip&#34;, &#34;torrent&#34; или &#34;nzb&#34;, часть имени файла (в нашем случае это расширение), захваченная регулярным выражением создает подкаталог.<br />
+Если ни одно из этих расширений не присутствует, регулярное выражение не будет найдено, и подкаталог создан не будет, таким образом остальные файлы будут загружены в D:\Видео\Отпуск">
+<!ENTITY info.advancedexample.text16 "<b>На заметку:</b> Вы можете поместить столько тегов, сколько вам требуется .<br />Фильтр может быть таким:">
+<!ENTITY info.advancedexample.text17 "D:\Видео\&#37;asf_rf&#37;(отпуск|свадьба)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
+В этом случае , подкаталог &#34;отпуск&#34; будет создан только в случае если часть имени файла содержит слово &#34;отпуск&#34;.">

@@ -2,28 +2,28 @@
 <!ENTITY asf.version "0.9.4b">
 
 <!-- Mini about box from addon manager -->
-<!ENTITY about "About Automatic Save Folder">
-<!ENTITY version "Version: ">
-<!ENTITY createdBy "Created By:">
+<!ENTITY about "О Automatic Save Folder">
+<!ENTITY version "Версия:">
+<!ENTITY createdBy "Создан:">
 <!ENTITY createdBy.name "Cyan (CASSAR Éric)">
-<!ENTITY contributor "Thanks:">
-<!ENTITY contributor.name "Thank you to everyone who helped and left comments">
-<!ENTITY contributor2.name "on various websites to make this add-on better">
-<!ENTITY homepage "Home Page:">
+<!ENTITY contributor "Благодарности:">
+<!ENTITY contributor.name "Спасибо для всех кто помог или оставил комментарий">
+<!ENTITY contributor2.name "чтобы сделать этот дополнение лучше">
+<!ENTITY homepage "Домашняя страница:">
 
 <!-- About tab -->
 <!ENTITY about.madeby_authorname "By Cyan">
 
-<!ENTITY about.links.title "Links">
-<!ENTITY about.links.mainwebsite.title "Main website">
-<!ENTITY about.links.mozilla.title "Add-on page on Mozilla">
+<!ENTITY about.links.title "Ссылки">
+<!ENTITY about.links.mainwebsite.title "Основной сайт">
+<!ENTITY about.links.mozilla.title "Страница дополнения на Mozilla">
 
-<!ENTITY about.history.title "ChangeLog">
-<!ENTITY about.add "Added">
-<!ENTITY about.delete "Removed">
-<!ENTITY about.change "Changed">
-<!ENTITY about.fix "Fixed">
-<!ENTITY about.version.title "Version">
+<!ENTITY about.history.title "Список изменений">
+<!ENTITY about.add "Добавлено">
+<!ENTITY about.delete "Удалено">
+<!ENTITY about.change "Изменено">
+<!ENTITY about.fix "Исправлено">
+<!ENTITY about.version.title "Версия">
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 begining spaces to create indentation -->
 <!ENTITY about.version.094 "+ Add filtering on Right-Click menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as...(Ctrl+S)&#34;
@@ -143,21 +143,21 @@ I removed the &#34;Accept&#34; button and replaced it with a scripted one &#34;S
 + Edit a filter with Double-click on the filters in the list.
 + Skin of the GUI with pictures.">
 
-<!ENTITY about.thanks.title "Thanks to">
+<!ENTITY about.thanks.title "Благодарности">
 
-<!ENTITY about.programmation.title "Programming">
-<!ENTITY about.programmation.content "I would like to thanks specially:<br />
-- DownThemAll and Download sort extension's authors, from who I learned a lot by looking at their source code.<br />
-- http://captain.at, late xulplanet.com, http://xulfr.org, for their Xul and javascript ressources.<br />
+<!ENTITY about.programmation.title "Программирование">
+<!ENTITY about.programmation.content "Хочу выразить специальные благодарности:<br />
+- Авторам дополнений DownThemAll и Download sort, от кого я научился многому, изучая их код.<br />
+- http://captain.at, late xulplanet.com, http://xulfr.org, за их Xul и javascript ресурсы.<br />
 <br />
-And contributors:<br />
+И спонсорам:<br />
 - Carsten, Ted Gifford, Paolo Amadini">
 
-<!ENTITY about.bugreport.title "Bugs report">
+<!ENTITY about.bugreport.title "Сообщения об ошибках">
 <!ENTITY about.bugreport.content "- Photonic, Martin">
 
-<!ENTITY about.translation.title "Translations">
-<!ENTITY about.translation.content "- Independant translators and Babelzilla translation team: <br />
+<!ENTITY about.translation.title "Переводы">
+<!ENTITY about.translation.content "- Независимые переводчики и команда переводчиков Babelzilla: <br />
 - de : Michael Baer<br />
 - en-US : Cyan, Narayan<br />
 - es : RigoNet<br />
