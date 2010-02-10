@@ -215,7 +215,7 @@ var automatic_save_folder = {
 				{
 					if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
 					{	// then change the destination folder to user choice
-						this.set_savepath(defaultfolder);
+						if (defaultfolder != "") this.set_savepath(defaultfolder);
 					}	
 					else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
 					{
@@ -232,7 +232,7 @@ var automatic_save_folder = {
 						{
 							lastpath = defaultfolder;
 						}
-						this.set_savepath(lastpath);
+						if (lastpath != "") this.set_savepath(lastpath);
 					}
 				}
 				else // else, if savetype == 0  (folder is set to last folder)
@@ -250,7 +250,7 @@ var automatic_save_folder = {
 					{
 						lastpath = defaultfolder;
 					}
-					this.set_savepath(lastpath);
+					if (lastpath != "") this.set_savepath(lastpath);
 				}
 			}
 			else // if a filter is found 

@@ -155,7 +155,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			{
 				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
 				{	// then change the destination folder to user choice
-					this.set_savepath(defaultfolder);
+					if (defaultfolder != "") this.set_savepath(defaultfolder);
 				}
 				else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
 				{
@@ -172,7 +172,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 					{
 						lastpath = defaultfolder;
 					}
-					this.set_savepath(lastpath);
+					if (lastpah != "") this.set_savepath(lastpath);
 				}
 			}
 			else // else, if savetype == 0  (folder is set to last folder)
@@ -190,7 +190,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				{
 					lastpath = defaultfolder;
 				}
-				this.set_savepath(lastpath);
+				if (lastpah != "") this.set_savepath(lastpath);
 			}
 		}
 		else // if a filter is found
