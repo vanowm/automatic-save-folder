@@ -26,6 +26,9 @@
 <!ENTITY about.version.title "Version">
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 begining spaces to create indentation -->
+<!ENTITY about.version.101 "! Fixed a spelling error preventing ASF to work when no filter matched.
+! Added a missing Russian string on the filter's tab.">
+
 <!ENTITY about.version.100 "+ Add filtering on Right-Click menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as...(Ctrl+S)&#34;
   (Need at least Firefox 2.0 and is not compatible with Download Sort add-on. If you have both activated, Download Sort prevails)
 + ASF is now working with Private browsing, and will prevent saving any data to Firefox preferences.

@@ -1,5 +1,5 @@
 ﻿<!-- ASF -->
-<!ENTITY asf.version "1.0">
+<!ENTITY asf.version "1.0.1">
 
 <!-- Mini about box from addon manager -->
 <!ENTITY about "À Propos d'Automatic save folder">
@@ -26,6 +26,9 @@
 <!ENTITY about.version.title "Version">
 
 <!-- Conserver les retour à la ligne car le tag < pre > est utilisé, gardez les deux espaces en début de ligne pour l'indentation -->
+<!ENTITY about.version.101 "! Correction d'une erreur de frape empêchant ASF de fonctionner si aucun filtre n'était trouvé.
+! Ajout d'une traduction russe manquante dans l'onglet des filtres.">
+
 <!ENTITY about.version.100 "+ Ajout du filtrage avec les menus du clic-droit &#34;Enregistrer la cible sous...&#34;, &#34;Enregistrer l'image sous...&#34; et &#34;Enregistrer sous...(Ctrl+S)&#34;
   (Ne fonctionne qu'à partir de Firefox 2.0 et est incompatible avec l'extension Download Sort. Si les deux extensions sont activées, Download Sort est prioritaire)
 + ASF fonctionne maintenant avec la Navigation Privée, empêchant toutes données d'être enregistrées dans les préférences de Firefox.
