@@ -172,7 +172,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 					{
 						lastpath = defaultfolder;
 					}
-					if (lastpah != "") this.set_savepath(lastpath);
+					if (lastpath != "") this.set_savepath(lastpath);
 				}
 			}
 			else // else, if savetype == 0  (folder is set to last folder)
@@ -190,7 +190,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				{
 					lastpath = defaultfolder;
 				}
-				if (lastpah != "") this.set_savepath(lastpath);
+				if (lastpath != "") this.set_savepath(lastpath);
 			}
 		}
 		else // if a filter is found
