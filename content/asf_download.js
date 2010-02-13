@@ -155,7 +155,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			{
 				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
 				{	// then change the destination folder to user choice
-					if (defaultfolder != "") this.set_savepath(defaultfolder);
+					this.set_savepath(defaultfolder);
 				}
 				else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
 				{
@@ -172,7 +172,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 					{
 						lastpath = defaultfolder;
 					}
-					if (lastpath != "") this.set_savepath(lastpath);
+					this.set_savepath(lastpath);
 				}
 			}
 			else // else, if savetype == 0  (folder is set to last folder)
@@ -190,7 +190,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				{
 					lastpath = defaultfolder;
 				}
-				if (lastpath != "") this.set_savepath(lastpath);
+				this.set_savepath(lastpath);
 			}
 		}
 		else // if a filter is found
@@ -249,10 +249,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var folderList = this.prefManager.getIntPref("browser.download.folderList");
 		
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-		directory.initWithPath(path);
+		
 		
 		// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of filtered path
-		if (useDownloadDir == true)
+		if ( (folderList == 0) || (folderList == 1) )
 		{
 			var desk = Components.classes["@mozilla.org/file/directory_service;1"]
 								.getService(Components.interfaces.nsIProperties)
@@ -266,7 +266,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				
 				if ( (folderList == 0) || (folderList == 1 && !supportDownloadLabel) ) // if desktop or if OS doesn't support default Download dir
 				{
-					var directory = desk;
+					directory = desk;
 				}
 				if (folderList == 1 && supportDownloadLabel) // default Downloads folder
 				{
@@ -274,7 +274,16 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				}
 			}
 		}
-		
+		else if ( (folderList == 2) && (!path) )   // set to filters but no path is define (either no default folder is set, or first time using 'folderList=2' )
+		{
+			directory = Components.classes["@mozilla.org/file/directory_service;1"]
+								.getService(Components.interfaces.nsIProperties)
+								.get("Desk", Components.interfaces.nsILocalFile);
+		}
+		else
+		{
+			directory.initWithPath(path);
+		}
 		
 		if (this.firefoxversion == 2)
 		{
