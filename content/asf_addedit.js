@@ -245,23 +245,17 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		if (document.getElementById(id_regexp).checked) 
 		{
-			if (filter.value.substring(0,1) != "/")  // let's add the /
+			if ((filter.value.substring(0,1) != "/") || (filter.value.substr(filter.value.length - 1, 1) != "/"))  // let's add the /
 			{
 				filter.value = "/" + filter.value;
-			}
-			if (filter.value.substr(filter.value.length - 1, 1) != "/")
-			{
 				filter.value = filter.value + "/";
 			}
 		}
 		else 
 		{
-			if (filter.value.substring(0,1) == "/")  // then delete the /
+			if ((filter.value.substring(0,1) == "/") && (filter.value.substr(filter.value.length - 1, 1) == "/"))  // then delete the /
 			{
 				filter.value = filter.value.substring(1, filter.value.length);
-			}
-			if (filter.value.substr(filter.value.length - 1, 1) == "/")	
-			{
 				filter.value = filter.value.substring(0, filter.value.length -1);
 			}
 		}
