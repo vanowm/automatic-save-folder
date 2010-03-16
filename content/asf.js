@@ -539,8 +539,15 @@ var automatic_save_folder = {
 			var currentdomain = window.opener.document.getElementById("source").value;
 			var currentfilename = window.opener.document.getElementById("location").value ;
 			var uCT = window.opener.document.getElementById("unknownContentType");
-			var currentURL = uCT.parentNode.defaultView.opener.location.host;	
-			
+			try
+			{
+				var currentURL = uCT.parentNode.defaultView.opener.location.host;
+			}
+			catch(e) // If direct link (copy/past to URLbar, or open from another application), no Tab's URL is returned.
+			{
+				var currentURL = "";
+			}
+
 			var domain = document.getElementById("asf-current-domain");
 			var filename = document.getElementById("asf-current-filename");
 			var URL = document.getElementById("asf-current-url");

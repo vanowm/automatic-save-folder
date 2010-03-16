@@ -1,5 +1,5 @@
 ﻿<!-- ASF -->
-<!ENTITY asf.version "1.0.1">
+<!ENTITY asf.version "1.0.2b Rev73">
 
 <!-- browser and save dialog-->
 <!ENTITY prefwindow.title "Preferenze di Automatic Save Folder">
