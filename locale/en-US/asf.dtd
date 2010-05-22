@@ -1,5 +1,5 @@
 ﻿<!-- ASF -->
-<!ENTITY asf.version "1.0.2b Rev73">
+<!ENTITY asf.version "1.0.2b Rev74">
 
 <!-- browser and save dialog-->
 <!ENTITY prefwindow.title "Automatic Save Folder Preferences">
@@ -43,6 +43,7 @@
 <!ENTITY asf.dialogaccept.bool "Automatically accept the &#34;What should Firefox do with this file&#34; dialog windows.">
 <!ENTITY asf.dialogacceptFiltered.bool "Only if a filter is found">
 <!ENTITY asf.dialogacceptFiltered.tooltip "Will not automatically accept the &#34;What should Firefox do with this file&#34; dialog windows if no filter matches.">
+<!ENTITY asf.dialogacceptForceSavefile.bool "Force the radio choice to &#34;Save File&#34; before automatically accepting the save dialog.">
 <!ENTITY asf.viewdloption.bool "View options when downloading">
 <!ENTITY asf.viewdloption.tooltip "Allow you to see the last two destination folders and a link to add or edit the filters">
 <!ENTITY asf.viewdloptionType0.label "Always show">

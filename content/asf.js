@@ -374,6 +374,7 @@ var automatic_save_folder = {
 		var viewpathlist = document.getElementById("asf-viewpathselect");
 		var dialogaccept = document.getElementById("asf-dialogaccept");
 		var dialogacceptFiltered = document.getElementById("asf-dialogacceptFiltered");
+		var dialogacceptForceSavefile = document.getElementById("asf-dialogacceptForceSavefile");
 		var useDownloadDir = document.getElementById("asf-useDownloadDir");
 		var asf_userightclick = document.getElementById("asf-userightclick");
 		var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout");
@@ -396,10 +397,13 @@ var automatic_save_folder = {
 		{
 			dialogacceptFiltered.checked = false;
 			dialogacceptFiltered.disabled = true;
+			dialogacceptForceSavefile.checked = false;
+			dialogacceptForceSavefile.disabled = true;			
 		}
 		if (dialogaccept.checked == true)
 		{
 			dialogacceptFiltered.disabled = false;
+			dialogacceptForceSavefile.disabled = false;
 		}
 		
 		// if the option window is opened from the saving window, disable the autosave feature (Not working when set from here.)

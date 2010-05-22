@@ -130,7 +130,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 					var uCT = document.getElementById("unknownContentType");
 					try
 					{
-						var currentURL = uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
+						var currentURL = uCT.parentNode.defaultView.opener.location.href; // look for the current website URL in the DOM.
 						dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
 					}
 					catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain.
@@ -228,6 +228,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		if (dialogacceptFiltered && idx < 0) dialogaccept = false; // no filter matched, do not autoaccept the dialog
 		if (dialogaccept)
 		{
+			// select "Save file" automatically
+			if (this.prefManager.getBoolPref("extensions.asf.dialogacceptForceSavefile"))
+			{
+				var radiosavemode = document.getElementById("mode");
+				radiosavemode.selectedItem = document.getElementById("save");
+				//alert(document.getElementById("save").selected);
+			}
 			window.close();
 			return dialog.onOK();
 		}

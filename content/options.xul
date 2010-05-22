@@ -33,6 +33,7 @@
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
 		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
 		<preference id="asf_dialogacceptFiltered" name="extensions.asf.dialogacceptFiltered" type="bool"/>
+		<preference id="asf_dialogacceptForceSavefile" name="extensions.asf.dialogacceptForceSavefile" type="bool"/>
 		<preference id="asf_userightclick" name="extensions.asf.userightclick" type="bool"/>
 		<preference id="asf_rightclicktimeout" name="extensions.asf.rightclicktimeout" type="bool"/>
 		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
@@ -154,7 +155,8 @@
 				</menulist>
 			</hbox>
 			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;" oncommand="automatic_save_folder.toggle_options();"/>
-			<checkbox id="asf-dialogacceptFiltered" preference="asf_dialogacceptFiltered" label="&asf.dialogacceptFiltered.bool;"  tooltip="tooltip_dialogacceptFiltered" style="margin-left:25px;"/>
+			<checkbox id="asf-dialogacceptFiltered" preference="asf_dialogacceptFiltered" label="&asf.dialogacceptFiltered.bool;" tooltip="tooltip_dialogacceptFiltered" style="margin-left:25px;"/>
+			<checkbox id="asf-dialogacceptForceSavefile" preference="asf_dialogacceptForceSavefile" label="&asf.dialogacceptForceSavefile.bool;" style="margin-left:25px;"/>
 			<hbox>
 				<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>
 				<menulist id="asf-viewdloptionType" preference="asf_viewdloptionType">
