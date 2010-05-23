@@ -33,7 +33,8 @@
 		<preference id="asf_variablemode" name="extensions.asf.variablemode" type="bool"/>
 		<preference id="asf_dialogaccept" name="extensions.asf.dialogaccept" type="bool"/>
 		<preference id="asf_dialogacceptFiltered" name="extensions.asf.dialogacceptFiltered" type="bool"/>
-		<preference id="asf_dialogacceptForceSavefile" name="extensions.asf.dialogacceptForceSavefile" type="bool"/>
+		<preference id="asf_dialogForceRadio" name="extensions.asf.dialogForceRadio" type="bool"/>
+		<preference id="asf_dialogForceRadioTo" name="extensions.asf.dialogForceRadioTo" type="string"/>
 		<preference id="asf_userightclick" name="extensions.asf.userightclick" type="bool"/>
 		<preference id="asf_rightclicktimeout" name="extensions.asf.rightclicktimeout" type="bool"/>
 		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
@@ -156,7 +157,18 @@
 			</hbox>
 			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;" oncommand="automatic_save_folder.toggle_options();"/>
 			<checkbox id="asf-dialogacceptFiltered" preference="asf_dialogacceptFiltered" label="&asf.dialogacceptFiltered.bool;" tooltip="tooltip_dialogacceptFiltered" style="margin-left:25px;"/>
-			<checkbox id="asf-dialogacceptForceSavefile" preference="asf_dialogacceptForceSavefile" label="&asf.dialogacceptForceSavefile.bool;" style="margin-left:25px;"/>
+			<hbox>
+				<checkbox id="asf-dialogForceRadio_Start" preference="asf_dialogForceRadio" label="&asf.dialogForceRadio_Start.bool;" style="margin-left:25px;"/>
+				<menulist id="asf-dialogForceRadioTo" preference="asf_dialogForceRadioTo" >
+					<menupopup>
+						<menuitem value="open" 			label="&asf.dialogForceRadioTo.label1;"></menuitem>
+						<menuitem value="downthemall" 	label="&asf.dialogForceRadioTo.label2;" id="asf-dialogForceRadioToDownthemall" style="display:none;"></menuitem>
+						<menuitem value="turbodta" 		label="&asf.dialogForceRadioTo.label3;" id="asf-dialogForceRadioToTurbodta" style="display:none;"></menuitem>
+						<menuitem value="save" 			label="&asf.dialogForceRadioTo.label4;"></menuitem>
+					</menupopup>
+				</menulist>
+				<label id="asf-dialogForceRadio_End">&asf.dialogForceRadio_End.bool;</label>
+			</hbox>
 			<hbox>
 				<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>
 				<menulist id="asf-viewdloptionType" preference="asf_viewdloptionType">

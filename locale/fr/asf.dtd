@@ -1,5 +1,5 @@
 ﻿<!-- ASF -->
-<!ENTITY asf.version "1.0.2b Rev74">
+<!ENTITY asf.version "1.0.2b Rev75">
 
 <!-- browser and save dialog-->
 <!ENTITY prefwindow.title "Préférences pour Automatic Save Folder">
@@ -43,7 +43,12 @@
 <!ENTITY asf.dialogaccept.bool "Valider automatiquement la fenêtre &#34;Que doit faire Firefox avec ce fichier ?&#34;.">
 <!ENTITY asf.dialogacceptFiltered.bool "Seulement si un filtre est trouvé">
 <!ENTITY asf.dialogacceptFiltered.tooltip "Ne valide pas automatiquement la fenêtre &#34;Que doit faire Firefox avec ce fichier ?&#34; si aucun filtre ne correspond.">
-<!ENTITY asf.dialogacceptForceSavefile.bool "Forcer le choix sur &#34;Enregistrer le fichier&#34; avant de valider automatiquement la fenêtre d'enregistrement.">
+<!ENTITY asf.dialogForceRadio_Start.bool "Forcer le choix sur">
+<!ENTITY asf.dialogForceRadioTo.label1 "Ouvrir avec">
+<!ENTITY asf.dialogForceRadioTo.label2 "DownThemAll!">
+<!ENTITY asf.dialogForceRadioTo.label3 "dTa OneClick!">
+<!ENTITY asf.dialogForceRadioTo.label4 "Enregistrer le fichier">
+<!ENTITY asf.dialogForceRadio_End.bool "avant de valider automatiquement la fenêtre d'enregistrement.">
 <!ENTITY asf.viewdloption.bool "Afficher les options lors de l'enregistrement">
 <!ENTITY asf.viewdloption.tooltip "Permet de voir les deux derniers dossiers d'enregistrement et un lien pour éditer ou ajouter de nouveaux filtres.">
 <!ENTITY asf.viewdloptionType0.label "Toujours afficher">

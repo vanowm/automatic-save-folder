@@ -229,10 +229,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		if (dialogaccept)
 		{
 			// select "Save file" automatically
-			if (this.prefManager.getBoolPref("extensions.asf.dialogacceptForceSavefile"))
+			if (this.prefManager.getBoolPref("extensions.asf.dialogForceRadio"))
 			{
-				var radiosavemode = document.getElementById("mode");
-				radiosavemode.selectedItem = document.getElementById("save");
+				var radioSavemode = document.getElementById("mode");
+				var forceRadioTo = this.prefManager.getCharPref("extensions.asf.dialogForceRadioTo");
+				if (!this.DownThemAll && (forceRadioTo == "downthemall" || forceRadioTo == "turbodta")) forceRadioTo = "save"; // default to "Save File" if DTA is uninstalled.
+				radioSavemode.selectedItem = document.getElementById(forceRadioTo);
 				//alert(document.getElementById("save").selected);
 			}
 			window.close();
@@ -997,7 +999,23 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		{
 			return ret; // return default value if pref doesn't exist
 		} 
-	}
+	},
+
+
+	DownThemAll: function() {
+		// Check for DTA add-on, if enabled return true. (works only on 3.x)
+		if (this.firefoxversion == 3)
+		{
+			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
+			var dsort_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
+			var DTA = enabledItems.indexOf(dsort_GUUID,0);
+			
+			if (DTA >= 0) return true;
+		}
+		return false;
+	},
+
+	
 };
 
 	addEventListener( // Autoload

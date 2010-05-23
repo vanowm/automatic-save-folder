@@ -374,7 +374,9 @@ var automatic_save_folder = {
 		var viewpathlist = document.getElementById("asf-viewpathselect");
 		var dialogaccept = document.getElementById("asf-dialogaccept");
 		var dialogacceptFiltered = document.getElementById("asf-dialogacceptFiltered");
-		var dialogacceptForceSavefile = document.getElementById("asf-dialogacceptForceSavefile");
+		var dialogForceRadio_Start = document.getElementById("asf-dialogForceRadio_Start");
+		var dialogForceRadio_End = document.getElementById("asf-dialogForceRadio_End");
+		var dialogForceRadioTo = document.getElementById("asf-dialogForceRadioTo");
 		var useDownloadDir = document.getElementById("asf-useDownloadDir");
 		var asf_userightclick = document.getElementById("asf-userightclick");
 		var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout");
@@ -397,14 +399,29 @@ var automatic_save_folder = {
 		{
 			dialogacceptFiltered.checked = false;
 			dialogacceptFiltered.disabled = true;
-			dialogacceptForceSavefile.checked = false;
-			dialogacceptForceSavefile.disabled = true;			
+			dialogForceRadio_Start.checked = false;
+			dialogForceRadio_Start.disabled = true;
+			dialogForceRadio_End.disabled = true;
+			dialogForceRadioTo.disabled = true;
 		}
 		if (dialogaccept.checked == true)
 		{
 			dialogacceptFiltered.disabled = false;
-			dialogacceptForceSavefile.disabled = false;
+			dialogForceRadio_Start.disabled = false;
+			dialogForceRadio_End.disabled = false;
+			dialogForceRadioTo.disabled = false;
 		}
+		
+		// and fill the forceRadioTo menuItems
+			var forceRadioTo = this.prefManager.getCharPref("extensions.asf.dialogForceRadioTo");
+			var DownThemAll = this.DownThemAll();
+			if (DownThemAll)
+			{
+				document.getElementById("asf-dialogForceRadioToDownthemall").style.display = "block";
+				document.getElementById("asf-dialogForceRadioToTurbodta").style.display = "block";
+			}
+			if (!this.DownThemAll && (forceRadioTo == "downthemall" || forceRadioTo == "turbodta")) this.prefManager.setCharPref("extensions.asf.dialogForceRadioTo","save"); // default to "Save File" if DTA is uninstalled.
+		
 		
 		// if the option window is opened from the saving window, disable the autosave feature (Not working when set from here.)
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")
@@ -820,6 +837,20 @@ var automatic_save_folder = {
 			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
 			
 			if (DownloadSort >= 0) return true;
+		}
+		return false;
+	},
+
+
+	DownThemAll: function() {
+		// Check for DTA add-on, if enabled return true. (works only on 3.x)
+		if (this.firefoxversion == 3)
+		{
+			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
+			var dsort_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
+			var DTA = enabledItems.indexOf(dsort_GUUID,0);
+			
+			if (DTA >= 0) return true;
 		}
 		return false;
 	},

@@ -1,5 +1,5 @@
 ﻿<!-- ASF -->
-<!ENTITY asf.version "1.0.2b Rev74">
+<!ENTITY asf.version "1.0.2b Rev75">
 
 <!-- browser and save dialog-->
 <!ENTITY prefwindow.title "Настройки Automatic Save Folder">
@@ -43,7 +43,12 @@
 <!ENTITY asf.dialogaccept.bool "Автоматически использовать настройку  &#34;Как FireFox следует обработать это файл&#34;.">
 <!ENTITY asf.dialogacceptFiltered.bool "Только если найден фильтр">
 <!ENTITY asf.dialogacceptFiltered.tooltip "Не будет автоматически использовать настройку &#34;Как FireFox следует обработать это файл&#34; если не найдено подходящего фильтра.">
-<!ENTITY asf.dialogacceptForceSavefile.bool "Force the radio choice to &#34;Save File&#34; before automatically accepting the save dialog.">
+<!ENTITY asf.dialogForceRadio_Start.bool "Force the radio choice to">
+<!ENTITY asf.dialogForceRadioTo.label1 "Open with">
+<!ENTITY asf.dialogForceRadioTo.label2 "DownThemAll!">
+<!ENTITY asf.dialogForceRadioTo.label3 "dTa OneClick!">
+<!ENTITY asf.dialogForceRadioTo.label4 "Save File">
+<!ENTITY asf.dialogForceRadio_End.bool "before automatically accepting the save dialog.">
 <!ENTITY asf.viewdloption.bool "Показывать опции при загрузке">
 <!ENTITY asf.viewdloption.tooltip "Показывать две последних использованных папки и кнопку для добавления и редактирования фильтров">
 <!ENTITY asf.viewdloptionType0.label "Всегда показывать">
