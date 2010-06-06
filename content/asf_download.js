@@ -28,6 +28,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
                                .getService(Components.interfaces.nsIVersionComparator),
 				
 		firefoxversion : "",
+		systemslash: "",
 		
 	main: function () {
 
@@ -233,12 +234,23 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			{
 				var radioSavemode = document.getElementById("mode");
 				var forceRadioTo = this.prefManager.getCharPref("extensions.asf.dialogForceRadioTo");
-				if (!this.DownThemAll && (forceRadioTo == "downthemall" || forceRadioTo == "turbodta")) forceRadioTo = "save"; // default to "Save File" if DTA is uninstalled.
+				var dta_ASFtoDTA_isActive = this.prefManager.getBoolPref("extensions.asf.dta_ASFtoDTA_isActive");
+				if (!this.DownThemAll_isEnabled() && (forceRadioTo == "downthemall" || forceRadioTo == "turbodta")) forceRadioTo = "save"; // default to "Save File" if DTA is uninstalled.
+				if (this.DownThemAll_isEnabled() && (!dta_ASFtoDTA_isActive) && (forceRadioTo == "turbodta")) forceRadioTo = "downthemall"; // default to "DownThemAll" if DTA is installed but extension.dta.directory is empty.
+				//if (this.DownThemAll_isEnabled() && (dta_ASFtoDTA_isActive) && document.getElementById("tdta").hidden == true) forceRadioTo = "downthemall"; // default to "downthemall" if DTA is installed, extension.dta.directory is empty, but ASF just set data.
 				radioSavemode.selectedItem = document.getElementById(forceRadioTo);
-				//alert(document.getElementById("save").selected);
+				//alert(document.getElementById("turbodta").selected);
 			}
-			window.close();
-			return dialog.onOK();
+			
+			if (this.DownThemAll_isEnabled() && (document.getElementById("downthemall").selected || document.getElementById("turbodta").selected))
+			{
+				DTA_SaveAs.dialogAccepted();
+			}
+			else
+			{
+				window.close();
+				return dialog.onOK();
+			}
 		}
 		else
 		{
@@ -253,12 +265,8 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	
 	set_savepath: function(path) {
 		var folderList = this.prefManager.getIntPref("browser.download.folderList");
-		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
-		var useDownloadDir = this.prefManager.getBoolPref("browser.download.useDownloadDir");
-		var folderList = this.prefManager.getIntPref("browser.download.folderList");
-		
-		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-		
+		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too		
+		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);		
 		
 		// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of filtered path
 		if ( (folderList == 0) || (folderList == 1) )
@@ -266,7 +274,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			var desk = Components.classes["@mozilla.org/file/directory_service;1"]
 								.getService(Components.interfaces.nsIProperties)
 								.get("Desk", Components.interfaces.nsILocalFile);
-			
+			directory = desk;
 			if (this.firefoxversion == 3)
 			{
 				var dnldMgr = Components.classes["@mozilla.org/download-manager;1"]
@@ -323,6 +331,15 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				this.saveUnicodeString("browser.download.lastDir", directory.path);
 				if (folderList == 2)
 					this.saveUnicodeString("browser.download.dir", directory.path);
+				
+				
+				// and process DTA if enabled
+				if (this.DownThemAll_isEnabled() && this.prefManager.getBoolPref("extensions.asf.dta_ASFtoDTA_isActive"))
+				{
+					this.DTA_replaceDirectory(directory.path);
+					// If process turbo dta too
+					this.DTA_setTurboDtaList();
+				}
 			}
 			
 		}
@@ -826,6 +843,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var j = 0;
 		if (pathlist_defaultforceontop)
 		{
+			if (variable_mode == true) defaultfolder = this.createfolder(defaultfolder);
 			var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
 			menuitem.setAttribute('label', defaultfolder);
 			menuitem.setAttribute('crop', 'center');
@@ -1002,7 +1020,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	},
 
 
-	DownThemAll: function() {
+	DownThemAll_isEnabled: function() {
 		// Check for DTA add-on, if enabled return true. (works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
@@ -1015,7 +1033,111 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		return false;
 	},
 
-	
+
+	DTA_replaceDirectory: function(folder) {
+		var dta_pathArray = this.DTA_readDirectory();
+		var asf_saveFolder = this.DTA_preparePath(folder); // filtered ASF folder
+		var dta_sendMethod = this.prefManager.getCharPref("extensions.asf.dta_sendMethod");
+		
+		if (dta_sendMethod == "replace")
+		{
+			dta_pathArray.splice(0, 1, asf_saveFolder );
+		}
+		if (dta_sendMethod == "add")
+		{
+			if(dta_pathArray.length >0)
+			{
+				dta_pathArray.unshift(asf_saveFolder);
+			}
+			else 
+			{
+				dta_pathArray.splice(0, 1, asf_saveFolder );
+			}
+		}
+		this.DTA_saveDirectory(dta_pathArray);
+	},
+
+
+	DTA_readDirectory: function() {
+		var string = this.loadUnicodeString("extensions.dta.directory");
+		// readHiddenPref("extensions.dta.directory", "complex", "[]");
+		
+		string = string.substring(1, string.length);
+		string = string.substring(0, string.length -1);
+		var directories = string.split(", ");
+		for (var i=0; i < directories.length; i++)
+		{
+			directories[i] = directories[i].substring(1, directories[i].length);
+			directories[i] = directories[i].substring(0, directories[i].length -1);
+		}
+		return directories;
+	},
+
+
+	DTA_saveDirectory: function(data) {
+		var history = this.prefManager.getIntPref("extensions.dta.history");
+		var dta_directory = data.slice(0,history)
+		
+		dta_directory = dta_directory.join("\", \"");
+		dta_directory = "[\"" + dta_directory + "\"]";
+		
+		return this.saveUnicodeString("extensions.dta.directory", dta_directory);	
+	},
+
+
+	DTA_setTurboDtaList: function () {
+		var dta_pathArray = this.DTA_readDirectory();
+		var processTurboDTA = !document.getElementById("tdta").hidden;
+		var tdtalist = document.getElementById("tdtalist");
+		var dta_sendMethod = this.prefManager.getCharPref("extensions.asf.dta_sendMethod");
+		//alert(tdtalist._list.menupopup.children[0].boxObject.element.attributes[0].value);
+		
+		// rename menuitems labels		
+		if (processTurboDTA)
+		{
+			if (dta_sendMethod == "replace")
+			{
+				if (this.systemslash == "\\") dta_pathArray[0] = dta_pathArray[0].replace(/\\\\/g, "\\");
+				tdtalist._list.menupopup.children[0].boxObject.element.attributes[0].value =  dta_pathArray[0];
+			}
+			
+			if (dta_sendMethod == "add")
+			{
+				for (var i = 0 ; i < tdtalist._list.menupopup.children.length ; i++)
+				{
+					if (this.systemslash == "\\") dta_pathArray[i] = dta_pathArray[i].replace(/\\\\/g, "\\");
+					tdtalist._list.menupopup.children[i].boxObject.element.attributes[0].value =  dta_pathArray[i];
+				}
+			}
+		}
+	},
+
+
+	DTA_preparePath: function(path) {
+		var _profile = Components.classes["@mozilla.org/file/directory_service;1"]
+						.getService(Components.interfaces.nsIProperties)
+						.get("ProfD", Components.interfaces.nsIFile);
+		this.systemslash = (_profile.path.indexOf('/') != -1) ? '/' : '\\';
+		
+		var formated_path = this.addFinalSlash(path);
+		if (this.systemslash == "\\") formated_path = formated_path.replace(/\\/g, "\\\\");
+		return formated_path;
+	},
+
+
+	// Inspired from DTA
+	addFinalSlash: function(string) {
+		if (string.length == 0)
+		{
+			return this.systemslash;
+		}
+		
+		if (string[string.length - 1] != this.systemslash)
+		{
+			return string + this.systemslash;
+		}
+		return string;
+	},
 };
 
 	addEventListener( // Autoload

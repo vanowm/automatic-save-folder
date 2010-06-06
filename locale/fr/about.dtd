@@ -1,7 +1,4 @@
-﻿<!-- ASF -->
-<!ENTITY asf.version "1.0.2b Rev75">
-
-<!-- Mini about box from addon manager -->
+﻿<!-- Mini about box from addon manager -->
 <!ENTITY about "À Propos d'Automatic save folder">
 <!ENTITY version "Version : ">
 <!ENTITY createdBy "Extension créée par :">
@@ -26,7 +23,10 @@
 <!ENTITY about.version.title "Version">
 
 <!-- Conserver les retour à la ligne car le tag < pre > est utilisé, gardez les deux espaces en début de ligne pour l'indentation -->
-<!ENTITY about.version.102 "+ Ajout d'une option permettant de forcer le choix sur &#34;Enregistrer le fichier&#34; lorsque l'enregistrement automatique est sélectionné.
+<!ENTITY about.version.102 "+ Ajout d'une option permettant de forcer le choix de l'action a effectuer lorsque l'enregistrement automatique est sélectionné.
++ Si l'extension DownThemAll est installée, un nouvel onglet d'option est disponible permetant d'envoyer le dossier de destination d'ASF à DTA.
++ Ajout d'une option permettant de choisir si les filtres sont sensibles ou insensibles à la casse.
++ Nouvelles options concernant l'interface graphique.
 ! Correction du script permettant de rajouter les slashs aux expressions régulières si le filtre contient déjà un slash aux extrémités.
 ! Correction d'un bug où les données d'un lien direct entré dans la barre d'adresse ou initialisé par un autre programme n'étaient pas lu correctement, empêchant d'afficher la liste des filtres lorsque la fenêtre de préférences était ouverte à partir du lien &#34;+ Ajouter ou éditer un filtre&#34; de la fenêtre d'enregistrement. (Merci à MrCOLOMBO)
 ! ASF utilise maintenant l'URL complète du site courant au lieu de son domaine lorsque qu'aucun filtre n'est trouvé. (Le clic-droit utilisait déjà l'URL complète).">

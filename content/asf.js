@@ -46,7 +46,7 @@ var automatic_save_folder = {
 		
 		// init the preference for firefox 3
 		if (this.firefoxversion == "3")
-		{	
+		{
 			// set lastdir to "enable" if the user just updated from previous version and had it disabled
 			var lastdir = document.getElementById("asf-lasdir");
 			lastdir.checked = true;
@@ -320,7 +320,10 @@ var automatic_save_folder = {
 		}
 		
 		// initialize the regular expression search
-		var test_regexp = new RegExp(filters, "i");  // put the slash back and the gi option (g = global seach, i = case insensitive)
+		var param = "";
+		var regexp_caseinsensitive = this.readHiddenPref("extensions.asf.regexp_caseinsensitive", "bool", true); // let the user choose in next release.
+		if (regexp_caseinsensitive) param = "i";
+		var test_regexp = new RegExp(filters, param);  // put the slash back and the gi option (g = global seach, i = case insensitive)
 		
 		if (string.match(test_regexp)) // if something match
 		{
@@ -414,13 +417,12 @@ var automatic_save_folder = {
 		
 		// and fill the forceRadioTo menuItems
 			var forceRadioTo = this.prefManager.getCharPref("extensions.asf.dialogForceRadioTo");
-			var DownThemAll = this.DownThemAll();
-			if (DownThemAll)
+			if (this.DownThemAll_isEnabled())
 			{
 				document.getElementById("asf-dialogForceRadioToDownthemall").style.display = "block";
 				document.getElementById("asf-dialogForceRadioToTurbodta").style.display = "block";
 			}
-			if (!this.DownThemAll && (forceRadioTo == "downthemall" || forceRadioTo == "turbodta")) this.prefManager.setCharPref("extensions.asf.dialogForceRadioTo","save"); // default to "Save File" if DTA is uninstalled.
+			if (!this.DownThemAll_isEnabled() && (forceRadioTo == "downthemall" || forceRadioTo == "turbodta")) this.prefManager.setCharPref("extensions.asf.dialogForceRadioTo","save"); // default to "Save File" if DTA is uninstalled.
 		
 		
 		// if the option window is opened from the saving window, disable the autosave feature (Not working when set from here.)
@@ -458,7 +460,6 @@ var automatic_save_folder = {
 		// hide all the descriptions box, and unhide the needed one 
 		document.getElementById("asf-rightclickdesc-ff2").hidden = true;     // Firefox 2, Right-click disabled message
 		document.getElementById("asf-rightclickdesc-DSort").hidden = true;   // Download sort conflit alert
-		var Dsort_installed = this.DownloadSort();
 		
 		if (this.firefoxversion == 2)
 		{
@@ -468,12 +469,17 @@ var automatic_save_folder = {
 		}
 		if (this.firefoxversion == 3)
 		{
-			if (Dsort_installed) // if Download sort is installed, display a message "right click disabled"
+			if (this.DownloadSort_isEnabled()) // if Download sort is installed, display a message "right click disabled"
 			{
 				asf_userightclick.disabled = true;
 				asf_rightclicktimeout.disabled = true;
 				
 				document.getElementById("asf-rightclickdesc-DSort").hidden = false;
+			}
+			
+			if (this.DownThemAll_isEnabled()) // if DownThemall is installed, show the DTA sub-tab in the option's tab
+			{
+				document.getElementById("asf-optionssubtab-dta").hidden = false;
 			}
 		}
 		
@@ -828,7 +834,7 @@ var automatic_save_folder = {
 	},
 
 
-	DownloadSort: function() {
+	DownloadSort_isEnabled: function() {
 		// Check for Download sort add-on, if enabled return true. (works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
@@ -842,7 +848,7 @@ var automatic_save_folder = {
 	},
 
 
-	DownThemAll: function() {
+	DownThemAll_isEnabled: function() {
 		// Check for DTA add-on, if enabled return true. (works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
@@ -911,8 +917,7 @@ var automatic_save_folder = {
 		
 		//save the rightclick (set timeout for header(Content-Disposition:) true = 0, false = 1000)
 		// Only if DownloadSort is not enabled (prevent conflict)
-		var Dsort_installed = this.DownloadSort();
-		if ((Dsort_installed == false) && this.firefoxversion == 3) // only for firefox 3, Firefox2 doesn't use timeout option
+		if ( !this.DownloadSort_isEnabled() && this.firefoxversion == 3) // only for firefox 3, Firefox2 doesn't use timeout option
 		{
 			var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout").checked;
 			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclicktimeout == true ? 0 : 1000);

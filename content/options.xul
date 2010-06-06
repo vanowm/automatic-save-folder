@@ -8,7 +8,12 @@
     ***** END LICENSE BLOCK ***** -->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://asf/skin/style.css" type="text/css"?>
-<!DOCTYPE dialog SYSTEM "chrome://asf/locale/asf.dtd">
+<!DOCTYPE dialog [
+	<!ENTITY % asfDTD SYSTEM "chrome://asf/locale/asf.dtd">
+	%asfDTD;
+	<!ENTITY % commonDTD SYSTEM "chrome://asf/content/common.dtd">
+	%commonDTD;
+]>
 
 <prefwindow
 			id="asf_pref"
@@ -40,6 +45,12 @@
 		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
 		<preference id="asf_useDownloadDir" name="browser.download.useDownloadDir" type="bool"/>
 		<preference id="asf_folderList" name="browser.download.folderList" type="int"/>
+		<preference id="asf_regexp_caseinsensitive" name="extensions.asf.regexp_caseinsensitive" type="bool"/>
+		<preference id="asf_pathlist_defaultforceontop" name="extensions.asf.pathlist_defaultforceontop" type="bool"/>
+		<preference id="asf_pathlist_alphasort" name="extensions.asf.pathlist_alphasort" type="bool"/>
+		<preference id="asf_rowmatchinghighlight" name="extensions.asf.rowmatchinghighlight" type="string"/>
+		<preference id="asf_dta_ASFtoDTA_isActive" name="extensions.asf.dta_ASFtoDTA_isActive" type="bool"/>
+		<preference id="asf_dta_sendMethod" name="extensions.asf.dta_sendMethod" type="string"/>
 	</preferences>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
@@ -142,54 +153,103 @@
 		</groupbox>
 	</vbox>
 	<vbox id="asf-tab-options" hidden="true" flex="1000">
-		<groupbox id="asf-options" flex="1">
-			<caption label="&asf.options.label;"/>
-			<separator class="thin"/>
-			<hbox>
-				<checkbox id="asf-useDownloadDir" preference="asf_useDownloadDir" label="&asf.useDownloadDir.bool;" oncommand="automatic_save_folder.toggle_options();"/>
-				<menulist id="asf-folderList" preference="asf_folderList" tooltip="tooltip_folderList">
-					<menupopup>
-						<menuitem value="0" label="&asf.desktop.label;"></menuitem>
-						<menuitem value="1" label="&asf.systemdownload.label;"></menuitem>
-						<menuitem value="2" label="&asf.filteredfolder.label;"></menuitem>
-					</menupopup>
-				</menulist>
-			</hbox>
-			<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;" oncommand="automatic_save_folder.toggle_options();"/>
-			<checkbox id="asf-dialogacceptFiltered" preference="asf_dialogacceptFiltered" label="&asf.dialogacceptFiltered.bool;" tooltip="tooltip_dialogacceptFiltered" style="margin-left:25px;"/>
-			<hbox>
-				<checkbox id="asf-dialogForceRadio_Start" preference="asf_dialogForceRadio" label="&asf.dialogForceRadio_Start.bool;" style="margin-left:25px;"/>
-				<menulist id="asf-dialogForceRadioTo" preference="asf_dialogForceRadioTo" >
-					<menupopup>
-						<menuitem value="open" 			label="&asf.dialogForceRadioTo.label1;"></menuitem>
-						<menuitem value="downthemall" 	label="&asf.dialogForceRadioTo.label2;" id="asf-dialogForceRadioToDownthemall" style="display:none;"></menuitem>
-						<menuitem value="turbodta" 		label="&asf.dialogForceRadioTo.label3;" id="asf-dialogForceRadioToTurbodta" style="display:none;"></menuitem>
-						<menuitem value="save" 			label="&asf.dialogForceRadioTo.label4;"></menuitem>
-					</menupopup>
-				</menulist>
-				<label id="asf-dialogForceRadio_End">&asf.dialogForceRadio_End.bool;</label>
-			</hbox>
-			<hbox>
-				<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>
-				<menulist id="asf-viewdloptionType" preference="asf_viewdloptionType">
-					<menupopup>
-						<menuitem value="0" label="&asf.viewdloptionType0.label;"></menuitem>
-						<menuitem value="1" label="&asf.viewdloptionType1.label;"></menuitem>
-						<menuitem value="2" label="&asf.viewdloptionType2.label;"></menuitem>
-						<menuitem value="3" label="&asf.viewdloptionType3.label;"></menuitem>
-					</menupopup>
-				</menulist>
-			</hbox>
-			<checkbox id="asf-viewpathselect" preference="asf_viewpathselect"  label="&asf.viewpathselect.bool;" tooltip="tooltip_viewpathselect" style="margin-left:25px;white-space:pre-wrap"/>
-			<separator class="thin"/>
-			<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
-			<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
-			<separator class="thin"/>
-			<checkbox id="asf-userightclick" preference="asf_userightclick" label="&asf.userightclick.bool;" tooltip="tooltip_userightclick" oncommand="automatic_save_folder.toggle_userightclick();"/>
-			<checkbox id="asf-rightclicktimeout" preference="asf_rightclicktimeout" label="&asf.rightclicktimeout.bool;" tooltip="tooltip_rightclicktimeout" style="margin-left:25px;" oncommand="automatic_save_folder.toggle_rightclicktimeout();"/>
-			<description id="asf-rightclickdesc-DSort" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.DSort.label;</description>
-			<description id="asf-rightclickdesc-ff2" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.ff2.label;</description>
-		</groupbox>
+		<separator class="thin"/>
+			<tabbox>
+				<tabs>
+					<tab id="asf-optionssubtab-options" label="&asf.options.tab1.label;"  />
+					<tab id="asf-optionssubtab-options" label="&asf.options.tab2.label;"  />
+					<tab id="asf-optionssubtab-dta" 	label="&asf.options.tabdta.label;" hidden="true" />
+				</tabs>
+				<tabpanels>
+					<tabpanel flex="1">
+						<vbox id="asf-options-tab1" flex="1">
+							<groupbox><caption label="&asf.options.groupbox1.label;" />
+								<hbox>
+									<checkbox id="asf-useDownloadDir" preference="asf_useDownloadDir" label="&asf.useDownloadDir.bool;" oncommand="automatic_save_folder.toggle_options();"/>
+									<menulist id="asf-folderList" preference="asf_folderList" tooltip="tooltip_folderList">
+										<menupopup>
+											<menuitem value="0" label="&asf.desktop.label;"></menuitem>
+											<menuitem value="1" label="&asf.systemdownload.label;"></menuitem>
+											<menuitem value="2" label="&asf.filteredfolder.label;"></menuitem>
+										</menupopup>
+									</menulist>
+								</hbox>
+							</groupbox>
+							<groupbox><caption label="&asf.options.groupbox2.label;" />
+								<checkbox id="asf-dialogaccept" preference="asf_dialogaccept" label="&asf.dialogaccept.bool;" oncommand="automatic_save_folder.toggle_options();"/>
+								<checkbox id="asf-dialogacceptFiltered" preference="asf_dialogacceptFiltered" label="&asf.dialogacceptFiltered.bool;" tooltip="tooltip_dialogacceptFiltered" style="margin-left:25px;"/>
+								<hbox flex="1">
+									<checkbox id="asf-dialogForceRadio_Start" preference="asf_dialogForceRadio" label="&asf.dialogForceRadio_Start.bool;" style="margin-left:25px;"/>
+									<menulist id="asf-dialogForceRadioTo" preference="asf_dialogForceRadioTo" >
+										<menupopup>
+											<menuitem value="open" 			label="&asf.dialogForceRadioTo.label1;"></menuitem>
+											<menuitem value="downthemall" 	label="&asf.dialogForceRadioTo.label2;" id="asf-dialogForceRadioToDownthemall" style="display:none;"></menuitem>
+											<menuitem value="turbodta" 		label="&asf.dialogForceRadioTo.label3;" id="asf-dialogForceRadioToTurbodta" style="display:none;"></menuitem>
+											<menuitem value="save" 			label="&asf.dialogForceRadioTo.label4;"></menuitem>
+										</menupopup>
+									</menulist>
+									<label id="asf-dialogForceRadio_End" flex="1">&asf.dialogForceRadio_End.bool;</label>
+								</hbox>
+								<hbox>
+									<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>
+									<menulist id="asf-viewdloptionType" preference="asf_viewdloptionType">
+										<menupopup>
+											<menuitem value="0" label="&asf.viewdloptionType0.label;"></menuitem>
+											<menuitem value="1" label="&asf.viewdloptionType1.label;"></menuitem>
+											<menuitem value="2" label="&asf.viewdloptionType2.label;"></menuitem>
+											<menuitem value="3" label="&asf.viewdloptionType3.label;"></menuitem>
+										</menupopup>
+									</menulist>
+								</hbox>
+								<checkbox id="asf-viewpathselect" preference="asf_viewpathselect"  label="&asf.viewpathselect.bool;" tooltip="tooltip_viewpathselect" style="margin-left:25px;white-space:pre-wrap"/>
+							</groupbox>
+						</vbox>
+					</tabpanel>
+					<tabpanel>
+						<vbox id="asf-options-tab2" flex="1">
+							<groupbox><caption label="&asf.options.groupbox3.label;" />
+								<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
+								<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
+								<checkbox id="asf-regexp_caseinsensitive" preference="asf_regexp_caseinsensitive" label="&asf.regexp_caseinsensitive.bool;"/>
+							</groupbox>
+							<groupbox><caption label="&asf.options.groupbox4.label;" />							
+								<checkbox id="asf-userightclick" preference="asf_userightclick" label="&asf.userightclick.bool;" tooltip="tooltip_userightclick" oncommand="automatic_save_folder.toggle_userightclick();"/>
+								<checkbox id="asf-rightclicktimeout" preference="asf_rightclicktimeout" label="&asf.rightclicktimeout.bool;" tooltip="tooltip_rightclicktimeout" style="margin-left:25px;" oncommand="automatic_save_folder.toggle_rightclicktimeout();"/>
+								<description id="asf-rightclickdesc-DSort" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.DSort.label;</description>
+								<description id="asf-rightclickdesc-ff2" style="margin-left:25px;white-space:pre-wrap;color:red;">&asf.rightclick.ff2.label;</description>
+							</groupbox>
+							<groupbox><caption label="&asf.options.groupbox5.label;" />							
+								<checkbox id="asf-pathlist_defaultforceontop" preference="asf_pathlist_defaultforceontop" label="&asf.pathlist_defaultforceontop.bool;"/>
+								<checkbox id="asf-pathlist_alphasort" preference="asf_pathlist_alphasort" label="&asf.pathlist_alphasort.bool;"/>
+								<separator class="thin"/>
+									<label>&asf.rowmatchinghighlight.label;</label>
+									<radiogroup id="asf-rowmatchinghighlight" preference="asf_rowmatchinghighlight">
+										<hbox>
+											<radio value="color" label="&asf.rowmatchinghighlight.color;"/>
+											<radio value="system" label="&asf.rowmatchinghighlight.system;"/>
+										</hbox>
+									</radiogroup>
+							</groupbox>
+						</vbox>
+					</tabpanel>
+					<tabpanel>
+						<vbox id="asf-options-tab3" flex="1">
+							<groupbox><caption label="&asf.options.groupbox6.label;" />
+								<description>&asf.options.dtaDetected.label;</description>
+								<checkbox id="asf-dta_ASFtoDTA_isActive" preference="asf_dta_ASFtoDTA_isActive" label="&asf.dta_ASFtoDTA_isActive.bool;"/>
+								<separator />
+									<description style="vertical-align:top;white-space:pre-wrap">&asf.dta_chooseSendingMethod.label;</description>
+									<radiogroup id="asf-dta_sendMethod" preference="asf_dta_sendMethod">
+										<hbox >
+											<radio value="replace" label="&asf.dta_methodReplace.label;"/>
+											<radio value="add" label="&asf.dta_methodAdd.label;"/>
+										</hbox>
+									</radiogroup>
+							</groupbox>
+						</vbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
 	</vbox>
 	<vbox id="asf-tab-dynamics" hidden="true" flex="1000">
 		<groupbox id="asf-dynamics" flex="1">

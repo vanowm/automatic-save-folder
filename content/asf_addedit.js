@@ -539,7 +539,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		// Write each path to the menupopup
 		var pathlist = new Array();
-		var pathlist_defaultforceontop = this.readHiddenPref("extensions.asf.pathlist_defaultforceontop", "bool", false); // let the user choose in next release.
+		var pathlist_defaultforceontop = window.opener.document.getElementById("asf-pathlist_defaultforceontop").checked;
 		var defaultfolder = window.opener.document.getElementById("asf-default-folder").value;
 		var j = 0;
 		if (pathlist_defaultforceontop)
@@ -567,7 +567,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			}
 		}
 		
-		var pathlist_sort_alpha = this.readHiddenPref("extensions.asf.pathlist_alphasort", "bool", true); // let the user choose in next release.
+		var pathlist_sort_alpha = window.opener.document.getElementById("asf-pathlist_alphasort").checked;
 		if (pathlist_sort_alpha) pathlist.sort(); 
 		
 		
