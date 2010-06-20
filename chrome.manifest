@@ -1,8 +1,13 @@
 content	asf	content/
+
 locale	asf	en-US	locale/en-US/
 locale	asf	fr		locale/fr/
 locale	asf	it		locale/it/
 locale	asf	ru		locale/ru/
+
 skin	asf	classic/1.0	skin/
+
 overlay	chrome://browser/content/browser.xul	chrome://asf/content/overlay_preferences.xul
 overlay	chrome://mozapps/content/downloads/unknownContentType.xul	chrome://asf/content/overlay_unknownContentType.xul
+
+style	chrome://global/content/customizeToolbar.xul	chrome://asf/skin/style.css

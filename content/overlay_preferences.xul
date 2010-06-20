@@ -6,13 +6,19 @@
     You may find the license in the LICENSE file
 
     ***** END LICENSE BLOCK ***** -->
-<?xml-stylesheet href="chrome://asf/skin/overlay.css" type="text/css"?>
+<?xml-stylesheet href="chrome://asf/skin/style.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://asf/locale/asf.dtd">
-<overlay id="asf-overlay-preferences"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<overlay id="asf-overlay-preferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
 	<script type="application/x-javascript" src="chrome://asf/content/asf_right_click.js"/>
+	
 	<menupopup id="menu_ToolsPopup">
-		<menuitem insertafter="sanitizeItem" id="asf-option" label="&asf.label;" 
-            oncommand="window.openDialog('chrome://asf/content/options.xul','Automatic_Save_Folder_Preferences','chrome,centerscreen,resizable=yes, dialog=no');" />
-  </menupopup>
+		<menuitem insertafter="sanitizeItem" id="asf-menu-preferences" label="&asf.label;" class="menuitem-iconic" oncommand="window.openDialog('chrome://asf/content/options.xul','Automatic_Save_Folder_Preferences','chrome,centerscreen,resizable=yes, dialog=no');" />
+	</menupopup>
+	
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="asf-toolbar-icon-preferences" class="toolbarbutton-1" label="ASF" tooltiptext="Automatic Save Folder" oncommand="window.openDialog('chrome://asf/content/options.xul','Automatic_Save_Folder_Preferences','chrome,centerscreen,resizable=yes, dialog=no');" />
+	</toolbarpalette>
+	
 </overlay>
