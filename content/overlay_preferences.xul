@@ -18,7 +18,7 @@
 	</menupopup>
 	
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="asf-toolbar-icon-preferences" class="toolbarbutton-1" label="ASF" tooltiptext="Automatic Save Folder" oncommand="window.openDialog('chrome://asf/content/options.xul','Automatic_Save_Folder_Preferences','chrome,centerscreen,resizable=yes, dialog=no');" />
+		<toolbarbutton id="asf-toolbar-icon-preferences" class="chromeclass-toolbar-additional toolbarbutton-1" label="ASF" tooltiptext="Automatic Save Folder" oncommand="window.openDialog('chrome://asf/content/options.xul','Automatic_Save_Folder_Preferences','chrome,centerscreen,resizable=yes, dialog=no');" />
 	</toolbarpalette>
 	
 </overlay>
