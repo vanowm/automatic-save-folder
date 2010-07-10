@@ -64,3 +64,14 @@ treechildren::-moz-tree-cell-text(FilterTestFailSelected)
 {
   color: #000000;
 }
+
+treechildren::-moz-tree-row(FilterDragCopy_set)
+{
+  border-top: solid 1px #000000;
+}
+
+treechildren::-moz-tree-row(FilterDragCopy_remove)
+{
+  border-top: solid 0px #000000;
+}
+

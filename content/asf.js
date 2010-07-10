@@ -656,6 +656,8 @@ var automatic_save_folder = {
 		
 		//event.dataTransfer.setData('application/x-moz-node', currentitem);  // send node data
 		event.dataTransfer.setData('user/define', idx);  // send index data as text (but to prevent drop on text field, let's use custom set)
+		event.dataTransfer.effectAllowed = "move copy";
+		event.dataTransfer.dropEffect = "move copy";
 	},
 
 
@@ -665,8 +667,28 @@ var automatic_save_folder = {
 		if (isDefine)
 		{
 			event.preventDefault();
-			event.dataTransfer.effectAllowed = "move";
-			event.dataTransfer.dropEffect = "move";
+			event.dataTransfer.effectAllowed = "move copy";
+			event.dataTransfer.dropEffect = "move copy";
+			
+			// Show target indicator
+			if (event.dataTransfer.dropEffect == "copy")
+			{
+				var treename = "asf-filterList";
+				var tree = document.getElementById(treename);
+				var targetitem_idx = tree.treeBoxObject.getRowAt(event.pageX, event.pageY);
+				var maxidx = tree.view.rowCount;
+				if (targetitem_idx == -1) targetitem_idx = maxidx-1;
+				
+				var currentitem = tree.treeBoxObject.view.getItemAtIndex(targetitem_idx);
+				var parent = currentitem.parentNode;
+				
+				for (var i = 0; i < maxidx; i++)
+				{
+					tree.view.getItemAtIndex(i).firstChild.setAttribute('properties', "FilterDragCopy_remove");
+				}
+				
+				currentitem.firstChild.setAttribute('properties', "FilterDragCopy_set");
+			}
 		}
 	},
 
@@ -681,25 +703,37 @@ var automatic_save_folder = {
 			var tree = document.getElementById(treename);
 			var currentitem = tree.treeBoxObject.view.getItemAtIndex(currentitem_idx);
 			
-			try 
+			var targetitem_idx = tree.treeBoxObject.getRowAt(event.pageX, event.pageY);
+			var maxidx = tree.view.rowCount;
+			if (targetitem_idx == -1) targetitem_idx = maxidx-1;
+			var targetitem = tree.treeBoxObject.view.getItemAtIndex(targetitem_idx);
+			var parent = targetitem.parentNode;
+			
+			if (event.dataTransfer.dropEffect == "move")
 			{
-				var targetitem_idx = tree.treeBoxObject.getRowAt(event.pageX, event.pageY);
-				var targetitem = tree.treeBoxObject.view.getItemAtIndex(targetitem_idx);
-				var parent = targetitem.parentNode;		
-				
 				if (currentitem_idx > targetitem_idx) parent.insertBefore(currentitem, targetitem);
 				if (currentitem_idx < targetitem_idx) parent.insertBefore(currentitem, targetitem.nextSibling);
 				tree.view.selection.select(targetitem_idx); // reselect the moved filter
-				
-				// Now check is the user has InstantApply option to save the filter's order.
-				var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
-				if (instantApply)
-				{
-					//save the filters
-					this.asf_savefilters();
-				}
 			}
-			catch(e){} // if the user point outside of the filter tree (because using dragexit instead of dragdrop (dragdrop is not working)).
+			if (event.dataTransfer.dropEffect == "copy")
+			{
+				parent.appendChild(currentitem.cloneNode(true))
+				var last_idx = parent.childNodes.length-1; // select the last index (newly created item)
+				currentitem = tree.treeBoxObject.view.getItemAtIndex(last_idx);
+				
+				parent.insertBefore(currentitem, targetitem);
+				tree.view.selection.select(targetitem_idx); // reselect the duplicated filter
+				
+				tree.view.getItemAtIndex(targetitem_idx+1).firstChild.setAttribute('properties', "FilterDragCopy_remove");
+			}
+			
+			// Now check is the user has InstantApply option to save the filter's order.
+			var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
+			if (instantApply)
+			{
+				//save the filters
+				this.asf_savefilters();
+			}
 		} 
 		event.preventDefault();
 	},
@@ -713,7 +747,7 @@ var automatic_save_folder = {
 		if (idx == -1) return false;
 		var originidx = idx;
 		var currentitem = tree.treeBoxObject.view.getItemAtIndex(idx);	
-		var parent = currentitem.parentNode;		
+		var parent = currentitem.parentNode;
 		{
 			parent.appendChild(currentitem.cloneNode(true))
 		}

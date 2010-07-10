@@ -120,7 +120,7 @@
 					<treechildren 
 					ondragstart="automatic_save_folder.dragstart(event)"
 					ondragover="automatic_save_folder.dragover(event)"
-					ondragexit="automatic_save_folder.dragdrop(event)"
+					ondrop="automatic_save_folder.dragdrop(event)"
 					onclick="automatic_save_folder.save_active_state()"
 					id="asf-filterChilds" context="contextpopup" ondblclick="event.preventDefault();window.openDialog('chrome://asf/content/edit.xul','asf_addedit','chrome, centerscreen, resizable=no, dialog=no, modal=yes');"/>
 				</tree>
