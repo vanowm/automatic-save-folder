@@ -35,18 +35,15 @@ var automatic_save_folder = {
 		if (!asf_rightclick_loaded) 
 		{
 			asf_rightclick_loaded = true;
+			this.checkFirefoxVersion();
 			
 			// Right-click feature doesn't work on Firefox 2 (Can't detect installed add-on and prevent conflict with Download Sort)
-			if (this.versionChecker.compare(this.appInfo.version, "3.0") >= 0)
+			if (this.firefoxversion >= 3)
 			{
 				// Replace original Right-click menu with ASF Right-click menu
 				// Not compatible with Download Sort extension (Dsort rewrites the whole function, it will conflict with ASF).
 				// Detect if Download Sort is installed and enabled, and activate ASF rightclick only if DSort is not already loaded.
-				var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
-				var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
-				var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
-				
-				if (DownloadSort == -1)  // Download Sort is not enabled, load ASF rightclick replacement && Firefox 2.0 min
+				if (!this.DownloadSort_isEnabled())  // Download Sort is not enabled, load ASF rightclick replacement && Firefox 2.0 min
 				{
 					// adding ASF filtering function at the beginning of the getTargetFile function.
 					// Code from Paolo Amadini, MAF add-on developer. Thank you !
@@ -90,18 +87,6 @@ var automatic_save_folder = {
 			
 			// Setting private variables usable in this function
 			var prefManager = this.prefManager;		
-			var versionChecker = this.versionChecker;
-			var appInfo = this.appInfo;
-			
-			if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
-			{
-				this.firefoxversion = "3";
-			}
-			else 
-			{
-				this.firefoxversion = "2";
-			}
-			
 			
 			// Check if there is any filter in list
 			var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");		
@@ -145,7 +130,7 @@ var automatic_save_folder = {
 			}
 			
 			// set the last folder path used into asf.lastpath
-			if (this.firefoxversion == "3")   // take the download.lastDir if it's FF3
+			if (this.firefoxversion >= "3")   // take the download.lastDir if it's FF3
 			{
 				var folder = this.loadUnicodeString("browser.download.lastDir");
 			}
@@ -219,7 +204,7 @@ var automatic_save_folder = {
 					}	
 					else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
 					{
-						if (this.firefoxversion == "3")
+						if (this.firefoxversion >= "3")
 						{
 							var lastpath = this.loadUnicodeString("browser.download.lastDir");
 						}
@@ -237,7 +222,7 @@ var automatic_save_folder = {
 				}
 				else // else, if savetype == 0  (folder is set to last folder)
 				{
-					if (this.firefoxversion == "3")
+					if (this.firefoxversion >= "3")
 					{
 						var lastpath = this.loadUnicodeString("browser.download.lastDir");
 					}
@@ -268,7 +253,7 @@ var automatic_save_folder = {
 			
 			// in every case, set the new file hosted domain to tempdomain if not in private browsing
 			var inPrivateBrowsing = false;
-			if (this.firefoxversion == 3)
+			if (this.firefoxversion >= 3)
 			{
 				try {
 					var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
@@ -312,7 +297,7 @@ var automatic_save_folder = {
 			this.saveUnicodeString("browser.download.lastDir", directory.path);		
 		}
 		
-		if (this.firefoxversion == 3)
+		if (this.firefoxversion >= 3)
 		{
 			
 			var inPrivateBrowsing = false;
@@ -702,6 +687,48 @@ var automatic_save_folder = {
 		{
 			return false;
 		}
+	},
+	
+	
+	checkFirefoxVersion: function() {
+		
+		if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
+		{
+			this.firefoxversion = "4";
+		}
+		else if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
+		{
+			this.firefoxversion = "3";
+		}
+		else 
+		{
+			this.firefoxversion = "2";
+		}
+	},
+	
+	
+	DownloadSort_isEnabled: function() {
+		// Check for Download sort add-on, if enabled return true. 
+		
+		if (this.firefoxversion >= 4)
+		{
+			var enabledItems = this.prefManager.getCharPref("extensions.enabledAddons");
+			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
+			
+			if (DownloadSort >= 0) return true;
+		}
+		
+		// (works only on 3.x)
+		if (this.firefoxversion == 3)
+		{
+			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
+			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
+			
+			if (DownloadSort >= 0) return true;
+		}
+		return false;
 	},
 	
 	

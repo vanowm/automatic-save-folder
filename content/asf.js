@@ -34,18 +34,11 @@ var automatic_save_folder = {
 		
 	asf_load: function () {
 		
-		if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
-		{
-			this.firefoxversion = "3";
-		}
-		else 
-		{
-			this.firefoxversion = "2";
-		}
+		this.checkFirefoxVersion();
 		
 		
-		// init the preference for firefox 3
-		if (this.firefoxversion == "3")
+		// init the preference for firefox 3+
+		if (this.firefoxversion >= "3")
 		{
 			// set lastdir to "enable" if the user just updated from previous version and had it disabled
 			var lastdir = document.getElementById("asf-lasdir");
@@ -61,6 +54,15 @@ var automatic_save_folder = {
 		this.asf_toggleradio(); // set the radio choice to the right place
 		this.asf_variablemode(); // check if variable mode is on or off, and change mode if needed
 		
+		// Resize the preferences window to match the localization needs.
+		// I don't know why width, or css width are not working, so let's use a script to resize the preferences window on load.
+		var resize = document.getElementById("asf-preferences-window-resize").value;
+		if (resize == "true")
+		{
+			var asf_pref_window = document.getElementById("asf_pref");
+			asf_pref_window.width = document.getElementById("asf-preferences-window-width").value;
+			asf_pref_window.height = document.getElementById("asf-preferences-window-height").value;
+		}
 		
 		
 		//Detect OS
@@ -467,7 +469,7 @@ var automatic_save_folder = {
 			document.getElementById("asf-rightclicktimeout").hidden = true;   // Hide the right-click timeout checkbox
 			document.getElementById("asf-rightclickdesc-ff2").hidden = false; // Show right-click not working on Firefox 2.0
 		}
-		if (this.firefoxversion == 3)
+		if (this.firefoxversion >= 3)
 		{
 			if (this.DownloadSort_isEnabled()) // if Download sort is installed, display a message "right click disabled"
 			{
@@ -834,8 +836,50 @@ var automatic_save_folder = {
 	},
 
 
+	checkFirefoxVersion: function() {
+		
+		if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
+		{
+			this.firefoxversion = "4";
+		}
+		else if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
+		{
+			this.firefoxversion = "3";
+		}
+		else 
+		{
+			this.firefoxversion = "2";
+		}
+	},
+
+
 	DownloadSort_isEnabled: function() {
-		// Check for Download sort add-on, if enabled return true. (works only on 3.x)
+		// Check for Download sort add-on, if enabled return true. 
+		
+		if (this.firefoxversion >= 4)
+		{
+			/*
+			var DownloadSort = false;
+			Components.utils.import("resource://gre/modules/AddonManager.jsm");
+			AddonManager.getAddonByID("asf@mangaheart.org", function(addon) {
+			DownloadSort = addon.isActive;
+			});
+			//1st access to DownloadSort doesnt work - time to short ; New asynchronous addon manager is a problem :(
+			alert("1st try to get the version: " + DownloadSort);
+			alert("2nd try to get the version: " + DownloadSort);
+			return DownloadSort;
+			*/
+			
+			// let's use the same method than Firefox 3, but it doesn't detect enabled state in real time anymore
+			// Firefox need to be restarted for addon state to takes effect.
+			var enabledItems = this.prefManager.getCharPref("extensions.enabledAddons");
+			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
+			
+			if (DownloadSort >= 0) return true;
+		}
+		
+		// (works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
@@ -849,7 +893,18 @@ var automatic_save_folder = {
 
 
 	DownThemAll_isEnabled: function() {
-		// Check for DTA add-on, if enabled return true. (works only on 3.x)
+		// Check for DTA add-on, if enabled return true. 
+		
+		if (this.firefoxversion >= 4)
+		{
+			var enabledItems = this.prefManager.getCharPref("extensions.enabledAddons");
+			var dsort_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
+			var DTA = enabledItems.indexOf(dsort_GUUID,0);
+			
+			if (DTA >= 0) return true;
+		}
+		
+		//(works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
@@ -917,7 +972,7 @@ var automatic_save_folder = {
 		
 		//save the rightclick (set timeout for header(Content-Disposition:) true = 0, false = 1000)
 		// Only if DownloadSort is not enabled (prevent conflict)
-		if ( !this.DownloadSort_isEnabled() && this.firefoxversion == 3) // only for firefox 3, Firefox2 doesn't use timeout option
+		if ( !this.DownloadSort_isEnabled() && this.firefoxversion >= 3) // only for firefox 3+, Firefox2 doesn't use timeout option
 		{
 			var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout").checked;
 			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", asf_rightclicktimeout == true ? 0 : 1000);

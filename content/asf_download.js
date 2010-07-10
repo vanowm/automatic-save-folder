@@ -37,14 +37,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var prefManager = automatic_save_folder.prefManager;
 		var versionChecker = automatic_save_folder.versionChecker;
 		var appInfo = automatic_save_folder.appInfo;
-		if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0)
-		{
-			this.firefoxversion = "3";
-		}
-		else
-		{
-			this.firefoxversion = "2";
-		}
+		this.checkFirefoxVersion();
 		
 		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
 		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)
@@ -86,7 +79,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		
 		// set the last saved path into asf.lastpath
-		if (this.firefoxversion == "3")   // take the download.lastDir if it's FF3
+		if (this.firefoxversion >= "3")   // take the download.lastDir if it's FF3
 		{
 			var folder = this.loadUnicodeString("browser.download.lastDir");
 		}
@@ -160,7 +153,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				}
 				else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
 				{
-					if (this.firefoxversion == "3")
+					if (this.firefoxversion >= "3")
 					{
 						var lastpath = this.loadUnicodeString("browser.download.lastDir");
 					}
@@ -178,7 +171,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			}
 			else // else, if savetype == 0  (folder is set to last folder)
 			{
-				if (this.firefoxversion == "3")
+				if (this.firefoxversion >= "3")
 				{
 					var lastpath = this.loadUnicodeString("browser.download.lastDir");
 				}
@@ -209,7 +202,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		// in every case, set the new file hosted domain to tempdomain if not in private browsing
 		var inPrivateBrowsing = false;
-		if (this.firefoxversion == 3)
+		if (this.firefoxversion >= 3)
 		{
 			try {
 				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
@@ -275,7 +268,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 								.getService(Components.interfaces.nsIProperties)
 								.get("Desk", Components.interfaces.nsILocalFile);
 			directory = desk;
-			if (this.firefoxversion == 3)
+			if (this.firefoxversion >= 3)
 			{
 				var dnldMgr = Components.classes["@mozilla.org/download-manager;1"]
 									.getService(Components.interfaces.nsIDownloadManager);
@@ -310,7 +303,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			this.saveUnicodeString("browser.download.lastDir", directory.path);
 		}
 		
-		if (this.firefoxversion == 3)
+		if (this.firefoxversion >= 3)
 		{
 		
 			var inPrivateBrowsing = false;
@@ -644,7 +637,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				folder = "...";
 			}
 		}
-		if (this.firefoxversion == 3)
+		if (this.firefoxversion >= 3)
 		{
 		
 			var inPrivateBrowsing = false;
@@ -1020,8 +1013,36 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	},
 
 
+	checkFirefoxVersion: function() {
+		
+		if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
+		{
+			this.firefoxversion = "4";
+		}
+		else if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
+		{
+			this.firefoxversion = "3";
+		}
+		else 
+		{
+			this.firefoxversion = "2";
+		}
+	},
+
+
 	DownThemAll_isEnabled: function() {
-		// Check for DTA add-on, if enabled return true. (works only on 3.x)
+		// Check for DTA add-on, if enabled return true. 
+		
+		if (this.firefoxversion >= 4)
+		{
+			var enabledItems = this.prefManager.getCharPref("extensions.enabledAddons");
+			var dsort_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
+			var DTA = enabledItems.indexOf(dsort_GUUID,0);
+			
+			if (DTA >= 0) return true;
+		}
+		
+		//(works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");

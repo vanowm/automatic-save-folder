@@ -150,6 +150,9 @@
 			<textbox id="asf-current-domain" value="" />
 			<textbox id="asf-current-filename" value="" />
 			<textbox id="asf-current-url" value="" />
+			<textbox id="asf-preferences-window-resize" value="&asf.preferences_window.resize;" />
+			<textbox id="asf-preferences-window-width" value="&asf.preferences_window.width;" />
+			<textbox id="asf-preferences-window-height" value="&asf.preferences_window.height;" />
 		</groupbox>
 	</vbox>
 	<vbox id="asf-tab-options" hidden="true" flex="1000">

@@ -1,4 +1,10 @@
-﻿<!-- browser and save dialog-->
+﻿<!-- ASF Settings -->
+<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
+<!ENTITY asf.preferences_window.resize "false">
+<!ENTITY asf.preferences_window.width "617">
+<!ENTITY asf.preferences_window.height "423">
+
+<!-- browser and save dialog-->
 <!ENTITY prefwindow.title "Preferenze di Automatic Save Folder">
 <!ENTITY asf.label "Automatic Save Folder...">
 <!ENTITY asf.addedit.label "Aggiungi o modifica filtro">

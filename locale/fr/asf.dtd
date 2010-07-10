@@ -1,4 +1,10 @@
-﻿<!-- browser and save dialog-->
+﻿<!-- ASF Settings -->
+<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
+<!ENTITY asf.preferences_window.resize "true">
+<!ENTITY asf.preferences_window.width "647">
+<!ENTITY asf.preferences_window.height "423">
+
+<!-- browser and save dialog-->
 <!ENTITY prefwindow.title "Préférences pour Automatic Save Folder">
 <!ENTITY asf.label "Automatic Save Folder...">
 <!ENTITY asf.addedit.label "Ajouter ou éditer un filtre">
@@ -80,7 +86,7 @@
 
 <!ENTITY asf.options.groupbox5.label "Interface graphique">
 <!ENTITY asf.pathlist_defaultforceontop.bool "Dans les menus déroulants, afficher en premier le chemin d'enregistrement par défaut.">
-<!ENTITY asf.pathlist_alphasort.bool "Trier la liste des chemin d'enregistrement par ordre alphabétique.">
+<!ENTITY asf.pathlist_alphasort.bool "Trier la liste des chemins d'enregistrement par ordre alphabétique.">
 <!ENTITY asf.rowmatchinghighlight.label "Couleur de surbrillance lors de la séléction d'un filtre valide :">
 <!ENTITY asf.rowmatchinghighlight.color "Couleur d'ASF">
 <!ENTITY asf.rowmatchinghighlight.system "Couleur système">
