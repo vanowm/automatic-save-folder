@@ -570,7 +570,7 @@ var automatic_save_folder = {
 			var uCT = window.opener.document.getElementById("unknownContentType");
 			try
 			{
-				var currentURL = uCT.parentNode.defaultView.opener.location.host;
+				var currentURL = uCT.parentNode.defaultView.opener.location;
 			}
 			catch(e) // If direct link (copy/past to URLbar, or open from another application), no Tab's URL is returned.
 			{
@@ -890,8 +890,8 @@ var automatic_save_folder = {
 	DownloadSort_isEnabled: function() {
 		// Check for Download sort add-on, if enabled return true. 
 		
-		if (this.firefoxversion >= 4)
-		{
+			
+		// Starting from Firefox 4.x, a new addon manager must be use, but it doesn't work :
 			/*
 			var DownloadSort = false;
 			Components.utils.import("resource://gre/modules/AddonManager.jsm");
@@ -904,24 +904,22 @@ var automatic_save_folder = {
 			return DownloadSort;
 			*/
 			
-			// let's use the same method than Firefox 3, but it doesn't detect enabled state in real time anymore
-			// Firefox need to be restarted for addon state to takes effect.
+		// So let's use the same method than Firefox 3
+		// Firefox need to be restarted for addon state to takes effect.
+		if (this.firefoxversion >= 4)
+		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledAddons");
-			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
-			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if (DownloadSort >= 0) return true;
 		}
-		
-		// (works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
-			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
-			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if (DownloadSort >= 0) return true;
 		}
+
+		var addon_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+		var DownloadSort = enabledItems.indexOf(addon_GUUID,0);
+			
+		if (DownloadSort >= 0) return true;
+
 		return false;
 	},
 
@@ -932,21 +930,21 @@ var automatic_save_folder = {
 		if (this.firefoxversion >= 4)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledAddons");
-			var dsort_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
-			var DTA = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if (DTA >= 0) return true;
 		}
-		
-		//(works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
-			var dsort_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
-			var DTA = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if (DTA >= 0) return true;
 		}
+
+		var addon_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
+		var DTA = enabledItems.indexOf(addon_GUUID,0);
+		if (DTA >= 0) return true;
+		
+		//Same but for beta, nighly release of dTa
+		var addon_GUUID = "dta@downthemall.net";
+		var DTA = enabledItems.indexOf(addon_GUUID,0);
+		if (DTA >= 0) return true;
+		
 		return false;
 	},
 

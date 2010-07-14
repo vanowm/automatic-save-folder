@@ -229,15 +229,22 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				var forceRadioTo = this.prefManager.getCharPref("extensions.asf.dialogForceRadioTo");
 				var dta_ASFtoDTA_isActive = this.prefManager.getBoolPref("extensions.asf.dta_ASFtoDTA_isActive");
 				if (!this.DownThemAll_isEnabled() && (forceRadioTo == "downthemall" || forceRadioTo == "turbodta")) forceRadioTo = "save"; // default to "Save File" if DTA is uninstalled.
-				if (this.DownThemAll_isEnabled() && (!dta_ASFtoDTA_isActive) && (forceRadioTo == "turbodta")) forceRadioTo = "downthemall"; // default to "DownThemAll" if DTA is installed but extension.dta.directory is empty.
-				//if (this.DownThemAll_isEnabled() && (dta_ASFtoDTA_isActive) && document.getElementById("tdta").hidden == true) forceRadioTo = "downthemall"; // default to "downthemall" if DTA is installed, extension.dta.directory is empty, but ASF just set data.
+				if (this.DownThemAll_isEnabled() && (!dta_ASFtoDTA_isActive) && (document.getElementById("tdta").hidden == true) && (forceRadioTo == "turbodta")) forceRadioTo = "downthemall"; // default to "DownThemAll" if DTA is installed but extension.dta.directory is empty.
 				radioSavemode.selectedItem = document.getElementById(forceRadioTo);
 				//alert(document.getElementById("turbodta").selected);
 			}
 			
 			if (this.DownThemAll_isEnabled() && (document.getElementById("downthemall").selected || document.getElementById("turbodta").selected))
 			{
-				DTA_SaveAs.dialogAccepted();
+				if (typeof (DTA_SaveAs) != "undefined") // dTa 1.x
+				{
+					DTA_SaveAs.dialogAccepted();
+				}
+				else // dTa 2.x
+				{
+					window.close();
+					this.DTA_acceptDownload(document.getElementById("turbodta").selected);
+				}
 			}
 			else
 			{
@@ -1036,21 +1043,21 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		if (this.firefoxversion >= 4)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledAddons");
-			var dsort_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
-			var DTA = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if (DTA >= 0) return true;
 		}
-		
-		//(works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
-			var dsort_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
-			var DTA = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if (DTA >= 0) return true;
 		}
+		
+		var addon_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
+		var DTA = enabledItems.indexOf(addon_GUUID,0);
+		if (DTA >= 0) return true;
+		
+		//Same but for beta, nighly release of dTa
+		var addon_GUUID = "dta@downthemall.net";
+		var DTA = enabledItems.indexOf(addon_GUUID,0);
+		if (DTA >= 0) return true;
+		
 		return false;
 	},
 
@@ -1066,13 +1073,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		if (dta_sendMethod == "add")
 		{
-			if(dta_pathArray.length >0)
+			if (dta_pathArray[0] == "")
+			{
+				dta_pathArray.splice(0, 1, asf_saveFolder);
+			}
+			else
 			{
 				dta_pathArray.unshift(asf_saveFolder);
-			}
-			else 
-			{
-				dta_pathArray.splice(0, 1, asf_saveFolder );
 			}
 		}
 		this.DTA_saveDirectory(dta_pathArray);
@@ -1102,19 +1109,19 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		dta_directory = dta_directory.join("\", \"");
 		dta_directory = "[\"" + dta_directory + "\"]";
 		
-		return this.saveUnicodeString("extensions.dta.directory", dta_directory);	
+		return this.saveUnicodeString("extensions.dta.directory", dta_directory);
 	},
 
 
 	DTA_setTurboDtaList: function () {
 		var dta_pathArray = this.DTA_readDirectory();
-		var processTurboDTA = !document.getElementById("tdta").hidden;
+		var history = this.prefManager.getIntPref("extensions.dta.history");
 		var tdtalist = document.getElementById("tdtalist");
 		var dta_sendMethod = this.prefManager.getCharPref("extensions.asf.dta_sendMethod");
 		//alert(tdtalist._list.menupopup.children[0].boxObject.element.attributes[0].value);
 		
-		// rename menuitems labels		
-		if (processTurboDTA)
+		// rename menuitems labels if there is any
+		if (typeof (tdtalist._list.menupopup.children[0]) == "object")
 		{
 			if (dta_sendMethod == "replace")
 			{
@@ -1124,12 +1131,34 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			
 			if (dta_sendMethod == "add")
 			{
+			
+				// If menulist < history size, add a new menuitem
+				if (tdtalist._list.menupopup.children.length < history)
+				{ 
+					var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
+					menuitem.setAttribute('label', dta_pathArray[tdtalist._list.menupopup.children.length]);
+					menuitem.setAttribute('crop', 'center');
+					menuitem.setAttribute('value', dta_pathArray[tdtalist._list.menupopup.children.length]);
+					tdtalist._list.menupopup.appendChild(menuitem);
+				}
+				
 				for (var i = 0 ; i < tdtalist._list.menupopup.children.length ; i++)
 				{
 					if (this.systemslash == "\\") dta_pathArray[i] = dta_pathArray[i].replace(/\\\\/g, "\\");
 					tdtalist._list.menupopup.children[i].boxObject.element.attributes[0].value =  dta_pathArray[i];
 				}
 			}
+		}
+		else // or create a new menuitem
+		{
+			var menuitem = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'menuitem');
+			menuitem.setAttribute('label', dta_pathArray[0]);
+			menuitem.setAttribute('crop', 'center');
+			menuitem.setAttribute('value', dta_pathArray[0]);
+			tdtalist._list.menupopup.appendChild(menuitem);
+			tdtalist._list.selectedIndex = 0;
+			document.getElementById("tdta").hidden = false;
+			document.getElementById("turbodta").disabled = false;
 		}
 	},
 
@@ -1143,6 +1172,31 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var formated_path = this.addFinalSlash(path);
 		if (this.systemslash == "\\") formated_path = formated_path.replace(/\\/g, "\\\\");
 		return formated_path;
+	},
+
+
+	// from dTa 2.x
+	DTA_acceptDownload: function(turbo) {
+	// New function used by dTa to save files.
+	// Accepting the save dialog auomatically doesn't work when dTa is selected.
+	// dTa2.x use an eventListener to detect dialogaccept and send data to dTa.
+	// this function is a copy from dTa source
+	
+		let url = dialog.mLauncher.source;
+		let referrer;
+		try 
+		{
+			referrer = dialog.mContext.QueryInterface(Components.interfaces.nsIWebNavigation).currentURI.spec;
+		}
+		catch(ex)
+		{
+			referrer = url.spec;
+		}
+		let ml = DTA.getLinkPrintMetalink(url);
+		url = new DTA.URL(ml ? ml : url);
+	
+		DTA.saveSingleLink(window, turbo, url, referrer, "");
+		let de = document.documentElement;
 	},
 
 

@@ -713,21 +713,16 @@ var automatic_save_folder = {
 		if (this.firefoxversion >= 4)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledAddons");
-			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
-			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if (DownloadSort >= 0) return true;
 		}
-		
-		// (works only on 3.x)
 		if (this.firefoxversion == 3)
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
-			var dsort_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
-			var DownloadSort = enabledItems.indexOf(dsort_GUUID,0);
-			
-			if (DownloadSort >= 0) return true;
 		}
+
+		var addon_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+		var DownloadSort = enabledItems.indexOf(addon_GUUID,0);
+		if (DownloadSort >= 0) return true;
+	
 		return false;
 	},
 	
