@@ -4,6 +4,9 @@
 <!ENTITY asf.preferences_window.width "617">
 <!ENTITY asf.preferences_window.height "423">
 
+<!-- new line, U+00A0 ISOnum -->
+<!ENTITY NL "&#10;" >
+
 <!-- browser and save dialog-->
 <!ENTITY prefwindow.title "Настройки Automatic Save Folder">
 <!ENTITY asf.label "Automatic Save Folder...">
@@ -82,7 +85,7 @@
 <!ENTITY asf.rightclicktimeout.tooltip3 "Использовать только для скриптов с перенаправлением загрузок.">
 <!ENTITY asf.rightclicktimeout.tooltip4 "На заметку: Опция не имеет влияния на меню &#34;Сохранить картинку как...&#34; и  &#34;Сохранить как... (Ctrl+S)&#34;.">
 <!ENTITY asf.rightclick.ff2.label "Меню Automatic Save Folder по правой кнопке мыши не доступно для Firefox 2. Если вы хотите иметь возможность использовать фильтры для меню правой кнопки мыши &#34;Сохранить ссылку как...&#34;, вы должны обновить Firefox до версии 3.0 (рекомендуемая версия 3.5 или выше).">
-<!ENTITY asf.rightclick.DSort.label "Обнаружено дополнение 'Download sort'. Меню Automatic Save Folder по правой кнопке мыши не будет доступно пока вы не отключите 'Download Sort' в списке дополнений.">
+<!ENTITY asf.rightclick.DSort.label "Обнаружено дополнение 'Download sort'. &NL;Меню Automatic Save Folder по правой кнопке мыши не будет доступно пока вы не отключите 'Download Sort' в списке дополнений.">
 
 <!ENTITY asf.options.groupbox5.label "Graphical inerface">
 <!ENTITY asf.pathlist_defaultforceontop.bool "On drop-down menus, shows the default save path first.">
@@ -92,7 +95,7 @@
 <!ENTITY asf.rowmatchinghighlight.system "System color">
 
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on. Automatic Save Folder can send the filtered destination path to DownThemAll when using the &#34;What should firefox do with this file&#34; saving window. This option is disabled when using the Private Browsing mode.">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on. &NL;Automatic Save Folder can send the filtered destination path to DownThemAll when using the &#34;What should firefox do with this file&#34; saving window. This option is disabled when using the Private Browsing mode.">
 <!ENTITY asf.dta_ASFtoDTA_isActive.bool "Enable Automatic Save Folder to send the filtered path to DownThemAll.">
 <!ENTITY asf.dta_chooseSendingMethod.label "Choose the sending method for DTA OneClic!:">
 <!ENTITY asf.dta_methodReplace.label "Replace first folder in list">

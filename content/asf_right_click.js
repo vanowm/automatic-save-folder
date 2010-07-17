@@ -72,7 +72,6 @@ var automatic_save_folder = {
 				}
 			}
 		}
-		
 	},
 	
 	
@@ -86,10 +85,10 @@ var automatic_save_folder = {
 			//alert("ok");
 			
 			// Setting private variables usable in this function
-			var prefManager = this.prefManager;		
+			var prefManager = this.prefManager;
 			
 			// Check if there is any filter in list
-			var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");		
+			var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
 				
 				
 			// load the domain and the filename of the saved file (copy the data from the firefox saving window)
@@ -114,14 +113,14 @@ var automatic_save_folder = {
 			
 			
 			// load prefmanager data
-			var savetype = 			prefManager.getIntPref("extensions.asf.savetype");	
-			var lastdir = 			prefManager.getBoolPref("extensions.asf.lastdir");	
-			var defaultfolder = 	this.loadUnicodeString("extensions.asf.defaultfolder");		
+			var savetype = 			prefManager.getIntPref("extensions.asf.savetype");
+			var lastdir = 			prefManager.getBoolPref("extensions.asf.lastdir");
+			var defaultfolder = 	this.loadUnicodeString("extensions.asf.defaultfolder");
 			var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
 			var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");
 			var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
-			var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");	
-			var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");	
+			var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");
+			var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");
 			
 			// If variable/Dynamic folders mode is ON, let's check the variables and replace to create the new defaultfolder
 			if (variable_mode == true) 
@@ -139,10 +138,10 @@ var automatic_save_folder = {
 				var folder = this.loadUnicodeString("browser.download.dir");
 			}
 			this.saveUnicodeString("extensions.asf.lastpath", folder); // And set it to asf.lastpath to be compared later with the new path the filters will set to lastDir (or dir)
-
+			
 			
 			// load filters data from prefmanager into filters[]
-			// filters[filternumber][label]		
+			// filters[filternumber][label]
 			var filters = new Array();
 			for ( var i = 0 ; i < nbrfilters ; i++)
 			{
@@ -181,7 +180,7 @@ var automatic_save_folder = {
 						catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain. 
 					}
 					
-				// Check the filename	
+				// Check the filename
 					file_regexp = this.test_regexp(filters[i][1], filename); // Filename
 					
 					// debug
@@ -190,7 +189,7 @@ var automatic_save_folder = {
 					{
 						var idx = i;
 						break;
-					}			
+					}
 				}
 			} // end filters loop
 			
@@ -311,6 +310,10 @@ var automatic_save_folder = {
 			
 			if (inPrivateBrowsing && directory)
 			{
+				if (typeof(gDownloadLastDir) == "undefined") // if not loaded yet
+				{
+					Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
+				}
 				gDownloadLastDir.file = directory;
 			}
 			else
@@ -319,8 +322,7 @@ var automatic_save_folder = {
 				if (folderList == 2)
 					this.saveUnicodeString("browser.download.dir", directory.path);
 			}
-			
-		}	
+		}
 	},
 	
 	
@@ -418,8 +420,8 @@ var automatic_save_folder = {
 		
 		var dom_regexp = this.test_regexp(asf_domain, scheme+"://"+domain); 
 		var file_regexp = this.test_regexp(asf_filename, filename); 
-
-// Ted Gifford, start block		
+		
+// Ted Gifford, start block
 		// String capture in filename with $<1-9>f
 		try {
 		//alert(file_regexp.length);
@@ -449,13 +451,13 @@ var automatic_save_folder = {
 		{
 			asf_domain = asf_domain.substring(1, asf_domain.length);
 			asf_domain = asf_domain.substring(0, asf_domain.length -1);
-		}		
+		}
 		// Trim the / / if filename is regexp
 		if (this.is_regexp(asf_filename))
 		{
 			asf_filename = asf_filename.substring(1, asf_filename.length);
 			asf_filename = asf_filename.substring(0, asf_filename.length -1);
-		}		
+		}
 		
 		// read the userpref to define if regexp is case insensitive (default true)
 		var param = "";
@@ -550,7 +552,7 @@ var automatic_save_folder = {
 			asf_domain = asf_domain.replace(/[\/\:]/g,'');
 			asf_filename = asf_filename.replace(/[\/\:]/g,'');
 			file_name = file_name.replace(/[\/\:]/g,'');
-		}		
+		}
 		
 		// replace the string here		// Year
 			path = path					.replace(/%Y%/g, objdate.getFullYear())  // full year format = 2009
@@ -718,7 +720,7 @@ var automatic_save_folder = {
 		{
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
 		}
-
+		
 		var addon_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
 		var DownloadSort = enabledItems.indexOf(addon_GUUID,0);
 		if (DownloadSort >= 0) return true;
@@ -749,4 +751,4 @@ var automatic_save_folder = {
 	"load",			// After OnLoad from overlay_unknownContentType.xul file
 	function(){ automatic_save_folder.rightclick_init(); },  // Run main from automatic_save_folder to check the filters
 	false
-	);	
+	);

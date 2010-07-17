@@ -238,7 +238,7 @@
 					<tabpanel>
 						<vbox id="asf-options-tab3" flex="1">
 							<groupbox><caption label="&asf.options.groupbox6.label;" />
-								<description>&asf.options.dtaDetected.label;</description>
+								<description style="white-space:pre-wrap;">&asf.options.dtaDetected.label;</description>
 								<checkbox id="asf-dta_ASFtoDTA_isActive" preference="asf_dta_ASFtoDTA_isActive" label="&asf.dta_ASFtoDTA_isActive.bool;"/>
 								<separator />
 									<description style="vertical-align:top;white-space:pre-wrap">&asf.dta_chooseSendingMethod.label;</description>

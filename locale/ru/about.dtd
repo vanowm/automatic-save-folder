@@ -22,7 +22,7 @@
 <!ENTITY about.fix "Исправлено">
 <!ENTITY about.version.title "Версия">
 
-<!-- Keep the newline intact as it uses the < pre > tag, keep the 2 begining spaces to create indentation -->
+<!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
 <!ENTITY about.version.102 "+ Added an option to force the action choice when using the automatic download option.
 + If DownThemAll add-on is installed, a new option's tab is available to send ASF target path to DTA.
 + Added an option to select if the filters are case sensitive or insensitive.
