@@ -97,7 +97,7 @@
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
 <!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! &NL;add-on. Automatic Save Folder can send the filtered destination path to DownThemAll when using the &#34;What should firefox do with this file&#34; saving window. This option is disabled when using the Private Browsing mode.">
 <!ENTITY asf.dta_ASFtoDTA_isActive.bool "Enable Automatic Save Folder to send the filtered path to DownThemAll.">
-<!ENTITY asf.dta_chooseSendingMethod.label "Choose the sending method for DTA OneClic!:">
+<!ENTITY asf.dta_chooseSendingMethod.label "Choose the sending method for DTA OneClick!:">
 <!ENTITY asf.dta_methodReplace.label "Replace first folder in list">
 <!ENTITY asf.dta_methodAdd.label "Add to list">
 

@@ -1,7 +1,7 @@
 ﻿<!-- ASF Settings -->
 <!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
-<!ENTITY asf.preferences_window.resize "false">
-<!ENTITY asf.preferences_window.width "617">
+<!ENTITY asf.preferences_window.resize "true">
+<!ENTITY asf.preferences_window.width "630">
 <!ENTITY asf.preferences_window.height "423">
 
 <!-- new line, U+00A0 ISOnum -->
@@ -19,7 +19,7 @@
 <!ENTITY asf.tree.column.filename "Имя файла">
 <!ENTITY asf.tree.column.localfolder "Папка для сохранения">
 <!ENTITY asf.tree.column.enabled "Архив">
-<!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter's tab, you can write 'up' if you want -->
+<!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter&#34;s tab, you can write &#34;up&#34; if you want -->
 <!ENTITY asf.options.move.up " ">
 <!ENTITY asf.options.move.down " ">
 <!ENTITY asf.options.edit "Изменить">
@@ -41,27 +41,27 @@
 
 <!-- Options tab -->
 <!ENTITY asf.options.label "Опции">
-<!ENTITY asf.options.tab1.label "Page 1">
-<!ENTITY asf.options.tab2.label "Page 2">
-<!ENTITY asf.options.tabdta.label "DownThemAll">
+<!ENTITY asf.options.tab1.label "Страница 1">
+<!ENTITY asf.options.tab2.label "Страница 2">
+<!ENTITY asf.options.tabdta.label "Расширение &#34;DownThemAll&#34;">
 
-<!ENTITY asf.options.groupbox1.label "File Explorer">
+<!ENTITY asf.options.groupbox1.label "Проводник">
 <!ENTITY asf.useDownloadDir.bool "Не предлагать выбор папки и автоматически сохранить в:">
 <!ENTITY asf.desktop.label "Рабочий стол">
 <!ENTITY asf.systemdownload.label "Загрузки">
 <!ENTITY asf.filteredfolder.label "Использовать фильтры">
 <!ENTITY asf.folderList.tooltip "Если папка &#34;Загрузки&#34; не существует, будет предложено выбрать папку.">
 
-<!ENTITY asf.options.groupbox2.label "Save dialog">
+<!ENTITY asf.options.groupbox2.label "Диалог сохранения">
 <!ENTITY asf.dialogaccept.bool "Автоматически использовать настройку  &#34;Как FireFox следует обработать это файл&#34;.">
 <!ENTITY asf.dialogacceptFiltered.bool "Только если найден фильтр">
 <!ENTITY asf.dialogacceptFiltered.tooltip "Не будет автоматически использовать настройку &#34;Как FireFox следует обработать это файл&#34; если не найдено подходящего фильтра.">
-<!ENTITY asf.dialogForceRadio_Start.bool "Force the radio choice to">
-<!ENTITY asf.dialogForceRadioTo.label1 "Open with">
-<!ENTITY asf.dialogForceRadioTo.label2 "DownThemAll!">
-<!ENTITY asf.dialogForceRadioTo.label3 "dTa OneClick!">
-<!ENTITY asf.dialogForceRadioTo.label4 "Save File">
-<!ENTITY asf.dialogForceRadio_End.bool "before automatically accepting the save dialog.">
+<!ENTITY asf.dialogForceRadio_Start.bool "Использовать следующий метод:">
+<!ENTITY asf.dialogForceRadioTo.label1 "Открыть с помощью">
+<!ENTITY asf.dialogForceRadioTo.label2 "Расширение &#34;DownThemAll!&#34;">
+<!ENTITY asf.dialogForceRadioTo.label3 "Расширение &#34;dTa OneClick!&#34;">
+<!ENTITY asf.dialogForceRadioTo.label4 "Сохранить файл">
+<!ENTITY asf.dialogForceRadio_End.bool "до автоматического действия в диалоге сохранения.">
 <!ENTITY asf.viewdloption.bool "Показывать опции при загрузке">
 <!ENTITY asf.viewdloption.tooltip "Показывать две последних использованных папки и кнопку для добавления и редактирования фильтров">
 <!ENTITY asf.viewdloptionType0.label "Всегда показывать">
@@ -71,12 +71,12 @@
 <!ENTITY asf.viewpathselect.bool "Показывать список папок">
 <!ENTITY asf.viewpathselect.tooltip "Активировать меню перетаскивания мышкой для всех папок фильтров.">
 
-<!ENTITY asf.options.groupbox3.label "Filtering options">
-<!ENTITY asf.lastdir.bool "Изменять папку для команды 'сохранить как...' когда есть подходящий фильтр">
+<!ENTITY asf.options.groupbox3.label "Настройки фильтров">
+<!ENTITY asf.lastdir.bool "Изменять папку для команды &#34;сохранить как...&#34; когда есть подходящий фильтр">
 <!ENTITY asf.usecurrenturl.bool "Использовать пусть из строки адреса если не найден фильтр для домена загружаемого файла.">
-<!ENTITY asf.regexp_caseinsensitive.bool "Filters are case insensitive.">
+<!ENTITY asf.regexp_caseinsensitive.bool "Учитывать регистр при обработке фильтров.">
 
-<!ENTITY asf.options.groupbox4.label "Right-click">
+<!ENTITY asf.options.groupbox4.label "Правая кнопка мыши">
 <!ENTITY asf.userightclick.bool "Использовать фильтры в меню">
 <!ENTITY asf.userightclick.tooltip "Использовать фильтры  для меню &#34;Сохранить ссылку как...&#34;, &#34;Сохранить картинку как...&#34; и &#34;Сохранить как... (Ctrl+S)&#34;">
 <!ENTITY asf.rightclicktimeout.bool "Убрать задержку по времени и активировать фильтры для меню правой кнопки мыши &#34;Сохранить ссылку как...&#34;">
@@ -85,21 +85,21 @@
 <!ENTITY asf.rightclicktimeout.tooltip3 "Использовать только для скриптов с перенаправлением загрузок.">
 <!ENTITY asf.rightclicktimeout.tooltip4 "На заметку: Опция не имеет влияния на меню &#34;Сохранить картинку как...&#34; и  &#34;Сохранить как... (Ctrl+S)&#34;.">
 <!ENTITY asf.rightclick.ff2.label "Меню Automatic Save Folder по правой кнопке мыши не доступно для Firefox 2. Если вы хотите иметь возможность использовать фильтры для меню правой кнопки мыши &#34;Сохранить ссылку как...&#34;, вы должны обновить Firefox до версии 3.0 (рекомендуемая версия 3.5 или выше).">
-<!ENTITY asf.rightclick.DSort.label "Обнаружено дополнение 'Download sort'. &NL;Меню Automatic Save Folder по правой кнопке мыши не будет доступно пока вы не отключите 'Download Sort' в списке дополнений.">
+<!ENTITY asf.rightclick.DSort.label "Обнаружено дополнение &#34;Download sort&#34;. &NL;Меню Automatic Save Folder по правой кнопке мыши не будет доступно пока вы не отключите &#34;Download Sort&#34; в списке дополнений.">
 
-<!ENTITY asf.options.groupbox5.label "Graphical inerface">
-<!ENTITY asf.pathlist_defaultforceontop.bool "On drop-down menus, shows the default save path first.">
-<!ENTITY asf.pathlist_alphasort.bool "Sort save paths list alphabetically.">
-<!ENTITY asf.rowmatchinghighlight.label "Highlight color when selecting a matching filter:">
-<!ENTITY asf.rowmatchinghighlight.color "ASF color">
-<!ENTITY asf.rowmatchinghighlight.system "System color">
+<!ENTITY asf.options.groupbox5.label "Графический интерфейс">
+<!ENTITY asf.pathlist_defaultforceontop.bool "Первым показывать путь для сохранения по умолчанию.">
+<!ENTITY asf.pathlist_alphasort.bool "Алфавитная сортировка списков.">
+<!ENTITY asf.rowmatchinghighlight.label "Цвет выделения при совпадении с фильтром:">
+<!ENTITY asf.rowmatchinghighlight.color "Собственный цвет">
+<!ENTITY asf.rowmatchinghighlight.system "Системный цвет">
 
-<!ENTITY asf.options.groupbox6.label "DownThemAll!">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on. &NL;Automatic Save Folder can send the filtered destination path to DownThemAll when using the &#34;What should firefox do with this file&#34; saving window. This option is disabled when using the Private Browsing mode.">
-<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Enable Automatic Save Folder to send the filtered path to DownThemAll.">
-<!ENTITY asf.dta_chooseSendingMethod.label "Choose the sending method for DTA OneClic!:">
-<!ENTITY asf.dta_methodReplace.label "Replace first folder in list">
-<!ENTITY asf.dta_methodAdd.label "Add to list">
+<!ENTITY asf.options.groupbox6.label "Расширение &#34;DownThemAll!&#34;">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder определил, что вы используете расширение &#34;DownThemAll!&#34;. &NL;Automatic Save Folder может передавать пути, основанные на фильтрах, в &#34;DownThemAll&#34; при использовнии окна &#34;Как FireFox следует обработать это файл&#34;. Эта опция недоступна в режиме приватного просмотра.">
+<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Включить передачу путей из расширения &#34;Automatic Save Folder&#34; в расширение &#34;DownThemAll&#34;.">
+<!ENTITY asf.dta_chooseSendingMethod.label "Выбрать действие для &#34;DTA OneClick!&#34;:">
+<!ENTITY asf.dta_methodReplace.label "Заменить первый путь в списке">
+<!ENTITY asf.dta_methodAdd.label "Добавить в список">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Динамические папки">

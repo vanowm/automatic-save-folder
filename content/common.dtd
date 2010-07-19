@@ -1,2 +1,9 @@
 <!-- Current version -->
-<!ENTITY asf.version "1.0.2b Rev82">
+<!ENTITY asf.version "1.0.2b Rev83">
+
+<!ENTITY about.translators "
+- en-US : Cyan, Narayan<br />
+- fr : Cyan, Goofy, Haynee<br />
+- it : Scognito.<br />
+- ru : MrCOLOMBO<br />
+">

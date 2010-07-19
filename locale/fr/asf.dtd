@@ -97,7 +97,7 @@
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
 <!ENTITY asf.options.dtaDetected.label "Automatic Save Folder a détecté que vous utilisez l'extension DownThemAll!. &NL;Automatic Save Folder peut envoyer le dossier de destination filtré à DownThemAll lorsque vous utilisez la fenêtre de sauvegarde &#34;Que doit faire Firefox avec ce fichier ?&#34;. Cette option est désactivée lorsque vous utilisez le mode Navigation Privée.">
 <!ENTITY asf.dta_ASFtoDTA_isActive.bool "Activer l'envoi du dossier filtré par Automatic Save Folder à DownThemAll!.">
-<!ENTITY asf.dta_chooseSendingMethod.label "Choix de la méthode d'envoi pour DTA OneClic!:">
+<!ENTITY asf.dta_chooseSendingMethod.label "Choix de la méthode d'envoi pour DTA OneClick!:">
 <!ENTITY asf.dta_methodReplace.label "Remplacer le premier dossier de la liste">
 <!ENTITY asf.dta_methodAdd.label "Ajouter à la liste">
 

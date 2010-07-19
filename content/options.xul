@@ -58,31 +58,13 @@
 		<menuitem label="&asf.delete.popup;" oncommand="automatic_save_folder.asf_delete();"/>
 		<menuitem label="&asf.bottom.popup;" oncommand="automatic_save_folder.move('bottom');"/>
 	</menupopup>
-	<tooltip id="tooltip_folderList" orient="vertical" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.folderList.tooltip;"/>
-	</tooltip>
-	<tooltip id="tooltip_viewdloption" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.viewdloption.tooltip;"/>
-	</tooltip>
-	<tooltip id="tooltip_viewpathselect" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.viewpathselect.tooltip;"/>
-	</tooltip>
-	<tooltip id="tooltip_userightclick" orient="vertical" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.userightclick.tooltip;"/>
-	</tooltip>
-	<tooltip id="tooltip_rightclicktimeout" orient="vertical" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.rightclicktimeout.tooltip1;"/>
-		<description value="&asf.rightclicktimeout.tooltip2;"/>
-		<description value="&asf.rightclicktimeout.tooltip3;"/>
-		<description value="&asf.rightclicktimeout.tooltip4;"/>
-	</tooltip>
-	<tooltip id="tooltip_variablemode" orient="vertical" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.variablemode.tooltip1;"/>
-		<description value="&asf.variablemode.tooltip2;"/>
-	</tooltip>
-	<tooltip id="tooltip_dialogacceptFiltered" orient="vertical" style="background-color: #33DD00;" noautohide="true">
-		<description value="&asf.dialogacceptFiltered.tooltip;"/>
-	</tooltip>
+	<tooltip id="tooltip_folderList"     label="&asf.folderList.tooltip;"     noautohide="true" />
+	<tooltip id="tooltip_viewdloption"   label="&asf.viewdloption.tooltip;"   noautohide="true" />
+	<tooltip id="tooltip_viewpathselect" label="&asf.viewpathselect.tooltip;" noautohide="true" />
+	<tooltip id="tooltip_userightclick"  label="&asf.userightclick.tooltip;"  noautohide="true" />
+	<tooltip id="tooltip_rightclicktimeout" label="&asf.rightclicktimeout.tooltip1;&#10;&asf.rightclicktimeout.tooltip2;&#10;&asf.rightclicktimeout.tooltip3;&#10;&#10;&asf.rightclicktimeout.tooltip4;" noautohide="true" />
+	<tooltip id="tooltip_variablemode"   label="&asf.variablemode.tooltip1;&#10;&#10;&asf.variablemode.tooltip2;" noautohide="true" />
+	<tooltip id="tooltip_dialogacceptFiltered" label="&asf.dialogacceptFiltered.tooltip;" noautohide="true" />
 	<vbox>
 		<tabbox>
 			<tabs>
@@ -183,7 +165,7 @@
 								<checkbox id="asf-dialogacceptFiltered" preference="asf_dialogacceptFiltered" label="&asf.dialogacceptFiltered.bool;" tooltip="tooltip_dialogacceptFiltered" style="margin-left:25px;"/>
 								<hbox flex="1">
 									<checkbox id="asf-dialogForceRadio_Start" preference="asf_dialogForceRadio" label="&asf.dialogForceRadio_Start.bool;" style="margin-left:25px;"/>
-									<menulist id="asf-dialogForceRadioTo" preference="asf_dialogForceRadioTo" >
+									<menulist id="asf-dialogForceRadioTo" preference="asf_dialogForceRadioTo">
 										<menupopup>
 											<menuitem value="open" 			label="&asf.dialogForceRadioTo.label1;"></menuitem>
 											<menuitem value="downthemall" 	label="&asf.dialogForceRadioTo.label2;" id="asf-dialogForceRadioToDownthemall" style="display:none;"></menuitem>
@@ -191,7 +173,7 @@
 											<menuitem value="save" 			label="&asf.dialogForceRadioTo.label4;"></menuitem>
 										</menupopup>
 									</menulist>
-									<label id="asf-dialogForceRadio_End" flex="1">&asf.dialogForceRadio_End.bool;</label>
+									<label id="asf-dialogForceRadio_End" flex="1" style="max-height:2em;">&asf.dialogForceRadio_End.bool;</label>
 								</hbox>
 								<hbox>
 									<checkbox id="asf-viewdloption" preference="asf_viewdloption" label="&asf.viewdloption.bool;" tooltip="tooltip_viewdloption" oncommand="automatic_save_folder.toggle_options();"/>

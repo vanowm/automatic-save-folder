@@ -257,6 +257,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			// show or hide the asf option on saving window
 			this.show_dloptions();
 			this.check_uCTOption(true);
+			
+			var radioSavemode = document.getElementById("mode");
+			radioSavemode.addEventListener(
+			"command",		// After a save mode change (save, open, etc.)
+			function(){ automatic_save_folder.check_uCTOption(); },  // show/hide and enable/disable ASF.
+			false
+			);
 		}
 		
 	return false;
@@ -760,6 +767,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");
 		var asf_viewdloptionType = this.prefManager.getIntPref("extensions.asf.viewdloptionType");
 		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");
+		var dTa = false;
+		if (this.DownThemAll_isEnabled) // enable ASF box if dTa is selected and sending folder to dTa is enabled.
+		{
+			dTa = this.prefManager.getBoolPref("extensions.asf.dta_ASFtoDTA_isActive") && (document.getElementById("downthemall").selected || document.getElementById("turbodta").selected);
+		}
 		
 		// Workaround for bug 439323 (if call when not needed, dosen't work anymore)
 		// https://bugzilla.mozilla.org/show_bug.cgi?id=439323
@@ -767,7 +779,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		if (asf_viewdloption)
 		{
-			if(save) // if set to "save the file"
+			if(save || dTa) // if set to "save the file"
 			{
 				asf_radio_savepath.disabled = false;
 				asf_radiogroup_pathselect.disabled = false;
@@ -1218,11 +1230,5 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	addEventListener( // Autoload
 	"load",			// After OnLoad from overlay_unknownContentType.xul file
 	function(){ automatic_save_folder.main(); },  // Run main from automatic_save_folder to check the filters
-	false
-	);
-
-	addEventListener(
-	"command",		// After a click in the unknownContentType.xul, check if the user changed the saving option (save, open, etc.)
-	function(){ automatic_save_folder.check_uCTOption(); },  // Run main from automatic_save_folder to check the filters
 	false
 	);

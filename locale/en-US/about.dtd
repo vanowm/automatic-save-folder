@@ -166,10 +166,5 @@ And contributors:<br />
 <!ENTITY about.bugreport.content "- Photonic, Martin">
 
 <!ENTITY about.translation.title "Translations">
-<!ENTITY about.translation.content "- Independant translators and Babelzilla translation team: <br />
-- en-US : Cyan, Narayan<br />
-- fr : Cyan, Goofy, Haynee<br />
-- it : Scognito.<br />
-- ru : MrCOLOMBO<br />
-">
+<!ENTITY about.translation.content "- Independant translators and Babelzilla translation team: <br />">
 
