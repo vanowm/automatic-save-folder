@@ -887,6 +887,37 @@ var automatic_save_folder = {
 	},
 
 
+	checkBetaVersion: function() {
+		var current_version = document.getElementById('asf-version').value;
+		var latest_version = "1.0.2b Rev85";
+		var XhrObj = new XMLHttpRequest();
+		XhrObj.onreadystatechange = function()
+		{
+			if (XhrObj.readyState == 4 && XhrObj.status == 200)
+			{
+				latest_version = XhrObj.responseText ;
+				if(automatic_save_folder.versionChecker.compare(latest_version, current_version) > 0)
+				{
+					document.getElementById('asf-checkBetaUpdate').hidden = true;
+					document.getElementById('asf-betaVersionAvailable').hidden = false;
+					document.getElementById('asf-version').value = latest_version;
+					document.getElementById('asf-version').hidden = false;
+					
+				}
+				else
+				{
+					document.getElementById('asf-checkBetaUpdate').hidden = true;
+					document.getElementById('asf-betaVersionNotAvailable').hidden = false;
+				}
+			}
+		}
+		
+		XhrObj.open("POST", "http://asf.mangaheart.org/latestBetaVersion.php");
+		XhrObj.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+		XhrObj.send("version="+current_version);
+	},
+
+
 	DownloadSort_isEnabled: function() {
 		// Check for Download sort add-on, if enabled return true. 
 		

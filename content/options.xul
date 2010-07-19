@@ -188,6 +188,14 @@
 								</hbox>
 								<checkbox id="asf-viewpathselect" preference="asf_viewpathselect"  label="&asf.viewpathselect.bool;" tooltip="tooltip_viewpathselect" style="margin-left:25px;white-space:pre-wrap"/>
 							</groupbox>
+							<groupbox><caption label="&asf.options.checkUpdate.label;" />
+								<hbox>
+									<button id="asf-checkBetaUpdate" label="&asf.options.checkBetaUpdate.button;" oncommand="automatic_save_folder.checkBetaVersion();"/>
+									<description id="asf-betaVersionAvailable" hidden="true">&asf.options.betaVersionAvailable.label;</description>
+									<description id="asf-betaVersionNotAvailable" hidden="true">&asf.options.betaVersionNotAvailable.label;</description>
+									<description id="asf-version" hidden="true" value="&asf.version;" />
+								</hbox>
+							</groupbox>
 						</vbox>
 					</tabpanel>
 					<tabpanel>

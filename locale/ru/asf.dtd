@@ -71,6 +71,11 @@
 <!ENTITY asf.viewpathselect.bool "Показывать список папок">
 <!ENTITY asf.viewpathselect.tooltip "Активировать меню перетаскивания мышкой для всех папок фильтров.">
 
+<!ENTITY asf.options.checkUpdate.label "Update">
+<!ENTITY asf.options.checkBetaUpdate.button "Check if there is a new beta version">
+<!ENTITY asf.options.betaVersionAvailable.label "A new version is available:">
+<!ENTITY asf.options.betaVersionNotAvailable.label "No new version available.">
+
 <!ENTITY asf.options.groupbox3.label "Настройки фильтров">
 <!ENTITY asf.lastdir.bool "Изменять папку для команды &#34;сохранить как...&#34; когда есть подходящий фильтр">
 <!ENTITY asf.usecurrenturl.bool "Использовать пусть из строки адреса если не найден фильтр для домена загружаемого файла.">

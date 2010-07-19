@@ -71,6 +71,11 @@
 <!ENTITY asf.viewpathselect.bool "Vedi la lista dei filtri">
 <!ENTITY asf.viewpathselect.tooltip "Visualizza un menu con la lista di tutti i percorsi dei filtri.">
 
+<!ENTITY asf.options.checkUpdate.label "Update">
+<!ENTITY asf.options.checkBetaUpdate.button "Check if there is a new beta version">
+<!ENTITY asf.options.betaVersionAvailable.label "A new version is available:">
+<!ENTITY asf.options.betaVersionNotAvailable.label "No new version available.">
+
 <!ENTITY asf.options.groupbox3.label "Filtering options">
 <!ENTITY asf.lastdir.bool "Ha effetto sulla cartella per il comando 'Salva come...' quando un filtro corrisponde">
 <!ENTITY asf.usecurrenturl.bool "Use the current website URL to verify the filter's domain if the hosted domain doesn't match.">
