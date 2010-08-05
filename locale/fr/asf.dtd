@@ -71,10 +71,11 @@
 <!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">
 <!ENTITY asf.viewpathselect.tooltip "Active le menu déroulant contenant le chemin de chaque filtre.">
 
-<!ENTITY asf.options.checkUpdate.label "Mise à jour">
-<!ENTITY asf.options.checkBetaUpdate.button "Vérifier si une nouvelle version béta est disponible">
-<!ENTITY asf.options.betaVersionAvailable.label "Une nouvelle version est disponible :">
-<!ENTITY asf.options.betaVersionNotAvailable.label "Pas de nouvelle version disponible.">
+<!ENTITY asf.option.groupbox.checkUpdate.label "Mise à jour béta">
+<!ENTITY asf.checkBetaUpdate.button "Vérifier si une nouvelle version béta est disponible">
+<!ENTITY asf.betaVersionAvailable.label "Une nouvelle version est disponible :">
+<!ENTITY asf.betaVersionNotAvailable.label "Pas de nouvelle version disponible.">
+<!ENTITY asf.autoCheckBetaUpdate.bool "Vérifier automatiquement à l'ouverture des préférences.">
 
 <!ENTITY asf.options.groupbox3.label "Pendant le filtrage">
 <!ENTITY asf.lastdir.bool "Modifier aussi le dossier d'enregistrement utilisé par le menu 'Enregistrer sous... (Ctrl+S)'">

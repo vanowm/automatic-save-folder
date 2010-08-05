@@ -53,6 +53,7 @@ var automatic_save_folder = {
 		this.asf_treeSelected(); // set the button to disabled state because no filter is selected when openning
 		this.asf_toggleradio(); // set the radio choice to the right place
 		this.asf_variablemode(); // check if variable mode is on or off, and change mode if needed
+		if(this.prefManager.getBoolPref("extensions.asf.autoCheckBetaUpdate")) this.checkBetaVersion(true); // Check the latest available (beta) version
 		
 		// Resize the preferences window to match the localization needs.
 		// I don't know why width, or css width are not working, so let's use a script to resize the preferences window on load.
@@ -887,9 +888,9 @@ var automatic_save_folder = {
 	},
 
 
-	checkBetaVersion: function() {
+	checkBetaVersion: function(showalert) {
 		var current_version = document.getElementById('asf-version').value;
-		var latest_version = "1.0.2b Rev85";
+		var latest_version = "";
 		var XhrObj = new XMLHttpRequest();
 		XhrObj.onreadystatechange = function()
 		{
@@ -902,7 +903,10 @@ var automatic_save_folder = {
 					document.getElementById('asf-betaVersionAvailable').hidden = false;
 					document.getElementById('asf-version').value = latest_version;
 					document.getElementById('asf-version').hidden = false;
-					
+					if(showalert)
+					{
+						alert(document.getElementById('asf-betaVersionAvailable').textContent + "\nAutomatic Save Folder v" + document.getElementById('asf-version').value);
+					}
 				}
 				else
 				{
@@ -1075,7 +1079,7 @@ var automatic_save_folder = {
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") // if the option is opened from the saving window
 		{
 			window.opener.automatic_save_folder.main();		// rescan the filters to set the good folder
-			window.opener.sizeToContent();
+			window.opener.check_uCTOption();
 		}
 		window.opener.focus;
 	}

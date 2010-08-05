@@ -43,6 +43,7 @@
 		<preference id="asf_userightclick" name="extensions.asf.userightclick" type="bool"/>
 		<preference id="asf_rightclicktimeout" name="extensions.asf.rightclicktimeout" type="bool"/>
 		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
+		<preference id="asf_domainTestOrder" name="extensions.asf.domainTestOrder" type="string"/>
 		<preference id="asf_useDownloadDir" name="browser.download.useDownloadDir" type="bool"/>
 		<preference id="asf_folderList" name="browser.download.folderList" type="int"/>
 		<preference id="asf_regexp_caseinsensitive" name="extensions.asf.regexp_caseinsensitive" type="bool"/>
@@ -51,6 +52,7 @@
 		<preference id="asf_rowmatchinghighlight" name="extensions.asf.rowmatchinghighlight" type="string"/>
 		<preference id="asf_dta_ASFtoDTA_isActive" name="extensions.asf.dta_ASFtoDTA_isActive" type="bool"/>
 		<preference id="asf_dta_sendMethod" name="extensions.asf.dta_sendMethod" type="string"/>
+		<preference id="asf_autoCheckBetaUpdate" name="extensions.asf.autoCheckBetaUpdate" type="bool"/>
 	</preferences>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
@@ -188,13 +190,14 @@
 								</hbox>
 								<checkbox id="asf-viewpathselect" preference="asf_viewpathselect"  label="&asf.viewpathselect.bool;" tooltip="tooltip_viewpathselect" style="margin-left:25px;white-space:pre-wrap"/>
 							</groupbox>
-							<groupbox><caption label="&asf.options.checkUpdate.label;" />
+							<groupbox><caption label="&asf.option.groupbox.checkUpdate.label;" />
 								<hbox>
-									<button id="asf-checkBetaUpdate" label="&asf.options.checkBetaUpdate.button;" oncommand="automatic_save_folder.checkBetaVersion();"/>
-									<description id="asf-betaVersionAvailable" hidden="true">&asf.options.betaVersionAvailable.label;</description>
-									<description id="asf-betaVersionNotAvailable" hidden="true">&asf.options.betaVersionNotAvailable.label;</description>
-									<description id="asf-version" hidden="true" value="&asf.version;" />
+									<button id="asf-checkBetaUpdate" label="&asf.checkBetaUpdate.button;" oncommand="automatic_save_folder.checkBetaVersion();"/>
+									<description id="asf-betaVersionAvailable" hidden="true">&asf.betaVersionAvailable.label;</description>
+									<description id="asf-betaVersionNotAvailable" hidden="true">&asf.betaVersionNotAvailable.label;</description>
+									<label id="asf-version" href="http://asf.mangaheart.org/?menu=2&amp;sub=2" class="text-link" hidden="true" value="&asf.version;" />
 								</hbox>
+								<checkbox id="asf-autoCheckBetaUpdate" preference="asf_autoCheckBetaUpdate" label="&asf.autoCheckBetaUpdate.bool;" />
 							</groupbox>
 						</vbox>
 					</tabpanel>

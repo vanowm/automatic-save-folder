@@ -71,10 +71,11 @@
 <!ENTITY asf.viewpathselect.bool "View the list of folders">
 <!ENTITY asf.viewpathselect.tooltip "Activate a drop-down menu with all the filter's path.">
 
-<!ENTITY asf.options.checkUpdate.label "Update">
-<!ENTITY asf.options.checkBetaUpdate.button "Check if there is a new beta version">
-<!ENTITY asf.options.betaVersionAvailable.label "A new version is available:">
-<!ENTITY asf.options.betaVersionNotAvailable.label "No new version available.">
+<!ENTITY asf.option.groupbox.checkUpdate.label "Beta update">
+<!ENTITY asf.checkBetaUpdate.button "Check if there is a new beta version">
+<!ENTITY asf.betaVersionAvailable.label "A new version is available:">
+<!ENTITY asf.betaVersionNotAvailable.label "No new version available.">
+<!ENTITY asf.autoCheckBetaUpdate.bool "Automatically check when opening the preferences window.">
 
 <!ENTITY asf.options.groupbox3.label "Filtering options">
 <!ENTITY asf.lastdir.bool "Affect the folder for the 'save as...' command when a filter matches">

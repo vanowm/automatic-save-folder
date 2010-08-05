@@ -28,3 +28,4 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
  pref("extensions.asf.pathlist_alphasort", true);
  pref("extensions.asf.dta_ASFtoDTA_isActive", false);
  pref("extensions.asf.dta_sendMethod", "replace");
+ pref("extensions.asf.autoCheckBetaUpdate", false);
