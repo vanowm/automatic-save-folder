@@ -28,6 +28,10 @@
 + Настройки обработки регистра в фильтрах.
 + Новые опции для графического интерфейса.
 + Добавлен метод копирования через Drag&amp;Drop (Например: Удерживая Ctrl при перетаскивании в Windows).
++ Print filter's and process informations to the error console when downloading a file. (Disabled if Firefox is in PrivateBrowsing mode)
+* It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).
+* %asf_f% now uses full filename with extension if no filter match.
+* %asf_d% now uses domain without the protocol if no filter match.
 ! Исправлена обработка регулярных выражений когда фильтр оканчивался на косую черту (слеш).
 ! Исправлена ошибка при открытии окна настроек фильтров из окна сохранения (&#34;+ Добавить или изменить фильтр&#34;), при обработке пути который не был представлен в списке фильтров. (Благодарность MrCOLOMBO)
 ! ASF использует полный путь вместо домена если не найден подходящий фильтр, для левой кнопки мыши (Правая кнопка уже использует полный путь).">

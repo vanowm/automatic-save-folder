@@ -72,14 +72,22 @@
 <!ENTITY asf.viewpathselect.tooltip "Active le menu déroulant contenant le chemin de chaque filtre.">
 
 <!ENTITY asf.option.groupbox.checkUpdate.label "Mise à jour béta">
-<!ENTITY asf.checkBetaUpdate.button "Vérifier si une nouvelle version béta est disponible">
+<!ENTITY asf.checkBetaUpdate.button "Rechercher des mises à jour béta...">
 <!ENTITY asf.betaVersionAvailable.label "Une nouvelle version est disponible :">
 <!ENTITY asf.betaVersionNotAvailable.label "Pas de nouvelle version disponible.">
 <!ENTITY asf.autoCheckBetaUpdate.bool "Vérifier automatiquement à l'ouverture des préférences.">
 
 <!ENTITY asf.options.groupbox3.label "Pendant le filtrage">
 <!ENTITY asf.lastdir.bool "Modifier aussi le dossier d'enregistrement utilisé par le menu 'Enregistrer sous... (Ctrl+S)'">
-<!ENTITY asf.usecurrenturl.bool "Utiliser l'adresse du site courant pour comparer le domaine du filtre si le domaine d'hébergement ne correspond pas.">
+<!ENTITY asf.domainTestOrder.label1 "Choisissez le type de domaine à utiliser, ainsi que leur ordre de vérification, lors du filtrage :">
+<!ENTITY asf.domainTestOrder.label2 "[Aide]">
+<!ENTITY asf.domainTestOrder.tooltip1 "Spécifiez l'ordre dans lequel les tests sur le domaine seront effectués, en les séparant par une virgule. Valeur par défaut si la case est vide : 1,5">
+<!ENTITY asf.domainTestOrder.tooltip2 "Domaine du fichier">
+<!ENTITY asf.domainTestOrder.tooltip3 "URL du fichier">
+<!ENTITY asf.domainTestOrder.tooltip4 "URL du fichier + nom du fichier">
+<!ENTITY asf.domainTestOrder.tooltip5 "Domaine de l'onglet (ou le domaine du fichier si aucun résultat n'est trouvé)">
+<!ENTITY asf.domainTestOrder.tooltip6 "URL de l'onglet (ou l'URL du fichier si aucun résultat n'est trouvé)">
+<!ENTITY asf.domainTestOrder.tooltip7 "Pour plus de précisions, vous pouvez voir à quoi correspond ces informations dans la Console d'erreurs lorsque vous téléchargez un fichier.">
 <!ENTITY asf.regexp_caseinsensitive.bool "Les filtres sont insensibles à la casse.">
 
 <!ENTITY asf.options.groupbox4.label "Clic droit">

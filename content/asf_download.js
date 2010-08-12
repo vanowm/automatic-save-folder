@@ -29,6 +29,8 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				
 		firefoxversion : "",
 		systemslash: "",
+		logtoconsole: true,
+		inPrivateBrowsing: false,
 		
 	main: function () {
 
@@ -38,6 +40,19 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var versionChecker = automatic_save_folder.versionChecker;
 		var appInfo = automatic_save_folder.appInfo;
 		this.checkFirefoxVersion();
+		
+		// Check if the user is in PrivateBrowsing mode.
+		if (this.firefoxversion >= 3)
+		{
+			try
+			{
+				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
+									.getService(Components.interfaces.nsIPrivateBrowsingService);
+				this.inPrivateBrowsing = pbs.privateBrowsingEnabled;
+			}
+			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+			}
+		}
 		
 		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
 		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)
@@ -50,9 +65,26 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		
 		// load the domain and the filename of the saved file (copy the data from the firefox saving window)
-		var domain = 		document.getElementById("source").value ;
-		var filename = 		document.getElementById("location").value ;
+		var uCT = 				document.getElementById("unknownContentType");
+		var filename = 			document.getElementById("location").value ;
+		var domain = 			document.getElementById("source").value ;
+		var	domainWithoutProtocol = domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
+		var fileURL = 			document.getElementById("source").getAttribute("tooltiptext");
+		var fileURLAndFilename= document.getElementById("source").getAttribute("tooltiptext") + filename;
+		try
+		{
+			var currentDomain, currentURL = "";
+			currentDomain = 	uCT.parentNode.defaultView.opener.location.protocol + "//" + uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
+			currentURL = 		uCT.parentNode.defaultView.opener.location.href; // look for the current website URL in the DOM.
+		}
+		catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
+		{
+			currentDomain = domain;
+			currentURL = fileURL;
+		}
 		
+		var message = "These data will be used to verify the filters :\nFilename:\t\t"+filename +"\n1 - File's domain:\t"+domain+"\n2 - File's URL:\t\t"+fileURL+"\n3 - Full file's URL:\t"+fileURLAndFilename+"\n4 - Tab's domain:\t"+currentDomain+"\n5 - Tab's URL:\t\t"+currentURL;
+		if (!this.inPrivateBrowsing) this.console_print(message);
 		// debug : show the full downloaded link  http://abc.xyz/def/file.ext
 		// Can use this new function to get free from the need of the download window.
 		//var url = dialog.mLauncher.source.spec;
@@ -70,7 +102,6 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var variable_mode = 		prefManager.getBoolPref("extensions.asf.variablemode");  // enable Variables in folder creation (dynamic Folders)
 		var dialogaccept = 			prefManager.getBoolPref("extensions.asf.dialogaccept");
 		var dialogacceptFiltered = 	prefManager.getBoolPref("extensions.asf.dialogacceptFiltered");
-		var use_currentURL = 		prefManager.getBoolPref("extensions.asf.usecurrenturl");
 		
 		// If variable/Dynamic folders mode is ON, let's replace the variables to create the new defaultfolder
 		if (variable_mode == true)
@@ -116,18 +147,38 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				dom_regexp = false ; // reset the matching string for the "for" loop
 				file_regexp = false ; // same as above
 			// Check the domain
-				dom_regexp = this.test_regexp(filters[i][0], domain);  // hosted Domain
+				var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
+				if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
+				domain_testOrder = domain_testOrder.split(/,/);
 				
-			// Check the current website URL if hosted domain checking returned false.
-				if (!dom_regexp && use_currentURL)
+				for ( var j = 0 ; j < domain_testOrder.length ; j++)
 				{
-					var uCT = document.getElementById("unknownContentType");
-					try
+					switch (this.trim(domain_testOrder[j])) 
 					{
-						var currentURL = uCT.parentNode.defaultView.opener.location.href; // look for the current website URL in the DOM.
-						dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
+						case "1":
+							dom_regexp = this.test_regexp(filters[i][0], domain);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 1");
+							break;
+						case "2":
+							dom_regexp = this.test_regexp(filters[i][0], fileURL);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 2");
+							break;
+						case "3":
+							dom_regexp = this.test_regexp(filters[i][0], fileURLAndFilename);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 3");
+							break;
+						case "4":
+							dom_regexp = this.test_regexp(filters[i][0], currentDomain);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 4");
+							break;
+						case "5":
+							dom_regexp = this.test_regexp(filters[i][0], currentURL);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 5");
+						default:
+						//alert ("case = "+this.trim(domain_testOrder[j]) );
 					}
-					catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain.
+					
+					if (dom_regexp) break;
 				}
 				
 			// Check the filename
@@ -138,6 +189,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				if (dom_regexp && file_regexp)
 				{
 					var idx = i;
+					if (this.logtoconsole && !this.inPrivateBrowsing)  this.console_print("Filter "+idx+" is matching both domain and filename.\nDomain:\t\t"+filters[i][0]+"\nFilename:\t"+filters[i][1]+"\nFolder:\t\t"+filters[i][2]);
 					break;
 				}
 			}
@@ -145,6 +197,8 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		if (idx < 0) // if no filters matched
 		{
+			if (this.logtoconsole && !this.inPrivateBrowsing)  this.console_print("No filter matched both domain and filename. These data will be used instead :\nFolder:\t\t"+this.loadUnicodeString("extensions.asf.defaultfolder")+"\n%asf_d%:\t"+domainWithoutProtocol+"\n%asf_f%:\t"+filename);
+			
 			if(savetype == 1)  // and folder is set to user choice
 			{
 				if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
@@ -201,18 +255,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		
 		// in every case, set the new file hosted domain to tempdomain if not in private browsing
-		var inPrivateBrowsing = false;
-		if (this.firefoxversion >= 3)
-		{
-			try {
-				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
-									.getService(Components.interfaces.nsIPrivateBrowsingService);
-				inPrivateBrowsing = pbs.privateBrowsingEnabled;
-			}
-			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
-			}
-		}
-		if (!inPrivateBrowsing)
+		if (!this.inPrivateBrowsing)
 		{
 			this.saveUnicodeString("extensions.asf.tempdomain", domain);
 		}
@@ -319,17 +362,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		if (this.firefoxversion >= 3)
 		{
-		
-			var inPrivateBrowsing = false;
-			try {
-				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
-									.getService(Components.interfaces.nsIPrivateBrowsingService);
-				inPrivateBrowsing = pbs.privateBrowsingEnabled;
-			}
-			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
-			}
-			
-			if (inPrivateBrowsing && directory)
+			if (this.inPrivateBrowsing && directory)
 			{
 				gDownloadLastDir.file = directory;
 			}
@@ -412,13 +445,25 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		const ZERO = "0";  // leading zero
 		
 		// load the domain and the filename of the saved file
-		var domain = 	document.getElementById("source").value ;
-			domain =    domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
-		var filename = 	document.getElementById("location").value ;
-		var file_name = filename.replace (/\.(?!.*\.).*$/i, "");  // Trim from the last dot to the end of the file = remove extension
-		var extension = filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
-		
-		
+		var uCT =				document.getElementById("unknownContentType");
+		var filename =			document.getElementById("location").value ;
+		var file_name =			filename.replace (/\.(?!.*\.).*$/i, "");  // Trim from the last dot to the end of the file = remove extension
+		var extension =			filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
+		var domain =			document.getElementById("source").value ;
+		var	domainWithoutProtocol = domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
+		var fileURL =			document.getElementById("source").getAttribute("tooltiptext");
+		var fileURLAndFilename= document.getElementById("source").getAttribute("tooltiptext") + filename;
+		try
+		{
+			var currentDomain, currentURL = "";
+			currentDomain = 	uCT.parentNode.defaultView.opener.location.protocol + "//" + uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
+			currentURL = 		uCT.parentNode.defaultView.opener.location.href; // look for the current website URL in the DOM.
+		}
+		catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
+		{
+			currentDomain = domain; 
+			currentURL = fileURL;
+		}
 		
 		// check the filter's data
 		var asf_domain = "";
@@ -430,12 +475,44 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		else // no filter is found, use actual Domain and filename without extension
 		{
-			asf_domain = domain;
-			asf_filename = file_name;
+			asf_domain = domainWithoutProtocol;
+			asf_filename = filename;
 		}
 		
 		
-		var dom_regexp = this.test_regexp(asf_domain, document.getElementById("source").value);
+		// Check the domain
+		var dom_regexp = false;
+		var domain_testOrder = this.prefManager.getCharPref("extensions.asf.domainTestOrder");
+		if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
+		domain_testOrder = domain_testOrder.split(/,/);
+		
+		for ( var j = 0 ; j < domain_testOrder.length ; j++)
+		{
+			switch (this.trim(domain_testOrder[j])) 
+			{
+				case "1":
+					dom_regexp = this.test_regexp(asf_domain, domain);
+					break;
+				case "2":
+					dom_regexp = this.test_regexp(asf_domain, fileURL);
+					break;
+				case "3":
+					dom_regexp = this.test_regexp(asf_domain, fileURLAndFilename);
+					break;
+				case "4":
+					dom_regexp = this.test_regexp(asf_domain, currentDomain);
+					break;
+				case "5":
+					dom_regexp = this.test_regexp(asf_domain, currentURL);
+				default:
+				//alert ("case = "+this.trim(domain_testOrder[j]) );
+			}
+			
+			// check the filename
+			if (dom_regexp) break;
+		}
+		
+		// check the filename
 		var file_regexp = this.test_regexp(asf_filename, filename);
 		
 // Ted Gifford, start block
@@ -589,7 +666,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 										.replace(/%d%/g, ((objdate.getDate()) <10) ? (ZERO + (objdate.getDate())) : objdate.getDate())  // = number of the day : 01 to 31
 										.replace(/%j%/g, objdate.getDate())  // = number of the day  1 to 31 (no leading 0)
 										// ASF
-										.replace(/%asf_D%/g, domain)       // downloaded File's domain
+										.replace(/%asf_D%/g, domainWithoutProtocol)       // downloaded File's domain
 										.replace(/%asf_F%/g, filename)     // downloaded File's filename with extension
 										.replace(/%asf_Fx%/g, file_name)   // downloaded File's filename without extension
 										.replace(/%asf_d%/g, asf_domain)   // matching filter's Domain (without special chars used by regexp)
@@ -653,17 +730,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		if (this.firefoxversion >= 3)
 		{
-		
-			var inPrivateBrowsing = false;
-			try {
-				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
-									.getService(Components.interfaces.nsIPrivateBrowsingService);
-				inPrivateBrowsing = pbs.privateBrowsingEnabled;
-			}
-			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
-			}
-			
-			if (inPrivateBrowsing && gDownloadLastDir.file)
+			if (this.inPrivateBrowsing && gDownloadLastDir.file)
 			{
 				folder = gDownloadLastDir.file.path;
 			}
@@ -1015,7 +1082,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	
 	
 	readHiddenPref: function(pref_place, type, ret) {
-		try 
+		if(this.prefManager.getPrefType(pref_place))
 		{
 			switch (type)
 			{
@@ -1024,11 +1091,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				case "char": return this.prefManager.getCharPref(pref_place);
 				case "complex": return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
 			}
-		} 
-		catch(e) 
+		}
+		else
 		{
 			return ret; // return default value if pref doesn't exist
-		} 
+		}
 	},
 
 
@@ -1224,6 +1291,13 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			return string + this.systemslash;
 		}
 		return string;
+	},
+
+
+	console_print : function (aMessage) {
+		var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
+                                 .getService(Components.interfaces.nsIConsoleService);
+		consoleService.logStringMessage("Automatic Save Folder : \n" + aMessage);
 	},
 };
 

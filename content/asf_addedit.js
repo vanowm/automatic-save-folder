@@ -26,8 +26,8 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 
 	add_load: function () {
 		
-		var currentdomain = window.opener.document.getElementById("asf-current-domain").value;
-		var currentfilename = window.opener.document.getElementById("asf-current-filename").value ;
+		var currentdomain = window.opener.document.getElementById("asf-currentDL-domain").value;
+		var currentfilename = window.opener.document.getElementById("asf-currentDL-filename").value ;
 		
 		var radio_domain_all = window.document.getElementById("asf-addedit-radio-domain-all");
 		var radio_domain_edited = window.document.getElementById("asf-addedit-radio-domain");

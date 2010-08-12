@@ -42,7 +42,6 @@
 		<preference id="asf_dialogForceRadioTo" name="extensions.asf.dialogForceRadioTo" type="string"/>
 		<preference id="asf_userightclick" name="extensions.asf.userightclick" type="bool"/>
 		<preference id="asf_rightclicktimeout" name="extensions.asf.rightclicktimeout" type="bool"/>
-		<preference id="asf_usecurrenturl" name="extensions.asf.usecurrenturl" type="bool"/>
 		<preference id="asf_domainTestOrder" name="extensions.asf.domainTestOrder" type="string"/>
 		<preference id="asf_useDownloadDir" name="browser.download.useDownloadDir" type="bool"/>
 		<preference id="asf_folderList" name="browser.download.folderList" type="int"/>
@@ -67,6 +66,15 @@
 	<tooltip id="tooltip_rightclicktimeout" label="&asf.rightclicktimeout.tooltip1;&#10;&asf.rightclicktimeout.tooltip2;&#10;&asf.rightclicktimeout.tooltip3;&#10;&#10;&asf.rightclicktimeout.tooltip4;" noautohide="true" />
 	<tooltip id="tooltip_variablemode"   label="&asf.variablemode.tooltip1;&#10;&#10;&asf.variablemode.tooltip2;" noautohide="true" />
 	<tooltip id="tooltip_dialogacceptFiltered" label="&asf.dialogacceptFiltered.tooltip;" noautohide="true" />
+	<tooltip id="tooltip_domainTestOrder" noautohide="true" align="vertical">
+		<label>&asf.domainTestOrder.tooltip1;</label>
+		<hbox><description value="1 :"/><label>&asf.domainTestOrder.tooltip2;</label></hbox>
+		<hbox><description value="2 :"/><label>&asf.domainTestOrder.tooltip3;</label></hbox>
+		<hbox><description value="3 :"/><label>&asf.domainTestOrder.tooltip4;</label></hbox>
+		<hbox><description value="4 :"/><label>&asf.domainTestOrder.tooltip5;</label></hbox>
+		<hbox><description value="5 :"/><label>&asf.domainTestOrder.tooltip6;</label></hbox>
+		<label>&#10;&asf.domainTestOrder.tooltip7;</label>
+	</tooltip>
 	<vbox>
 		<tabbox>
 			<tabs>
@@ -131,9 +139,12 @@
 			</radiogroup>
 		</groupbox>
 		<groupbox hidden="true">
-			<textbox id="asf-current-domain" value="" />
-			<textbox id="asf-current-filename" value="" />
-			<textbox id="asf-current-url" value="" />
+			<textbox id="asf-currentDL-filename" value="" />
+			<textbox id="asf-currentDL-domain" value="" />
+			<textbox id="asf-currentDL-fileURL" value="" />
+			<textbox id="asf-currentDL-fileURLAndFilename" value="" />
+			<textbox id="asf-currentDL-currentDomain" value="" />
+			<textbox id="asf-currentDL-currentURL" value="" />
 			<textbox id="asf-preferences-window-resize" value="&asf.preferences_window.resize;" />
 			<textbox id="asf-preferences-window-width" value="&asf.preferences_window.width;" />
 			<textbox id="asf-preferences-window-height" value="&asf.preferences_window.height;" />
@@ -143,9 +154,9 @@
 		<separator class="thin"/>
 			<tabbox>
 				<tabs>
-					<tab id="asf-optionssubtab-options" label="&asf.options.tab1.label;"  />
-					<tab id="asf-optionssubtab-options" label="&asf.options.tab2.label;"  />
-					<tab id="asf-optionssubtab-dta" 	label="&asf.options.tabdta.label;" hidden="true" />
+					<tab id="asf-optionssubtab-page1" label="&asf.options.tab1.label;"  />
+					<tab id="asf-optionssubtab-page2" label="&asf.options.tab2.label;"  />
+					<tab id="asf-optionssubtab-dta"   label="&asf.options.tabdta.label;" hidden="true" />
 				</tabs>
 				<tabpanels>
 					<tabpanel flex="1">
@@ -205,7 +216,11 @@
 						<vbox id="asf-options-tab2" flex="1">
 							<groupbox><caption label="&asf.options.groupbox3.label;" />
 								<checkbox id="asf-lasdir" preference="asf_lastdir" label="&asf.lastdir.bool;"/>
-								<checkbox id="asf-usecurrenturl" preference="asf_usecurrenturl" label="&asf.usecurrenturl.bool;"/>
+								<hbox>
+									<label>&asf.domainTestOrder.label1;</label>
+									<textbox id="asf-domainTestOrder" preference="asf_domainTestOrder" size="10"/>
+									<label tooltip="tooltip_domainTestOrder">&asf.domainTestOrder.label2;</label>
+								</hbox>
 								<checkbox id="asf-regexp_caseinsensitive" preference="asf_regexp_caseinsensitive" label="&asf.regexp_caseinsensitive.bool;"/>
 							</groupbox>
 							<groupbox><caption label="&asf.options.groupbox4.label;" />							

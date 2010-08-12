@@ -30,11 +30,27 @@ var automatic_save_folder = {
 						.getService(Components.interfaces.nsIVersionComparator),
 				
 	firefoxversion : "",
+	logtoconsole: true,
+	inPrivateBrowsing: false,
+	result: "", // print_r result
 		
 	rightclick_init: function() {
 		if (!asf_rightclick_loaded) 
 		{
 			asf_rightclick_loaded = true;
+			
+			
+			// update changes from asf<=1.0.2r85 to ASF>=1.0.2rev86
+			if(this.prefManager.getPrefType("extensions.asf.usecurrenturl") == 128) // Bool
+			{
+				if (this.prefManager.getBoolPref("extensions.asf.usecurrenturl"))
+				{
+					this.prefManager.setCharPref("extensions.asf.domainTestOrder", "1,5"); // convert usecurrentURL=true to 1,5
+				}
+				this.prefManager.deleteBranch("extensions.asf.usecurrenturl"); // remove old preference
+			}
+			
+			
 			this.checkFirefoxVersion();
 			
 			// Right-click feature doesn't work on Firefox 2 (Can't detect installed add-on and prevent conflict with Download Sort)
@@ -87,25 +103,48 @@ var automatic_save_folder = {
 			// Setting private variables usable in this function
 			var prefManager = this.prefManager;
 			
+			// Check if the user is in PrivateBrowsing mode.
+			try
+			{
+				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
+									.getService(Components.interfaces.nsIPrivateBrowsingService);
+				this.inPrivateBrowsing = pbs.privateBrowsingEnabled;
+			}
+			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+			}
+			
 			// Check if there is any filter in list
 			var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
 				
 				
-			// load the domain and the filename of the saved file (copy the data from the firefox saving window)
-			// var domain = 		document.getElementById("source").value ;
-			// var filename = 		document.getElementById("location").value ;
-			
-			try 
+			// load the domain and the filename of the saved file
+			var filename = aFpP.fileInfo.fileName; // filename or tab's name if no filename specified.
+			if (typeof(aFpP.fileInfo.uri.fileName) != "undefined") // if the download is from an URL
 			{
-				var domain = aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host ;
+				var domain = 					aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host;
+				var	domainWithoutProtocol =    	aFpP.fileInfo.uri.host;
+				var fileURL = 					aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.directory; 
+				var fileURLAndFilename=			aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.path;
+				var currentDomain = document.getElementById("urlbar").value; // look for the current website URL in the DOM.
+					currentDomain = currentDomain.match(/^(.*?:\/\/)?.*?[^\/]+/);
+					currentDomain = currentDomain[0];
+				var currentURL = document.getElementById("urlbar").value;
+			
 			}
-			catch(e) // If the saved data is not from an URL, use the current website URL (example : Abduction! add-on screenshot function saving the current page into image)
-			{ 
-				var domain = document.getElementById("urlbar").value; 
-				domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
-				domain = domain[0];
-			} 
-			var filename = aFpP.fileInfo.fileName
+			else //  If the saved data is not from an URL (example : Abduction! add-on)
+			{
+				var domain = document.getElementById("urlbar").value;
+					domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
+					domain = domain[0];
+				var domainWithoutProtocol =  domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
+				var fileURL = "";
+				var fileURLAndFilename = domain+"/"+filename;
+				var currentDomain = domain;
+				var currentURL = document.getElementById("urlbar").value;
+			}
+			var message = "These data will be used to verify the filters :\nFilename:\t\t"+filename +"\n1 - File's domain:\t"+domain+"\n2 - File's URL:\t\t"+fileURL+"\n3 - Full file's URL:\t"+fileURLAndFilename+"\n4 - Tab's domain:\t"+currentDomain+"\n5 - Tab's URL:\t\t"+currentURL;
+			if (!this.inPrivateBrowsing) this.console_print(message);
+			
 			
 			// For Ctrl+S, if pagename.ext is not on the URL document.title is used as filename, add .htm to the filename
 			var page_title = document.title.replace(" - Mozilla Firefox", "");
@@ -120,7 +159,6 @@ var automatic_save_folder = {
 			var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");
 			var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
 			var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");
-			var use_currentURL = 	prefManager.getBoolPref("extensions.asf.usecurrenturl");
 			
 			// If variable/Dynamic folders mode is ON, let's check the variables and replace to create the new defaultfolder
 			if (variable_mode == true) 
@@ -150,7 +188,7 @@ var automatic_save_folder = {
 				var fol = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
 				var act = prefManager.getBoolPref("extensions.asf.filters"+ i +".active");	
 				filters[i] = [dom, fil, fol, act];
-			}	
+			}
 			
 			
 			// 
@@ -160,26 +198,46 @@ var automatic_save_folder = {
 			var dom_regexp = false;
 			var file_regexp = false;
 			for ( var i = 0 ; i < filters.length ; i++)
-			{		
+			{
 				if (filters[i][3] == true)  // if not temporary deactivated
-				{		
+				{
 					dom_regexp = false ; // reset the matching string for the "for" loop
 					file_regexp = false ; // same as above
 				// Check the domain	
-					dom_regexp = this.test_regexp(filters[i][0], domain);  // hosted Domain
-					
-				// Check the current website URL if hosted domain checking returned false.
-					if (!dom_regexp && use_currentURL)
+				var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
+				if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
+				domain_testOrder = domain_testOrder.split(/,/);
+				
+				for ( var j = 0 ; j < domain_testOrder.length ; j++)
+				{
+					switch (this.trim(domain_testOrder[j])) 
 					{
-						
-						try
-						{
-							var currentURL = document.getElementById("urlbar").value;
-							dom_regexp = this.test_regexp(filters[i][0], currentURL); // check the filter domain with the current website URL only if the hosted domain doesn't match
-						}
-						catch (e) { } // if there is no location.host data (tab is closed or script redirection), use the default folder as there are no filter's domain or current URL domain. 
+						case "1":
+							dom_regexp = this.test_regexp(filters[i][0], domain);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 1");
+							break;
+						case "2":
+							dom_regexp = this.test_regexp(filters[i][0], fileURL);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 2");
+							break;
+						case "3":
+							dom_regexp = this.test_regexp(filters[i][0], fileURLAndFilename);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 3");
+							break;
+						case "4":
+							dom_regexp = this.test_regexp(filters[i][0], currentDomain);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 4");
+							break;
+						case "5":
+							dom_regexp = this.test_regexp(filters[i][0], currentURL);
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 5");
+						default:
 					}
 					
+					if (dom_regexp) break;
+				}
+				
+				
 				// Check the filename
 					file_regexp = this.test_regexp(filters[i][1], filename); // Filename
 					
@@ -188,6 +246,7 @@ var automatic_save_folder = {
 					if (dom_regexp && file_regexp)
 					{
 						var idx = i;
+						if (this.logtoconsole && !this.inPrivateBrowsing)  this.console_print("Filter "+idx+" is matching both domain and filename.\nDomain:\t\t"+filters[i][0]+"\nFilename:\t"+filters[i][1]+"\nFolder:\t\t"+filters[i][2]);
 						break;
 					}
 				}
@@ -195,6 +254,8 @@ var automatic_save_folder = {
 			
 			if (idx < 0) // if no filters matched
 			{
+				if (this.logtoconsole && !this.inPrivateBrowsing)  this.console_print("No filter matched both domain and filename. These data will be used instead :\nFolder:\t\t"+this.loadUnicodeString("extensions.asf.defaultfolder")+"\n%asf_d%:\t"+domainWithoutProtocol+"\n%asf_f%:\t"+filename);
+				
 				if(savetype == 1)  // and folder is set to user choice
 				{
 					if ( (keeptemp == false) || ((keeptemp == true) && ( tempdomain != domain )) ) // and, if [same domain not checked] OR [ if same domain (keeptemp) is checked and domain not same as previous one]
@@ -251,18 +312,7 @@ var automatic_save_folder = {
 			}
 			
 			// in every case, set the new file hosted domain to tempdomain if not in private browsing
-			var inPrivateBrowsing = false;
-			if (this.firefoxversion >= 3)
-			{
-				try {
-					var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
-										.getService(Components.interfaces.nsIPrivateBrowsingService);
-					inPrivateBrowsing = pbs.privateBrowsingEnabled;
-				}
-				catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
-				}
-			}
-			if (!inPrivateBrowsing)
+			if (!this.inPrivateBrowsing)
 			{
 				this.saveUnicodeString("extensions.asf.tempdomain", domain);
 			}
@@ -298,17 +348,7 @@ var automatic_save_folder = {
 		
 		if (this.firefoxversion >= 3)
 		{
-			
-			var inPrivateBrowsing = false;
-			try {
-				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
-									.getService(Components.interfaces.nsIPrivateBrowsingService);
-				inPrivateBrowsing = pbs.privateBrowsingEnabled;
-			}
-			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
-			}
-			
-			if (inPrivateBrowsing && directory)
+			if (this.inPrivateBrowsing && directory)
 			{
 				if (typeof(gDownloadLastDir) == "undefined") // if not loaded yet
 				{
@@ -385,27 +425,37 @@ var automatic_save_folder = {
 		const ZERO = "0";  // leading zero
 		
 		// load the domain and the filename of the saved file	
-		try
-		{
-			var domain = 	aFpP.fileInfo.uri.host ;
-			var scheme = 	aFpP.fileInfo.uri.scheme ;
-		}
-		catch(e) // If the saved data is not from an URL, use the current website URL (example : Abduction! add-on screenshot function saving the current page into image)
-		{ 
-			var domain = document.getElementById("urlbar").value; 
-			domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
-			var scheme = domain[1];
-			domain = domain[0];
-		} 
-		var filename = 	aFpP.fileInfo.fileName ;
+		var filename = aFpP.fileInfo.fileName; // filename or tab's name if no filename specified.
 		var file_name = aFpP.fileInfo.fileBaseName ;
-		var extension = aFpP.fileInfo.fileExt ;
+		var extension = filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
+		if (typeof(aFpP.fileInfo.uri.fileName) != "undefined") // if the download is from an URL
+		{
+			var domain = 					aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host;
+			var	domainWithoutProtocol =    	aFpP.fileInfo.uri.host;
+			var fileURL = 					aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.directory; 
+			var fileURLAndFilename=			aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.path;
+			var currentDomain = document.getElementById("urlbar").value; // look for the current website URL in the DOM.
+				currentDomain = currentDomain.match(/^(.*?:\/\/)?.*?[^\/]+/);
+				currentDomain = currentDomain[0];
+			var currentURL = document.getElementById("urlbar").value;
 		
-		//alert ("domain = "+scheme+"://"+domain);
+		}
+		else //  If the saved data is not from an URL (example : Abduction! add-on), use current URL and tab's name.
+		{
+			var domain = document.getElementById("urlbar").value;
+				domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
+				domain = domain[0];
+			var domainWithoutProtocol =  domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
+			var fileURL = "";
+			var fileURLAndFilename = domain+"/"+filename;
+			var currentDomain = domain;
+			var currentURL = document.getElementById("urlbar").value;
+		}
+		
 		
 		// check the filter's data
 		var asf_domain = "";
-		var asf_filename = "";		
+		var asf_filename = "";
 		if (idx) // If a filter match, idx is true
 		{  
 			asf_domain = this.loadUnicodeString("extensions.asf.filters"+ idx +".domain");
@@ -413,12 +463,41 @@ var automatic_save_folder = {
 		}
 		else // no filter is found, use actual Domain and filename without extension
 		{
-			asf_domain = domain;
-			asf_filename = file_name;
+			asf_domain = domainWithoutProtocol;
+			asf_filename = filename;
 		}
 		
+		// check the domain
+		var dom_regexp = false;
+		var domain_testOrder = this.prefManager.getCharPref("extensions.asf.domainTestOrder");
+		if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
+		domain_testOrder = domain_testOrder.split(/,/);
 		
-		var dom_regexp = this.test_regexp(asf_domain, scheme+"://"+domain); 
+		for ( var j = 0 ; j < domain_testOrder.length ; j++)
+		{
+			switch (this.trim(domain_testOrder[j])) 
+			{
+				case "1":
+					dom_regexp = this.test_regexp(asf_domain, domain);
+					break;
+				case "2":
+					dom_regexp = this.test_regexp(asf_domain, fileURL);
+					break;
+				case "3":
+					dom_regexp = this.test_regexp(asf_domain, fileURLAndFilename);
+					break;
+				case "4":
+					dom_regexp = this.test_regexp(asf_domain, currentDomain);
+					break;
+				case "5":
+					dom_regexp = this.test_regexp(asf_domain, currentURL);
+				default:
+			}
+			
+			if (dom_regexp) break;
+		}
+		
+		// Check the filename
 		var file_regexp = this.test_regexp(asf_filename, filename); 
 		
 // Ted Gifford, start block
@@ -467,9 +546,6 @@ var automatic_save_folder = {
 		// Check if asf_rd is present and process     asf_rd = Regexp the domain
 		if (path.search("%asf_rd%") != -1)
 		{
-			// get the domain with the protocol
-			var domainp = 	scheme+"://"+domain ;
-			
 			// extract the filter part
 			var matches = path.match(/%asf_rd%.*?%asf_rd%/g);        // matches is an array
 			if (matches != null)
@@ -482,7 +558,7 @@ var automatic_save_folder = {
 					datareg = matches[i].replace(/%asf_rd%/g, '');  // remove the %asf_rf% to keep only the regexp
 					datareg = new RegExp(datareg, param);			//  create the regexp
 					//alert("reg="+datareg);
-					result = domainp.match(datareg);    // Check it on the domain with protocol
+					result = domain.match(datareg);    // Check it on the domain with protocol
 					
 					if (result == null) 
 					{
@@ -572,7 +648,7 @@ var automatic_save_folder = {
 										.replace(/%d%/g, ((objdate.getDate()) <10) ? (ZERO + (objdate.getDate())) : objdate.getDate())  // = number of the day : 01 to 31
 										.replace(/%j%/g, objdate.getDate())  // = number of the day  1 to 31 (no leading 0)
 										// ASF
-										.replace(/%asf_D%/g, domain)       // downloaded File's domain
+										.replace(/%asf_D%/g, domainWithoutProtocol)       // downloaded File's domain
 										.replace(/%asf_F%/g, filename)     // downloaded File's filename with extension
 										.replace(/%asf_Fx%/g, file_name)   // downloaded File's filename without extension
 										.replace(/%asf_d%/g, asf_domain)   // matching filter's Domain (without special chars used by regexp)
@@ -730,7 +806,7 @@ var automatic_save_folder = {
 	
 	
 	readHiddenPref: function(pref_place, type, ret) {
-		try 
+		if(this.prefManager.getPrefType(pref_place))
 		{
 			switch (type)
 			{
@@ -739,12 +815,41 @@ var automatic_save_folder = {
 				case "char": return this.prefManager.getCharPref(pref_place);
 				case "complex": return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
 			}
-		} 
-		catch(e) 
+		}
+		else
 		{
 			return ret; // return default value if pref doesn't exist
-		} 
-	}
+		}
+	},
+	
+	
+	print_r: function (Obj) {
+		if(Obj.constructor == Array || Obj.constructor == Object)
+		{
+			for(var p in Obj)
+			{
+				if(Obj[p].constructor == Array|| Obj[p].constructor == Object)
+				{
+					this.result = this.result + "<li>["+p+"] =>"+typeof(Obj)+"</li>";
+					this.result = this.result + "<ul>";
+					this.print_r(Obj[p]);
+					this.result = this.result + "</ul>";
+				}
+				else 
+				{
+					this.result = this.result + "<li>["+p+"] =>"+Obj[p]+"</li>";
+				}
+			}
+		}
+		return this.result;
+	},
+	
+	
+	console_print : function (aMessage) {
+		var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
+                                 .getService(Components.interfaces.nsIConsoleService);
+		consoleService.logStringMessage("Automatic Save Folder : \n" + aMessage);
+	},
 }
 	
 	addEventListener( // Autoload

@@ -12,6 +12,13 @@ toolbar[iconsize="small"] #asf-toolbar-icon-preferences, #asf-menu-preferences
   list-style-image: url("chrome://asf/skin/asf-icon_16x16.png");
 }
 
+  /* options */
+  
+#tooltip_domainTestOrder description {
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
   /* Filter tree */
 
 treechildren::-moz-tree-checkbox

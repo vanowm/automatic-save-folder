@@ -204,13 +204,16 @@ var automatic_save_folder = {
 		{
 			
 		// Load current file info (source, location and current website URL)
-			var domain = document.getElementById("asf-current-domain").value;
-			var filename = document.getElementById("asf-current-filename").value;
-			var currentURL = document.getElementById("asf-current-url").value;
+			var filename = document.getElementById("asf-currentDL-filename").value;
+			var domain = document.getElementById("asf-currentDL-domain").value;
+			var fileURL = document.getElementById("asf-currentDL-fileURL").value;
+			var fileURLAndFilename = document.getElementById("asf-currentDL-fileURLAndFilename").value;
+			var currentDomain = document.getElementById("asf-currentDL-currentDomain").value;
+			var currentURL = document.getElementById("asf-currentDL-currentURL").value;
+			
 			var treename = "asf-filterList";
 			var tree = document.getElementById(treename);
 			var maxidx = tree.view.rowCount;
-			var use_currentURL = document.getElementById("asf-usecurrenturl").checked;
 			var dom, fil, fol, act, color, dom_regexp, file_regexp ;
 			var found = false;
 			
@@ -227,10 +230,32 @@ var automatic_save_folder = {
 				dom_regexp = false ; // reset the matching string for the "for" loop
 				file_regexp = false ; // same as above
 				
-				dom_regexp = this.test_regexp(dom, domain);  // hosted Domain
-				if (!dom_regexp && use_currentURL)
+				var domain_testOrder = document.getElementById("asf-domainTestOrder").value;
+				if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
+				domain_testOrder = domain_testOrder.split(/,/);
+				
+				for ( var j = 0 ; j < domain_testOrder.length ; j++)
 				{
-					dom_regexp = this.test_regexp(dom, currentURL);  // current URL if hosted Domain returns false
+					switch (this.trim(domain_testOrder[j])) 
+					{
+						case "1":
+							dom_regexp = this.test_regexp(dom, domain);
+							break;
+						case "2":
+							dom_regexp = this.test_regexp(dom, fileURL);
+							break;
+						case "3":
+							dom_regexp = this.test_regexp(dom, fileURLAndFilename);
+							break;
+						case "4":
+							dom_regexp = this.test_regexp(dom, currentDomain);
+							break;
+						case "5":
+							dom_regexp = this.test_regexp(dom, currentURL);
+						default:
+					}
+					
+					if (dom_regexp) break;
 				}
 				file_regexp = this.test_regexp(fil, filename); // Filename
 				
@@ -565,26 +590,30 @@ var automatic_save_folder = {
 
 	asf_getdomain: function () {  // Save the domain and filename in a hidden field, to be used by the "add" button for auto-complete field.
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")  // if the option is opened from the saving window
-		{	
-			var currentdomain = window.opener.document.getElementById("source").value;
-			var currentfilename = window.opener.document.getElementById("location").value ;
+		{
 			var uCT = window.opener.document.getElementById("unknownContentType");
+			var filename = 			window.opener.document.getElementById("location").value ;
+			var domain = 			window.opener.document.getElementById("source").value ;
+			var fileURL = 			window.opener.document.getElementById("source").getAttribute("tooltiptext");
+			var fileURLAndFilename= window.opener.document.getElementById("source").getAttribute("tooltiptext") + filename;
 			try
 			{
-				var currentURL = uCT.parentNode.defaultView.opener.location;
+				var currentDomain, currentURL = "";
+				currentDomain = 	uCT.parentNode.defaultView.opener.location.protocol + "//" + uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
+				currentURL = 		uCT.parentNode.defaultView.opener.location.href; // look for the current website URL in the DOM.
 			}
-			catch(e) // If direct link (copy/past to URLbar, or open from another application), no Tab's URL is returned.
+			catch(e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
 			{
-				var currentURL = "";
+				currentDomain = domain; 
+				currentURL = fileURL;
 			}
-
-			var domain = document.getElementById("asf-current-domain");
-			var filename = document.getElementById("asf-current-filename");
-			var URL = document.getElementById("asf-current-url");
 			
-			domain.value = currentdomain ;
-			filename.value = currentfilename ;
-			URL.value = currentURL;
+			document.getElementById("asf-currentDL-filename").value = filename;
+			document.getElementById("asf-currentDL-domain").value = domain;
+			document.getElementById("asf-currentDL-fileURL").value = fileURL;
+			document.getElementById("asf-currentDL-fileURLAndFilename").value = fileURLAndFilename;
+			document.getElementById("asf-currentDL-currentDomain").value = currentDomain;
+			document.getElementById("asf-currentDL-currentURL").value = currentURL;
 		}
 	},
 
@@ -985,7 +1014,7 @@ var automatic_save_folder = {
 
 
 	readHiddenPref: function(pref_place, type, ret) {
-		try 
+		if(this.prefManager.getPrefType(pref_place))
 		{
 			switch (type)
 			{
@@ -994,11 +1023,11 @@ var automatic_save_folder = {
 				case "char": return this.prefManager.getCharPref(pref_place);
 				case "complex": return this.prefManager.getComplexValue(pref_place, Components.interfaces.nsISupportsString).data;
 			}
-		} 
-		catch(e) 
+		}
+		else
 		{
 			return ret; // return default value if pref doesn't exist
-		} 
+		}
 	},
 
 
@@ -1079,7 +1108,7 @@ var automatic_save_folder = {
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") // if the option is opened from the saving window
 		{
 			window.opener.automatic_save_folder.main();		// rescan the filters to set the good folder
-			window.opener.check_uCTOption();
+			window.opener.automatic_save_folder.check_uCTOption();
 		}
 		window.opener.focus;
 	}

@@ -72,14 +72,22 @@
 <!ENTITY asf.viewpathselect.tooltip "Visualizza un menu con la lista di tutti i percorsi dei filtri.">
 
 <!ENTITY asf.option.groupbox.checkUpdate.label "Beta update">
-<!ENTITY asf.checkBetaUpdate.button "Check if there is a new beta version">
+<!ENTITY asf.checkBetaUpdate.button "Check for Beta Updates...">
 <!ENTITY asf.betaVersionAvailable.label "A new version is available:">
 <!ENTITY asf.betaVersionNotAvailable.label "No new version available.">
 <!ENTITY asf.autoCheckBetaUpdate.bool "Automatically check when opening the preferences window.">
 
 <!ENTITY asf.options.groupbox3.label "Filtering options">
 <!ENTITY asf.lastdir.bool "Ha effetto sulla cartella per il comando 'Salva come...' quando un filtro corrisponde">
-<!ENTITY asf.usecurrenturl.bool "Use the current website URL to verify the filter's domain if the hosted domain doesn't match.">
+<!ENTITY asf.domainTestOrder.label1 "Choose the domain types to use, and their verification order, when filtering:">
+<!ENTITY asf.domainTestOrder.label2 "[Aiuto]">
+<!ENTITY asf.domainTestOrder.tooltip1 "A coma separated number list to specify in which order the tests on the domain will be performed. Default value if the field is empty: 1,5">
+<!ENTITY asf.domainTestOrder.tooltip2 "File's domain">
+<!ENTITY asf.domainTestOrder.tooltip3 "File's URL">
+<!ENTITY asf.domainTestOrder.tooltip4 "File's URL + Filename">
+<!ENTITY asf.domainTestOrder.tooltip5 "Tab's domain (or the file's domain if no data is found)">
+<!ENTITY asf.domainTestOrder.tooltip6 "Tab's URL (or the file's URL if no data is found)">
+<!ENTITY asf.domainTestOrder.tooltip7 "For more informations, you can see to which values correspond each entry in the Error console when downloading a file.">
 <!ENTITY asf.regexp_caseinsensitive.bool "Filters are case insensitive.">
 
 <!ENTITY asf.options.groupbox4.label "Right-click">

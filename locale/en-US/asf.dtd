@@ -72,14 +72,22 @@
 <!ENTITY asf.viewpathselect.tooltip "Activate a drop-down menu with all the filter's path.">
 
 <!ENTITY asf.option.groupbox.checkUpdate.label "Beta update">
-<!ENTITY asf.checkBetaUpdate.button "Check if there is a new beta version">
+<!ENTITY asf.checkBetaUpdate.button "Check for Beta Updates...">
 <!ENTITY asf.betaVersionAvailable.label "A new version is available:">
 <!ENTITY asf.betaVersionNotAvailable.label "No new version available.">
 <!ENTITY asf.autoCheckBetaUpdate.bool "Automatically check when opening the preferences window.">
 
 <!ENTITY asf.options.groupbox3.label "Filtering options">
 <!ENTITY asf.lastdir.bool "Affect the folder for the 'save as...' command when a filter matches">
-<!ENTITY asf.usecurrenturl.bool "Use the current website URL to verify the filter's domain if the hosted domain doesn't match.">
+<!ENTITY asf.domainTestOrder.label1 "Choose the domain types to use, and their verification order, when filtering:">
+<!ENTITY asf.domainTestOrder.label2 "[Help]">
+<!ENTITY asf.domainTestOrder.tooltip1 "A coma separated number list to specify in which order the tests on the domain will be performed. Default value if the field is empty: 1,5">
+<!ENTITY asf.domainTestOrder.tooltip2 "File's domain">
+<!ENTITY asf.domainTestOrder.tooltip3 "File's URL">
+<!ENTITY asf.domainTestOrder.tooltip4 "File's URL + Filename">
+<!ENTITY asf.domainTestOrder.tooltip5 "Tab's domain (or the file's domain if no data is found)">
+<!ENTITY asf.domainTestOrder.tooltip6 "Tab's URL (or the file's URL if no data is found)">
+<!ENTITY asf.domainTestOrder.tooltip7 "For more informations, you can see to which values correspond each entry in the Error console when downloading a file.">
 <!ENTITY asf.regexp_caseinsensitive.bool "Filters are case insensitive.">
 
 <!ENTITY asf.options.groupbox4.label "Right-click">
@@ -93,7 +101,7 @@
 <!ENTITY asf.rightclick.ff2.label "The Automatic Save Folder's right-click feature is not available on Firefox 2. If you want to use the filters on your downloads using the right-click menu &#34;Save link as&#34;, you should update your Firefox version to 3.0 minimum (recommended version 3.5 or more).">
 <!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &NL;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Extension manager.">
 
-<!ENTITY asf.options.groupbox5.label "Graphical inerface">
+<!ENTITY asf.options.groupbox5.label "Graphical interface">
 <!ENTITY asf.pathlist_defaultforceontop.bool "On drop-down menus, shows the default save path first.">
 <!ENTITY asf.pathlist_alphasort.bool "Sort save paths list alphabetically.">
 <!ENTITY asf.rowmatchinghighlight.label "Highlight color when selecting a matching filter:">
