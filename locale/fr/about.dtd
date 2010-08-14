@@ -30,8 +30,8 @@
 + Ajout de la fonction Copie lors d'un Drag&amp;Drop (ex. drag+Ctrl sur Windows).
 + Affichage d'informations dans la Console d'erreur concernant les filtres et les fichiers lors d'un téléchargement. (Désactivé lorsque Firefox est en mode Navigation privée)
 * Il est maintenant possible de choisir quel type de domaine sera utilisé pendant le filtrage, et de personaliser leur ordre de vérification (Domaine seul, URL complète, du fichier ou de l'onglet actif).
-* %asf_f% utilise maintenant le nom de fichier complet, avec l'extension, si aucun filtre ne correspond.
-* %asf_d% utilise maintenant le nom de domaine sans le protocol, si aucun filtre ne correspond.
+* &#37;asf_f&#37; utilise maintenant le nom de fichier complet, avec l'extension, si aucun filtre ne correspond.
+* &#37;asf_d&#37; utilise maintenant le nom de domaine sans le protocol, si aucun filtre ne correspond.
 ! Correction du script permettant de rajouter les slashs aux expressions régulières si le filtre contient déjà un slash à l'une des extrémités.
 ! Correction d'un bug où les données d'un lien direct entré dans la barre d'adresse ou initialisé par un autre programme n'étaient pas lu correctement, empêchant d'afficher la liste des filtres lorsque la fenêtre de préférences était ouverte à partir du lien &#34;+ Ajouter ou éditer un filtre&#34; de la fenêtre d'enregistrement. (Merci à MrCOLOMBO)
 ! ASF utilise maintenant l'URL complète du site courant au lieu de son domaine lorsque qu'aucun filtre n'est trouvé. (Le clic-droit utilisait déjà l'URL complète).">
