@@ -76,6 +76,7 @@
 <!ENTITY asf.betaVersionAvailable.label "A new version is available:">
 <!ENTITY asf.betaVersionNotAvailable.label "No new version available.">
 <!ENTITY asf.autoCheckBetaUpdate.bool "Automatically check when opening the preferences window.">
+<!ENTITY asf.betaVersionUpdateNow.label "Update now">
 
 <!ENTITY asf.options.groupbox3.label "Filtering options">
 <!ENTITY asf.lastdir.bool "Ha effetto sulla cartella per il comando 'Salva come...' quando un filtro corrisponde">

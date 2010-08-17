@@ -591,20 +591,22 @@ var automatic_save_folder = {
 	asf_getdomain: function () {  // Save the domain and filename in a hidden field, to be used by the "add" button for auto-complete field.
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul")  // if the option is opened from the saving window
 		{
-			var uCT = window.opener.document.getElementById("unknownContentType");
+			var tBrowser = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+				 .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
+			var tabLocation = tBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
 			var filename = 			window.opener.document.getElementById("location").value ;
 			var domain = 			window.opener.document.getElementById("source").value ;
 			var fileURL = 			window.opener.document.getElementById("source").getAttribute("tooltiptext");
 			var fileURLAndFilename= window.opener.document.getElementById("source").getAttribute("tooltiptext") + filename;
-			try
+			var currentDomain, currentURL = "";
+			try 
 			{
-				var currentDomain, currentURL = "";
-				currentDomain = 	uCT.parentNode.defaultView.opener.location.protocol + "//" + uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
-				currentURL = 		uCT.parentNode.defaultView.opener.location.href; // look for the current website URL in the DOM.
+				currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+				currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
 			}
-			catch(e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
+			catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
 			{
-				currentDomain = domain; 
+				currentDomain = domain;
 				currentURL = fileURL;
 			}
 			
@@ -925,16 +927,23 @@ var automatic_save_folder = {
 		{
 			if (XhrObj.readyState == 4 && XhrObj.status == 200)
 			{
-				latest_version = XhrObj.responseText ;
+				latest_version = XhrObj.responseText.split("\n") ;
 				if(automatic_save_folder.versionChecker.compare(latest_version, current_version) > 0)
 				{
 					document.getElementById('asf-checkBetaUpdate').hidden = true;
 					document.getElementById('asf-betaVersionAvailable').hidden = false;
-					document.getElementById('asf-version').value = latest_version;
+					document.getElementById('asf-version').value = latest_version[0];
 					document.getElementById('asf-version').hidden = false;
+					document.getElementById('asf-betaUpdate-URL').value = latest_version[1];
+					
+					if (automatic_save_folder.firefoxversion == 4)
+					{
+						document.getElementById('asf-betaVersionUpdateNow').hidden = false;
+					}
 					if(showalert)
 					{
-						alert(document.getElementById('asf-betaVersionAvailable').textContent + "\nAutomatic Save Folder v" + document.getElementById('asf-version').value);
+						var message = automatic_save_folder.stringbundle.formatStringFromName("checkForUpdates.updateAvailable", latest_version, 1);
+						alert(message);
 					}
 				}
 				else
@@ -947,7 +956,27 @@ var automatic_save_folder = {
 		
 		XhrObj.open("POST", "http://asf.mangaheart.org/latestBetaVersion.php");
 		XhrObj.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		XhrObj.send("version="+current_version);
+		XhrObj.send("version="+current_version+"&link=true");
+	},
+
+
+	updateASF: function(location) {
+		
+		var location = document.getElementById("asf-betaUpdate-URL").value;
+		//location = "http://asf.mangaheart.org/xpi/beta/automatic_save_folder-1.0.2bRev0086.xpi";
+		if (this.firefoxversion == 4) // update to new version
+		{
+			Components.utils.import("resource://gre/modules/AddonManager.jsm");  
+			
+			AddonManager.getInstallForURL(location, function(aInstall) {  
+			
+			// aInstall is an instance of {{AMInterface("AddonInstall")}}  
+			aInstall.install(); 
+			alert("install finish, you need to reboot now");
+			document.getElementById('asf-betaVersionUpdateNow').hidden = true;
+			}, "application/x-xpinstall");  
+		}
+		
 	},
 
 

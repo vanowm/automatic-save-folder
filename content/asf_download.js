@@ -65,17 +65,19 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		
 		// load the domain and the filename of the saved file (copy the data from the firefox saving window)
-		var uCT = 				document.getElementById("unknownContentType");
+		var tBrowser = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+				 .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
+		var tabLocation = tBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
 		var filename = 			document.getElementById("location").value ;
 		var domain = 			document.getElementById("source").value ;
 		var	domainWithoutProtocol = domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
 		var fileURL = 			document.getElementById("source").getAttribute("tooltiptext");
 		var fileURLAndFilename= document.getElementById("source").getAttribute("tooltiptext") + filename;
+		var currentDomain, currentURL = "";
 		try
 		{
-			var currentDomain, currentURL = "";
-			currentDomain = 	uCT.parentNode.defaultView.opener.location.protocol + "//" + uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
-			currentURL = 		uCT.parentNode.defaultView.opener.location.href; // look for the current website URL in the DOM.
+			currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+			currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
 		}
 		catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
 		{
@@ -445,7 +447,9 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		const ZERO = "0";  // leading zero
 		
 		// load the domain and the filename of the saved file
-		var uCT =				document.getElementById("unknownContentType");
+		var tBrowser = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+				 .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
+		var tabLocation = tBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
 		var filename =			document.getElementById("location").value ;
 		var file_name =			filename.replace (/\.(?!.*\.).*$/i, "");  // Trim from the last dot to the end of the file = remove extension
 		var extension =			filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
@@ -453,15 +457,15 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var	domainWithoutProtocol = domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
 		var fileURL =			document.getElementById("source").getAttribute("tooltiptext");
 		var fileURLAndFilename= document.getElementById("source").getAttribute("tooltiptext") + filename;
-		try
+		var currentDomain, currentURL = "";
+		try 
 		{
-			var currentDomain, currentURL = "";
-			currentDomain = 	uCT.parentNode.defaultView.opener.location.protocol + "//" + uCT.parentNode.defaultView.opener.location.host; // look for the current website URL in the DOM.
-			currentURL = 		uCT.parentNode.defaultView.opener.location.href; // look for the current website URL in the DOM.
+			currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+			currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
 		}
 		catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
 		{
-			currentDomain = domain; 
+			currentDomain = domain;
 			currentURL = fileURL;
 		}
 		

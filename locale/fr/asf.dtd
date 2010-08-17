@@ -76,6 +76,7 @@
 <!ENTITY asf.betaVersionAvailable.label "Une nouvelle version est disponible :">
 <!ENTITY asf.betaVersionNotAvailable.label "Pas de nouvelle version disponible.">
 <!ENTITY asf.autoCheckBetaUpdate.bool "Vérifier automatiquement à l'ouverture des préférences.">
+<!ENTITY asf.betaVersionUpdateNow.label "Mettre à jour maintenant">
 
 <!ENTITY asf.options.groupbox3.label "Pendant le filtrage">
 <!ENTITY asf.lastdir.bool "Modifier aussi le dossier d'enregistrement utilisé par le menu 'Enregistrer sous... (Ctrl+S)'">

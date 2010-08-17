@@ -145,6 +145,7 @@
 			<textbox id="asf-currentDL-fileURLAndFilename" value="" />
 			<textbox id="asf-currentDL-currentDomain" value="" />
 			<textbox id="asf-currentDL-currentURL" value="" />
+			<textbox id="asf-betaUpdate-URL" value="" />
 			<textbox id="asf-preferences-window-resize" value="&asf.preferences_window.resize;" />
 			<textbox id="asf-preferences-window-width" value="&asf.preferences_window.width;" />
 			<textbox id="asf-preferences-window-height" value="&asf.preferences_window.height;" />
@@ -207,6 +208,7 @@
 									<description id="asf-betaVersionAvailable" hidden="true">&asf.betaVersionAvailable.label;</description>
 									<description id="asf-betaVersionNotAvailable" hidden="true">&asf.betaVersionNotAvailable.label;</description>
 									<label id="asf-version" href="http://asf.mangaheart.org/?menu=2&amp;sub=2" class="text-link" hidden="true" value="&asf.version;" />
+									<label id="asf-betaVersionUpdateNow" class="text-link" hidden="true" value="&asf.betaVersionUpdateNow.label;" onclick="automatic_save_folder.updateASF();"/>
 								</hbox>
 								<checkbox id="asf-autoCheckBetaUpdate" preference="asf_autoCheckBetaUpdate" label="&asf.autoCheckBetaUpdate.bool;" />
 							</groupbox>
