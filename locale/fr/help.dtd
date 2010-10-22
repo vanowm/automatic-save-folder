@@ -5,19 +5,6 @@
 <!ENTITY info.dynamicfilter "Filtre dynamique">
 <!ENTITY info.capturefilter "Filtre de capture">
 
-<!ENTITY info.important.title "Important">
-<!ENTITY info.important.text1 "Le filtrage sur les téléchargements normaux (simple clic, ou téléchargement automatique) ne fonctionne que si la fenêtre de téléchargement &#34;Que doit faire Firefox avec ce fichier ?&#34; s'affiche :">
-<!-- Screenshot from your language. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big) -->
-<!ENTITY info.important.pict1 "screen_save_fr.png">
-<!ENTITY info.important.text2 "Par conséquent, vérifiez que Firefox ne lance pas un traitement différent sur le fichier empêchant la fenêtre de s'afficher en suivant ces instructions :">
-<!ENTITY info.important.text3 "Allez dans le menu &#34;Outils&#34; de Firefox puis &#34;Options...&#34;.">
-<!ENTITY info.important.text4 "- Pour les utilisateurs de Firefox 3 : Allez sur l'onglet &#34;Applications&#34;.
-  <br />- Pour les utilisateurs d'une version précédente : Allez sur l'onglet &#34;Contenu&#34; puis cliquez sur le bouton &#34;Gérer...&#34;.">
-<!ENTITY info.important.text5 "Vérifiez que l'extension de fichier que vous souhaitez télécharger soit bien positionnée sur &#34;Toujours demander&#34;.">
-<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' selected -->
-<!ENTITY info.important.pict2 "screen_apps_fr.png">
-
-
 <!ENTITY info.howtouse.title "Fonctionnement">
 <!ENTITY info.howtouse.text1 "Cette extension permet de définir, à l'aide de filtres, le répertoire qui vous sera automatiquement proposé par la fenêtre d'enregistrement de vos fichiers.">
 
@@ -82,3 +69,62 @@ Si aucune de ses trois extensions n'est trouvée, l'expression régulière ne re
 <!ENTITY info.advancedexample.text16 "Note : Vous pouvez placer autant de balises que vous le souhaitez dans le chemin d'enregistrement.<br /> Le filtre aurait pu être :">
 <!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(vacances|mariage)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
 Dans ce cas, le premier sous-dossier &#34;vacances&#34; est crée uniquement si le nom de fichier contient &#34;vacances&#34;.">
+
+
+<!-- Bellow is the page which appear on first install, and on important updates -->
+<!-- To see the page for localization testing go to chrome://asf/content/help/update.xhtml -->
+<!ENTITY version "Version">
+
+<!ENTITY firstinstall.welcome_message "Merci d'avoir installé Automatic Save Folder.<br /><br />
+Veuillez lire ce message attentivement afin d'éventuellement modifier vos paramètres.<br />
+Cette page s'affiche lors de la 1ère installation, et lorsque des changements importants doivent vous être signalés.">
+
+<!ENTITY firstinstall.title.importantupdates "Mises à jour importantes :">
+<!ENTITY firstinstall.title.firstinstall "1ère installation et rappel :">
+<!ENTITY firstinstall.fullupdatelist "Pour la liste complète des changements, veuillez vous reporter à l'onglet &#34;À propos...&#34; dans les préférences d'Automatic Save Folder.">
+
+<!ENTITY firstinstall.steps "Pour que cette extension fonctionne, <b>vous devez paramétrer correctement Firefox</b> et Automatic Save Folder.<br />
+Trois étapes sont essentielles, si le filtrage ne fonctionne pas, veuillez re-vérifier chacune de ces étapes :">
+<!ENTITY firstinstall.step1 "Étape 1 : Firefox">
+<!ENTITY firstinstall.step2 "Étape 2 : Automatic Save Folder">
+<!ENTITY firstinstall.step3 "Étape 3 : Pendant le téléchargement">
+
+<!ENTITY firstinstall.firefox.text1 "Le filtrage sur les téléchargements normaux (simple clic, ou téléchargement automatique) ne fonctionne que si la fenêtre de téléchargement &#34;Que doit faire Firefox avec ce fichier ?&#34; s'affiche :">
+<!-- Screenshot from your language. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big) -->
+<!ENTITY firstinstall.firefox.pict1 "screen_save_fr.png">
+<!ENTITY firstinstall.firefox.text2 "Par conséquent, vérifiez que Firefox ne lance pas un traitement différent sur le fichier empêchant la fenêtre de s'afficher en suivant ces instructions :">
+<!ENTITY firstinstall.firefox.text3 "Allez dans le menu &#34;Outils&#34; de Firefox puis &#34;Options...&#34;.">
+<!ENTITY firstinstall.firefox.text4 "- Pour les utilisateurs de Firefox 3 : Allez sur l'onglet &#34;Applications&#34;.
+  <br />- Pour les utilisateurs d'une version précédente : Allez sur l'onglet &#34;Contenu&#34; puis cliquez sur le bouton &#34;Gérer...&#34;.">
+<!ENTITY firstinstall.firefox.text5 "Vérifiez que l'extension de fichier que vous souhaitez télécharger soit bien positionnée sur &#34;Toujours demander&#34;.">
+<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' selected -->
+<!ENTITY firstinstall.firefox.pict2 "screen_apps_fr.png">
+<!ENTITY firstinstall.firefox.text6 "Choisissez un mode de sauvegarde dans les préférence de Firefox, onglet général :<br />
+- Enregistrer le fichier dans le dossier... : Firefox sauvegardera le fichier automatiquement sans ouvrir l'explorateur de fichiers.<br />
+- Toujours demander où enregistrer les fichier : Firefox affiche la fenêtre d'explorateur de fichiers afin de pouvoir renommer ou changer l'emplacement de sauvegarde manuellement.">
+<!ENTITY firstinstall.firefox.pict3 "screen_apps_fr.png">
+
+<!ENTITY firstinstall.asf.text1 "Si vous décidez de ne pas utiliser l'explorateur de fichier, Firefox enregistrera automatiquement vos fichiers <br />
+soit dans un dossier de téléchargement spécifique à votre système d'exploitation, soit directement sur votre bureau.<br />
+N'oubliez pas de sélectionner &#34;Défini par les filtres&#34; pour que Firefox utilise les dossiers de vos filtres.">
+<!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
+<!ENTITY firstinstall.asf.pict1 "screen-asf102-setbyfilters_fr.png">
+<!ENTITY firstinstall.asf.text2 "L'ordre de vos filtre à aussi une grande importance !<br />
+La vérification s'effectue de haut en bas, et s'arrete dès qu'un filtre correspond au fichier téléchargé.<br />
+Pensez à bien organiser vos filtres en les déplaçant avec les flèches situé sur le coté droit de l'onglet des filtres, ou en attrapant les filtres avec votre souris.">
+
+
+<!ENTITY firstinstall.save.text1 "Vous devez veillez à ce que Firefox vous propose toujours ce qu'il doit faire du fichier que vous êtes en train de télécharger.<br />
+Par conséquent, <b style='color:red;'>il ne faut pas cocher</b> &#34;Toujours effectuer cette action pour ce type de fichier&#34;.<br />
+Si cela devait arriver, revérifiez l'étape 1.">
+<!-- Screenshot from your language. this is a screen of 'What should Firefox do with this file?' saving window, like firstinstall.Firefox.pict1, but with "Do this automatically for files like this from now." shown unchecked-->
+<!ENTITY firstinstall.save.pict1 "screen-savedialog-alwaysdothis_fr.png">
+
+<!ENTITY firstinstall.moreinfo.text1  "Pour plus de renseignements sur l'utilisation de l'extension et la création des filtres, un onglet d'aide est disponible dans l'extension.">
+<!ENTITY firstinstall.moreinfo.text2  "Un forum d'aide est aussi à votre disposition sur le site officiel :">
+
+<!-- important updates for 1.0.2 -->
+<!ENTITY importantupdates.102.1 "Vous pouvez désormais choisir quelles données du fichier téléchargé vous souhaitez utiliser pour filter le domaine : Domaine du fichier, URL complète du fichier, domaine de l'onglet actif, URL complète de l'onglet actif.<br />Pour modifier ce paramètre, allez sur la page 2 des options d'Automatic Save Folder.">
+<!ENTITY importantupdates.102.2 "Envoi du dossier filtré à DownThemAll!">
+<!ENTITY importantupdates.102.3 "Import/export des filtres.">
+<!ENTITY importantupdates.102.4 "Suppression des slashs aux extrémités des filtres utilisant les expressions régulières.">

@@ -5,19 +5,6 @@
 <!ENTITY info.dynamicfilter "Dinamiche filtri">
 <!ENTITY info.capturefilter "Capture filtri">
 
-<!ENTITY info.important.title "Importante">
-<!ENTITY info.important.text1 "Questa estensione funziona solamente se si usa la finestra di download (quella che chiede di aprire, eseguire o salvare file su disco)<br />Se Firefox non mostra tale finestra, l'estensione non funzionerà.">
-<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big)  -->
-<!ENTITY info.important.pict1 "screen_save_en.png">
-<!ENTITY info.important.text2 "Se qualche filtro non funziona, accertartati che Firefox non usi un altro processo sul file scaricato:">
-<!ENTITY info.important.text3 "Vai sul menu &#34;Strumenti&#34; e &#34;Opzioni...&#34;.">
-<!ENTITY info.important.text4 "- Per utenti di Firefox 3: vai sul tab &#34;Applicazioni&#34;<br />
-- Per utenti di precedenti versioni di Firefox: Vai sul tab &#34;Contenuti&#34; e clicca su &#34;gestisci...&#34; in basso a destra.">
-<!ENTITY info.important.text5 "Verifica se il file che vuoi scaricare sia impostato su &#34;Chiedi ogni volta&#34;.">
-<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
-<!ENTITY info.important.pict2 "screen_apps_en.png">
-
-
 <!ENTITY info.howtouse.title "Come si usa">
 <!ENTITY info.howtouse.text1 "Questa estensione permette di definire, usando dei filtri, quale cartella verrà scelta automaticamente quando scarichi i tuoi file.">
 
@@ -82,3 +69,62 @@ Se nessuna di quelle estensioni non è trovata, l'espressione regolare non farà
 <!ENTITY info.advancedexample.text16 "Nota: Puoi mettere quanti tag vuoi per la cartella principale.<br />I filtri possono essere:">
 <!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(vacanza|matrimonio)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
 In questo cartello, verrà creata la cartella &#34;vacanze&#34; verrà creata solo se il nome contiene &#34;vacanze&#34;.">
+
+
+<!-- Bellow is the page which appear on first install, and on important updates -->
+<!-- To see the page for localization testing go to chrome://asf/content/help/update.xhtml -->
+<!ENTITY version "Version">
+
+<!ENTITY firstinstall.welcome_message "Thank you for installing Automatic Save Folder.<br /><br />
+Please, read this message carefully to make potential changes to your preferences.<br />
+This page will only be displayed once, on first install or when important changes must be communicated.">
+
+<!ENTITY firstinstall.title.importantupdates "Important updates:">
+<!ENTITY firstinstall.title.firstinstall "1st install and reminder :">
+<!ENTITY firstinstall.fullupdatelist "For the complete changelog, see the &#34;About...&#34; tab in Automatic Save Folder's preferences.">
+
+<!ENTITY firstinstall.steps "In order to work, <b>you have to correctly set Firefox</b> and Automatic Save Folder's <b>preferences</b>.<br />
+Three steps are essentials, if the filtering doesn't work please check each of this steps again:">
+<!ENTITY firstinstall.step1 "Step 1 : Firefox">
+<!ENTITY firstinstall.step2 "Step 2 : Automatic Save Folder">
+<!ENTITY firstinstall.step3 "Step 3 : While downloading">
+
+<!ENTITY firstinstall.firefox.text1 "Questa estensione funziona solamente se si usa la finestra di download (quella che chiede di aprire, eseguire o salvare file su disco)<br />Se Firefox non mostra tale finestra, l'estensione non funzionerà.">
+<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big)  -->
+<!ENTITY firstinstall.firefox.pict1 "screen_save_en.png">
+<!ENTITY firstinstall.firefox.text2 "Se qualche filtro non funziona, accertartati che Firefox non usi un altro processo sul file scaricato:">
+<!ENTITY firstinstall.firefox.text3 "Vai sul menu &#34;Strumenti&#34; e &#34;Opzioni...&#34;.">
+<!ENTITY firstinstall.firefox.text4 "- Per utenti di Firefox 3: vai sul tab &#34;Applicazioni&#34;<br />
+- Per utenti di precedenti versioni di Firefox: Vai sul tab &#34;Contenuti&#34; e clicca su &#34;gestisci...&#34; in basso a destra.">
+<!ENTITY firstinstall.firefox.text5 "Verifica se il file che vuoi scaricare sia impostato su &#34;Chiedi ogni volta&#34;.">
+<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
+<!ENTITY firstinstall.firefox.pict2 "screen_apps_en.png">
+<!ENTITY firstinstall.firefox.text6 "Choose a saving method in Firefox preferences, General tab:<br />
+- Save files to : Firefox will save the file automatically to that folder without opening the files explorer.<br />
+- Always ask me where to save files : Firefox will show you the files explorer to allow you to rename the file or choose the saving folder manually.">
+<!ENTITY firstinstall.firefox.pict3 "screen-main_en.png">
+
+<!ENTITY firstinstall.asf.text1 "If you decide to go without the file explorer, Firefox will automatically save your files<br />
+Either in the download folder defined by your operating system, either on your desktop.<br />
+Do not forget to select &#34;Set by the filters&#34; to allow Firefox to use the filtered folders.">
+<!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
+<!ENTITY firstinstall.asf.pict1 "screen-asf102-setbyfilters_en.png">
+<!ENTITY firstinstall.asf.text2 "Your filter's order is of a big importance!<br />
+The verification is done from top to bottom, and stop right after a filter is matching the actual downloaded file.<br />
+Remember to alway set your filters order using the arrow on the right of the filter's tab, or dragging them with your mouse.">
+
+
+<!ENTITY firstinstall.save.text1 "You must take care that Firefox will always ask you what to do with your currently downloading file.<br />
+According to this, <b style='color:red;'>you must not check</b> &#34;Do this automatically for files like this from now on.&#34;.<br />
+If it happens, do Step 1 again.">
+<!-- Screenshot from your language. This is a screen of 'What should Firefox do with this file?' saving window, like firstinstall.Firefox.pict1, but with 'Do this automatically for files like this from now on.' shown unchecked-->
+<!ENTITY firstinstall.save.pict1 "screen-savedialog-alwaysdothis_en.png">
+
+<!ENTITY firstinstall.moreinfo.text1  "For more informations on using and creating filters, a help tab is available in the add-on."> 
+<!ENTITY firstinstall.moreinfo.text2  "A forum is also available on the official development website:">
+
+<!-- important updates for 1.0.2 -->
+<!ENTITY importantupdates.102.1 "You can now choose which data from the downloaded file you want to use to filter the domain field : File's domain, File's full URL, Active tab's domain, Active tab's full URL.<br />To change this setting, go to page 2 of Automatic Save Folder's option's tab.">
+<!ENTITY importantupdates.102.2 "Send the filtered folder to DownThemAll!">
+<!ENTITY importantupdates.102.3 "Import/export the filters.">
+<!ENTITY importantupdates.102.4 "Deletion of the slashes needed at each side of a regular expression's filters.">

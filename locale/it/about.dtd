@@ -29,12 +29,14 @@
 + New options related to Graphical User Interface.
 + Added a Drag&amp;Drop Copy method (ie. drag+Ctrl on Windows).
 + Print filter's and process informations to the error console when downloading a file. (Disabled if Firefox is in PrivateBrowsing mode)
++ checking and update for beta versions. The internal update feature is working only on Firefox 4.
++ New menu to import and export preferences and filters.
++ A help page will now open after the first install and when there's important messages after an update.
 * It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).
 * &#37;asf_f&#37; now uses full filename with extension if no filter match.
 * &#37;asf_d&#37; now uses domain without the protocol if no filter match.
 ! Fixed a bug where checking the Regexp option when a filter ended by a slash didn't add a second slash.
 ! Fixed a bug where no data were returned if a download was initiated from the URL bar or from an external software which resulted in no filters in the filter's list if the preferences window was opened from the saving dialog &#34;+ Add or edit a filter&#34;. (Thanks to MrCOLOMBO)
-! ASF now uses the full URL instead of the domain when falling back to current website URL if no filter is found, when using single click (Right-click already used full URL).">
 
 <!ENTITY about.version.101 "! Fixed a spelling error preventing ASF to work when no filter matched.
 ! Added a missing Russian string on the filter's tab.">

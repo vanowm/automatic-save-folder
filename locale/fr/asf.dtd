@@ -2,7 +2,7 @@
 <!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
 <!ENTITY asf.preferences_window.resize "true">
 <!ENTITY asf.preferences_window.width "647">
-<!ENTITY asf.preferences_window.height "423">
+<!ENTITY asf.preferences_window.height "446">
 
 <!-- new line, U+00A0 ISOnum -->
 <!ENTITY NL "&#10;" >
@@ -43,7 +43,8 @@
 <!ENTITY asf.options.label "Options">
 <!ENTITY asf.options.tab1.label "Page 1">
 <!ENTITY asf.options.tab2.label "Page 2">
-<!ENTITY asf.options.tabdta.label "DownThemAll">
+<!ENTITY asf.options.tabdta.label "DownThemAll!">
+<!ENTITY asf.options.tabdata.label "Gestion des données">
 
 <!ENTITY asf.options.groupbox1.label "Explorateur de fichiers">
 <!ENTITY asf.useDownloadDir.bool "Ne pas afficher l'explorateur de fichiers, et enregistrer directement dans le dossier :">
@@ -88,7 +89,7 @@
 <!ENTITY asf.domainTestOrder.tooltip4 "URL du fichier + nom du fichier">
 <!ENTITY asf.domainTestOrder.tooltip5 "Domaine de l'onglet (ou le domaine du fichier si aucun résultat n'est trouvé)">
 <!ENTITY asf.domainTestOrder.tooltip6 "URL de l'onglet (ou l'URL du fichier si aucun résultat n'est trouvé)">
-<!ENTITY asf.domainTestOrder.tooltip7 "Pour plus de précisions, vous pouvez voir à quoi correspond ces informations dans la Console d'erreurs lorsque vous téléchargez un fichier.">
+<!ENTITY asf.domainTestOrder.tooltip7 "Pour plus de précisions, vous pouvez voir à quoi correspondent ces informations dans la Console d'erreurs lorsque vous téléchargez un fichier.">
 <!ENTITY asf.regexp_caseinsensitive.bool "Les filtres sont insensibles à la casse.">
 
 <!ENTITY asf.options.groupbox4.label "Clic droit">
@@ -110,11 +111,29 @@
 <!ENTITY asf.rowmatchinghighlight.system "Couleur système">
 
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder a détecté que vous utilisez l'extension DownThemAll!. &NL;Automatic Save Folder peut envoyer le dossier de destination filtré à DownThemAll lorsque vous utilisez la fenêtre de sauvegarde &#34;Que doit faire Firefox avec ce fichier ?&#34;. Cette option est désactivée lorsque vous utilisez le mode Navigation Privée.">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder a détecté que vous utilisez l'extension DownThemAll!.&NL;Automatic Save Folder peut envoyer le dossier de destination filtré à DownThemAll! lorsque vous utilisez la fenêtre de sauvegarde &#34;Que doit faire Firefox avec ce fichier ?&#34;.&NL;&NL;Note : Cette option est désactivée lorsque vous utilisez le mode Navigation Privée.">
 <!ENTITY asf.dta_ASFtoDTA_isActive.bool "Activer l'envoi du dossier filtré par Automatic Save Folder à DownThemAll!.">
 <!ENTITY asf.dta_chooseSendingMethod.label "Choix de la méthode d'envoi pour DTA OneClick!:">
 <!ENTITY asf.dta_methodReplace.label "Remplacer le premier dossier de la liste">
 <!ENTITY asf.dta_methodAdd.label "Ajouter à la liste">
+
+<!ENTITY asf.options.groupbox.datamanagement.label "Gestion des données">
+<!ENTITY asf.export.notemp.bool "Ne pas importer les données temporaires, comme le dernier domaine de provenance ou le dernier chemin d'enregistrement.">
+<!ENTITY asf.export.forceimport.bool "Forcer l'importation même si la version n'est pas compatible. Attention : Exportez et conservez d'abord vos données actuelles par sécurité.">
+<!ENTITY asf.export.infonotsaved.label "Note : Ces deux options ne sont pas mémorisées pour éviter des erreurs d'importation.">
+<!ENTITY asf.export.button.label "Données">
+<!ENTITY asf.export.button.export.label "Exporter">
+<!ENTITY asf.export.button.import.label "Importer">
+<!ENTITY asf.export.button.importall.label "Importer toutes les données">
+<!ENTITY asf.export.button.importprefs.label "Importer seulement les préférences">
+<!ENTITY asf.export.button.importfilters.label "Importer seulement les filtres">
+<!ENTITY asf.export.button.recoverfilters.label "Récupérer les filtres inutilisés dans la base de données">
+<!ENTITY asf.export.button.delete.label "Effacer">
+<!ENTITY asf.export.button.deleteallfilters.label "Effacer tous les filtres">
+<!ENTITY asf.export.button.deleteunusedfilters.label "Effacer les filtres inutilisés dans la base de données">
+<!ENTITY asf.export.button.deleteuserprefs.label "Restaurer les préférences par défauts">
+<!ENTITY asf.export.defaultfolder.label "Dossier par défaut pour les données exportées (facultatif) :">
+<!ENTITY asf.export.showbutton.bool "Ajouter un boutton de gestion des données sur l'onglet des filtres.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dossiers dynamiques">

@@ -32,26 +32,24 @@ var automatic_save_folder = {
 	firefoxversion : "",
 	logtoconsole: true,
 	inPrivateBrowsing: false,
+	importantVersionAlert: "1.0.0", // currently not used
 	result: "", // print_r result
-		
+	previousASFVersion: "",
+	currentASFVersion : "",
+	
 	rightclick_init: function() {
 		if (!asf_rightclick_loaded) 
 		{
 			asf_rightclick_loaded = true;
-			
-			
-			// update changes from asf<=1.0.2r85 to ASF>=1.0.2rev86
-			if(this.prefManager.getPrefType("extensions.asf.usecurrenturl") == 128) // Bool
-			{
-				if (this.prefManager.getBoolPref("extensions.asf.usecurrenturl"))
-				{
-					this.prefManager.setCharPref("extensions.asf.domainTestOrder", "1,5"); // convert usecurrentURL=true to 1,5
-				}
-				this.prefManager.deleteBranch("extensions.asf.usecurrenturl"); // remove old preference
-			}
-			
-			
 			this.checkFirefoxVersion();
+			
+			this.checkASFVersion();
+			
+			// After installation or upgrade, show a message if needed.
+			this.show_update_message();
+			
+			// check and modify preferences structure if needed 
+			this.preference_structure_changes();
 			
 			// Right-click feature doesn't work on Firefox 2 (Can't detect installed add-on and prevent conflict with Download Sort)
 			if (this.firefoxversion >= 3)
@@ -850,10 +848,99 @@ var automatic_save_folder = {
                                  .getService(Components.interfaces.nsIConsoleService);
 		consoleService.logStringMessage("Automatic Save Folder : \n" + aMessage);
 	},
+	
+	
+	checkASFVersion: function() {
+	
+		if(this.prefManager.getPrefType("extensions.asf.version") == 0) // not present
+		{
+			this.prefManager.setCharPref("extensions.asf.version", "1.0.0")
+		}
+		
+		this.previousASFVersion = this.prefManager.getCharPref("extensions.asf.version");
+		
+		// Read currently installed ASF version, including beta revisions
+		// workaround for Firefox4 new asynchronous addonManager (can't depend on addon.version anymore,
+		// so for all versions of Firefox, read the data directly from the dtd source file.
+		var XhrObj = new XMLHttpRequest();
+		XhrObj.open("GET", "chrome://asf/content/common.dtd", false); //synchronous mode
+		XhrObj.overrideMimeType('text/plain; charset=UTF-8');
+		XhrObj.send(null);
+		if (XhrObj.status == 0)
+		{
+			var dtd = XhrObj.responseText.split("\n") ;
+			this.currentASFVersion = dtd[1].match(/"(.*)"/)[1];
+		}
+	},
+	
+	
+	show_update_message: function() {
+		
+		var show_update_message = false;
+		var	messageType = "update";
+		var previous_version = this.previousASFVersion;	
+		
+		// show the update message in a new tab on important notices
+		var notice_version = this.importantVersionAlert; // latest important release, needing a notice
+		if(this.versionChecker.compare(notice_version, previous_version) > 0)  // if an important version occured since the last installed version
+		{
+			show_update_message = true;
+		}
+		
+		// show the update message in a new tab on first install
+		if(previous_version == "1.0.0" && this.prefManager.getPrefType("extensions.asf.filters0.active") == 0) // first install, no filter set
+		{
+			show_update_message = true;
+			messageType = "install";
+		}
+		
+		if (show_update_message)
+		{
+			var gBrowser = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+					 .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
+			setTimeout(function(messageType)
+			{
+				gBrowser.selectedTab = gBrowser.addTab("chrome://asf/content/help/"+messageType+".xhtml");
+			},
+			500,
+			messageType);
+		}
+	},
+	
+	
+	preference_structure_changes: function(version) {
+		
+		if (this.versionChecker.compare(this.previousASFVersion, "1.0.2bRev86") == -1) this.upgrade("1.0.2bRev86"); // convert currenturl to 1,5
+		// write the current version as old to prevent showing the updateMessage again
+		this.previousASFVersion = this.currentASFVersion;
+		this.prefManager.setCharPref("extensions.asf.version", this.currentASFVersion);
+	
+	},
+	
+	
+	upgrade: function(version) {
+		switch(version)
+		{
+			case "1.0.2bRev86": // convert extensions.asf.usecurrentURL=true to extensions.asf.domainTestOrder=1,5
+				
+				if(this.prefManager.getPrefType("extensions.asf.usecurrenturl") == 128) // Bool=128
+				{
+					if (this.prefManager.getBoolPref("extensions.asf.usecurrenturl"))
+					{
+						this.prefManager.setCharPref("extensions.asf.domainTestOrder", "1,5"); 
+					}
+					this.prefManager.deleteBranch("extensions.asf.usecurrenturl"); // remove old preference
+				}
+			break;
+			
+		}
+	},
+	
+	
 }
 	
 	addEventListener( // Autoload
-	"load",			// After OnLoad from overlay_unknownContentType.xul file
+	"load",			// After browser window is loaded
 	function(){ automatic_save_folder.rightclick_init(); },  // Run main from automatic_save_folder to check the filters
 	false
 	);

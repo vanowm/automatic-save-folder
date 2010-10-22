@@ -26,6 +26,9 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
  pref("extensions.asf.regexp_caseinsensitive", true);
  pref("extensions.asf.pathlist_defaultforceontop", false);
  pref("extensions.asf.pathlist_alphasort", true);
+ pref("extensions.asf.rowmatchinghighlight", "color");
  pref("extensions.asf.dta_ASFtoDTA_isActive", false);
  pref("extensions.asf.dta_sendMethod", "replace");
  pref("extensions.asf.autoCheckBetaUpdate", false);
+ pref("extensions.asf.exportFolder", "");
+ pref("extensions.asf.showExportButton", false);

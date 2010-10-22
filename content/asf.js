@@ -31,6 +31,7 @@ var automatic_save_folder = {
                    .createBundle("chrome://asf/locale/asf.properties"),
 				
 		firefoxversion : "",
+		ASF_VERSION: "",
 		
 	asf_load: function () {
 		
@@ -41,7 +42,7 @@ var automatic_save_folder = {
 		if (this.firefoxversion >= "3")
 		{
 			// set lastdir to "enable" if the user just updated from previous version and had it disabled
-			var lastdir = document.getElementById("asf-lasdir");
+			var lastdir = document.getElementById("asf-lastdir");
 			lastdir.checked = true;
 			lastdir.hidden = true; // hidden on FF3, as lastdir must always be true, don't allow the user to disable it.
 			this.prefManager.setBoolPref("extensions.asf.lastdir", true);
@@ -49,7 +50,8 @@ var automatic_save_folder = {
 		
 		
 		this.asf_getdomain(); // Run this to get the current domain and filename from the download window to pre-fill the fields in "add filter".
-		this.asf_loadpref();  // Load the preferences and the filter's array content
+		this.asf_loadpref();  // Load the preferences
+		this.asf_loadFilters();  // Load the filter's array content
 		this.asf_treeSelected(); // set the button to disabled state because no filter is selected when openning
 		this.asf_toggleradio(); // set the radio choice to the right place
 		this.asf_variablemode(); // check if variable mode is on or off, and change mode if needed
@@ -80,13 +82,30 @@ var automatic_save_folder = {
 
 
 	asf_loadpref: function () {
-		var nbrRow = this.prefManager.getIntPref("extensions.asf.filtersNumber", 0);
-		
 		//load the default folder (I removed the preference in options.xul, unicode folder's name didn't saved at all with automatic preference management. 
 		// 							Manual saving is working, but not saving in the right encoding type in prefs.js, so we need to use get/setComplexValue)
 		var default_folder = document.getElementById("asf-default-folder");
 		default_folder.value = this.loadUnicodeString("extensions.asf.defaultfolder");
 		
+		var exportFolder = document.getElementById("asf-exportFolder");
+		exportFolder.value = this.loadUnicodeString("extensions.asf.exportFolder");
+		
+		// export button
+		var showExportButton = document.getElementById("asf-showExportButton");
+		var exportButton = document.getElementById("asf-filter-export");
+		exportButton.hidden = !showExportButton.checked;
+	},
+
+
+	asf_loadFilters: function () {
+		var nbrRow = this.prefManager.getIntPref("extensions.asf.filtersNumber", 0);
+			
+		// ensure there's no filters already listed in the treeview
+		for (var i=document.getElementById('asf-filterChilds').childNodes.length-1 ; i>=0 ; i--)
+		{
+			document.getElementById('asf-filterChilds').removeChild(document.getElementById('asf-filterChilds').childNodes[i]);
+		}
+		// insert the filters in the treeview
 		for ( var i = 0 ; i < nbrRow ; i++)
 		{
 			var domain = this.loadUnicodeString("extensions.asf.filters"+ i +".domain");
@@ -819,13 +838,17 @@ var automatic_save_folder = {
 
 
 	// next 2 functions : Code inspired from DTA (browsedir & createValidDestination)
-	browsedir: function () {
-		var current_folder_input = document.getElementById("asf-default-folder").value;
+	browsedir: function (targetID) {
+		var inputbox = document.getElementById(targetID);
+		var current_folder_input = inputbox.value;
 		
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		
-		var filepickerdescription = this.stringbundle.GetStringFromName("select_default_folder");
+		var filepickerdescription = "";
+		if (targetID == "asf-default-folder") filepickerdescription = this.stringbundle.GetStringFromName("select_default_folder");
+		if (targetID == "asf-exportFolder") filepickerdescription = this.stringbundle.GetStringFromName("export.default_folder");
+		
 		fp.init(window, filepickerdescription, nsIFilePicker.modeGetFolder);
 		//fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 		
@@ -838,16 +861,17 @@ var automatic_save_folder = {
 		{
 			var asf_url = fp.file.path;
 			// Set the data into the input box
-			document.getElementById("asf-default-folder").value = asf_url;
+			document.getElementById(targetID).value = asf_url;
 		}
 		
 		//needed to save unicode paths using instantApply
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		if (instantApply)
 		{
-			//save the default folder right after editing
-			var default_folder = document.getElementById("asf-default-folder").value;
-			this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);
+			//save the new folder right after editing
+			var new_folder = document.getElementById(targetID).value;
+			if (targetID == "asf-default-folder") this.saveUnicodeString("extensions.asf.defaultfolder", new_folder);
+			if (targetID == "asf-exportFolder") this.saveUnicodeString("extensions.asf.exportFolder", new_folder);
 		}
 	},
 
@@ -980,6 +1004,523 @@ var automatic_save_folder = {
 	},
 
 
+	preferences_import: function(importType) {
+	/** 
+	// string @importType : "all", "filters", "preferences"
+	*/
+		
+		// read the default import/export folder
+		var exportFolder = document.getElementById("asf-exportFolder").value;
+		
+		var data = this.read_file(exportFolder);
+		if (!data) return false;
+		
+		if(data[0]!="Automatic Save Folder") 
+		{
+			alert("not an ASF pref data");
+			return false;
+		}
+		
+		var compare = this.versionChecker.compare;
+		var import_version = data[1];
+		var asf_version = this.prefManager.getCharPref("extensions.asf.version");
+		var apply = true;
+		var message = "";
+		
+		if (compare(import_version, asf_version) == 1) // imported data is from a newer ASF version than the current ASF installed version
+		{
+			apply = false;
+			message = this.stringbundle.GetStringFromName("export.importnewer");
+		}
+		
+		
+		if (compare(import_version, asf_version) == -1) // imported data is from an older ASF version than the current ASF installed version, let's check if data update is needed
+		{
+			
+			apply = true;
+			
+			// upgrade exemple
+			// 1.0.2bReb86
+			if (this.versionChecker.compare(import_version, "1.0.2bRev86") == -1) // convert usecurrenturl=true to checkDomainOrder=1,5
+			{
+				for (var i = 2; i < data.length ; i++)
+				{
+					if (data[i].indexOf("extensions.asf.usecurrenturl") >= 0)
+					{
+						if (data[i] == "extensions.asf.usecurrenturl;bool=true")
+						{
+							
+							data[i] = "extensions.asf.domainTestOrder;char=1,5";
+						}
+						else
+						{
+							data[i] = "extensions.asf.domainTestOrder;char=1";
+						}
+						break;
+					}
+				}
+			}
+			
+			
+		}
+		
+		
+		if (document.getElementById('asf-options-export-forceimport').checked == true)
+		{
+			apply = true;
+		}
+		
+		if (apply == false)
+		{
+			alert(message);
+			return false;
+		}
+		
+		
+		// import the data
+		var type_pos, data_pos, prefName, prefType, prefData, dataType ;
+		var notempdata = document.getElementById('asf-options-export-notempdata').checked;
+		var importThisData = true;
+		for (var i=1; i<data.length; i++)
+		{
+			// exclude these temporary data from import if option is checked
+			importThisData = true;
+			if (data[i].indexOf("extensions.asf.lastpath") >= 0 && notempdata == true) importThisData = false;
+			if (data[i].indexOf("extensions.asf.tempdomain") >= 0 && notempdata == true) importThisData = false; 
+			
+			type_pos = data[i].indexOf(";");
+			data_pos = data[i].indexOf("=");
+			if ((type_pos > 0) && importThisData == true)
+			{
+				prefName  = data[i].substring(0,type_pos);
+				prefType = data[i].substring(type_pos+1,data_pos);
+				prefData = data[i].substring(data_pos+1,data[i].length);
+				dataType = prefName.indexOf("extensions.asf.filters")>=0 ? "filters" : "preferences";
+				if (importType == "all" || importType == dataType)
+				{
+					switch(prefType)
+					{
+						case "int" : this.prefManager.setIntPref(prefName, prefData); break;
+						case "char" : this.saveUnicodeString(prefName, prefData); break;
+						case "bool" : 
+						{
+							prefData = (prefData == "true" ? true : false) ;
+							this.prefManager.setBoolPref(prefName, prefData); 
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		
+		// we need to set back the radios, checkboxes and lists manually (Even with instantApply), because of dependencies.
+		if (importType == "preferences" || importType == "all")
+		{
+			// filters tab
+			document.getElementById("radio-savetype").value = this.prefManager.getIntPref("extensions.asf.savetype");						// use last folder if no filter found
+			document.getElementById("asf-default-folder").value = this.loadUnicodeString("extensions.asf.defaultfolder");					// use default saving folder
+			document.getElementById("asf-keeptemp-check").checked = this.prefManager.getBoolPref("extensions.asf.keeptemp");				// but last folder if same domain
+			
+			// options tab
+			document.getElementById("asf-useDownloadDir").checked = this.prefManager.getBoolPref("browser.download.useDownloadDir"); 		// useDownloadDir (firefox pref)
+			document.getElementById("asf-folderList").value = this.prefManager.getIntPref("browser.download.folderList");					// folderList 0= desk, 1= download, 2= user
+			
+			document.getElementById("asf-dialogaccept").checked = this.prefManager.getBoolPref("extensions.asf.dialogaccept");				// auto accept the save dialog
+			document.getElementById("asf-dialogacceptFiltered").checked = this.prefManager.getBoolPref("extensions.asf.dialogacceptFiltered"); // only if a filter is found
+			document.getElementById("asf-dialogForceRadioTo").value = this.prefManager.getCharPref("extensions.asf.dialogForceRadioTo");	// force radio choice to
+			
+			document.getElementById("asf-viewdloption").checked = this.prefManager.getBoolPref("extensions.asf.viewdloption");				// show the ASF box when saving
+			document.getElementById("asf-viewdloptionType").value = this.prefManager.getIntPref("extensions.asf.viewdloptionType"); 		// box state if disabled
+			// document.getElementById("asf-suggestAllPossibleFolders").checked = this.prefManager.getBoolPref("extensions.asf.suggestAllPossibleFolders"); // suggest all possible folders
+			document.getElementById("asf-viewpathselect").checked = this.prefManager.getBoolPref("extensions.asf.viewpathselect");			// show a dropdown menu with all the filter's folders
+			
+			document.getElementById("asf-userightclick").checked = this.prefManager.getBoolPref("extensions.asf.userightclick");			// Activate filtering on the right click menus
+			document.getElementById("asf-rightclicktimeout").checked = this.prefManager.getBoolPref("extensions.asf.rightclicktimeout");	// remove http-header reading delay
+			var timeout = document.getElementById("asf-rightclicktimeout").checked ? '0' : '1000';
+			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", timeout );											// set time out accordingly to the new imported pref
+			
+			document.getElementById("asf-lastdir").checked = this.prefManager.getBoolPref("extensions.asf.lastdir");						// for FF < 3.x only
+			document.getElementById("asf-domainTestOrder").value = this.prefManager.getCharPref("extensions.asf.domainTestOrder");			// Domain test order
+			document.getElementById("asf-regexp_caseinsensitive").checked = this.prefManager.getBoolPref("extensions.asf.regexp_caseinsensitive");	// case sensitivity
+			
+			document.getElementById("asf-pathlist_defaultforceontop").checked = this.prefManager.getBoolPref("extensions.asf.pathlist_defaultforceontop");	// default folder on top of the lists
+			document.getElementById("asf-pathlist_alphasort").checked = this.prefManager.getBoolPref("extensions.asf.pathlist_alphasort");	// sort lists alphabetically
+			document.getElementById("asf-rowmatchinghighlight").value = this.prefManager.getCharPref("extensions.asf.rowmatchinghighlight"); // highlight color when matching row is selected
+			
+			document.getElementById("asf-autoCheckBetaUpdate").checked = this.prefManager.getBoolPref("extensions.asf.autoCheckBetaUpdate"); // autocheck beta update
+			
+			document.getElementById("asf-dta_ASFtoDTA_isActive").checked = this.prefManager.getBoolPref("extensions.asf.dta_ASFtoDTA_isActive"); // send to dTa
+			document.getElementById("asf-dta_sendMethod").value = this.prefManager.getCharPref("extensions.asf.dta_sendMethod");			// replace or add to dTa
+			
+			document.getElementById("asf-exportFolder").value = this.loadUnicodeString("extensions.asf.exportFolder");						// export button present on Filter's tab
+			document.getElementById("asf-showExportButton").checked = this.prefManager.getBoolPref("extensions.asf.showExportButton");		// export button present on Filter's tab
+			
+			// Dynamic Folders tab
+			document.getElementById("asf-variablemode").checked = this.prefManager.getBoolPref("extensions.asf.variablemode");
+			
+			this.asf_loadpref();  // reload the preferences
+			this.asf_toggleradio(); // set the radio choice to the right place
+			this.toggle_options(); // set the checkboxes disabled state
+			this.asf_variablemode(); 
+		}
+		
+		if (importType == "filters" || importType == "all")
+		{
+			var optionTabSelected = document.getElementById("asf-optionstab").selected;
+			if (optionTabSelected) this.asf_selecttab("asf-tab-filters"); // go to filter tab to restore filters correctly
+			this.asf_loadFilters(); // reload all the preferences from the prefManger
+			this.asf_treeSelected();
+			if (optionTabSelected) this.asf_selecttab("asf-tab-options"); // go back to previous tab
+		}
+		
+		
+		message =  this.stringbundle.GetStringFromName("export.importsuccessful");
+		alert(message);
+		
+		return true;
+	},
+
+
+	preferences_export: function() {
+		var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+								getService(Components.interfaces.nsIPrefService);
+		
+		
+		// save the current data to userpref.js before exporting
+		var optionTabSelected = document.getElementById("asf-optionstab").selected;
+		if (optionTabSelected) this.asf_selecttab("asf-tab-filters"); // go to filter tab to restore filters correctly
+		this.asf_savefilters(); //save the filters
+		this.asf_saveoptions(); //save the options
+		if (optionTabSelected) this.asf_selecttab("asf-tab-options"); // go back to previous tab
+		
+		
+		// read the default import/export folder
+		var exportFolder = document.getElementById("asf-exportFolder").value;
+		
+		var data = new Array;
+		data[data.length] = "Automatic Save Folder"; // always first
+		data[data.length] = this.prefManager.getCharPref("extensions.asf.version"); // always second
+		
+		var ASF_prefs = new Array;
+		var additionnal_prefs = new Array;
+		// ASF 1.0.0
+		ASF_prefs[ASF_prefs.length] = "browser.download.useDownloadDir";
+		ASF_prefs[ASF_prefs.length] = "browser.download.folderList";
+		
+		
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.autoCheckBetaUpdate";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.checkBetaVersion";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.defaultfolder";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.dialogForceRadio";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.dialogForceRadioTo";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.dialogaccept";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.dialogacceptFiltered";
+		// ASF_prefs[ASF_prefs.length] = "extensions.asf.usecurrenturl";  ---> removed since 1.0.2bRev86, replace with extensions.asf.domainTestOrder
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.dta_ASFtoDTA_isActive";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.dta_sendMethod";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.keeptemp";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.lastdir";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.lastpath";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.pathlist_alphasort";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.pathlist_defaultforceontop";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.regexp_caseinsensitive";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.rightclicktimeout";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.rowmatchinghighlight";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.savetype";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.tempdomain";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.useDownloadDirFiltered";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.userightclick";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.variablemode";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.viewdloption";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.viewdloptionType";
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.viewpathselect";
+		
+		
+		// ASF version 1.0.2bRev86
+		// can also use concat to fuse arrays.
+		additionnal_prefs = ["extensions.asf.domainTestOrder"];
+		ASF_prefs = ASF_prefs.concat(additionnal_prefs);
+		
+		// ASF version 1.0.2bRev89
+		// add import/export feature
+		additionnal_prefs = ["extensions.asf.showExportButton", "extensions.asf.exportFolder"];
+		ASF_prefs = ASF_prefs.concat(additionnal_prefs);
+		
+		// just before the filters, put number of filters
+		ASF_prefs[ASF_prefs.length] = "extensions.asf.filtersNumber"; // number of shown Filters in the filter list (not the same as total filters stored in prefManager)
+		
+		//save the current formated preferences to data[]
+		var line = data.length;
+		for(var i=0; i<ASF_prefs.length; i++)
+		{
+			branch = ASF_prefs[i];
+			type = prefs.getPrefType(branch);
+			
+			if (type)
+			{
+				switch (type)
+				{
+					case 32 : type = "char"; value = this.prefManager.getComplexValue(branch, Components.interfaces.nsISupportsString).data; break;
+					case 64 : type = "int"; value = this.prefManager.getIntPref(branch); break;
+					case 128 : type = "bool"; value = this.prefManager.getBoolPref(branch); break;
+				}
+				data[line++] = branch+";"+type+"="+value;
+			}
+		}
+		
+		
+		// now save the filters
+		var filter_number = 0;
+		var filter_childs = 0;
+		var type = 0;
+		var value = "";
+		var branch = "";
+		while (1)
+		{
+			branch = "extensions.asf.filters"+filter_number+".";
+			filter_childs = prefs.getBranch(branch).getChildList("", {});
+			if(filter_childs.length)
+			{
+				for(var i=0; i<filter_childs.length; i++)
+				{
+					branch = "extensions.asf.filters"+filter_number+"."+filter_childs[i];
+					type = prefs.getPrefType(branch);
+					
+					if (type)
+					{
+						switch (type)
+						{
+							case 32 : type = "char"; value = this.prefManager.getComplexValue(branch, Components.interfaces.nsISupportsString).data; break;
+							case 64 : type = "int"; value = this.prefManager.getIntPref(branch); break;
+							case 128 : type = "bool"; value = this.prefManager.getBoolPref(branch); break;
+						}
+						data[line++] = branch+";"+type+"="+value;
+					}
+				}
+				filter_number++;
+			}
+			else
+			{
+				break;
+			}
+		}
+		this.write_file(data, exportFolder);
+	},
+
+
+	recover_filters: function() {
+		var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+								getService(Components.interfaces.nsIPrefService);
+		
+		// check number of filters
+		var filter_number = 0;
+		var filter_childs = 0;
+		var branch = "";
+		while (1)
+		{
+			branch = "extensions.asf.filters"+filter_number+".";
+			filter_childs = prefs.getBranch(branch).getChildList("", {});
+			if(filter_childs.length)
+			{
+				filter_number++;
+			}
+			else
+			{
+				break;
+			}
+		}
+		
+		var before = this.prefManager.getIntPref("extensions.asf.filtersNumber");
+		var recovered = new Array;
+		recovered[0] = filter_number - before;
+		this.prefManager.setIntPref("extensions.asf.filtersNumber",filter_number);
+		
+		var optionTabSelected = document.getElementById("asf-optionstab").selected;
+		if (optionTabSelected) this.asf_selecttab("asf-tab-filters"); // go to filter tab to restore filters correctly
+		this.asf_loadFilters(); // reload all the pref from the prefManger
+		this.asf_treeSelected();
+		if (optionTabSelected) this.asf_selecttab("asf-tab-options"); // go back to previous tab
+		
+		// print xxxx filters recovered
+		var message = this.stringbundle.formatStringFromName("export.recoveredfilters", recovered, 1);
+		alert (message);
+	},
+
+
+	delete_filters: function(all) {
+		var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+								getService(Components.interfaces.nsIPrefService);
+		
+		
+		// now save the filters
+		if(all) this.prefManager.setIntPref("extensions.asf.filtersNumber", 0);
+		var filter_number = this.prefManager.getIntPref("extensions.asf.filtersNumber");
+		var filter_childs = 0;
+		var branch = "";
+		while (1)
+		{
+			branch = "extensions.asf.filters"+filter_number+".";
+			filter_childs = prefs.getBranch(branch).getChildList("", {});
+			if(filter_childs.length)
+			{
+				prefs.deleteBranch(branch);
+				filter_number++;
+			}
+			else
+			{
+				break;
+			}
+		}
+		
+		var optionTabSelected = document.getElementById("asf-optionstab").selected;
+		if (optionTabSelected) this.asf_selecttab("asf-tab-filters"); // go to filter tab to restore filters correctly
+		this.asf_loadFilters(); // reload all the pref from the prefManger
+		this.asf_treeSelected();
+		if (optionTabSelected) this.asf_selecttab("asf-tab-options"); // go back to previous tab
+	},
+
+
+	reset_preferences: function() {
+		
+		// reload default value to preferences 
+		this.prefManager.setBoolPref("extensions.asf.lastdir", true);
+		this.prefManager.setBoolPref("extensions.asf.keeptemp", true);
+		this.prefManager.setBoolPref("extensions.asf.viewdloption", false);
+		this.prefManager.setIntPref("extensions.asf.viewdloptionType", 0);
+		this.prefManager.setBoolPref("extensions.asf.viewpathselect", false);
+		this.prefManager.setIntPref("extensions.asf.savetype", 0);
+		this.prefManager.setCharPref("extensions.asf.defaultfolder", "");
+		this.prefManager.setCharPref("extensions.asf.tempdomain", "");
+		// this.prefManager.setIntPref("extensions.asf.filtersNumber", 0); do not reset the number of active filters
+		this.prefManager.setCharPref("extensions.asf.lastpath", "");
+		this.prefManager.setBoolPref("extensions.asf.variablemode", false); 
+		// See http://developer.mozilla.org/En/Download_Manager_preferences   or    http://kb.mozillazine.org/About:config_entries
+		// it makes automatic saving to the right folder - 0= desktop, 1= system download dir, 2= user define
+		// does only affect the user if useDownloadDir = true  ---- if "always ask the destination folder" is selected in FF options, it has no effect on the user.
+		this.prefManager.setIntPref("browser.download.folderList", 2);
+		this.prefManager.setBoolPref("extensions.asf.dialogaccept", false);
+		this.prefManager.setBoolPref("extensions.asf.dialogacceptFiltered", false);
+		this.prefManager.setBoolPref("extensions.asf.dialogForceRadio", false);
+		this.prefManager.setCharPref("extensions.asf.dialogForceRadioTo", "save");
+		this.prefManager.setBoolPref("extensions.asf.userightclick", true);
+		this.prefManager.setBoolPref("extensions.asf.rightclicktimeout", true);
+		this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", 0);
+		this.prefManager.setCharPref("extensions.asf.domainTestOrder", "1");
+		this.prefManager.setBoolPref("extensions.asf.regexp_caseinsensitive", true);
+		this.prefManager.setBoolPref("extensions.asf.pathlist_defaultforceontop", false);
+		this.prefManager.setBoolPref("extensions.asf.pathlist_alphasort", true);
+		this.prefManager.setCharPref("extensions.asf.rowmatchinghighlight", "color");
+		this.prefManager.setBoolPref("extensions.asf.dta_ASFtoDTA_isActive", false);
+		this.prefManager.setCharPref("extensions.asf.dta_sendMethod", "replace");
+		this.prefManager.setBoolPref("extensions.asf.autoCheckBetaUpdate", false);
+		this.prefManager.setCharPref("extensions.asf.exportFolder", "");
+		this.prefManager.setBoolPref("extensions.asf.showExportButton", false);
+		
+		this.asf_loadpref();  // reload the preferences
+		this.asf_toggleradio(); // set the radio choice to the right place
+		this.toggle_options(); // set the checkboxes disabled state
+		this.asf_variablemode();
+	},
+
+
+	read_file: function(folder) {
+	// thanks to TabMixPlus
+	/**
+	// string @folder = default opened folder (optional)
+	// File Input : File in UTF8 without BOM.
+	// Stream Output : Array, in unicode (each cell = 1 line from file)
+	*/
+		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+		var stream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
+		var streamIO = Components.classes["@mozilla.org/scriptableinputstream;1"].createInstance(Components.interfaces.nsIScriptableInputStream);
+		var convutf8 = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+			convutf8.charset = "UTF-8";
+		
+		fp.init(window, null, fp.modeOpen);
+		fp.defaultExtension = "txt";
+		fp.appendFilters(fp.filterText | fp.filterAll);
+		
+		
+		// select the opened folder
+		if (folder != "undefined")
+		{
+			var current_folder_input = this.createValidDestination(folder);
+			if (current_folder_input !== false) fp.displayDirectory = current_folder_input;
+		}
+		
+		if (fp.show() != fp.returnCancel) 
+		{
+			stream.init(fp.file, 0x01, 0444, null);
+			streamIO.init(stream);
+			var input = streamIO.read(stream.available());
+			streamIO.close();
+			stream.close();
+			
+			input = convutf8.ConvertToUnicode(input);
+			
+			var linebreak = input.match(/(((\n+)|(\r+))+)/m)[1]; // first: whole match -- second: backref-1 -- etc..
+			return input.split(linebreak);
+		}
+		return null;
+	},
+
+
+	write_file: function(data, folder) {
+	// thanks to TabMixPlus
+	/**
+	// array @data = array in Unicode to convert to file line by line
+	// string @folder = opening folder (optional)
+	// Stream Output : file in UTF8 without BOM.
+	*/
+		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+		var stream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
+		var convutf8 = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+		convutf8.charset = "UTF-8";
+		
+		
+		var objdate = new Date();
+		var year = objdate.getFullYear();
+		var month = ((objdate.getMonth()+1) <10) ? ("0" + (objdate.getMonth()+1)) : objdate.getMonth()+1;
+		var day = ((objdate.getDate()) <10) ? ("0" + (objdate.getDate())) : objdate.getDate();
+		fp.init(window, null, fp.modeSave);
+		fp.defaultExtension = "txt";
+		fp.defaultString = "ASFpref_"+year+"-"+month+"-"+day+".txt";
+		fp.appendFilters(fp.filterText | fp.filterAll);
+		
+		
+		// select the opened folder
+		if (folder != "undefined")
+		{
+			var current_folder_input = this.createValidDestination(folder);
+			if (current_folder_input !== false) fp.displayDirectory = current_folder_input;
+		}
+		
+		if (fp.show() != fp.returnCancel)
+		{
+			if (fp.file.exists()) fp.file.remove(true);
+			fp.file.create(fp.file.NORMAL_FILE_TYPE, 0666);
+			stream.init(fp.file, 0x02, 0x200, null);
+			
+			for (var i = 0; i < data.length ; i++) 
+			{
+				try
+				{
+					data[i] = convutf8.ConvertFromUnicode(data[i]);
+					
+					data[i]=data[i]+"\r\n";
+					stream.write(data[i], data[i].length);
+				}
+				catch(e)
+				{
+					alert (e)
+				}
+			}
+			stream.close();
+		}
+	},
+
+
 	DownloadSort_isEnabled: function() {
 		// Check for Download sort add-on, if enabled return true. 
 		
@@ -1107,6 +1648,9 @@ var automatic_save_folder = {
 		var default_folder = document.getElementById("asf-default-folder").value;
 		this.saveUnicodeString("extensions.asf.defaultfolder", default_folder);	
 		
+		//save the default import/export folder (options/data management tab)
+		var exportFolder = document.getElementById("asf-exportFolder").value;
+		this.saveUnicodeString("extensions.asf.exportFolder", exportFolder);	
 		
 		// bug from both instantApply and non instantApply, when changing checked state with javascript the state is not saved
 		// so for all the sub-option, let's save manually :

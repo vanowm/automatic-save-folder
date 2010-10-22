@@ -43,7 +43,8 @@
 <!ENTITY asf.options.label "Опции">
 <!ENTITY asf.options.tab1.label "Страница 1">
 <!ENTITY asf.options.tab2.label "Страница 2">
-<!ENTITY asf.options.tabdta.label "Расширение &#34;DownThemAll&#34;">
+<!ENTITY asf.options.tabdta.label "Расширение &#34;DownThemAll!&#34;">
+<!ENTITY asf.options.tabdata.label "Data management">
 
 <!ENTITY asf.options.groupbox1.label "Проводник">
 <!ENTITY asf.useDownloadDir.bool "Не предлагать выбор папки и автоматически сохранить в:">
@@ -110,11 +111,29 @@
 <!ENTITY asf.rowmatchinghighlight.system "Системный цвет">
 
 <!ENTITY asf.options.groupbox6.label "Расширение &#34;DownThemAll!&#34;">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder определил, что вы используете расширение &#34;DownThemAll!&#34;. &NL;Automatic Save Folder может передавать пути, основанные на фильтрах, в &#34;DownThemAll&#34; при использовнии окна &#34;Как FireFox следует обработать это файл&#34;. Эта опция недоступна в режиме приватного просмотра.">
-<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Включить передачу путей из расширения &#34;Automatic Save Folder&#34; в расширение &#34;DownThemAll&#34;.">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder определил, что вы используете расширение &#34;DownThemAll!&#34;. &NL;Automatic Save Folder может передавать пути, основанные на фильтрах, в &#34;DownThemAll!&#34; при использовнии окна &#34;Как FireFox следует обработать это файл&#34;. Эта опция недоступна в режиме приватного просмотра.">
+<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Включить передачу путей из расширения &#34;Automatic Save Folder&#34; в расширение &#34;DownThemAll!&#34;.">
 <!ENTITY asf.dta_chooseSendingMethod.label "Выбрать действие для &#34;DTA OneClick!&#34;:">
 <!ENTITY asf.dta_methodReplace.label "Заменить первый путь в списке">
 <!ENTITY asf.dta_methodAdd.label "Добавить в список">
+
+<!ENTITY asf.options.groupbox.datamanagement.label "Data management">
+<!ENTITY asf.export.notemp.bool "Ne pas importer les données temporaires, comme le dernier domaine de provenance ou le dernier chemin d'enregistrement.">
+<!ENTITY asf.export.forceimport.bool "Forcer l'importation même si la version n'est pas compatible. Attention : Exportez et conservez d'abord vos données actuelles par sécurité.">
+<!ENTITY asf.export.infonotsaved.label "Note : Ces deux options ne sont pas mémorisées pour éviter des erreurs d'importation.">
+<!ENTITY asf.export.button.label "Settings">
+<!ENTITY asf.export.button.export.label "Export">
+<!ENTITY asf.export.button.import.label "Import">
+<!ENTITY asf.export.button.importall.label "Import all data">
+<!ENTITY asf.export.button.importprefs.label "Import only preferences">
+<!ENTITY asf.export.button.importfilters.label "Import only filters">
+<!ENTITY asf.export.button.recoverfilters.label "Recover unused filters from database">
+<!ENTITY asf.export.button.delete.label "Delete">
+<!ENTITY asf.export.button.deleteallfilters.label "Delete all filters">
+<!ENTITY asf.export.button.deleteunusedfilters.label "Delete unused filters from database">
+<!ENTITY asf.export.button.deleteuserprefs.label "Restore preferences to default values">
+<!ENTITY asf.export.defaultfolder.label "Default folder for exported data (optional):">
+<!ENTITY asf.export.showbutton.bool "Add a data management button on the filter's tab.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Динамические папки">

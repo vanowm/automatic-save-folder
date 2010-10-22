@@ -1,0 +1,55 @@
+body
+{
+   margin-top: 0px;
+   margin-bottom: 20px;
+   margin-left: 20px;
+   margin-right: 0px;
+}
+
+a { 
+	text-decoration: none; 
+	color: #5555bb;
+	}
+
+a:link { 
+	text-decoration: none; 
+	color: #5555bb;
+	}
+a:visited { 
+	text-decoration: none; 
+	
+	}
+a:hover, a:active { 
+	text-decoration: none; 
+	}
+
+	
+#asf_title a {
+	color: #000000;
+	text-decoration: none;
+}
+
+#header_main {
+	background: #FFFFFF url("logo_project_left.jpg") right top no-repeat; 
+}
+
+#header_menu {
+	background: #FFFFFF url("logo_project_right.jpg") top; 
+}
+
+.tab_sub {
+	background-color: #F4F4F1;
+	border-top:2px  ridge #317300;
+	
+}
+
+
+.cadre-arrondi {
+-moz-border-radius-bottomleft:15px;
+-moz-border-radius-bottomright:15px;
+-moz-border-radius-topleft:15px;
+-moz-border-radius-topright:15px;
+border:1px solid #488F03;
+padding:10px;
+}
+

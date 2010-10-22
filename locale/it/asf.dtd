@@ -43,7 +43,8 @@
 <!ENTITY asf.options.label "Opzioni">
 <!ENTITY asf.options.tab1.label "Page 1">
 <!ENTITY asf.options.tab2.label "Page 2">
-<!ENTITY asf.options.tabdta.label "DownThemAll">
+<!ENTITY asf.options.tabdta.label "DownThemAll!">
+<!ENTITY asf.options.tabdata.label "Data management">
 
 <!ENTITY asf.options.groupbox1.label "File Explorer">
 <!ENTITY asf.useDownloadDir.bool "Do not show the file explorer, and automatically save to:">
@@ -110,11 +111,29 @@
 <!ENTITY asf.rowmatchinghighlight.system "System color">
 
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on. &NL;Automatic Save Folder can send the filtered destination path to DownThemAll when using the &#34;What should firefox do with this file&#34; saving window. This option is disabled when using the Private Browsing mode.">
-<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Enable Automatic Save Folder to send the filtered path to DownThemAll.">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on. &NL;Automatic Save Folder can send the filtered destination path to DownThemAll! when using the &#34;What should firefox do with this file&#34; saving window.&NL;&NL;Note: This option is disabled when using the Private Browsing mode.">
+<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Enable Automatic Save Folder to send the filtered path to DownThemAll!.">
 <!ENTITY asf.dta_chooseSendingMethod.label "Choose the sending method for DTA OneClick!:">
 <!ENTITY asf.dta_methodReplace.label "Replace first folder in list">
 <!ENTITY asf.dta_methodAdd.label "Add to list">
+
+<!ENTITY asf.options.groupbox.datamanagement.label "Data management">
+<!ENTITY asf.export.notemp.bool "Ne pas importer les données temporaires, comme le dernier domaine de provenance ou le dernier chemin d'enregistrement.">
+<!ENTITY asf.export.forceimport.bool "Forcer l'importation même si la version n'est pas compatible. Attention : Exportez et conservez d'abord vos données actuelles par sécurité.">
+<!ENTITY asf.export.infonotsaved.label "Note : Ces deux options ne sont pas mémorisées pour éviter des erreurs d'importation.">
+<!ENTITY asf.export.button.label "Settings">
+<!ENTITY asf.export.button.export.label "Export">
+<!ENTITY asf.export.button.import.label "Import">
+<!ENTITY asf.export.button.importall.label "Import all data">
+<!ENTITY asf.export.button.importprefs.label "Import only preferences">
+<!ENTITY asf.export.button.importfilters.label "Import only filters">
+<!ENTITY asf.export.button.recoverfilters.label "Recover unused filters from database">
+<!ENTITY asf.export.button.delete.label "Delete">
+<!ENTITY asf.export.button.deleteallfilters.label "Delete all filters">
+<!ENTITY asf.export.button.deleteunusedfilters.label "Delete unused filters from database">
+<!ENTITY asf.export.button.deleteuserprefs.label "Restore preferences to default values">
+<!ENTITY asf.export.defaultfolder.label "Default folder for exported data (optional):">
+<!ENTITY asf.export.showbutton.bool "Add a data management button on the filter's tab.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamic folders">
