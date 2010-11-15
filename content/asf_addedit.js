@@ -167,10 +167,17 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var domain = tree.view.getCellText(idx,tree.columns.getColumnAt(0));
 		var filename = tree.view.getCellText(idx,tree.columns.getColumnAt(1));
 		var folder = tree.view.getCellText(idx,tree.columns.getColumnAt(2));
+		var active = tree.view.getCellValue(idx,tree.columns.getColumnAt(3));
+		var domain_regexp = tree.view.getCellValue(idx,tree.columns.getColumnAt(4));
+		var filename_regexp = tree.view.getCellValue(idx,tree.columns.getColumnAt(5));
+		active = (active == "true" ? true : false) ;
+		domain_regexp = (domain_regexp == "true" ? true : false) ;
+		filename_regexp = (filename_regexp == "true" ? true : false) ;
+		
 		var radio_domain = document.getElementById("radio-addedit-domain") ;		
 		var radio_filename = document.getElementById("radio-addedit-filename") ;
 		
-		if (domain == "/.*/") 
+		if (domain == "*") 
 		{
 			radio_domain.value = 0;
 		}
@@ -179,10 +186,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			radio_domain.value = 1;
 			document.getElementById("asf-addedit-domain").value = domain;
 			
-			document.getElementById("asf-addedit-domain-regexp").checked = this.is_regexp(document.getElementById("asf-addedit-domain").value);
+			document.getElementById("asf-addedit-domain-regexp").checked = domain_regexp;
 		}
 		
-		if (filename == "/.*/")
+		if (filename == "*")
 		{
 			radio_filename.value = 0;
 		}
@@ -191,7 +198,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			radio_filename.value = 1;
 			document.getElementById("asf-addedit-filename").value = filename;
 			
-			document.getElementById("asf-addedit-filename-regexp").checked = this.is_regexp(document.getElementById("asf-addedit-filename").value);
+			document.getElementById("asf-addedit-filename-regexp").checked = filename_regexp;
 		}
 		
 		document.getElementById("asf-addedit-folder").value = folder ;	
@@ -238,55 +245,6 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	},
 
 
-	// add the / at the beginning and the end of the input_regexp if id_regexp id checked
-	makeRegexp: function (id_regexp, input_regexp) {
-		
-		var filter = document.getElementById(input_regexp);
-		
-		if (document.getElementById(id_regexp).checked) 
-		{
-			if ((filter.value.substring(0,1) != "/") || (filter.value.substr(filter.value.length - 1, 1) != "/"))  // let's add the /
-			{
-				filter.value = "/" + filter.value;
-				filter.value = filter.value + "/";
-			}
-		}
-		else 
-		{
-			if ((filter.value.substring(0,1) == "/") && (filter.value.substr(filter.value.length - 1, 1) == "/"))  // then delete the /
-			{
-				filter.value = filter.value.substring(1, filter.value.length);
-				filter.value = filter.value.substring(0, filter.value.length -1);
-			}
-		}
-		document.getElementById(input_regexp).value = filter.value;
-	},
-
-
-	is_regexp: function (string) {
-		
-		if ((string.substring(0,1) == "/") && (string.substr(string.length - 1, 1) == "/"))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	},
-
-
-	// on text change, check if the text is still regexp, else unchecked the checkbox
-	testRegexp: function (id_regexp, input_regexp) {
-		var filter = document.getElementById(input_regexp);
-		
-		if ((filter.value.substring(0,1) != "/") || (filter.value.substr(filter.value.length - 1, 1) != "/")) 
-		{
-			document.getElementById(id_regexp).checked = false;
-		}
-	},
-
-
 	trim: function (string) {
 		return string.replace(/(^\s*)|(\s*$)/g,'');
 	},
@@ -301,18 +259,19 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	//
 		var domain_radio = document.getElementById('radio-addedit-domain');
 		var domain = document.getElementById('asf-addedit-domain');
-		var domain_regexp = document.getElementById('asf-addedit-domain-regexp');
+		var domain_regexp = document.getElementById('asf-addedit-domain-regexp').checked;
 		if (domain_radio.value == 0)
 		{
-			var rule = "/.*/";
+			var rule = "*";
 		}
 		else
 		{
 			var rule = this.trim(domain.value);
 		}
 		
-		if (rule != "") 
+		if (rule != "")
 		{
+			if (rule == "*") domain_regexp = false;
 			var domain = rule;
 		}
 		else
@@ -326,13 +285,14 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	//
 		var filename_radio = document.getElementById('radio-addedit-filename');
 		var filename = document.getElementById('asf-addedit-filename');
-		var filename_regexp = document.getElementById('asf-addedit-filename-regexp');
+		var filename_regexp = document.getElementById('asf-addedit-filename-regexp').checked;
 		if (filename_radio.value == 0)
 		{
-			var rule = "/.*/";
+			var rule = "*";
 		}
 		else
 		{
+			if (rule == "*") filename_regexp = false;
 			var rule = this.trim(filename.value);
 		}
 		
@@ -377,17 +337,25 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			var c2 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');  
 			var c3 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
 			var c4 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
+			var c5 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
+			var c6 = window.opener.document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
 			c1.setAttribute('label', domain);
 			c2.setAttribute('label', filename);
 			c3.setAttribute('label', folder);
-			c4.setAttribute('value', true);
+			c4.setAttribute('value', true); // active state
+			c5.setAttribute('value', domain_regexp);
+			c6.setAttribute('value', filename_regexp);
 			c1.setAttribute('editable', false);
 			c2.setAttribute('editable', false);
 			c3.setAttribute('editable', false);
+			c5.setAttribute('editable', false);
+			c6.setAttribute('editable', false);
 			row.appendChild(c1);
 			row.appendChild(c2);
 			row.appendChild(c3);
 			row.appendChild(c4);
+			row.appendChild(c5);
+			row.appendChild(c6);
 			item.appendChild(row);
 			rules.appendChild(item);
 			
@@ -418,10 +386,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	// 
 		var domain_radio = document.getElementById('radio-addedit-domain');
 		var domain = document.getElementById('asf-addedit-domain');
-		var domain_regexp = document.getElementById('asf-addedit-domain-regexp');
+		var domain_regexp = document.getElementById('asf-addedit-domain-regexp').checked;
 		if (domain_radio.value == 0)
 		{
-			var rule = "/.*/";
+			var rule = "*";
 		}
 		else
 		{
@@ -430,6 +398,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		
 		if (rule != "") 
 		{
+			if (rule == "*") domain_regexp = false;
 			var domain = rule;
 		}
 		else
@@ -443,18 +412,19 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	// 
 		var filename_radio = document.getElementById('radio-addedit-filename');
 		var filename = document.getElementById('asf-addedit-filename');
-		var filename_regexp = document.getElementById('asf-addedit-filename-regexp');
+		var filename_regexp = document.getElementById('asf-addedit-filename-regexp').checked;
 		if (filename_radio.value == 0)
 		{
-			var rule = "/.*/";
+			var rule = "*";
 		}
 		else
 		{
 			var rule = this.trim(filename.value);
 		}
 		
-		if (rule != "") 
+		if (rule != "")
 		{
+			if (rule == "*") filename_regexp = false;
 			var filename = rule;
 		}
 		else
@@ -482,7 +452,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		
 		if (error != true)
-		{		
+		{
 			var tree = window.opener.document.getElementById("asf-filterList") ;
 			var idx = tree.currentIndex;
 			if (idx < 0) 
@@ -497,6 +467,9 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			theValue.firstChild.childNodes[0].setAttribute("label", domain );
 			theValue.firstChild.childNodes[1].setAttribute("label", filename );
 			theValue.firstChild.childNodes[2].setAttribute("label", folder );
+		//	theValue.firstChild.childNodes[3].setAttribute("value", active ); // active state
+			theValue.firstChild.childNodes[4].setAttribute("value", domain_regexp );
+			theValue.firstChild.childNodes[5].setAttribute("value", filename_regexp );
 			
 			//select the edited filter	
 			tree.view.selection.select(idx);

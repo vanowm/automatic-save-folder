@@ -2,13 +2,6 @@
 <!ENTITY Intro_1 "L'expression régulière (aussi appelé Expression Rationnelle) est une méthode de filtrage permettant de définir plusieurs masques complexes en un seul filtre.">
 <!ENTITY Intro_2 "Avec les expressions régulières vous pouvez filtrer des noms de fichiers ou de domaines qui pourraient être difficile à effectuer avec le simple astérisque '*'.">
 
-<!ENTITY Note1.title "Note 1">
-<!ENTITY Note1.text "Tous les filtres ignorent la casse (les majuscules et minuscules sont interprétés de la même façon).">
-<!ENTITY Note2.title "Note 2">
-<!ENTITY Note2.text "Les expressions régulières nécessitent dans cette extension d'être entourés par des slashs / /. 
-Tous les exemples décrits ci-dessous omettent les slashs de début et de fin de filtre afin de faciliter la lisibilité. 
-Lorsque vous cochez la case Regexp dans la fenêtre du filtre, les slashs / / s'ajoutent automatiquement.">
-
 <!ENTITY Title_1 "Les caractères spéciaux">
 <!ENTITY Intro_3 "Comme le caractère * (astérisque) utilisé dans les filtres normaux pour remplacer un nombre de lettres indéterminées, 
 l'Expression Régulière utilise plusieurs caractères spéciaux correspondant à des groupes de lettres différents :">

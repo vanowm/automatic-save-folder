@@ -2,13 +2,6 @@
 <!ENTITY Intro_1 "Un Espressione Regolare (Reg. exp., or Regexp) è un metodo di matching per definire molti filtri su una linea.">
 <!ENTITY Intro_2 "Con le Regexp puoi filtrare il nome del file o dominio che sarebbe difficile da filtrare con il solto asterisco '*'.">
 
-<!ENTITY Note1.title "Nota 1">
-<!ENTITY Note1.text "Tutti i filtri sono 'case insensitive' (non c'è distinzione fra maiuscole e minuscole).">
-<!ENTITY Note2.title "Nota 2">
-<!ENTITY Note2.text "Le regexp in questo plugin hanno bisogno di essere racchiuse all'interno di una coppia di caratteri / / . 
-Tutti gli esempi che seguono non comprendono / / all'inizio e alla fine del filtro per essere leggibili facilmente. 
-Quando selezioni dalla checkbox 'regexp' nella finestra dei filtri, gli / / verranno inseriti automaticamente.">
-
 <!ENTITY Title_1 "The special tags">
 <!ENTITY Intro_3 "The same way the * character (asterisk) is used in common filter to replace an undetermined number of letters, 
 the regular expression use many special characters to match different group of letters :">

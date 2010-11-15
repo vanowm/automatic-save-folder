@@ -112,6 +112,8 @@ var automatic_save_folder = {
 			var filename = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");
 			var folder = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");
 			var active = this.prefManager.getBoolPref("extensions.asf.filters"+ i +".active");
+			var domain_regexp = this.prefManager.getBoolPref("extensions.asf.filters"+ i +".domain_regexp");
+			var filename_regexp = this.prefManager.getBoolPref("extensions.asf.filters"+ i +".filename_regexp");
 			
 			// adding into the tree
 			var filter = document.getElementById('asf-filterList');
@@ -119,20 +121,28 @@ var automatic_save_folder = {
 			var item = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treeitem');
 			var row = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treerow');
 			var c1 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
-			var c2 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');  
+			var c2 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
 			var c3 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
 			var c4 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
+			var c5 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
+			var c6 = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'treecell');
 			c1.setAttribute('label', domain);
 			c2.setAttribute('label', filename);
 			c3.setAttribute('label', folder);
 			c4.setAttribute('value', active);
+			c5.setAttribute('value', domain_regexp);
+			c6.setAttribute('value', filename_regexp);
 			c1.setAttribute('editable', false);
 			c2.setAttribute('editable', false);
 			c3.setAttribute('editable', false);
+			c5.setAttribute('editable', false);
+			c6.setAttribute('editable', false);
 			row.appendChild(c1);
 			row.appendChild(c2);
 			row.appendChild(c3);
 			row.appendChild(c4);
+			row.appendChild(c5);
+			row.appendChild(c6);
 			item.appendChild(row);
 			
 			rules.appendChild(item);
@@ -1006,7 +1016,7 @@ var automatic_save_folder = {
 
 	preferences_import: function(importType) {
 	/** 
-	// string @importType : "all", "filters", "preferences"
+	// importType (String) : "all", "filters", "preferences"
 	*/
 		
 		// read the default import/export folder
@@ -1057,6 +1067,45 @@ var automatic_save_folder = {
 							data[i] = "extensions.asf.domainTestOrder;char=1";
 						}
 						break;
+					}
+				}
+			}
+			
+			
+			// 1.0.2bRev90 - removes the slashes to regexp and create new settings to store regexp state.
+			if (this.versionChecker.compare(import_version, "1.0.2bRev90") == -1)
+			{
+				var prefDataReg = false;
+				var dataLength = data.length;
+				for (var i=2; i<dataLength; i++)
+				{
+					if (data[i].indexOf("extensions.asf.filters") >= 0)
+					{
+						type_pos = data[i].indexOf(";");
+						data_pos = data[i].indexOf("=");
+						if (type_pos > 0)
+						{
+							prefName = data[i].substring(0,type_pos);
+							prefType = data[i].substring(type_pos+1,data_pos);
+							prefData = data[i].substring(data_pos+1,data[i].length);
+							
+							if ( prefName.indexOf("domain") >0 || prefName.indexOf("filename") >0 )
+							{
+								prefDataReg = this.is_regexp(prefData);
+								if (prefDataReg) // convert the current data
+								{
+									prefData = prefData.substring(1, prefData.length -1);
+									if (prefData == ".*") 
+									{
+										prefData = "*";
+										prefDataReg = false;
+									}
+								}
+								data[i] = prefName+";char="+prefData; // replace the new data
+								prefDataReg = prefDataReg == true ? "true" : "false" ;
+								data.push(prefName+"_regexp"+";bool="+prefDataReg); // create the regexp value
+							}
+						}
 					}
 				}
 			}
@@ -1349,6 +1398,9 @@ var automatic_save_folder = {
 
 
 	delete_filters: function(all) {
+	/** 
+	// all (Bool) : true = delete all filters ; false = delete only unused filters from database.
+	*/
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].
 								getService(Components.interfaces.nsIPrefService);
 		
@@ -1405,7 +1457,10 @@ var automatic_save_folder = {
 		this.prefManager.setCharPref("extensions.asf.dialogForceRadioTo", "save");
 		this.prefManager.setBoolPref("extensions.asf.userightclick", true);
 		this.prefManager.setBoolPref("extensions.asf.rightclicktimeout", true);
-		this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", 0);
+		if ( !this.DownloadSort_isEnabled() && this.firefoxversion >= 3) // only for firefox 3+, Firefox2 doesn't use timeout option
+		{
+			this.prefManager.setIntPref("browser.download.saveLinkAsFilenameTimeout", 0);
+		}
 		this.prefManager.setCharPref("extensions.asf.domainTestOrder", "1");
 		this.prefManager.setBoolPref("extensions.asf.regexp_caseinsensitive", true);
 		this.prefManager.setBoolPref("extensions.asf.pathlist_defaultforceontop", false);
@@ -1427,9 +1482,9 @@ var automatic_save_folder = {
 	read_file: function(folder) {
 	// thanks to TabMixPlus
 	/**
-	// string @folder = default opened folder (optional)
-	// File Input : File in UTF8 without BOM.
-	// Stream Output : Array, in unicode (each cell = 1 line from file)
+	// folder (String) : Default opened folder (optional)
+	// Input (Stream) : File in UTF8 without BOM.
+	// Return (Array) : Array, in unicode (each cell = 1 line from file)
 	*/
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
 		var stream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
@@ -1469,9 +1524,9 @@ var automatic_save_folder = {
 	write_file: function(data, folder) {
 	// thanks to TabMixPlus
 	/**
-	// array @data = array in Unicode to convert to file line by line
-	// string @folder = opening folder (optional)
-	// Stream Output : file in UTF8 without BOM.
+	// data (Array) : array in Unicode to convert to file line by line
+	// folder (String) : opening folder (optional)
+	// Output (Stream) : file in UTF8 without BOM.
 	*/
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
 		var stream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
@@ -1620,12 +1675,18 @@ var automatic_save_folder = {
 			var filename = tree.view.getCellText(i,tree.columns.getColumnAt("1"));
 			var folder = tree.view.getCellText(i,tree.columns.getColumnAt("2"));
 			var active = tree.view.getCellValue(i,tree.columns.getColumnAt("3"));
+			var domain_regexp = tree.view.getCellValue(i,tree.columns.getColumnAt("4"));
+			var filename_regexp = tree.view.getCellValue(i,tree.columns.getColumnAt("5"));
 			active = (active == "true" ? true : false) ;
+			domain_regexp = (domain_regexp == "true" ? true : false) ;
+			filename_regexp = (filename_regexp == "true" ? true : false) ;
 			
 			this.saveUnicodeString("extensions.asf.filters"+ i +".domain", domain);
 			this.saveUnicodeString("extensions.asf.filters"+ i +".filename", filename);
 			this.saveUnicodeString("extensions.asf.filters"+ i +".folder", folder);
 			this.prefManager.setBoolPref("extensions.asf.filters"+ i +".active", active);
+			this.prefManager.setBoolPref("extensions.asf.filters"+ i +".domain_regexp", domain_regexp);
+			this.prefManager.setBoolPref("extensions.asf.filters"+ i +".filename_regexp", filename_regexp);
 		}
 	},
 
@@ -1682,6 +1743,7 @@ var automatic_save_folder = {
 		{
 			window.opener.automatic_save_folder.main();		// rescan the filters to set the good folder
 			window.opener.automatic_save_folder.check_uCTOption();
+			window.opener.sizeToContent(); // can create a bug, but it should not be noticed by the user. see https://bugzilla.mozilla.org/show_bug.cgi?id=439323
 		}
 		window.opener.focus;
 	}

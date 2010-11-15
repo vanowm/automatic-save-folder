@@ -118,9 +118,9 @@
 <!ENTITY asf.dta_methodAdd.label "Add to list">
 
 <!ENTITY asf.options.groupbox.datamanagement.label "Data management">
-<!ENTITY asf.export.notemp.bool "Ne pas importer les données temporaires, comme le dernier domaine de provenance ou le dernier chemin d'enregistrement.">
-<!ENTITY asf.export.forceimport.bool "Forcer l'importation même si la version n'est pas compatible. Attention : Exportez et conservez d'abord vos données actuelles par sécurité.">
-<!ENTITY asf.export.infonotsaved.label "Note : Ces deux options ne sont pas mémorisées pour éviter des erreurs d'importation.">
+<!ENTITY asf.export.notemp.bool "Do not import temporary data, like the last domain you downloaded from or the last saved path.">
+<!ENTITY asf.export.forceimport.bool "Force the import process even if the version is not compatible. Attention: To prevent data loss, export and keep your actual data before forcing the import.">
+<!ENTITY asf.export.infonotsaved.label "Note: These two options are not memorized to prevent import error.">
 <!ENTITY asf.export.button.label "Settings">
 <!ENTITY asf.export.button.export.label "Export">
 <!ENTITY asf.export.button.import.label "Import">

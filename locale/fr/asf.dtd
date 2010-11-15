@@ -130,7 +130,7 @@
 <!ENTITY asf.export.button.recoverfilters.label "Récupérer les filtres inutilisés dans la base de données">
 <!ENTITY asf.export.button.delete.label "Effacer">
 <!ENTITY asf.export.button.deleteallfilters.label "Effacer tous les filtres">
-<!ENTITY asf.export.button.deleteunusedfilters.label "Effacer les filtres inutilisés dans la base de données">
+<!ENTITY asf.export.button.deleteunusedfilters.label "Effacer les filtres inutilisés de la base de données">
 <!ENTITY asf.export.button.deleteuserprefs.label "Restaurer les préférences par défauts">
 <!ENTITY asf.export.defaultfolder.label "Dossier par défaut pour les données exportées (facultatif) :">
 <!ENTITY asf.export.showbutton.bool "Ajouter un boutton de gestion des données sur l'onglet des filtres.">

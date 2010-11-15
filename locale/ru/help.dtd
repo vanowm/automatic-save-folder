@@ -133,4 +133,4 @@ If it happens, do Step 1 again.">
 <!ENTITY importantupdates.102.1 "You can now choose which data from the downloaded file you want to use to filter the domain field : File's domain, File's full URL, Active tab's domain, Active tab's full URL.<br />To change this setting, go to page 2 of Automatic Save Folder's option's tab.">
 <!ENTITY importantupdates.102.2 "Send the filtered folder to DownThemAll!">
 <!ENTITY importantupdates.102.3 "Import/export the filters.">
-<!ENTITY importantupdates.102.4 "Deletion of the slashes needed at each side of a regular expression's filters.">
+<!ENTITY importantupdates.102.4 "Removed the need of the slashes around a regular expression's filters.">

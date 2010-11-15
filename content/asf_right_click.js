@@ -32,7 +32,7 @@ var automatic_save_folder = {
 	firefoxversion : "",
 	logtoconsole: true,
 	inPrivateBrowsing: false,
-	importantVersionAlert: "1.0.0", // currently not used
+	importantVersionAlert: "1.0.2bRev90",
 	result: "", // print_r result
 	previousASFVersion: "",
 	currentASFVersion : "",
@@ -156,7 +156,6 @@ var automatic_save_folder = {
 			var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
 			var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");
 			var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
-			var dialogaccept = 		prefManager.getBoolPref("extensions.asf.dialogaccept");
 			
 			// If variable/Dynamic folders mode is ON, let's check the variables and replace to create the new defaultfolder
 			if (variable_mode == true) 
@@ -185,7 +184,9 @@ var automatic_save_folder = {
 				var fil = this.loadUnicodeString("extensions.asf.filters"+ i +".filename");		
 				var fol = this.loadUnicodeString("extensions.asf.filters"+ i +".folder");		
 				var act = prefManager.getBoolPref("extensions.asf.filters"+ i +".active");	
-				filters[i] = [dom, fil, fol, act];
+				var dom_reg = prefManager.getBoolPref("extensions.asf.filters"+ i +".domain_regexp");
+				var fil_reg = prefManager.getBoolPref("extensions.asf.filters"+ i +".filename_regexp");
+				filters[i] = [dom, fil, fol, act, dom_reg, fil_reg];
 			}
 			
 			
@@ -211,23 +212,23 @@ var automatic_save_folder = {
 					switch (this.trim(domain_testOrder[j])) 
 					{
 						case "1":
-							dom_regexp = this.test_regexp(filters[i][0], domain);
+							dom_regexp = this.test_regexp(filters[i][0], domain, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 1");
 							break;
 						case "2":
-							dom_regexp = this.test_regexp(filters[i][0], fileURL);
+							dom_regexp = this.test_regexp(filters[i][0], fileURL, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 2");
 							break;
 						case "3":
-							dom_regexp = this.test_regexp(filters[i][0], fileURLAndFilename);
+							dom_regexp = this.test_regexp(filters[i][0], fileURLAndFilename, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 3");
 							break;
 						case "4":
-							dom_regexp = this.test_regexp(filters[i][0], currentDomain);
+							dom_regexp = this.test_regexp(filters[i][0], currentDomain, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 4");
 							break;
 						case "5":
-							dom_regexp = this.test_regexp(filters[i][0], currentURL);
+							dom_regexp = this.test_regexp(filters[i][0], currentURL, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 5");
 						default:
 					}
@@ -235,9 +236,8 @@ var automatic_save_folder = {
 					if (dom_regexp) break;
 				}
 				
-				
 				// Check the filename
-					file_regexp = this.test_regexp(filters[i][1], filename); // Filename
+					file_regexp = this.test_regexp(filters[i][1], filename, i, "filename"); // Filename
 					
 					// debug
 					// alert ("i = "+i+"\n domain match = "+dom_regexp+"\n file match = "+file_regexp);
@@ -322,8 +322,8 @@ var automatic_save_folder = {
 	set_savepath: function(path) {
 		var folderList = this.prefManager.getIntPref("browser.download.folderList");	
 		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
-		
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		
 		if (!path) 
 		{
 			directory = Components.classes["@mozilla.org/file/directory_service;1"]
@@ -454,7 +454,7 @@ var automatic_save_folder = {
 		// check the filter's data
 		var asf_domain = "";
 		var asf_filename = "";
-		if (idx) // If a filter match, idx is true
+		if (idx >= 0) // If a filter match
 		{  
 			asf_domain = this.loadUnicodeString("extensions.asf.filters"+ idx +".domain");
 			asf_filename = this.loadUnicodeString("extensions.asf.filters"+ idx +".filename");
@@ -466,6 +466,7 @@ var automatic_save_folder = {
 		}
 		
 		// check the domain
+		var used_domain_string = "";
 		var dom_regexp = false;
 		var domain_testOrder = this.prefManager.getCharPref("extensions.asf.domainTestOrder");
 		if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
@@ -476,19 +477,24 @@ var automatic_save_folder = {
 			switch (this.trim(domain_testOrder[j])) 
 			{
 				case "1":
-					dom_regexp = this.test_regexp(asf_domain, domain);
+					dom_regexp = this.test_regexp(asf_domain, domain, idx, "domain");
+					used_domain_string = domain;
 					break;
 				case "2":
-					dom_regexp = this.test_regexp(asf_domain, fileURL);
+					dom_regexp = this.test_regexp(asf_domain, fileURL, idx, "domain");
+					used_domain_string = fileURL;
 					break;
 				case "3":
-					dom_regexp = this.test_regexp(asf_domain, fileURLAndFilename);
+					dom_regexp = this.test_regexp(asf_domain, fileURLAndFilename, idx, "domain");
+					used_domain_string = fileURLAndFilename;
 					break;
 				case "4":
-					dom_regexp = this.test_regexp(asf_domain, currentDomain);
+					dom_regexp = this.test_regexp(asf_domain, currentDomain, idx, "domain");
+					used_domain_string = currentDomain;
 					break;
 				case "5":
-					dom_regexp = this.test_regexp(asf_domain, currentURL);
+					dom_regexp = this.test_regexp(asf_domain, currentURL, idx, "domain");
+					used_domain_string = currentURL;
 				default:
 			}
 			
@@ -496,7 +502,7 @@ var automatic_save_folder = {
 		}
 		
 		// Check the filename
-		var file_regexp = this.test_regexp(asf_filename, filename); 
+		var file_regexp = this.test_regexp(asf_filename, filename, idx, "filename"); 
 		
 // Ted Gifford, start block
 		// String capture in filename with $<1-9>f
@@ -523,22 +529,10 @@ var automatic_save_folder = {
 		} catch (e) {alert(e);}
 // Ted Gifford, end block
 		
-		// Trim the / / if domain is regexp
-		if (this.is_regexp(asf_domain))
-		{
-			asf_domain = asf_domain.substring(1, asf_domain.length);
-			asf_domain = asf_domain.substring(0, asf_domain.length -1);
-		}
-		// Trim the / / if filename is regexp
-		if (this.is_regexp(asf_filename))
-		{
-			asf_filename = asf_filename.substring(1, asf_filename.length);
-			asf_filename = asf_filename.substring(0, asf_filename.length -1);
-		}
 		
 		// read the userpref to define if regexp is case insensitive (default true)
 		var param = "";
-		var regexp_caseinsensitive = this.readHiddenPref("extensions.asf.regexp_caseinsensitive", "bool", true); // let the user choose in next release.
+		var regexp_caseinsensitive = this.prefManager.getBoolPref("extensions.asf.regexp_caseinsensitive");
 		if (regexp_caseinsensitive) param = "i";
 		
 		// Check if asf_rd is present and process     asf_rd = Regexp the domain
@@ -556,7 +550,7 @@ var automatic_save_folder = {
 					datareg = matches[i].replace(/%asf_rd%/g, '');  // remove the %asf_rf% to keep only the regexp
 					datareg = new RegExp(datareg, param);			//  create the regexp
 					//alert("reg="+datareg);
-					result = domain.match(datareg);    // Check it on the domain with protocol
+					result = used_domain_string.match(datareg);    // Check it on the domain type set by the user
 					
 					if (result == null) 
 					{
@@ -678,7 +672,7 @@ var automatic_save_folder = {
 	},
 	
 	
-	trim: function (string)	{
+	trim: function (string) {
 		return string.replace(/(^\s*)|(\s*$)/g,'');
 	},
 	
@@ -692,28 +686,27 @@ var automatic_save_folder = {
 			if(test_regexp.test(arr[i])) return i;
 		}
 		return -1;
-	} ,
+	},
 	
 	
-	test_regexp: function (filters, string) {
-		
-		// Steps :
-		// 1 - Check if the filter is a regular expression
-		// 2 - if not regexp : add the backslah to special characters and .* to the start and end of the string to convert it into a regexp form
-		//		if it's already regexp : delete the / / for new regexp() to handle it
-		// 3 - when all is ready in regexp, test the data with the filters
-		// 4 - if the data match the filter --> return true
-		
-		// 3 & 4 replaced with Ted script, now it returns the matching result's array, or false if nothing matched.
-		
-		
-		// step  1
-		var test_regexp = this.is_regexp(filters);   // True or False
-		
-		// step 2
-		if (test_regexp == false) // replace simple wildcard and special characters with corresponding regexp
+	test_regexp: function (filter_data, downloaded_data, idx, filter_type) {
+	/**
+	// filter_data (String) : The filter's content
+	// downloaded_data (String) : The downloaded filename or domain informations
+	// idx (Int) : Current filter number
+	// filter_type (String) : Current filter type, can be "domain" of "filename".
+	// Return (Array) : return false, or the result as an Array [downloaded_data [, captured group1 [, ... [, captured group9]]]]
+	*/
+		// replace normal filter to regular expression filter.
+		var isregexp = false;
+		if(idx >= 0)
 		{
-			filters = filters.replace(/\./gi, "\\.")
+			if (filter_type == "domain") isregexp = this.prefManager.getBoolPref("extensions.asf.filters"+ idx +".domain_regexp");
+			if (filter_type == "filename") isregexp = this.prefManager.getBoolPref("extensions.asf.filters"+ idx +".filename_regexp");
+		}
+		if (isregexp == false) // replace simple wildcard and special characters with corresponding regexp
+		{
+			filter_data = filter_data.replace(/\./gi, "\\.")
 													.replace(/\*/gi, ".*")
 													.replace(/\$/gi, "\\$")
 													.replace(/\^/gi, "\\^")
@@ -722,39 +715,21 @@ var automatic_save_folder = {
 													.replace(/\|/gi, "\\|")
 													.replace(/\[/gi, "\\[")
 													.replace(/\//gi, "\\/");
-			filters = ".*"+filters+".*";
-		}
-		else // remove the first and last slash
-		{
-			filters = filters.substring(1, filters.length);
-			filters = filters.substring(0, filters.length -1);
+			filter_data = ".*"+filter_data+".*";
 		}
 		
 		// initialize the regular expression search
-		var param = "";
-		var regexp_caseinsensitive = this.readHiddenPref("extensions.asf.regexp_caseinsensitive", "bool", true); // let the user choose in next release.
-		if (regexp_caseinsensitive) param = "i";
-		var test_regexp = new RegExp(filters, param);  // put the slash back and the gi option (g = global seach, i = case insensitive)
-		// Edited to only "i" option by Ted.
+		var param = (this.prefManager.getBoolPref("extensions.asf.regexp_caseinsensitive") == true ? "i" : "");
+		var test = new RegExp(filter_data, param);
 		
-		// Step 3 & 4
-		// if (string.match(test_regexp)) // if something match
-		// {
-		//	 return(true);
-		// }
-		
-		// return(false);
-
-// Ted Gifford, start block	
-       var res = string.match(test_regexp);
-       if (res) return res;
-	   return false
-// Ted Gifford, end block	
-
+		// Thanks to Ted Gifford for the regular expression capture.
+		var res = downloaded_data.match(test);
+		if (res) return res;
+		return false;
 	},
 	
 	
-	is_regexp: function (string) {
+	is_regexp: function (string) { // Not used anymore ASF>r90, but needed to convert older filters to new format.
 		if ((string.substring(0,1) == "/") && (string.substr(string.length - 1, 1) == "/"))
 		{
 			return true;
@@ -911,6 +886,7 @@ var automatic_save_folder = {
 	preference_structure_changes: function(version) {
 		
 		if (this.versionChecker.compare(this.previousASFVersion, "1.0.2bRev86") == -1) this.upgrade("1.0.2bRev86"); // convert currenturl to 1,5
+		if (this.versionChecker.compare(this.previousASFVersion, "1.0.2bRev90") == -1) this.upgrade("1.0.2bRev90"); // remove the slashes to regexp
 		// write the current version as old to prevent showing the updateMessage again
 		this.previousASFVersion = this.currentASFVersion;
 		this.prefManager.setCharPref("extensions.asf.version", this.currentASFVersion);
@@ -933,6 +909,56 @@ var automatic_save_folder = {
 				}
 			break;
 			
+			case "1.0.2bRev90": // remove / / from regular expression filters, and create separate settings to read the regular expression state.
+				
+				var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+									getService(Components.interfaces.nsIPrefService);
+				
+				var filter_number = 0;
+				var filter_childs = 0;
+				var value = "";
+				var branch = "";
+				while (1)
+				{
+					branch = "extensions.asf.filters"+filter_number+".";
+					filter_childs = prefs.getBranch(branch).getChildList("", {});
+					if(filter_childs.length)
+					{
+						value = this.prefManager.getCharPref(branch+"domain");
+						this.prefManager.setBoolPref(branch+"domain_regexp", this.is_regexp(value)); // create the regexp value
+						if (this.is_regexp(value)) // convert the current data
+						{
+							value = value.substring(1, value.length);
+							value = value.substring(0, value.length -1);
+							if (value == ".*") 
+							{
+								value = "*";
+								this.prefManager.setBoolPref(branch+"domain_regexp", false);
+							}
+							this.prefManager.setCharPref(branch+"domain", value);
+						}
+						
+						value = this.prefManager.getCharPref(branch+"filename");
+						this.prefManager.setBoolPref(branch+"filename_regexp", this.is_regexp(value)); // create the regexp value
+						if (this.is_regexp(value)) // convert the current data
+						{
+							value = value.substring(1, value.length);
+							value = value.substring(0, value.length -1);
+							if (value == ".*") 
+							{
+								value = "*";
+								this.prefManager.setBoolPref(branch+"filename_regexp", false);
+							}
+							this.prefManager.setCharPref(branch+"filename", value);
+						}
+						filter_number++;
+					}
+					else
+					{
+						break;
+					}
+				}
+			break;
 		}
 	},
 	

@@ -29,8 +29,8 @@
 			<radio id="asf-addedit-radio-domain-all" value="0" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
 			<hbox>
 				<radio id="asf-addedit-radio-domain" value="1" label="=" oncommand="automatic_save_folder.asf_toggleradio_domain()"/>
-				<textbox id="asf-addedit-domain" width="200" onchange="automatic_save_folder.testRegexp('asf-addedit-domain-regexp', 'asf-addedit-domain');"/>
-				<checkbox id="asf-addedit-domain-regexp" label="&asf.addedit.regexp;" oncommand="automatic_save_folder.makeRegexp('asf-addedit-domain-regexp', 'asf-addedit-domain');"/>
+				<textbox id="asf-addedit-domain" width="200"/>
+				<checkbox id="asf-addedit-domain-regexp" label="&asf.addedit.regexp;"/>
 			</hbox>
 		</radiogroup>
 		<separator class="thin"/>
@@ -40,8 +40,8 @@
 			<radio id="asf-addedit-radio-filename-all" value="0" label="&asf.addedit.all;" oncommand="automatic_save_folder.asf_toggleradio_filename()"/>
 			<hbox>
 				<radio id="asf-addedit-radio-filename" value="1" label="=" oncommand="automatic_save_folder.asf_toggleradio_filename()"/>
-				<textbox id="asf-addedit-filename" width="200" onchange="automatic_save_folder.testRegexp('asf-addedit-filename-regexp', 'asf-addedit-filename')"/>
-				<checkbox id="asf-addedit-filename-regexp" label="&asf.addedit.regexp;" oncommand="automatic_save_folder.makeRegexp('asf-addedit-filename-regexp', 'asf-addedit-filename');"/>
+				<textbox id="asf-addedit-filename" width="200"/>
+				<checkbox id="asf-addedit-filename-regexp" label="&asf.addedit.regexp;"/>
 			</hbox>
 		</radiogroup>
 		<separator class="thin"/>

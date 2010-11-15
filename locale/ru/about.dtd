@@ -32,11 +32,14 @@
 + checking and update for beta versions. The internal update feature is working only on Firefox 4.
 + New menu to import and export preferences and filters.
 + A help page will now open after the first install and when there's important messages after an update.
+- Removed the need of the slashes around a regular expression's filters.
 * It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).
 * &#37;asf_f&#37; now uses full filename with extension if no filter match.
 * &#37;asf_d&#37; now uses domain without the protocol if no filter match.
-! Исправлена обработка регулярных выражений когда фильтр оканчивался на косую черту (слеш).
 ! Исправлена ошибка при открытии окна настроек фильтров из окна сохранения (&#34;+ Добавить или изменить фильтр&#34;), при обработке пути который не был представлен в списке фильтров. (Благодарность MrCOLOMBO)
+! Fixed the dynamic folder creation for the first filter in the list. (Thanks to Googer)
+
+Note : In order to develop Automatic Save Folder further, this version is the last compatible with Firefox 1.5, 2.0 and 3.0.">
 
 <!ENTITY about.version.101 "! Исправлена проблема с переводом, которая не позволяла работать ASF когда не найден подходящий фильтр.
 ! Добавлен пропущенный русский перевод для закладки Фильтры.">
