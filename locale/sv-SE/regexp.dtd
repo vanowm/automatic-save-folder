@@ -1,0 +1,84 @@
+<!-- browser and save dialog-->
+<!ENTITY Intro_1 "Reguljära uttryck (regexp, regex eller RegEx) är en matchningsmetod för att definiera flera filter i samma sträng.">
+<!ENTITY Intro_2 "Med RegEx kan du filtrera filnamn och domäner, som är mycket svårare att filtrera med den vanliga asterisken, &apos;*&apos;.">
+<!ENTITY Title_1 "Specialtaggarna">
+<!ENTITY Intro_3 "På samma sätt som tecknet * (asterisk) används i vanliga filter för att ersätta ett obestämt antal bokstäver, 
+
+
+använder reguljära uttryck flera specialtecken för att matcha olika bokstavsgrupper :">
+<!ENTITY The.dot.title "Punkten .">
+<!ENTITY The.dot.text "En punkt ( . ) matchar vilket tecken som helst, ett tecken åt gången (en bokstav, ett nummer, en symbol eller ett blanksteg).<br />
+
+
+&apos;g..gle&apos; matchar &apos;google&apos; och alla andra ord som börjar med &apos;g&apos; följt av vilka 2 tecken som helst och avslutas med &apos;gle&apos;.">
+<!ENTITY The.asterisk.title "Asterisken *">
+<!ENTITY The.asterisk.text "Asterisken upprepar det föregående tecknet från 0 till (oändligt) många gånger.<br />
+
+
+">
+<!ENTITY The.caret.title "Insättningstecknet ^">
+<!ENTITY The.caret.text "Insättningstecknet ( ^ ) används för att identifiera början av en sträng. &apos;^http&apos; kommer endast att leta efter &apos;http&apos; i början av domänen.<br />
+
+
+Filtreringen kommer att vara korrekt för &apos;http://test.com&apos; men inte för &apos;ftp://http_test.com&apos; eftersom http inte står i början av strängen, utan i mitten.">
+<!ENTITY The.dollar.title "Dollartecknet $">
+<!ENTITY The.dollar.text "Dollartecknet ( $ ) används för att identifiera slutet av en sträng. &apos;com$&apos; kommer att matcha varje sträng som avslutas med &apos;com&apos;.<br />
+
+
+Filtreringen kommer att vara korrekt för &apos;http://test.com&apos; men inte för &apos;http://computer.net&apos; eftersom &apos;com&apos; inte står i slutet av strängen, utan i mitten.">
+<!ENTITY The.braces.title "Klammerparentesen {}">
+<!ENTITY The.braces.text "Klammerparentesen används för att precisera hur många gånger det föregående tecknet skall upprepas, t.ex. go{2}gle = google (tecknet o upprepas 2 gånger).<br />
+
+
+Det är möjligt att ange ett lägsta och högsta antal repetitioner: &apos;go{0,2}gle&apos; kommer att matcha antingen ggle, gogle eller google.">
+<!ENTITY The.parenthesis.title "Rundparentesen ( ) och vertikalstrecket |">
+<!ENTITY The.parenthesis.text "Rundparentesen låter oss precisera på varandra följande teckengrupper. Tillsammans med vertikalstreck &apos;|&apos; kan de båda definiera flervalsfilter.<br />
+
+
+(aaaa|bbbb|cccc) kommer att matcha vilken som helst av teckengrupperna aaaa eller bbbb eller cccc, men aldrig mer än en gång.
+
+">
+<!ENTITY The.question.title "Frågetecknet ?">
+<!ENTITY The.question.text "Frågetecknet ( ? ) används för att ange det alternerande tillståndet för det föregående tecknet eller gruppen.<br />
+
+
+">
+<!ENTITY The.bracket.title "Hakparentesen [ ]">
+<!ENTITY The.bracket.text "Hakparentesen används för att specificera ett område eller en grupp av möjliga tecken.<br />
+
+
+">
+<!ENTITY The.backslash.title "Omvänt snedstreck \ följt av en bokstav">
+<!ENTITY The.backslash.text "\d matchar siffrorna<br />
+
+
+">
+<!ENTITY The.backslash.info "Eftersom alla ovan beskrivna taggar används för att ange det reguljära uttryckets funktion måste du, om du behöver filtrera ett av dem (t.ex. i fil- eller domännamn), undanta (eng. escape) det tecknet med ett framförvarande omvänt snedstreck &apos; \ &apos;.<br />
+
+
+">
+<!-- feel free to add a link to a RegEx website on your own language -->
+<!ENTITY Regexp.links "Det finns många filtreringsmetoder som använder reguljära uttryck, men som inte kan förklaras här.<br />
+
+
+">
+<!ENTITY Example_1.title "Några exempel">
+<!ENTITY Example_1.text "För att filtrera alla .rar-filer och .r01- till .rxx-filer:<br />
+
+
+">
+<!ENTITY Example_2.title "Filterexempel för filnamn">
+<!ENTITY Example_2.text "För att filtrera alla arkivfiler: <br />
+
+
+">
+<!ENTITY Example_3.title "Filterexempel för domäner">
+<!ENTITY Example_3.text "För att filtrera ftp-protokoll:<br />
+
+
+">
+<!ENTITY Conclusion.title "Slutsats">
+<!ENTITY Conclusion.text "Reguljära uttryck ger möjlighet till en bättre användning av filter, men det kan ibland gå mycket snabbare att använda ett enkelt jokertecken, t.ex. *.<br />
+
+
+Reguljära uttryck är riktigt användbara endast vid komplexa sökningar där man vill ha specifika matchningar.">
