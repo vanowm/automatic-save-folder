@@ -27,7 +27,7 @@
 + If DownThemAll add-on is installed, a new option's tab is available to send ASF target path to DTA.
 + Added an option to select if the filters are case sensitive or insensitive.
 + New options related to Graphical User Interface.
-+ Added a Drag&amp;Drop Copy method (ie. drag+Ctrl on Windows).
++ Added a Drag&amp;Drop Copy method (ie. Ctrl+drag on Windows).
 + Print filter's and process informations to the error console when downloading a file. (Disabled if Firefox is in PrivateBrowsing mode)
 + checking and update for beta versions. The internal update feature is working only on Firefox 4.
 + New menu to import and export preferences and filters.
@@ -37,199 +37,143 @@
 * It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).
 * &#37;asf_f&#37; now uses full filename with extension if no filter match.
 * &#37;asf_d&#37; now uses domain without the protocol if no filter match.
-! Fixed a bug where no data was returned if a download was initiated from the URL bar or from an external software which resulted in no filters in the filter's list if the preferences window was opened from the saving dialog &#34;+ Add or edit a filter&#34;. (Thanks to MrCOLOMBO)
+! Fixed a bug where no data was returned if a download was initiated from the URL bar or from an external software which resulted in no filters in the filter's list if the preferences window was opened from the saving dialog &quot;+ Add or edit a filter&quot;. (Thanks to MrCOLOMBO)
 ! Fixed the dynamic folder creation for the first filter in the list. (Thanks to Googer)
 
-Note : In order to develop Automatic Save Folder further, this version is the last compatible with Firefox 1.5, 2.0 and 3.0.">
+Note: In order to develop Automatic Save Folder further, this version is the last compatible with older Firefox versions (1.5, 2.0 and 3.0).">
 
-<!ENTITY about.version.101 "! Fixed a spelling error preventing ASF to work when no filter matched.
-! Added a missing Russian string on the filter's tab.">
+<!ENTITY about.version.101 "! Korrigerade ett stavfel som hindrade ASF från att fungera när inga filter matchade.
+! Lade till en saknad ryskspråkig sträng i Filter-fliken.">
 
-<!ENTITY about.version.100 "+ Add filtering on Right-Click menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as...(Ctrl+S)&#34;
-  (Need at least Firefox 2.0 and is not compatible with Download Sort add-on. If you have both activated, Download Sort prevails)
-+ ASF is now working with Private browsing, and will prevent saving any data to Firefox preferences.
-  Two things to note which change ASF behavior: 1) The previous hosted domain will not be updated, and 2) If the destination folder doesn't exist it will not be created or suggested, and the last working folder from non private mode will be used instead.
-+ Add dynamic variables &#37;F&#37; for the month name, and &#37;M&#37; for the abbreviated one.
-+ Add dynamic variables for weeks: Week number &#37;W&#37;, Day of the week &#37;w&#37;, &#37;l&#37; or &#37;D&#37;
-+ Make Windows and Mac OSX works with Firefox option &#34;browser.preferences.instantApply&#34; to save the filters right after a modification (Option by default on Linux)
-+ Add Drag and Drop feature on the filter's listing to set filter's order quickly.
-+ Add a proper way to select Firefox saving option (&#34;Always ask&#34; or &#34;Save to&#34;), and select which folder manually instead of forcing it to Userchoice (browser.downlod.folderList=2)
-+ Add an option to automatically accept the &#34;what would Firefox need to do with this file?&#34; dialog windows (User requested). Use it with &#34;Do not prompt the File explorer&#34; option for even better efficiency.
-+ Add an option to choose if you want to use the current website URL to verify the filters if the file's hosted domain doesn't match.
-+ Display ASF icon on the add-ons manager even on disabled state, instead of the green puzzle piece (Firefox 3.6+)
-+ Added a display option to show or hide the ASF option box, and set the box name clickable to show/hide the ASF option box content.
-+ Added row coloration to see the matching filters according to the current downloaded file if the preferences window is opened from the saving window. Matching and enabled  = green, Matching but disabled = red.
-* On the download dialog's drop-down menu: Sort path list alphabetically, remove duplicates, and made them working with dynamic renaming folder if option enabled.
-* Separated the &#34;informations&#34; tab in two other tabs &#34;Help&#34; and &#34;About...&#34;.
-* Added tooltips instead of help text bellow each options (has some issues with Firefox2).
-* On the download dialog, disable the suggested folders if the &#34;What should Firefox do with this file?&#34; group's option is not set to &#34;Save File&#34;
-* Added a drop-down menu on the Add&amp;Edit window for quick access to the folders already added from the available filter's list.
-! Correct links to Mozilla website, which were forced to the French page.
-! Correct the filter's checking when Dynamic folder creation is enabled
-! Prevent an exception when &#34;use current website URL&#34; option is enabled and the address bar doesn't contain an URL.
-  Happened with redirection download script and Firefox closing the new empty popup window, or using middle mouse-button click on a link.
-! When using instantApply, the suggested filters weren't refreshed after closing the preference window.
-! Fixed a bug where sub-options were auto unchecked visually but not saved when using instantApply feature.
+<!ENTITY about.version.100 "+ Lade till filtrering i högerklicksmenyerna &quot;Spara länk som...&quot;, &quot;Spara bild som...&quot; och &quot;Spara som...(Ctrl+S)&quot;
+  (Kräver som minst Firefox 2.0 och är inkompatibelt med tillägget Download Sort. Om du har båda aktiverade, så tar Download Sort överhanden.)
++ ASF fungerar nu i privat surfning-läget och kommer då att förhindra att data sparas till Firefox inställningar.
+  Två saker kommer dock att förändras i ASF:s beteende: 1) Den föregående värddomänen kommer inte att uppdateras, och 2) Om målmappen inte finns kommer någon sådan inte att skapas eller föreslås, utan den senaste fungerande mappen från normalläget kommer att användas istället.
++ Lade till de dynamiska variablerna &#37;F&#37; för en månads hela namn och &#37;M&#37; för kortformen.
++ Lade till dynamiska variabler för veckor: Veckonummer &#37;W&#37;, dag i veckan &#37;w&#37;, &#37;l&#37; eller &#37;D&#37;.
++ Gjorde så att Windows och Mac OSX fungerar med Firefox-inställningen &quot;browser.preferences.instantApply&quot; (verkställ omedelbart) för att spara alla filter direkt efter en ändring (standardalternativ på Linux).
++ Lade till dra och släpp-funktion i filterlistan för att snabbt kunna justera filterordningen.
++ Lade till ett ordentligt sätt att välja sparalternativ för Firefox (&quot;Fråga alltid&quot; eller &quot;Spara till&quot;) och för att kunna välja mapp manuellt istället för att tvinga användarens standardval (browser.downlod.folderList=2).
++ Lade till ett alternativ för att automatiskt godkänna dialogfönstren &quot;Vad vill du att Firefox gör med denna fil?&quot; (begärt av användare). Använd det med alternativet &quot;Fråga inte Filutforskaren&quot; för ännu bättre effektivitet.
++ Lade till ett alternativ för att välja om du vill använda den aktuella webbplatsens URL för att verifiera filtren om filens värddomän inte matchar.
++ Visa ASF:s ikon i Tilläggshanteraren även när tillägget är inaktiverat, istället för den gröna pusselbiten (Firefox 3.6+).
++ Lade till ett visningsalternativ för att visa eller gömma ASF:s alternativruta samt göra rutans namn klickbart för att visa/gömma innehållet i alternativrutan.
++ Lade till radfärgläggning för att kunna se hur matchningsfiltren relaterar till den aktuella nerladdade filen när Inställningar-fönstret öppnas från Spara-fönstret. Matchning och aktiverat  = grönt. Matchning, men inaktiverat = rött.
+* I nerladdningsdialogens rullgardinsmeny: Sortera sökvägslistan alfabetiskt och ta bort duplikat. Fick dem att fungera med dynamiskt byte av mappnamn om det alternativet är aktiverat.
+* Delade upp &quot;informations&quot;-fliken i två nya flikar, &quot;Hjälp&quot; och &quot;Om...&quot;.
+* Lade till verktygstips istället för hjälptexterna nedanför varje alternativ (har vissa problem i Firefox 2).
+* I nerladdningsdialogen kan du nu inaktivera de föreslagna mapparna om gruppalternativet för &quot;Vad vill du att Firefox gör med denna fil?&quot; inte är inställt på &quot;Spara fil&quot;.
+* Lade till en rullgardinsmeny i Lägg till &amp; Redigera-fönstret för snabb åtkomst till mapparna som redan har lagts till från listan över tillgängliga filter.
+! Korrigerade länkar till Mozillas webbplats, som tidigare tvingade användaren till den franskspråkiga versionen.
+! Korrigerade filterkontrollen när funktionen för att skapa dynamiska mappar är aktiverad.
+! Förebyggde ett undantag när alternativet &quot;Använd aktuell webbplats-URL&quot; är aktiverat och adressfältet inte innehåller någon URL.
+  Inträffade med omdirigerande nerladdningsskript, när Firefox stängde det nya tomma popup-fönstret eller när användaren mittenklickade på en länk.
+! Under användning instantApply (verkställ omedelbart) uppdaterades inte de föreslagna filtren efter att Inställningar-fönstret hade stängts.
+! Korrigerade en bugg där underalternativ automatiskt avmarkerades visuellt, men ändringarna inte sparades när med instantApply-funktionen (verkställ omedelbart).
 
-Other updates :
-+ Source code and revisions available on http://code.google.com/p/automatic-save-folder
-* Add-on now in public area on http://addons.mozilla.org/addon/4781 ; Thank you for your support, your comments and suggestions.
-* New website in english for the add-on (Information, Download, Forum) : http://asf.mangaheart.org">
+Övriga uppdateringar :
++ Källkoden och reviderade upplagor finns tillgängliga på http://code.google.com/p/automatic-save-folder
+* Tillägget nu på allmän webbplats på http://addons.mozilla.org/addon/4781 ; Tusen tack för ert stöd, era kommentarer och era förslag.
+* Ny webbplats på engelska för tillägget (information, nerladdning, forum) : http://asf.mangaheart.org">
 
 <!ENTITY about.version.093 "+ Lade till versionsnumret i fönsterrubriken för huvudinställningarna.
-
-
 + Lade till ett alternativ att dubbelklicka i ett sökvägsfält för att öppna Utforskaren.
-
 + Nya flikar för att separera filter, inställningar, hjälp och versionshistorik.
-
 + Ny dynamisk variabel för att skapa mappar. (Tack till Ted för gruppfångsten med $1)
-
 + Alternativ för att aktivera eller inaktivera dynamiska variabler (avancerat läge).
-
 + Ny snabbmeny i filterlistan för att kopiera ett filter eller flytta filter överst/underst med ett enda klick.
-
 + [Experimentellt] För enkel användning när värddomänen är slumpmässig (t.ex. för att ladda ner Firefox från Mozilla.org):
-
   Kontrollera filtret med den aktuella URI:n om värddomänens fil inte matchar.
-
   Lägg märke till filtreringsordningen : Först kontrolleras filens värddomän, sedan den aktuella webbadressen.
-
   Den data som används för att märka en domän som &quot;föregående&quot; är fortfarande den från filens värddomän.
-
 + Begränsade Spara-fönstrets bredd till användarens huvudskärmstorlek. (Tack till Julien)
-
 + Lade till ett alternativ att visa en menylista i Spara-fönstret för att välja sparmappen ur filterlistan.
-
 * Ändrade sättet som länkarna i &quot;Om...&quot;-fönstret fungerar. Nu kommer de att öppnas i en ny flik.
-
 * Större meny och fönster för bättre synlighet.
-
 * Kodförenkling för flytt av filter uppåt/nedåt.
-
 * Kodförenkling för inläsnings- och autofylldatan i &quot;Lägg till&quot;-fönstret.
-
 * Bättre synlighet : Alla fönster är numera dragbara och innehållet anpassar sig därefter.
-
 * Fullständig omkodning av skript till global namnrymd (ombedd av Mozilla.com att registrera tillägget på den allmänna webbplatsen).
-
 * Renare kod och kommentarer.
-
 ! Korrigering för Unicode-sökvägar (filter som använder Unicode-tecken i version 0.9.2 kan raderas, var vänlig återskapa dem manuellt).
-
 ! Korrigering av de redigerbara parametrarna för nyskapade filter.
-
 ! Korrigering av bugg som hindrade inläsning och läsning av odefinierade eller icke-existerande inställningar i about:config. (Tack till Martin)">
+
 <!ENTITY about.version.092 "* Kompatibilitet med teman: Standardfärgerna används nu, all text bör vara av korrekt läs- och synbarhet.
-
-
   Bilderna har uppdaterats för att vara synliga i mörka teman.
-
 ! Korrigering för Vista: Tvingade variabeln browser.download.folderList till &quot;2&quot; när ASF:s inställningar-fönster öppnas.
-
 ! Korrigerade &quot;Aktiverat&quot;-kolumnen, filtren kunde varken aktiveras eller inaktiveras temporärt.">
+
 <!ENTITY about.version.091 "+ Italiensk översättning av Scognito.
-
-
 + Lade till en envalsmeny under sparprocessen, som låter användaren att snabbt välja mellan de senaste två mapparna.
-
   Det andra alternativet visas endast om det skiljer sig från det första alternativet.
-
 * Göm alternativet &quot;Påverka 'Spara som...'&quot;. I Firefox 3 används det här alternativet automatiskt.
-
 * Tog bort popup-rutan &quot;Lägg till ett filter&quot; under sparande. Det skapade en del fokusproblem och ett fönsterpositionsfel.
-
   Länken finns fortfarande kvar och öppnar nu huvudfönstret för att tillåta användaren att lägga till eller redigera befintliga filter.
-
   När du lägger till ett filter genom att använda den här länken kommer fältet att automatiskt fyllas i med aktuellt filnamn och domän.
-
 * Inaktiverade dubbelklickning på filter. Nu är fälten inte redigerbara i Firefox 3.
-
   Från och med Firefox 3 ger ett dubbelklick på en trädcell användaren möjlighet att redigera dess innehåll utan Redigera-fönstret. Ändringarna sparades därför inte korrekt.
-
 ! Korrigering av en skriptbugg vid filterverifiering när &quot;Använd den senaste mappen&quot; hade valts. (Tack till Carsten)
-
 ! Korrigerade en bugg i Firefox 3 och Windows Vista: Ändrade ett internt Firefox-alternativ som tillåter användaren att använda förvalda mappar. (Tack till Carsten)
-
   (browser.download.folderList = 2). I Windows Vista är standardvärdet satt till 1.
-
   Övriga möjliga värden är : 0 = Skrivbordet ; 1 = Standardsparmappen ; 2 = Fråga användaren.
-
 ! Korrigerade den angivna sökvägen i Spara-fönstret i Firefox3.">
+
 <!ENTITY about.version.090 "+ Fungerar med Firefox 3.0.*
-
-
 + Lade till en ny knapp för information och hjälp om hur man använder tillägget.
-
 + Ny meny som låter dig lägga till ett filter precis innan filen sparas, med domän- och filområden ifyllda med de aktuella nerladdningsegenskaperna.
-
   Efter att ha lagt till ett filter på det här sättet kontrolleras filtren igen, varefter de nya filtren tillämpas på den aktuella nerladdade filen.
-
   Känd bugg: Ett fönsterfokusproblem kan inträffa när filterpanelen stängs.
-
 - Tog bort alternativet att aktivera eller inaktivera tillägget. För att inaktivera det temporärt, var vänlig använd Tilläggshanteraren.
-
 * Nytt sätt att kontrollera filtren (addEventlistener istället för OnLoad), för en bättre kompatibilitet med andra tillägg.
-
 ! Korrigerade &quot;Aktiverat&quot;-kolumnens egenskaper per filter, vilka inte på ett korrekt sätt höll sig gömda.">
+
 <!ENTITY about.version.087 "+ Kompatibelt med Firefox 3.0 beta (några få ändringar i skriptet).
-
-
 * Retur-tangenten är nu kopplad till godkännandeknappen (OK, Lägg till, Redigera). I tidigare versioner, svarade den mot Avbryt-knappen.
-
 ! Endast en version för Windows och Linux (och kanske Mac ? Kan någon snäll själ testa det ?).">
+
 <!ENTITY about.version.086fix "* Ändringar av &quot;OK&quot;-knapparna, som inte syntes i panelen för huvudinställningar i Linux.
-
-
 Info:
-
 I Linux finns det endast en &quot;Stäng&quot;-knapp och alternativknappsvalet sparas automatiskt när det markeras av användaren. Tråkigt nog sparas inte tabellmatrisen under den här processen.
-
 Jag tog bort &quot;Acceptera&quot;-knappen och ersatte den med en skriptbaserad knapp, &quot;Spara och stäng&quot;.">
+
 <!ENTITY about.version.086 "* Ord- och syntaxkorrigering. Tack till Goofy för kommentaren på mozilla.org.">
+
 <!ENTITY about.version.085 "+ Lade till ett alternativ att visa lite information i nerladdningsfönstret.
-
-
 + Lade till ett alternativ att behålla domänen som filen kom ifrån i minnet.
-
 * Standardmappen fungerar nu även om inga filter är angivna.
-
 * Ändrade sättet på vilket hjälpfönstret för reguljära uttryck visas. Använder en Iframe och en HTML-sida istället för XUL:ens DTD.">
+
 <!ENTITY about.version.084 "+ Fransk översättning.
-
-
 * Konverterade språkfilerna till UTF-8.">
+
 <!ENTITY about.version.083 "+ Lade till några exempel och kortfattad hjälp om hur reguljära uttryck fungerar. Åtkomligt från Lägg till &amp; Redigera filter-fönstret.">
+
 <!ENTITY about.version.082 "Första offentliga versionen.
-
-
 + Lade till ett alternativ att påverka sökvägen i webbsidesparmenyn (Arkiv, Spara som...).">
+
 <!ENTITY about.version.081 "* Mappval: Fönstret för mappval öppnar nu i den föregående valda mappen. Tidigare öppnade det i en slumpmässigt vald mapp från: Dokument och inställningar, Skrivbordet eller Mina dokument.
-
-
 * Begränsning av mappval: Tog bort möjligheten att skriva sökvägen manuellt. Nu är endast &quot;Välj...&quot;-knappen giltig för att välja målmapp.">
+
 <!ENTITY about.version.080 "Funktioner:
-
-
 + Prioritetssortering av filter (alternativ för att flytta filtren uppåt eller nedåt)
-
 + Fungerar med normala-, jokertecken- och RegEx-filter.
-
 + Välj mapp manuellt eller med en Välj-knapp.
-
 + Redigera ett filter genom att dubbelklicka på filtret i listan.
-
 + Skal för GUI med bilder.">
+
 <!ENTITY about.thanks.title "Tack till">
+
 <!ENTITY about.programmation.title "Programmering">
 <!ENTITY about.programmation.content "Jag vill särskilt tacka:<br />
+- Tilläggen DownThemAlls och Download Sorts skapare, av vilka jag lärde mig massor genom att studera deras källkoder.<br />
+- http://captain.at, late xulplanet.com och http://xulfr.org för deras XUL- och JavaScript-resurser.<br />
+<br />
+Medarbetare:<br />
+- Carsten, Ted Gifford, Paolo Amadini">
 
-
-">
 <!ENTITY about.bugreport.title "Buggrapport">
 <!ENTITY about.bugreport.content "- Photonic, Martin">
+
 <!ENTITY about.translation.title "Översättningar">
-<!ENTITY about.translation.content "- Oberoende översättare och BabelZillas översättningsteam: <br />
-
-
-">
+<!ENTITY about.translation.content "- Oberoende översättare och BabelZillas översättningsteam: <br />">

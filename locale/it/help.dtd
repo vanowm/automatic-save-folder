@@ -10,7 +10,7 @@
 
 <!ENTITY info.filterrules.title "Regole dei filtri">
 <!ENTITY info.filterrules.rule1 "I filtri sono definiti usando il nome del file e il dominio.">
-<!ENTITY info.filterrules.rule2 "I filtri devono corrispondere al nome del file o al dominio. Per esempio non scrivere <b>&#34;google.com&#34;</b> ma solo <b>google.com</b> (senza doppi apici)">
+<!ENTITY info.filterrules.rule2 "I filtri devono corrispondere al nome del file o al dominio. Per esempio non scrivere <b>&quot;google.com&quot;</b> ma solo <b>google.com</b> (senza doppi apici)">
 <!ENTITY info.filterrules.rule3 "Puoi usare i caratteri wildcard <b>*</b> (asterisco) per rimpiazzare parti del filtro: <b>wiki*.org</b>">
 <!ENTITY info.filterrules.rule4 "L'asterisco non serve all'inizio e alla fine della stringa usata come filtro. Scrivere <b>*wiki*</b> o <b>wiki</b> è la stessa cosa.">
 <!ENTITY info.filterrules.rule5 "La stessa cosa vale per il filtro sul nome file: <b>*.zip</b> o <b>.zip</b> funzionano allo stesso modo.">
@@ -38,37 +38,37 @@
 <!ENTITY info.basicexample.text9 "la tua cartella per tutte le versioni del programma di istallazione di Firefox">
 
 
-<!ENTITY info.advancedexample.title "Ecco qualche esempio di variabili dinamiche e &#34;capture&#34;:">
+<!ENTITY info.advancedexample.title "Ecco qualche esempio di variabili dinamiche e &quot;capture&quot;:">
 <!ENTITY info.advancedexample.text1 "Attention : In order to work correctly, don't forget to enable the option on the Dynamic Filters tab">
 
 <!ENTITY info.advancedexample.text2 "Per scaricare tutte le nightly build di firefox in una sottocartella di D:\Download\firefox :">
 <!ENTITY info.advancedexample.text3 "D:\Download\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
-<!ENTITY info.advancedexample.text4 "L'estensione creerà una sottocartella chiamata con la data di quel giorno. Per esempio &#34;2009-12-04&#34;, dove verrà salvato il file.">
+<!ENTITY info.advancedexample.text4 "L'estensione creerà una sottocartella chiamata con la data di quel giorno. Per esempio &quot;2009-12-04&quot;, dove verrà salvato il file.">
 
 <!ENTITY info.advancedexample.text5 "Per scaricare un file in base alla sua estensione:">
 <!ENTITY info.advancedexample.text6 "D:\Download\&#37;asf_x&#37;">
-<!ENTITY info.advancedexample.text7 "L'estensione creerà una sottocartella chiamata &#34;zip&#34; per i file .zip, &#34;rar&#34; per i file .rar, etc., dove verranno salvati i file.">
+<!ENTITY info.advancedexample.text7 "L'estensione creerà una sottocartella chiamata &quot;zip&quot; per i file .zip, &quot;rar&quot; per i file .rar, etc., dove verranno salvati i file.">
 
 <!ENTITY info.advancedexample.text8 "To sort all the Firefox installation package inside subfolder named after the software version:">
 <!ENTITY info.advancedexample.text9 "D:\Download\Firefox\$1f">
-<!ENTITY info.advancedexample.text10 "While checking the downloaded file with the filters, the parentheses are not took in account, and the filter will act as &#34;Firefox Setup *.exe&#34;<br />
+<!ENTITY info.advancedexample.text10 "While checking the downloaded file with the filters, the parentheses are not took in account, and the filter will act as &quot;Firefox Setup *.exe&quot;<br />
 $1f correspond to the first parenthesis content on the filter's file name, which is the version number <br />
-The file &#34;Firefox Setup 3.5.4.exe&#34; will be saved in the folder D:\Download\Firefox\3.5.4\">
+The file &quot;Firefox Setup 3.5.4.exe&quot; will be saved in the folder D:\Download\Firefox\3.5.4\">
 
 <!ENTITY info.advancedexample.text11 "Per creare oppure no sottocartelle differenti in base al nome del file :">
-<!ENTITY info.advancedexample.text12 "Esempio : Vogliamo salvare i video chiamati &#34;La_mia_vacanza_data-di-viaggio.avi&#34;.<br />
+<!ENTITY info.advancedexample.text12 "Esempio : Vogliamo salvare i video chiamati &quot;La_mia_vacanza_data-di-viaggio.avi&quot;.<br />
 I video hanno i sottotitoli nel formato .srt per spiegare la vacanza, ci sono anche file .zip con le foto del viaggio, e i video possono escarticati con l'estensione .avi, .torrent or .nzb (newsgroup).<br />
-<br />&#34;.avi&#34; e &#34;.srt&#34; andranno nella cartella D:\video\vacanza .<br />
-&#34;.zip&#34;, &#34;.torrent&#34; e &#34;.nzb&#34; andranno rispettivamente nelle sottocartelle D:\video\vacanze\zip, D:\video\vacanze\torrent and D:\video\vacanze\nzb.">
+<br />&quot;.avi&quot; e &quot;.srt&quot; andranno nella cartella D:\video\vacanza .<br />
+&quot;.zip&quot;, &quot;.torrent&quot; e &quot;.nzb&quot; andranno rispettivamente nelle sottocartelle D:\video\vacanze\zip, D:\video\vacanze\torrent and D:\video\vacanze\nzb.">
 <!ENTITY info.advancedexample.text13 "/^La_mia_vacanza.*\.(avi|srt|zip|torrent|nzb)$/">
 <!ENTITY info.advancedexample.text14 "D:\video\vacanza\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;">
 <!ENTITY info.advancedexample.text15 "Spiegazione dei filtri :<br />
-I filtri saranno attivati per tutti i file che cominciano con &#34;La_mia_vacanza&#34; e che finiscono con l'estensione disponibili (avi, srt, zip, torrent o nzb).<br />
-La cartella creata dipenderà dal filtro: &#37;asf_rf&#37; analizza il nome del file scaricato con l'espressione regolare contenuta fra i due &#37;asf_rf&#37; : se il file finisce con &#34;zip&#34;, &#34;torrent&#34; o &#34;nzb&#34;, la parte catturata dall'espressione regolare creerà la sottocartella.<br />
+I filtri saranno attivati per tutti i file che cominciano con &quot;La_mia_vacanza&quot; e che finiscono con l'estensione disponibili (avi, srt, zip, torrent o nzb).<br />
+La cartella creata dipenderà dal filtro: &#37;asf_rf&#37; analizza il nome del file scaricato con l'espressione regolare contenuta fra i due &#37;asf_rf&#37; : se il file finisce con &quot;zip&quot;, &quot;torrent&quot; o &quot;nzb&quot;, la parte catturata dall'espressione regolare creerà la sottocartella.<br />
 Se nessuna di quelle estensioni non è trovata, l'espressione regolare non farà nulla, non verrà creata nessuna sottocartella e i file verranno scaricati nella cartella in D:\video\vacanze\">
 <!ENTITY info.advancedexample.text16 "Nota: Puoi mettere quanti tag vuoi per la cartella principale.<br />I filtri possono essere:">
 <!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(vacanza|matrimonio)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
-In questo cartello, verrà creata la cartella &#34;vacanze&#34; verrà creata solo se il nome contiene &#34;vacanze&#34;.">
+In questo cartello, verrà creata la cartella &quot;vacanze&quot; verrà creata solo se il nome contiene &quot;vacanze&quot;.">
 
 
 <!-- Bellow is the page which appear on first install, and on important updates -->
@@ -80,10 +80,10 @@ Please, read this message carefully to make potential changes to your preference
 This page will only be displayed once, on first install or when important changes must be communicated.">
 
 <!ENTITY firstinstall.title.importantupdates "Important updates:">
-<!ENTITY firstinstall.title.firstinstall "1st install and reminder :">
-<!ENTITY firstinstall.fullupdatelist "For the complete changelog, see the &#34;About...&#34; tab in Automatic Save Folder's preferences.">
+<!ENTITY firstinstall.title.firstinstall "First install and reminder :">
+<!ENTITY firstinstall.fullupdatelist "For the complete changelog, see the &quot;About...&quot; tab in Automatic Save Folder's preferences.">
 
-<!ENTITY firstinstall.steps "In order to work, <b>you have to correctly set Firefox</b> and Automatic Save Folder's <b>preferences</b>.<br />
+<!ENTITY firstinstall.steps "In order to work, <b>you have to correctly set Firefox</b> and Automatic Save Folder's preferences.<br />
 Three steps are essentials, if the filtering doesn't work please check each of this steps again:">
 <!ENTITY firstinstall.step1 "Step 1 : Firefox">
 <!ENTITY firstinstall.step2 "Step 2 : Automatic Save Folder">
@@ -93,20 +93,20 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 <!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big)  -->
 <!ENTITY firstinstall.firefox.pict1 "screen_save_en.png">
 <!ENTITY firstinstall.firefox.text2 "Se qualche filtro non funziona, accertartati che Firefox non usi un altro processo sul file scaricato:">
-<!ENTITY firstinstall.firefox.text3 "Vai sul menu &#34;Strumenti&#34; e &#34;Opzioni...&#34;.">
-<!ENTITY firstinstall.firefox.text4 "- Per utenti di Firefox 3: vai sul tab &#34;Applicazioni&#34;<br />
-- Per utenti di precedenti versioni di Firefox: Vai sul tab &#34;Contenuti&#34; e clicca su &#34;gestisci...&#34; in basso a destra.">
-<!ENTITY firstinstall.firefox.text5 "Verifica se il file che vuoi scaricare sia impostato su &#34;Chiedi ogni volta&#34;.">
+<!ENTITY firstinstall.firefox.text3 "Vai sul menu &quot;Strumenti&quot; e &quot;Opzioni...&quot;.">
+<!ENTITY firstinstall.firefox.text4 "- Per utenti di Firefox 3: vai sul tab &quot;Applicazioni&quot;<br />
+- Per utenti di precedenti versioni di Firefox: Vai sul tab &quot;Contenuti&quot; e clicca su &quot;gestisci...&quot; in basso a destra.">
+<!ENTITY firstinstall.firefox.text5 "Verifica se il file che vuoi scaricare sia impostato su &quot;Chiedi ogni volta&quot;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
 <!ENTITY firstinstall.firefox.pict2 "screen_apps_en.png">
 <!ENTITY firstinstall.firefox.text6 "Choose a saving method in Firefox preferences, General tab:<br />
-- Save files to : Firefox will save the file automatically to that folder without opening the files explorer.<br />
-- Always ask me where to save files : Firefox will show you the files explorer to allow you to rename the file or choose the saving folder manually.">
+- &quot;Save files to&quot;: Firefox will save the downloads automatically into the specified folder without opening the files explorer.<br />
+- &quot;Always ask me where to save files&quot;: Firefox will show you the files explorer which will allow you to rename the file or select another saving folder manually.">
 <!ENTITY firstinstall.firefox.pict3 "screen-main_en.png">
 
 <!ENTITY firstinstall.asf.text1 "If you decide to go without the file explorer, Firefox will automatically save your files<br />
-Either in the download folder defined by your operating system, either on your desktop.<br />
-Do not forget to select &#34;Set by the filters&#34; to allow Firefox to use the filtered folders.">
+either in the download folder defined by your operating system, or on your desktop.<br />
+Do not forget to select &quot;Set by the filters&quot; to allow Firefox to use the filtered folders.">
 <!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
 <!ENTITY firstinstall.asf.pict1 "screen-asf102-setbyfilters_en.png">
 <!ENTITY firstinstall.asf.text2 "Your filter's order is of a big importance!<br />
@@ -115,8 +115,8 @@ Remember to alway set your filters order using the arrow on the right of the fil
 
 
 <!ENTITY firstinstall.save.text1 "You must take care that Firefox will always ask you what to do with your currently downloading file.<br />
-According to this, <b style='color:red;'>you must not check</b> &#34;Do this automatically for files like this from now on.&#34;.<br />
-If it happens, do Step 1 again.">
+According to this, <b style='color:red;'>you must not check</b> &quot;Do this automatically for files like this from now on.&quot;.<br />
+If it ever happens, do Step 1 again.">
 <!-- Screenshot from your language. This is a screen of 'What should Firefox do with this file?' saving window, like firstinstall.Firefox.pict1, but with 'Do this automatically for files like this from now on.' shown unchecked-->
 <!ENTITY firstinstall.save.pict1 "screen-savedialog-alwaysdothis_en.png">
 
@@ -128,3 +128,4 @@ If it happens, do Step 1 again.">
 <!ENTITY importantupdates.102.2 "Send the filtered folder to DownThemAll!">
 <!ENTITY importantupdates.102.3 "Import/export the filters.">
 <!ENTITY importantupdates.102.4 "Removed the need of the slashes around a regular expression's filters.">
+<!ENTITY importantupdates.102.5 "Note: In order to develop Automatic Save Folder further, this version is the last compatible with older Firefox versions (1.5, 2.0 and 3.0).">

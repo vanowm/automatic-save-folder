@@ -32,40 +32,41 @@
 + Vérification et mise à jour vers les versions béta. La mise à jour interne ne fonctionne que sur Firefox 4.
 + Nouveau menu permettant d'importer et exporter les paramètres et les filtres.
 + Ouverture d'une page d'aide après la 1ère installation et lors de message important après une mise à jour.
++ Localisation : sv-SE
 - Suppression des slashs aux extrémités des filtres utilisant les expressions régulières.
 * Il est maintenant possible de choisir quel type de domaine sera utilisé pendant le filtrage, et de personnaliser leur ordre de vérification (Domaine seul, URL complète, du fichier ou de l'onglet actif).
 * &#37;asf_f&#37; utilise maintenant le nom de fichier complet, avec l'extension, si aucun filtre ne correspond.
 * &#37;asf_d&#37; utilise maintenant le nom de domaine sans le protocole, si aucun filtre ne correspond.
-! Correction d'un bug où les données d'un lien direct entré dans la barre d'adresse ou initialisé par un autre programme n'étaient pas lu correctement, empêchant d'afficher la liste des filtres lorsque la fenêtre de préférences était ouverte à partir du lien &#34;+ Ajouter ou éditer un filtre&#34; de la fenêtre d'enregistrement. (Merci à MrCOLOMBO)
+! Correction d'un bug où les données d'un lien direct entré dans la barre d'adresse ou initialisé par un autre programme n'étaient pas lu correctement, empêchant d'afficher la liste des filtres lorsque la fenêtre de préférences était ouverte à partir du lien &quot;+ Ajouter ou éditer un filtre&quot; de la fenêtre d'enregistrement. (Merci à MrCOLOMBO)
 ! Correction de la création de dossiers dynamiques pour le 1er filtre de la liste. (Merci à Googer)
 
-Note : Afin de pouvoir faire évoluer Automatic Save Folder, cette version est la dernière compatible avec firefox 1.5, 2.0 et 3.0.">
+Note : Afin de pouvoir faire évoluer Automatic Save Folder, cette version est la dernière compatible avec les anciennes versions de firefox (1.5, 2.0 et 3.0).">
 
 <!ENTITY about.version.101 "! Correction d'une erreur de frape empêchant ASF de fonctionner si aucun filtre n'était trouvé.
 ! Ajout d'une traduction russe manquante dans l'onglet des filtres.">
 
-<!ENTITY about.version.100 "+ Ajout du filtrage avec les menus du clic-droit &#34;Enregistrer la cible sous...&#34;, &#34;Enregistrer l'image sous...&#34; et &#34;Enregistrer sous...(Ctrl+S)&#34;
+<!ENTITY about.version.100 "+ Ajout du filtrage avec les menus du clic-droit &quot;Enregistrer la cible sous...&quot;, &quot;Enregistrer l'image sous...&quot; et &quot;Enregistrer sous...(Ctrl+S)&quot;
   (Ne fonctionne qu'à partir de Firefox 2.0 et est incompatible avec l'extension Download Sort. Si les deux extensions sont activées, Download Sort est prioritaire)
 + ASF fonctionne maintenant avec la Navigation Privée, empêchant toutes données d'être enregistrées dans les préférences de Firefox.
   Deux choses à noter qui modifient le fonctionnement d'ASF : 1) Le précédent domaine d'hébergement ne sera pas mémorisé, et 2) Si le dossier de destination n'existe pas, il ne sera ni créé ni suggéré, et le dernier dossier valide connu en Navigation Non Privée sera utilisé à la place.
 + Ajout des variables dynamiques &#37;F&#37; pour le nom du mois, et &#37;M&#37; pour son abréviation.
 + Ajout des variables dynamiques pour la semaine : Numéro de la semaine &#37;W&#37;, Jour de la semaine &#37;w&#37;, &#37;l&#37; ou &#37;D&#37;
-+ Prise en compte pour Windows et Mac OSX de l'option &#34;browser.preferences.instantApply&#34; afin de sauvegarder les filtres des leur modification (option par défaut sur Linux).
++ Prise en compte pour Windows et Mac OSX de l'option &quot;browser.preferences.instantApply&quot; afin de sauvegarder les filtres des leur modification (option par défaut sur Linux).
 + Ajout du Glisser-déposer (Drag and Drop) dans la liste des filtres pour les repositionner rapidement.
-+ Ajout d'une option pour choisir le mode d'enregistrement de Firefox (&#34;Toujours demander où enregistrer les fichiers&#34; ou &#34;Enregistrer les fichiers dans le dossier&#34;), et sélectionner manuellement le dossier plutôt que de forcer sur &#34;Défini par les filtres&#34; (browser.download.folderList=2)
-+ Ajout d'une option pour accepter automatiquement la fenêtre &#34;Que doit faire Firefox de ce fichier ?&#34;. Utilisez la avec l'option de sauvegarde de Firefox &#34;Enregistrer le fichier dans le dossier&#34; pour une meilleure efficacité.
++ Ajout d'une option pour choisir le mode d'enregistrement de Firefox (&quot;Toujours demander où enregistrer les fichiers&quot; ou &quot;Enregistrer les fichiers dans le dossier&quot;), et sélectionner manuellement le dossier plutôt que de forcer sur &quot;Défini par les filtres&quot; (browser.download.folderList=2)
++ Ajout d'une option pour accepter automatiquement la fenêtre &quot;Que doit faire Firefox de ce fichier ?&quot;. Utilisez la avec l'option de sauvegarde de Firefox &quot;Enregistrer le fichier dans le dossier&quot; pour une meilleure efficacité.
 + Ajout d'une option pour utiliser l'adresse du site courant avec le domaine du filtre si le domaine d'hébergement ne correspond pas.
 + Affichage de l'icône d'ASF dans le gestionnaire d'extensions même lorsque l'extension est désactivée, plutôt que la pièce de puzzle verte (Firefox 3.6+)
 + Ajout d'une option permettant de choisir le style d'affichage du groupe ASF, et ajout d'un lien sur le nom du groupe pour afficher/masquer son contenu.
 + Ajout de la coloration des lignes pour voir les filtres correspondant au fichier téléchargé lorsque la fenêtre de préférences est ouverte à partir de la fenêtre de sauvegarde. Correspondant et actif = vert, Correspondant et désactivé = rouge.
 * Dans le menu déroulant sur la fenêtre de sauvegarde : Listing des dossiers par ordre alphabétique, suppression des doublons et nom de dossier dynamique si l'option est activée.
-* Séparation de l'onglet &#34;informations&#34; en deux onglets &#34;Aide&#34; et &#34;À propos...&#34;.
+* Séparation de l'onglet &quot;informations&quot; en deux onglets &quot;Aide&quot; et &quot;À propos...&quot;.
 * Ajout d'infobulles à la place du texte explicatif sous les options (Quelques problèmes rencontrés avec Firefox2).
-* Sur la fenêtre de sauvegarde, désactivation des suggestions de dossiers si l'option du groupe &#34;Que dois faire Firefox avec ce ficher ?&#34; n'est pas sur &#34;Enregistrer le fichier&#34;
+* Sur la fenêtre de sauvegarde, désactivation des suggestions de dossiers si l'option du groupe &quot;Que dois faire Firefox avec ce ficher ?&quot; n'est pas sur &quot;Enregistrer le fichier&quot;
 * Ajout d'un menu déroulant dans la fenêtre d'ajout et d'édition pour un accès rapide aux dossiers déjà présents dans les filtres enregistrés.
 ! Correction des liens vers Mozilla qui forçait le chargement de la page en Français.
 ! Correction d'une vérification du filtrage lorsque les variables dynamiques étaient utilisés.
-! Correction d'une exception lorsque l'option &#34;Utiliser l'URL du site courant&#34; est activé et que la barre d'adresse ne contient pas d'URL. 
+! Correction d'une exception lorsque l'option &quot;Utiliser l'URL du site courant&quot; est activé et que la barre d'adresse ne contient pas d'URL. 
   Se produisait généralement avec les script de redirection lorsque Firefox refermait le nouvel onglet vide, ou en cliquant sur un lien avec la molette de la souris.
 ! En utilisant l'option InstantApply, les filtres suggérés n'étaient pas rechargés à la fermeture de la fenêtre de préférences.
 ! En utilisant l'option InstantApply, les sous-options qui se dé-sélectionnaient visuellement n'étaient pas enregistrées.
@@ -87,10 +88,10 @@ Autres mises à jour :
   Les données utilisés pour vérifier le domaine précédent reste celui d'hébergement du fichier.
 + Limite la taille maximum de la fenêtre d'enregistrement à la résolution de l'écran principal. (Merci à Julien)
 + Ajout d'une option permettant d'afficher un menu déroulant sur la fenêtre de sauvegarde contenant la liste des dossiers définit par les filtres.
-* Modification du mode d'ouverture des liens de la fenêtre &#34;à propos de...&#34;. Les liens s'ouvrent maintenant dans un nouvel onglet.
+* Modification du mode d'ouverture des liens de la fenêtre &quot;à propos de...&quot;. Les liens s'ouvrent maintenant dans un nouvel onglet.
 * Agrandissement de certains menus pour plus de lisibilité.
 * simplification du code pour le déplacement haut/bas des filtres.
-* simplification du code de chargement des données courantes pour l'auto-complétion du menu &#34;Ajouter&#34;.
+* simplification du code de chargement des données courantes pour l'auto-complétion du menu &quot;Ajouter&quot;.
 * Meilleure visibilité : Les zones de texte s'agrandissent maintenant avec le changement de taille des fenêtres de préférence et d'aides.
 * Modification complète du script en Global Namespace, demandé par mozilla.org afin de sous-mettre l'extension en zone public.
 * Simplifications des fonctions du script et ajout des commentaires du code.
@@ -100,19 +101,19 @@ Autres mises à jour :
 
 <!ENTITY about.version.092 "* Compatibilité des thèmes : Les couleurs par défauts sont maintenant utilisées, tous les textes devraient être visibles correctement.
   Les images ont été améliorées afin d'être visibles sur les thèmes sombres.
-! Correction pour Vista : Mise à jour forcée de la variable browser.download.folderList à &#34;2&#34; lors de l'ouverture de la fenêtre d'option d'ASF.
-! Correction de la colonne &#34;actif&#34;, les filtres ne pouvaient plus être activés ou désactivés temporairement depuis la Version 0.8.7.">
+! Correction pour Vista : Mise à jour forcée de la variable browser.download.folderList à &quot;2&quot; lors de l'ouverture de la fenêtre d'option d'ASF.
+! Correction de la colonne &quot;actif&quot;, les filtres ne pouvaient plus être activés ou désactivés temporairement depuis la Version 0.8.7.">
 
 <!ENTITY about.version.091 "+ Traduction italienne par Scognito.
 + Ajout d'un menu à puces lors de l'enregistrement, permettant de sélectionner rapidement les deux derniers dossiers en mémoire.
   Le deuxième choix n'apparaît que s'il est différent du premier.
-* Suppression de l'option &#34;affecter aussi enregistrer sous...&#34; pour firefox3, puisque cette valeur est utilisée automatiquement.
-* Suppression du popup &#34;+ Ajouter un filtre&#34; lors de l'enregistrement. Cela causait des problèmes de priorité de focus et de position de fenêtres.
+* Suppression de l'option &quot;affecter aussi enregistrer sous...&quot; pour firefox3, puisque cette valeur est utilisée automatiquement.
+* Suppression du popup &quot;+ Ajouter un filtre&quot; lors de l'enregistrement. Cela causait des problèmes de priorité de focus et de position de fenêtres.
   Le lien n'ouvre plus que le menu principal permettant de modifier ou ajouter un filtre manuellement.
   Lors de l'ajout d'un filtre en passant par ce menu, les champs seront tout de même pré-remplis avec le nom de fichier et le domaine.
 * Désactivation de l'édition des cellules du tableau lors d'un double-clic.
   Depuis Firefox 3, double cliquer sur une cellule permet de l'éditer directement sans passer par la fenêtre d'édition. L'édition n'était alors pas enregistrée correctement.
-! Correction d'un bug lors de la vérification des filtres si l'option &#34;Utiliser le dernier dossier&#34; était sélectionné. (Merci à Carsten)
+! Correction d'un bug lors de la vérification des filtres si l'option &quot;Utiliser le dernier dossier&quot; était sélectionné. (Merci à Carsten)
 ! Correction d'un bug sur Firefox3 et Windows Vista : Modification d'une option interne à Firefox permettant de changer le dossier d'enregistrement manuellement. (Merci à Carsten)
   (browser.download.folderList = 2) Sur Windows Vista, la valeur par défaut est à 1.
   Les différentes valeurs possibles sont : 0 = Bureau ; 1 = Dossier d'enregistrement par défaut ; 2 = Choix laissé à l'utilisateur.
@@ -125,16 +126,16 @@ Autres mises à jour :
   Bug connu : un problème de retour à la fenêtre active peut survenir lors de la fermeture des filtres.
 - Suppression de l'option permettant de désactiver l'extension. Afin de la désactiver temporairement, veuillez utiliser le gestionnaire d'extension.
 * Changement de la façon dont les filtres sont exécutés (addEventlistener à la place de OnLoad), pour une meilleure compatibilité avec les autres extensions.
-! Correction de la colonne &#34;Actif&#34; qui ne restait pas masquée correctement.">
+! Correction de la colonne &quot;Actif&quot; qui ne restait pas masquée correctement.">
 
 <!ENTITY about.version.087 "+ Compatible avec Firefox 3.0 beta (quelques modifications apportées au code).
-* La touche entrée du clavier correspond maintenant aux boutons d'acceptations (OK, Ajouter, Éditer). Auparavant le bouton par défaut était &#34;Annuler&#34;.
+* La touche entrée du clavier correspond maintenant aux boutons d'acceptations (OK, Ajouter, Éditer). Auparavant le bouton par défaut était &quot;Annuler&quot;.
 ! Version unique pour Windows et Linux (et peut être Mac ?).">
 
-<!ENTITY about.version.086fix "* Modification des boutons &#34;OK&#34; qui n'apparaissent pas dans la fenêtre principale sur Linux.
+<!ENTITY about.version.086fix "* Modification des boutons &quot;OK&quot; qui n'apparaissent pas dans la fenêtre principale sur Linux.
 Info :
-Sur Linux, il n'y a que le bouton &#34;Fermer&#34; et les cases à cocher sont enregistrées dès qu'elles sont modifiées par l'utilisateur. Malheureusement les tableaux ne sont pas pris en compte à la fermeture.
-J'ai donc supprimé le bouton &#34;Accept&#34; et je l'ai remplacé par un bouton &#34;sauver et fermer&#34;.">
+Sur Linux, il n'y a que le bouton &quot;Fermer&quot; et les cases à cocher sont enregistrées dès qu'elles sont modifiées par l'utilisateur. Malheureusement les tableaux ne sont pas pris en compte à la fermeture.
+J'ai donc supprimé le bouton &quot;Accept&quot; et je l'ai remplacé par un bouton &quot;sauver et fermer&quot;.">
 
 <!ENTITY about.version.086 "* Correction orthographique et syntaxique. Merci à Goofy pour son commentaire sur Mozilla.org">
 
@@ -149,15 +150,15 @@ J'ai donc supprimé le bouton &#34;Accept&#34; et je l'ai remplacé par un bouto
 <!ENTITY about.version.083 "+ Ajout d'exemples et une courte explication concernant l'utilisation des expressions régulières, accessible dans la fenêtre d'ajout et d'édition des filtres.">
 
 <!ENTITY about.version.082 "Première version publique.
-+ Ajout d'une option pour agir en même temps sur le chemin d'enregistrement des pages Web (note : le menu &#34;fichier/enregistrer sous...&#34; de Firefox).">
++ Ajout d'une option pour agir en même temps sur le chemin d'enregistrement des pages Web (note : le menu &quot;fichier/enregistrer sous...&quot; de Firefox).">
 
 <!ENTITY about.version.081 "* Sélection des dossiers : la fenêtre de sélection s'ouvre sur le dossier déjà sélectionné. Avant elle s'ouvrait sur un dossier aléatoire parmi : documents and settings, bureau et le dossier personnel.
-* Restriction pour la sélection des dossiers : suppression de la possibilité d'écrire le chemin au clavier, seul le bouton &#34;Sélectionner...&#34; est valide pour choisir les dossiers de destination.">
+* Restriction pour la sélection des dossiers : suppression de la possibilité d'écrire le chemin au clavier, seul le bouton &quot;Sélectionner...&quot; est valide pour choisir les dossiers de destination.">
 
 <!ENTITY about.version.080 "Fonctionnalités :
 + Positionnement des filtres par priorité (option pour monter et descendre les filtres).
 + Reconnaissance des filtres normaux, masqués et RegExp. (Expression régulière).
-+ Sélection des dossiers manuellement et par menu interactif (bouton &#34;sélectionner...&#34;).
++ Sélection des dossiers manuellement et par menu interactif (bouton &quot;sélectionner...&quot;).
 + Édition des filtres par double-clic sur les filtres.
 + Skin de l'interface avec des images.">
 

@@ -15,7 +15,7 @@ g..gle corrisponde a 'google' e ad altre parole che cominciano per 'g', seguite 
 'go*gle' will correspond to gogle, google, goooooooooogle, etc.<br />
 '.*' (a dot followed by an asterisk) correspond to many times any character.<br />
 .* used alone will match all the filter's domain name or the filter's file name,
-so this is what is used when you select &#34;All&#34; in the filter creation window.">
+so this is what is used when you select &quot;All&quot; in the filter creation window.">
 
 <!ENTITY The.caret.title "Il simbolo ^">
 <!ENTITY The.caret.text "^ significa all'inizio della stringa (^http indica solo l'occorrenza all'inizio. Va bene per  http://test.com ma non per ftp://http_test.com)<br />
@@ -48,9 +48,9 @@ The question mark is a shortcut of the regular expression {0,1}<br />
 Nov(ember)? = Nov(ember){0,1}<br />
 <br />
 The question mark is also used to transform a Regular expression state from greedy (default) to lazy, example :<br />
-The data : &#34;This is a test&#34;<br />
-Filter 1 : &#34;t.*t&#34; will capture from the first to the last T, in other word all the string &#34;This is a test&#34;, the asterisk tag is greedy and matches the more characters he can find.<br />
-Filter 2 : &#34;t.*?t&#34; will capture from the first T to the first encountered T folowing it, it will return &#34;This is a t&#34;, the asterisk is now lazy and stops at the first occurence it finds (from left to right).">
+The data : &quot;This is a test&quot;<br />
+Filter 1 : &quot;t.*t&quot; will capture from the first to the last T, in other word all the string &quot;This is a test&quot;, the asterisk tag is greedy and matches the more characters he can find.<br />
+Filter 2 : &quot;t.*?t&quot; will capture from the first T to the first encountered T folowing it, it will return &quot;This is a t&quot;, the asterisk is now lazy and stops at the first occurence it finds (from left to right).">
 
 <!ENTITY The.bracket.title "Le parentesi quadre [ ]">
 <!ENTITY The.bracket.text "Le parentesi quadre [ ] sono utili per definire una corrispondenza di molti caratteri.<br />

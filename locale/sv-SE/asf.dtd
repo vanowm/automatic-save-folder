@@ -1,8 +1,8 @@
 <!-- ASF Settings -->
 <!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
-<!ENTITY asf.preferences_window.resize "true">
-<!ENTITY asf.preferences_window.width "580">
-<!ENTITY asf.preferences_window.height "446">
+<!ENTITY asf.preferences_window.resize "false">
+<!ENTITY asf.preferences_window.width "617">
+<!ENTITY asf.preferences_window.height "423">
 
 <!-- new line, U+00A0 ISOnum -->
 <!ENTITY NL "&#10;" >
@@ -111,7 +111,7 @@
 <!ENTITY asf.rowmatchinghighlight.system "System color">
 
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on.&NL;Automatic Save Folder can send the filtered destination path to DownThemAll! when using the &#34;What should firefox do with this file&#34; saving window.&NL;&NL;Note: This option is disabled when using the Private Browsing mode.">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on.&NL;Automatic Save Folder can send the filtered destination path to DownThemAll! when using the &quot;What should firefox do with this file&quot; saving window.&NL;&NL;Note: This option is disabled when using the Private Browsing mode.">
 <!ENTITY asf.dta_ASFtoDTA_isActive.bool "Enable Automatic Save Folder to send the filtered path to DownThemAll!.">
 <!ENTITY asf.dta_chooseSendingMethod.label "Choose the sending method for DTA OneClick!:">
 <!ENTITY asf.dta_methodReplace.label "Replace first folder in list">

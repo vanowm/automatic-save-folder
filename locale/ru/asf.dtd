@@ -19,7 +19,7 @@
 <!ENTITY asf.tree.column.filename "Имя файла">
 <!ENTITY asf.tree.column.localfolder "Папка для сохранения">
 <!ENTITY asf.tree.column.enabled "Архив">
-<!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter&#34;s tab, you can write &#34;up&#34; if you want -->
+<!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter&quot;s tab, you can write &quot;up&quot; if you want -->
 <!ENTITY asf.options.move.up " ">
 <!ENTITY asf.options.move.down " ">
 <!ENTITY asf.options.edit "Изменить">
@@ -43,7 +43,7 @@
 <!ENTITY asf.options.label "Опции">
 <!ENTITY asf.options.tab1.label "Страница 1">
 <!ENTITY asf.options.tab2.label "Страница 2">
-<!ENTITY asf.options.tabdta.label "Расширение &#34;DownThemAll!&#34;">
+<!ENTITY asf.options.tabdta.label "Расширение &quot;DownThemAll!&quot;">
 <!ENTITY asf.options.tabdata.label "Data management">
 
 <!ENTITY asf.options.groupbox1.label "Проводник">
@@ -51,16 +51,16 @@
 <!ENTITY asf.desktop.label "Рабочий стол">
 <!ENTITY asf.systemdownload.label "Загрузки">
 <!ENTITY asf.filteredfolder.label "Использовать фильтры">
-<!ENTITY asf.folderList.tooltip "Если папка &#34;Загрузки&#34; не существует, будет предложено выбрать папку.">
+<!ENTITY asf.folderList.tooltip "Если папка &quot;Загрузки&quot; не существует, будет предложено выбрать папку.">
 
 <!ENTITY asf.options.groupbox2.label "Диалог сохранения">
-<!ENTITY asf.dialogaccept.bool "Автоматически использовать настройку  &#34;Как FireFox следует обработать это файл&#34;.">
+<!ENTITY asf.dialogaccept.bool "Автоматически использовать настройку  &quot;Как FireFox следует обработать это файл&quot;.">
 <!ENTITY asf.dialogacceptFiltered.bool "Только если найден фильтр">
-<!ENTITY asf.dialogacceptFiltered.tooltip "Не будет автоматически использовать настройку &#34;Как FireFox следует обработать это файл&#34; если не найдено подходящего фильтра.">
+<!ENTITY asf.dialogacceptFiltered.tooltip "Не будет автоматически использовать настройку &quot;Как FireFox следует обработать это файл&quot; если не найдено подходящего фильтра.">
 <!ENTITY asf.dialogForceRadio_Start.bool "Использовать следующий метод:">
 <!ENTITY asf.dialogForceRadioTo.label1 "Открыть с помощью">
-<!ENTITY asf.dialogForceRadioTo.label2 "Расширение &#34;DownThemAll!&#34;">
-<!ENTITY asf.dialogForceRadioTo.label3 "Расширение &#34;dTa OneClick!&#34;">
+<!ENTITY asf.dialogForceRadioTo.label2 "Расширение &quot;DownThemAll!&quot;">
+<!ENTITY asf.dialogForceRadioTo.label3 "Расширение &quot;dTa OneClick!&quot;">
 <!ENTITY asf.dialogForceRadioTo.label4 "Сохранить файл">
 <!ENTITY asf.dialogForceRadio_End.bool "до автоматического действия в диалоге сохранения.">
 <!ENTITY asf.viewdloption.bool "Показывать опции при загрузке">
@@ -80,7 +80,7 @@
 <!ENTITY asf.betaVersionUpdateNow.label "Update now">
 
 <!ENTITY asf.options.groupbox3.label "Настройки фильтров">
-<!ENTITY asf.lastdir.bool "Изменять папку для команды &#34;сохранить как...&#34; когда есть подходящий фильтр">
+<!ENTITY asf.lastdir.bool "Изменять папку для команды &quot;сохранить как...&quot; когда есть подходящий фильтр">
 <!ENTITY asf.domainTestOrder.label1 "Choose the domain types to use, and their verification order, when filtering:">
 <!ENTITY asf.domainTestOrder.label2 "[Help]">
 <!ENTITY asf.domainTestOrder.tooltip1 "A coma separated number list to specify in which order the tests on the domain will be performed. Default value if the field is empty: 1,5">
@@ -94,14 +94,14 @@
 
 <!ENTITY asf.options.groupbox4.label "Правая кнопка мыши">
 <!ENTITY asf.userightclick.bool "Использовать фильтры в меню">
-<!ENTITY asf.userightclick.tooltip "Использовать фильтры  для меню &#34;Сохранить ссылку как...&#34;, &#34;Сохранить картинку как...&#34; и &#34;Сохранить как... (Ctrl+S)&#34;">
-<!ENTITY asf.rightclicktimeout.bool "Убрать задержку по времени и активировать фильтры для меню правой кнопки мыши &#34;Сохранить ссылку как...&#34;">
+<!ENTITY asf.userightclick.tooltip "Использовать фильтры  для меню &quot;Сохранить ссылку как...&quot;, &quot;Сохранить картинку как...&quot; и &quot;Сохранить как... (Ctrl+S)&quot;">
+<!ENTITY asf.rightclicktimeout.bool "Убрать задержку по времени и активировать фильтры для меню правой кнопки мыши &quot;Сохранить ссылку как...&quot;">
 <!ENTITY asf.rightclicktimeout.tooltip1 "Убрать задержку по времени не позволяющую Firefox прочитать имя файла для перенаправленной загрузки и позволить это сделать Automatic Save Folder.">
 <!ENTITY asf.rightclicktimeout.tooltip2 "Временно отключить это опцию если вы хотите разрешить Firefox прочитать имя файла из заголовка (фильтры не будут доступны).">
 <!ENTITY asf.rightclicktimeout.tooltip3 "Использовать только для скриптов с перенаправлением загрузок.">
-<!ENTITY asf.rightclicktimeout.tooltip4 "На заметку: Опция не имеет влияния на меню &#34;Сохранить картинку как...&#34; и  &#34;Сохранить как... (Ctrl+S)&#34;.">
-<!ENTITY asf.rightclick.ff2.label "Меню Automatic Save Folder по правой кнопке мыши не доступно для Firefox 2. Если вы хотите иметь возможность использовать фильтры для меню правой кнопки мыши &#34;Сохранить ссылку как...&#34;, вы должны обновить Firefox до версии 3.0 (рекомендуемая версия 3.5 или выше).">
-<!ENTITY asf.rightclick.DSort.label "Обнаружено дополнение &#34;Download sort&#34;. &NL;Меню Automatic Save Folder по правой кнопке мыши не будет доступно пока вы не отключите &#34;Download Sort&#34; в списке дополнений.">
+<!ENTITY asf.rightclicktimeout.tooltip4 "На заметку: Опция не имеет влияния на меню &quot;Сохранить картинку как...&quot; и  &quot;Сохранить как... (Ctrl+S)&quot;.">
+<!ENTITY asf.rightclick.ff2.label "Меню Automatic Save Folder по правой кнопке мыши не доступно для Firefox 2. Если вы хотите иметь возможность использовать фильтры для меню правой кнопки мыши &quot;Сохранить ссылку как...&quot;, вы должны обновить Firefox до версии 3.0 (рекомендуемая версия 3.5 или выше).">
+<!ENTITY asf.rightclick.DSort.label "Обнаружено дополнение &quot;Download sort&quot;. &NL;Меню Automatic Save Folder по правой кнопке мыши не будет доступно пока вы не отключите &quot;Download Sort&quot; в списке дополнений.">
 
 <!ENTITY asf.options.groupbox5.label "Графический интерфейс">
 <!ENTITY asf.pathlist_defaultforceontop.bool "Первым показывать путь для сохранения по умолчанию.">
@@ -110,10 +110,10 @@
 <!ENTITY asf.rowmatchinghighlight.color "Собственный цвет">
 <!ENTITY asf.rowmatchinghighlight.system "Системный цвет">
 
-<!ENTITY asf.options.groupbox6.label "Расширение &#34;DownThemAll!&#34;">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder определил, что вы используете расширение &#34;DownThemAll!&#34;. &NL;Automatic Save Folder может передавать пути, основанные на фильтрах, в &#34;DownThemAll!&#34; при использовнии окна &#34;Как FireFox следует обработать это файл&#34;. Эта опция недоступна в режиме приватного просмотра.">
-<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Включить передачу путей из расширения &#34;Automatic Save Folder&#34; в расширение &#34;DownThemAll!&#34;.">
-<!ENTITY asf.dta_chooseSendingMethod.label "Выбрать действие для &#34;DTA OneClick!&#34;:">
+<!ENTITY asf.options.groupbox6.label "Расширение &quot;DownThemAll!&quot;">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder определил, что вы используете расширение &quot;DownThemAll!&quot;. &NL;Automatic Save Folder может передавать пути, основанные на фильтрах, в &quot;DownThemAll!&quot; при использовнии окна &quot;Как FireFox следует обработать это файл&quot;. Эта опция недоступна в режиме приватного просмотра.">
+<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Включить передачу путей из расширения &quot;Automatic Save Folder&quot; в расширение &quot;DownThemAll!&quot;.">
+<!ENTITY asf.dta_chooseSendingMethod.label "Выбрать действие для &quot;DTA OneClick!&quot;:">
 <!ENTITY asf.dta_methodReplace.label "Заменить первый путь в списке">
 <!ENTITY asf.dta_methodAdd.label "Добавить в список">
 

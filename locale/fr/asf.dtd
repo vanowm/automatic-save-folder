@@ -51,12 +51,12 @@
 <!ENTITY asf.desktop.label "Bureau">
 <!ENTITY asf.systemdownload.label "Téléchargements">
 <!ENTITY asf.filteredfolder.label "Défini par les filtres">
-<!ENTITY asf.folderList.tooltip "Si le dossier &#34;Téléchargements&#34; n'existe pas, l'explorateur de fichier s'affichera.">
+<!ENTITY asf.folderList.tooltip "Si le dossier &quot;Téléchargements&quot; n'existe pas, l'explorateur de fichier s'affichera.">
 
 <!ENTITY asf.options.groupbox2.label "Fenêtre de sauvegarde">
-<!ENTITY asf.dialogaccept.bool "Valider automatiquement la fenêtre &#34;Que doit faire Firefox avec ce fichier ?&#34;.">
+<!ENTITY asf.dialogaccept.bool "Valider automatiquement la fenêtre &quot;Que doit faire Firefox avec ce fichier ?&quot;.">
 <!ENTITY asf.dialogacceptFiltered.bool "Seulement si un filtre est trouvé">
-<!ENTITY asf.dialogacceptFiltered.tooltip "Ne valide pas automatiquement la fenêtre &#34;Que doit faire Firefox avec ce fichier ?&#34; si aucun filtre ne correspond.">
+<!ENTITY asf.dialogacceptFiltered.tooltip "Ne valide pas automatiquement la fenêtre &quot;Que doit faire Firefox avec ce fichier ?&quot; si aucun filtre ne correspond.">
 <!ENTITY asf.dialogForceRadio_Start.bool "Forcer le choix sur">
 <!ENTITY asf.dialogForceRadioTo.label1 "Ouvrir avec">
 <!ENTITY asf.dialogForceRadioTo.label2 "DownThemAll!">
@@ -94,14 +94,14 @@
 
 <!ENTITY asf.options.groupbox4.label "Clic droit">
 <!ENTITY asf.userightclick.bool "Activer les filtres sur les menus">
-<!ENTITY asf.userightclick.tooltip "Active le filtrage sur les menus &#34;Enregistrer la cible du lien sous...&#34;, &#34;Enregistrer l'image sous...&#34; et &#34;Enregistrer sous... (Ctrl+S)&#34;">
-<!ENTITY asf.rightclicktimeout.bool "Supprimer la temporisation et activer les filtres sur le menu clic-droit &#34;Enregistrer la cible du lien sous...&#34;.">
+<!ENTITY asf.userightclick.tooltip "Active le filtrage sur les menus &quot;Enregistrer la cible du lien sous...&quot;, &quot;Enregistrer l'image sous...&quot; et &quot;Enregistrer sous... (Ctrl+S)&quot;">
+<!ENTITY asf.rightclicktimeout.bool "Supprimer la temporisation et activer les filtres sur le menu clic-droit &quot;Enregistrer la cible du lien sous...&quot;.">
 <!ENTITY asf.rightclicktimeout.tooltip1 "Supprimer la temporisation empêche Firefox de lire le nom du fichier cible lors d'un téléchargement avec redirection, mais permet à Automatic Save Folder de fonctionner.">
 <!ENTITY asf.rightclicktimeout.tooltip2 "Désactivez temporairement cette option si vous souhaitez que Firefox lise correctement le nom du fichier fourni par l'entête (plus de filtrage possible).">
 <!ENTITY asf.rightclicktimeout.tooltip3 "Seuls les scripts de téléchargement avec redirection de fichier sont concernés.">
-<!ENTITY asf.rightclicktimeout.tooltip4 "Note : Cette option n'a pas d'effet sur les menus &#34;Enregistrer l'image sous...&#34; ni &#34;Enregistrer sous... (Ctrl+S)&#34;.">
-<!ENTITY asf.rightclick.ff2.label "La fonction clic-droit d'automatic save folder n'est pas compatible avec Firefox 2. Si vous souhaitez utiliser les filtres sur les téléchargements en utilisant le menu clic-droit &#34;Enregistrer la cible du lien sous...&#34;, vous devrez utiliser au minimum Firefox version 3.0 (Version 3.5 ou plus conseillée).">
-<!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &NL;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu &#34;Outils/Modules complémentaires...&#34; afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
+<!ENTITY asf.rightclicktimeout.tooltip4 "Note : Cette option n'a pas d'effet sur les menus &quot;Enregistrer l'image sous...&quot; ni &quot;Enregistrer sous... (Ctrl+S)&quot;.">
+<!ENTITY asf.rightclick.ff2.label "La fonction clic-droit d'automatic save folder n'est pas compatible avec Firefox 2. Si vous souhaitez utiliser les filtres sur les téléchargements en utilisant le menu clic-droit &quot;Enregistrer la cible du lien sous...&quot;, vous devrez utiliser au minimum Firefox version 3.0 (Version 3.5 ou plus conseillée).">
+<!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &NL;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu &quot;Outils/Modules complémentaires...&quot; afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
 
 <!ENTITY asf.options.groupbox5.label "Interface graphique">
 <!ENTITY asf.pathlist_defaultforceontop.bool "Dans les menus déroulants, afficher en premier le chemin d'enregistrement par défaut.">
@@ -111,7 +111,7 @@
 <!ENTITY asf.rowmatchinghighlight.system "Couleur système">
 
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder a détecté que vous utilisez l'extension DownThemAll!.&NL;Automatic Save Folder peut envoyer le dossier de destination filtré à DownThemAll! lorsque vous utilisez la fenêtre de sauvegarde &#34;Que doit faire Firefox avec ce fichier ?&#34;.&NL;&NL;Note : Cette option est désactivée lorsque vous utilisez le mode Navigation Privée.">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder a détecté que vous utilisez l'extension DownThemAll!.&NL;Automatic Save Folder peut envoyer le dossier de destination filtré à DownThemAll! lorsque vous utilisez la fenêtre de sauvegarde &quot;Que doit faire Firefox avec ce fichier ?&quot;.&NL;&NL;Note : Cette option est désactivée lorsque vous utilisez le mode Navigation Privée.">
 <!ENTITY asf.dta_ASFtoDTA_isActive.bool "Activer l'envoi du dossier filtré par Automatic Save Folder à DownThemAll!.">
 <!ENTITY asf.dta_chooseSendingMethod.label "Choix de la méthode d'envoi pour DTA OneClick!:">
 <!ENTITY asf.dta_methodReplace.label "Remplacer le premier dossier de la liste">

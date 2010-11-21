@@ -7,6 +7,7 @@
 
 <!ENTITY info.howtouse.title "Hur du använder ASF">
 <!ENTITY info.howtouse.text1 "Det här tillägget låter dig genom att använda filter, att definiera mappar som automatiskt väljs när du sparar dina filer.">
+
 <!ENTITY info.filterrules.title "Filterregler">
 <!ENTITY info.filterrules.rule1 "Filtren definieras med hjälp av filnamn och domän.">
 <!ENTITY info.filterrules.rule2 "Filtren måste matcha filens namn eller dess domän. Till exempel: Skriv inte <b>&quot;google.com&quot;</b> utan endast <b>google.com</b> (utan citationstecken)">
@@ -15,27 +16,38 @@
 <!ENTITY info.filterrules.rule5 "Samma sak med filnamnsfiltret: <b>*.zip</b> eller <b>.zip</b> fungerar likadant båda två.">
 <!ENTITY info.filterrules.rule6 "Filtren tillämpas från toppen till botten av listan och processen stoppas när ett filter som matchar den nerladdade filen påträffas. Sortera dina filter med detta i åtanke.">
 <!ENTITY info.filterrules.rule7 "Filtren är inte skiftlägeskänsliga, det görs med andra ord ingen skillnad på versaler och gemener när filtren bearbetas.">
+
 <!ENTITY info.howtouse.text2 "För mer flexibilitet accepterar det här tillägget reguljära uttryck.">
 <!ENTITY info.howtouse.text3 "För hjälp med reguljära uttryck kan du gå till fönstret &apos;Lägg till och redigera filter&apos; eller tilläggets huvudwebbplats. Om du vill ha tillgång till fullständiga resurser, kan du besöka http://www.regular-expressions.info/.">
 <!ENTITY info.howtouse.text4 "Dynamiska variabler kan användas för att skapa nya mappar under sparprocessen, namngivna efter dagens datum, filnamnet, domännamnet etc.<br />Du kan gå till fliken Dynamiska mappar för att se tillgängliga taggar.">
+
 <!ENTITY info.basicexample.title "Några exempel på filter">
+
 <!ENTITY info.basicexample.text1 "Om du vill att alla dina exekverbara filer <b>.exe</b> skall sparas i en en särskild mapp:">
 <!ENTITY info.basicexample.text2 "Mappen du vill att dina exekverbara filer skall sparas till.">
+
 <!ENTITY info.basicexample.text3 "Om du vill att alla filer från en viss webbplats (t.ex. mozilla.org) skall sparas i en Mozilla-mapp:">
 <!ENTITY info.basicexample.text4 "Din Mozilla-mapp.">
+
 <!ENTITY info.basicexample.text5 "Om du behöver sortera alla <b>.zip</b>-filer från mozilla.org och lämna övriga filer i den föregående mappen:">
 <!ENTITY info.basicexample.text6 "Din Mozilla-mapp för .zip-filer.">
 <!ENTITY info.basicexample.text7 "Och sortera det här filtret ovanför det föregående. Kom ihåg att filtren verifieras från toppen till botten i listan.">
+
 <!ENTITY info.basicexample.text8 "Och sist men inte minst. Du kan definiera filter med mer fullständiga namn och inte bara med filnamnstillägget:">
 <!ENTITY info.basicexample.text9 "Din mapp för alla versioner av Firefox installationsprogram.">
+
+
 <!ENTITY info.advancedexample.title "Några exempel med dynamiska filter och infångstfilter">
 <!ENTITY info.advancedexample.text1 "Obs : För att det skall fungera korrekt måste du aktivera alternativet under fliken Dynamiska mappar">
+
 <!ENTITY info.advancedexample.text2 "För att sortera ut alla s.k. nightly builds (löpande, nattlig uppdatering av utvecklingsversioner) av Firefox till undermappar i D:\Nerladdningar\Firefox:">
 <!ENTITY info.advancedexample.text3 "D:\Nerladdningar\Firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
 <!ENTITY info.advancedexample.text4 "Tillägget kommer att skapa en undermapp med namn efter dagens datum, t.ex. &quot;2009-12-04&quot;, i vilken din fil kommer att sparas.">
+
 <!ENTITY info.advancedexample.text5 "För att sortera ut en fil efter dess filnamnstillägg:">
 <!ENTITY info.advancedexample.text6 "D:\Nerladdningar\&#37;asf_x&#37;">
 <!ENTITY info.advancedexample.text7 "Tillägget kommer att skapa en undermapp med namnet &quot;zip&quot; för .zip-filer, &quot;rar&quot; för .rar-filer o.s.v., i vilken din fil kommer att sparas.">
+
 <!ENTITY info.advancedexample.text8 "För att sortera alla installationspaket av Firefox till undermappar med namn efter paketens versioner:">
 <!ENTITY info.advancedexample.text9 "D:\Nerladdningar\Firefox\$1f">
 <!ENTITY info.advancedexample.text10 "När den nerladdade filen kontrolleras mot filtren tas inte parenteser med i bedömningen och filtret kommer att agera som &quot;Firefox Setup *.exe&quot;<br />
@@ -68,10 +80,10 @@ Please, read this message carefully to make potential changes to your preference
 This page will only be displayed once, on first install or when important changes must be communicated.">
 
 <!ENTITY firstinstall.title.importantupdates "Important updates:">
-<!ENTITY firstinstall.title.firstinstall "1st install and reminder :">
-<!ENTITY firstinstall.fullupdatelist "For the complete changelog, see the &#34;About...&#34; tab in Automatic Save Folder's preferences.">
+<!ENTITY firstinstall.title.firstinstall "First install and reminder :">
+<!ENTITY firstinstall.fullupdatelist "For the complete changelog, see the &quot;About...&quot; tab in Automatic Save Folder's preferences.">
 
-<!ENTITY firstinstall.steps "In order to work, <b>you have to correctly set Firefox</b> and Automatic Save Folder's <b>preferences</b>.<br />
+<!ENTITY firstinstall.steps "In order to work, <b>you have to correctly set Firefox</b> and Automatic Save Folder's preferences.<br />
 Three steps are essentials, if the filtering doesn't work please check each of this steps again:">
 <!ENTITY firstinstall.step1 "Step 1 : Firefox">
 <!ENTITY firstinstall.step2 "Step 2 : Automatic Save Folder">
@@ -87,16 +99,16 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 
 	<br />- För användare av de tidigare Firefox-versionerna: Gå till fliken &quot;Innehåll&quot; och klicka på &quot;Hantera...&quot; nederst till höger.">
 <!ENTITY firstinstall.firefox.text5 "Säkerställ att den filtyp du vill ladda ner är inställd på &quot;Fråga alltid&quot;.">
-<!-- Screenshot from your language. Take firefox/tools/option/application tab/ och show an 'always ask' drop down selected -->
+<!-- Screenshot from your language. Take firefox/tools/option/application tab/ to show an 'always ask' drop down selected -->
 <!ENTITY firstinstall.firefox.pict2 "screen_apps_sv.png">
 <!ENTITY firstinstall.firefox.text6 "Choose a saving method in Firefox preferences, General tab:<br />
-- Save files to : Firefox will save the file automatically to that folder without opening the files explorer.<br />
-- Always ask me where to save files : Firefox will show you the files explorer to allow you to rename the file or choose the saving folder manually.">
+- &quot;Save files to&quot;: Firefox will save the downloads automatically into the specified folder without opening the files explorer.<br />
+- &quot;Always ask me where to save files&quot;: Firefox will show you the files explorer which will allow you to rename the file or select another saving folder manually.">
 <!ENTITY firstinstall.firefox.pict3 "screen-main_en.png">
 
 <!ENTITY firstinstall.asf.text1 "If you decide to go without the file explorer, Firefox will automatically save your files<br />
-Either in the download folder defined by your operating system, either on your desktop.<br />
-Do not forget to select &#34;Set by the filters&#34; to allow Firefox to use the filtered folders.">
+either in the download folder defined by your operating system, or on your desktop.<br />
+Do not forget to select &quot;Set by the filters&quot; to allow Firefox to use the filtered folders.">
 <!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
 <!ENTITY firstinstall.asf.pict1 "screen-asf102-setbyfilters_en.png">
 <!ENTITY firstinstall.asf.text2 "Your filter's order is of a big importance!<br />
@@ -105,8 +117,8 @@ Remember to alway set your filters order using the arrow on the right of the fil
 
 
 <!ENTITY firstinstall.save.text1 "You must take care that Firefox will always ask you what to do with your currently downloading file.<br />
-According to this, <b>you must not check</b> &#34;Do this automatically for files like this from now on.&#34;.<br />
-If it happens, do Step 1 again.">
+According to this, <b style='color:red;'>you must not check</b> &quot;Do this automatically for files like this from now on.&quot;.<br />
+If it ever happens, do Step 1 again.">
 <!-- Screenshot from your language. This is a screen of 'What should Firefox do with this file?' saving window, like firstinstall.Firefox.pict1, but with 'Do this automatically for files like this from now on.' shown unchecked-->
 <!ENTITY firstinstall.save.pict1 "screen-savedialog-alwaysdothis_en.png">
 
@@ -118,3 +130,4 @@ If it happens, do Step 1 again.">
 <!ENTITY importantupdates.102.2 "Send the filtered folder to DownThemAll!">
 <!ENTITY importantupdates.102.3 "Import/export the filters.">
 <!ENTITY importantupdates.102.4 "Removed the need of the slashes around a regular expression's filters.">
+<!ENTITY importantupdates.102.5 "Note: In order to develop Automatic Save Folder further, this version is the last compatible with older Firefox versions (1.5, 2.0 and 3.0).">

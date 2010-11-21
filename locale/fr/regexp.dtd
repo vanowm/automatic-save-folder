@@ -48,9 +48,9 @@ Le ? correspond à l'expression régulière {0,1}<br />
 Nov(embre)? = Nov(embre){0,1}<br />
 <br />
 Le caractère * suivi d'un ? permet de rendre le * fénéant au lieu d'avare, exemple :<br />
-Les données : &#34;C'est un test&#34;<br />
-Filtre 1 : &#34;t.*t&#34; capturera du premier au dernier T, soit &#34;t un test&#34;, l'astérisque est avare et capture le plus de lettres possibles.<br />
-Filtre 2 : &#34;t.*?t&#34; ne capturera cependant que le premier groupe de T, c'est à dire &#34;t un t&#34;, l'astérisque est fénéante et la capture s'arrete au premier résultat rencontré (de gauche à droite).">
+Les données : &quot;C'est un test&quot;<br />
+Filtre 1 : &quot;t.*t&quot; capturera du premier au dernier T, soit &quot;t un test&quot;, l'astérisque est avare et capture le plus de lettres possibles.<br />
+Filtre 2 : &quot;t.*?t&quot; ne capturera cependant que le premier groupe de T, c'est à dire &quot;t un t&quot;, l'astérisque est fénéante et la capture s'arrete au premier résultat rencontré (de gauche à droite).">
 
 <!ENTITY The.bracket.title "Les crochets [ ]">
 <!ENTITY The.bracket.text "Les crochets [ ] servent à définir une plage ou un groupe de caractères possibles.<br />

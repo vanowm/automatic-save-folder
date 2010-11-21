@@ -27,45 +27,46 @@
 + If DownThemAll add-on is installed, a new option's tab is available to send ASF target path to DTA.
 + Added an option to select if the filters are case sensitive or insensitive.
 + New options related to Graphical User Interface.
-+ Added a Drag&amp;Drop Copy method (ie. drag+Ctrl on Windows).
++ Added a Drag&amp;Drop Copy method (ie. Ctrl+drag on Windows).
 + Print filter's and process informations to the error console when downloading a file. (Disabled if Firefox is in PrivateBrowsing mode)
 + checking and update for beta versions. The internal update feature is working only on Firefox 4.
 + New menu to import and export preferences and filters.
 + A help page will now open after the first install and when there's important messages after an update.
++ Localization : sv-SE
 - Removed the need of the slashes around a regular expression's filters.
 * It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).
 * &#37;asf_f&#37; now uses full filename with extension if no filter match.
 * &#37;asf_d&#37; now uses domain without the protocol if no filter match.
-! Fixed a bug where no data was returned if a download was initiated from the URL bar or from an external software which resulted in no filters in the filter's list if the preferences window was opened from the saving dialog &#34;+ Add or edit a filter&#34;. (Thanks to MrCOLOMBO)
+! Fixed a bug where no data was returned if a download was initiated from the URL bar or from an external software which resulted in no filters in the filter's list if the preferences window was opened from the saving dialog &quot;+ Add or edit a filter&quot;. (Thanks to MrCOLOMBO)
 ! Fixed the dynamic folder creation for the first filter in the list. (Thanks to Googer)
 
-Note : In order to develop Automatic Save Folder further, this version is the last compatible with Firefox 1.5, 2.0 and 3.0.">
+Note: In order to develop Automatic Save Folder further, this version is the last compatible with older Firefox versions (1.5, 2.0 and 3.0).">
 
 <!ENTITY about.version.101 "! Fixed a spelling error preventing ASF to work when no filter matched.
 ! Added a missing Russian string on the filter's tab.">
 
-<!ENTITY about.version.100 "+ Add filtering on Right-Click menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as...(Ctrl+S)&#34;
+<!ENTITY about.version.100 "+ Add filtering on Right-Click menus &quot;Save link as...&quot;, &quot;Save image as...&quot; and &quot;Save as...(Ctrl+S)&quot;
   (Need at least Firefox 2.0 and is not compatible with Download Sort add-on. If you have both activated, Download Sort prevails)
 + ASF is now working with Private browsing, and will prevent saving any data to Firefox preferences.
   Two things to note which change ASF behavior: 1) The previous hosted domain will not be updated, and 2) If the destination folder doesn't exist it will not be created or suggested, and the last working folder from non private mode will be used instead.
 + Add dynamic variables &#37;F&#37; for the month name, and &#37;M&#37; for the abbreviated one.
 + Add dynamic variables for weeks: Week number &#37;W&#37;, Day of the week &#37;w&#37;, &#37;l&#37; or &#37;D&#37;
-+ Make Windows and Mac OSX works with Firefox option &#34;browser.preferences.instantApply&#34; to save the filters right after a modification (Option by default on Linux)
++ Make Windows and Mac OSX works with Firefox option &quot;browser.preferences.instantApply&quot; to save the filters right after a modification (Option by default on Linux)
 + Add Drag and Drop feature on the filter's listing to set filter's order quickly.
-+ Add a proper way to select Firefox saving option (&#34;Always ask&#34; or &#34;Save to&#34;), and select which folder manually instead of forcing it to Userchoice (browser.downlod.folderList=2)
-+ Add an option to automatically accept the &#34;what would Firefox need to do with this file?&#34; dialog windows (User requested). Use it with &#34;Do not prompt the File explorer&#34; option for even better efficiency.
++ Add a proper way to select Firefox saving option (&quot;Always ask&quot; or &quot;Save to&quot;), and select which folder manually instead of forcing it to Userchoice (browser.downlod.folderList=2)
++ Add an option to automatically accept the &quot;what would Firefox need to do with this file?&quot; dialog windows (User requested). Use it with &quot;Do not prompt the File explorer&quot; option for even better efficiency.
 + Add an option to choose if you want to use the current website URL to verify the filters if the file's hosted domain doesn't match.
 + Display ASF icon on the add-ons manager even on disabled state, instead of the green puzzle piece (Firefox 3.6+)
 + Added a display option to show or hide the ASF option box, and set the box name clickable to show/hide the ASF option box content.
 + Added row coloration to see the matching filters according to the current downloaded file if the preferences window is opened from the saving window. Matching and enabled  = green, Matching but disabled = red.
 * On the download dialog's drop-down menu: Sort path list alphabetically, remove duplicates, and made them working with dynamic renaming folder if option enabled.
-* Separated the &#34;informations&#34; tab in two other tabs &#34;Help&#34; and &#34;About...&#34;.
+* Separated the &quot;informations&quot; tab in two other tabs &quot;Help&quot; and &quot;About...&quot;.
 * Added tooltips instead of help text bellow each options (has some issues with Firefox2).
-* On the download dialog, disable the suggested folders if the &#34;What should Firefox do with this file?&#34; group's option is not set to &#34;Save File&#34;
+* On the download dialog, disable the suggested folders if the &quot;What should Firefox do with this file?&quot; group's option is not set to &quot;Save File&quot;
 * Added a drop-down menu on the Add&amp;Edit window for quick access to the folders already added from the available filter's list.
 ! Correct links to Mozilla website, which were forced to the French page.
 ! Correct the filter's checking when Dynamic folder creation is enabled
-! Prevent an exception when &#34;use current website URL&#34; option is enabled and the address bar doesn't contain an URL.
+! Prevent an exception when &quot;use current website URL&quot; option is enabled and the address bar doesn't contain an URL.
   Happened with redirection download script and Firefox closing the new empty popup window, or using middle mouse-button click on a link.
 ! When using instantApply, the suggested filters weren't refreshed after closing the preference window.
 ! Fixed a bug where sub-options were auto unchecked visually but not saved when using instantApply feature.
@@ -84,13 +85,13 @@ Other updates :
 + [Sperimentale] Per facilitare l'uso quando il dominio hostato è random (es. per scaricare firefox su mozilla.org):
   Controllare i filtri con l'URI corrente se il dominio hostato non corrisponde.
   Attenzione all'ordine dei filtri: Prima viene controllato il file del dominio, dopo l'indirizzo  del sito corrente.
-  I dati usati per selezionare il dominio come &#34;precedente&#34; è ancora uno dei file hostati sul dominio.
+  I dati usati per selezionare il dominio come &quot;precedente&quot; è ancora uno dei file hostati sul dominio.
 + Limitata la larghezza della finestra di salvataggio (Grazie a Julien)
 + Aggiunta l'opzione per mostrare un menu con la lista nella finestra di salvataggio per selezionare la cartella di salvataggio da tale lista. 
-* Cambiato il modo in cui i link nella finestra &#34;about...&#34; funzionano. Adesso apriranno un nuovo tab.
+* Cambiato il modo in cui i link nella finestra &quot;about...&quot; funzionano. Adesso apriranno un nuovo tab.
 * Finetra e menu pi grandi per una visibilità migliore.
 * Codice semplificato per muovere i filtri su e giu.
-* Codice semplificato per il caricamento e l'autocompletamento dei dati nella finestra &#34;aggiungi&#34;.
+* Codice semplificato per il caricamento e l'autocompletamento dei dati nella finestra &quot;aggiungi&quot;.
 * Migliore visibilità: Tutte le finestra possono essere ridimensionate e il contenuto verrà aggiusato di conseguenza.
 * Script riscritto completamente per usare namespace Globa (chiesto da mozilla.com per pubblicare l'estensione)
 * Codice scritto in modo più chiaro e con commenti.
@@ -100,18 +101,18 @@ Other updates :
 
 <!ENTITY about.version.092 "*Compatibilià con i temi: Adesso vengono usati i colori di default, tutto il testo dovrebbe essere visibile correttamente.
  Le immagini sono state aggiornate in modo da rimanere visibili sui temi scuri.
-! Correzione per Vista: Forzata la variabile browser.download.folderList a &#34;2&#34; quando si apre la finestra delle preferenze di ASF.
-! Corretta la colonna &#34;attiva&#34;, i filtri non potevano essere temporaneamente attivati o disattivati.">
+! Correzione per Vista: Forzata la variabile browser.download.folderList a &quot;2&quot; quando si apre la finestra delle preferenze di ASF.
+! Corretta la colonna &quot;attiva&quot;, i filtri non potevano essere temporaneamente attivati o disattivati.">
 
 <!ENTITY about.version.091 "+ Traduzione italiana di Scognito.
 + Aggiunto un radio menu mentre si salva, che permette all'utente di scegliere velocemente fra le ultime due cartelle.
   La seconda scelta compare solamente se è diversa dalla prima.
-* Nascosta l'opzione &#34;Ha effetto su 'salva come...'&#34; su Firefox 3, questa opzione è usata automaticamente.
-* Rimosso il popup &#34;Aggiungi un filtro&#34; mentre si salva. Ha creato il problema del focus e un errore sul posizionamento della finestra.
+* Nascosta l'opzione &quot;Ha effetto su 'salva come...'&quot; su Firefox 3, questa opzione è usata automaticamente.
+* Rimosso il popup &quot;Aggiungi un filtro&quot; mentre si salva. Ha creato il problema del focus e un errore sul posizionamento della finestra.
   Il collegamento è ancora qui e apre la finestra principale per permettere all'utente di aggiungere o modificare filtri.
   Mentre si aggiunge un filtro usando questo collegamento, il campo verrà inserito automaticamente riempito col nome del file corrente e col dominio.
 * Risolto il doppio click sui filtri. Adesso i campi non sono editabili su Firefox 3.
-! Corretto un bug dello script sulla verifica del filtro mentre &#34;Usa l'ultima cartella&#34; era selezionata (grazie a Carsten)
+! Corretto un bug dello script sulla verifica del filtro mentre &quot;Usa l'ultima cartella&quot; era selezionata (grazie a Carsten)
 ! Risolto un bug su Firefox 3 e Windows Vista: Cambiato un opzione interna di firefox che permette all'utente di usare cartelle definite. (Thanks to Carsten)
   (browser.download.folderList = 2) Su Windows Vista, il valore è settato a 1.
   I possibili valori sono: 0 = desktop ; 1 = cartella di download predefinita; 2 = scelta utente.
@@ -125,16 +126,16 @@ Other updates :
   Problema noto: Può capitare un problema di focus mentre si chiude il pannelo dei filtri.
 - Tolta l'opzione per attivare o disattivare l'estensione. Per disabilitarla temporaneamente, usa il gestore delle estensioni.
 * Nuovo modo di controllare i filtri (addEventlistener invece di OnLoad), per una migliore compatibilità con altre estensioni.
-! Corretta la colonna per filtro &#34;Attivo&#34; che non era nascosta correttamente.">
+! Corretta la colonna per filtro &quot;Attivo&quot; che non era nascosta correttamente.">
 
 <!ENTITY about.version.087 "+ Compatibile con Firefox 3.0 beta (giusto qualche cambiamento sullo script).
-* Il bottone Invio ha effetto sui vari pulsanti (Ok, Aggiungi, Modifica). Nelle precedenti versioni era sul pulsante &#34;Cancel&#34;.
+* Il bottone Invio ha effetto sui vari pulsanti (Ok, Aggiungi, Modifica). Nelle precedenti versioni era sul pulsante &quot;Cancel&quot;.
 ! 1 versioni per Windows e Linux (e forse Mac ? Perfavore qualcuno potrebbe testare ?)">
 
-<!ENTITY about.version.086fix "* Cambiati i bottoni &#34;OK&#34; che non comparivano nel menu principale su Linux.
+<!ENTITY about.version.086fix "* Cambiati i bottoni &quot;OK&quot; che non comparivano nel menu principale su Linux.
 Informazioni:
-Su Linux, c'è solo il bottone &#34;chiudi&#34; e i bottoni di controllo sono salvati automaticamente quando richiesto dall'utente. Sfortunatamente l'array Table non è salvato in questo processo.
-Ho rimosso il bottone &#34;Accetta&#34; e l'ho cambiato con uno fatto traimte script &#34;Salva e chiudi&#34;.">
+Su Linux, c'è solo il bottone &quot;chiudi&quot; e i bottoni di controllo sono salvati automaticamente quando richiesto dall'utente. Sfortunatamente l'array Table non è salvato in questo processo.
+Ho rimosso il bottone &quot;Accetta&quot; e l'ho cambiato con uno fatto traimte script &quot;Salva e chiudi&quot;.">
 
 <!ENTITY about.version.086 "* Correzioni di parole e frasi. Grazie al commento di Goofy di Mozilla.org.">
 
@@ -152,12 +153,12 @@ Ho rimosso il bottone &#34;Accetta&#34; e l'ho cambiato con uno fatto traimte sc
 + Aggiunta l'opzione per impostare il percorso del menu salva pagina Web (File, salva pagina con nome...)">
 
 <!ENTITY about.version.081 "* Selezione cartella: La finestra della selezione della cartella si basa sulla cartella scelta precedentemente. Prima si apriva su una cartella a caso tra: documents and settings, desktop o la cartella dell'utente.
-* Restrizioni sulla selezione della cartella: tolta la possibilità di scrivere il percorso manualmente, adesso solo il bottone &#34;Seleziona...&#34; è valido per la selezione della cartella di destinazione.">
+* Restrizioni sulla selezione della cartella: tolta la possibilità di scrivere il percorso manualmente, adesso solo il bottone &quot;Seleziona...&quot; è valido per la selezione della cartella di destinazione.">
 
 <!ENTITY about.version.080 "Funzioni:
 + Filtri ordinati per priorità (opzioni per muovere i filtri su e giu)
 + Funziona con filtri normali, wildcard e RegExp.
-+ La cartella si puà selezionare manualmente o col bottone &#34;Seleziona&#34;.
++ La cartella si puà selezionare manualmente o col bottone &quot;Seleziona&quot;.
 + Modifica di un filtro tramite doppio click sulla lista dei filtri.
 + Skin della GUI con immagini.">
 

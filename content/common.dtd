@@ -1,10 +1,10 @@
 <!-- Current version -->
-<!ENTITY asf.version "1.0.2bRev91">
+<!ENTITY asf.version "1.0.2bRev92">
 
 <!ENTITY about.translators "
 - en-US : Cyan, Narayan<br />
 - fr : Cyan, Goofy, Haynee<br />
 - it : Scognito.<br />
 - ru : MrCOLOMBO<br />
-- sv-SE : Lakrits<br />
+- sv-SE : Mikael Hiort af Ornäs<br />
 ">

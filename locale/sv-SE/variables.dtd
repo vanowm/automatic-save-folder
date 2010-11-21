@@ -1,18 +1,22 @@
 <!-- browser and save dialog-->
 <!ENTITY Year "År">
+
 <!ENTITY Month "Månad">
 <!ENTITY Month.wleadingzero "01 till 12">
 <!ENTITY Month.woleadingzero "1 till 12">
 <!ENTITY Month.fullname "januari">
 <!ENTITY Month.abbr "jan">
+
 <!ENTITY Week "Vecka">
 <!ENTITY Week.wleadingzero "01 till 52">
 <!ENTITY DayOfTheWeek "0 (söndag) till 6">
 <!ENTITY DayOfTheWeek.fullname "måndag">
 <!ENTITY DayOfTheWeek.abbr "mån">
+
 <!ENTITY Day "Dag">
 <!ENTITY Day.wleadingzero "01 till 31">
 <!ENTITY Day.woleadingzero "1 till 31">
+
 <!ENTITY Special.tags "Specialtaggar">
 <!ENTITY asf_D "Domännamn. (Utan http://)">
 <!ENTITY asf_F "Filnamn med filnamnstillägg.">
@@ -20,13 +24,15 @@
 <!ENTITY asf_d "&quot;Domän&quot;-fältet från det använda filtret. (Otillåtna tecken kommer att tas bort. Om inga filter hittas används den aktuella domänen.)">
 <!ENTITY asf_f "&quot;Filnamn&quot;-fältet från det använda filtret. (Otillåtna tecken kommer att tas bort. Om inga filter hittas används det aktuella filnamnet.)">
 <!ENTITY asf_x "Filnamnstillägg. (Utan punkten)">
+
 <!ENTITY Capture.tags "Infångsttaggar">
 <!ENTITY number "nummer">
-<!ENTITY Capture.d "Returnerar den infångade datan genom att använda rundparenteser i &quot;domän&quot;-filtret. <nummer> refererar till rundparentesnumret, från 1 till 9.">
-<!ENTITY Capture.f "Returnerar den infångade datan genom att använda rundparenteser i &quot;filnamn&quot;-filtret. <nummer> refererar till rundparentesnumret, från 1 till 9.">
+<!ENTITY Capture.d "Returnerar den infångade datan genom att använda rundparenteser i &quot;domän&quot;-filtret. [nummer] refererar till rundparentesnumret, från 1 till 9.">
+<!ENTITY Capture.f "Returnerar den infångade datan genom att använda rundparenteser i &quot;filnamn&quot;-filtret. [nummer] refererar till rundparentesnumret, från 1 till 9.">
 <!ENTITY Capture.example "Exempel: I det här filtret:  mozilla_(firefox)_3.5.(exe), kommer <b>$1f</b> att fånga in &quot;firefox&quot; och <b>$2f</b> att fånga in &quot;exe&quot;.">
 <!ENTITY Regexp "reguljära uttryck">
-<!ENTITY Capture.rd "Kontrollerar den fullständiga domänen med det reguljära uttrycket omslutet av de två taggarna <b>&#37;asf_rd&#37;</b> och returnerar den infångade datan.">
+<!ENTITY Capture.rd "Kontrollerar den domänen med det reguljära uttrycket omslutet av de två taggarna <b>&#37;asf_rd&#37;</b> och returnerar den infångade datan.">
 <!ENTITY Capture.rf "Kontrollerar filnamnet med det reguljära uttrycket omslutet av de två taggarna <b>&#37;asf_rf&#37;</b> och returnerar den infångade datan.">
+
 <!ENTITY Attention "OBSERVERA">
 <!ENTITY Attention.text "Om resultatet för sparsökvägen innehåller otillåtna tecken (:?&quot;*\/&lt;&gt;| för Windows), kommer tillägget att sluta fungera. Se till att kontrollera dina filter om tillägget inte längre fungerar.">

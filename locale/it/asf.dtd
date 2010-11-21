@@ -51,12 +51,12 @@
 <!ENTITY asf.desktop.label "Desktop">
 <!ENTITY asf.systemdownload.label "Downloads">
 <!ENTITY asf.filteredfolder.label "Set by the filters">
-<!ENTITY asf.folderList.tooltip "If the &#34;Downloads&#34; folder doesn't exist, the file explorer will be shown.">
+<!ENTITY asf.folderList.tooltip "If the &quot;Downloads&quot; folder doesn't exist, the file explorer will be shown.">
 
 <!ENTITY asf.options.groupbox2.label "Save dialog">
-<!ENTITY asf.dialogaccept.bool "Automatically accept the &#34;What should Firefox do with this file&#34; dialog windows.">
+<!ENTITY asf.dialogaccept.bool "Automatically accept the &quot;What should Firefox do with this file&quot; dialog windows.">
 <!ENTITY asf.dialogacceptFiltered.bool "Only if a filter is found">
-<!ENTITY asf.dialogacceptFiltered.tooltip "Will not automatically accept the &#34;What should Firefox do with this file&#34; dialog windows if no filter matches.">
+<!ENTITY asf.dialogacceptFiltered.tooltip "Will not automatically accept the &quot;What should Firefox do with this file&quot; dialog windows if no filter matches.">
 <!ENTITY asf.dialogForceRadio_Start.bool "Force the radio choice to">
 <!ENTITY asf.dialogForceRadioTo.label1 "Open with">
 <!ENTITY asf.dialogForceRadioTo.label2 "DownThemAll!">
@@ -94,13 +94,13 @@
 
 <!ENTITY asf.options.groupbox4.label "Right-click">
 <!ENTITY asf.userightclick.bool "Use the filters on the menus">
-<!ENTITY asf.userightclick.tooltip "Enable the filters on the menus &#34;Save link as...&#34;, &#34;Save image as...&#34; and &#34;Save as... (Ctrl+S)&#34;">
-<!ENTITY asf.rightclicktimeout.bool "Remove the timing delay and activate the filtering on the right-click menu &#34;Save link as...&#34;">
+<!ENTITY asf.userightclick.tooltip "Enable the filters on the menus &quot;Save link as...&quot;, &quot;Save image as...&quot; and &quot;Save as... (Ctrl+S)&quot;">
+<!ENTITY asf.rightclicktimeout.bool "Remove the timing delay and activate the filtering on the right-click menu &quot;Save link as...&quot;">
 <!ENTITY asf.rightclicktimeout.tooltip1 "Removing the timing delay prevent Firefox to read the file's target name if it is from a redirection download, but allow Automatic Save Folder to work.">
 <!ENTITY asf.rightclicktimeout.tooltip2 "Temporarily disable this feature if you want Firefox to read the filename provided by the header (no filter available anymore).">
 <!ENTITY asf.rightclicktimeout.tooltip3 "Only download scripts with file redirection are affected.">
-<!ENTITY asf.rightclicktimeout.tooltip4 "Note: This option doesn't affect the menus &#34;Save image as...&#34; nor &#34;Save as... (Ctrl+S)&#34;.">
-<!ENTITY asf.rightclick.ff2.label "The Automatic Save Folder's right-click feature is not available on Firefox 2. If you want to use the filters on your downloads using the right-click menu &#34;Save link as&#34;, you should update your Firefox version to 3.0 minimum (recommended version 3.5 or more).">
+<!ENTITY asf.rightclicktimeout.tooltip4 "Note: This option doesn't affect the menus &quot;Save image as...&quot; nor &quot;Save as... (Ctrl+S)&quot;.">
+<!ENTITY asf.rightclick.ff2.label "The Automatic Save Folder's right-click feature is not available on Firefox 2. If you want to use the filters on your downloads using the right-click menu &quot;Save link as&quot;, you should update your Firefox version to 3.0 minimum (recommended version 3.5 or more).">
 <!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &NL;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Extension manager.">
 
 <!ENTITY asf.options.groupbox5.label "Graphical inerface">
@@ -111,7 +111,7 @@
 <!ENTITY asf.rowmatchinghighlight.system "System color">
 
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on. &NL;Automatic Save Folder can send the filtered destination path to DownThemAll! when using the &#34;What should firefox do with this file&#34; saving window.&NL;&NL;Note: This option is disabled when using the Private Browsing mode.">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on. &NL;Automatic Save Folder can send the filtered destination path to DownThemAll! when using the &quot;What should firefox do with this file&quot; saving window.&NL;&NL;Note: This option is disabled when using the Private Browsing mode.">
 <!ENTITY asf.dta_ASFtoDTA_isActive.bool "Enable Automatic Save Folder to send the filtered path to DownThemAll!.">
 <!ENTITY asf.dta_chooseSendingMethod.label "Choose the sending method for DTA OneClick!:">
 <!ENTITY asf.dta_methodReplace.label "Replace first folder in list">

@@ -10,7 +10,7 @@
 
 <!ENTITY info.filterrules.title "Les règles à suivre">
 <!ENTITY info.filterrules.rule1 "Les filtres sont définis à l'aide du nom et du domaine d'hébergement du fichier.">
-<!ENTITY info.filterrules.rule2 "Les filtres doivent contenir le texte correspondant au nom de fichier ou de domaine. Par exemple n'indiquez pas <strong>&#34;google.fr&#34;</strong> mais simplement <strong>google.fr</strong> (sans les guillemets).">
+<!ENTITY info.filterrules.rule2 "Les filtres doivent contenir le texte correspondant au nom de fichier ou de domaine. Par exemple n'indiquez pas <strong>&quot;google.fr&quot;</strong> mais simplement <strong>google.fr</strong> (sans les guillemets).">
 <!ENTITY info.filterrules.rule3 "Vous pouvez utiliser le caractère <strong>*</strong> (astérisque) pour remplacer une partie du filtre : <strong>wiki*.org</strong>">
 <!ENTITY info.filterrules.rule4 "L'astérisque n'est pas nécessaire en début et fin de filtre. Écrire <strong>*wiki*</strong> ou <strong>wiki</strong> revient au même. (Les astérisques sont ajoutés automatiquement en début et fin de filtre lors de l'enregistrement)">
 <!ENTITY info.filterrules.rule5 "Tout comme les extensions de fichier : <strong>*.zip</strong> ou <strong>.zip</strong> fonctionnent de la même manière.">
@@ -19,7 +19,7 @@
 
 <!ENTITY info.howtouse.text2 "Pour une plus grande souplesse, Automatic Save Folder accepte aussi les expressions régulières.">
 <!ENTITY info.howtouse.text3 "Pour plus de renseignements sur les expressions régulières, reportez-vous au menu d'aide présent dans la fenêtre d'ajout et d'édition des filtres, aussi disponible sur le site de l'extension ou sur le site http://www.regular-expressions.info/ (en anglais).">
-<!ENTITY info.howtouse.text4 "Des variables dynamiques sont à votre dispositions afin de créer des dossiers spécifiques lors de l'enregistrement, suivant la date du jour ou les noms de fichier et de domaine. <br />Reportez vous à l'onglet &#34;Dossiers dynamiques&#34; pour la liste des balises.">
+<!ENTITY info.howtouse.text4 "Des variables dynamiques sont à votre dispositions afin de créer des dossiers spécifiques lors de l'enregistrement, suivant la date du jour ou les noms de fichier et de domaine. <br />Reportez vous à l'onglet &quot;Dossiers dynamiques&quot; pour la liste des balises.">
 
 
 <!ENTITY info.basicexample.title "Voici quelques exemples de filtres simples">
@@ -43,32 +43,32 @@
 
 <!ENTITY info.advancedexample.text2 "Pour classer tous les nighlty build de firefox dans un sous-dossier de D:\Téléchargements\firefox :">
 <!ENTITY info.advancedexample.text3 "D:\Téléchargements\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
-<!ENTITY info.advancedexample.text4 "L'extension créera un sous-dossier nommé avec la date du jour, par exemple &#34;2009-04-12&#34;, dans lequel sera enregistré votre fichier.">
+<!ENTITY info.advancedexample.text4 "L'extension créera un sous-dossier nommé avec la date du jour, par exemple &quot;2009-04-12&quot;, dans lequel sera enregistré votre fichier.">
 
 <!ENTITY info.advancedexample.text5 "Pour classer un fichier suivant son extension :">
 <!ENTITY info.advancedexample.text6 "D:\Téléchargements\&#37;asf_x&#37;">
-<!ENTITY info.advancedexample.text7 "L'extension créera un sous-dossier nommé &#34;zip&#34; pour les fichier .zip, &#34;rar&#34; pour les .rar, etc. dans lequel sera enregistré votre fichier.">
+<!ENTITY info.advancedexample.text7 "L'extension créera un sous-dossier nommé &quot;zip&quot; pour les fichier .zip, &quot;rar&quot; pour les .rar, etc. dans lequel sera enregistré votre fichier.">
 
 <!ENTITY info.advancedexample.text8 "Pour classer les programmes d'installation de Firefox dans des dossiers portant le numéro de version">
 <!ENTITY info.advancedexample.text9 "D:\Téléchargements\Firefox\$1f">
-<!ENTITY info.advancedexample.text10 "Lors de la vérification, les parenthèses ne sont pas prises en compte, et le filtre se comporte comme s'il s'agissait de &#34;Firefox Setup *.exe&#34;<br />
+<!ENTITY info.advancedexample.text10 "Lors de la vérification, les parenthèses ne sont pas prises en compte, et le filtre se comporte comme s'il s'agissait de &quot;Firefox Setup *.exe&quot;<br />
 $1f correspond au contenu de la 1ere parenthèse du filtre sur le nom de fichier, soit le numéro de version <br />
- Le fichier &#34;Firefox Setup 3.5.4.exe&#34; sera donc enregistré dans le répertoire D:\Téléchargements\Firefox\3.5.4\">
+ Le fichier &quot;Firefox Setup 3.5.4.exe&quot; sera donc enregistré dans le répertoire D:\Téléchargements\Firefox\3.5.4\">
 
 <!ENTITY info.advancedexample.text11 "Pour créer ou non des sous-dossiers différents suivant le contenu du nom de fichier :">
-<!ENTITY info.advancedexample.text12 "Exemple de consignes : Nous souhaitons télécharger des vidéos nommées &#34;Mes_vacances_date-du-séjour.avi&#34;.<br />
+<!ENTITY info.advancedexample.text12 "Exemple de consignes : Nous souhaitons télécharger des vidéos nommées &quot;Mes_vacances_date-du-séjour.avi&quot;.<br />
 Les vidéos comportent des sous-titres .srt pour expliquer le voyage, des fichiers .zip sont également disponibles contenant des photos du séjour, les vidéos peuvent être distribuées en .avi, .torrent ou .nzb (newsgroup).<br />
-<br />Les &#34;.avi&#34; et &#34;.srt&#34; devront aller dans le dossier D:\video\vacances. <br />
-Les &#34;.zip&#34;, &#34;.torrent&#34; et &#34;.nzb&#34; devront aller respectivement dans leur sous-dossier D:\video\vacances\zip, D:\video\vacances\torrent et D:\video\vacances\nzb.">
+<br />Les &quot;.avi&quot; et &quot;.srt&quot; devront aller dans le dossier D:\video\vacances. <br />
+Les &quot;.zip&quot;, &quot;.torrent&quot; et &quot;.nzb&quot; devront aller respectivement dans leur sous-dossier D:\video\vacances\zip, D:\video\vacances\torrent et D:\video\vacances\nzb.">
 <!ENTITY info.advancedexample.text13 "/^Mes_vacances.*\.(avi|srt|zip|torrent|nzb)$/">
 <!ENTITY info.advancedexample.text14 "D:\video\vacances\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;">
 <!ENTITY info.advancedexample.text15 "Explication du filtrage :<br />
-Le filtre sera déclenché pour tous les fichiers commençant par &#34;Mes_vacances&#34; et terminant par une des extensions possibles (avi, srt, zip, torrent ou nzb).<br />
-Le dossier créé dépendra du filtrage : La balise &#37;asf_rf&#37; analyse le nom du fichier téléchargé avec l'expression régulière contenue entre les deux balises : Si le fichier comporte &#34;zip&#34;, &#34;torrent&#34; ou &#34;nzb&#34; en fin de nom, la portion capturée par l'expression régulière sert à créer le sous-dossier.<br />
+Le filtre sera déclenché pour tous les fichiers commençant par &quot;Mes_vacances&quot; et terminant par une des extensions possibles (avi, srt, zip, torrent ou nzb).<br />
+Le dossier créé dépendra du filtrage : La balise &#37;asf_rf&#37; analyse le nom du fichier téléchargé avec l'expression régulière contenue entre les deux balises : Si le fichier comporte &quot;zip&quot;, &quot;torrent&quot; ou &quot;nzb&quot; en fin de nom, la portion capturée par l'expression régulière sert à créer le sous-dossier.<br />
 Si aucune de ses trois extensions n'est trouvée, l'expression régulière ne renvoie rien, et aucun sous-dossier n'est créé, les fichiers seront téléchargé dans D:\video\vacances\">
 <!ENTITY info.advancedexample.text16 "Note : Vous pouvez placer autant de balises que vous le souhaitez dans le chemin d'enregistrement.<br /> Le filtre aurait pu être :">
 <!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(vacances|mariage)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
-Dans ce cas, le premier sous-dossier &#34;vacances&#34; est crée uniquement si le nom de fichier contient &#34;vacances&#34;.">
+Dans ce cas, le premier sous-dossier &quot;vacances&quot; est crée uniquement si le nom de fichier contient &quot;vacances&quot;.">
 
 
 <!-- Bellow is the page which appear on first install, and on important updates -->
@@ -80,8 +80,8 @@ Veuillez lire ce message attentivement afin d'éventuellement modifier vos param
 Cette page s'affiche lors de la 1ère installation, et lorsque des changements importants doivent vous être signalés.">
 
 <!ENTITY firstinstall.title.importantupdates "Mises à jour importantes :">
-<!ENTITY firstinstall.title.firstinstall "1ère installation et rappel :">
-<!ENTITY firstinstall.fullupdatelist "Pour la liste complète des changements, veuillez vous reporter à l'onglet &#34;À propos...&#34; dans les préférences d'Automatic Save Folder.">
+<!ENTITY firstinstall.title.firstinstall "Première installation et rappel :">
+<!ENTITY firstinstall.fullupdatelist "Pour la liste complète des changements, veuillez vous reporter à l'onglet &quot;À propos...&quot; dans les préférences d'Automatic Save Folder.">
 
 <!ENTITY firstinstall.steps "Pour que cette extension fonctionne, <b>vous devez paramétrer correctement Firefox</b> et Automatic Save Folder.<br />
 Trois étapes sont essentielles, si le filtrage ne fonctionne pas, veuillez re-vérifier chacune de ces étapes :">
@@ -89,36 +89,36 @@ Trois étapes sont essentielles, si le filtrage ne fonctionne pas, veuillez re-v
 <!ENTITY firstinstall.step2 "Étape 2 : Automatic Save Folder">
 <!ENTITY firstinstall.step3 "Étape 3 : Pendant le téléchargement">
 
-<!ENTITY firstinstall.firefox.text1 "Le filtrage sur les téléchargements normaux (simple clic, ou téléchargement automatique) ne fonctionne que si la fenêtre de téléchargement &#34;Que doit faire Firefox avec ce fichier ?&#34; s'affiche :">
+<!ENTITY firstinstall.firefox.text1 "Le filtrage sur les téléchargements normaux (simple clic, ou téléchargement automatique) ne fonctionne que si la fenêtre de téléchargement &quot;Que doit faire Firefox avec ce fichier ?&quot; s'affiche :">
 <!-- Screenshot from your language. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big) -->
 <!ENTITY firstinstall.firefox.pict1 "screen_save_fr.png">
 <!ENTITY firstinstall.firefox.text2 "Par conséquent, vérifiez que Firefox ne lance pas un traitement différent sur le fichier empêchant la fenêtre de s'afficher en suivant ces instructions :">
-<!ENTITY firstinstall.firefox.text3 "Allez dans le menu &#34;Outils&#34; de Firefox puis &#34;Options...&#34;.">
-<!ENTITY firstinstall.firefox.text4 "- Pour les utilisateurs de Firefox 3 : Allez sur l'onglet &#34;Applications&#34;.
-  <br />- Pour les utilisateurs d'une version précédente : Allez sur l'onglet &#34;Contenu&#34; puis cliquez sur le bouton &#34;Gérer...&#34;.">
-<!ENTITY firstinstall.firefox.text5 "Vérifiez que l'extension de fichier que vous souhaitez télécharger soit bien positionnée sur &#34;Toujours demander&#34;.">
+<!ENTITY firstinstall.firefox.text3 "Allez dans le menu &quot;Outils&quot; de Firefox puis &quot;Options...&quot;.">
+<!ENTITY firstinstall.firefox.text4 "- Pour les utilisateurs de Firefox 3 : Allez sur l'onglet &quot;Applications&quot;.
+  <br />- Pour les utilisateurs d'une version précédente : Allez sur l'onglet &quot;Contenu&quot; puis cliquez sur le bouton &quot;Gérer...&quot;.">
+<!ENTITY firstinstall.firefox.text5 "Vérifiez que l'extension de fichier que vous souhaitez télécharger soit bien positionnée sur &quot;Toujours demander&quot;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' selected -->
 <!ENTITY firstinstall.firefox.pict2 "screen_apps_fr.png">
 <!ENTITY firstinstall.firefox.text6 "Choisissez un mode de sauvegarde dans les préférence de Firefox, onglet général :<br />
-- Enregistrer le fichier dans le dossier... : Firefox sauvegardera le fichier automatiquement sans ouvrir l'explorateur de fichiers.<br />
-- Toujours demander où enregistrer les fichier : Firefox affiche la fenêtre d'explorateur de fichiers afin de pouvoir renommer ou changer l'emplacement de sauvegarde manuellement.">
-<!ENTITY firstinstall.firefox.pict3 "screen_apps_fr.png">
+- &quot;Enregistrer les fichiers dans le dossier&quot; : Firefox sauvegardera les téléchargements automatiquement dans le dossier spécifié sans ouvrir l'explorateur de fichiers.<br />
+- &quot;Toujours demander où enregistrer les fichiers&quot; : Firefox affiche la fenêtre d'explorateur de fichiers afin de pouvoir renommer ou changer l'emplacement de sauvegarde manuellement.">
+<!ENTITY firstinstall.firefox.pict3 "screen_main_fr.png">
 
 <!ENTITY firstinstall.asf.text1 "Si vous décidez de ne pas utiliser l'explorateur de fichier, Firefox enregistrera automatiquement vos fichiers <br />
 soit dans un dossier de téléchargement spécifique à votre système d'exploitation, soit directement sur votre bureau.<br />
-N'oubliez pas de sélectionner &#34;Défini par les filtres&#34; pour que Firefox utilise les dossiers de vos filtres.">
+N'oubliez pas de sélectionner &quot;Défini par les filtres&quot; pour que Firefox utilise les dossiers de vos filtres.">
 <!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
-<!ENTITY firstinstall.asf.pict1 "screen-asf102-setbyfilters_fr.png">
+<!ENTITY firstinstall.asf.pict1 "screen_asf102-setbyfilters_fr.png">
 <!ENTITY firstinstall.asf.text2 "L'ordre de vos filtre à aussi une grande importance !<br />
 La vérification s'effectue de haut en bas, et s'arrete dès qu'un filtre correspond au fichier téléchargé.<br />
 Pensez à bien organiser vos filtres en les déplaçant avec les flèches situé sur le coté droit de l'onglet des filtres, ou en attrapant les filtres avec votre souris.">
 
 
 <!ENTITY firstinstall.save.text1 "Vous devez veillez à ce que Firefox vous propose toujours ce qu'il doit faire du fichier que vous êtes en train de télécharger.<br />
-Par conséquent, <b style='color:red;'>il ne faut pas cocher</b> &#34;Toujours effectuer cette action pour ce type de fichier&#34;.<br />
+Par conséquent, <b style='color:red;'>il ne faut pas cocher</b> &quot;Toujours effectuer cette action pour ce type de fichier&quot;.<br />
 Si cela devait arriver, revérifiez l'étape 1.">
 <!-- Screenshot from your language. this is a screen of 'What should Firefox do with this file?' saving window, like firstinstall.Firefox.pict1, but with "Do this automatically for files like this from now." shown unchecked-->
-<!ENTITY firstinstall.save.pict1 "screen-savedialog-alwaysdothis_fr.png">
+<!ENTITY firstinstall.save.pict1 "screen_savedialog-alwaysdothis_fr.png">
 
 <!ENTITY firstinstall.moreinfo.text1  "Pour plus de renseignements sur l'utilisation de l'extension et la création des filtres, un onglet d'aide est disponible dans l'extension.">
 <!ENTITY firstinstall.moreinfo.text2  "Un forum d'aide est aussi à votre disposition sur le site officiel :">
@@ -128,3 +128,4 @@ Si cela devait arriver, revérifiez l'étape 1.">
 <!ENTITY importantupdates.102.2 "Envoi du dossier filtré à DownThemAll!">
 <!ENTITY importantupdates.102.3 "Import/export des filtres.">
 <!ENTITY importantupdates.102.4 "Suppression des slashs aux extrémités des filtres utilisant les expressions régulières.">
+<!ENTITY importantupdates.102.5 "Note : Afin de pouvoir faire évoluer Automatic Save Folder, cette version est la dernière compatible avec les anciennes versions de firefox (1.5, 2.0 et 3.0).">
