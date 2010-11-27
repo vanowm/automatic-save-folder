@@ -5,7 +5,7 @@
 <!ENTITY asf.preferences_window.height "423">
 
 <!-- new line, U+00A0 ISOnum -->
-<!ENTITY NL "&#10;" >
+<!ENTITY NL "&#10;">
 
 <!-- browser and save dialog-->
 <!ENTITY prefwindow.title "Inställningar för Automatic Save Folder">
@@ -20,11 +20,11 @@
 <!ENTITY asf.tree.column.localfolder "Lokal mapp">
 <!ENTITY asf.tree.column.enabled "Aktiverat">
 <!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter's tab, you can write 'up' if you want -->
-<!ENTITY asf.options.move.up "Flytta upp">
-<!ENTITY asf.options.move.down "Flytta ned">
+<!ENTITY asf.options.move.up " Flytta upp">
+<!ENTITY asf.options.move.down " Flytta ned">
 <!ENTITY asf.options.edit "Redigera">
-<!ENTITY asf.options.delete "Ta bort">
-<!ENTITY asf.options.add "Lägg till">
+<!ENTITY asf.options.delete "   Ta bort   ">
+<!ENTITY asf.options.add "  Lägg till  ">
 
 <!-- Filters tab - bottom -->
 <!ENTITY asf.default.label "Om filen inte matchar något filter, spara till:">
@@ -41,28 +41,28 @@
 
 <!-- Options tab -->
 <!ENTITY asf.options.label "Inställningar">
-<!ENTITY asf.options.tab1.label "Page 1">
-<!ENTITY asf.options.tab2.label "Page 2">
+<!ENTITY asf.options.tab1.label "Sida 1">
+<!ENTITY asf.options.tab2.label "Sida 2">
 <!ENTITY asf.options.tabdta.label "DownThemAll!">
-<!ENTITY asf.options.tabdata.label "Data management">
+<!ENTITY asf.options.tabdata.label "Datahantering">
 
-<!ENTITY asf.options.groupbox1.label "File Explorer">
+<!ENTITY asf.options.groupbox1.label "Filutforskaren">
 <!ENTITY asf.useDownloadDir.bool "Visa inte Filutforskaren, utan spara automatiskt till:">
 <!ENTITY asf.desktop.label "Skrivbordet">
 <!ENTITY asf.systemdownload.label "Hämtade filer">
 <!ENTITY asf.filteredfolder.label "Mapp angiven av filtren">
 <!ENTITY asf.folderList.tooltip "Om mappen &quot;Hämtade filer&quot; inte finns, kommer Filutforskaren att visas.">
 
-<!ENTITY asf.options.groupbox2.label "Save dialog">
+<!ENTITY asf.options.groupbox2.label "Spardialog">
 <!ENTITY asf.dialogaccept.bool "Godkänn dialogfönstren &quot;Vad vill du att Firefox gör med denna fil?&quot; automatiskt.">
 <!ENTITY asf.dialogacceptFiltered.bool "Endast om ett filter hittas">
 <!ENTITY asf.dialogacceptFiltered.tooltip "Om inga filter matchar kommer ASF inte att godkänna dialogfönstren &quot;Vad vill du att Firefox gör med denna fil?&quot; automatiskt.">
-<!ENTITY asf.dialogForceRadio_Start.bool "Force the radio choice to">
-<!ENTITY asf.dialogForceRadioTo.label1 "Open with">
+<!ENTITY asf.dialogForceRadio_Start.bool "Tvinga alternativknappen att markera">
+<!ENTITY asf.dialogForceRadioTo.label1 "Öppna med">
 <!ENTITY asf.dialogForceRadioTo.label2 "DownThemAll!">
 <!ENTITY asf.dialogForceRadioTo.label3 "dTa OneClick!">
-<!ENTITY asf.dialogForceRadioTo.label4 "Save File">
-<!ENTITY asf.dialogForceRadio_End.bool "before automatically accepting the save dialog.">
+<!ENTITY asf.dialogForceRadioTo.label4 "Spara fil">
+<!ENTITY asf.dialogForceRadio_End.bool "innan spardialogen godkänns automatiskt.">
 <!ENTITY asf.viewdloption.bool "Visa inställningar vid nerladdning">
 <!ENTITY asf.viewdloption.tooltip "Låter dig se de två senaste målmapparna och en länk för att lägga till eller redigera filtren">
 <!ENTITY asf.viewdloptionType0.label "Visa alltid">
@@ -72,27 +72,27 @@
 <!ENTITY asf.viewpathselect.bool "Visa listan över mappar">
 <!ENTITY asf.viewpathselect.tooltip "Aktivera visning av en rullgardinsmeny med alla filtersökvägar.">
 
-<!ENTITY asf.option.groupbox.checkUpdate.label "Beta update">
-<!ENTITY asf.checkBetaUpdate.button "Check for Beta Updates...">
-<!ENTITY asf.betaVersionAvailable.label "A new version is available:">
-<!ENTITY asf.betaVersionNotAvailable.label "No new version available.">
-<!ENTITY asf.autoCheckBetaUpdate.bool "Automatically check when opening the preferences window.">
-<!ENTITY asf.betaVersionUpdateNow.label "Update now">
+<!ENTITY asf.option.groupbox.checkUpdate.label "Beta-uppdatering">
+<!ENTITY asf.checkBetaUpdate.button "Sök efter Beta-uppdateringar...">
+<!ENTITY asf.betaVersionAvailable.label "En ny version är tillgänglig:">
+<!ENTITY asf.betaVersionNotAvailable.label "Ingen ny version tillgänglig.">
+<!ENTITY asf.autoCheckBetaUpdate.bool "Sök efter uppdateringar automatiskt när Inställningar öppnas.">
+<!ENTITY asf.betaVersionUpdateNow.label "Uppdatera nu">
 
-<!ENTITY asf.options.groupbox3.label "Filtering options">
+<!ENTITY asf.options.groupbox3.label "Filtreringsalternativ">
 <!ENTITY asf.lastdir.bool "Påverka mappen för kommandot &apos;Spara som...&apos; när ett filter matchar">
-<!ENTITY asf.domainTestOrder.label1 "Choose the domain types to use, and their verification order, when filtering:">
-<!ENTITY asf.domainTestOrder.label2 "[Help]">
-<!ENTITY asf.domainTestOrder.tooltip1 "A coma separated number list to specify in which order the tests on the domain will be performed. Default value if the field is empty: 1,5">
-<!ENTITY asf.domainTestOrder.tooltip2 "File's domain">
-<!ENTITY asf.domainTestOrder.tooltip3 "File's URL">
-<!ENTITY asf.domainTestOrder.tooltip4 "File's URL + Filename">
-<!ENTITY asf.domainTestOrder.tooltip5 "Tab's domain (or the file's domain if no data is found)">
-<!ENTITY asf.domainTestOrder.tooltip6 "Tab's URL (or the file's URL if no data is found)">
-<!ENTITY asf.domainTestOrder.tooltip7 "For more informations, you can see to which values correspond each entry in the Error console when downloading a file.">
-<!ENTITY asf.regexp_caseinsensitive.bool "Filters are case insensitive.">
+<!ENTITY asf.domainTestOrder.label1 "Välj de domäntyper som skall användas, och deras verifieringsordning, vid filtrering:">
+<!ENTITY asf.domainTestOrder.label2 "[Hjälp]">
+<!ENTITY asf.domainTestOrder.tooltip1 "En kommaseparerad tallista som anger i vilken ordning testerna för domänen skall utföras. Standardvärde om fältet är tomt: 1,5">
+<!ENTITY asf.domainTestOrder.tooltip2 "Filens domän">
+<!ENTITY asf.domainTestOrder.tooltip3 "Filens URL">
+<!ENTITY asf.domainTestOrder.tooltip4 "Filens URL + Filnamn">
+<!ENTITY asf.domainTestOrder.tooltip5 "Flikens domän (eller filens domän om ingen data hittas)">
+<!ENTITY asf.domainTestOrder.tooltip6 "Flikens URL (eller filens URL om ingen data hittas)">
+<!ENTITY asf.domainTestOrder.tooltip7 "För mer information kan du se vilka värden som hör ihop med vilka poster i Felkonsolen när du laddar ner en fil.">
+<!ENTITY asf.regexp_caseinsensitive.bool "Filtren är inte skiftlägeskänsliga.">
 
-<!ENTITY asf.options.groupbox4.label "Right-click">
+<!ENTITY asf.options.groupbox4.label "Högerklick">
 <!ENTITY asf.userightclick.bool "Använd filtren i sparmenyer">
 <!ENTITY asf.userightclick.tooltip "Aktivera filtren i menyerna &quot;Spara länk som...&quot;, &quot;Spara bild som...&quot; och &quot;Spara som... (Ctrl+S)&quot;">
 <!ENTITY asf.rightclicktimeout.bool "Ta bort tidsfördröjningen och aktivera filtreringen för snabbmenyobjektet &quot;Spara länk som...&quot;">
@@ -103,37 +103,37 @@
 <!ENTITY asf.rightclick.ff2.label "Automatic Save Folders högerklicksfunktion är inte tillgänglig i Firefox 2. Om du vill använda filtren vid nerladdningar via snabbmenyobjektet &quot;Spara länk som&quot;, måste du uppdatera Firefox till version 3.0 eller högre (version 3.5 eller högre rekommenderas).">
 <!ENTITY asf.rightclick.DSort.label "Tillägget Download Sort har upptäckts. &NL;Automatic Save Folders högerklicksfunktion kommer inte att fungera förrän du inaktiverar Download Sort i Tilläggshanteraren.">
 
-<!ENTITY asf.options.groupbox5.label "Graphical interface">
-<!ENTITY asf.pathlist_defaultforceontop.bool "On drop-down menus, shows the default save path first.">
-<!ENTITY asf.pathlist_alphasort.bool "Sort save paths list alphabetically.">
-<!ENTITY asf.rowmatchinghighlight.label "Highlight color when selecting a matching filter:">
-<!ENTITY asf.rowmatchinghighlight.color "ASF color">
-<!ENTITY asf.rowmatchinghighlight.system "System color">
+<!ENTITY asf.options.groupbox5.label "Grafiskt gränssnitt">
+<!ENTITY asf.pathlist_defaultforceontop.bool "I rullgardinsmenyer, visa standardsparsökvägen först.">
+<!ENTITY asf.pathlist_alphasort.bool "Sortera sparsökvägslistan alfabetiskt.">
+<!ENTITY asf.rowmatchinghighlight.label "Markeringsfärg när ett matchande filter markeras:">
+<!ENTITY asf.rowmatchinghighlight.color "ASF:s färg">
+<!ENTITY asf.rowmatchinghighlight.system "Systemets färg">
 
 <!ENTITY asf.options.groupbox6.label "DownThemAll!">
-<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder has detected that you are using DownThemAll! add-on.&NL;Automatic Save Folder can send the filtered destination path to DownThemAll! when using the &quot;What should firefox do with this file&quot; saving window.&NL;&NL;Note: This option is disabled when using the Private Browsing mode.">
-<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Enable Automatic Save Folder to send the filtered path to DownThemAll!.">
-<!ENTITY asf.dta_chooseSendingMethod.label "Choose the sending method for DTA OneClick!:">
-<!ENTITY asf.dta_methodReplace.label "Replace first folder in list">
-<!ENTITY asf.dta_methodAdd.label "Add to list">
+<!ENTITY asf.options.dtaDetected.label "Automatic Save Folder har upptäckt att du använder tillägget DownThemAll!.&NL;Automatic Save Folder kan skicka den filtrerade målsökvägen till DownThemAll! när du använder sparfönstret &quot;Vad vill du att Firefox gör med denna fil?&quot;.&NL;&NL;Obs: Det här alternativet är inaktiverat när du använder Privat surfning-läget.">
+<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Aktivera att Automatic Save Folder skickar den filtrerade sökvägen till DownThemAll!.">
+<!ENTITY asf.dta_chooseSendingMethod.label "Välj sändmetod för DTA OneClick!:">
+<!ENTITY asf.dta_methodReplace.label "Ersätt första mappen i listan">
+<!ENTITY asf.dta_methodAdd.label "Lägg till i lista">
 
-<!ENTITY asf.options.groupbox.datamanagement.label "Data management">
-<!ENTITY asf.export.notemp.bool "Do not import temporary data, like the last domain you downloaded from or the last saved path.">
-<!ENTITY asf.export.forceimport.bool "Force the import process even if the version is not compatible. Attention: To prevent data loss, export and keep your actual data before forcing the import.">
-<!ENTITY asf.export.infonotsaved.label "Note: These two options are not memorized to prevent import error.">
-<!ENTITY asf.export.button.label "Settings">
-<!ENTITY asf.export.button.export.label "Export">
-<!ENTITY asf.export.button.import.label "Import">
-<!ENTITY asf.export.button.importall.label "Import all data">
-<!ENTITY asf.export.button.importprefs.label "Import only preferences">
-<!ENTITY asf.export.button.importfilters.label "Import only filters">
-<!ENTITY asf.export.button.recoverfilters.label "Recover unused filters from database">
-<!ENTITY asf.export.button.delete.label "Delete">
-<!ENTITY asf.export.button.deleteallfilters.label "Delete all filters">
-<!ENTITY asf.export.button.deleteunusedfilters.label "Delete unused filters from database">
-<!ENTITY asf.export.button.deleteuserprefs.label "Restore preferences to default values">
-<!ENTITY asf.export.defaultfolder.label "Default folder for exported data (optional):">
-<!ENTITY asf.export.showbutton.bool "Add a data management button on the filter's tab.">
+<!ENTITY asf.options.groupbox.datamanagement.label "Datahantering">
+<!ENTITY asf.export.notemp.bool "Importera inte temporär data, t.ex. den senaste domänen du laddade ner från eller den senast sparade sökvägen.">
+<!ENTITY asf.export.forceimport.bool "Tvinga importprocessen även om versionen inte är kompatibel. Obs: För att förhindra dataförluster, exportera och behåll din befintliga data innan importen tvingas.">
+<!ENTITY asf.export.infonotsaved.label "Obs: De här båda alternativen glöms bort efter användning för att förhindra importfel.">
+<!ENTITY asf.export.button.label "Inställningar">
+<!ENTITY asf.export.button.export.label "Exportera">
+<!ENTITY asf.export.button.import.label "Importera">
+<!ENTITY asf.export.button.importall.label "Importera all data">
+<!ENTITY asf.export.button.importprefs.label "Importera endast inställningar">
+<!ENTITY asf.export.button.importfilters.label "Importera endast filter">
+<!ENTITY asf.export.button.recoverfilters.label "Återställ oanvända filter från databas">
+<!ENTITY asf.export.button.delete.label "Ta bort">
+<!ENTITY asf.export.button.deleteallfilters.label "Ta bort alla filter">
+<!ENTITY asf.export.button.deleteunusedfilters.label "Ta bort oanvända filter från databasen">
+<!ENTITY asf.export.button.deleteuserprefs.label "Återställ inställningar till standardvärdena">
+<!ENTITY asf.export.defaultfolder.label "Standardmapp för exporterad data (valfritt):">
+<!ENTITY asf.export.showbutton.bool "Lägg till en datahanteringsknapp i filterfliken.">
 
 <!-- Dynamics tab-->
 <!ENTITY asf.dynamics.label "Dynamiska mappar">

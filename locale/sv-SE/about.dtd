@@ -23,24 +23,24 @@
 <!ENTITY about.version.title "Version">
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 begining spaces to create indentation -->
-<!ENTITY about.version.102 "+ Added an option to force the action choice when using the automatic download option.
-+ If DownThemAll add-on is installed, a new option's tab is available to send ASF target path to DTA.
-+ Added an option to select if the filters are case sensitive or insensitive.
-+ New options related to Graphical User Interface.
-+ Added a Drag&amp;Drop Copy method (ie. Ctrl+drag on Windows).
-+ Print filter's and process informations to the error console when downloading a file. (Disabled if Firefox is in PrivateBrowsing mode)
-+ checking and update for beta versions. The internal update feature is working only on Firefox 4.
-+ New menu to import and export preferences and filters.
-+ A help page will now open after the first install and when there's important messages after an update.
-+ Localization : sv-SE
-- Removed the need of the slashes around a regular expression's filters.
-* It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).
-* &#37;asf_f&#37; now uses full filename with extension if no filter match.
-* &#37;asf_d&#37; now uses domain without the protocol if no filter match.
-! Fixed a bug where no data was returned if a download was initiated from the URL bar or from an external software which resulted in no filters in the filter's list if the preferences window was opened from the saving dialog &quot;+ Add or edit a filter&quot;. (Thanks to MrCOLOMBO)
-! Fixed the dynamic folder creation for the first filter in the list. (Thanks to Googer)
+<!ENTITY about.version.102 "+ Lade till ett alternativ att tvinga åtgärdsvalet när det automatiska nerladdningsalternativet används.
++ Om tillägget DownThemAll! är installerat blir en ny alternativflik tillgänglig för att kunna skicka ASF:s målsökväg till DTA.
++ Lade till ett alternativ att välja huruvida filter skall vara skiftlägeskänsliga eller inte.
++ Nytt alternativ relaterat till det grafiska användargränssnittet.
++ Lade till en dra &amp; släpp-kopieringsmetod (d.v.s. Ctrl+dra i Windows).
++ Skriv ut filter- och processinformation till felkonsolen när en fil laddas ner. (Inaktiverat när Firefox är i Privat surfning-läge.)
++ Sökning efter och uppdatering av betaversioner. Den interna uppdateringsfunktionen fungerar endast i Firefox 4.
++ Ny meny för att importera och exportera inställningar och filter.
++ En hjälpsida kommer hädanefter att öppnas efter den första installationen och när det finns viktiga meddelanden efter en uppdatering.
++ Översättning : sv-SE
+- Tog bort behovet av snedstreck kring reguljära uttryck-filter.
+* Det är nu möjligt att välja vilken domäntyp som används för filtreringsprocessen och anpassa verifieringsordningen (endast domän, fullständig URL, från filen eller den aktuella fliken).
+* &#37;asf_f&#37; använder nu fullständiga filnamn med filtillägg om inget filter matchar.
+* &#37;asf_d&#37; använder nu domän utan protokoll om inget filter matchar.
+! Korrigerade en bugg där nulldata returnerades om en nerladdning startades från adressfältet eller från ett externt program, och resulterade i noll filter i filterlistan om Inställningar-fönstret öppnats från spardialogens &quot;+ Lägg till eller redigera ett filter&quot;. (Tack till MrCOLOMBO)
+! Korrigerade skapandet av en dynamisk mapp för det första filtret i listan. (Tack till Googer)
 
-Note: In order to develop Automatic Save Folder further, this version is the last compatible with older Firefox versions (1.5, 2.0 and 3.0).">
+Obs: För att kunna vidareutveckla Automatic Save Folder är den här versionen den sista som är kompatibel med äldre Firefox-versioner (1.5, 2.0 och 3.0).">
 
 <!ENTITY about.version.101 "! Korrigerade ett stavfel som hindrade ASF från att fungera när inga filter matchade.
 ! Lade till en saknad ryskspråkig sträng i Filter-fliken.">

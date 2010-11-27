@@ -21,6 +21,7 @@
 <!ENTITY info.howtouse.text3 "För hjälp med reguljära uttryck kan du gå till fönstret &apos;Lägg till och redigera filter&apos; eller tilläggets huvudwebbplats. Om du vill ha tillgång till fullständiga resurser, kan du besöka http://www.regular-expressions.info/.">
 <!ENTITY info.howtouse.text4 "Dynamiska variabler kan användas för att skapa nya mappar under sparprocessen, namngivna efter dagens datum, filnamnet, domännamnet etc.<br />Du kan gå till fliken Dynamiska mappar för att se tillgängliga taggar.">
 
+
 <!ENTITY info.basicexample.title "Några exempel på filter">
 
 <!ENTITY info.basicexample.text1 "Om du vill att alla dina exekverbara filer <b>.exe</b> skall sparas i en en särskild mapp:">
@@ -52,8 +53,8 @@
 <!ENTITY info.advancedexample.text9 "D:\Nerladdningar\Firefox\$1f">
 <!ENTITY info.advancedexample.text10 "När den nerladdade filen kontrolleras mot filtren tas inte parenteser med i bedömningen och filtret kommer att agera som &quot;Firefox Setup *.exe&quot;<br />
 
-
 ">
+
 <!ENTITY info.advancedexample.text11 "För att skapa eller inte skapa olika undermappar beroende på filnamnet:">
 <!ENTITY info.advancedexample.text12 "Exempel : Du vill ladda ner videor med namnen &quot;Min_semester_resevideornas-olika-datum.avi&quot;.<br />
 
@@ -67,9 +68,8 @@
 ">
 <!ENTITY info.advancedexample.text16 "Obs : Du kan skriva in så många taggar som du vill för huvudmappen.<br />Filtret kunde ha skrivits:">
 <!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(semester|bröllop)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />
-
-
 I det här fallet skapas undermappen &quot;semester&quot; endast om filnamnet innehåller &quot;semester&quot;.">
+
 
 <!-- Bellow is the page which appear on first install, and on important updates -->
 <!-- To see the page for localization testing go to chrome://asf/content/help/update.xhtml -->
@@ -80,11 +80,11 @@ Please, read this message carefully to make potential changes to your preference
 This page will only be displayed once, on first install or when important changes must be communicated.">
 
 <!ENTITY firstinstall.title.importantupdates "Important updates:">
-<!ENTITY firstinstall.title.firstinstall "First install and reminder :">
+<!ENTITY firstinstall.title.firstinstall "First install and reminder:">
 <!ENTITY firstinstall.fullupdatelist "For the complete changelog, see the &quot;About...&quot; tab in Automatic Save Folder's preferences.">
 
 <!ENTITY firstinstall.steps "In order to work, <b>you have to correctly set Firefox</b> and Automatic Save Folder's preferences.<br />
-Three steps are essentials, if the filtering doesn't work please check each of this steps again:">
+Three steps are essentials, if the filtering doesn't work please check each of these steps again:">
 <!ENTITY firstinstall.step1 "Step 1 : Firefox">
 <!ENTITY firstinstall.step2 "Step 2 : Automatic Save Folder">
 <!ENTITY firstinstall.step3 "Step 3 : While downloading">
@@ -95,8 +95,6 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 <!ENTITY firstinstall.firefox.text2 "Så, försäkra dig om att Firefox inte använder någon annan process som förhindrar att fönstret visas genom att tillämpa följande metod:">
 <!ENTITY firstinstall.firefox.text3 "Gå till Firefox-menyn &quot;Verktyg&quot; och välj &quot;Inställningar...&quot;.">
 <!ENTITY firstinstall.firefox.text4 "- Firefox 3-användare: Gå till fliken &quot;Program&quot;
-
-
 	<br />- För användare av de tidigare Firefox-versionerna: Gå till fliken &quot;Innehåll&quot; och klicka på &quot;Hantera...&quot; nederst till höger.">
 <!ENTITY firstinstall.firefox.text5 "Säkerställ att den filtyp du vill ladda ner är inställd på &quot;Fråga alltid&quot;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ to show an 'always ask' drop down selected -->
@@ -104,13 +102,13 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 <!ENTITY firstinstall.firefox.text6 "Choose a saving method in Firefox preferences, General tab:<br />
 - &quot;Save files to&quot;: Firefox will save the downloads automatically into the specified folder without opening the files explorer.<br />
 - &quot;Always ask me where to save files&quot;: Firefox will show you the files explorer which will allow you to rename the file or select another saving folder manually.">
-<!ENTITY firstinstall.firefox.pict3 "screen-main_en.png">
+<!ENTITY firstinstall.firefox.pict3 "screen_main_sv.png">
 
 <!ENTITY firstinstall.asf.text1 "If you decide to go without the file explorer, Firefox will automatically save your files<br />
 either in the download folder defined by your operating system, or on your desktop.<br />
 Do not forget to select &quot;Set by the filters&quot; to allow Firefox to use the filtered folders.">
 <!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
-<!ENTITY firstinstall.asf.pict1 "screen-asf102-setbyfilters_en.png">
+<!ENTITY firstinstall.asf.pict1 "screen_asf102-setbyfilters_sv.png">
 <!ENTITY firstinstall.asf.text2 "Your filter's order is of a big importance!<br />
 The verification is done from top to bottom, and stop right after a filter is matching the actual downloaded file.<br />
 Remember to alway set your filters order using the arrow on the right of the filter's tab, or dragging them with your mouse.">
@@ -120,10 +118,10 @@ Remember to alway set your filters order using the arrow on the right of the fil
 According to this, <b style='color:red;'>you must not check</b> &quot;Do this automatically for files like this from now on.&quot;.<br />
 If it ever happens, do Step 1 again.">
 <!-- Screenshot from your language. This is a screen of 'What should Firefox do with this file?' saving window, like firstinstall.Firefox.pict1, but with 'Do this automatically for files like this from now on.' shown unchecked-->
-<!ENTITY firstinstall.save.pict1 "screen-savedialog-alwaysdothis_en.png">
+<!ENTITY firstinstall.save.pict1 "screen_savedialog-alwaysdothis_sv.png">
 
-<!ENTITY firstinstall.moreinfo.text1  "For more informations on using and creating filters, a help tab is available in the add-on."> 
-<!ENTITY firstinstall.moreinfo.text2  "A forum is also available on the official development website:">
+<!ENTITY firstinstall.moreinfo.text1 "For more informations on using and creating filters, a help tab is available in the add-on.">
+<!ENTITY firstinstall.moreinfo.text2 "A forum is also available on the official development website:">
 
 <!-- important updates for 1.0.2 -->
 <!ENTITY importantupdates.102.1 "You can now choose which data from the downloaded file you want to use to filter the domain field : File's domain, File's full URL, Active tab's domain, Active tab's full URL.<br />To change this setting, go to page 2 of Automatic Save Folder's option's tab.">

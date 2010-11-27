@@ -1,84 +1,138 @@
 <!-- browser and save dialog-->
 <!ENTITY Intro_1 "Reguljära uttryck (regexp, regex eller RegEx) är en matchningsmetod för att definiera flera filter i samma sträng.">
 <!ENTITY Intro_2 "Med RegEx kan du filtrera filnamn och domäner, som är mycket svårare att filtrera med den vanliga asterisken, &apos;*&apos;.">
+
 <!ENTITY Title_1 "Specialtaggarna">
 <!ENTITY Intro_3 "På samma sätt som tecknet * (asterisk) används i vanliga filter för att ersätta ett obestämt antal bokstäver, 
-
-
 använder reguljära uttryck flera specialtecken för att matcha olika bokstavsgrupper :">
+
 <!ENTITY The.dot.title "Punkten .">
 <!ENTITY The.dot.text "En punkt ( . ) matchar vilket tecken som helst, ett tecken åt gången (en bokstav, ett nummer, en symbol eller ett blanksteg).<br />
-
-
 &apos;g..gle&apos; matchar &apos;google&apos; och alla andra ord som börjar med &apos;g&apos; följt av vilka 2 tecken som helst och avslutas med &apos;gle&apos;.">
+
 <!ENTITY The.asterisk.title "Asterisken *">
 <!ENTITY The.asterisk.text "Asterisken upprepar det föregående tecknet från 0 till (oändligt) många gånger.<br />
+&apos;go*gle&apos; kommer att matcha gogle, google, goooooooooogle o.s.v.<br />
+&apos;.*&apos; (en punkt följd av en asterisk) upprepar vilket tecken som helst hur många gånger som helst.<br />
+använt ensamt kommer .* att matcha alla filtrets domännamn eller filnamn,
+så det här är vad som används när du väljer &quot;Alla&quot; i Skapa filter-fönstret.">
 
-
-">
 <!ENTITY The.caret.title "Insättningstecknet ^">
 <!ENTITY The.caret.text "Insättningstecknet ( ^ ) används för att identifiera början av en sträng. &apos;^http&apos; kommer endast att leta efter &apos;http&apos; i början av domänen.<br />
-
-
 Filtreringen kommer att vara korrekt för &apos;http://test.com&apos; men inte för &apos;ftp://http_test.com&apos; eftersom http inte står i början av strängen, utan i mitten.">
+
 <!ENTITY The.dollar.title "Dollartecknet $">
 <!ENTITY The.dollar.text "Dollartecknet ( $ ) används för att identifiera slutet av en sträng. &apos;com$&apos; kommer att matcha varje sträng som avslutas med &apos;com&apos;.<br />
-
-
 Filtreringen kommer att vara korrekt för &apos;http://test.com&apos; men inte för &apos;http://computer.net&apos; eftersom &apos;com&apos; inte står i slutet av strängen, utan i mitten.">
+
 <!ENTITY The.braces.title "Klammerparentesen {}">
 <!ENTITY The.braces.text "Klammerparentesen används för att precisera hur många gånger det föregående tecknet skall upprepas, t.ex. go{2}gle = google (tecknet o upprepas 2 gånger).<br />
-
-
 Det är möjligt att ange ett lägsta och högsta antal repetitioner: &apos;go{0,2}gle&apos; kommer att matcha antingen ggle, gogle eller google.">
+
 <!ENTITY The.parenthesis.title "Rundparentesen ( ) och vertikalstrecket |">
 <!ENTITY The.parenthesis.text "Rundparentesen låter oss precisera på varandra följande teckengrupper. Tillsammans med vertikalstreck &apos;|&apos; kan de båda definiera flervalsfilter.<br />
-
-
 (aaaa|bbbb|cccc) kommer att matcha vilken som helst av teckengrupperna aaaa eller bbbb eller cccc, men aldrig mer än en gång.
+(b|g)oogle matchar antingen boogle eller google, men aldrig bgoogle<br />
+<br />
+Du kan tillämpa alternativ på en rundparentesgrupp:<br />
+&apos;(b|g){1,2}oogle&apos; kan fånga in bokstäverna b eller g, en eller två gånger, följt av &apos;oogle&apos;.<br />
+boogle, bboogle, google, ggoogle, bgoogle, gboogle kommer således alla att matcha.<br />
+<br />
+&apos;(b|g)*oogle&apos; kan fånga in matchningar från ett oändligt antal kombinationer av b och g före &apos;oogle&apos;.">
 
-">
 <!ENTITY The.question.title "Frågetecknet ?">
 <!ENTITY The.question.text "Frågetecknet ( ? ) används för att ange det alternerande tillståndet för det föregående tecknet eller gruppen.<br />
+Till exempel kan mpeg-filer vara av filtyperna &apos;.mpg&apos; eller &apos;.mpeg&apos;. Det reguljära uttryck som fångar in båda dessa blir då &apos;mpe?g&apos;.<br />
+Nov(ember)? kommer att matcha Nov och November.<br />
+Frågetecknet är en genväg till det reguljära uttrycket {0,1}.<br />
+Nov(ember)? = Nov(ember){0,1}.<br />
+<br />
+Frågetecknet används även för att omvandla en reguljär uttryckssats från girig (standardvärde) till icke-girig. Exempel :<br />
+Sträng   : &quot;Tänk noga under testet&quot;.<br />
+Filter 1 : &quot;t.*t&quot; kommer att fånga in allt från det första T:et till det sista T:et, med andra ord hela strängen, &quot;Tänk noga under testet&quot;. Asterisktaggen är girig och matchar alla tecken den kan hitta.<br />
+Filter 2 : &quot;t.*?t&quot; kommer att fånga in allt från det första T:et till nästa T som påträffas, vilket ger &quot;Tänk noga under t&quot;. Asterisken är nu icke-girig och stannar vid den första förekomsten den hittar (från vänster till höger).">
 
-
-">
 <!ENTITY The.bracket.title "Hakparentesen [ ]">
 <!ENTITY The.bracket.text "Hakparentesen används för att specificera ett område eller en grupp av möjliga tecken.<br />
+Till skillnad från rundparentesen räknas inte tecknen inom hakparentesen som ett enskilt ord, utan som från varandra oberoende tecken.<br />
+Nov[embr] kommer att matcha en av bokstäverna inom hakparentesen, inte samtliga. Vi får alltså : Nove, Novm, Novb eller Novr.<br />
+<br />
+Minustecknet &apos;-&apos; mellan två tecken anger ett intervall av tillåtna tecken :<br />
+[a-z] betyder vilken bokstav som helst från a till z.<br />
+<br />
+Du kan skriva in fler än ett minustecken i en hakparentes. [a-zA-Z] matchar alla gemener och versaler av bokstäverna i (det engelska) alfabetet. [a-zA-Z0-9] kommer att matcha alla alfanumeriska tecken.<br />
+Du kan ange vilket tecken eller vilken teckenentitet som helst inom hakparentesen: [_+.()a-d\s] kommer att matcha bokstäverna &apos;från a till d&apos; samt tecknen _ (understreck), + (plustecken), punkten, rundparentesen och blanksteget.<br />
+För att matcha minustecknet &apos;-&apos;, måste du skriva det först. [-a-z] kommer att matcha minustecknet &apos;-&apos; och bokstäverna från a till z.<br />
+<br />
+<br />
+Hakparentesen matchar endast en bokstav, men du kan ange fler än så på följande vis:<br />
+t[se]*t matchar båda bokstäverna inom hakparentesen i ett otal kombinationer : &apos;tet&apos;, &apos;tst&apos;, &apos;test&apos;, &apos;tset&apos; eller t.o.m. &apos;tesssst&apos;.<br /> 
+t[es]{0,2} begränsar matchningen till t, te, ts, tee, tss, tes och tse.">
 
-
-">
 <!ENTITY The.backslash.title "Omvänt snedstreck \ följt av en bokstav">
 <!ENTITY The.backslash.text "\d matchar siffrorna<br />
+\s matchar tomma utrymmen (blanksteg, tabb etc.)<br />
+\w matchar ett ord (bokstavsgrupper separerade av blanksteg, början eller slutet av en sträng)<br />
+\b identifierar början och slutet av ett ord. &apos;\barc\b&apos; kommer att identifiera ordet &apos;arc&apos; om det har skrivits på det sättet, men kommer inte att fungera på ordet &apos;archer&apos;.<br />
+\uFFFF, där FFFF utgörs av en hexadecimalkod, matchar Unicode-tecknet som hexadecimalkoden svarar mot.<br />
+Exempel: \u00A9 matchar &apos;©&apos;.">
 
-
-">
 <!ENTITY The.backslash.info "Eftersom alla ovan beskrivna taggar används för att ange det reguljära uttryckets funktion måste du, om du behöver filtrera ett av dem (t.ex. i fil- eller domännamn), undanta (eng. escape) det tecknet med ett framförvarande omvänt snedstreck &apos; \ &apos;.<br />
+Till exempel: För att filtrera filen &apos;min_fil(2007).jpg&apos;, måste du använda omvända snedstreck före rundparentesen och punkttecknet : min_fil\(2007\)\.jpg <br />
+<br />
+Alla dessa tecken behöver undantas med ett omvänt snedstreck :">
 
-
-">
 <!-- feel free to add a link to a RegEx website on your own language -->
 <!ENTITY Regexp.links "Det finns många filtreringsmetoder som använder reguljära uttryck, men som inte kan förklaras här.<br />
-
-
+Om du vill lära dig mer, kan du studera dokumentation och exempel på nedanstående webbplatser: <br />
+Svenska:<br />
+http://patrikc.wordpress.com/2009/05/22/grundlaggande-reguljara-uttryck/<br />
+http://patrikc.wordpress.com/2009/06/01/avancerade-reguljara-uttryck/<br />
+http://lix.hisvux.se/martinf/regexp.html (Notera: Här anges &apos;undantag-&apos; som &apos;escape-&apos;)<br />
+Engelska:<br />
+http://www.regular-expressions.info/tutorial.html<br />
+http://www.javascriptkit.com/jsref/regexp.shtml
 ">
+
 <!ENTITY Example_1.title "Några exempel">
 <!ENTITY Example_1.text "För att filtrera alla .rar-filer och .r01- till .rxx-filer:<br />
+r(ar|\d{2}) <br />
+Det innebär &apos;r&apos; följt av antingen &apos;ar&apos; eller 2 siffror.<br />
+<br />
+För att matcha alla http-webbadresser inom toppdomänen .com:<br />
+^http.*\.com$<br />
+Det innebär allting som startar med &apos;http&apos; (åstadkommet med ^), följt av inga eller vilka bokstäver som helst repeterade ett obestämt antal gånger, och som avslutas med &apos;.com&apos; (åstadkommet med $).<br />
+<br />
+För att matcha en domän, oavsett om www står med i sökvägen eller inte:<br />
+ ^http:\/\/(|www\.)mozilla\.org<br />
+Det innebär allting som startar med &apos;http&apos; (åstadkommet med ^), följt av ett kolon &apos;:&apos;, följt av 2 snedstreck &apos;\/\/&apos;, följt av antingen ingenting eller &apos;www&apos; och en punkt &apos;\.&apos;, följt av domännamnet (i det här fallet &apos;mozilla.org&apos;).<br />
+Obs : Snedstrecken och punkttecknet är undantagna med ett omvänt snedstreck eftersom de annars skulle fungera som taggar i de reguljära uttrycken.">
 
-
-">
 <!ENTITY Example_2.title "Filterexempel för filnamn">
 <!ENTITY Example_2.text "För att filtrera alla arkivfiler: <br />
+.*\.(z(ip|\d{2})|r(ar|\d{2})|jar|bz2|gz|tar|rpm|7z)$<br />
+<br />
+För att filtrera alla videor:<br />
+.*\.(mp(eg?|[g4])|rm|avi|mov|divx|asf|qt|wmv|ram|m1v|m2v|rv|vob|asx)$<br />
+<br />
+För att filtrera alla bilder:<br />
+.*\.(jpe?g|jpe|gif|png|tiff?|bmp|ico)$"> 
 
-
-">
 <!ENTITY Example_3.title "Filterexempel för domäner">
 <!ENTITY Example_3.text "För att filtrera ftp-protokoll:<br />
+Med RegEx. : ^ftp:\/\/.*<br />
+Utan RegEx. : ftp://<br />
+<br />
+För att filtrera en viss domän:<br />
+Med RegEx. : ^http:\/\/(|www\.)domän\.com$<br />
+Utan RegEx. : http://*domän.com<br />
+(Utan RegEx kommer filtret att fungera för antingen http://domän.com eller http://www.domän.com, men det kommer även att matcha http://inte_någon_bra.domän.com)<br />
+<br />
+<br />
+För att matcha vilken domän som helst med &apos;oogle&apos; i sig:<br />
+Med RegEx : .*oogle.*<br />
+Utan RegEx : oogle">
 
-
-">
 <!ENTITY Conclusion.title "Slutsats">
 <!ENTITY Conclusion.text "Reguljära uttryck ger möjlighet till en bättre användning av filter, men det kan ibland gå mycket snabbare att använda ett enkelt jokertecken, t.ex. *.<br />
-
-
 Reguljära uttryck är riktigt användbara endast vid komplexa sökningar där man vill ha specifika matchningar.">
