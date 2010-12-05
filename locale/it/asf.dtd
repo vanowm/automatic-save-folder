@@ -69,6 +69,8 @@
 <!ENTITY asf.viewdloptionType1.label "Always minimize">
 <!ENTITY asf.viewdloptionType2.label "Minimize if disabled">
 <!ENTITY asf.viewdloptionType3.label "Hide if disabled">
+<!ENTITY asf.suggestAllPossibleFolders.bool "Suggest all possible folders">
+<!ENTITY asf.suggestAllPossibleFolders.tooltip "Adds a radio choice for each matching filter to select one of them quickly without using the drop-down list.">
 <!ENTITY asf.viewpathselect.bool "Vedi la lista dei filtri">
 <!ENTITY asf.viewpathselect.tooltip "Visualizza un menu con la lista di tutti i percorsi dei filtri.">
 

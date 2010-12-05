@@ -31,6 +31,8 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		systemslash: "",
 		logtoconsole: true,
 		inPrivateBrowsing: false,
+		matching_filters: new Array(),
+		matching_folders: new Array(),
 		
 	main: function () {
 
@@ -106,6 +108,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var variable_mode = 		prefManager.getBoolPref("extensions.asf.variablemode");  // enable Variables in folder creation (dynamic Folders)
 		var dialogaccept = 			prefManager.getBoolPref("extensions.asf.dialogaccept");
 		var dialogacceptFiltered = 	prefManager.getBoolPref("extensions.asf.dialogacceptFiltered");
+		var suggestAllPossibleFolders = prefManager.getBoolPref("extensions.asf.suggestAllPossibleFolders");
 		
 		// If variable/Dynamic folders mode is ON, let's replace the variables to create the new defaultfolder
 		if (variable_mode == true)
@@ -146,6 +149,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		var idx = -1 ;
 		var dom_regexp = false;
 		var file_regexp = false;
+		while(this.matching_filters.length) this.matching_filters.pop(); // reset the matching filters array
 		for ( var i = 0 ; i < filters.length ; i++)
 		{
 			if (filters[i][3] == true)  // if not temporary deactivated
@@ -193,9 +197,10 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				// alert ("i = "+i+"\n domain match = "+dom_regexp+"\n file match = "+file_regexp);
 				if (dom_regexp && file_regexp)
 				{
-					var idx = i;
+					idx = i;
+					this.matching_filters.push(idx); // add the matching filter to the array
 					if (this.logtoconsole && !this.inPrivateBrowsing)  this.console_print("Filter "+idx+" is matching both domain and filename.\nDomain:\t\t"+filters[i][0]+"\nFilename:\t"+filters[i][1]+"\nFolder:\t\t"+filters[i][2]);
-					break;
+					if (suggestAllPossibleFolders == false) break;
 				}
 			}
 		} // end filters loop
@@ -248,15 +253,21 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		else // if a filter is found
 		{
-			var folder = filters[idx][2];
-			
-			// If Advanced mode is ON, let's check the variables and create the folder
-			if (variable_mode == true)
+			for (var i = 0; i < this.matching_filters.length ; i++)
 			{
-				folder = this.createfolder(folder, idx);
+				var idx = this.matching_filters[i];
+				var folder = filters[idx][2];
+				
+				// If Advanced mode is ON, let's check the variables and create the folder
+				if (variable_mode == true)
+				{
+					folder = this.createfolder(folder, idx);
+				}
+				
+				this.matching_folders[i] = folder;
 			}
 			
-			this.set_savepath(folder);
+			this.set_savepath(this.matching_folders[0]); // set the default folder to the first matching filter
 		}
 		
 		// in every case, set the new file hosted domain to tempdomain if not in private browsing
@@ -754,7 +765,42 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		
 		//set the text to be written on the Radio comment
-		asf_savefolder.label = folder;
+		if (this.matching_filters.length >= 1)
+		{
+			for (var i=asf_savefolder.childNodes.length-1 ; i>=0 ; i--)
+			{
+				asf_savefolder.removeChild(asf_savefolder.childNodes[i]);
+			}
+			for (var i = 0; i < this.matching_filters.length; i++)
+			{
+				var new_radio = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'radio');
+				new_radio.setAttribute("id", "asf_savefolder_"+i);
+				new_radio.setAttribute("value", i);
+				new_radio.setAttribute("width", "280");
+				new_radio.setAttribute("crop", "center");
+				new_radio.setAttribute("label", this.matching_folders[i]);
+				new_radio.setAttribute("class", "small-indent");
+				new_radio.setAttribute("oncommand", "automatic_save_folder.asf_toggle_savepath(this);");
+				asf_savefolder.appendChild(new_radio);
+			}
+		}
+		else
+		{
+			if (asf_savefolder.childNodes.length == 0)
+			{
+				var new_radio = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'radio');
+				new_radio.setAttribute("id", "asf_savefolder_0");
+				new_radio.setAttribute("value", 0);
+				new_radio.setAttribute("width", "280");
+				new_radio.setAttribute("crop", "center");
+				new_radio.setAttribute("label", this.matching_folders[0]);
+				new_radio.setAttribute("class", "small-indent");
+				new_radio.setAttribute("oncommand", "automatic_save_folder.asf_toggle_savepath(this);");
+				asf_savefolder.appendChild(new_radio);
+			}
+			
+			document.getElementById('asf_savefolder_0').label = folder;
+		}
 		asf_lastpath.label = lastpath;
 		
 		// Force check the first radio choice (needed on linux + ff2.x) (linux has blank radio choices on loading, this is only visual, it doesn't affect anything here, the value are set to the new path by default until the user change the radio choice)
@@ -964,28 +1010,17 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 	},
 	
 	
-	asf_toggle_savepath: function () {
+	asf_toggle_savepath: function (elem) {
 		
-		var asf_savefolder = document.getElementById('asf_savefolder');
-		var asf_lastpath = document.getElementById('asf_lastpath');
 		var asf_pathselect = document.getElementById('asf_pathselect');
 		var userchoice = "";
-		
-		if(asf_savefolder.selected == true)
-		{
-			userchoice = asf_savefolder.label ;
-		}
-		
-		if(asf_lastpath.selected == true)
-		{
-			userchoice = asf_lastpath.label ;
-		}
-		
 		if(asf_pathselect.selected == true)
 		{
-			// read the current selected item value
-			var asf_folder_list = document.getElementById('asf_folder_list');
-			userchoice = asf_folder_list.value ;
+			userchoice = document.getElementById('asf_folder_list').value ;
+		}
+		else
+		{
+			userchoice = elem.label;
 		}
 		
 		this.set_savepath(userchoice);
@@ -998,7 +1033,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		// check the third radio choice
 		var asf_radio_savepath = document.getElementById('asf_radio_savepath');
 		var asf_pathselect = document.getElementById('asf_pathselect');
-		asf_radio_savepath.value = 2;
+		asf_radio_savepath.value = 99;
 		asf_pathselect.checked;
 		
 		this.asf_toggle_savepath();

@@ -1296,6 +1296,11 @@ var automatic_save_folder = {
 		additionnal_prefs = ["extensions.asf.showExportButton", "extensions.asf.exportFolder"];
 		ASF_prefs = ASF_prefs.concat(additionnal_prefs);
 		
+		// ASF version 1.0.2bRev94
+		// add suggestAllPossibleFolders option
+		additionnal_prefs = ["extensions.asf.suggestAllPossibleFolders"];
+		ASF_prefs = ASF_prefs.concat(additionnal_prefs);
+		
 		// just before the filters, put number of filters
 		ASF_prefs[ASF_prefs.length] = "extensions.asf.filtersNumber"; // number of shown Filters in the filter list (not the same as total filters stored in prefManager)
 		

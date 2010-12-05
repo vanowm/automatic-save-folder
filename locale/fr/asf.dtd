@@ -69,6 +69,8 @@
 <!ENTITY asf.viewdloptionType1.label "Toujours réduire">
 <!ENTITY asf.viewdloptionType2.label "Réduire si désactivé">
 <!ENTITY asf.viewdloptionType3.label "Masquer si désactivé">
+<!ENTITY asf.suggestAllPossibleFolders.bool "Suggérer tous les dossiers possibles.">
+<!ENTITY asf.suggestAllPossibleFolders.tooltip "Ajoute un élement radio pour chaque filtre trouvé afin d'en selectionner un rapidement sans passer par le menu déroulant.">
 <!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">
 <!ENTITY asf.viewpathselect.tooltip "Active le menu déroulant contenant le chemin de chaque filtre.">
 

@@ -26,12 +26,13 @@
 <!ENTITY about.version.102 "+ Added an option to force the action choice when using the automatic download option.
 + If DownThemAll add-on is installed, a new option's tab is available to send ASF target path to DTA.
 + Added an option to select if the filters are case sensitive or insensitive.
-+ New options related to Graphical User Interface.
++ New options related to Graphical User Interface (GUI).
 + Added a Drag&amp;Drop Copy method (ie. Ctrl+drag on Windows).
 + Print filter's and process informations to the error console when downloading a file. (Disabled if Firefox is in PrivateBrowsing mode)
-+ checking and update for beta versions. The internal update feature is working only on Firefox 4.
++ Checking and update for beta versions. The internal update feature is working only on Firefox 4.
 + New menu to import and export preferences and filters.
 + A help page will now open after the first install and when there's important messages after an update.
++ Added an option to suggest all matching filters instead of only one.
 + Localization : sv-SE
 - Removed the need of the slashes around a regular expression's filters.
 * It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).

@@ -32,3 +32,4 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
  pref("extensions.asf.autoCheckBetaUpdate", false);
  pref("extensions.asf.exportFolder", "");
  pref("extensions.asf.showExportButton", false);
+ pref("extensions.asf.suggestAllPossibleFolders", false);

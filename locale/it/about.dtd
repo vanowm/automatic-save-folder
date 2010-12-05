@@ -32,6 +32,7 @@
 + checking and update for beta versions. The internal update feature is working only on Firefox 4.
 + New menu to import and export preferences and filters.
 + A help page will now open after the first install and when there's important messages after an update.
++ Added an option to suggest all matching filters instead of only one.
 + Localization : sv-SE
 - Removed the need of the slashes around a regular expression's filters.
 * It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).

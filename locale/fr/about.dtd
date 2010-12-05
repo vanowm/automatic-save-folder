@@ -32,6 +32,7 @@
 + Vérification et mise à jour vers les versions béta. La mise à jour interne ne fonctionne que sur Firefox 4.
 + Nouveau menu permettant d'importer et exporter les paramètres et les filtres.
 + Ouverture d'une page d'aide après la 1ère installation et lors de message important après une mise à jour.
++ Ajout d'une option permettant de suggérer tous les filtres trouvés plutôt qu'un seul.
 + Localisation : sv-SE
 - Suppression des slashs aux extrémités des filtres utilisant les expressions régulières.
 * Il est maintenant possible de choisir quel type de domaine sera utilisé pendant le filtrage, et de personnaliser leur ordre de vérification (Domaine seul, URL complète, du fichier ou de l'onglet actif).

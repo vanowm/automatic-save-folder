@@ -101,7 +101,7 @@ It means everything starting with 'http' (accomplished with the ^), followed by 
 To match a domain, regardless if there is www or not in the path:<br />
  ^http:\/\/(|www\.)mozilla\.org<br />
 It means everything starting with 'http' (accomplished with the ^), followed with a ':', followed with 2 slashes '\/\/', followed either with nothing or 'www' and a dot '\.', followed with the domain name (ici 'mozilla.org')<br />
-Note : the slashes and the point are escaped with a backslash because if not, they would used as tags by the Regular Expression.">
+Note : The slashes and the point are escaped with a backslash or else they would be interpreted as Regular Expression's tag.">
 
 <!ENTITY Example_2.title "Filter examples on filenames">
 <!ENTITY Example_2.text "To filter all the archive files: <br />

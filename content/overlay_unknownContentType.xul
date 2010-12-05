@@ -18,10 +18,12 @@
 	<caption label="Automatic Save Folder" onclick="automatic_save_folder.toggle_dloptionsContent();"/>
 	<vbox id="asf_dloptions_content" style="visibility: visible;" >
 		<radiogroup id="asf_radio_savepath" align="left">
-				<radio id="asf_savefolder" value="0" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath()"/>
-				<radio id="asf_lastpath" value="1" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath()"/>
+				<vbox id="asf_savefolder">
+					<radio id="asf_savefolder_0" value="0" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath(this)"/>
+				</vbox>
+				<radio id="asf_lastpath" value="98" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath(this)"/>
 				<vbox id="asf_radiogroup_pathselect" style="visibility: collapse;">
-					<radio id="asf_pathselect" value="2" width="280" crop="center" label="&asf.pathselect.label;" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath()"/>
+					<radio id="asf_pathselect" value="99" width="280" crop="center" label="&asf.pathselect.label;" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath(this)"/>
 					<hbox>
 						<description value="       "/><menulist id="asf_folder_list" width="280">
 						</menulist>

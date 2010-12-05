@@ -54,9 +54,9 @@
 <!ENTITY asf.folderList.tooltip "If the &quot;Downloads&quot; folder doesn't exist, the file explorer will be shown.">
 
 <!ENTITY asf.options.groupbox2.label "Save dialog">
-<!ENTITY asf.dialogaccept.bool "Automatically accept the &quot;What should Firefox do with this file&quot; dialog windows.">
+<!ENTITY asf.dialogaccept.bool "Automatically accept the &quot;What should Firefox do with this file?&quot; dialog windows.">
 <!ENTITY asf.dialogacceptFiltered.bool "Only if a filter is found">
-<!ENTITY asf.dialogacceptFiltered.tooltip "Will not automatically accept the &quot;What should Firefox do with this file&quot; dialog windows if no filter matches.">
+<!ENTITY asf.dialogacceptFiltered.tooltip "Will not automatically accept the &quot;What should Firefox do with this file?&quot; dialog windows if no filter matches.">
 <!ENTITY asf.dialogForceRadio_Start.bool "Force the radio choice to">
 <!ENTITY asf.dialogForceRadioTo.label1 "Open with">
 <!ENTITY asf.dialogForceRadioTo.label2 "DownThemAll!">
@@ -64,11 +64,13 @@
 <!ENTITY asf.dialogForceRadioTo.label4 "Save File">
 <!ENTITY asf.dialogForceRadio_End.bool "before automatically accepting the save dialog.">
 <!ENTITY asf.viewdloption.bool "View options when downloading">
-<!ENTITY asf.viewdloption.tooltip "Allow you to see the last two destination folders and a link to add or edit the filters">
+<!ENTITY asf.viewdloption.tooltip "Adds an information area on the saving dialog which allows you to select a different saving folders quickly. There is also a link available to open the preferences window and allows you to add a new filter or change the options for the current download.">
 <!ENTITY asf.viewdloptionType0.label "Always show">
 <!ENTITY asf.viewdloptionType1.label "Always minimize">
 <!ENTITY asf.viewdloptionType2.label "Minimize if disabled">
 <!ENTITY asf.viewdloptionType3.label "Hide if disabled">
+<!ENTITY asf.suggestAllPossibleFolders.bool "Suggest all possible folders">
+<!ENTITY asf.suggestAllPossibleFolders.tooltip "Adds a radio choice for each matching filter to select one of them quickly without using the drop-down list.">
 <!ENTITY asf.viewpathselect.bool "View the list of folders">
 <!ENTITY asf.viewpathselect.tooltip "Activate a drop-down menu with all the filter's path.">
 

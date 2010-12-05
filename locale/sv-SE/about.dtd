@@ -32,6 +32,7 @@
 + Sökning efter och uppdatering av betaversioner. Den interna uppdateringsfunktionen fungerar endast i Firefox 4.
 + Ny meny för att importera och exportera inställningar och filter.
 + En hjälpsida kommer hädanefter att öppnas efter den första installationen och när det finns viktiga meddelanden efter en uppdatering.
++ Added an option to suggest all matching filters instead of only one.
 + Översättning : sv-SE
 - Tog bort behovet av snedstreck kring reguljära uttryck-filter.
 * Det är nu möjligt att välja vilken domäntyp som används för filtreringsprocessen och anpassa verifieringsordningen (endast domän, fullständig URL, från filen eller den aktuella fliken).

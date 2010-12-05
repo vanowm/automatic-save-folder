@@ -69,6 +69,8 @@
 <!ENTITY asf.viewdloptionType1.label "Всегда минимизировать">
 <!ENTITY asf.viewdloptionType2.label "Минимизировать если отключено">
 <!ENTITY asf.viewdloptionType3.label "Скрыть если отключено">
+<!ENTITY asf.suggestAllPossibleFolders.bool "Suggest all possible folders">
+<!ENTITY asf.suggestAllPossibleFolders.tooltip "Adds a radio choice for each matching filter to select one of them quickly without using the drop-down list.">
 <!ENTITY asf.viewpathselect.bool "Показывать список папок">
 <!ENTITY asf.viewpathselect.tooltip "Активировать меню перетаскивания мышкой для всех папок фильтров.">
 

@@ -69,6 +69,8 @@
 <!ENTITY asf.viewdloptionType1.label "Minimera alltid">
 <!ENTITY asf.viewdloptionType2.label "Minimera om inaktiverat">
 <!ENTITY asf.viewdloptionType3.label "Göm om inaktiverat">
+<!ENTITY asf.suggestAllPossibleFolders.bool "Suggest all possible folders">
+<!ENTITY asf.suggestAllPossibleFolders.tooltip "Adds a radio choice for each matching filter to select one of them quickly without using the drop-down list.">
 <!ENTITY asf.viewpathselect.bool "Visa listan över mappar">
 <!ENTITY asf.viewpathselect.tooltip "Aktivera visning av en rullgardinsmeny med alla filtersökvägar.">
 

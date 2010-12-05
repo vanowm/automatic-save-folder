@@ -53,6 +53,7 @@
 		<preference id="asf_dta_sendMethod" name="extensions.asf.dta_sendMethod" type="string"/>
 		<preference id="asf_autoCheckBetaUpdate" name="extensions.asf.autoCheckBetaUpdate" type="bool"/>
 		<preference id="asf_showExportButton" name="extensions.asf.showExportButton" type="bool"/>
+		<preference id="asf_suggestAllPossibleFolders" name="extensions.asf.suggestAllPossibleFolders" type="bool"/>
 	</preferences>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
@@ -94,6 +95,7 @@
 		<hbox><description value="5 :"/><label>&asf.domainTestOrder.tooltip6;</label></hbox>
 		<label>&#10;&asf.domainTestOrder.tooltip7;</label>
 	</tooltip>
+	<tooltip id="tooltip_suggestAllPossibleFolders" label="&asf.suggestAllPossibleFolders.tooltip;" noautohide="true" />
 	<vbox>
 		<tabbox>
 			<tabs>
@@ -225,6 +227,7 @@
 										</menupopup>
 									</menulist>
 								</hbox>
+								<checkbox id="asf-suggestAllPossibleFolders" preference="asf_suggestAllPossibleFolders"  label="&asf.suggestAllPossibleFolders.bool;" tooltip="tooltip_suggestAllPossibleFolders"/>
 								<checkbox id="asf-viewpathselect" preference="asf_viewpathselect"  label="&asf.viewpathselect.bool;" tooltip="tooltip_viewpathselect"/>
 							</groupbox>
 							<groupbox><caption label="&asf.options.groupbox4.label;" />
