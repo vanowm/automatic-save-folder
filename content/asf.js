@@ -431,6 +431,7 @@ var automatic_save_folder = {
 		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var viewdloption = document.getElementById("asf-viewdloption");
 		var viewdloptionType = document.getElementById("asf-viewdloptionType");
+		var suggestAllPossibleFolders = document.getElementById("asf-suggestAllPossibleFolders");
 		var viewpathlist = document.getElementById("asf-viewpathselect");
 		var dialogaccept = document.getElementById("asf-dialogaccept");
 		var dialogacceptFiltered = document.getElementById("asf-dialogacceptFiltered");
@@ -496,11 +497,14 @@ var automatic_save_folder = {
 			viewdloptionType.disabled = true;
 			viewpathlist.checked = false;
 			viewpathlist.disabled = true;
+			suggestAllPossibleFolders.checked = false;
+			suggestAllPossibleFolders.disabled = true;
 		}
 		if (viewdloption.checked == true)
 		{
 			viewdloptionType.disabled = false;
 			viewpathlist.disabled = false;
+			suggestAllPossibleFolders.disabled = false;
 		}
 		
 		// set the sub-rightclick option to grey state
