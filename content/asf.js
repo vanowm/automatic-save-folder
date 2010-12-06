@@ -268,25 +268,25 @@ var automatic_save_folder = {
 					switch (this.trim(domain_testOrder[j])) 
 					{
 						case "1":
-							dom_regexp = this.test_regexp(dom, domain);
+							dom_regexp = this.test_regexp(dom, domain, idx, "domain");
 							break;
 						case "2":
-							dom_regexp = this.test_regexp(dom, fileURL);
+							dom_regexp = this.test_regexp(dom, fileURL, idx, "domain");
 							break;
 						case "3":
-							dom_regexp = this.test_regexp(dom, fileURLAndFilename);
+							dom_regexp = this.test_regexp(dom, fileURLAndFilename, idx, "domain");
 							break;
 						case "4":
-							dom_regexp = this.test_regexp(dom, currentDomain);
+							dom_regexp = this.test_regexp(dom, currentDomain, idx, "domain");
 							break;
 						case "5":
-							dom_regexp = this.test_regexp(dom, currentURL);
+							dom_regexp = this.test_regexp(dom, currentURL, idx, "domain");
 						default:
 					}
 					
 					if (dom_regexp) break;
 				}
-				file_regexp = this.test_regexp(fil, filename); // Filename
+				file_regexp = this.test_regexp(fil, filename, idx, "filename"); // Filename
 				
 				
 			//set or remove Attribute color
@@ -354,12 +354,24 @@ var automatic_save_folder = {
 	},
 
 
-	test_regexp: function (filters, string) {
-		
-		var test_regexp = this.is_regexp(filters);   // True or False
-		if (test_regexp == false) // replace simple wildcard and special characters with corresponding regexp
+	test_regexp: function (filter_data, downloaded_data, idx, filter_type) {
+	/**
+	// filter_data (String) : The filter's content
+	// downloaded_data (String) : The downloaded filename or domain informations
+	// idx (Int) : Current filter number
+	// filter_type (String) : Current filter type, can be "domain" of "filename".
+	// Return (Bool) : return true if the current filter matches.
+	*/
+		// Convert normal filter to regular expression filter.
+		var isregexp = false;
+		if(idx >= 0)
 		{
-			filters = filters.replace(/\./gi, "\\.")
+			if (filter_type == "domain") isregexp = this.prefManager.getBoolPref("extensions.asf.filters"+ idx +".domain_regexp");
+			if (filter_type == "filename") isregexp = this.prefManager.getBoolPref("extensions.asf.filters"+ idx +".filename_regexp");
+		}
+		if (isregexp == false) // replace simple wildcard and special characters with corresponding regexp
+		{
+			filter_data = filter_data.replace(/\./gi, "\\.")
 													.replace(/\*/gi, ".*")
 													.replace(/\$/gi, "\\$")
 													.replace(/\^/gi, "\\^")
@@ -368,23 +380,16 @@ var automatic_save_folder = {
 													.replace(/\|/gi, "\\|")
 													.replace(/\[/gi, "\\[")
 													.replace(/\//gi, "\\/");
-			filters = ".*"+filters+".*";
-		}
-		else // remove the first and last slash
-		{
-			filters = filters.substring(1, filters.length);
-			filters = filters.substring(0, filters.length -1);
+			filter_data = ".*"+filter_data+".*";
 		}
 		
 		// initialize the regular expression search
-		var param = "";
-		var regexp_caseinsensitive = this.readHiddenPref("extensions.asf.regexp_caseinsensitive", "bool", true); // let the user choose in next release.
-		if (regexp_caseinsensitive) param = "i";
-		var test_regexp = new RegExp(filters, param);  // put the slash back and the gi option (g = global seach, i = case insensitive)
+		var param = (this.prefManager.getBoolPref("extensions.asf.regexp_caseinsensitive") == true ? "i" : "");
+		var test = new RegExp(filter_data, param);
 		
-		if (string.match(test_regexp)) // if something match
+		if (downloaded_data.match(test)) // if something match
 		{
-			 return(true);
+			return(true);
 		}
 		return(false);
 	},
