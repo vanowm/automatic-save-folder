@@ -1,0 +1,32 @@
+<!-- browser and save dialog-->
+<!ENTITY Year "rok">
+<!ENTITY Month "měsíc">
+<!ENTITY Month.wleadingzero "01 až 12">
+<!ENTITY Month.woleadingzero "1 až 12">
+<!ENTITY Month.fullname "leden">
+<!ENTITY Month.abbr "led">
+<!ENTITY Week "týden">
+<!ENTITY Week.wleadingzero "01 až 52">
+<!ENTITY DayOfTheWeek "0 (neděle) až 6">
+<!ENTITY DayOfTheWeek.fullname "pondělí">
+<!ENTITY DayOfTheWeek.abbr "po">
+<!ENTITY Day "den">
+<!ENTITY Day.wleadingzero "01 až 31">
+<!ENTITY Day.woleadingzero "1 až 31">
+<!ENTITY Special.tags "Zvláštní štítky">
+<!ENTITY asf_D "Název domény. (Bez http://)">
+<!ENTITY asf_F "Název souboru včetně přípony.">
+<!ENTITY asf_Fx "Název souboru bez přípony.">
+<!ENTITY asf_d "Pole „Doména“ z použitého filtru. (Zakázané znaky budou smazány. Nebude-li nalezen žádný filtr, bude použita stávající doména)">
+<!ENTITY asf_f "Pole „Název souboru“ z použitého filtru. (Zakázané znaky budou smazány. Nebude-li nalezen žádný filtr, použije se stávající název souboru.)">
+<!ENTITY asf_x "Přípona souboru. (Bez tečky)">
+<!ENTITY Capture.tags "Značky pro ukládání do složek dle názvu">
+<!ENTITY number "číslo">
+<!ENTITY Capture.d "Pro vrácení řetězce z filtru pro domény použije závorky. [číslo] označuje pořadové číslo závorky, od 1 do 9.">
+<!ENTITY Capture.f "Pro vrácení řetězce z filtru pro název souboru použije závorky. [číslo] označuje pořadové číslo závorky, od 1 do 9.">
+<!ENTITY Capture.example "Například pro filtr: mozilla_(firefox)_3.5.(exe), <b>$1f</b> vybere „firefox“ a <b>$2f</b> vybere „exe“.">
+<!ENTITY Regexp "regulární výraz">
+<!ENTITY Capture.rd "Vrátí řetězec z domény vybraný pomocí regulárního výrazu obsaženého mezi značkami <b>&#37;asf_rd&#37;</b>.">
+<!ENTITY Capture.rf "Vrátí řetězec z názvu souboru vybraný pomocí regulárního výrazu obsaženého mezi značkami <b>&#37;asf_rd&#37;</b>.">
+<!ENTITY Attention "UPOZORNĚNÍ">
+<!ENTITY Attention.text "Pokud bude výsledná cesta pro uložení obsahovat zakázané znaky (: nebo ?&quot;*/&lt;&gt;|: ve Windows), rozšíření přestane fungovat. V tom případě zkontrolujte filtry.">

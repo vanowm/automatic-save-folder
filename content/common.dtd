@@ -1,7 +1,8 @@
 <!-- Current version -->
-<!ENTITY asf.version "1.0.2bRev96">
+<!ENTITY asf.version "1.0.2bRev97">
 
 <!ENTITY about.translators "
+- cz : Stanislav Horáček<br />
 - en-US : Cyan, Narayan<br />
 - fr : Cyan, Goofy, Haynee<br />
 - it : Scognito.<br />

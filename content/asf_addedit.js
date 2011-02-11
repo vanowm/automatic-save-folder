@@ -292,12 +292,12 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		}
 		else
 		{
-			if (rule == "*") filename_regexp = false;
 			var rule = this.trim(filename.value);
 		}
 		
 		if (rule != "") 
 		{
+			if (rule == "*") filename_regexp = false;
 			var filename = rule;
 		}
 		else

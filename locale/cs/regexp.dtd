@@ -1,0 +1,110 @@
+<!-- browser and save dialog-->
+<!ENTITY Intro_1 "Regulární výrazy (regular expression, zkráceně Reg. exp. či Regexp) umožňují definovat na jednom řádku mnoho filtrů.">
+<!ENTITY Intro_2 "0">
+<!ENTITY Title_1 "Zvláštní značky">
+<!ENTITY Intro_3 "Stejně jako znak * (hvězdička) nahrazuje v obecných filtrech neurčený počet písmen, v regulárních výrazech lze používat mnoho zvláštních znaků odpovídajících různým skupinám písmen:">
+<!ENTITY The.dot.title "Tečka .">
+<!ENTITY The.dot.text "Tečka . odpovídá jedinému znaku (písmenu, číslici, symbolu nebo mezeře).<br /> „g..gle“ odpovídá slovu google a dalším slovům začínajícím na „g“, následované jakýmikoliv dvěma znaky, a končícímu s „gle“.">
+<!ENTITY The.asterisk.title "Hvězdička *">
+<!ENTITY The.asterisk.text "Hvězdička nahrazuje předchozí znak 0krát až mnohokrát.<br />
+'go*gle' bude odpovídat gogle, google, goooooooooogle atd.<br />
+'.*' (tečka následovaná hvězdičkou) odpovídá mnohonásobnému jakémukoliv znaku.<br />
+.* použitá samostatně odpovídá odpovídá všem názvům domény nebo souboru,
+což se shoduje s případem, kdy zvolíte v okně vytváření filtru „Všechno“.">
+<!ENTITY The.caret.title "Stříška ^">
+<!ENTITY The.caret.text "Stříška ^ označuje začátek řádku. „^http“ bude hledat „http“ vyskytující se pouze na začátku domény.<br /> Filtru bude vyhovovat „http://test.com“, ale už ne „ftp://http_test.com“, protože „http“ se nenachází na začátku, ale uprostřed.">
+<!ENTITY The.dollar.title "Dolar $">
+<!ENTITY The.dollar.text "Dolar $ označuje konec řádku. „com$“ bude odpovídat každému řetězci končícímu s „com“.<br /> Filtru bude vyhovovat „http://test.com“, ale už ne „http://computer.net“, protože „com“ se nenachází na konci řádku, ale uprostřed.">
+<!ENTITY The.braces.title "Složené závorky {}">
+<!ENTITY The.braces.text "Složené závorky značí počet opakování předchozího znaku, například go{2}gle = google (znak o se dvakrát opakuje)<br />Je možné zadat minimum a maximum: „go{0,2}gle“ bude odpovídat jak „ggle“, tak „gogle“ či „google“.">
+<!ENTITY The.parenthesis.title "Závorky ( ) a svislítko |">
+<!ENTITY The.parenthesis.text "Závorky umožňují definovat skupinu po sobě jdoucích písmen. Ve spojení se svislítkem tak lze definovat výběr z více možností<br /> (aaaa|bbbb|cccc) bude odpovídat jakékoliv z těchto skupin aaaa, bbbb nebo cccc, ale ne víckrát než jednou.
+(b|g)oogle znamená buď boogle, nebo google, ale ne bgoogle<br />
+<br />
+Existují další možnosti pro skupinu vymezenou závorkami:<br />
+'(b|g){1,2}oogle' bude odpovídat jednomu nebo dvou písmenům b či g následovaným 'oogle'<br />
+Budou tedy odpovídat výrazy boogle, bboogle, google, ggoogle, bgoogle, gboogle.<br />
+<br />
+'(b|g)*oogle' zahrnuje nekonečné množství kombinací b a g před 'oogle'.">
+<!ENTITY The.question.title "Otazník ?">
+<!ENTITY The.question.text "Otazník ? označuje předchozí znak či skupinu jako nepovinný.<br />
+Například soubory mpeg mohou mít příponu '.mpg' nebo '.mpeg'. Odpovídajícím regulárním výrazem je 'mpe?g'<br />
+Nov(ember)? bude odpovídat Nov a November<br />
+Otazníkk je vlastně zkratkou regulárního výrazu {0,1}<br />
+Nov(ember)? = Nov(ember){0,1}<br />
+<br />
+Otazník se také používá ke změně hladových regulárních výrazů (výchozí) na líné, například:<br />
+Data: „To je test“<br />
+Filtr 1: „t.*t“ zachytí vše od prvního po poslední T, jinými slovy celý řetězec „To je test“, hvězdička je hladová a odpovídá jí největší počet znaků, které může nalézt.<br />
+Filtr 2 : „t.*?t“ zachytí část od prvního T do prvního následujícho T, tedy „To je t“, hvězdička je nyní líná a zastavuje se na prvním výskytu, který najde (zleva doprava).">
+<!ENTITY The.bracket.title "Hranaté závorky [ ]">
+<!ENTITY The.bracket.text "Hranaté závorky označují rozmezí nebo skupinu možných znaků.<br />
+Na rozdíl od obyčejných závorek se uvnitř hranatých nenachází slovo, ale nezávislá písmena.<br />
+Pro Nov[embr] bude odpovídat jednomu z písmen v závorkách, ale ne všem: Nove, Novm, Novb or Novr.<br />
+<br />
+Minus mezi dvěma znaky značí rozsah povolených znaků:<br />
+[a-z] znamená jakýkoliv znak od a do z.<br />
+<br />
+V hranatých závorkách lze použít více než jedno minus. [a-zA-Z] definuje všechna malá a velká písmena abecedy. [a-zA-Z0-9] značí všechny znaky abecedy a číslice.<br />
+V hranatých závorkách lze napsat jakýkoliv znak: [_+.()a-d\s] značí písmena od a do d a navíc znaky _, +, tečku, závorky a mezeru.<br />
+Pro zadání znaku minus '-' je třeba ho napsat na první místo: [-a-z] bude odpoovídat znaku minus '-' a písmenům od a do z.<br />
+<br />
+<br />
+Hranaté závorky odpovídají jedinému písmenu, více jich je možné definovat následovně:<br />
+t[se]*t odpovídá mnoha výskytům těchto písmen: 'tet', 'tst', 'test', 'tset' nebo dokonce 'tesssst'<br /> 
+t[es]{0,2} odpovídá t, te, ts, tee, tss, tes a tse">
+<!ENTITY The.backslash.title "Zpětné lomítko  následované písmenem">
+<!ENTITY The.backslash.text "d odpovídá počtu<br />
+\s odpovídá bílým znakům (mezera, tabulátor atd.)<br />
+\w odpovídá slovu (skupina písmen oddělená mezerami, začátkem řádku nebo jeho koncem)<br />
+\b zjišťuje začátek a konec slova. '\barc\b' zjistí slovo 'arc', ale nebude fungovat na slově 'archer'.<br />
+\uFFFF, kde FFFF je šestnáctkový kód, odpovídá příslušnému znaku unicode.<br />
+Například \u00A9 odpovídá '©'.">
+<!ENTITY The.backslash.info "Všechny výše uvedené značky se používají ve funkcích regulárních výrazů, pokud potřebujete filtrovat jedno z těchto písmen v názvu souboru nebo domény, je nutné je zapsat s počátečním zpětným lomítkem.<br />
+Například pro filtrování souboru 'my_file(2007).jpg' je nutné použít zpětné lomítko před závorkami a tečkou my_file\(2007\)\.jpg <br />
+<br />
+Zpětným lomítkem musí být uvozeny všechny tyto znaky:">
+
+<!-- feel free to add a link to a Regexp website on your own language -->
+<!ENTITY Regexp.links "Existuje mnoho dalších množností filtrování pomocí regulárních výrazů, ty zde ale nemohou být vysvětleny.<br />
+Pro další informace se podívejte do dokumentace a příkladů na těchto stránkách: <br />
+http://www.regular-expressions.info/tutorial.html<br />
+http://www.javascriptkit.com/jsref/regexp.shtml">
+<!ENTITY Example_1.title "Vybrané příklady">
+<!ENTITY Example_1.text "Filtrování všech souborů .rar a .r01:<br />
+r(ar|\d{2}) <br />
+Znamená 'r' následované buď 'ar' nebo 2 číslicemi<br />
+<br />
+Aby odpovídalo jakékoliv http v doméně .com:<br />
+^http.*\.com$<br />
+Znamená vše začínající na 'http' (zadáno pomocí ^), následované neurčeným počtem jakýchkoliv písmen (nebo žádnými) a končící na '.com' (zadáno pomocí $).<br />
+<br />
+Aby odpovídala doména bez ohledu na to, obsahuje-li www, či ne:<br />
+ ^http:\/\/(|www\.)mozilla\.org<br />
+Znamená všechno začínající na 'http' (zadáno pomocí ^), následované ':', dále dvěma lomítky '\/\/', dále 'www' a tečkou '\.', nebo ničím a názvem domény (zde 'mozilla.org')<br />
+Poznámka: Lomítka a tečky jsou uvozeny zpětným lomítkem, jinak by byly považovány na značku regulárního výrazu.">
+<!ENTITY Example_2.title "Příklad filtru pro jména souborů">
+<!ENTITY Example_2.text "Filtrování všech souborů archivu:<br />
+.*\.(z(ip|\d{2})|r(ar|\d{2})|jar|bz2|gz|tar|rpm|7z)$<br />
+<br />
+Filtrování všech videí:<br />
+.*\.(mp(eg?|[g4])|rm|avi|mov|divx|asf|qt|wmv|ram|m1v|m2v|rv|vob|asx)$<br />
+<br />
+Filtrování všech obrázků:<br />
+.*\.(jpe?g|jpe|gif|png|tiff?|bmp|ico)$"> 
+<!ENTITY Example_3.title "Příklad filtru pro domény">
+<!ENTITY Example_3.text "Filtrovat všechny protokoly ftp:<br />
+Pomocí regulárního výrazu: ^ftp:\/\/.*<br />
+Bez regulárního výrazu: ftp://<br />
+<br />
+Filtrování určité domény:<br />
+Pomocí regulárního výrazu: ^http:\/\/(|www\.)domain\.com$<br />
+Bez regulárního výrazu: http://*domain.com<br />
+(Bez regulárního výrazu bude filtr fungovat na http://domain.com nebo http://www.domain.com, ale také na http://not_the_good.domain.com)<br />
+<br />
+<br />
+Aby odpovídala jakákoiliv doména s 'oogle' v názvu:<br />
+Pomocí regulárního výrazu: .*oogle.*<br />
+Bez regulárního výrazu: oogle">
+<!ENTITY Conclusion.title "Shrnutí">
+<!ENTITY Conclusion.text "Díky regulárním výrazům lze lépe filtrovat, někdy ale může být mnohem rychlejší jednoduché použití zástupného znaku *.<br />Regulární výrazy jsou užitečné obzvlášť pro složité filtrování.">

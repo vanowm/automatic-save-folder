@@ -366,8 +366,10 @@ var automatic_save_folder = {
 		var isregexp = false;
 		if(idx >= 0)
 		{
-			if (filter_type == "domain") isregexp = this.prefManager.getBoolPref("extensions.asf.filters"+ idx +".domain_regexp");
-			if (filter_type == "filename") isregexp = this.prefManager.getBoolPref("extensions.asf.filters"+ idx +".filename_regexp");
+			var tree = document.getElementById("asf-filterList");
+			if (filter_type == "domain") isregexp = tree.view.getCellValue(idx,tree.columns.getColumnAt("4"));
+			if (filter_type == "filename") isregexp = tree.view.getCellValue(idx,tree.columns.getColumnAt("5"));
+			isregexp = isregexp == "true" ? true : false;
 		}
 		if (isregexp == false) // replace simple wildcard and special characters with corresponding regexp
 		{
@@ -384,7 +386,7 @@ var automatic_save_folder = {
 		}
 		
 		// initialize the regular expression search
-		var param = (this.prefManager.getBoolPref("extensions.asf.regexp_caseinsensitive") == true ? "i" : "");
+		var param = (document.getElementById("asf-regexp_caseinsensitive").checked == true ? "i" : "");
 		var test = new RegExp(filter_data, param);
 		
 		if (downloaded_data.match(test)) // if something match

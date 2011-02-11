@@ -1,0 +1,180 @@
+<!-- Mini about box from addon manager -->
+<!ENTITY about "O rozšíření Automaticky uložit do složky">
+<!ENTITY version "Verze:">
+<!ENTITY createdBy "Vytvořil:">
+<!ENTITY createdBy.name "Cyan (CASSAR Éric)">
+<!ENTITY contributor "Poděkování:">
+<!ENTITY contributor.name "Díky všem, kdo pomohli nebo na různých stránkách">
+<!ENTITY contributor2.name "napsali komentář, aby toto rozšíření vylepšili.">
+<!ENTITY homepage "Domovská stránka">
+
+<!-- About tab -->
+<!ENTITY about.madeby_authorname "vytvořil Cyan">
+
+<!ENTITY about.links.title "Odkazy">
+<!ENTITY about.links.mainwebsite.title "Hlavní stránka">
+<!ENTITY about.links.mozilla.title "Stránka rozšíření Mozilly">
+
+<!ENTITY about.history.title "Seznam změn">
+<!ENTITY about.add "Přidáno">
+<!ENTITY about.delete "Odstraněno">
+<!ENTITY about.change "Změněno">
+<!ENTITY about.fix "Opraveno">
+<!ENTITY about.version.title "Verze">
+
+<!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
+<!ENTITY about.version.102 "+ Přidána možnost změnit akci v možnostech automatického stahování.
++ Je-li nainstalováno rozšíření DownThemAll, na novém panelu možností lze nastavení posílání složky určené AUS do DTA.
++ Přidána možnost výběru, zda u filtrů záleží, nebo nezáleží na velikosti písmen.
++ Nové možnosti týkající se grafického uživatelského rozhraní.
++ Přidán způsob Táhni a pusť (tj. Ctrl+táhni na Windows).
++ Výpis informací o procesech a filtrech během stahování souboru do Chybové konzole. (Vypnuto, pokud je Firefox v režimu anonymního prohlížení)
++ Kontrola a aktualizace beta verzí. Tato vlastnost funguje jenom ve Firefoxu 4.
++ Nová nabídka pro import a export předvoleb a filtrů.
++ Stránka s nápovědou se otevře po první instalaci, v případě důležitých oznámení také po aktualizaci.
++ Přidána možnost navrhovat všechny odpovídající filtry místo pouze jednoho.
++ Lokalizace: sv-SE
+- Není nutné používat lomítka kolem filtrů s regulárními výrazy.
+* Nyní je možné vybrat, jaký typ domény bude požíván pro filtrování, a přizpůsobit pořadí provádění filtrů (název domény, plné URL, pro soubor nebo aktuální panel).
+* &#37;asf_f&#37; nyní používá plný název souboru s příponou, pokud se nehodí žádný filtr.
+* &#37;asf_d&#37; nyní používá doménu bez protokolu, pokud se nehodí žádný filtr.
+! Opraveny chyba způsobující to, že se nevracela data, pokud stahování započalo z adresního řádku nebo z externího softwaru, což mělo za následek prázdný seznam filtrů v případě, že okno předvoleb bylo otevřeno z dialogu „+ Přidat nebo upravit filtr“. (Díky si zaslouží MrCOLOMBO)
+! Opraveno vytváření dynamických složek pro první filtr v seznamu. (Díky si zaslouží Googer)
+
+Poznámka: V zájmu dalšího vývoje rozšíření Automaticky uložit do složky je tato verze poslední, která je určena také pro starší verze Firefoxu (1.5, 2.0 a 3.0).">
+
+<!ENTITY about.version.101 "! Opravena chyba v hláskování zabraňující funkci AUS, pokud neodpovídal žádný filtr.
+! Přidán chybějící ruský řetězec na panel filtrů.">
+
+<!ENTITY about.version.100 "+ Přidáno filtrování do nabídek vyvolávaných pravým klepnutím – „Uložit odkaz jako…“, „Uložit obrázek jako…“ a „Uložit jako… (Ctrl+S)“ 
+  (Potřebuje alespoň Firefox 2.0 a není kompatibilní s rozšíření Download Sort. Jsou-li zapnuta obě rozšíření, zobrazí se volby pro Download Sort.)
++ AUS nyní funguje s režimem anonymního prohlížení a zabraňuje ukládání jakýchkoliv dat do předvoleb Firefoxu.
+  Dvě poznámky ke změnám chování AUS: 1) Předchozí doména nebude aktualizována, a 2) Pokud cílová složka neexistuje, nebude vyvořena a namísto ní bude použita poslední složka z neanonymního režimu, která fungovala.
++ Přidány dynamické proměnné &#37;F&#37; pro název měsíce a &#37;M&#37; pro jeho zkratku.
++ Přidány dynamické proměnné pro týdny: Číslo týdne &#37;W&#37;, den v týdnu &#37;w&#37;, &#37;l&#37; or &#37;D&#37;
++ Pro Windows a Mac OSX nyní rozšíření funguje s volbou „browser.preferences.instantApply“, která ukládá filtry ihned po změně. (Na Linuxu je volba výchozí.)
++ Přidána vlastnost Táhni a pusť na seznam filtrů, aby bylo možno filtry rychle řadit.
++ Přidán správný způsob výběru možnosti ukládání („Vždy se dotázat“ nebo „Uložit soubor“) a ruční výběr složky namísto použití Userchoice (browser.downlod.folderList=2)
++ Přidána možnost automaticky potvrdit dialog „Co má aplikace Firefox udělat s tímto soubrem?“ (požadavek uživatele). Ještě účinnější je tato možnost ve spojení s volbou „Nespouštět průzkumníka souborů“.
++ Přidána možnost zvolit, zda chcete pro filtr použít URL aktuální stránky, pokud neodpovídá doméně, na které je umístěn soubor.
++ Zobrazí ikonu AUS ve správci doplňků také tehdy, je-li rozšíření vypnuto, a to místo zeleného kousku skládačky (Firefox 3.6+).
++ Přidána možnost zobrazit nebo skrýt pole možností AUS a nastavit název pole tak, aby se klepnutím na něj zobrazil nebo skryl jeho obsah.
++ Přidáno podbarvování řádků podle toho, kterým filtrům odpovídá právě stahovaný soubor. Platí v případě, že je okno předvoleb otevřeno z okna pro ukládání. Odpovídají s zapnuté filtry se podbarví zeleně, odpovídají, ale vypnuté červeně.
+* Rozbalovací nabídka dialogu pro stahování: Řadí seznam cest abecedně, odstraňuje duplicity a funguje s dynamickými složkami, jsou-li povoleny.
+* Panel „Informace“ oddělen od dvou dalších panelů „Nápověda“ a „O rozšíření…“.
+* Přidána místní nápověda místo textové pod každou možnost (jsou s tím určité problémy ve Firefoxu 2).
+* V dialogu stahování byla vypnuta navržená složka, pokud není možnost v „Co má aplikace Firefox udělat s tímto souborem?“ nastavena na „Uložit soubor“.
+* Přidána rozbalovací nabídka do okna Přidat a upravit, aby bylo možné rychle přistupovat ke složkám již přidaným z dostupného seznamu filtru.
+! Opraveny odkazy na stránky Mozilly, které vedly na francouzskou verzi.
+! Opraveno provádění filtrů, pokud jsou zapnuty Dynamické složky
+! Zabráněno výjimce, která nastávala, pokud bylo zvoleno „použít URL aktuální stránky“, ale adresní řádek žádnou URL neobsahoval.
+  Stávalo se to při přesměrování skriptem pro stahování, pokud se zavíralo prázdné vyskakovací okno nebo klepalo prostředním tlačítkem na odkaz.
+! Při použití instantApply nebyly navrhované filtry obnoveny po zavření okna předvoleb.
+! Opravena chyba způsobující, že možnosti byly viditelně odškrtnuty, ale při použití vlastnosti instantApply nebyly uloženy.
+
+Další aktualizace:
++ Zdrojový kód a revize jsou dostupné na http://code.google.com/p/automatic-save-folder
+* Rozšíření se nyní nachází na veřejných stránkách na http://addons.mozilla.org/addon/4781; Díky za podporu, komentáře a nápady.
+* Nové stránky rozšíření v angličtině (informace, stažení, fórum): http://asf.mangaheart.org">
+
+<!ENTITY about.version.093 "+ Přidáno číslo verze v titulku hlavního okna s nastavením.
++ Přidána možnost dvojitého klepnutí na pole s cestou, které otevře okno průzkumníka.
++ Nové panely s oddělenými filtry, možnostmi, nápovědou a historií verzí.
++ Nové dynamické proměnné pro vytváření složek. (Díky Tedovi za výběr skupiny pomocí $1.)
++ Možnost zapnout nebo vypnout dynamické proměnné (v pokročilém režimu).
++ Nová místní nabídka na seznamu filtrů umožňuje vytvořit kopii filtru nebo ho přesunout nahoru či dospod pomocí jediného klepnutí.
++ [Experimentální] Pro snadnější použití, když je doména náhodná (např. pro stažení Firefoxu z Mozilla.org):
+  Zkontroluje filtry pro aktuální URL, pokud filtrům neodpovídá doména, kde je umístěn soubor.
+  Pozor na pořadí filtrování: Napřed se kontroluje doména, kde je umístěn soubor, pak adresa aktuální stránky.
+  Za údaj použitý k označení domény jako „předchozí“ je stále považována doména souboru.
++ Omezena šířka okna pro ukládání na velikost obrazovky. (Díky si zaslouží Julien)
++ Přidána možnost zobrazit seznam v nabídce okna pro ukládání, ze kterého lze vybrat složku pro uložení ze seznamu filtrů.
+* Změněn způsob chování odkazů v okně „O rozšíření“. Nyní se otevírají v novém panelu.
+* Větší a lépe viditelná nabídka a okno.
+* Zjednodušení kódu pro přesouvání filtrů nahoru a dolů.
+* Zjednodušení kódu pro načítání a automatické vyplňování údajů v okně „Přidat“.
+* Zpřehlednění: Všechna okna lze měnit táhnutím a jejich obsah se tomu přizpůsobuje.
+* Přepsání skriptů do globálního jmenného prostoru (požadováno Mozillou.com, aby bylo možno vložit rozšíření na jejich stránky)
+* Čistší kód a komentáře.
+! Oprava pro cesty v Unicode (může smazat filtry používající Unicode z verze 0.9.2, prosím přepište je ručně).
+! Oprava vlastností nově vytvořených filtrů, které se dají změnit.
+! Oprava chyby zabraňující načíst a prohlížet neurčené nebo neexistující předvolby v about:config. (Díky si zaslouží Martin)">
+
+<!ENTITY about.version.092 "* Kompatibilita s motivy vzhledu: Nyní se používají výchozí barvy, všechny texty by měly být správně viditelné.
+  Byly aktualizovány obrázky, aby byly viditelné v tmavých motivech.
+! Oprava pro Visty: Při otevírání okna předvoleb AUS nastavena proměnná browser.download.folderList na „2“.
+! Opraven „aktivní“ sloupec, filtry nemohou být aktivovány nebo deaktivovány dočasně.">
+
+<!ENTITY about.version.091 "+ Italská lokalizace od Scognita.
++ Přidána možnost rychle vybrat při ukládání ze dvou posledních složek.
+  Druhá složka se objeví pouze v případě, liší-li se od první.
+* Skryta možnost „Upravit 'Uložit jako…'“ ve Firefoxu 3, kde se používá automaticky.
+* Odstraněno okno „Přidat filtr“ vyskakující při ukládání. Způsobovalo problémy s aktivací a umístěním okna.
+  Odkaz je stále dostupný a nyní otevírá hlavní okno, ve kterém uživatel může přidat nový nebo upravit stávající filtry.  
+  Při použití tohoto odkazu bude pole automaticky vyplněno podle aktuálního názvu souboru a domény.
+* Zrušeno dvojité klepnutí na filtry. Nyní nelze pole upravovat ve Firefoxu 3.
+  Ve verzích nižších než Firefox 3 umožňovalo dvojité klepnutí upravit obsah bez okna pro úpravy. Změny přitom nebyly správně ukládány.
+! Opravena chyba ve skriptu pro provádění filtrů při volbě „naposledy použitá složka“. (Díky si zaslouží Carsten.)
+! Opravena chyba při použití Firefoxu 3 a Windows Vista: Změněna vnitřní možnost Firefoxu, která povoluje uživateli ukládat do libovolných složek. (Díky si zaslouží Carsten.)
+  (browser.download.folderList = 2) na Windowsech Vista je výchozí hodnota 1.
+  Dalšími možnostmi jsou: 0 = plocha; 1 = výchozí složka pro ukládání; 2 = podle volby uživatele.
+! Opravena cesta v okně ukládání ve Firefoxu 3.">
+
+<!ENTITY about.version.090 "+ Funguje s Firefoxem 3.0.*
++ Přidáno tlačítko pro informace a nápovědu, jak rozšíření používat.
++ Nová nabídka umožňuje přidat filtr přímo před uložením souboru, pole s názvem souboru a domény jsou vyplněna podle aktuálně stahovaného souboru.
+  Je-li takto filtr přidán, jsou znovu všechny filtry včetně nově přidaného použity na stahovaném souboru.
+  Známá chyba: Problém s aktivací okna při zavírání panelu s filtry.
+- Odstraněna možnost zakázat nebo povolit rozšíření. Pro dočasný zákaz prosím použijte správce rozšíření.
+* Nový způsob provádění filtrů (addEventlistener místo OnLoad), aby bylo rozšíření lépe použitelné v kombinaci s ostatními rozšířeními.
+! Opraven sloupec „Aktivní“ u filtrů, který nezůstával správně skrytý.">
+
+<!ENTITY about.version.087 "+ Kompatibilní s Firefoxem 3.0 beta (několik změn ve skriptu).
+* Klávesa Enter nyní slouží k potvrzování (Ok, Přidat, Upravit). V předchozí verzi byla přiřazena k tlačítku Zrušit.
+! Jediná verze pro Windows a Linux (A možná pro Mac? Může to prosím někdo vyzkoušet?)">
+
+<!ENTITY about.version.086fix "* Změny pro tlačítko „OK“; tlačítka se neobjevovala v Linuxu v hlavním panelu s možnostmi.
+Informace:
+V Linuxu je pouze tlačítko „Zavřít“ a zaškrtnutí jsou ukládána automaticky. Naneštěstí během toho nebyla ukládána pole s tabulkou.
+Tlačítko „Přijmout“ bylo odstraněno a nahrazeno skriptovaným „Uložit a zavřít“.">
+
+<!ENTITY about.version.086 "* Opravy slov a vět. Díky za komentáře Goofymu z mozilla.org.">
+
+<!ENTITY about.version.085 "+ Přidána možnost zobrazit určité informace v okně pro stahování.
++ Přidána možnost uchovat v paměti název domény, odkud soubor pochází.
+* Výchozí složka nyní funguje, i když není nastaven žádný filtr.
+* Změněn způsob, jak se zobrazuje okno s regulárními výrazy. Je použit iframe a html stránka místo dtd a XUL.">
+
+<!ENTITY about.version.084 "+ Překlad do francouzštiny.
+* Soubory s lokalizacemi převedeny do utf-8.">
+
+<!ENTITY about.version.083 "+ Přidáno několik příkladů a stručná nápověda pro práci s regulárními výrazy. Dostupné v oknech pro filtry Přidat a Upravit.">
+
+<!ENTITY about.version.082 "První veřejné vydání.
++ Přidána možnost určit v nabídce pro ukládání webové stránky (Soubor, Uložit jako…).">
+
+<!ENTITY about.version.081 "* Výběr složky: Okno se nyní otevírá na naposledy vybrané složce. Předtím se otevíralo náhodně na jedné ze složek: documents and settings, plocha nebo složka uživatele.
+* Omezení pro výběr složky: odstraněna možnost zapsat cestu ručně, nyní lze vybrat cílovou složku pouze pomocí tlačítka „Vybrat…“.">
+
+<!ENTITY about.version.080 "Funkce:
++ Řazení filtrů podle priority (možnost přesunout filtr nahoru, nebo dolů)
++ Kromě normálních filtrů pracuje s filtry zadaných pomocí zástupného znaku a regulárních výrazů.
++ Výběr složky ručně, nebo pomocí tlačítka Vybrat.
++ Úprava filtru dvojitým klepnutím v seznamu filtrů.
++ Vzhled grafického uživatelského rozhraní s obrázky.">
+
+<!ENTITY about.thanks.title "Poděkování">
+
+<!ENTITY about.programmation.title "Programování">
+<!ENTITY about.programmation.content "Poděkování si zaslouží zejména:<br />
+- autoři rozšíření DownThemAll a Download sort, z jejichž zdrojových kódů jsem se hodně naučil.<br />
+- http://captain.at, late xulplanet.com, http://xulfr.org, za jejich zdroje o Xul a Javascriptu.<br />
+<br />
+A přispěvatelé:<br />
+- Carsten, Ted Gifford, Paolo Amadini">
+
+<!ENTITY about.bugreport.title "Hlášení chyb">
+<!ENTITY about.bugreport.content "- Photonic, Martin">
+
+<!ENTITY about.translation.title "Překlady">
+<!ENTITY about.translation.content "- nezávislí překladatelé a překladatelé z Babelzilly: <br />">

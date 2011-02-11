@@ -1,0 +1,158 @@
+<!-- ASF Settings -->
+<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
+<!ENTITY asf.preferences_window.resize "true">
+<!ENTITY asf.preferences_window.width "580">
+<!ENTITY asf.preferences_window.height "446">
+<!-- new line, U+00A0 ISOnum -->
+<!ENTITY NL "&#10;" >
+
+<!-- browser and save dialog-->
+<!ENTITY prefwindow.title "Nastavení rozšíření Automaticky uložit do složky">
+<!ENTITY asf.label "Automaticky uložit do složky…">
+<!ENTITY asf.addedit.label "Přidat nebo upravit filtr">
+<!ENTITY asf.pathselect.label "Cesta k dostupným filtrům:">
+<!-- Filters tab - top -->
+<!ENTITY asf.filters.label "Filtry">
+<!ENTITY asf.tree.column.domain "Doména">
+<!ENTITY asf.tree.column.filename "Název souboru">
+<!ENTITY asf.tree.column.localfolder "Místní složka">
+<!ENTITY asf.tree.column.enabled "Aktivní">
+<!-- this is 1 space (not empty string), this is the text you want to see on the buttons next to the arrows on the filter's tab, you can write 'up' if you want -->
+<!ENTITY asf.options.move.up " Nahoru">
+<!ENTITY asf.options.move.down " Dolů">
+<!ENTITY asf.options.edit "Upravit">
+<!ENTITY asf.options.delete " Smazat">
+<!ENTITY asf.options.add " Přidat">
+<!-- Filters tab - bottom -->
+<!ENTITY asf.default.label "Pokud soubor nevyhovuje žádnému filtru, uložit do:">
+<!ENTITY asf.lastselected.label "Naposledy použité složky">
+<!ENTITY asf.defaultfolder.label "Této složky:">
+<!ENTITY asf.selectfolder.label "Vybrat…">
+<!ENTITY asf.keeptemp.label "Použít poslední složku, je-li soubor ze stejné domény jako naposledy stažený soubor.">
+<!-- popup -->
+<!ENTITY asf.top.popup "Přesunout nahoru">
+<!ENTITY asf.copy.popup "Vytvořit kopii">
+<!ENTITY asf.delete.popup "Smazat">
+<!ENTITY asf.bottom.popup "Přesunout dolů">
+<!-- Options tab -->
+<!ENTITY asf.options.label "Možnosti">
+<!ENTITY asf.options.tab1.label "Strana 1">
+<!ENTITY asf.options.tab2.label "Strana 2">
+<!ENTITY asf.options.tabdta.label "DownThemAll!">
+<!ENTITY asf.options.tabdata.label "Správa dat">
+<!ENTITY asf.options.groupbox1.label "Prohlížeč souborů">
+<!ENTITY asf.useDownloadDir.bool "Nezobrazovat prohlížeč souborů a automaticky uložit do:">
+<!ENTITY asf.desktop.label "Plocha">
+<!ENTITY asf.systemdownload.label "Downloads">
+<!ENTITY asf.filteredfolder.label "Nastavit podle filtrů">
+<!ENTITY asf.folderList.tooltip "Jestliže neexistuje složka „Downloads“, zobrazí se prohlížeč souborů.">
+<!ENTITY asf.options.groupbox2.label "Dialog Uložit">
+<!ENTITY asf.dialogaccept.bool "Automaticky potvrdit dialogové okno „Co má aplikace Firefox udělat s tímto souborem“.">
+<!ENTITY asf.dialogacceptFiltered.bool "Jenom pokud je nalezen filtr">
+<!ENTITY asf.dialogacceptFiltered.tooltip "Dialogové okno „Co má aplikace Firefox udělat s tímto souborem“ nebude automaticky potvrzeno, pokud nebude vyhovovat žádný filtr.">
+<!ENTITY asf.dialogForceRadio_Start.bool "Vynutit volbu">
+<!ENTITY asf.dialogForceRadioTo.label1 "Otevřít s">
+<!ENTITY asf.dialogForceRadioTo.label2 "DownThemAll!">
+<!ENTITY asf.dialogForceRadioTo.label3 "dTa OneClick!">
+<!ENTITY asf.dialogForceRadioTo.label4 "Uložit soubor">
+<!ENTITY asf.dialogForceRadio_End.bool "před tím, než bude dialog pro uložení automaticky potvrzen.">
+<!ENTITY asf.viewdloption.bool "Zobrazit možnosti při stahování">
+<!ENTITY asf.viewdloption.tooltip "Zobrazí dvě poslední cílové složky a odkaz na přidání nebo úpravu filtrů">
+<!ENTITY asf.viewdloptionType0.label "Zobrazit vždy">
+<!ENTITY asf.viewdloptionType1.label "Vždy minimalizovat">
+<!ENTITY asf.viewdloptionType2.label "Minimalizovat, je-li vypnuto">
+<!ENTITY asf.viewdloptionType3.label "Skrýt, je-li vypnuto">
+<!ENTITY asf.suggestAllPossibleFolders.bool "Navrhovat všechny možné složky">
+<!ENTITY asf.suggestAllPossibleFolders.tooltip "Umožní rychle bez rozbalovací nabídky vybrat složku z těch, pro které odpovídá filtr.">
+<!ENTITY asf.viewpathselect.bool "Zobrazit seznam složek">
+<!ENTITY asf.viewpathselect.tooltip "Aktivuje rozbalovací seznam se všemi cestami filtrů">
+<!ENTITY asf.option.groupbox.checkUpdate.label "Beta aktualizace">
+<!ENTITY asf.checkBetaUpdate.button "Zkontrolovat beta aktualizace…">
+<!ENTITY asf.betaVersionAvailable.label "K dispozici je nová verze:">
+<!ENTITY asf.betaVersionNotAvailable.label "Není k dispozici nová verze.">
+<!ENTITY asf.autoCheckBetaUpdate.bool "Automaticky kontrolovat při otevírání okna s nastavením.">
+<!ENTITY asf.betaVersionUpdateNow.label "Aktualizovat nyní">
+<!ENTITY asf.options.groupbox3.label "Možnosti filtrů">
+<!ENTITY asf.lastdir.bool "Nastavit složku pro příkaz „Uložit jako“, pokud filtr vyhovuje">
+<!ENTITY asf.domainTestOrder.label1 "Zvolte domény, které se budou používat, a jejich pořadí při filtrování:">
+<!ENTITY asf.domainTestOrder.label2 "[Nápověda]">
+<!ENTITY asf.domainTestOrder.tooltip1 "Seznam čísel oddělených čárkami, který udává, v jakém pořadí se budou domény testovat. Výchozí hodnota, pokud je pole prázdné: 1,5">
+<!ENTITY asf.domainTestOrder.tooltip2 "Doména souboru">
+<!ENTITY asf.domainTestOrder.tooltip3 "URL souboru">
+<!ENTITY asf.domainTestOrder.tooltip4 "URL souboru + název souboru">
+<!ENTITY asf.domainTestOrder.tooltip5 "Doména panelu (nebo doména souboru, pokud není údaj nalezen)">
+<!ENTITY asf.domainTestOrder.tooltip6 "URL panelu (nebo URL souboru, pokud není údaj nalezen)">
+<!ENTITY asf.domainTestOrder.tooltip7 "Více informací o tom, které hodnoty odpovídají jednotlivým položkám, zjistíte v Chybové konzoli při stahování souboru.">
+<!ENTITY asf.regexp_caseinsensitive.bool "Filtry nerozlišují velikost písmen.">
+<!ENTITY asf.options.groupbox4.label "Klepnutí pravým tlačítkem">
+<!ENTITY asf.userightclick.bool "Použít filtry v nabídkách">
+<!ENTITY asf.userightclick.tooltip "Povolí filtry v nabídkách „Uložit odkaz jako…“, „Uložit obrázek jako…“ a „Uložit jako… (Ctrl+S)“">
+<!ENTITY asf.rightclicktimeout.bool "Odstranit zdržení a použít filtr při „Uložit odkaz jako…“ v nabídce vyvolané pravým tlačítkem">
+<!ENTITY asf.rightclicktimeout.tooltip1 "Odstranění zdržení zabrání Firefoxu číst cílové jméno souboru, pokud se stahuje z přesměrování, ale umožní funkci rozšíření Automaticky uložit do složky.">
+<!ENTITY asf.rightclicktimeout.tooltip2 "Tuto vlastnost dočasně vypněte, pokud chcete, aby Firefox četl název souboru poskytovaný v hlavičce (nebudou dostupné filtry).">
+<!ENTITY asf.rightclicktimeout.tooltip3 "Ovlivněny jsou pouze skripty pro stahování s přesměrováním na soubor.">
+<!ENTITY asf.rightclicktimeout.tooltip4 "Poznámka: Tato možnost neovlivní nabídky „Uložit obrázek jako…“ ani „Uložit jako… (Ctrl+S)“.">
+<!ENTITY asf.rightclick.ff2.label "Vlastnosti pro pravé tlačítko nejsou dostupné ve Firefoxu 2. Chcete-li používat filtry pro stahování pomocí „Uložit odkaz jako“ v nabídce vyvolané pravým tlačítkem, je nutné aktualizovat Firefox alespoň na verzi 3.0 (doporučena je verze 3.5 a novější).">
+<!ENTITY asf.rightclick.DSort.label "Bylo zjištěno rozšíření Download Sort.&NL;Vlastnosti pro pravé tlačítko rozšíření Automaticky uložit do složky nebudou fungovat, dokud nebude rozšíření Download Sort ve Správci rozšíření vypnuto.">
+<!ENTITY asf.options.groupbox5.label "Grafické rozhraní">
+<!ENTITY asf.pathlist_defaultforceontop.bool "V rozbalovacích nabídkách zobrazovat nejdříve výchozí cestu pro uložení.">
+<!ENTITY asf.pathlist_alphasort.bool "Řadit seznam cest pro uložení abecedně.">
+<!ENTITY asf.rowmatchinghighlight.label "Barevně zvýraznit, pokud je vybrán vyhovující filtr:">
+<!ENTITY asf.rowmatchinghighlight.color "Barvy rozšíření">
+<!ENTITY asf.rowmatchinghighlight.system "Systémové barvy">
+<!ENTITY asf.options.groupbox6.label "DownThemAll!">
+<!ENTITY asf.options.dtaDetected.label "Rozšíření Automaticky uložit do složky zjistilo, že je používán doplněk DownThemAll!&NL;Automaticky uložit do složky může posílat cestu získanou z filtrů do DownThemAll!, pokud se používá dialog pro uložení „Co má aplikace Firefox udělat s tímto souborem“.&NL;&NL;Poznámka: Tato možnost nefunguje v režimu Anonymního prohlížení.">
+<!ENTITY asf.dta_ASFtoDTA_isActive.bool "Povolit, aby rozšíření Automaticky uložit do složky posílalo cestu podle filtrů do DownThemAll!">
+<!ENTITY asf.dta_chooseSendingMethod.label "Vyberte metodu pro posílání do DTA OneClick!:">
+<!ENTITY asf.dta_methodReplace.label "Nahradit první složku v seznamu">
+<!ENTITY asf.dta_methodAdd.label "Přidat do seznamu">
+<!ENTITY asf.options.groupbox.datamanagement.label "Správa dat">
+<!ENTITY asf.export.notemp.bool "Neimportovat dočasná data jako doména, ze které se naposledy stahovalo, nebo naposledy uložená cesta.">
+<!ENTITY asf.export.forceimport.bool "Vynutit import, i když se nejedná o kompatibilní verzi. Upozornění: Abyste zabránili ztrátě dat, před vynucením importu exportujte a uschovejte stávající data.">
+<!ENTITY asf.export.infonotsaved.label "Poznámka: Tyto dvě možnosti se neuchovávají v zájmu zamezení chybám při importu.">
+<!ENTITY asf.export.button.label "Nastavení">
+<!ENTITY asf.export.button.export.label "Exportovat">
+<!ENTITY asf.export.button.import.label "Importovat">
+<!ENTITY asf.export.button.importall.label "Importovat všechna data">
+<!ENTITY asf.export.button.importprefs.label "Importovat pouze předvolby">
+<!ENTITY asf.export.button.importfilters.label "Importovat pouze filtry">
+<!ENTITY asf.export.button.recoverfilters.label "Obnovit z databáze nepoužité filtry">
+<!ENTITY asf.export.button.delete.label "Smazat">
+<!ENTITY asf.export.button.deleteallfilters.label "Smazat všechny filtry">
+<!ENTITY asf.export.button.deleteunusedfilters.label "Smazat z databáze nepoužité filtry">
+<!ENTITY asf.export.button.deleteuserprefs.label "Nastavit předvolby na výchozí hodnoty">
+<!ENTITY asf.export.defaultfolder.label "Výchozí složka pro exportovaná data (volitelné):">
+<!ENTITY asf.export.showbutton.bool "Přidat tlačítko pro správu dat na panel s filtry.">
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Dynamické složky">
+<!ENTITY asf.variablemode.bool "Povolit">
+<!ENTITY asf.variablemode.tooltip1 "Umožní upravovat filtry pro ukládání cest ručně s pomocí dynamických proměnných jako datum nebo název souboru.">
+<!ENTITY asf.variablemode.tooltip2 "Upozornění: Používá-li se režim Anonymního prohlížení, Firefox nevytváří složky, pokud neexistují. Navržena bude proto složka naposledy použitá v neanonymním prohlížení.">
+<!ENTITY asf.variablemode.label "Upozornění: U značek se rozlišuje velikost písmen.">
+<!ENTITY asf.variables.label "Seznam značek:">
+<!-- help tab-->
+<!ENTITY asf.help.label "Nápověda">
+<!ENTITY asf.help.title "Nápověda">
+<!-- About tab-->
+<!ENTITY asf.about.label "O rozšíření…">
+<!ENTITY asf.about.title "O rozšíření Automaticky uložit do složky">
+<!-- preference add & edit-->
+<!ENTITY buttonlabelextra1 "OK">
+<!ENTITY asf.add.title "Přidat nový filtr">
+<!ENTITY asf.edit.title "Upravit filtr">
+<!ENTITY asf.addedit.filter.label "Filtry">
+<!ENTITY asf.addedit.help.label "Nápověda">
+<!ENTITY asf.addedit.domain.label "Doména">
+<!ENTITY asf.addedit.filename.label "Název souboru">
+<!ENTITY asf.addedit.folder.label "Místní složka">
+<!ENTITY asf.addedit.regexp "Regulární výraz">
+<!ENTITY asf.addedit.all "Všechno">
+<!ENTITY asf.addedit.regexp.exemple "Příklady regulárních výrazů:">
+<!ENTITY asf.addedit.regexphelp.label "Nápověda k regulárním výrazům">
+<!ENTITY asf.addedit.inforegexp1 "Filtry mohou být:">
+<!ENTITY asf.addedit.inforegexp2 "Pevně určené: file_to_download.zip">
+<!ENTITY asf.addedit.inforegexp3 "Částečně určené za použití zástupných znaků: file*.zip">
+<!ENTITY asf.addedit.inforegexp4 "Regulární výrazy: .*(.rar|.zip)$">
+<!-- Regular expression Help dialog -->
+<!ENTITY asf.regexp.title "Regulární výrazy">
+<!ENTITY asf.regexp.label "Nápověda a příklady">

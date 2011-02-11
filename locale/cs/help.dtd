@@ -1,0 +1,100 @@
+<!ENTITY info.domain "Doména:">
+<!ENTITY info.filename "Soubor:">
+<!ENTITY info.folder "Složka:">
+<!ENTITY info.all "Všechno">
+<!ENTITY info.dynamicfilter "Dynamický filtr">
+<!ENTITY info.capturefilter "Filtr pro ukládání do složek dle názvu">
+<!ENTITY info.howtouse.title "Návod k použití">
+<!ENTITY info.howtouse.text1 "Toto rozšíření umožňuje definovat a používat filtry, na základě kterých bude automaticky vybrána složka při ukládání souborů.">
+<!ENTITY info.filterrules.title "Výsledky filtru">
+<!ENTITY info.filterrules.rule1 "Filtry jsou definovány pomocí názvu souboru a domény.">
+<!ENTITY info.filterrules.rule2 "Filtry musí odpovídat názvu souboru nebo domény. Například nepište <b>&quot;google.com&quot;</b>, ale jenom <b>google.com</b> (bez uvozovek)">
+<!ENTITY info.filterrules.rule3 "Je možné nahradit část filtru zástupným znakem <b>*</b> (hvězdičkou): <b>wiki*.org</b>">
+<!ENTITY info.filterrules.rule4 "Není potřeba psát hvězdičku na začátek a na konec řetězce filtru. Zápis <b>*wiki*</b> nebo <b>wiki</b> vyjde nastejno.">
+<!ENTITY info.filterrules.rule5 "To samé platí pro filtr s názvem souboru: <b>*.zip</b> i <b>.zip</b> budou fungovat stejně.">
+<!ENTITY info.filterrules.rule6 "Filtry jsou kontrolovány odshora dolů, dokud není nalezen filtr odpovídající stahovanému souboru. Ujistěte se, že máte filtry seřazené s ohledem na to.">
+<!ENTITY info.filterrules.rule7 "U filtrů nezáleží na velikosti písmen, při zpracování filtrů není rozdíl mezi velkým a malým písmenem.">
+<!ENTITY info.howtouse.text2 "Toto rozšíření umožňuje používat regulární výrazy, čímž zvyšuje přizpůsobitelnost filtrů.">
+<!ENTITY info.howtouse.text3 "Nápovědu pro regulární výrazy naleznete v okně „Přidat a upravit filtr“, je rovněž dostupná na stránkách rozšíření nebo si můžete přečíst kompletní přehled na stránkách http://www.regular-expressions.info/.">
+<!ENTITY info.howtouse.text4 "Pomocí dynamických proměnných je možné při ukládání vytvořit novou složku pojmenovanou podle data, názvu souboru, názvu domény atd.<br />Značky, které pro to lze použít, najdete na panelu Dynamické složky.">
+<!ENTITY info.basicexample.title "Příklady několika filtrů">
+<!ENTITY info.basicexample.text1 "Chcete-li ukládat všechny spustitelné soubory <b>.exe</b> do určité složky:">
+<!ENTITY info.basicexample.text2 "Složka, do které chcete spustitelné soubory ukládat.">
+<!ENTITY info.basicexample.text3 "Pokud chcete ukládat všechny soubory z konkrétní stránky (například z mozilla.org) do složky Mozilla:">
+<!ENTITY info.basicexample.text4 "Složka Mozilla.">
+<!ENTITY info.basicexample.text5 "Dále, potřebujete-li ukládat soubory <b>.zip</b> z mozilla.org, ale nechávat ostatní soubory v předchozí složce:">
+<!ENTITY info.basicexample.text6 "Složka Mozilla pro soubory .zip.">
+<!ENTITY info.basicexample.text7 "A zařaďte tento filtr nad předchozí. Pamatujte, že filtry jsou prováděny odshora dolů.">
+<!ENTITY info.basicexample.text8 "Na závěr můžete definovat filtry s úplnějšími názvy než jen příponou:">
+<!ENTITY info.basicexample.text9 "Složka pro všechny verze instalačního programu Firefoxu.">
+<!ENTITY info.advancedexample.title "Několik příkladů s dynamickými filtry a filtry pro ukládání do složek dle názvu">
+<!ENTITY info.advancedexample.text1 "Upozornění: Aby filtry fungovaly správně, nezapomeňte povolit možnost na panelu Dynamické filtry">
+<!ENTITY info.advancedexample.text2 "Ukládat noční sestavení Firefoxu do podsložek složky: D:\Download\firefox:">
+<!ENTITY info.advancedexample.text3 "D:\Download\firefox\nightly\&#37;Y&#37;-&#37;m&#37;-&#37;d&#37;">
+<!ENTITY info.advancedexample.text4 "Rozšíření bude vytvářet podsložky pojmenované podle data (například „2009-12-04“) a do nich bude ukládat soubory.">
+<!ENTITY info.advancedexample.text5 "Ukládat soubor podle jeho přípony:">
+<!ENTITY info.advancedexample.text6 "D:\Download\&#37;asf_x&#37;">
+<!ENTITY info.advancedexample.text7 "Rozšíření bude vytvářet podsložky pojmenované „zip“ pro soubory .zip, „rar“ pro soubory rar atd. a do nich bude ukládat soubory.">
+<!ENTITY info.advancedexample.text8 "Ukládat instalační soubory Firefoxu do podsložky pojmenované podle jeho verze:">
+<!ENTITY info.advancedexample.text9 "D:\Download\Firefox\$1f">
+<!ENTITY info.advancedexample.text10 "Během provádění filtrů na stahovaném souboru nejsou závorky brány v potaz a filtr se bude chovat jako „Firefox Setup *.exe“<br />
+$1f znamená obsah mezi prvními závorkami ve filtrovaném názvu souboru, což je číslo verze<br />
+Soubor „Firefox Setup 3.5.4.exe“ bude uložen do složky D:\Download\Firefox\3.5.4\">
+<!ENTITY info.advancedexample.text11 "Vytvářet nebo nevytvářet různé podsložky podle názvu souboru:">
+<!ENTITY info.advancedexample.text12 "Přiklad: Chceme stahovat videa z výletů s názvem „My_vacation_date-of-the-trip.avi“.<br />
+Videa mají vysvětlující titulky .srt, rovněž jsou k dispozici soubory .zip s fotografiemi z výletů, videa mohou být stažena s příponou .avi, .torrent nebo .nzb.<br />
+„.avi“ a „.srt“ budou uloženy do souboru ve složce D:\video\vacation. <br />
+„.zip“, „.torrent“ a „.nzb“ budou uloženy do podsložek D:\video\vacation\zip, D:\video\vacation\torrent a D:\video\vacation\nzb.">
+<!ENTITY info.advancedexample.text13 "/^My_vacation.*\.(avi|srt|zip|torrent|nzb)$/">
+<!ENTITY info.advancedexample.text14 "D:\video\vacation\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;">
+<!ENTITY info.advancedexample.text15 "Vysvětlení filtrů:<br />
+Filtr bude použit pro všechny soubory začínající na „My_vacation“ a končící jednou z uvedených přípon (avi, srt, zip, torrent or nzb).<br />
+Jaká složka se vytvoří, závisí na filtru: &#37;asf_rf&#37; vyhodnotí název stahovaného souboru pomocí regulárního výrazu mezi dvěma &#37;asf_rf&#37;: Pokud soubor končí s „.zip“, „.torrent“ nebo „.nzb“, bude vytvořena podsložka pojmenovaná podle části zachycené regulárním výrazem.<br />
+Nebude-li nalezena žádná z těchto tří přípon, regulární výraz neudělá nic, nevytvoří se žádná podsložka a soubory budou staženy do D:\video\vacation\">
+<!ENTITY info.advancedexample.text16 "Poznámka: Pro hlavní složku lze použít libovolné množství značek.<br />Filtr by mohl být:">
+<!ENTITY info.advancedexample.text17 "D:\video\&#37;asf_rf&#37;(vacation|wedding)&#37;asf_rf&#37;\&#37;asf_rf&#37;(zip|torrent|nzb)$&#37;asf_rf&#37;<br />V tomto případě je podsložka „vacation“ vytvořena jenom tehdy, obsahuje-li název soubor „vacation“.">
+<!-- Bellow is the page which appear on first install, and on important updates -->
+<!-- To see the page for localization testing go to chrome://asf/content/help/update.xhtml -->
+<!ENTITY version "Verze">
+<!ENTITY firstinstall.welcome_message "Děkujeme za instalaci rozšíření Automaticky uložit do složky.<br /><br />
+Přečtěte si prosím pozorně tuto zprávu a případně podle ní udělejte potřebné změny.<br />
+Tato stránka se zobrazí pouze jednou po první instalaci rozšíření nebo pokud je nutné sdělit významné změny.">
+<!ENTITY firstinstall.title.importantupdates "Důležité aktualizace:">
+<!ENTITY firstinstall.title.firstinstall "Poznámky k první instalaci:">
+<!ENTITY firstinstall.fullupdatelist "Pro úplný seznam změn se podívejte na panel „O rozšíření“ v předvolbách rozšíření Automaticky uložit do složky.">
+<!ENTITY firstinstall.steps "Pro zprovoznění <b>je nutné správně nastavit Firefox</b> a předvolby rozšíření.<br />Nezbytné jsou následující tři kroky, pokud filtrování nebude fungovat, zkontrolujte je prosím znovu:">
+<!ENTITY firstinstall.step1 "První krok: Firefox">
+<!ENTITY firstinstall.step2 "Druhý krok: Automaticky uložit do složky">
+<!ENTITY firstinstall.step3 "Třetí krok: Během stahování">
+<!ENTITY firstinstall.firefox.text1 "Filtry pro běžné stahování (jednoduché klepnutí nebo automatické stahování) fungují pouze tehdy, ukazuje-li se okno „Co má aplikace Firefox udělat s tímto souborem?“.">
+<!-- Screenshot from your language, place it in skin folder. Take a screen of the 'What should Firefox do with this file?' saving window (you can resize the picture if you find it a little too big)-->
+<!ENTITY firstinstall.firefox.pict1 "screen_save_cs.png">
+<!ENTITY firstinstall.firefox.text2 "Proto se následujícím způsobem ujistěte, že Firefox není nastaven tak, aby zabránil otevření tohoto okna:">
+<!ENTITY firstinstall.firefox.text3 "Zvolte v nabídce Firefoxu „Nástroje“ a „Možnosti“.">
+<!ENTITY firstinstall.firefox.text4 "- Používáte-li Firefox 3, zvolte panel „Aplikace“<br />- Používáte-li předchozí verze Firefoxu, zvolte panel „Obsah“ a klepněte vpravo dole na „Spravovat“.">
+<!ENTITY firstinstall.firefox.text5 "Zkontrolujte, že pro typ souboru, který chcete stahovat, je nastaveno „Vždy se dotázat“.">
+<!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
+<!ENTITY firstinstall.firefox.pict2 "screen_apps_cs.png">
+<!ENTITY firstinstall.firefox.text6 "Vyberte způsob ukládání v předvolbách Firefoxu na panelu Obecné:<br />
+- „Uložit všechny soubory do“: Firefox bude ukládat stažené souboru do určené složky, aniž by otevíral průzkumník souborů.<br />
+- „U každého souboru se dotázat, kam ho uložit“: Firefox bude zobrazovat průzkumníka souborů, který umožní přejmenovat soubor nebo vybrat ručně jinou složku pro uložení.">
+<!ENTITY firstinstall.firefox.pict3 "screen_main_cs.png">
+<!ENTITY firstinstall.asf.text1 "Pokud zvolíte ukládání bez průzkumníka souborů, Firefox bude soubory ukládat automaticky<br />">
+<!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
+<!ENTITY firstinstall.asf.pict1 "screen_asf102-setbyfilters_cs.png">
+<!ENTITY firstinstall.asf.text2 "Velice důležité je pořadí filtrů!<br />
+Filtry jsou prováděny odshora dolů a skončí, pokud je nalezen filtr odpovídající právě stahovanému souboru.<br />
+Nezapomeňte vždy nastavit pořadí filtrů tažením myší nebo pomocí šipky na pravé straně panelu s filtry.">
+<!ENTITY firstinstall.save.text1 "Je nutné zajistit, aby se Firefox vždy ptal, co udělat s právě stahovaným souborem.<br />
+Kvůli tomu <b style='color:red;'>nesmíte zaškrtnout</b> „Provádět od teď automaticky s podobnými soubory“.<br />
+Pokud se tak stane, opakujte krok 1.">
+<!-- Screenshot from your language. This is a screen of 'What should Firefox do with this file?' saving window, like firstinstall.Firefox.pict1, but with 'Do this automatically for files like this from now on.' shown unchecked-->
+<!ENTITY firstinstall.save.pict1 "screen_savedialog-alwaysdothis_cs.png">
+<!ENTITY firstinstall.moreinfo.text1 "Více o tom, jak vytvářet a používat filtry, se dozvíte na panelu Nápověda v možnostech rozšíření.">
+<!ENTITY firstinstall.moreinfo.text2 "Na oficiálních stránkách vývoje rozšíření je k dispozici také fórum:">
+<!-- important updates for 1.0.2 -->
+<!ENTITY importantupdates.102.1 "Nyní můžete zvolit, jaké údaje ze stahovaných souborů chcete použít pro filtrování: doména soubory, plné URL souboru, domény aktivního panelu, plné URL aktivního panelu.<br />Změnit toto nastavení lze na straně 2 na panelu možností rozšíření Automaticky uložit do složky.">
+<!ENTITY importantupdates.102.2 "Posílání složek zjištěných filtry do rozšíření DownThemAll!">
+<!ENTITY importantupdates.102.3 "Import/export filtrů.">
+<!ENTITY importantupdates.102.4 "Není nutno používat lomítka kolem filtrů s regulárními výrazy.">
+<!ENTITY importantupdates.102.5 "Poznámka: V zájmu dalšího vývoje rozšíření Automaticky uložit do složky je tato verze poslední, která je určena také pro starší verze Firefoxu (1.5, 2.0 a 3.0).">
