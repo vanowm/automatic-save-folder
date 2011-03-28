@@ -71,7 +71,7 @@ Tato stránka se zobrazí pouze jednou po první instalaci rozšíření nebo po
 <!ENTITY firstinstall.firefox.pict1 "screen_save_cs.png">
 <!ENTITY firstinstall.firefox.text2 "Proto se následujícím způsobem ujistěte, že Firefox není nastaven tak, aby zabránil otevření tohoto okna:">
 <!ENTITY firstinstall.firefox.text3 "Zvolte v nabídce Firefoxu „Nástroje“ a „Možnosti“.">
-<!ENTITY firstinstall.firefox.text4 "- Používáte-li Firefox 3, zvolte panel „Aplikace“<br />- Používáte-li předchozí verze Firefoxu, zvolte panel „Obsah“ a klepněte vpravo dole na „Spravovat“.">
+<!ENTITY firstinstall.firefox.text4 "- Používáte-li Firefox ≥ 3, zvolte panel „Aplikace“<br />- Používáte-li předchozí verze Firefoxu, zvolte panel „Obsah“ a klepněte vpravo dole na „Spravovat“.">
 <!ENTITY firstinstall.firefox.text5 "Zkontrolujte, že pro typ souboru, který chcete stahovat, je nastaveno „Vždy se dotázat“.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
 <!ENTITY firstinstall.firefox.pict2 "screen_apps_cs.png">

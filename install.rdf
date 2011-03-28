@@ -17,6 +17,14 @@
 		</em:localized>
 		<em:localized>
 			<Description>
+				<em:locale>cs</em:locale>
+				<em:name>Automatic Save Folder</em:name>
+				<em:description>Automaticky vybere cílovou složku pro stahování podle názvu souboru a domény.</em:description>
+				<em:homepageURL>http://asf.mangaheart.org</em:homepageURL>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
 				<em:locale>de</em:locale>
 				<em:name>Automatic Save Folder</em:name>
 				<em:description>Wählt automatisch den Zielordner für Ihren Download basierend auf Dateiname und Domain.</em:description>

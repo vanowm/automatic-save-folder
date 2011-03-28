@@ -1,11 +1,11 @@
 <!-- Current version -->
-<!ENTITY asf.version "1.0.2bRev97">
+<!ENTITY asf.version "1.0.2bRev98">
 
 <!ENTITY about.translators "
-- cz : Stanislav Horáček<br />
+- cs : Stanislav Horáček<br />
 - en-US : Cyan, Narayan<br />
 - fr : Cyan, Goofy, Haynee<br />
-- it : Scognito.<br />
+- it : Scognito<br />
 - ru : MrCOLOMBO<br />
 - sv-SE : Mikael Hiort af Ornäs<br />
 ">

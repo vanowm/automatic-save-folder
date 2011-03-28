@@ -94,7 +94,7 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 <!ENTITY firstinstall.firefox.pict1 "screen_save_sv.png">
 <!ENTITY firstinstall.firefox.text2 "Så, försäkra dig om att Firefox inte använder någon annan process som förhindrar att fönstret visas genom att tillämpa följande metod:">
 <!ENTITY firstinstall.firefox.text3 "Gå till Firefox-menyn &quot;Verktyg&quot; och välj &quot;Inställningar...&quot;.">
-<!ENTITY firstinstall.firefox.text4 "- Firefox 3-användare: Gå till fliken &quot;Program&quot;
+<!ENTITY firstinstall.firefox.text4 "- Firefox ≥ 3-användare: Gå till fliken &quot;Program&quot;
 	<br />- För användare av de tidigare Firefox-versionerna: Gå till fliken &quot;Innehåll&quot; och klicka på &quot;Hantera...&quot; nederst till höger.">
 <!ENTITY firstinstall.firefox.text5 "Säkerställ att den filtyp du vill ladda ner är inställd på &quot;Fråga alltid&quot;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ to show an 'always ask' drop down selected -->

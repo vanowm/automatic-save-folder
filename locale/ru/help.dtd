@@ -100,7 +100,7 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 <!ENTITY firstinstall.firefox.pict1 "screen_save_ru.png">
 <!ENTITY firstinstall.firefox.text2 "Убедитесь, что FireFox, не использует другое действие, предотвращающее появление окна загрузки следующим образом:">
 <!ENTITY firstinstall.firefox.text3 "В FireFox откройте меню &quot;Инструменты&quot; далее &quot;Настройки...&quot;.">
-<!ENTITY firstinstall.firefox.text4 "- Для FireFox 3: Откройте закладку &quot;Приложения&quot;
+<!ENTITY firstinstall.firefox.text4 "- Для FireFox ≥ 3: Откройте закладку &quot;Приложения&quot;
         <br />- Для FireFox 2: Откройте в закладку &quot;Содержимое&quot; и нажмите на &quot;Управление...&quot; внизу справа.">
 <!ENTITY firstinstall.firefox.text5 "Проверьте чтобы у типа загружаемого файла было установлено действие &quot;Всегда спрашивать&quot;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
@@ -108,13 +108,13 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 <!ENTITY firstinstall.firefox.text6 "Choose a saving method in Firefox preferences, General tab:<br />
 - &quot;Save files to&quot;: Firefox will save the downloads automatically into the specified folder without opening the files explorer.<br />
 - &quot;Always ask me where to save files&quot;: Firefox will show you the files explorer which will allow you to rename the file or select another saving folder manually.">
-<!ENTITY firstinstall.firefox.pict3 "screen-main_en.png">
+<!ENTITY firstinstall.firefox.pict3 "screen_main_en.png">
 
 <!ENTITY firstinstall.asf.text1 "If you decide to go without the file explorer, Firefox will automatically save your files<br />
 either in the download folder defined by your operating system, or on your desktop.<br />
 Do not forget to select &quot;Set by the filters&quot; to allow Firefox to use the filtered folders.">
 <!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
-<!ENTITY firstinstall.asf.pict1 "screen-asf102-setbyfilters_en.png">
+<!ENTITY firstinstall.asf.pict1 "screen_asf102-setbyfilters_en.png">
 <!ENTITY firstinstall.asf.text2 "Your filter's order is of a big importance!<br />
 The verification is done from top to bottom, and stop right after a filter is matching the actual downloaded file.<br />
 Remember to alway set your filters order using the arrow on the right of the filter's tab, or dragging them with your mouse.">
@@ -124,7 +124,7 @@ Remember to alway set your filters order using the arrow on the right of the fil
 According to this, <b style='color:red;'>you must not check</b> &quot;Do this automatically for files like this from now on.&quot;.<br />
 If it ever happens, do Step 1 again.">
 <!-- Screenshot from your language. This is a screen of 'What should Firefox do with this file?' saving window, like firstinstall.Firefox.pict1, but with 'Do this automatically for files like this from now on.' shown unchecked-->
-<!ENTITY firstinstall.save.pict1 "screen-savedialog-alwaysdothis_en.png">
+<!ENTITY firstinstall.save.pict1 "screen_savedialog-alwaysdothis_en.png">
 
 <!ENTITY firstinstall.moreinfo.text1  "For more informations on using and creating filters, a help tab is available in the add-on."> 
 <!ENTITY firstinstall.moreinfo.text2  "A forum is also available on the official development website:">

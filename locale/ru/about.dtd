@@ -24,16 +24,18 @@
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
 <!ENTITY about.version.102 "+ Добавлена опция выбора действия для автоматического сохранения.
-+ Если установлено расширение DownThemAll, доступны новые опции для настройки взаимодействия с ним.
++ Если установлено расширение DownThemAll!, доступны новые опции для настройки взаимодействия с ним.
 + Настройки обработки регистра в фильтрах.
 + Новые опции для графического интерфейса.
 + Добавлен метод копирования через Drag&amp;Drop (Например: Удерживая Ctrl при перетаскивании в Windows).
 + Print filter's and process informations to the error console when downloading a file. (Disabled if Firefox is in PrivateBrowsing mode)
-+ checking and update for beta versions. The internal update feature is working only on Firefox 4.
++ Check and update for beta versions. The internal update feature is working only on Firefox 4.
 + New menu to import and export preferences and filters.
 + A help page will now open after the first install and when there's important messages after an update.
 + Added an option to suggest all matching filters instead of only one.
-+ Localization : sv-SE
++ An ASF button is now available in the toolbar customization menu.
++ Localization : cs, sv-SE
+- Localization : it
 - Removed the need of the slashes around a regular expression's filters.
 * It's now possible to choose which domain type are used for the filtering process, and personalize the verification order (domain only, full URL, from the file or the current tab).
 * &#37;asf_f&#37; now uses full filename with extension if no filter match.

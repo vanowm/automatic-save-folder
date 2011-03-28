@@ -1,6 +1,6 @@
 ﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
-Copyright (C) 2007-2010 Éric Cassar (Cyan).
+Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			  2009 Ted Gifford - Dynamic variable capturing 
 
     "Automatic Save Folder" is free software: you can redistribute it and/or modify

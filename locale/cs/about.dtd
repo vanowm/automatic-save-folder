@@ -24,7 +24,7 @@
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
 <!ENTITY about.version.102 "+ Přidána možnost změnit akci v možnostech automatického stahování.
-+ Je-li nainstalováno rozšíření DownThemAll, na novém panelu možností lze nastavení posílání složky určené AUS do DTA.
++ Je-li nainstalováno rozšíření DownThemAll!, na novém panelu možností lze nastavení posílání složky určené AUS do dTa!.
 + Přidána možnost výběru, zda u filtrů záleží, nebo nezáleží na velikosti písmen.
 + Nové možnosti týkající se grafického uživatelského rozhraní.
 + Přidán způsob Táhni a pusť (tj. Ctrl+táhni na Windows).
@@ -33,7 +33,9 @@
 + Nová nabídka pro import a export předvoleb a filtrů.
 + Stránka s nápovědou se otevře po první instalaci, v případě důležitých oznámení také po aktualizaci.
 + Přidána možnost navrhovat všechny odpovídající filtry místo pouze jednoho.
-+ Lokalizace: sv-SE
++ An ASF button is now available in the toolbar customization menu.
++ Lokalizace: cs, sv-SE
+- Lokalizace: it
 - Není nutné používat lomítka kolem filtrů s regulárními výrazy.
 * Nyní je možné vybrat, jaký typ domény bude požíván pro filtrování, a přizpůsobit pořadí provádění filtrů (název domény, plné URL, pro soubor nebo aktuální panel).
 * &#37;asf_f&#37; nyní používá plný název souboru s příponou, pokud se nehodí žádný filtr.

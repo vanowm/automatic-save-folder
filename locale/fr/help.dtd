@@ -94,7 +94,7 @@ Trois étapes sont essentielles, si le filtrage ne fonctionne pas, veuillez re-v
 <!ENTITY firstinstall.firefox.pict1 "screen_save_fr.png">
 <!ENTITY firstinstall.firefox.text2 "Par conséquent, vérifiez que Firefox ne lance pas un traitement différent sur le fichier empêchant la fenêtre de s'afficher en suivant ces instructions :">
 <!ENTITY firstinstall.firefox.text3 "Allez dans le menu &quot;Outils&quot; de Firefox puis &quot;Options...&quot;.">
-<!ENTITY firstinstall.firefox.text4 "- Pour les utilisateurs de Firefox 3 : Allez sur l'onglet &quot;Applications&quot;.
+<!ENTITY firstinstall.firefox.text4 "- Pour les utilisateurs de Firefox ≥ 3 : Allez sur l'onglet &quot;Applications&quot;.
   <br />- Pour les utilisateurs d'une version précédente : Allez sur l'onglet &quot;Contenu&quot; puis cliquez sur le bouton &quot;Gérer...&quot;.">
 <!ENTITY firstinstall.firefox.text5 "Vérifiez que l'extension de fichier que vous souhaitez télécharger soit bien positionnée sur &quot;Toujours demander&quot;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' selected -->
@@ -109,9 +109,9 @@ soit dans un dossier de téléchargement spécifique à votre système d'exploit
 N'oubliez pas de sélectionner &quot;Défini par les filtres&quot; pour que Firefox utilise les dossiers de vos filtres.">
 <!-- Screenshot from your language. Take ASF pref/options/page1 to show the 'Set by filters' selected menu -->
 <!ENTITY firstinstall.asf.pict1 "screen_asf102-setbyfilters_fr.png">
-<!ENTITY firstinstall.asf.text2 "L'ordre de vos filtre à aussi une grande importance !<br />
+<!ENTITY firstinstall.asf.text2 "L'ordre de vos filtres à aussi une grande importance !<br />
 La vérification s'effectue de haut en bas, et s'arrete dès qu'un filtre correspond au fichier téléchargé.<br />
-Pensez à bien organiser vos filtres en les déplaçant avec les flèches situé sur le coté droit de l'onglet des filtres, ou en attrapant les filtres avec votre souris.">
+Pensez à bien organiser vos filtres en les déplaçant avec les flèches situées sur le coté droit de l'onglet des filtres, ou en attrapant les filtres avec votre souris.">
 
 
 <!ENTITY firstinstall.save.text1 "Vous devez veillez à ce que Firefox vous propose toujours ce qu'il doit faire du fichier que vous êtes en train de télécharger.<br />
@@ -128,4 +128,4 @@ Si cela devait arriver, revérifiez l'étape 1.">
 <!ENTITY importantupdates.102.2 "Envoi du dossier filtré à DownThemAll!">
 <!ENTITY importantupdates.102.3 "Import/export des filtres.">
 <!ENTITY importantupdates.102.4 "Suppression des slashs aux extrémités des filtres utilisant les expressions régulières.">
-<!ENTITY importantupdates.102.5 "Note : Afin de pouvoir faire évoluer Automatic Save Folder, cette version est la dernière compatible avec les anciennes versions de firefox (1.5, 2.0 et 3.0).">
+<!ENTITY importantupdates.102.5 "Note : Afin de pouvoir faire évoluer Automatic Save Folder, cette version est la dernière compatible avec les anciennes versions de Firefox (1.5, 2.0 et 3.0).">

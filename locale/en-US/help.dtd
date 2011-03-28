@@ -94,7 +94,7 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 <!ENTITY firstinstall.firefox.pict1 "screen_save_en.png">
 <!ENTITY firstinstall.firefox.text2 "So, be sure to check if Firefox doesn't use another process preventing the window to appear by following this method:">
 <!ENTITY firstinstall.firefox.text3 "Go to the Firefox menu &quot;Tools&quot; and &quot;Options...&quot;.">
-<!ENTITY firstinstall.firefox.text4 "- For the Firefox 3 users: go to the &quot;Applications&quot; tab
+<!ENTITY firstinstall.firefox.text4 "- For the Firefox ≥ 3 users: go to the &quot;Applications&quot; tab
 	<br />- For the previous Firefox versions users: Go to the &quot;Content&quot; tab and click on the &quot;Manage...&quot; at the bottom right.">
 <!ENTITY firstinstall.firefox.text5 "Verify that the File Type you want to download is correctly set to &quot;Always ask&quot;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->

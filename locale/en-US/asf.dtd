@@ -85,7 +85,7 @@
 <!ENTITY asf.lastdir.bool "Affect the folder for the 'save as...' command when a filter matches">
 <!ENTITY asf.domainTestOrder.label1 "Choose the domain types to use, and their verification order, when filtering:">
 <!ENTITY asf.domainTestOrder.label2 "[Help]">
-<!ENTITY asf.domainTestOrder.tooltip1 "A coma separated number list to specify in which order the tests on the domain will be performed. Default value if the field is empty: 1,5">
+<!ENTITY asf.domainTestOrder.tooltip1 "A comma separated number list to specify in which order the tests on the domain will be performed. Default value if the field is empty: 1,5">
 <!ENTITY asf.domainTestOrder.tooltip2 "File's domain">
 <!ENTITY asf.domainTestOrder.tooltip3 "File's URL">
 <!ENTITY asf.domainTestOrder.tooltip4 "File's URL + Filename">

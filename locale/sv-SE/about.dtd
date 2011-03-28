@@ -24,7 +24,7 @@
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 begining spaces to create indentation -->
 <!ENTITY about.version.102 "+ Lade till ett alternativ att tvinga åtgärdsvalet när det automatiska nerladdningsalternativet används.
-+ Om tillägget DownThemAll! är installerat blir en ny alternativflik tillgänglig för att kunna skicka ASF:s målsökväg till DTA.
++ Om tillägget DownThemAll! är installerat blir en ny alternativflik tillgänglig för att kunna skicka ASF:s målsökväg till dTa!.
 + Lade till ett alternativ att välja huruvida filter skall vara skiftlägeskänsliga eller inte.
 + Nytt alternativ relaterat till det grafiska användargränssnittet.
 + Lade till en dra &amp; släpp-kopieringsmetod (d.v.s. Ctrl+dra i Windows).
@@ -33,7 +33,9 @@
 + Ny meny för att importera och exportera inställningar och filter.
 + En hjälpsida kommer hädanefter att öppnas efter den första installationen och när det finns viktiga meddelanden efter en uppdatering.
 + Added an option to suggest all matching filters instead of only one.
-+ Översättning : sv-SE
++ An ASF button is now available in the toolbar customization menu.
++ Översättning : cs, sv-SE
+- Översättning : it
 - Tog bort behovet av snedstreck kring reguljära uttryck-filter.
 * Det är nu möjligt att välja vilken domäntyp som används för filtreringsprocessen och anpassa verifieringsordningen (endast domän, fullständig URL, från filen eller den aktuella fliken).
 * &#37;asf_f&#37; använder nu fullständiga filnamn med filtillägg om inget filter matchar.

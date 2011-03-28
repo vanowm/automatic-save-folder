@@ -94,7 +94,7 @@ Three steps are essentials, if the filtering doesn't work please check each of t
 <!ENTITY firstinstall.firefox.pict1 "screen_save_en.png">
 <!ENTITY firstinstall.firefox.text2 "Se qualche filtro non funziona, accertartati che Firefox non usi un altro processo sul file scaricato:">
 <!ENTITY firstinstall.firefox.text3 "Vai sul menu &quot;Strumenti&quot; e &quot;Opzioni...&quot;.">
-<!ENTITY firstinstall.firefox.text4 "- Per utenti di Firefox 3: vai sul tab &quot;Applicazioni&quot;<br />
+<!ENTITY firstinstall.firefox.text4 "- Per utenti di Firefox ≥ 3: vai sul tab &quot;Applicazioni&quot;<br />
 - Per utenti di precedenti versioni di Firefox: Vai sul tab &quot;Contenuti&quot; e clicca su &quot;gestisci...&quot; in basso a destra.">
 <!ENTITY firstinstall.firefox.text5 "Verifica se il file che vuoi scaricare sia impostato su &quot;Chiedi ogni volta&quot;.">
 <!-- Screenshot from your language. Take firefox/tools/option/application tab/ and show an 'always ask' drop down selected -->
