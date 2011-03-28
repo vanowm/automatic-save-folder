@@ -4,7 +4,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>asf@mangaheart.org</em:id>
 		<em:name>Automatic Save Folder</em:name>
-		<em:version>1.0.2b</em:version>
+		<em:version>1.0.2</em:version>
 		<em:type>2</em:type>
 		
 		<em:localized>

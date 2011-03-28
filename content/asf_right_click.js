@@ -32,7 +32,7 @@ var automatic_save_folder = {
 	firefoxversion : "",
 	logtoconsole: true,
 	inPrivateBrowsing: false,
-	importantVersionAlert: "1.0.2bRev90",
+	importantVersionAlert: "1.0.2",
 	result: "", // print_r result
 	previousASFVersion: "",
 	currentASFVersion : "",
