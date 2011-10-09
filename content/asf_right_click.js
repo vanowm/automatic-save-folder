@@ -36,6 +36,7 @@ var automatic_save_folder = {
 	result: "", // print_r result
 	previousASFVersion: "",
 	currentASFVersion : "",
+	current_uri: "", // FF7.0.1 use a new per uri saved folder.
 	
 	rightclick_init: function() {
 		if (!asf_rightclick_loaded) 
@@ -116,31 +117,41 @@ var automatic_save_folder = {
 				
 				
 			// load the domain and the filename of the saved file
+			var tBrowser = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						.getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
+			var tabLocation = tBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
 			var filename = aFpP.fileInfo.fileName; // filename or tab's name if no filename specified.
-			if (typeof(aFpP.fileInfo.uri.fileName) != "undefined") // if the download is from an URL
-			{
-				var domain = 					aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host;
-				var	domainWithoutProtocol =    	aFpP.fileInfo.uri.host;
-				var fileURL = 					aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.directory; 
-				var fileURLAndFilename=			aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.path;
-				var currentDomain = document.getElementById("urlbar").value; // look for the current website URL in the DOM.
-					currentDomain = currentDomain.match(/^(.*?:\/\/)?.*?[^\/]+/);
-					currentDomain = currentDomain[0];
-				var currentURL = document.getElementById("urlbar").value;
+
+			var domain = 					aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host;
+			var	domainWithoutProtocol =    	aFpP.fileInfo.uri.host;
+			var fileURL = 					aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.directory; 
+			var fileURLAndFilename=			aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.path;
 			
-			}
-			else //  If the saved data is not from an URL (example : Abduction! add-on)
+			var currentDomain, currentURL = "";
+			try
 			{
-				var domain = document.getElementById("urlbar").value;
-					domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
-					domain = domain[0];
+				currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+				currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
+			}
+			catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
+			{
+				currentDomain = domain;
+				currentURL = fileURL;
+			}
+			
+			if (typeof(aFpP.fileInfo.uri.fileName) == "undefined") //  If the saved data is not from an URL (example : old Abduction! add-on)
+			{
+				var domain = currentDomain;
 				var domainWithoutProtocol =  domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
 				var fileURL = "";
 				var fileURLAndFilename = domain+"/"+filename;
-				var currentDomain = domain;
-				var currentURL = document.getElementById("urlbar").value;
 			}
-			var message = "These data will be used to verify the filters :\nFilename:\t\t"+filename +"\n1 - File's domain:\t"+domain+"\n2 - File's URL:\t\t"+fileURL+"\n3 - Full file's URL:\t"+fileURLAndFilename+"\n4 - Tab's domain:\t"+currentDomain+"\n5 - Tab's URL:\t\t"+currentURL;
+			
+			if (this.firefoxversion >= 7.01) this.current_uri = currentDomain.replace(/^.*:\/\//g,'');
+			
+			var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
+			if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
+			var message = "These data will be used to verify the filters :\nFilename:\t\t"+filename+"\nDomain test order:\t"+domain_testOrder+"\n1 - File's domain:\t"+domain+"\n2 - File's URL:\t\t"+fileURL+"\n3 - Full file's URL:\t"+fileURLAndFilename+"\n4 - Tab's domain:\t"+currentDomain+"\n5 - Tab's URL:\t\t"+currentURL;
 			if (!this.inPrivateBrowsing) this.console_print(message);
 			
 			
@@ -360,6 +371,22 @@ var automatic_save_folder = {
 				if (folderList == 2)
 					this.saveUnicodeString("browser.download.dir", directory.path);
 			}
+		}
+		
+		if (this.firefoxversion >= 7.01)
+		{
+			
+			if (typeof(gDownloadLastDir) == "undefined") // if not loaded yet
+			{
+				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
+			}
+				
+			// Firefox 7.0.1 use a new feature to memorize last used folder on a site-by-site basis.
+			// Replace the memorized folder for the current website's URI.
+			var uri = this.current_uri;
+			// var file = gDownloadLastDir.getFile(uri);
+			// alert("uri="+uri+"\noldpath ="+file.path+"\nnewpath ="+directory.path);
+			gDownloadLastDir.setFile(uri, directory);
 		}
 	},
 	
@@ -743,7 +770,11 @@ var automatic_save_folder = {
 	
 	checkFirefoxVersion: function() {
 		
-		if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
+		if (this.versionChecker.compare(this.appInfo.version, "7.0.1") >= 0)
+		{
+			this.firefoxversion = "7.01";
+		}
+		else if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
 		{
 			this.firefoxversion = "4";
 		}

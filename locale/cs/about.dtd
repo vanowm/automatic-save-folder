@@ -23,6 +23,10 @@
 <!ENTITY about.version.title "Verze">
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
+<!ENTITY about.version.103 "+ Firefox 7.0.1: Compatibility with the new Last Saved Path feature (Now memorized on a site-by-site basis).
+- Removed beta checking feature on non beta releases.
+* Prevent closing the save dialog if the preferences dialog is still open.">
+
 <!ENTITY about.version.102 "+ Přidána možnost změnit akci v možnostech automatického stahování.
 + Je-li nainstalováno rozšíření DownThemAll!, na novém panelu možností lze nastavení posílání složky určené AUS do dTa!.
 + Přidána možnost výběru, zda u filtrů záleží, nebo nezáleží na velikosti písmen.

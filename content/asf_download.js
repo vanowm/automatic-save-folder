@@ -1,6 +1,6 @@
 ﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
-Copyright (C) 2007-2010 Éric Cassar (Cyan).
+Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			  2009 Ted Gifford - Dynamic variable capturing
 
     "Automatic Save Folder" is free software: you can redistribute it and/or modify
@@ -33,6 +33,7 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 		inPrivateBrowsing: false,
 		matching_filters: new Array(),
 		matching_folders: new Array(),
+		current_uri: "", // FF7.0.1 use a new per uri saved folder.
 		
 	main: function () {
 
@@ -86,9 +87,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 			currentDomain = domain;
 			currentURL = fileURL;
 		}
+		
+		if (this.firefoxversion >= 7.01) this.current_uri = currentDomain.replace(/^.*:\/\//g,'');
+		
 		var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
 		if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
-		
 		var message = "These data will be used to verify the filters :\nFilename:\t\t"+filename+"\nDomain test order:\t"+domain_testOrder+"\n1 - File's domain:\t"+domain+"\n2 - File's URL:\t\t"+fileURL+"\n3 - Full file's URL:\t"+fileURLAndFilename+"\n4 - Tab's domain:\t"+currentDomain+"\n5 - Tab's URL:\t\t"+currentURL;
 		if (!this.inPrivateBrowsing) this.console_print(message);
 		// debug : show the full downloaded link  http://abc.xyz/def/file.ext
@@ -398,6 +401,16 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 				}
 			}
 			
+		}
+		
+		if (this.firefoxversion >= 7.01)
+		{
+			// Firefox 7.0.1 use a new feature to memorize last used folder on a site-by-site basis.
+			// Replace the memorized folder for the current website's URI.
+			var uri = this.current_uri;
+			// var file = gDownloadLastDir.getFile(uri);
+			// alert("uri="+uri+"\noldpath ="+file.path+"\nnewpath ="+directory.path);
+			gDownloadLastDir.setFile(uri, directory);
 		}
 	},
 	
@@ -1100,7 +1113,11 @@ Copyright (C) 2007-2010 Éric Cassar (Cyan).
 
 	checkFirefoxVersion: function() {
 		
-		if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
+		if (this.versionChecker.compare(this.appInfo.version, "7.0.1") >= 0)
+		{
+			this.firefoxversion = "7.01";
+		}
+		else if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
 		{
 			this.firefoxversion = "4";
 		}

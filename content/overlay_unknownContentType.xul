@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- ***** BEGIN LICENSE BLOCK *****
-	Copyright 2007-2010 Éric Cassar (Cyan)
+	Copyright 2007-2011 Éric Cassar (Cyan)
 
     This file is part of "Automatic Save Folder".
     You may find the license in the LICENSE file
@@ -32,8 +32,8 @@
 		</radiogroup>
 		<separator class="thin"/>
 		<hbox>
-			<image src="chrome://asf/skin/add.png" onclick="window.openDialog('chrome://asf/content/options.xul','asf_option','chrome, centerscreen, resizable=yes, dialog=no, modal=no');" />
-			<description onclick="window.openDialog('chrome://asf/content/options.xul','asf_option','chrome, centerscreen, resizable=yes, dialog=no, modal=no');">&asf.addedit.label;</description>
+			<image src="chrome://asf/skin/add.png" onclick="window.openDialog('chrome://asf/content/options.xul','asf_option','chrome, centerscreen, resizable=yes, dialog=no, modal=yes');" />
+			<description onclick="window.openDialog('chrome://asf/content/options.xul','asf_option','chrome, centerscreen, resizable=yes, dialog=no, modal=yes');">&asf.addedit.label;</description>
 		</hbox>	
 	</vbox>
 

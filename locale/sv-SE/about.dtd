@@ -22,7 +22,11 @@
 <!ENTITY about.fix "Korrigerat">
 <!ENTITY about.version.title "Version">
 
-<!-- Keep the newline intact as it uses the < pre > tag, keep the 2 begining spaces to create indentation -->
+<!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
+<!ENTITY about.version.103 "+ Firefox 7.0.1: Compatibility with the new Last Saved Path feature (Now memorized on a site-by-site basis).
+- Removed beta checking feature on non beta releases.
+* Prevent closing the save dialog if the preferences dialog is still open.">
+
 <!ENTITY about.version.102 "+ Lade till ett alternativ att tvinga åtgärdsvalet när det automatiska nerladdningsalternativet används.
 + Om tillägget DownThemAll! är installerat blir en ny alternativflik tillgänglig för att kunna skicka ASF:s målsökväg till dTa!.
 + Lade till ett alternativ att välja huruvida filter skall vara skiftlägeskänsliga eller inte.

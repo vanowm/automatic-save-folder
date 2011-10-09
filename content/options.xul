@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ***** BEGIN LICENSE BLOCK *****
-	Copyright 2007-2010 Éric Cassar (Cyan)
+	Copyright 2007-2011 Éric Cassar (Cyan)
 
     This file is part of "Automatic Save Folder".
     You may find the license in the LICENSE file
@@ -261,7 +261,7 @@
 										</hbox>
 									</radiogroup>
 							</groupbox>
-							<groupbox><caption label="&asf.option.groupbox.checkUpdate.label;" />
+							<groupbox style="display:none;"><caption label="&asf.option.groupbox.checkUpdate.label;" />
 								<hbox>
 									<button id="asf-checkBetaUpdate" label="&asf.checkBetaUpdate.button;" oncommand="automatic_save_folder.checkBetaVersion();"/>
 									<description id="asf-betaVersionAvailable" hidden="true">&asf.betaVersionAvailable.label;</description>

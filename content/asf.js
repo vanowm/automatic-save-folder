@@ -55,7 +55,7 @@ var automatic_save_folder = {
 		this.asf_treeSelected(); // set the button to disabled state because no filter is selected when openning
 		this.asf_toggleradio(); // set the radio choice to the right place
 		this.asf_variablemode(); // check if variable mode is on or off, and change mode if needed
-		if(this.prefManager.getBoolPref("extensions.asf.autoCheckBetaUpdate")) this.checkBetaVersion(true); // Check the latest available (beta) version
+		// if(this.prefManager.getBoolPref("extensions.asf.autoCheckBetaUpdate")) this.checkBetaVersion(true); // Check the latest available (beta) version
 		
 		// Resize the preferences window to match the localization needs.
 		// I don't know why width, or css width are not working, so let's use a script to resize the preferences window on load.
@@ -1754,13 +1754,13 @@ var automatic_save_folder = {
 	asf_close: function() {
 		
 		//close the options	
-		window.close();
 		if (window.opener.location == "chrome://mozapps/content/downloads/unknownContentType.xul") // if the option is opened from the saving window
 		{
 			window.opener.automatic_save_folder.main();		// rescan the filters to set the good folder
 			window.opener.automatic_save_folder.check_uCTOption();
 			window.opener.sizeToContent(); // can create a bug, but it should not be noticed by the user. see https://bugzilla.mozilla.org/show_bug.cgi?id=439323
 		}
+		window.close();
 		window.opener.focus;
 	}
 	
