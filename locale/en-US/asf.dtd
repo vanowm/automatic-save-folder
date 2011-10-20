@@ -29,6 +29,7 @@
 <!-- Filters tab - bottom -->
 <!ENTITY asf.default.label "If the file doesn't match any filter, save to:">
 <!ENTITY asf.lastselected.label "The last folder">
+<!ENTITY asf.useSiteBySiteSavePath.label "Memorize on a site-by-site basis.">
 <!ENTITY asf.defaultfolder.label "This folder: ">
 <!ENTITY asf.selectfolder.label "Select...">
 <!ENTITY asf.keeptemp.label "Use the last folder if the file is from the same hosted domain than the previously downloaded file.">

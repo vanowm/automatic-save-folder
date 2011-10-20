@@ -26,6 +26,7 @@
 <!-- Filters tab - bottom -->
 <!ENTITY asf.default.label "Pokud soubor nevyhovuje žádnému filtru, uložit do:">
 <!ENTITY asf.lastselected.label "Naposledy použité složky">
+<!ENTITY asf.useSiteBySiteSavePath.label "Memorize on a site-by-site basis.">
 <!ENTITY asf.defaultfolder.label "Této složky:">
 <!ENTITY asf.selectfolder.label "Vybrat…">
 <!ENTITY asf.keeptemp.label "Použít poslední složku, je-li soubor ze stejné domény jako naposledy stažený soubor.">

@@ -29,6 +29,7 @@
 <!-- Filters tab - bottom -->
 <!ENTITY asf.default.label "Dossier d'enregistrement lorsqu'aucun filtre n'est trouvé :">
 <!ENTITY asf.lastselected.label "Le dernier dossier utilisé">
+<!ENTITY asf.useSiteBySiteSavePath.label "Mémoriser site par site.">
 <!ENTITY asf.defaultfolder.label "Ce dossier : ">
 <!ENTITY asf.selectfolder.label "Sélectionner...">
 <!ENTITY asf.keeptemp.label "Utiliser le dernier dossier si le téléchargement provient du même domaine d'hébergement que le précédent fichier.">

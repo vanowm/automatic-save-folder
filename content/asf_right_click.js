@@ -103,13 +103,12 @@ var automatic_save_folder = {
 			var prefManager = this.prefManager;
 			
 			// Check if the user is in PrivateBrowsing mode.
-			try
+			if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0) //not working on FF2 and 3.0
 			{
 				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
 									.getService(Components.interfaces.nsIPrivateBrowsingService);
 				this.inPrivateBrowsing = pbs.privateBrowsingEnabled;
-			}
-			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
 			}
 			
 			// Check if there is any filter in list
@@ -304,6 +303,10 @@ var automatic_save_folder = {
 					{
 						lastpath = defaultfolder;
 					}
+					if (this.firefoxversion >= 7.01 && this.prefManager.getBoolPref("extensions.asf.useSiteBySiteSavePath") == true)
+					{
+						lastpath = gDownloadLastDir.getFile(this.current_uri).path;
+					}
 					this.set_savepath(lastpath);
 				}
 			}
@@ -359,10 +362,6 @@ var automatic_save_folder = {
 		{
 			if (this.inPrivateBrowsing && directory)
 			{
-				if (typeof(gDownloadLastDir) == "undefined") // if not loaded yet
-				{
-					Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
-				}
 				gDownloadLastDir.file = directory;
 			}
 			else
@@ -375,12 +374,6 @@ var automatic_save_folder = {
 		
 		if (this.firefoxversion >= 7.01)
 		{
-			
-			if (typeof(gDownloadLastDir) == "undefined") // if not loaded yet
-			{
-				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
-			}
-				
 			// Firefox 7.0.1 use a new feature to memorize last used folder on a site-by-site basis.
 			// Replace the memorized folder for the current website's URI.
 			var uri = this.current_uri;

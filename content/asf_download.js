@@ -254,6 +254,10 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 				{
 					lastpath = defaultfolder;
 				}
+				if (this.firefoxversion >= 7.01 && this.prefManager.getBoolPref("extensions.asf.useSiteBySiteSavePath") == true)
+				{
+					lastpath = gDownloadLastDir.getFile(this.current_uri).path;
+				}
 				this.set_savepath(lastpath);
 			}
 		}

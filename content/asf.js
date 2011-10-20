@@ -410,18 +410,20 @@ var automatic_save_folder = {
 
 
 	asf_toggleradio: function () {
+		var instantApply = this.prefManager.getBoolPref("browser.preferences.instantApply");
 		var select_last_radio = document.getElementById("asf-last-radio");
 		var select_choose_radio = document.getElementById("asf-choose-radio");
 		var select_folder_input = document.getElementById("asf-default-folder");
 		var select_folder_btn = document.getElementById("asf-select-folder");
 		var select_keeptemp_chk = document.getElementById("asf-keeptemp-check");
-		var variable_mode = document.getElementById("asf-variablemode");
+		var useSiteBySiteSavePath = document.getElementById("asf-useSiteBySiteSavePath");
 		
 		if(select_last_radio.selected == true)
 		{
 			select_folder_input.disabled   = true;
 			select_folder_btn.disabled   = true;
 			select_keeptemp_chk.disabled = true;
+			useSiteBySiteSavePath.disabled = false;
 		}
 		
 		if(select_choose_radio.selected == true)
@@ -430,6 +432,18 @@ var automatic_save_folder = {
 			this.asf_variablemode();
 			select_folder_btn.disabled   = false;
 			select_keeptemp_chk.disabled = false;
+			useSiteBySiteSavePath.checked = false;
+			useSiteBySiteSavePath.disabled = true;
+		}
+		
+		if(this.firefoxversion < 7.01)
+		{
+			useSiteBySiteSavePath.hidden = true;
+
+		}
+		if (instantApply) // bug with sub-options status set by javascript
+		{
+			this.asf_saveoptions();
 		}
 	},
 
@@ -949,7 +963,11 @@ var automatic_save_folder = {
 
 	checkFirefoxVersion: function() {
 		
-		if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
+		if (this.versionChecker.compare(this.appInfo.version, "7.0.1") >= 0)
+		{
+			this.firefoxversion = "7.01";
+		}
+		else if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
 		{
 			this.firefoxversion = "4";
 		}
@@ -1734,6 +1752,7 @@ var automatic_save_folder = {
 		this.prefManager.setBoolPref("extensions.asf.viewpathselect", document.getElementById("asf-viewpathselect").checked);
 		this.prefManager.setBoolPref("extensions.asf.rightclicktimeout", document.getElementById("asf-rightclicktimeout").checked);
 		this.prefManager.setBoolPref("extensions.asf.dialogacceptFiltered", document.getElementById("asf-dialogacceptFiltered").checked);
+		this.prefManager.setBoolPref("extensions.asf.useSiteBySiteSavePath", document.getElementById("asf-useSiteBySiteSavePath").checked);
 		
 		
 	},

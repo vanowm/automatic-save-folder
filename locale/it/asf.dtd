@@ -29,6 +29,7 @@
 <!-- preference bottom -->
 <!ENTITY asf.default.label "Cartella per salvare il file se nessun filtro corrisponde:">
 <!ENTITY asf.lastselected.label "Ultima cartella">
+<!ENTITY asf.useSiteBySiteSavePath.label "Memorize on a site-by-site basis.">
 <!ENTITY asf.defaultfolder.label "Cartella: ">
 <!ENTITY asf.selectfolder.label "Seleziona...">
 <!ENTITY asf.keeptemp.label "Usa l'ultima cartella se il file viene dallo stesso dominio dell'ultimo file scaricato.">

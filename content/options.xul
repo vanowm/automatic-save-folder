@@ -54,6 +54,7 @@
 		<preference id="asf_autoCheckBetaUpdate" name="extensions.asf.autoCheckBetaUpdate" type="bool"/>
 		<preference id="asf_showExportButton" name="extensions.asf.showExportButton" type="bool"/>
 		<preference id="asf_suggestAllPossibleFolders" name="extensions.asf.suggestAllPossibleFolders" type="bool"/>
+		<preference id="asf_useSiteBySiteSavePath" name="extensions.asf.useSiteBySiteSavePath" type="bool"/>
 	</preferences>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
@@ -155,7 +156,10 @@
 		<groupbox flex="0">
 			<caption label="&asf.default.label;"/>
 			<radiogroup id="radio-savetype" align="left" preference="asf_savetype">
-				<radio id="asf-last-radio" value="0" label="&asf.lastselected.label;" oncommand="automatic_save_folder.asf_toggleradio()"/>
+				<hbox>
+					<radio id="asf-last-radio" value="0" label="&asf.lastselected.label;" oncommand="automatic_save_folder.asf_toggleradio()"/>
+					<checkbox id="asf-useSiteBySiteSavePath" preference="asf_useSiteBySiteSavePath" label="&asf.useSiteBySiteSavePath.label;" />
+				</hbox>
 				<hbox>
 					<radio id="asf-choose-radio" value="1" label="&asf.defaultfolder.label;" oncommand="automatic_save_folder.asf_toggleradio()"/>
 					<textbox id="asf-default-folder" width="350" ondblclick="automatic_save_folder.browsedir('asf-default-folder')"/>

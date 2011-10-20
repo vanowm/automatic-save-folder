@@ -29,6 +29,7 @@
 <!-- Filters tab - bottom -->
 <!ENTITY asf.default.label "Om filen inte matchar något filter, spara till:">
 <!ENTITY asf.lastselected.label "Den senaste mappen">
+<!ENTITY asf.useSiteBySiteSavePath.label "Memorize on a site-by-site basis.">
 <!ENTITY asf.defaultfolder.label "Den här mappen: ">
 <!ENTITY asf.selectfolder.label "Välj...">
 <!ENTITY asf.keeptemp.label "Använd den senaste mappen om filen kommer ifrån samma värddomän som den föregående nerladdade filen.">

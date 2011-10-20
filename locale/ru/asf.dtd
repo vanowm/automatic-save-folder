@@ -29,6 +29,7 @@
 <!-- Filters tab - bottom -->
 <!ENTITY asf.default.label "Если файл не соответствует ни одному фильтру сохранить в:">
 <!ENTITY asf.lastselected.label "Последняя папка">
+<!ENTITY asf.useSiteBySiteSavePath.label "Memorize on a site-by-site basis.">
 <!ENTITY asf.defaultfolder.label "Эта папка: ">
 <!ENTITY asf.selectfolder.label "Выбрать...">
 <!ENTITY asf.keeptemp.label "Используйте последнюю папку при загрузке файла с того же домена что и последний загруженный файл.">
