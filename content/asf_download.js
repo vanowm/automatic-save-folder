@@ -87,8 +87,11 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			currentDomain = domain;
 			currentURL = fileURL;
 		}
-		
-		if (this.firefoxversion >= 7.01) this.current_uri = currentDomain.replace(/^.*:\/\//g,'');
+		if (this.firefoxversion >= 7.01) 
+		{
+			this.current_uri = currentDomain.replace(/^.*:\/\//g,'');
+			if (this.current_uri == "") this.current_uri = tabLocation.href; // fix website opening a new about:blank page when clicking on a download link, and that tab is not auto-closing.
+		}
 		
 		var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
 		if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
