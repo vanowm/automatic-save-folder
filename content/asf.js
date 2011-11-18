@@ -59,14 +59,20 @@ var automatic_save_folder = {
 		
 		// Resize the preferences window to match the localization needs.
 		// I don't know why width, or css width are not working, so let's use a script to resize the preferences window on load.
+		// Check the current preferences window size stored by the user, if bigger then don't resize.
+		var target_width = 617; // default sizes
+		var target_height = 423;
+		var asf_pref_window = document.getElementById("asf_pref");
+		var locale_width = document.getElementById("asf-preferences-window-width").value;
+		var locale_height = document.getElementById("asf-preferences-window-height").value;
 		var resize = document.getElementById("asf-preferences-window-resize").value;
-		if (resize == "true")
+		if (resize == "true") // new size defined by locale.
 		{
-			var asf_pref_window = document.getElementById("asf_pref");
-			asf_pref_window.width = document.getElementById("asf-preferences-window-width").value;
-			asf_pref_window.height = document.getElementById("asf-preferences-window-height").value;
+			target_width = target_width > locale_width ? target_width : locale_width;
+			target_height = target_height > locale_height ? target_height : locale_height;
 		}
-		
+		asf_pref_window.width = asf_pref_window.width > target_width ? asf_pref_window.width : target_width;
+		asf_pref_window.height = asf_pref_window.height > target_height ? asf_pref_window.height : target_height;		
 		
 		//Detect OS
 		// var OSName="Unknown OS";

@@ -23,9 +23,11 @@
 <!ENTITY about.version.title "Version">
 
 <!-- Conserver les retours à la ligne car le tag < pre > est utilisé, gardez les deux espaces en début de ligne pour l'indentation -->
-<!ENTITY about.version.103 "+ Firefox 7.0.1 : Compatible avec la nouvelle fonction concernant le dernier chemin d'enregistrement (Maintenant mémorisé site par site).
+<!ENTITY about.version.103 "+ Compatibilité avec la nouvelle fonction de Firefox 7.0.1 concernant le dernier chemin d'enregistrement (Maintenant mémorisé site par site).
++ Ajout d'une option pour utiliser le mode site par site pour les utilisateurs de firefox 7.0.1+ lorqu'aucun filtre ne correspond.
 - Suppression de la recherche d'une nouvelle version béta pour les versions non béta.
-* Empêche la fermeture de la fenêtre de sauvegarde si la fenêtre de préférence est encore ouverte.">
+* Empêche la fermeture de la fenêtre de sauvegarde si la fenêtre de préférence est encore ouverte.
+* Mémorise la taille de la fenêtre de préférences si elle est agrandie par l'utilisateur. La taille par défaut sera utilisée si la fenêtre est réduite.">
 
 <!ENTITY about.version.102 "+ Ajout d'une option permettant de forcer l'action à effectuer lorsque l'enregistrement automatique est sélectionné.
 + Si l'extension DownThemAll! est installée, un nouvel onglet d'options est disponible permettant d'envoyer le dossier de destination d'ASF à dTa!.

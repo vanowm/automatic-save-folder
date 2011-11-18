@@ -24,8 +24,10 @@
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
 <!ENTITY about.version.103 "+ Firefox 7.0.1: Compatibility with the new Last Saved Path feature (Now memorized on a site-by-site basis).
++ Added an option to use the new site-by-site save mode for Firefox 7.0.1+ users when no filter match.
 - Removed beta checking feature on non beta releases.
-* Prevent closing the save dialog if the preferences dialog is still open.">
+* Prevent closing the save dialog if the preferences dialog is still open.
+* Memorize the preferences window size if the user make it bigger. It will use the default size if the window is shortened.">
 
 <!ENTITY about.version.102 "+ Lade till ett alternativ att tvinga åtgärdsvalet när det automatiska nerladdningsalternativet används.
 + Om tillägget DownThemAll! är installerat blir en ny alternativflik tillgänglig för att kunna skicka ASF:s målsökväg till dTa!.

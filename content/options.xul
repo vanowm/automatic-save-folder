@@ -18,7 +18,7 @@
 <prefwindow
 			id="asf_pref"
 			autostretch="always"
-			persist="screenX screenY"
+			persist="screenX screenY width height"
 			buttons="accept, cancel"
 			defaultButton="accept"
 			onload="automatic_save_folder.asf_load();"
