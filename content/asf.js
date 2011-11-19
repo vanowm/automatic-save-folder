@@ -63,8 +63,8 @@ var automatic_save_folder = {
 		var target_width = 617; // default sizes
 		var target_height = 423;
 		var asf_pref_window = document.getElementById("asf_pref");
-		var locale_width = document.getElementById("asf-preferences-window-width").value;
-		var locale_height = document.getElementById("asf-preferences-window-height").value;
+		var locale_width = parseInt(document.getElementById("asf-preferences-window-width").value);
+		var locale_height = parseInt(document.getElementById("asf-preferences-window-height").value);
 		var resize = document.getElementById("asf-preferences-window-resize").value;
 		if (resize == "true") // new size defined by locale.
 		{
@@ -72,7 +72,7 @@ var automatic_save_folder = {
 			target_height = target_height > locale_height ? target_height : locale_height;
 		}
 		asf_pref_window.width = asf_pref_window.width > target_width ? asf_pref_window.width : target_width;
-		asf_pref_window.height = asf_pref_window.height > target_height ? asf_pref_window.height : target_height;		
+		asf_pref_window.height = asf_pref_window.height > target_height ? asf_pref_window.height : target_height;
 		
 		//Detect OS
 		// var OSName="Unknown OS";
