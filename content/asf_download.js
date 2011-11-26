@@ -34,6 +34,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		matching_filters: new Array(),
 		matching_folders: new Array(),
 		current_uri: "", // FF7.0.1 use a new per uri saved folder.
+		current_uri_lastpath: "", // last stored path for that uri
 		
 	main: function () {
 
@@ -91,6 +92,11 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		{
 			this.current_uri = currentDomain.replace(/^.*:\/\//g,'');
 			if (this.current_uri == "") this.current_uri = tabLocation.href; // fix website opening a new about:blank page when clicking on a download link, and that tab is not auto-closing.
+			
+			// read lastpath for that uri
+			let uri = this.current_uri;
+			let file = gDownloadLastDir.getFile(uri);
+			this.current_uri_lastpath = file.path;
 		}
 		
 		var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
@@ -774,6 +780,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		// so he can choose from found filters, or last used path.
 		var lastpath = this.loadUnicodeString("extensions.asf.lastpath");
 		var asf_lastpath = document.getElementById('asf_lastpath');
+		asf_lastpath.label = lastpath;
 		
 		if ( (lastpath == folder) || (lastpath == "") )  // if same or empty (first time using ASF), do not show radio for lastpath choice
 		{
@@ -782,6 +789,18 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		else  // else, if last path is different than folder found in filter, show a choice
 		{
 			asf_lastpath.hidden = false;
+		}
+		
+		// Firefox 7.0.1+ : Check the current uri lastpath, if not in the available paths then print another radio choice to the user
+		var asf_currentURI_lastpath = document.getElementById('asf_currentURI_lastpath');
+		asf_currentURI_lastpath.hidden = true;
+		if (this.firefoxversion >= 7.01)
+		{
+			asf_currentURI_lastpath.label = this.current_uri_lastpath;
+			if ( (this.indexInArray(this.matching_folders, this.current_uri_lastpath) == -1) && (lastpath != this.current_uri_lastpath) ) // check if it's already listed 
+			{
+				asf_currentURI_lastpath.hidden = false;
+			}
 		}
 		
 		//set the text to be written on the Radio comment
@@ -821,7 +840,6 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			
 			document.getElementById('asf_savefolder_0').label = folder;
 		}
-		asf_lastpath.label = lastpath;
 		
 		// Force check the first radio choice (needed on linux + ff2.x) (linux has blank radio choices on loading, this is only visual, it doesn't affect anything here, the value are set to the new path by default until the user change the radio choice)
 		var asf_radio_savepath = document.getElementById('asf_radio_savepath');

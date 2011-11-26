@@ -24,7 +24,7 @@
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
 <!ENTITY about.version.103 "+ Compatibility with the new Firefox 7.0.1 Last Saved Path feature (Now memorized on a site-by-site basis).
-+ Added an option to use the new site-by-site save mode for Firefox 7.0.1+ users when no filter match.
++ Added an option to use the new site-by-site save mode for Firefox 7.0.1+ when no filter match.
 - Removed beta checking feature on non beta releases.
 * Prevent closing the save dialog if the preferences dialog is still open.
 * Memorize the preferences window size if the user make it bigger. It will use the default size if the window is shortened.">

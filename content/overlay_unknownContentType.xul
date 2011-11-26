@@ -21,7 +21,8 @@
 				<vbox id="asf_savefolder">
 					<radio id="asf_savefolder_0" value="0" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath(this)"/>
 				</vbox>
-				<radio id="asf_lastpath" value="98" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath(this)"/>
+				<radio id="asf_lastpath" value="97" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath(this)"/>
+				<radio id="asf_currentURI_lastpath" value="98" width="280" crop="center" label="folder" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath(this)"/>
 				<vbox id="asf_radiogroup_pathselect" style="visibility: collapse;">
 					<radio id="asf_pathselect" value="99" width="280" crop="center" label="&asf.pathselect.label;" class="small-indent" oncommand="automatic_save_folder.asf_toggle_savepath(this)"/>
 					<hbox>
