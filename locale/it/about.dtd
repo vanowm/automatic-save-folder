@@ -23,6 +23,8 @@
 <!ENTITY about.version.title "Versione">
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
+<!ENTITY about.version.104 "! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.">
+
 <!ENTITY about.version.103 "+ Firefox 7.0.1: Compatibility with the new Last Saved Path feature (Now memorized on a site-by-site basis).
 + Added an option to use the new site-by-site save mode for Firefox 7.0.1+ when no filter match.
 - Removed beta checking feature on non beta releases.

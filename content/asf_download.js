@@ -94,9 +94,9 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			if (this.current_uri == "") this.current_uri = tabLocation.href; // fix website opening a new about:blank page when clicking on a download link, and that tab is not auto-closing.
 			
 			// read lastpath for that uri
-			let uri = this.current_uri;
-			let file = gDownloadLastDir.getFile(uri);
-			this.current_uri_lastpath = file.path;
+			var uri = this.current_uri;
+			var file = gDownloadLastDir.getFile(uri);
+			if (file != null) this.current_uri_lastpath = file.path;
 		}
 		
 		var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
@@ -782,7 +782,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		var asf_lastpath = document.getElementById('asf_lastpath');
 		asf_lastpath.label = lastpath;
 		
-		if ( (lastpath == folder) || (lastpath == "") )  // if same or empty (first time using ASF), do not show radio for lastpath choice
+		if ( (lastpath == folder) || (lastpath == "") || (this.indexInArray(this.matching_folders, lastpath) > -1))  // if same or empty (first time using ASF), or already present from a filter's path, do not show radio for lastpath choice
 		{
 			asf_lastpath.hidden = true;
 		}
@@ -794,7 +794,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		// Firefox 7.0.1+ : Check the current uri lastpath, if not in the available paths then print another radio choice to the user
 		var asf_currentURI_lastpath = document.getElementById('asf_currentURI_lastpath');
 		asf_currentURI_lastpath.hidden = true;
-		if (this.firefoxversion >= 7.01)
+		if ((this.firefoxversion >= 7.01) && (this.current_uri_lastpath != ""))
 		{
 			asf_currentURI_lastpath.label = this.current_uri_lastpath;
 			if ( (this.indexInArray(this.matching_folders, this.current_uri_lastpath) == -1) && (lastpath != this.current_uri_lastpath) ) // check if it's already listed 
