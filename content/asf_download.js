@@ -90,7 +90,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		}
 		if (this.firefoxversion >= 7.01) 
 		{
-			this.current_uri = currentDomain.replace(/^.*:\/\//g,'');
+			this.current_uri = domain.replace(/^.*:\/\//g,'');
 			if (this.current_uri == "") this.current_uri = tabLocation.href; // fix website opening a new about:blank page when clicking on a download link, and that tab is not auto-closing.
 			
 			// read lastpath for that uri
@@ -262,7 +262,8 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 				}
 				if (this.firefoxversion >= 7.01 && this.prefManager.getBoolPref("extensions.asf.useSiteBySiteSavePath") == true)
 				{
-					lastpath = gDownloadLastDir.getFile(this.current_uri).path;
+					var file = gDownloadLastDir.getFile(this.current_uri);
+					if (file != null) lastpath = file.path;
 				}
 				this.set_savepath(lastpath);
 			}
@@ -425,6 +426,9 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			// alert("uri="+uri+"\noldpath ="+file.path+"\nnewpath ="+directory.path);
 			gDownloadLastDir.setFile(uri, directory);
 		}
+		
+		
+		if (this.logtoconsole && !this.inPrivateBrowsing) this.console_print("save location changed to: "+directory.path);
 	},
 	
 	

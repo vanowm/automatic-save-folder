@@ -146,7 +146,7 @@ var automatic_save_folder = {
 				var fileURLAndFilename = domain+"/"+filename;
 			}
 			
-			if (this.firefoxversion >= 7.01) this.current_uri = currentDomain.replace(/^.*:\/\//g,'');
+			if (this.firefoxversion >= 7.01) this.current_uri = domain.replace(/^.*:\/\//g,'');
 			
 			var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
 			if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
@@ -305,7 +305,8 @@ var automatic_save_folder = {
 					}
 					if (this.firefoxversion >= 7.01 && this.prefManager.getBoolPref("extensions.asf.useSiteBySiteSavePath") == true)
 					{
-						lastpath = gDownloadLastDir.getFile(this.current_uri).path;
+						var file = gDownloadLastDir.getFile(this.current_uri);
+						if (file != null) lastpath = file.path;
 					}
 					this.set_savepath(lastpath);
 				}
@@ -381,6 +382,8 @@ var automatic_save_folder = {
 			// alert("uri="+uri+"\noldpath ="+file.path+"\nnewpath ="+directory.path);
 			gDownloadLastDir.setFile(uri, directory);
 		}
+		
+		if (this.logtoconsole && !this.inPrivateBrowsing) this.console_print("save location changed to: "+directory.path);
 	},
 	
 	
