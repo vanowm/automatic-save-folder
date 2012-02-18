@@ -94,6 +94,8 @@
 		<hbox><description value="3 :"/><label>&asf.domainTestOrder.tooltip4;</label></hbox>
 		<hbox><description value="4 :"/><label>&asf.domainTestOrder.tooltip5;</label></hbox>
 		<hbox><description value="5 :"/><label>&asf.domainTestOrder.tooltip6;</label></hbox>
+		<hbox><description value="6 :"/><label>&asf.domainTestOrder.tooltip8;</label></hbox>
+		<hbox><description value="7 :"/><label>&asf.domainTestOrder.tooltip9;</label></hbox>
 		<label>&#10;&asf.domainTestOrder.tooltip7;</label>
 	</tooltip>
 	<tooltip id="tooltip_suggestAllPossibleFolders" label="&asf.suggestAllPossibleFolders.tooltip;" noautohide="true" />

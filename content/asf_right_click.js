@@ -116,11 +116,18 @@ var automatic_save_folder = {
 				
 				
 			// load the domain and the filename of the saved file
-			var tBrowser = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-						.getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
-			var tabLocation = tBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
+			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+							   .getService(Components.interfaces.nsIWindowMediator);
+			var mainWindow = wm.getMostRecentWindow("navigator:browser");
+			
+			var currentTab = mainWindow.gBrowser.getBrowserAtIndex(mainWindow.gBrowser.tabContainer.selectedIndex);
+			// var tabLocation = currentTab.currentURI.spec;
+			var tabLocation = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
+			var tabURL = mainWindow.gURLBar.value;
+			var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
+			
 			var filename = aFpP.fileInfo.fileName; // filename or tab's name if no filename specified.
-
+			
 			var domain = 					aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host;
 			var	domainWithoutProtocol =    	aFpP.fileInfo.uri.host;
 			var fileURL = 					aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.directory; 
@@ -150,7 +157,15 @@ var automatic_save_folder = {
 			
 			var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
 			if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
-			var message = "These data will be used to verify the filters :\nFilename:\t\t"+filename+"\nDomain test order:\t"+domain_testOrder+"\n1 - File's domain:\t"+domain+"\n2 - File's URL:\t\t"+fileURL+"\n3 - Full file's URL:\t"+fileURLAndFilename+"\n4 - Tab's domain:\t"+currentDomain+"\n5 - Tab's URL:\t\t"+currentURL;
+					var message = "These data will be used to verify the filters :\n"+
+							"Filename:\t\t"+filename+"\nDomain test order:\t"+domain_testOrder+"\n"+
+							"1 - File's domain:\t"+domain+"\n"+
+							"2 - File's URL:\t\t"+fileURL+"\n"+
+							"3 - Full file's URL:\t"+fileURLAndFilename+"\n"+
+							"4 - Page's domain:\t"+currentDomain+"\n"+
+							"5 - Page's URL:\t\t"+currentURL+"\n"+
+							"6 - Page's referrer:\t"+currentReferrer+"\n"+
+							"7 - Tab's URL content:\t"+tabURL;
 			if (!this.inPrivateBrowsing) this.console_print(message);
 			
 			
@@ -240,6 +255,14 @@ var automatic_save_folder = {
 						case "5":
 							dom_regexp = this.test_regexp(filters[i][0], currentURL, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 5");
+							break;
+						case "6":
+							dom_regexp = this.test_regexp(filters[i][0], currentReferrer, i, "domain");
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 6");
+							break;
+						case "7":
+							dom_regexp = this.test_regexp(filters[i][0], tabURL, i, "domain");
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 7");
 						default:
 					}
 					
@@ -743,7 +766,13 @@ var automatic_save_folder = {
 		
 		// initialize the regular expression search
 		var param = (this.prefManager.getBoolPref("extensions.asf.regexp_caseinsensitive") == true ? "i" : "");
-		var test = new RegExp(filter_data, param);
+		try 
+		{
+			var test = new RegExp(filter_data, param);
+		}
+		catch(e){
+			alert('\t\tAutomatic Save Folder\n\n-'+e.message+'\nin filter N°'+idx+':\n'+filter_data+'\nregular expression: '+isregexp)
+		}
 		
 		// Thanks to Ted Gifford for the regular expression capture.
 		var res = downloaded_data.match(test);

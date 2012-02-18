@@ -90,9 +90,11 @@
 <!ENTITY asf.domainTestOrder.tooltip2 "Domaine du fichier">
 <!ENTITY asf.domainTestOrder.tooltip3 "URL du fichier">
 <!ENTITY asf.domainTestOrder.tooltip4 "URL du fichier + nom du fichier">
-<!ENTITY asf.domainTestOrder.tooltip5 "Domaine de l'onglet (ou le domaine du fichier si aucun résultat n'est trouvé)">
-<!ENTITY asf.domainTestOrder.tooltip6 "URL de l'onglet (ou l'URL du fichier si aucun résultat n'est trouvé)">
+<!ENTITY asf.domainTestOrder.tooltip5 "Domaine de la page active (ou le domaine du fichier si aucun résultat n'est trouvé)">
+<!ENTITY asf.domainTestOrder.tooltip6 "URL de la page active (ou l'URL du fichier si aucun résultat n'est trouvé)">
 <!ENTITY asf.domainTestOrder.tooltip7 "Pour plus de précisions, vous pouvez voir à quoi correspondent ces informations dans la Console d'erreurs lorsque vous téléchargez un fichier.">
+<!ENTITY asf.domainTestOrder.tooltip8 "URL du referrer de la page active">
+<!ENTITY asf.domainTestOrder.tooltip9 "Contenu du champs URL de l'onglet actif">
 <!ENTITY asf.regexp_caseinsensitive.bool "Les filtres sont insensibles à la casse.">
 
 <!ENTITY asf.options.groupbox4.label "Clic droit">

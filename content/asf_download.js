@@ -68,11 +68,19 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
 		
 		
-		// load the domain and the filename of the saved file (copy the data from the firefox saving window)
-		var tBrowser = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-				 .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
-		var tabLocation = tBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
+		// load the domain and the filename of the saved file (copy the data from the firefox saving window and from the last active tab)
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+		var mainWindow = wm.getMostRecentWindow("navigator:browser");
+		
+		var currentTab = mainWindow.gBrowser.getBrowserAtIndex(mainWindow.gBrowser.tabContainer.selectedIndex);
+		// var tabLocation = currentTab.currentURI.spec;
+		var tabLocation = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
+		var tabURL = mainWindow.gURLBar.value;
+		var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
+		
 		var filename = 			document.getElementById("location").value ;
+		
 		var domain = 			document.getElementById("source").value ;
 		var	domainWithoutProtocol = domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
 		var fileURL = 			document.getElementById("source").getAttribute("tooltiptext");
@@ -82,6 +90,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		{
 			currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
 			currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
+			if (currentDomain == "about://") currentDomain = "";
 		}
 		catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
 		{
@@ -101,7 +110,15 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		
 		var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
 		if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
-		var message = "These data will be used to verify the filters :\nFilename:\t\t"+filename+"\nDomain test order:\t"+domain_testOrder+"\n1 - File's domain:\t"+domain+"\n2 - File's URL:\t\t"+fileURL+"\n3 - Full file's URL:\t"+fileURLAndFilename+"\n4 - Tab's domain:\t"+currentDomain+"\n5 - Tab's URL:\t\t"+currentURL;
+		var message = "These data will be used to verify the filters :\n"+
+							"Filename:\t\t"+filename+"\nDomain test order:\t"+domain_testOrder+"\n"+
+							"1 - File's domain:\t"+domain+"\n"+
+							"2 - File's URL:\t\t"+fileURL+"\n"+
+							"3 - Full file's URL:\t"+fileURLAndFilename+"\n"+
+							"4 - Page's domain:\t"+currentDomain+"\n"+
+							"5 - Page's URL:\t\t"+currentURL+"\n"+
+							"6 - Page's referrer:\t"+currentReferrer+"\n"+
+							"7 - Tab's URL content:\t"+tabURL;
 		if (!this.inPrivateBrowsing) this.console_print(message);
 		// debug : show the full downloaded link  http://abc.xyz/def/file.ext
 		// Can use this new function to get free from the need of the download window.
@@ -196,6 +213,14 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 						case "5":
 							dom_regexp = this.test_regexp(filters[i][0], currentURL, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 5");
+							break;
+						case "6":
+							dom_regexp = this.test_regexp(filters[i][0], currentReferrer, i, "domain");
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 6");
+							break;
+						case "7":
+							dom_regexp = this.test_regexp(filters[i][0], tabURL, i, "domain");
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 7");
 						default:
 					}
 					
@@ -1113,7 +1138,13 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		
 		// initialize the regular expression search
 		var param = (this.prefManager.getBoolPref("extensions.asf.regexp_caseinsensitive") == true ? "i" : "");
-		var test = new RegExp(filter_data, param);
+		try 
+		{
+			var test = new RegExp(filter_data, param);
+		}
+		catch(e){
+			alert('\t\tAutomatic Save Folder\n\n-'+e.message+'\nin filter N°'+idx+':\n'+filter_data+'\nregular expression: '+isregexp)
+		}
 		
 		// Thanks to Ted Gifford for the regular expression capture.
 		var res = downloaded_data.match(test);

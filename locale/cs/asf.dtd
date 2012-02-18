@@ -84,6 +84,8 @@
 <!ENTITY asf.domainTestOrder.tooltip5 "Doména panelu (nebo doména souboru, pokud není údaj nalezen)">
 <!ENTITY asf.domainTestOrder.tooltip6 "URL panelu (nebo URL souboru, pokud není údaj nalezen)">
 <!ENTITY asf.domainTestOrder.tooltip7 "Více informací o tom, které hodnoty odpovídají jednotlivým položkám, zjistíte v Chybové konzoli při stahování souboru.">
+<!ENTITY asf.domainTestOrder.tooltip8 "Active page's referrer URL">
+<!ENTITY asf.domainTestOrder.tooltip9 "Content of the active tab's URL">
 <!ENTITY asf.regexp_caseinsensitive.bool "Filtry nerozlišují velikost písmen.">
 <!ENTITY asf.options.groupbox4.label "Klepnutí pravým tlačítkem">
 <!ENTITY asf.userightclick.bool "Použít filtry v nabídkách">
