@@ -1,8 +1,8 @@
 ﻿<!-- ASF Settings -->
-<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
+<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=443, in pixels-->
 <!ENTITY asf.preferences_window.resize "true">
 <!ENTITY asf.preferences_window.width "580">
-<!ENTITY asf.preferences_window.height "446">
+<!ENTITY asf.preferences_window.height "466">
 
 <!-- new line, U+00A0 ISOnum -->
 <!ENTITY NL "&#10;" >
@@ -12,6 +12,9 @@
 <!ENTITY asf.label "Automatic Save Folder...">
 <!ENTITY asf.addedit.label "Add or edit a filter">
 <!ENTITY asf.pathselect.label "Available filter's path:">
+<!ENTITY asf.saveFromFilter.label "Folder from a filter.">
+<!ENTITY asf.savePreviousFolder.label "Previous folder.">
+<!ENTITY asf.savePreviousFolderSite.label "Previous folder used for this site.">
 
 <!-- Filters tab - top -->
 <!ENTITY asf.filters.label "Filters">
@@ -48,15 +51,18 @@
 <!ENTITY asf.options.tabdata.label "Data management">
 
 <!ENTITY asf.options.groupbox1.label "File Explorer">
-<!ENTITY asf.useDownloadDir.bool "Do not show the file explorer, and automatically save to:">
+<!ENTITY asf.useDownloadDir.label "Save files to">
 <!ENTITY asf.desktop.label "Desktop">
 <!ENTITY asf.systemdownload.label "Downloads">
 <!ENTITY asf.filteredfolder.label "Set by the filters">
 <!ENTITY asf.folderList.tooltip "If the &quot;Downloads&quot; folder doesn't exist, the file explorer will be shown.">
+<!ENTITY asf.useDownloadDirFiltered.bool "Only if a filter is found.">
+<!ENTITY asf.useDownloadDirFiltered.tooltip "Asks where to save the files only if no filter matches.">
+<!ENTITY asf.alwaysAskWhereToSave.label "Always ask me where to save files.">
 
 <!ENTITY asf.options.groupbox2.label "Save dialog">
 <!ENTITY asf.dialogaccept.bool "Automatically accept the &quot;What should Firefox do with this file?&quot; dialog windows.">
-<!ENTITY asf.dialogacceptFiltered.bool "Only if a filter is found">
+<!ENTITY asf.dialogacceptFiltered.bool "Only if a filter is found.">
 <!ENTITY asf.dialogacceptFiltered.tooltip "Will not automatically accept the &quot;What should Firefox do with this file?&quot; dialog windows if no filter matches.">
 <!ENTITY asf.dialogForceRadio_Start.bool "Force the radio choice to">
 <!ENTITY asf.dialogForceRadioTo.label1 "Open with">
@@ -72,7 +78,7 @@
 <!ENTITY asf.viewdloptionType3.label "Hide if disabled">
 <!ENTITY asf.suggestAllPossibleFolders.bool "Suggest all possible folders">
 <!ENTITY asf.suggestAllPossibleFolders.tooltip "Adds a radio choice for each matching filter to select one of them quickly without using the drop-down list.">
-<!ENTITY asf.viewpathselect.bool "View the list of folders">
+<!ENTITY asf.viewpathselect.bool "View the list of folders.">
 <!ENTITY asf.viewpathselect.tooltip "Activate a drop-down menu with all the filter's path.">
 
 <!ENTITY asf.option.groupbox.checkUpdate.label "Beta update">

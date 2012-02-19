@@ -1,8 +1,8 @@
 <!-- ASF Settings -->
-<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
+<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=443, in pixels-->
 <!ENTITY asf.preferences_window.resize "false">
 <!ENTITY asf.preferences_window.width "617">
-<!ENTITY asf.preferences_window.height "423">
+<!ENTITY asf.preferences_window.height "443">
 
 <!-- new line, U+00A0 ISOnum -->
 <!ENTITY NL "&#10;">
@@ -12,6 +12,9 @@
 <!ENTITY asf.label "Automatic Save Folder...">
 <!ENTITY asf.addedit.label "Lägg till eller redigera ett filter">
 <!ENTITY asf.pathselect.label "Sökväg till filter:">
+<!ENTITY asf.saveFromFilter.label "Folder from a filter.">
+<!ENTITY asf.savePreviousFolder.label "Previous folder.">
+<!ENTITY asf.savePreviousFolderSite.label "Previous folder used for this site.">
 
 <!-- Filters tab - top -->
 <!ENTITY asf.filters.label "Filter">
@@ -48,11 +51,14 @@
 <!ENTITY asf.options.tabdata.label "Datahantering">
 
 <!ENTITY asf.options.groupbox1.label "Filutforskaren">
-<!ENTITY asf.useDownloadDir.bool "Visa inte Filutforskaren, utan spara automatiskt till:">
+<!ENTITY asf.useDownloadDir.label "Save files to">
 <!ENTITY asf.desktop.label "Skrivbordet">
 <!ENTITY asf.systemdownload.label "Hämtade filer">
 <!ENTITY asf.filteredfolder.label "Mapp angiven av filtren">
 <!ENTITY asf.folderList.tooltip "Om mappen &quot;Hämtade filer&quot; inte finns, kommer Filutforskaren att visas.">
+<!ENTITY asf.useDownloadDirFiltered.bool "Only if a filter is found.">
+<!ENTITY asf.useDownloadDirFiltered.tooltip "Asks where to save the files only if no filter matches.">
+<!ENTITY asf.alwaysAskWhereToSave.label "Always ask me where to save files.">
 
 <!ENTITY asf.options.groupbox2.label "Spardialog">
 <!ENTITY asf.dialogaccept.bool "Godkänn dialogfönstren &quot;Vad vill du att Firefox gör med denna fil?&quot; automatiskt.">

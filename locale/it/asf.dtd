@@ -1,8 +1,8 @@
 ﻿<!-- ASF Settings -->
-<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
+<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=443, in pixels-->
 <!ENTITY asf.preferences_window.resize "false">
 <!ENTITY asf.preferences_window.width "617">
-<!ENTITY asf.preferences_window.height "423">
+<!ENTITY asf.preferences_window.height "443">
 
 <!-- new line, U+00A0 ISOnum -->
 <!ENTITY NL "&#10;" >
@@ -12,6 +12,9 @@
 <!ENTITY asf.label "Automatic Save Folder...">
 <!ENTITY asf.addedit.label "Aggiungi o modifica filtro">
 <!ENTITY asf.pathselect.label "Percorsi disponibili per i filtri:">
+<!ENTITY asf.saveFromFilter.label "Folder from a filter.">
+<!ENTITY asf.savePreviousFolder.label "Previous folder.">
+<!ENTITY asf.savePreviousFolderSite.label "Previous folder used for this site.">
 
 <!-- Filters tab - top -->
 <!ENTITY asf.filters.label "Filtri">
@@ -48,11 +51,14 @@
 <!ENTITY asf.options.tabdata.label "Data management">
 
 <!ENTITY asf.options.groupbox1.label "File Explorer">
-<!ENTITY asf.useDownloadDir.bool "Do not show the file explorer, and automatically save to:">
+<!ENTITY asf.useDownloadDir.label "Save files to">
 <!ENTITY asf.desktop.label "Desktop">
 <!ENTITY asf.systemdownload.label "Downloads">
 <!ENTITY asf.filteredfolder.label "Set by the filters">
 <!ENTITY asf.folderList.tooltip "If the &quot;Downloads&quot; folder doesn't exist, the file explorer will be shown.">
+<!ENTITY asf.useDownloadDirFiltered.bool "Only if a filter is found.">
+<!ENTITY asf.useDownloadDirFiltered.tooltip "Asks where to save the files only if no filter matches.">
+<!ENTITY asf.alwaysAskWhereToSave.label "Always ask me where to save files.">
 
 <!ENTITY asf.options.groupbox2.label "Save dialog">
 <!ENTITY asf.dialogaccept.bool "Automatically accept the &quot;What should Firefox do with this file&quot; dialog windows.">

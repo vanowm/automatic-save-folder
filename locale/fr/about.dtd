@@ -23,6 +23,13 @@
 <!ENTITY about.version.title "Version">
 
 <!-- Conserver les retours à la ligne car le tag < pre > est utilisé, gardez les deux espaces en début de ligne pour l'indentation -->
+<!ENTITY about.version.105 "+ Ajout de deux nouveaux types de domaine lors du filtrage : URL du referrer et contenu de la barre d'URL.
++ Ajout d'une alerte si une erreur de filtre est détectée lors de l'enregistrement.
++ L'explorateur de fichier est désormais activé au cas par cas lors de l'enregistrement.
+* Pour plus de clarté, l'option permettant de choisir si l'explorateur de fichier doit s'afficher est maintenant rédigé de la même façon que dans les options de Firefox.
+! Correction de l'affichage des propositions de dossiers lorsque le dossier de sauvegarde est forcé sur l'option Bureau ou Téléchargement.
+! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.">
+
 <!ENTITY about.version.104 "* Vérification des dossiers proposés sur la fenêtre d'enregistrement afin d'éviter les doublons.
 ! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.">
 

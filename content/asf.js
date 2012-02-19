@@ -470,15 +470,18 @@ var automatic_save_folder = {
 		var asf_rightclicktimeout = document.getElementById("asf-rightclicktimeout");
 		
 		// check if autosave is selected, if not : set the saving path to "filtered" and disable the dropdown menu.
-		if (useDownloadDir.checked == false)
+		if (useDownloadDir.value == "false")
 		{
 			document.getElementById("asf-folderList").value = 2;
 			document.getElementById("asf-folderList").disabled = true;
 			this.prefManager.setIntPref("browser.download.folderList",2);
+			document.getElementById("asf-useDownloadDirFiltered").checked = false;
+			document.getElementById("asf-useDownloadDirFiltered").disabled = true;
 		}
-		if (useDownloadDir.checked == true)
+		if (useDownloadDir.value == "true")
 		{
 			document.getElementById("asf-folderList").disabled = false;
+			document.getElementById("asf-useDownloadDirFiltered").disabled = false;
 		}
 		
 		
@@ -1085,7 +1088,7 @@ var automatic_save_folder = {
 			apply = true;
 			
 			// upgrade exemple
-			// 1.0.2bReb86
+			// 1.0.2bRev86
 			if (this.versionChecker.compare(import_version, "1.0.2bRev86") == -1) // convert usecurrenturl=true to checkDomainOrder=1,5
 			{
 				for (var i = 2; i < data.length ; i++)
@@ -1146,6 +1149,25 @@ var automatic_save_folder = {
 			}
 			
 			
+			// 1.0.5bRev116
+			if (this.versionChecker.compare(import_version, "1.0.5bRev116") == -1) // copy useDownloadDir to extensions.asf.useDownloadDir
+			{
+				for (var i = 2; i < data.length ; i++)
+				{
+					if (data[i].indexOf("browser.download.useDownloadDir") >= 0)
+					{
+						if (data[i] == "browser.download.useDownloadDir;bool=true")
+						{
+							data[i] = "extensions.asf.useDownloadDir;bool=true";
+						}
+						else
+						{
+							data[i] = "extensions.asf.useDownloadDir;bool=false";
+						}
+						break;
+					}
+				}
+			}
 		}
 		
 		
@@ -1207,8 +1229,9 @@ var automatic_save_folder = {
 			document.getElementById("asf-keeptemp-check").checked = this.prefManager.getBoolPref("extensions.asf.keeptemp");				// but last folder if same domain
 			
 			// options tab
-			document.getElementById("asf-useDownloadDir").checked = this.prefManager.getBoolPref("browser.download.useDownloadDir"); 		// useDownloadDir (firefox pref)
-			document.getElementById("asf-folderList").value = this.prefManager.getIntPref("browser.download.folderList");					// folderList 0= desk, 1= download, 2= user
+			document.getElementById("asf-useDownloadDir").value = this.prefManager.getBoolPref("extensions.asf.useDownloadDir"); 			// useDownloadDir
+			document.getElementById("asf-folderList").value = this.prefManager.getIntPref("browser.download.folderList");					// folderList 0= desk, 1= download, 2= user (firefox pref)
+			document.getElementById("asf-useDownloadDirFiltered").checked = this.prefManager.getBoolPref("extensions.asf.useDownloadDirFiltered"); // only if a filter is found
 			
 			document.getElementById("asf-dialogaccept").checked = this.prefManager.getBoolPref("extensions.asf.dialogaccept");				// auto accept the save dialog
 			document.getElementById("asf-dialogacceptFiltered").checked = this.prefManager.getBoolPref("extensions.asf.dialogacceptFiltered"); // only if a filter is found
@@ -1289,7 +1312,7 @@ var automatic_save_folder = {
 		var ASF_prefs = new Array;
 		var additionnal_prefs = new Array;
 		// ASF 1.0.0
-		ASF_prefs[ASF_prefs.length] = "browser.download.useDownloadDir";
+		//ASF_prefs[ASF_prefs.length] = "browser.download.useDownloadDir";	// Removed since 1.0.5bRev116, now using ASF's own useDownloadDir setting.
 		ASF_prefs[ASF_prefs.length] = "browser.download.folderList";
 		
 		
@@ -1334,6 +1357,11 @@ var automatic_save_folder = {
 		// ASF version 1.0.2bRev94
 		// add suggestAllPossibleFolders option
 		additionnal_prefs = ["extensions.asf.suggestAllPossibleFolders"];
+		ASF_prefs = ASF_prefs.concat(additionnal_prefs);
+		
+		// ASF version 1.0.5bRev116
+		// add useDownloadDir to ASF preferences instead of using Firefox's preferences.
+		additionnal_prefs = ["extensions.asf.useDownloadDir", "extensions.asf.useDownloadDirFiltered"];
 		ASF_prefs = ASF_prefs.concat(additionnal_prefs);
 		
 		// just before the filters, put number of filters
@@ -1759,6 +1787,7 @@ var automatic_save_folder = {
 		this.prefManager.setBoolPref("extensions.asf.rightclicktimeout", document.getElementById("asf-rightclicktimeout").checked);
 		this.prefManager.setBoolPref("extensions.asf.dialogacceptFiltered", document.getElementById("asf-dialogacceptFiltered").checked);
 		this.prefManager.setBoolPref("extensions.asf.useSiteBySiteSavePath", document.getElementById("asf-useSiteBySiteSavePath").checked);
+		this.prefManager.setBoolPref("extensions.asf.useDownloadDirFiltered", document.getElementById("asf-useDownloadDirFiltered").checked);
 		
 		
 	},

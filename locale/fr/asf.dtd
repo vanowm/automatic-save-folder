@@ -1,8 +1,8 @@
 ﻿<!-- ASF Settings -->
-<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=423, in pixels-->
+<!-- Change the preferences window size to fit your localization. Default values : resize=false width=617 height=443, in pixels-->
 <!ENTITY asf.preferences_window.resize "true">
 <!ENTITY asf.preferences_window.width "647">
-<!ENTITY asf.preferences_window.height "446">
+<!ENTITY asf.preferences_window.height "466">
 
 <!-- new line, U+00A0 ISOnum -->
 <!ENTITY NL "&#10;" >
@@ -12,6 +12,9 @@
 <!ENTITY asf.label "Automatic Save Folder...">
 <!ENTITY asf.addedit.label "Ajouter ou éditer un filtre">
 <!ENTITY asf.pathselect.label "Liste des filtres :">
+<!ENTITY asf.saveFromFilter.label "Dossier provenant d'un filtre">
+<!ENTITY asf.savePreviousFolder.label "Dossier précédant">
+<!ENTITY asf.savePreviousFolderSite.label "Dossier précédemment utilisé pour ce site">
 
 <!-- Filters tab - top -->
 <!ENTITY asf.filters.label "Filtres">
@@ -48,15 +51,18 @@
 <!ENTITY asf.options.tabdata.label "Gestion des données">
 
 <!ENTITY asf.options.groupbox1.label "Explorateur de fichiers">
-<!ENTITY asf.useDownloadDir.bool "Ne pas afficher l'explorateur de fichiers, et enregistrer directement dans le dossier :">
+<!ENTITY asf.useDownloadDir.label "Enregistrer les fichiers dans le dossier">
 <!ENTITY asf.desktop.label "Bureau">
 <!ENTITY asf.systemdownload.label "Téléchargements">
 <!ENTITY asf.filteredfolder.label "Défini par les filtres">
 <!ENTITY asf.folderList.tooltip "Si le dossier &quot;Téléchargements&quot; n'existe pas, l'explorateur de fichier s'affichera.">
+<!ENTITY asf.useDownloadDirFiltered.bool "Seulement si un filtre est trouvé.">
+<!ENTITY asf.useDownloadDirFiltered.tooltip "Demande où enregistrer les fichiers uniquement si un aucun filtre ne correspond.">
+<!ENTITY asf.alwaysAskWhereToSave.label "Toujours demander où enregistrer les fichiers.">
 
 <!ENTITY asf.options.groupbox2.label "Fenêtre de sauvegarde">
 <!ENTITY asf.dialogaccept.bool "Valider automatiquement la fenêtre &quot;Que doit faire Firefox avec ce fichier ?&quot;.">
-<!ENTITY asf.dialogacceptFiltered.bool "Seulement si un filtre est trouvé">
+<!ENTITY asf.dialogacceptFiltered.bool "Seulement si un filtre est trouvé.">
 <!ENTITY asf.dialogacceptFiltered.tooltip "Ne valide pas automatiquement la fenêtre &quot;Que doit faire Firefox avec ce fichier ?&quot; si aucun filtre ne correspond.">
 <!ENTITY asf.dialogForceRadio_Start.bool "Forcer le choix sur">
 <!ENTITY asf.dialogForceRadioTo.label1 "Ouvrir avec">
@@ -72,7 +78,7 @@
 <!ENTITY asf.viewdloptionType3.label "Masquer si désactivé">
 <!ENTITY asf.suggestAllPossibleFolders.bool "Suggérer tous les dossiers possibles.">
 <!ENTITY asf.suggestAllPossibleFolders.tooltip "Ajoute un élement radio pour chaque filtre trouvé afin d'en selectionner un rapidement sans passer par le menu déroulant.">
-<!ENTITY asf.viewpathselect.bool "Afficher la liste des filtres">
+<!ENTITY asf.viewpathselect.bool "Afficher la liste des dossiers.">
 <!ENTITY asf.viewpathselect.tooltip "Active le menu déroulant contenant le chemin de chaque filtre.">
 
 <!ENTITY asf.option.groupbox.checkUpdate.label "Mise à jour béta">

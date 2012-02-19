@@ -43,7 +43,8 @@
 		<preference id="asf_userightclick" name="extensions.asf.userightclick" type="bool"/>
 		<preference id="asf_rightclicktimeout" name="extensions.asf.rightclicktimeout" type="bool"/>
 		<preference id="asf_domainTestOrder" name="extensions.asf.domainTestOrder" type="string"/>
-		<preference id="asf_useDownloadDir" name="browser.download.useDownloadDir" type="bool"/>
+		<preference id="asf_useDownloadDir" name="extensions.asf.useDownloadDir" type="bool"/>
+		<preference id="asf_useDownloadDirFiltered" name="extensions.asf.useDownloadDirFiltered" type="bool"/>
 		<preference id="asf_folderList" name="browser.download.folderList" type="int"/>
 		<preference id="asf_regexp_caseinsensitive" name="extensions.asf.regexp_caseinsensitive" type="bool"/>
 		<preference id="asf_pathlist_defaultforceontop" name="extensions.asf.pathlist_defaultforceontop" type="bool"/>
@@ -87,6 +88,7 @@
 	<tooltip id="tooltip_rightclicktimeout" label="&asf.rightclicktimeout.tooltip1;&#10;&asf.rightclicktimeout.tooltip2;&#10;&asf.rightclicktimeout.tooltip3;&#10;&#10;&asf.rightclicktimeout.tooltip4;" noautohide="true" />
 	<tooltip id="tooltip_variablemode"   label="&asf.variablemode.tooltip1;&#10;&#10;&asf.variablemode.tooltip2;" noautohide="true" />
 	<tooltip id="tooltip_dialogacceptFiltered" label="&asf.dialogacceptFiltered.tooltip;" noautohide="true" />
+	<tooltip id="tooltip_useDownloadDirFiltered" label="&asf.useDownloadDirFiltered.tooltip;" noautohide="true" />
 	<tooltip id="tooltip_domainTestOrder" noautohide="true" align="vertical">
 		<label>&asf.domainTestOrder.tooltip1;</label>
 		<hbox><description value="1 :"/><label>&asf.domainTestOrder.tooltip2;</label></hbox>
@@ -197,14 +199,20 @@
 						<vbox id="asf-options-tab1" flex="1">
 							<groupbox><caption label="&asf.options.groupbox1.label;" />
 								<hbox>
-									<checkbox id="asf-useDownloadDir" preference="asf_useDownloadDir" label="&asf.useDownloadDir.bool;" oncommand="automatic_save_folder.toggle_options();"/>
-									<menulist id="asf-folderList" preference="asf_folderList" tooltip="tooltip_folderList">
-										<menupopup>
-											<menuitem value="0" label="&asf.desktop.label;"></menuitem>
-											<menuitem value="1" label="&asf.systemdownload.label;"></menuitem>
-											<menuitem value="2" label="&asf.filteredfolder.label;"></menuitem>
-										</menupopup>
-									</menulist>
+									<radiogroup id="asf-useDownloadDir" preference="asf_useDownloadDir">
+										<hbox>
+											<radio value="true" label="&asf.useDownloadDir.label;" oncommand="automatic_save_folder.toggle_options();"/>
+											<menulist id="asf-folderList" preference="asf_folderList" tooltip="tooltip_folderList">
+												<menupopup>
+													<menuitem value="0" label="&asf.desktop.label;"></menuitem>
+													<menuitem value="1" label="&asf.systemdownload.label;"></menuitem>
+													<menuitem value="2" label="&asf.filteredfolder.label;"></menuitem>
+												</menupopup>
+											</menulist>
+										</hbox>
+										<checkbox id="asf-useDownloadDirFiltered" preference="asf_useDownloadDirFiltered" label="&asf.useDownloadDirFiltered.bool;" tooltip="tooltip_useDownloadDirFiltered" style="margin-left:25px;"/>
+										<radio value="false" label="&asf.alwaysAskWhereToSave.label;" oncommand="automatic_save_folder.toggle_options();"/>
+									</radiogroup>
 								</hbox>
 							</groupbox>
 							<groupbox><caption label="&asf.options.groupbox2.label;" />

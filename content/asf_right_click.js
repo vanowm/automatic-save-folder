@@ -1,6 +1,6 @@
 ﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
-Copyright (C) 2007-2011 Éric Cassar (Cyan).
+Copyright (C) 2007-2012 Éric Cassar (Cyan).
 			  2009 Ted Gifford - Dynamic variable capturing 
 
     "Automatic Save Folder" is free software: you can redistribute it and/or modify
@@ -32,7 +32,7 @@ var automatic_save_folder = {
 	firefoxversion : "",
 	logtoconsole: true,
 	inPrivateBrowsing: false,
-	importantVersionAlert: "1.0.2",
+	importantVersionAlert: "1.0.5bRev116",
 	result: "", // print_r result
 	previousASFVersion: "",
 	currentASFVersion : "",
@@ -943,6 +943,7 @@ var automatic_save_folder = {
 		
 		if (this.versionChecker.compare(this.previousASFVersion, "1.0.2bRev86") == -1) this.upgrade("1.0.2bRev86"); // convert currenturl to 1,5
 		if (this.versionChecker.compare(this.previousASFVersion, "1.0.2bRev90") == -1) this.upgrade("1.0.2bRev90"); // remove the slashes to regexp
+		if (this.versionChecker.compare(this.previousASFVersion, "1.0.5bRev116") == -1) this.upgrade("1.0.5bRev116"); // copy useDownloadDir preference
 		// write the current version as old to prevent showing the updateMessage again
 		this.previousASFVersion = this.currentASFVersion;
 		this.prefManager.setCharPref("extensions.asf.version", this.currentASFVersion);
@@ -1015,6 +1016,13 @@ var automatic_save_folder = {
 					}
 				}
 			break;
+			
+			case "1.0.5bRev116": // // copy useDownloadDir to extensions.asf.useDownloadDir
+
+				this.prefManager.setBoolPref("extensions.asf.useDownloadDir", this.prefManager.getBoolPref("browser.download.useDownloadDir")); 
+			break;
+			
+
 		}
 	},
 	

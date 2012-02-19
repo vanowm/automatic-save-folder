@@ -129,3 +129,5 @@ Si cela devait arriver, revérifiez l'étape 1.">
 <!ENTITY importantupdates.102.3 "Import/export des filtres.">
 <!ENTITY importantupdates.102.4 "Suppression des slashs aux extrémités des filtres utilisant les expressions régulières.">
 <!ENTITY importantupdates.102.5 "Note : Afin de pouvoir faire évoluer Automatic Save Folder, cette version est la dernière compatible avec les anciennes versions de Firefox (1.5, 2.0 et 3.0).">
+
+<!ENTITY importantupdates.105b.1 "Automatic Save Folder n'est plus lié aux préférences de Firefox concernant le dossier d'enregistrement.<br />L'option de Firefox &quot;Toujours demander ou enregistrer les fichiers&quot; est désormais modifié au cas par cas lors de l'enregistrement.">

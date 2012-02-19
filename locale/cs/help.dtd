@@ -98,3 +98,5 @@ Pokud se tak stane, opakujte krok 1.">
 <!ENTITY importantupdates.102.3 "Import/export filtrů.">
 <!ENTITY importantupdates.102.4 "Není nutno používat lomítka kolem filtrů s regulárními výrazy.">
 <!ENTITY importantupdates.102.5 "Poznámka: V zájmu dalšího vývoje rozšíření Automaticky uložit do složky je tato verze poslední, která je určena také pro starší verze Firefoxu (1.5, 2.0 a 3.0).">
+
+<!ENTITY importantupdates.105b.1 "Automatic Save Folder is not linked anymore with the saved folder option defined in Firefox preferences.<br />The Firefox option &quot;Always ask me where to save files&quot; is now set on a case-by-case basis when downloading.">

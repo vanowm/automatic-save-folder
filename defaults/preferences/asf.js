@@ -34,3 +34,5 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
  pref("extensions.asf.showExportButton", false);
  pref("extensions.asf.suggestAllPossibleFolders", false);
  pref("extensions.asf.useSiteBySiteSavePath", false); // new feature since Firefox 7.0.1
+ pref("extensions.asf.useDownloadDir", false);
+ pref("extensions.asf.useDownloadDirFiltered", false);

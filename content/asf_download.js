@@ -1,6 +1,6 @@
 ﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
-Copyright (C) 2007-2011 Éric Cassar (Cyan).
+Copyright (C) 2007-2012 Éric Cassar (Cyan).
 			  2009 Ted Gifford - Dynamic variable capturing
 
     "Automatic Save Folder" is free software: you can redistribute it and/or modify
@@ -318,6 +318,14 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			this.saveUnicodeString("extensions.asf.tempdomain", domain);
 		}
 		
+		// Set the FileExplorer display status here.
+		var useDownloadDirFiltered = this.prefManager.getBoolPref("extensions.asf.useDownloadDirFiltered");
+		if (useDownloadDirFiltered && idx < 0) this.prefManager.setBoolPref("browser.download.useDownloadDir", true); // no filter matched, enable the File Explorer if chosen by the user.
+		else
+		{
+			var useDownloadDir = this.prefManager.getBoolPref("extensions.asf.useDownloadDir");
+			this.prefManager.setBoolPref("browser.download.useDownloadDir", useDownloadDir);
+		}
 		
 		// Automatic saving when clicking on a link. The save dialog still flash onscreen very quickly.
 		if (dialogacceptFiltered && idx < 0) dialogaccept = false; // no filter matched, do not autoaccept the dialog
@@ -376,7 +384,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too		
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);		
 		
-		// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of filtered path
+		// Check if the user use the "useDownloadDir" setting to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of filtered path
 		if ( (folderList == 0) || (folderList == 1) )
 		{
 			var desk = Components.classes["@mozilla.org/file/directory_service;1"]
@@ -769,6 +777,8 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		// read asf/content/info_save_ff2-3.txt for differences between Firefox 2 and Firefox 3 saving preferences.
 		var asf_dloptions = document.getElementById('asf_dloptions');
 		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
+		var asf_lastpath = document.getElementById('asf_lastpath');
+		var asf_currentURI_lastpath = document.getElementById('asf_currentURI_lastpath');
 		var asf_savefolder = document.getElementById('asf_savefolder');
 		var asf_folder_list = document.getElementById('asf_folder_list');
 		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");
@@ -776,6 +786,10 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");
 		var useDownloadDir = this.prefManager.getBoolPref("browser.download.useDownloadDir");
 		var folderList = this.prefManager.getIntPref("browser.download.folderList");
+		var stringbundle = Components.classes['@mozilla.org/intl/stringbundle;1']
+									 .getService(Components.interfaces.nsIStringBundleService)
+                                     .createBundle('chrome://asf/locale/asf.properties');
+		var fromfilter = stringbundle.GetStringFromName("save.fromfilter");
 		
 		var folder = "";
 		if (this.firefoxversion == 2) folder = this.loadUnicodeString("browser.download.dir");
@@ -808,7 +822,6 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		// check the lastpath, if different than current folder, then print radio choice to user
 		// so he can choose from found filters, or last used path.
 		var lastpath = this.loadUnicodeString("extensions.asf.lastpath");
-		var asf_lastpath = document.getElementById('asf_lastpath');
 		asf_lastpath.label = lastpath;
 		
 		if ( (lastpath == folder) || (lastpath == "") || (this.indexInArray(this.matching_folders, lastpath) > -1))  // if same or empty (first time using ASF), or already present from a filter's path, do not show radio for lastpath choice
@@ -821,7 +834,6 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		}
 		
 		// Firefox 7.0.1+ : Check the current uri lastpath, if not in the available paths then print another radio choice to the user
-		var asf_currentURI_lastpath = document.getElementById('asf_currentURI_lastpath');
 		asf_currentURI_lastpath.hidden = true;
 		if ((this.firefoxversion >= 7.01) && (this.current_uri_lastpath != ""))
 		{
@@ -833,7 +845,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		}
 		
 		//set the text to be written on the Radio comment
-		if (this.matching_filters.length >= 1)
+		if (this.matching_filters.length >= 1 && folderList == 2)
 		{
 			for (var i=asf_savefolder.childNodes.length-1 ; i>=0 ; i--)
 			{
@@ -848,6 +860,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 				new_radio.setAttribute("crop", "center");
 				new_radio.setAttribute("label", this.matching_folders[i]);
 				new_radio.setAttribute("class", "small-indent");
+				new_radio.setAttribute("tooltiptext", fromfilter);
 				new_radio.setAttribute("oncommand", "automatic_save_folder.asf_toggle_savepath(this);");
 				asf_savefolder.appendChild(new_radio);
 			}
@@ -863,12 +876,14 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 				new_radio.setAttribute("crop", "center");
 				new_radio.setAttribute("label", this.matching_folders[0]);
 				new_radio.setAttribute("class", "small-indent");
+				new_radio.setAttribute("tooltiptext", fromfilter);
 				new_radio.setAttribute("oncommand", "automatic_save_folder.asf_toggle_savepath(this);");
 				asf_savefolder.appendChild(new_radio);
 			}
 			
-			document.getElementById('asf_savefolder_0').label = folder;
 		}
+		
+		document.getElementById('asf_savefolder_0').label = folder;
 		
 		// Force check the first radio choice (needed on linux + ff2.x) (linux has blank radio choices on loading, this is only visual, it doesn't affect anything here, the value are set to the new path by default until the user change the radio choice)
 		var asf_radio_savepath = document.getElementById('asf_radio_savepath');
@@ -888,7 +903,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			
 			
 			
-			//and last, if the user checked the option to view the path list on saving window, set it to visible
+			//If the user checked the option to view the path list on saving window, set it to visible
 			if(asf_viewpathselect == true)
 			{
 				this.read_all_filterpath();
@@ -899,17 +914,17 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 				asf_radiogroup_pathselect.style.visibility = "collapse";
 			}
 			
-			// Check if the user use the "do not show file explorer" to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of found filters
-			if((useDownloadDir == true) && (folderList != 2)) // if set to desktop or Download
+			// Check if the user use the "useDownloadDir" setting to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of found filters
+			if(folderList != 2) // if set to desktop or Download
 			{
 				asf_radio_savepath.disabled = true;
-				asf_radiogroup_pathselect.disabled = true;
+				asf_savefolder.disabled = true;
 				asf_folder_list.disabled = true;
 			}
 			else
 			{
 				asf_radio_savepath.disabled = false;
-				asf_radiogroup_pathselect.disabled = false;
+				asf_savefolder.disabled = false;
 				asf_folder_list.disabled = false;
 			}
 			
@@ -938,11 +953,13 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		// Check if the user change the unkownContentType option (open with, save as, save with a download manager, etc.)
 		var save = document.getElementById("save").selected;
 		var asf_radio_savepath = document.getElementById('asf_radio_savepath');
-		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
+		var asf_savefolder = document.getElementById('asf_savefolder');
 		var asf_folder_list = document.getElementById('asf_folder_list');
+		var asf_radiogroup_pathselect = document.getElementById('asf_radiogroup_pathselect');
 		var asf_viewdloption = this.prefManager.getBoolPref("extensions.asf.viewdloption");
 		var asf_viewdloptionType = this.prefManager.getIntPref("extensions.asf.viewdloptionType");
 		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");
+		var folderList = this.prefManager.getIntPref("browser.download.folderList");
 		var dTa = false;
 		if (this.DownThemAll_isEnabled) // enable ASF box if dTa is selected and sending folder to dTa is enabled.
 		{
@@ -957,9 +974,9 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 		{
 			if(save || dTa) // if set to "save the file"
 			{
-				asf_radio_savepath.disabled = false;
-				asf_radiogroup_pathselect.disabled = false;
-				asf_folder_list.disabled = false;
+				if (folderList == 2) asf_radio_savepath.disabled = false;
+				if (folderList == 2) asf_savefolder.disabled = false;
+				if (folderList == 2) asf_folder_list.disabled = false;
 				if ((asf_viewdloptionType == 2) || (asf_viewdloptionType == 3))
 				{
 					document.getElementById('asf_dloptions').style.visibility = "visible";
@@ -973,7 +990,7 @@ Copyright (C) 2007-2011 Éric Cassar (Cyan).
 			else
 			{
 				asf_radio_savepath.disabled = true;
-				asf_radiogroup_pathselect.disabled = true;
+				asf_savefolder.disabled = true;
 				asf_folder_list.disabled = true;
 				if (asf_viewdloptionType == 2) // minimize only
 				{
