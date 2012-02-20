@@ -120,32 +120,21 @@ var automatic_save_folder = {
 							   .getService(Components.interfaces.nsIWindowMediator);
 			var mainWindow = wm.getMostRecentWindow("navigator:browser");
 			
-			var currentTab = mainWindow.gBrowser.getBrowserAtIndex(mainWindow.gBrowser.tabContainer.selectedIndex);
-			// var tabLocation = currentTab.currentURI.spec;
-			var tabLocation = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
 			var tabURL = mainWindow.gURLBar.value;
 			var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
 			
+			var tabLocation = 	mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
+			var currentDomain = tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+			var currentURL = 	tabLocation.href; // look for the current website URL in the DOM.
 			var filename = aFpP.fileInfo.fileName; // filename or tab's name if no filename specified.
-			
-			var domain = 					aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host;
-			var	domainWithoutProtocol =    	aFpP.fileInfo.uri.host;
-			var fileURL = 					aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.directory; 
-			var fileURLAndFilename=			aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.path;
-			
-			var currentDomain, currentURL = "";
-			try
+			if (typeof(aFpP.fileInfo.uri.fileName) != "undefined") // if the download is from an URL
 			{
-				currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
-				currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
+				var domain = 					aFpP.fileInfo.uri.scheme+"://"+aFpP.fileInfo.uri.host;
+				var	domainWithoutProtocol =    	aFpP.fileInfo.uri.host;
+				var fileURL = 					aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.directory; 
+				var fileURLAndFilename=			aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.path;
 			}
-			catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
-			{
-				currentDomain = domain;
-				currentURL = fileURL;
-			}
-			
-			if (typeof(aFpP.fileInfo.uri.fileName) == "undefined") //  If the saved data is not from an URL (example : old Abduction! add-on)
+			else //  If the saved data is not from an URL (example : Abduction! add-on), use current URL and tab's name.
 			{
 				var domain = currentDomain;
 				var domainWithoutProtocol =  domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
@@ -469,6 +458,16 @@ var automatic_save_folder = {
 		const ZERO = "0";  // leading zero
 		
 		// load the domain and the filename of the saved file	
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+		var mainWindow = wm.getMostRecentWindow("navigator:browser");
+		
+		var tabURL = mainWindow.gURLBar.value;
+		var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
+		
+		var tabLocation = 	mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
+		var currentDomain = tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+		var currentURL = 	tabLocation.href; // look for the current website URL in the DOM.
 		var filename = aFpP.fileInfo.fileName; // filename or tab's name if no filename specified.
 		var file_name = aFpP.fileInfo.fileBaseName ;
 		var extension = filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
@@ -478,22 +477,13 @@ var automatic_save_folder = {
 			var	domainWithoutProtocol =    	aFpP.fileInfo.uri.host;
 			var fileURL = 					aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.directory; 
 			var fileURLAndFilename=			aFpP.fileInfo.uri.prePath+aFpP.fileInfo.uri.path;
-			var currentDomain = document.getElementById("urlbar").value; // look for the current website URL in the DOM.
-				currentDomain = currentDomain.match(/^(.*?:\/\/)?.*?[^\/]+/);
-				currentDomain = currentDomain[0];
-			var currentURL = document.getElementById("urlbar").value;
-		
 		}
 		else //  If the saved data is not from an URL (example : Abduction! add-on), use current URL and tab's name.
 		{
-			var domain = document.getElementById("urlbar").value;
-				domain = domain.match(/^(.*?:\/\/)?.*?[^\/]+/);
-				domain = domain[0];
+			var domain = currentDomain;
 			var domainWithoutProtocol =  domain.replace(/^.*:\/\//g,'');  // remove the protocol name from the domain
 			var fileURL = "";
 			var fileURLAndFilename = domain+"/"+filename;
-			var currentDomain = domain;
-			var currentURL = document.getElementById("urlbar").value;
 		}
 		
 		
@@ -541,6 +531,14 @@ var automatic_save_folder = {
 				case "5":
 					dom_regexp = this.test_regexp(asf_domain, currentURL, idx, "domain");
 					used_domain_string = currentURL;
+					break;
+				case "6":
+					dom_regexp = this.test_regexp(asf_domain, currentReferrer, idx, "domain");
+					used_domain_string = currentReferrer;
+					break;
+				case "7":
+					dom_regexp = this.test_regexp(asf_domain, tabURL, idx, "domain");
+					used_domain_string = tabURL;
 				default:
 			}
 			

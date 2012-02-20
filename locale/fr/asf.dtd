@@ -12,9 +12,9 @@
 <!ENTITY asf.label "Automatic Save Folder...">
 <!ENTITY asf.addedit.label "Ajouter ou éditer un filtre">
 <!ENTITY asf.pathselect.label "Liste des filtres :">
-<!ENTITY asf.saveFromFilter.label "Dossier provenant d'un filtre">
-<!ENTITY asf.savePreviousFolder.label "Dossier précédant">
-<!ENTITY asf.savePreviousFolderSite.label "Dossier précédemment utilisé pour ce site">
+<!ENTITY asf.saveFromFilter.label "Dossier provenant d'un filtre.">
+<!ENTITY asf.savePreviousFolder.label "Dossier précédant.">
+<!ENTITY asf.savePreviousFolderSite.label "Dossier précédemment utilisé pour ce site.">
 
 <!-- Filters tab - top -->
 <!ENTITY asf.filters.label "Filtres">

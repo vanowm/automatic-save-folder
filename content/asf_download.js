@@ -86,17 +86,10 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		var fileURL = 			document.getElementById("source").getAttribute("tooltiptext");
 		var fileURLAndFilename= document.getElementById("source").getAttribute("tooltiptext") + filename;
 		var currentDomain, currentURL = "";
-		try
-		{
-			currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
-			currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
-			if (currentDomain == "about://") currentDomain = "";
-		}
-		catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
-		{
-			currentDomain = domain;
-			currentURL = fileURL;
-		}
+		currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+		currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
+		if (currentDomain == "about://") currentDomain = "";
+		
 		if (this.firefoxversion >= 7.01) 
 		{
 			this.current_uri = domain.replace(/^.*:\/\//g,'');
@@ -524,9 +517,16 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		const ZERO = "0";  // leading zero
 		
 		// load the domain and the filename of the saved file
-		var tBrowser = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-				 .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
-		var tabLocation = tBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+		var mainWindow = wm.getMostRecentWindow("navigator:browser");
+		
+		var currentTab = mainWindow.gBrowser.getBrowserAtIndex(mainWindow.gBrowser.tabContainer.selectedIndex);
+		// var tabLocation = currentTab.currentURI.spec;
+		var tabLocation = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
+		var tabURL = mainWindow.gURLBar.value;
+		var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
+		
 		var filename =			document.getElementById("location").value ;
 		var file_name =			filename.replace (/\.(?!.*\.).*$/i, "");  // Trim from the last dot to the end of the file = remove extension
 		var extension =			filename.match(/([^\.]*)$/i);  // take out the extension (anything not containing a dot, with an ending line)
@@ -535,16 +535,9 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		var fileURL =			document.getElementById("source").getAttribute("tooltiptext");
 		var fileURLAndFilename= document.getElementById("source").getAttribute("tooltiptext") + filename;
 		var currentDomain, currentURL = "";
-		try 
-		{
-			currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
-			currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
-		}
-		catch (e) // if there is no data (The tab is closed or it's a script redirection), use the file's data.
-		{
-			currentDomain = domain;
-			currentURL = fileURL;
-		}
+		currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+		currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
+		if (currentDomain == "about://") currentDomain = "";
 		
 		// check the filter's data
 		var asf_domain = "";
@@ -591,6 +584,14 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 				case "5":
 					dom_regexp = this.test_regexp(asf_domain, currentURL, idx, "domain");
 					used_domain_string = currentURL;
+					break;
+				case "6":
+					dom_regexp = this.test_regexp(asf_domain, currentReferrer, idx, "domain");
+					used_domain_string = currentReferrer;
+					break;
+				case "7":
+					dom_regexp = this.test_regexp(asf_domain, tabURL, idx, "domain");
+					used_domain_string = tabURL;
 				default:
 			}
 			
