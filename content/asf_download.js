@@ -89,7 +89,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		currentDomain = 	tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
 		currentURL = 		tabLocation.href; // look for the current website URL in the DOM.
 		if (currentDomain == "about://") currentDomain = "";
-		
+
 		if (this.firefoxversion >= 7.01) 
 		{
 			this.current_uri = domain.replace(/^.*:\/\//g,'');
@@ -131,6 +131,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		var dialogaccept = 			prefManager.getBoolPref("extensions.asf.dialogaccept");
 		var dialogacceptFiltered = 	prefManager.getBoolPref("extensions.asf.dialogacceptFiltered");
 		var suggestAllPossibleFolders = prefManager.getBoolPref("extensions.asf.suggestAllPossibleFolders");
+		var findNearestParent = 	prefManager.getBoolPref("extensions.asf.findNearestParent");
 		
 		// If variable/Dynamic folders mode is ON, let's replace the variables to create the new defaultfolder
 		if (variable_mode == true)
@@ -283,6 +284,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 					var file = gDownloadLastDir.getFile(this.current_uri);
 					if (file != null) lastpath = file.path;
 				}
+				if (findNearestParent) lastpath = this.find_nearestParent(lastpath);
 				this.set_savepath(lastpath);
 			}
 		}
@@ -299,7 +301,8 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 					folder = this.createfolder(folder, idx);
 				}
 				
-				this.matching_folders[i] = folder;
+				// Check is the save path is already in the list, if present don't add it again.
+				if (this.indexInArray(this.matching_folders, folder) == -1) this.matching_folders[i] = folder;
 			}
 			
 			this.set_savepath(this.matching_folders[0]); // set the default folder to the first matching filter
@@ -313,7 +316,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		
 		// Set the FileExplorer display status here.
 		var useDownloadDirFiltered = this.prefManager.getBoolPref("extensions.asf.useDownloadDirFiltered");
-		if (useDownloadDirFiltered && idx < 0) this.prefManager.setBoolPref("browser.download.useDownloadDir", true); // no filter matched, enable the File Explorer if chosen by the user.
+		if (useDownloadDirFiltered && idx < 0) this.prefManager.setBoolPref("browser.download.useDownloadDir", false); // no filter matched, enable the File Explorer if chosen by the user.
 		else
 		{
 			var useDownloadDir = this.prefManager.getBoolPref("extensions.asf.useDownloadDir");
@@ -474,6 +477,19 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 					.createInstance(Components.interfaces.nsISupportsString);
 		str.data = pref_data;
 		this.prefManager.setComplexValue(pref_place, Components.interfaces.nsISupportsString, str);
+	},
+	
+	
+	find_nearestParent: function(path) {
+	
+		/* test if the path exists. If it doesn't exist then returns first existing parent. */
+		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		directory.initWithPath(path);
+		while (!directory.exists() && directory.parent != null)
+		{
+			directory = directory.parent;
+		}
+		return directory.path;
 	},
 	
 	
@@ -705,18 +721,22 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		
 		// remove special characters from filters :
 		// forbidden on windows  \ / : * ? " < > |
+		
 		if (navigator.appVersion.indexOf("Win")!=-1) // = Windows
 		{
 			asf_domain = asf_domain.replace(/[\/\:\*\?\"\<\>\|]/g,'');
 			asf_filename = asf_filename.replace(/[\/\:\*\?\"\<\>\|]/g,'');
 			file_name = file_name.replace(/[\/\:\*\?\"\<\>\|]/g,'');
-			path = path.replace(/[\/\*\?\"\<\>\|]/g,'');
+			path = path.replace(/\//g,'\\'); // if the user captured subdomains, then replace them with windows' sub-folders
+			path = path.replace(/[\*\?\"\<\>\|]/g,'');
 		}
 		else  // MacOS and linux, replace only  / :
 		{
 			asf_domain = asf_domain.replace(/[\/\:]/g,'');
 			asf_filename = asf_filename.replace(/[\/\:]/g,'');
 			file_name = file_name.replace(/[\/\:]/g,'');
+			
+			// Do I need to replace subdomains "/" by sub-folders ":" for Mac?
 		}
 		
 		// replace the string here		// Year
@@ -846,13 +866,13 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		}
 		
 		//set the text to be written on the Radio comment
-		if (this.matching_filters.length >= 1 && folderList == 2)
+		if (this.matching_folders.length >= 1 && folderList == 2)
 		{
 			for (var i=asf_savefolder.childNodes.length-1 ; i>=0 ; i--)
 			{
 				asf_savefolder.removeChild(asf_savefolder.childNodes[i]);
 			}
-			for (var i = 0; i < this.matching_filters.length; i++)
+			for (var i = 0; i < this.matching_folders.length; i++)
 			{
 				var new_radio = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'radio');
 				new_radio.setAttribute("id", "asf_savefolder_"+i);

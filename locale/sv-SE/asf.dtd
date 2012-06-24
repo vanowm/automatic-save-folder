@@ -114,6 +114,13 @@
 <!ENTITY asf.rightclick.ff2.label "Automatic Save Folders högerklicksfunktion är inte tillgänglig i Firefox 2. Om du vill använda filtren vid nerladdningar via snabbmenyobjektet &quot;Spara länk som&quot;, måste du uppdatera Firefox till version 3.0 eller högre (version 3.5 eller högre rekommenderas).">
 <!ENTITY asf.rightclick.DSort.label "Tillägget Download Sort har upptäckts. &NL;Automatic Save Folders högerklicksfunktion kommer inte att fungera förrän du inaktiverar Download Sort i Tilläggshanteraren.">
 
+<!ENTITY asf.options.folderscreation.label "Folder's creation">
+<!ENTITY asf.variablemode.bool "Enable dynamic folder creation (See &quot;Help - Dynamic folders&quot; tab)">
+<!ENTITY asf.variablemode.tooltip1 "Låter dig redigera filtrens sparsökvägar manuellt och lägga till dynamiska variabler, t.ex. dagens datum eller filnamnet.">
+<!ENTITY asf.variablemode.tooltip2 "Obs: Om du är i privat surfning-läget kommer Firefox inte att skapa mappen om den inte redan finns. Den föreslagna mappen blir istället den senast använda i normalläget (icke-privat surfning).">
+<!ENTITY asf.findNearestParent.bool "If no filter is found, use the parent folder if the last saved folder doesn't exist anymore.">
+<!ENTITY asf.findNearestParent.tooltip1 "Prevents the creation of empty folders. This option is used only if no filter is found, if a filter is found then the save folder is created based on the filter's data.">
+
 <!ENTITY asf.options.groupbox5.label "Grafiskt gränssnitt">
 <!ENTITY asf.pathlist_defaultforceontop.bool "I rullgardinsmenyer, visa standardsparsökvägen först.">
 <!ENTITY asf.pathlist_alphasort.bool "Sortera sparsökvägslistan alfabetiskt.">
@@ -146,17 +153,13 @@
 <!ENTITY asf.export.defaultfolder.label "Standardmapp för exporterad data (valfritt):">
 <!ENTITY asf.export.showbutton.bool "Lägg till en datahanteringsknapp i filterfliken.">
 
-<!-- Dynamics tab-->
-<!ENTITY asf.dynamics.label "Dynamiska mappar">
-<!ENTITY asf.variablemode.bool "Aktivera">
-<!ENTITY asf.variablemode.tooltip1 "Låter dig redigera filtrens sparsökvägar manuellt och lägga till dynamiska variabler, t.ex. dagens datum eller filnamnet.">
-<!ENTITY asf.variablemode.tooltip2 "Obs: Om du är i privat surfning-läget kommer Firefox inte att skapa mappen om den inte redan finns. Den föreslagna mappen blir istället den senast använda i normalläget (icke-privat surfning).">
-<!ENTITY asf.variablemode.label "Obs: Taggar är skiftlägeskänsliga (skiljer på versaler och gemener).">
-<!ENTITY asf.variables.label "Tagglista :">
-
 <!-- help tab-->
 <!ENTITY asf.help.label "  Hjälp  ">
 <!ENTITY asf.help.title "Hjälp">
+
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Dynamiska mappar">
+<!ENTITY asf.variables.label "Tagglista :">
 
 <!-- About tab-->
 <!ENTITY asf.about.label "Om...">

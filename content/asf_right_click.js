@@ -170,6 +170,7 @@ var automatic_save_folder = {
 			var keeptemp = 			prefManager.getBoolPref("extensions.asf.keeptemp");
 			var tempdomain = 		this.loadUnicodeString("extensions.asf.tempdomain");
 			var variable_mode = 	prefManager.getBoolPref("extensions.asf.variablemode");
+			var findNearestParent = prefManager.getBoolPref("extensions.asf.findNearestParent");
 			
 			// If variable/Dynamic folders mode is ON, let's check the variables and replace to create the new defaultfolder
 			if (variable_mode == true) 
@@ -320,6 +321,7 @@ var automatic_save_folder = {
 						var file = gDownloadLastDir.getFile(this.current_uri);
 						if (file != null) lastpath = file.path;
 					}
+					if (findNearestParent) lastpath = this.find_nearestParent(lastpath);
 					this.set_savepath(lastpath);
 				}
 			}
@@ -416,6 +418,19 @@ var automatic_save_folder = {
 		str.data = pref_data;
 		this.prefManager.setComplexValue(pref_place, Components.interfaces.nsISupportsString, str);
 	},	
+	
+	
+	find_nearestParent: function(path) {
+	
+		/* test if the path exists. If it doesn't exist then returns first existing parent. */
+		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		directory.initWithPath(path);
+		while (!directory.exists() && directory.parent != null)
+		{
+			directory = directory.parent;
+		}
+		return directory.path;
+	},
 	
 	
 	createfolder: function (aFpP, path, idx) {
@@ -657,13 +672,16 @@ var automatic_save_folder = {
 			asf_domain = asf_domain.replace(/[\/\:\*\?\"\<\>\|]/g,'');
 			asf_filename = asf_filename.replace(/[\/\:\*\?\"\<\>\|]/g,'');
 			file_name = file_name.replace(/[\/\:\*\?\"\<\>\|]/g,'');
-			path = path.replace(/[\/\*\?\"\<\>\|]/g,'');
+			path = path.replace(/\//g,'\\'); // if the user captured subdomains, then replace them with windows' sub-folders
+			path = path.replace(/[\*\?\"\<\>\|]/g,'');
 		}
 		else  // MacOS and linux, replace only  / :
 		{
 			asf_domain = asf_domain.replace(/[\/\:]/g,'');
 			asf_filename = asf_filename.replace(/[\/\:]/g,'');
 			file_name = file_name.replace(/[\/\:]/g,'');
+			
+			// Do I need to replace subdomains "/" by sub-folders ":" for Mac?
 		}
 		
 		// replace the string here		// Year

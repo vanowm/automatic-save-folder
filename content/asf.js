@@ -1,6 +1,6 @@
 ﻿/* ***** BEGIN LICENSE BLOCK *****
 Automatic Save Folder
-Copyright (C) 2007-2011 Éric Cassar (Cyan).
+Copyright (C) 2007-2012 Éric Cassar (Cyan).
 
     "Automatic Save Folder" is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -246,6 +246,13 @@ var automatic_save_folder = {
 			var currentDomain = document.getElementById("asf-currentDL-currentDomain").value;
 			var currentURL = document.getElementById("asf-currentDL-currentURL").value;
 			
+			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+			var mainWindow = wm.getMostRecentWindow("navigator:browser");
+			var tabURL = mainWindow.gURLBar.value;
+			var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
+
+			
 			var treename = "asf-filterList";
 			var tree = document.getElementById(treename);
 			var maxidx = tree.view.rowCount;
@@ -287,6 +294,12 @@ var automatic_save_folder = {
 							break;
 						case "5":
 							dom_regexp = this.test_regexp(dom, currentURL, idx, "domain");
+							break;
+						case "6":
+							dom_regexp = this.test_regexp(dom, currentReferrer, idx, "domain");
+							break;
+						case "7":
+							dom_regexp = this.test_regexp(dom, tabURL, idx, "domain");
 						default:
 					}
 					
@@ -622,7 +635,6 @@ var automatic_save_folder = {
 		// Use this system for tab, because css for tab is not the same color as config window color, and I don't want to force any color by default so user can use new firefox theme's colors.
 		document.getElementById("asf-tab-filters").hidden = true;
 		document.getElementById("asf-tab-options").hidden = true;
-		document.getElementById("asf-tab-dynamics").hidden = true;
 		document.getElementById("asf-tab-help").hidden = true;
 		document.getElementById("asf-tab-about").hidden = true;
 		
@@ -1786,6 +1798,7 @@ var automatic_save_folder = {
 		this.prefManager.setBoolPref("extensions.asf.viewpathselect", document.getElementById("asf-viewpathselect").checked);
 		this.prefManager.setBoolPref("extensions.asf.rightclicktimeout", document.getElementById("asf-rightclicktimeout").checked);
 		this.prefManager.setBoolPref("extensions.asf.dialogacceptFiltered", document.getElementById("asf-dialogacceptFiltered").checked);
+		this.prefManager.setBoolPref("extensions.asf.dialogForceRadio", document.getElementById("asf-dialogForceRadio_Start").checked);
 		this.prefManager.setBoolPref("extensions.asf.useSiteBySiteSavePath", document.getElementById("asf-useSiteBySiteSavePath").checked);
 		this.prefManager.setBoolPref("extensions.asf.useDownloadDirFiltered", document.getElementById("asf-useDownloadDirFiltered").checked);
 		

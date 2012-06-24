@@ -26,9 +26,16 @@
 <!ENTITY about.version.105 "+ Ajout de deux nouveaux types de domaine lors du filtrage : URL du referrer et contenu de la barre d'URL.
 + Ajout d'une alerte si une erreur de filtre est détectée lors de l'enregistrement.
 + L'explorateur de fichier est désormais activé au cas par cas lors de l'enregistrement.
++ Ajout d'un menu d'option pour la création des dossiers.
++ Ajout d'une option permettant de choisir entre la création d'un nouveau dossier ou la sélection du premier dossier parent existant.
 * Pour plus de clarté, l'option permettant de choisir si l'explorateur de fichier doit s'afficher est maintenant rédigé de la même façon que dans les options de Firefox.
+* Amélioration de la détection des propositions de dossier afin d'éviter les doublons.
+* La liste des tags dynamiques est désormais située dans l'onglet Aide.
+* L'option de filtrage des domaines est désormais 1,5 lors de la première installation afin de refléter l'option par défaut si la case est vide. (Merci à V@no)
+* Lors d'une capture d'URL, les slashs sont désormais remplacés par des anti-slashs afin de transformer les sous-domaines en dossiers. (Windows seulement)
 ! Correction de l'affichage des propositions de dossiers lorsque le dossier de sauvegarde est forcé sur l'option Bureau ou Téléchargement.
-! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.">
+! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.
+! Correction de la mémorisation de l'option &quot;Forcer le choix sur...&quot;".>
 
 <!ENTITY about.version.104 "* Vérification des dossiers proposés sur la fenêtre d'enregistrement afin d'éviter les doublons.
 ! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.">

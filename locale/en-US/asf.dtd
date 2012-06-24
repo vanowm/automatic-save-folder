@@ -114,6 +114,13 @@
 <!ENTITY asf.rightclick.ff2.label "The Automatic Save Folder's right-click feature is not available on Firefox 2. If you want to use the filters on your downloads using the right-click menu &quot;Save link as&quot;, you should update your Firefox version to 3.0 minimum (recommended version 3.5 or more).">
 <!ENTITY asf.rightclick.DSort.label "Download sort extension has been detected. &NL;Automatic Save Folder's right-click feature will not work until you disable Download Sort in your Extension manager.">
 
+<!ENTITY asf.options.folderscreation.label "Folder's creation">
+<!ENTITY asf.variablemode.bool "Enable dynamic folder creation (See &quot;Help - Dynamic folders&quot; tab)">
+<!ENTITY asf.variablemode.tooltip1 "Allows you to edit the filter's saving path manually and add dynamic variables, like the date of the day or the file's name.">
+<!ENTITY asf.variablemode.tooltip2 "Attention: If you are in private browsing mode, Firefox will not create the folder if it doesn't exist yet. The suggested folder will be the last used in non private browsing.">
+<!ENTITY asf.findNearestParent.bool "If no filter is found, use the parent folder if the last saved folder doesn't exist anymore.">
+<!ENTITY asf.findNearestParent.tooltip1 "Prevents the creation of empty folders. This option is used only if no filter is found, if a filter is found then the save folder is created based on the filter's data.">
+
 <!ENTITY asf.options.groupbox5.label "Graphical interface">
 <!ENTITY asf.pathlist_defaultforceontop.bool "On drop-down menus, shows the default save path first.">
 <!ENTITY asf.pathlist_alphasort.bool "Sort save paths list alphabetically.">
@@ -146,17 +153,13 @@
 <!ENTITY asf.export.defaultfolder.label "Default folder for exported data (optional):">
 <!ENTITY asf.export.showbutton.bool "Add a data management button on the filter's tab.">
 
-<!-- Dynamics tab-->
-<!ENTITY asf.dynamics.label "Dynamic folders">
-<!ENTITY asf.variablemode.bool "Enable">
-<!ENTITY asf.variablemode.tooltip1 "Allow you to edit the filters saving path manually and add dynamic variables, like the date of the day or the file name.">
-<!ENTITY asf.variablemode.tooltip2 "Attention: If you are in private browsing mode, Firefox will not create the folder if it doesn't exist yet. The suggested folder will be the last used in non private browsing.">
-<!ENTITY asf.variablemode.label "Attention : Uppercase and lowercase tags are different.">
-<!ENTITY asf.variables.label "Tags list :">
-
 <!-- help tab-->
 <!ENTITY asf.help.label "  Help  ">
 <!ENTITY asf.help.title "Help">
+
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Dynamic folders">
+<!ENTITY asf.variables.label "Tags list :">
 
 <!-- About tab-->
 <!ENTITY asf.about.label "About...">

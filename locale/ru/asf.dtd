@@ -114,6 +114,13 @@
 <!ENTITY asf.rightclick.ff2.label "Меню Automatic Save Folder по правой кнопке мыши не доступно для Firefox 2. Если вы хотите иметь возможность использовать фильтры для меню правой кнопки мыши &quot;Сохранить ссылку как...&quot;, вы должны обновить Firefox до версии 3.0 (рекомендуемая версия 3.5 или выше).">
 <!ENTITY asf.rightclick.DSort.label "Обнаружено дополнение &quot;Download sort&quot;. &NL;Меню Automatic Save Folder по правой кнопке мыши не будет доступно пока вы не отключите &quot;Download Sort&quot; в списке дополнений.">
 
+<!ENTITY asf.options.folderscreation.label "Folder's creation">
+<!ENTITY asf.variablemode.bool "Enable dynamic folder creation (See &quot;Help - Dynamic folders&quot; tab)">
+<!ENTITY asf.variablemode.tooltip1 "Позволяет вам редактировать вручную пути сохранения и добавлять динамические переменные, такие как дата и имя файла.">
+<!ENTITY asf.variablemode.tooltip2 "Внимание: Если вы находитесь в режиме приватного просмотра, Firefox не сможет создать папку если она не существует. Будет предложена последняя папка использованная до включения режима приватного просмотра.">
+<!ENTITY asf.findNearestParent.bool "If no filter is found, use the parent folder if the last saved folder doesn't exist anymore.">
+<!ENTITY asf.findNearestParent.tooltip1 "Prevents the creation of empty folders. This option is used only if no filter is found, if a filter is found then the save folder is created based on the filter's data.">
+
 <!ENTITY asf.options.groupbox5.label "Графический интерфейс">
 <!ENTITY asf.pathlist_defaultforceontop.bool "Первым показывать путь для сохранения по умолчанию.">
 <!ENTITY asf.pathlist_alphasort.bool "Алфавитная сортировка списков.">
@@ -146,17 +153,13 @@
 <!ENTITY asf.export.defaultfolder.label "Default folder for exported data (optional):">
 <!ENTITY asf.export.showbutton.bool "Add a data management button on the filter's tab.">
 
-<!-- Dynamics tab-->
-<!ENTITY asf.dynamics.label "Динамические папки">
-<!ENTITY asf.variablemode.bool "Включить">
-<!ENTITY asf.variablemode.tooltip1 "Позволяет вам редактировать вручную пути сохранения и добавлять динамические переменные, такие как дата и имя файла.">
-<!ENTITY asf.variablemode.tooltip2 "Внимание: Если вы находитесь в режиме приватного просмотра, Firefox не сможет создать папку если она не существует. Будет предложена последняя папка использованная до включения режима приватного просмотра.">
-<!ENTITY asf.variablemode.label "Внимание: Теги с большими и маленькими буквами различаются.">
-<!ENTITY asf.variables.label "Список тегов:">
-
 <!-- help tab-->
 <!ENTITY asf.help.label "  Помощь  ">
 <!ENTITY asf.help.title "Помощь">
+
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Динамические папки">
+<!ENTITY asf.variables.label "Список тегов:">
 
 <!-- About tab-->
 <!ENTITY asf.about.label "О дополнении...">

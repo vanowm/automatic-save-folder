@@ -114,6 +114,13 @@
 <!ENTITY asf.rightclick.ff2.label "La fonction clic-droit d'automatic save folder n'est pas compatible avec Firefox 2. Si vous souhaitez utiliser les filtres sur les téléchargements en utilisant le menu clic-droit &quot;Enregistrer la cible du lien sous...&quot;, vous devrez utiliser au minimum Firefox version 3.0 (Version 3.5 ou plus conseillée).">
 <!ENTITY asf.rightclick.DSort.label "L'extension Download Sort à été détectée. &NL;La fonction clic-droit d'Automatic Save Folder est temporairement indisponible. Désactivez l'extension Download Sort dans le menu &quot;Outils/Modules complémentaires...&quot; afin de pouvoir utiliser le clic-droit avec Automatic Save Folder.">
 
+<!ENTITY asf.options.folderscreation.label "Création des dossiers">
+<!ENTITY asf.variablemode.bool "Activer la création dynamique des chemin d'enregistrement (Voir l'onglet &quot;Aide - Dossiers dynamiques&quot;)">
+<!ENTITY asf.variablemode.tooltip1 "Permet d'éditer manuellement le chemin d'enregistrement des filtres et d'ajouter des variables dynamiques, comme la date du jour ou le domaine d'hébergement.">
+<!ENTITY asf.variablemode.tooltip2 "Attention : Lorsque vous utilisez la navigation privée, Firefox ne vous proposera pas les dossiers inexistant. Le dernier dossier utilisé en mode non privé sera proposé à la place.">
+<!ENTITY asf.findNearestParent.bool "Lorsqu'aucun filtre n'est trouvé, utiliser le dossier parent si le dossier précédent n'existe plus.">
+<!ENTITY asf.findNearestParent.tooltip1 "Empêche la création d'un nouveau dossier vide. Cette option est utilisée uniquement si aucun filtre n'est trouvé, dans le cas contraire le dossier d'enregistrement est créé en ce basant sur les données du filtre.">
+
 <!ENTITY asf.options.groupbox5.label "Interface graphique">
 <!ENTITY asf.pathlist_defaultforceontop.bool "Dans les menus déroulants, afficher en premier le chemin d'enregistrement par défaut.">
 <!ENTITY asf.pathlist_alphasort.bool "Trier la liste des chemins d'enregistrement par ordre alphabétique.">
@@ -146,17 +153,13 @@
 <!ENTITY asf.export.defaultfolder.label "Dossier par défaut pour les données exportées (facultatif) :">
 <!ENTITY asf.export.showbutton.bool "Ajouter un boutton de gestion des données sur l'onglet des filtres.">
 
-<!-- Dynamics tab-->
-<!ENTITY asf.dynamics.label "Dossiers dynamiques">
-<!ENTITY asf.variablemode.bool "Activer">
-<!ENTITY asf.variablemode.tooltip1 "Permet d'éditer manuellement le chemin d'enregistrement des filtres et d'ajouter des variables dynamiques, comme la date du jour ou le domaine d'hébergement.">
-<!ENTITY asf.variablemode.tooltip2 "Attention : Lorsque vous utilisez la navigation privée, Firefox ne vous proposera pas les dossiers inexistant. Le dernier dossier utilisé en mode non privé sera proposé à la place.">
-<!ENTITY asf.variablemode.label "Attention : Les majuscules et les minuscules correspondent à des balises différentes.">
-<!ENTITY asf.variables.label "Liste des balises :">
-
 <!-- Help tab-->
 <!ENTITY asf.help.label "  Aide  ">
 <!ENTITY asf.help.title "Aide">
+
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Dossiers dynamiques">
+<!ENTITY asf.variables.label "Liste des balises :">
 
 <!-- About tab-->
 <!ENTITY asf.about.label "À propos...">

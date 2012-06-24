@@ -22,7 +22,7 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
  pref("extensions.asf.userightclick", true);
  pref("extensions.asf.rightclicktimeout", true);
  pref("browser.download.saveLinkAsFilenameTimeout", 0); // set the default value to userpref.js to prevent main pref.js modification and restore default value on ASF uninstall.
- pref("extensions.asf.domainTestOrder", "1");
+ pref("extensions.asf.domainTestOrder", "1,5");
  pref("extensions.asf.regexp_caseinsensitive", true);
  pref("extensions.asf.pathlist_defaultforceontop", false);
  pref("extensions.asf.pathlist_alphasort", true);
@@ -36,3 +36,4 @@ pref("extensions.asf@mangaheart.org.description", "chrome://asf/locale/asf.prope
  pref("extensions.asf.useSiteBySiteSavePath", false); // new feature since Firefox 7.0.1
  pref("extensions.asf.useDownloadDir", false);
  pref("extensions.asf.useDownloadDirFiltered", false);
+ pref("extensions.asf.findNearestParent", true);

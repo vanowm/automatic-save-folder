@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ***** BEGIN LICENSE BLOCK *****
-	Copyright 2007-2011 Éric Cassar (Cyan)
+	Copyright 2007-2012 Éric Cassar (Cyan)
 
     This file is part of "Automatic Save Folder".
     You may find the license in the LICENSE file
@@ -56,6 +56,7 @@
 		<preference id="asf_showExportButton" name="extensions.asf.showExportButton" type="bool"/>
 		<preference id="asf_suggestAllPossibleFolders" name="extensions.asf.suggestAllPossibleFolders" type="bool"/>
 		<preference id="asf_useSiteBySiteSavePath" name="extensions.asf.useSiteBySiteSavePath" type="bool"/>
+		<preference id="asf_findNearestParent" name="extensions.asf.findNearestParent" type="bool"/>
 	</preferences>
 	<menupopup id="contextpopup">
 		<menuitem label="&asf.top.popup;" oncommand="automatic_save_folder.move('top');"/>
@@ -101,17 +102,16 @@
 		<label>&#10;&asf.domainTestOrder.tooltip7;</label>
 	</tooltip>
 	<tooltip id="tooltip_suggestAllPossibleFolders" label="&asf.suggestAllPossibleFolders.tooltip;" noautohide="true" />
+	<tooltip id="tooltip_findNearestParent" label="&asf.findNearestParent.tooltip1;" noautohide="true" />
 	<vbox>
 		<tabbox>
 			<tabs>
 				<tab id="asf-filterstab" style="-moz-appearance: none" orient="vertical" selected="true" label="&asf.filters.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-filters');" />
 				<tab id="asf-optionstab" style="-moz-appearance: none" orient="vertical"                 label="&asf.options.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-options');" />
-				<tab id="asf-dynamicstab" style="-moz-appearance: none" orient="vertical"                 label="&asf.dynamics.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-dynamics');" />
 				<tab id="asf-helptab" style="-moz-appearance: none" orient="vertical"            label="&asf.help.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-help');" />
 				<tab id="asf-abouttab" style="-moz-appearance: none" orient="vertical"            label="&asf.about.label;" oncommand="automatic_save_folder.asf_selecttab('asf-tab-about');" />
 			</tabs>
 			<tabpanels hidden="true">
-				<tabpanel />
 				<tabpanel />
 				<tabpanel />
 				<tabpanel />
@@ -263,6 +263,11 @@
 								</hbox>
 								<checkbox id="asf-regexp_caseinsensitive" preference="asf_regexp_caseinsensitive" label="&asf.regexp_caseinsensitive.bool;"/>
 							</groupbox>
+							<groupbox><caption label="&asf.options.folderscreation.label;" />
+								<separator class="thin"/>
+								<checkbox id="asf-variablemode" preference="asf_variablemode" label="&asf.variablemode.bool;" tooltip="tooltip_variablemode" oncommand="automatic_save_folder.asf_variablemode()"/>
+								<checkbox id="asf-findNearestParent" preference="asf_findNearestParent" label="&asf.findNearestParent.bool;" tooltip="tooltip_findNearestParent" />
+							</groupbox>
 							<groupbox><caption label="&asf.options.groupbox5.label;" />
 								<checkbox id="asf-pathlist_defaultforceontop" preference="asf_pathlist_defaultforceontop" label="&asf.pathlist_defaultforceontop.bool;"/>
 								<checkbox id="asf-pathlist_alphasort" preference="asf_pathlist_alphasort" label="&asf.pathlist_alphasort.bool;"/>
@@ -330,36 +335,37 @@
 				</tabpanels>
 			</tabbox>
 	</vbox>
-	<vbox id="asf-tab-dynamics" hidden="true" flex="1000">
-		<groupbox id="asf-dynamics" flex="1">
-			<caption label="&asf.dynamics.label;"/>
-			<separator class="thin"/>
-			<checkbox id="asf-variablemode" preference="asf_variablemode" label="&asf.variablemode.bool;" tooltip="tooltip_variablemode" oncommand="automatic_save_folder.asf_variablemode()"/>
-			<description id="asf-variablemodedesc" style="vertical-align:top;margin-left:25px;white-space:pre-wrap" >&asf.variablemode.label;</description>
-			<separator class="thin"/>
-			<hbox flex="1">
-				<groupbox flex="1" style="padding:0px !important;">
-					<caption label="&asf.variables.label;"/>
-					<iframe flex="1" id="iframe_tab" class="plain" style="padding:0px !important; background-color:transparent; min-height:120px;"
-					src="chrome://asf/content/help/variables.xhtml"
-					/>
-				</groupbox>
-			</hbox>
-		</groupbox>
-	</vbox>
 	<vbox id="asf-tab-help" hidden="true" flex="1000" >
-		<groupbox id="asf-help" flex="1" >
-			<caption label="&asf.help.title;"/>
-			<iframe flex="1" id="iframe_info" class="plain" style="background-color:#FFFFFF; min-height:305px;"
-					width="580"
-					src="chrome://asf/content/help/help.xhtml"
-			/>
-		</groupbox>
+		<separator class="thin"/>
+		<tabbox>
+			<tabs>
+				<tab id="asf-helpsubtab-page1" label="&asf.help.label;"  />
+				<tab id="asf-helpsubtab-page2" label="&asf.dynamics.label;"  />
+			</tabs>
+			<tabpanels>
+				<tabpanel>
+
+						<iframe flex="1" id="iframe_help" class="plain" style="background-color:#FFFFFF; min-height:305px;"
+								width="580"
+								src="chrome://asf/content/help/help.xhtml"
+						/>
+
+				</tabpanel>
+				<tabpanel>
+
+						<iframe flex="1" id="iframe_dynamic" class="plain" style="background-color:#FFFFFF; min-height:305px;"
+								width="580"
+								src="chrome://asf/content/help/variables.xhtml"
+						/>
+		
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
 	</vbox>
 	<vbox id="asf-tab-about" hidden="true" flex="1000" >
 		<groupbox id="asf-about" flex="1" >
 			<caption label="&asf.about.title;"/>
-			<iframe flex="1" id="iframe_info" class="plain" style="background-color:#FFFFFF; min-height:305px;"
+			<iframe flex="1" id="iframe_about" class="plain" style="background-color:#FFFFFF; min-height:305px;"
 					width="580"
 					src="chrome://asf/content/help/about.xhtml"
 			/>

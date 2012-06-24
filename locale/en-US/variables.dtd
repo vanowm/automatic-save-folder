@@ -1,4 +1,9 @@
 ﻿<!-- browser and save dialog-->
+
+<!ENTITY presentation1 "You can insert dynamic variables in your filter's save path, such as the date of the day, the website name, etc.">
+<!ENTITY presentation2 "You need to enable dynamic folder creation in the option's tab to allow manual edition of the save paths.">
+<!ENTITY casesensitivity "Attention : Uppercase and lowercase are different tags.">
+
 <!ENTITY Year "Year">
 
 <!ENTITY Month "Month">

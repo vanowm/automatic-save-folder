@@ -1,4 +1,9 @@
 ﻿<!-- browser and save dialog-->
+
+<!ENTITY presentation1 "Vous pouvez insérer des variables dynamiques dans le chemin d'enregistrement de vos filtres, tel que la date du jour, le nom du site, etc.">
+<!ENTITY presentation2 "Vous devez activer l'option de création dynamique dans l'onglet des options afin de pouvoir éditer les chemins d'enregistrement manuellement.">
+<!ENTITY casesensitivity "Attention : Les majuscules et les minuscules correspondent à des balises différentes.">
+
 <!ENTITY Year "Année">
 
 <!ENTITY Month "Mois">

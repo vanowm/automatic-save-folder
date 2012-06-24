@@ -26,9 +26,16 @@
 <!ENTITY about.version.105 "+ Added two new Domain Type while filtering: Referrer URL and URL bar content.
 + Added an alert if a filter creation error is detected when downloading.
 + The file explorer is now activated on a case-by-case basis when downloading.
++ Added a new option menu for folder creation.
++ Added a new option to choose whether to create a new folder or use the first working parent folder.
 * For better clarity, the option to select whether the file explorer should be displayed is now written like in Firefox's options.
+* Improve path suggestion detection to prevent multiple entries with the same path.
+* The dynamic tag list is now located in the Help tab.
+* The default value for the domain filtering is now 1,5 on a new installation to reflect the default value when the input field is empty. (Thanks to V@no)
+* When capturing an URL, the slashes are now replaced by anti-slashes to convert sub-domains in folders. (Windows only)
 ! Fixed the suggested folder's display if the saved folder is forced to Desktop or Download.
-! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.">
+! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.
+! Fixed memorized state of &quot;Force the radio choice to...&quot; option.">
 
 <!ENTITY about.version.104 "* Prevent duplicated suggested folders on the save window.
 ! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.">

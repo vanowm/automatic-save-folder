@@ -114,6 +114,13 @@
 <!ENTITY asf.rightclick.ff2.label "Vlastnosti pro pravé tlačítko nejsou dostupné ve Firefoxu 2. Chcete-li používat filtry pro stahování pomocí „Uložit odkaz jako“ v nabídce vyvolané pravým tlačítkem, je nutné aktualizovat Firefox alespoň na verzi 3.0 (doporučena je verze 3.5 a novější).">
 <!ENTITY asf.rightclick.DSort.label "Bylo zjištěno rozšíření Download Sort.&NL;Vlastnosti pro pravé tlačítko rozšíření Automaticky uložit do složky nebudou fungovat, dokud nebude rozšíření Download Sort ve Správci rozšíření vypnuto.">
 
+<!ENTITY asf.options.folderscreation.label "Folder's creation">
+<!ENTITY asf.variablemode.bool "Enable dynamic folder creation (See &quot;Help - Dynamic folders&quot; tab)">
+<!ENTITY asf.variablemode.tooltip1 "Umožní upravovat filtry pro ukládání cest ručně s pomocí dynamických proměnných jako datum nebo název souboru.">
+<!ENTITY asf.variablemode.tooltip2 "Upozornění: Používá-li se režim Anonymního prohlížení, Firefox nevytváří složky, pokud neexistují. Navržena bude proto složka naposledy použitá v neanonymním prohlížení.">
+<!ENTITY asf.findNearestParent.bool "If no filter is found, use the parent folder if the last saved folder doesn't exist anymore.">
+<!ENTITY asf.findNearestParent.tooltip1 "Prevents the creation of empty folders. This option is used only if no filter is found, if a filter is found then the save folder is created based on the filter's data.">
+
 <!ENTITY asf.options.groupbox5.label "Grafické rozhraní">
 <!ENTITY asf.pathlist_defaultforceontop.bool "V rozbalovacích nabídkách zobrazovat nejdříve výchozí cestu pro uložení.">
 <!ENTITY asf.pathlist_alphasort.bool "Řadit seznam cest pro uložení abecedně.">
@@ -146,17 +153,13 @@
 <!ENTITY asf.export.defaultfolder.label "Výchozí složka pro exportovaná data (volitelné):">
 <!ENTITY asf.export.showbutton.bool "Přidat tlačítko pro správu dat na panel s filtry.">
 
-<!-- Dynamics tab-->
-<!ENTITY asf.dynamics.label "Dynamické složky">
-<!ENTITY asf.variablemode.bool "Povolit">
-<!ENTITY asf.variablemode.tooltip1 "Umožní upravovat filtry pro ukládání cest ručně s pomocí dynamických proměnných jako datum nebo název souboru.">
-<!ENTITY asf.variablemode.tooltip2 "Upozornění: Používá-li se režim Anonymního prohlížení, Firefox nevytváří složky, pokud neexistují. Navržena bude proto složka naposledy použitá v neanonymním prohlížení.">
-<!ENTITY asf.variablemode.label "Upozornění: U značek se rozlišuje velikost písmen.">
-<!ENTITY asf.variables.label "Seznam značek:">
-
 <!-- help tab-->
 <!ENTITY asf.help.label "Nápověda">
 <!ENTITY asf.help.title "Nápověda">
+
+<!-- Dynamics tab-->
+<!ENTITY asf.dynamics.label "Dynamické složky">
+<!ENTITY asf.variables.label "Seznam značek:">
 
 <!-- About tab-->
 <!ENTITY asf.about.label "O rozšíření…">
