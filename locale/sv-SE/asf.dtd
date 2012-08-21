@@ -101,6 +101,7 @@
 <!ENTITY asf.domainTestOrder.tooltip7 "För mer information kan du se vilka värden som hör ihop med vilka poster i Felkonsolen när du laddar ner en fil.">
 <!ENTITY asf.domainTestOrder.tooltip8 "Active page's referrer URL">
 <!ENTITY asf.domainTestOrder.tooltip9 "Content of the active tab's URL">
+<!ENTITY asf.domainTestOrder.tooltip10 "TabGroup's name">
 <!ENTITY asf.regexp_caseinsensitive.bool "Filtren är inte skiftlägeskänsliga.">
 
 <!ENTITY asf.options.groupbox4.label "Högerklick">

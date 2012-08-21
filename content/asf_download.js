@@ -31,6 +31,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		systemslash: "",
 		logtoconsole: true,
 		inPrivateBrowsing: false,
+		result: "", // print_r result
 		matching_filters: new Array(),
 		matching_folders: new Array(),
 		current_uri: "", // FF7.0.1 use a new per uri saved folder.
@@ -77,8 +78,9 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		// var tabLocation = currentTab.currentURI.spec;
 		var tabLocation = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
 		var tabURL = mainWindow.gURLBar.value;
+		var tabGroupName = this.getActiveGroupName();
 		var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
-		
+			
 		var filename = 			document.getElementById("location").value ;
 		
 		var domain = 			document.getElementById("source").value ;
@@ -111,7 +113,8 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 							"4 - Page's domain:\t"+currentDomain+"\n"+
 							"5 - Page's URL:\t\t"+currentURL+"\n"+
 							"6 - Page's referrer:\t"+currentReferrer+"\n"+
-							"7 - Tab's URL content:\t"+tabURL;
+							"7 - Tab's URL content:\t"+tabURL+"\n"+
+							"8 - Tab's group name:\t"+tabGroupName;
 		if (!this.inPrivateBrowsing) this.console_print(message);
 		// debug : show the full downloaded link  http://abc.xyz/def/file.ext
 		// Can use this new function to get free from the need of the download window.
@@ -215,6 +218,9 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 						case "7":
 							dom_regexp = this.test_regexp(filters[i][0], tabURL, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 7");
+						case "8":
+							dom_regexp = this.test_regexp(filters[i][0], tabGroupName, i, "domain");
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 8");
 						default:
 					}
 					
@@ -1230,6 +1236,36 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 	},
 
 
+	// get TabGroup name, from https://hg.mozilla.org/mozilla-central/rev/b284e10652d3
+	getActiveGroupName: function () {
+
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+		var mainWindow = wm.getMostRecentWindow("navigator:browser");
+		
+		// We get the active group this way, instead of querying
+		// GroupItems.getActiveGroupItem() because the tabSelect event
+		// will not have happened by the time the browser tries to
+		// update the title.
+		let groupItem = null;
+		let activeTab = mainWindow.gBrowser.selectedTab;
+		let activeTabItem = activeTab._tabViewTabItem;
+		
+		if (activeTab.pinned)
+		{
+			// It's an app tab, so it won't have a .tabItem.
+			groupItem = null;
+		} 
+		else if (activeTabItem)
+		{
+			groupItem = activeTabItem.parent;
+		}
+		
+		// groupItem may still be null, if the active tab is an orphan.
+		return groupItem ? groupItem.getTitle() : "";
+	},
+
+
 	DownThemAll_isEnabled: function() {
 		// Check for DTA add-on, if enabled return true. 
 		
@@ -1404,6 +1440,28 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 			return string + this.systemslash;
 		}
 		return string;
+	},
+
+
+	print_r: function (Obj) {
+		if(Obj.constructor == Array || Obj.constructor == Object)
+		{
+			for(var p in Obj)
+			{
+				if(Obj[p].constructor == Array|| Obj[p].constructor == Object)
+				{
+					this.result = this.result + "<li>["+p+"] =>"+typeof(Obj)+"</li>";
+					this.result = this.result + "<ul>";
+					this.print_r(Obj[p]);
+					this.result = this.result + "</ul>";
+				}
+				else 
+				{
+					this.result = this.result + "<li>["+p+"] =>"+Obj[p]+"</li>";
+				}
+			}
+		}
+		return this.result;
 	},
 
 

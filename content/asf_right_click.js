@@ -121,10 +121,11 @@ var automatic_save_folder = {
 			var mainWindow = wm.getMostRecentWindow("navigator:browser");
 			
 			var tabURL = mainWindow.gURLBar.value;
+			var tabGroupName = this.getActiveGroupName();
 			var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
 			
 			var tabLocation = 	mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
-			var currentDomain = tabLocation.protocol + "//" + tabLocation.host; // look for the current website URL in the DOM.
+			var currentDomain = tabLocation.protocol + "//" + tabLocation.host; // look for the current website domain in the DOM.
 			var currentURL = 	tabLocation.href; // look for the current website URL in the DOM.
 			var filename = aFpP.fileInfo.fileName; // filename or tab's name if no filename specified.
 			if (typeof(aFpP.fileInfo.uri.fileName) != "undefined") // if the download is from an URL
@@ -142,7 +143,9 @@ var automatic_save_folder = {
 				var fileURLAndFilename = domain+"/"+filename;
 			}
 			
-			if (this.firefoxversion >= 7.01) this.current_uri = domain.replace(/^.*:\/\//g,'');
+			//if (this.firefoxversion >= 7.01) this.current_uri = domain.replace(/^.*:\/\//g,'');
+			// Firefox's Right-click function seems to use the current website's domain and not current file URL's domain
+			if (this.firefoxversion >= 7.01) this.current_uri = currentDomain.replace(/^.*:\/\//g,''); 
 			
 			var domain_testOrder = prefManager.getCharPref("extensions.asf.domainTestOrder");
 			if (this.trim(domain_testOrder) == "") domain_testOrder = "1,5";
@@ -154,7 +157,8 @@ var automatic_save_folder = {
 							"4 - Page's domain:\t"+currentDomain+"\n"+
 							"5 - Page's URL:\t\t"+currentURL+"\n"+
 							"6 - Page's referrer:\t"+currentReferrer+"\n"+
-							"7 - Tab's URL content:\t"+tabURL;
+							"7 - Tab's URL content:\t"+tabURL+"\n"+
+							"8 - Tab's group name:\t"+tabGroupName;
 			if (!this.inPrivateBrowsing) this.console_print(message);
 			
 			
@@ -253,6 +257,9 @@ var automatic_save_folder = {
 						case "7":
 							dom_regexp = this.test_regexp(filters[i][0], tabURL, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 7");
+						case "8":
+							dom_regexp = this.test_regexp(filters[i][0], tabGroupName, i, "domain");
+							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 8");
 						default:
 					}
 					
@@ -827,6 +834,36 @@ var automatic_save_folder = {
 		{
 			this.firefoxversion = "2";
 		}
+	},
+	
+	
+	// get TabGroup name, from https://hg.mozilla.org/mozilla-central/rev/b284e10652d3
+	getActiveGroupName: function () {
+		
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+		var mainWindow = wm.getMostRecentWindow("navigator:browser");
+		
+		// We get the active group this way, instead of querying
+		// GroupItems.getActiveGroupItem() because the tabSelect event
+		// will not have happened by the time the browser tries to
+		// update the title.
+		let groupItem = null;
+		let activeTab = mainWindow.gBrowser.selectedTab;
+		let activeTabItem = activeTab._tabViewTabItem;
+		
+		if (activeTab.pinned)
+		{
+			// It's an app tab, so it won't have a .tabItem.
+			groupItem = null; // I didn't find how to get the Active Group's Name.
+		}
+		else if (activeTabItem)
+		{
+			groupItem = activeTabItem.parent;
+		}
+		
+		// groupItem may still be null, if the active tab is an orphan.
+		return groupItem ? groupItem.getTitle() : "";
 	},
 	
 	

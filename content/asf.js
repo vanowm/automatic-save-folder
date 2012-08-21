@@ -250,6 +250,7 @@ var automatic_save_folder = {
 						   .getService(Components.interfaces.nsIWindowMediator);
 			var mainWindow = wm.getMostRecentWindow("navigator:browser");
 			var tabURL = mainWindow.gURLBar.value;
+			var tabGroupName = this.getActiveGroupName();
 			var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
 
 			
@@ -300,6 +301,8 @@ var automatic_save_folder = {
 							break;
 						case "7":
 							dom_regexp = this.test_regexp(dom, tabURL, idx, "domain");
+						case "8":
+							dom_regexp = this.test_regexp(dom, tabGroupName, idx, "domain");
 						default:
 					}
 					
@@ -1653,6 +1656,36 @@ var automatic_save_folder = {
 			}
 			stream.close();
 		}
+	},
+
+
+	// get TabGroup name, from https://hg.mozilla.org/mozilla-central/rev/b284e10652d3
+	getActiveGroupName: function () {
+		
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+		var mainWindow = wm.getMostRecentWindow("navigator:browser");
+		
+		// We get the active group this way, instead of querying
+		// GroupItems.getActiveGroupItem() because the tabSelect event
+		// will not have happened by the time the browser tries to
+		// update the title.
+		let groupItem = null;
+		let activeTab = mainWindow.gBrowser.selectedTab;
+		let activeTabItem = activeTab._tabViewTabItem;
+		
+		if (activeTab.pinned)
+		{
+			// It's an app tab, so it won't have a .tabItem.
+			groupItem = null; // I didn't find how to get the Active Group's Name.
+		}
+		else if (activeTabItem)
+		{
+			groupItem = activeTabItem.parent;
+		}
+		
+		// groupItem may still be null, if the active tab is an orphan.
+		return groupItem ? groupItem.getTitle() : "";
 	},
 
 

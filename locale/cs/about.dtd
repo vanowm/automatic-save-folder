@@ -23,7 +23,7 @@
 <!ENTITY about.version.title "Verze">
 
 <!-- Keep the newline intact as it uses the < pre > tag, keep the 2 beginning spaces to create indentation -->
-<!ENTITY about.version.105 "+ Added two new Domain Type while filtering: Referrer URL and URL bar content.
+<!ENTITY about.version.105 "+ Added three new Domain Type while filtering: Referrer URL, URL bar content, and TabGroup's name (It doesn't work with pinned App Tabs).
 + Added an alert if a filter creation error is detected when downloading.
 + The file explorer is now activated on a case-by-case basis when downloading.
 + Added a new option menu for folder creation.
@@ -35,7 +35,8 @@
 * When capturing an URL, the slashes are now replaced by anti-slashes to convert sub-domains in folders. (Windows only)
 ! Fixed the suggested folder's display if the saved folder is forced to Desktop or Download.
 ! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.
-! Fixed memorized state of &quot;Force the radio choice to...&quot; option.">
+! Fixed memorized state of &quot;Force the radio choice to...&quot; option.
+! Fixed suggested save path when using right-click downloads with Firefox 7.0.1+">
 
 <!ENTITY about.version.104 "* Prevent duplicated suggested folders on the save window.
 ! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.">

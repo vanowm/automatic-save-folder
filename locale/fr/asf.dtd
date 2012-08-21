@@ -101,6 +101,7 @@
 <!ENTITY asf.domainTestOrder.tooltip7 "Pour plus de précisions, vous pouvez voir à quoi correspondent ces informations dans la Console d'erreurs lorsque vous téléchargez un fichier.">
 <!ENTITY asf.domainTestOrder.tooltip8 "URL du referrer de la page active">
 <!ENTITY asf.domainTestOrder.tooltip9 "Contenu du champs URL de l'onglet actif">
+<!ENTITY asf.domainTestOrder.tooltip10 "Nom du groupe d'onglets">
 <!ENTITY asf.regexp_caseinsensitive.bool "Les filtres sont insensibles à la casse.">
 
 <!ENTITY asf.options.groupbox4.label "Clic droit">

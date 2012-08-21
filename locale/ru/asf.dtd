@@ -101,6 +101,7 @@
 <!ENTITY asf.domainTestOrder.tooltip7 "For more informations, you can see to which values correspond each entry in the Error console when downloading a file.">
 <!ENTITY asf.domainTestOrder.tooltip8 "Active page's referrer URL">
 <!ENTITY asf.domainTestOrder.tooltip9 "Content of the active tab's URL">
+<!ENTITY asf.domainTestOrder.tooltip10 "TabGroup's name">
 <!ENTITY asf.regexp_caseinsensitive.bool "Учитывать регистр при обработке фильтров.">
 
 <!ENTITY asf.options.groupbox4.label "Правая кнопка мыши">

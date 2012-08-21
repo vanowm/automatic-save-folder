@@ -23,7 +23,7 @@
 <!ENTITY about.version.title "Version">
 
 <!-- Conserver les retours à la ligne car le tag < pre > est utilisé, gardez les deux espaces en début de ligne pour l'indentation -->
-<!ENTITY about.version.105 "+ Ajout de deux nouveaux types de domaine lors du filtrage : URL du referrer et contenu de la barre d'URL.
+<!ENTITY about.version.105 "+ Ajout de trois nouveaux types de domaine lors du filtrage : URL du referrer, contenu de la barre d'URL, et nom du groupe d'onglet (Ne fonctionne pas avec les onglets épinglés).
 + Ajout d'une alerte si une erreur de filtre est détectée lors de l'enregistrement.
 + L'explorateur de fichier est désormais activé au cas par cas lors de l'enregistrement.
 + Ajout d'un menu d'option pour la création des dossiers.
@@ -35,7 +35,8 @@
 * Lors d'une capture d'URL, les slashs sont désormais remplacés par des anti-slashs afin de transformer les sous-domaines en dossiers. (Windows seulement)
 ! Correction de l'affichage des propositions de dossiers lorsque le dossier de sauvegarde est forcé sur l'option Bureau ou Téléchargement.
 ! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.
-! Correction de la mémorisation de l'option &quot;Forcer le choix sur...&quot;".>
+! Correction de la mémorisation de l'option &quot;Forcer le choix sur...&quot;
+! Correction de la suggestion du dossier d'enregistrement lors d'un téléchargement utilisant clic-droit avec Firefox 7.0.1+".>
 
 <!ENTITY about.version.104 "* Vérification des dossiers proposés sur la fenêtre d'enregistrement afin d'éviter les doublons.
 ! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.">
