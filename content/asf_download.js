@@ -58,23 +58,31 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
 			}
 		}
+
+		// Check if there is any filter in list
+		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
+		
+		// Load Window and tab elements from the current active browser.
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+		var mainWindow = wm.getMostRecentWindow("navigator:browser");
+		var currentTab = mainWindow.gBrowser.getBrowserAtIndex(mainWindow.gBrowser.tabContainer.selectedIndex);
 		
 		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
 		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)
 		{
 			Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
+			
+			// since 2012-07-21, it uses a per-window privacy status instead of global service. (https://bugzilla.mozilla.org/show_bug.cgi?id=722995 ; https://hg.mozilla.org/mozilla-central/rev/03cd2ad254cc)
+			if (typeof(gDownloadLastDir) != "object")
+			{
+				var downloadModule = {};
+				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm", downloadModule);
+				gDownloadLastDir = new downloadModule.DownloadLastDir(mainWindow); // Load gDownloadLastDir for the active window 
+			}
 		}
 		
-		// Check if there is any filter in list
-		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
-		
-		
-		// load the domain and the filename of the saved file (copy the data from the firefox saving window and from the last active tab)
-		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-						   .getService(Components.interfaces.nsIWindowMediator);
-		var mainWindow = wm.getMostRecentWindow("navigator:browser");
-		
-		var currentTab = mainWindow.gBrowser.getBrowserAtIndex(mainWindow.gBrowser.tabContainer.selectedIndex);
+		/* load the domain and the filename of the saved file (copy the data from the firefox saving window and from the last active tab) */	
 		// var tabLocation = currentTab.currentURI.spec;
 		var tabLocation = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
 		var tabURL = mainWindow.gURLBar.value;
@@ -386,6 +394,17 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too		
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);		
 		
+		// since 2012-07-21 gDownloadLastDir uses a per-window privacy status instead of global service.
+		if (typeof(gDownloadLastDir) != "object")
+		{
+			var downloadModule = {};
+			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+							   .getService(Components.interfaces.nsIWindowMediator);
+			var mainWindow = wm.getMostRecentWindow("navigator:browser");
+			Components.utils.import("resource://gre/modules/DownloadLastDir.jsm", downloadModule);
+			gDownloadLastDir = new downloadModule.DownloadLastDir(mainWindow);
+		}
+		
 		// Check if the user use the "useDownloadDir" setting to automatically save to "desktop" or "downloads" and force the suggested path to those folders instead of filtered path
 		if ( (folderList == 0) || (folderList == 1) )
 		{
@@ -463,7 +482,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		}
 		
 		
-		if (this.logtoconsole && !this.inPrivateBrowsing) this.console_print("save location changed to: "+directory.path);
+		if (this.logtoconsole && !this.inPrivateBrowsing) this.console_print("save location for "+uri+" changed to: "+directory.path);
 	},
 	
 	
@@ -1238,7 +1257,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 
 	// get TabGroup name, from https://hg.mozilla.org/mozilla-central/rev/b284e10652d3
 	getActiveGroupName: function () {
-
+		
 		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
 						   .getService(Components.interfaces.nsIWindowMediator);
 		var mainWindow = wm.getMostRecentWindow("navigator:browser");
@@ -1254,8 +1273,8 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		if (activeTab.pinned)
 		{
 			// It's an app tab, so it won't have a .tabItem.
-			groupItem = null;
-		} 
+			groupItem = null; // I didn't find how to get the Active Group's Name.
+		}
 		else if (activeTabItem)
 		{
 			groupItem = activeTabItem.parent;

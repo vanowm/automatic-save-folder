@@ -120,6 +120,14 @@ var automatic_save_folder = {
 							   .getService(Components.interfaces.nsIWindowMediator);
 			var mainWindow = wm.getMostRecentWindow("navigator:browser");
 			
+			// since 2012-07-21 gDownloadLastDir uses a per-window privacy status instead of global service. (https://bugzilla.mozilla.org/show_bug.cgi?id=722995 ; https://hg.mozilla.org/mozilla-central/rev/03cd2ad254cc)
+			if (typeof(gDownloadLastDir) != "object" && this.versionChecker.compare(this.appInfo.version, "3.5") >= 0) // gDownloadLastDir is only in 3.5+, prevents error on old Firefox (I'll remove support of old versions soon)
+			{
+				var downloadModule = {};
+				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm", downloadModule);
+				gDownloadLastDir = new downloadModule.DownloadLastDir(mainWindow); // Load gDownloadLastDir for the active window
+			}
+			
 			var tabURL = mainWindow.gURLBar.value;
 			var tabGroupName = this.getActiveGroupName();
 			var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
@@ -360,6 +368,17 @@ var automatic_save_folder = {
 		var lastdir = this.prefManager.getBoolPref("extensions.asf.lastdir");	     // for Firefox2 : set save as Ctrl+S too
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 		
+		// since 2012-07-21 gDownloadLastDir uses a per-window privacy status instead of global service.
+		if (typeof(gDownloadLastDir) != "object" && this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)
+		{
+			var downloadModule = {};
+			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+							   .getService(Components.interfaces.nsIWindowMediator);
+			var mainWindow = wm.getMostRecentWindow("navigator:browser");
+			Components.utils.import("resource://gre/modules/DownloadLastDir.jsm", downloadModule);
+			gDownloadLastDir = new downloadModule.DownloadLastDir(mainWindow);
+		}
+		
 		if (!path) 
 		{
 			directory = Components.classes["@mozilla.org/file/directory_service;1"]
@@ -404,7 +423,7 @@ var automatic_save_folder = {
 			gDownloadLastDir.setFile(uri, directory);
 		}
 		
-		if (this.logtoconsole && !this.inPrivateBrowsing) this.console_print("save location changed to: "+directory.path);
+		if (this.logtoconsole && !this.inPrivateBrowsing) this.console_print("save location for "+uri+" changed to: "+directory.path);
 	},
 	
 	
