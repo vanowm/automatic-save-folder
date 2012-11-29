@@ -958,7 +958,7 @@ var automatic_save_folder = {
 		}
 		
 		this.previousASFVersion = this.prefManager.getCharPref("extensions.asf.version");
-		this.currentASFVersion = this.prefmanager.getCharPref("extensions.asf.currentVersion");
+		this.currentASFVersion = this.prefManager.getCharPref("extensions.asf.currentVersion");
 	},
 	
 	
