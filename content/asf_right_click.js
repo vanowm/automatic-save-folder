@@ -111,10 +111,6 @@ var automatic_save_folder = {
 				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
 			}
 			
-			// Check if there is any filter in list
-			var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
-				
-				
 			// load the domain and the filename of the saved file
 			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
 							   .getService(Components.interfaces.nsIWindowMediator);
@@ -204,6 +200,7 @@ var automatic_save_folder = {
 			
 			// load filters data from prefmanager into filters[]
 			// filters[filternumber][label]
+			var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
 			var filters = new Array();
 			for ( var i = 0 ; i < nbrfilters ; i++)
 			{
@@ -961,19 +958,7 @@ var automatic_save_folder = {
 		}
 		
 		this.previousASFVersion = this.prefManager.getCharPref("extensions.asf.version");
-		
-		// Read currently installed ASF version, including beta revisions
-		// workaround for Firefox4 new asynchronous addonManager (can't depend on addon.version anymore,
-		// so for all versions of Firefox, read the data directly from the dtd source file.
-		var XhrObj = new XMLHttpRequest();
-		XhrObj.open("GET", "chrome://asf/content/common.dtd", false); //synchronous mode
-		XhrObj.overrideMimeType('text/plain; charset=UTF-8');
-		XhrObj.send(null);
-		if (XhrObj.status == 0)
-		{
-			var dtd = XhrObj.responseText.split("\n") ;
-			this.currentASFVersion = dtd[1].match(/"(.*)"/)[1];
-		}
+		this.currentASFVersion = this.prefmanager.getCharPref("extensions.asf.currentVersion");
 	},
 	
 	

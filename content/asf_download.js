@@ -59,9 +59,6 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 			}
 		}
 
-		// Check if there is any filter in list
-		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
-		
 		// Load Window and tab elements from the current active browser.
 		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
 						   .getService(Components.interfaces.nsIWindowMediator);
@@ -164,6 +161,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		
 		// load filters data from prefmanager into filters[]
 		// filters[filternumber][label]
+		var nbrfilters = 	prefManager.getIntPref("extensions.asf.filtersNumber");
 		var filters = new Array();
 		for ( var i = 0 ; i < nbrfilters ; i++)
 		{
