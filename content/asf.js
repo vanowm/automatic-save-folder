@@ -1717,7 +1717,7 @@ var automatic_save_folder = {
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
 		}
 
-		var addon_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+		var addon_GUUID = "D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F";
 		var DownloadSort = enabledItems.indexOf(addon_GUUID,0);
 			
 		if (DownloadSort >= 0) return true;
@@ -1738,13 +1738,13 @@ var automatic_save_folder = {
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
 		}
 
-		var addon_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
+		var addon_GUUID = "DDC359D1-844A-42a7-9AA1-88A850A938A8";
 		var DTA = enabledItems.indexOf(addon_GUUID,0);
 		if (DTA >= 0) return true;
 		
 		//Same but for beta, nighly release of dTa
-		var addon_GUUID = "dta@downthemall.net";
-		var DTA = enabledItems.indexOf(addon_GUUID,0);
+		addon_GUUID = "dta@downthemall.net";
+		DTA = enabledItems.indexOf(addon_GUUID,0);
 		if (DTA >= 0) return true;
 		
 		return false;

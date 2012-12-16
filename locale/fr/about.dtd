@@ -36,7 +36,9 @@
 ! Correction de l'affichage des propositions de dossiers lorsque le dossier de sauvegarde est forcé sur l'option Bureau ou Téléchargement.
 ! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.
 ! Correction de la mémorisation de l'option &quot;Forcer le choix sur...&quot;
-! Correction de la suggestion du dossier d'enregistrement lors d'un téléchargement utilisant clic-droit avec Firefox 7.0.1+".>
+! Correction de la suggestion du dossier d'enregistrement lors d'un téléchargement utilisant clic-droit avec Firefox 7.0.1+
+! Correction de la détection de la version d'Automatic Save Folder avec Firefox 19+
+! Correction de la détection des extensions installées.">
 
 <!ENTITY about.version.104 "* Vérification des dossiers proposés sur la fenêtre d'enregistrement afin d'éviter les doublons.
 ! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.">

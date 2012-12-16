@@ -36,7 +36,9 @@
 ! Fixed the suggested folder's display if the saved folder is forced to Desktop or Download.
 ! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.
 ! Fixed memorized state of &quot;Force the radio choice to...&quot; option.
-! Fixed suggested save path when using right-click downloads with Firefox 7.0.1+">
+! Fixed suggested save path when using right-click downloads with Firefox 7.0.1+
+! Fixed Automatic Save Folder's version detection on Firefox 19+
+! Fixed other installed add-ons detection.">
 
 <!ENTITY about.version.104 "* Prevent duplicated suggested folders on the save window.
 ! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.">

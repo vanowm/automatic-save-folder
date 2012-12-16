@@ -1295,7 +1295,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
 		}
 		
-		var addon_GUUID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}";
+		var addon_GUUID = "DDC359D1-844A-42a7-9AA1-88A850A938A8";
 		var DTA = enabledItems.indexOf(addon_GUUID,0);
 		if (DTA >= 0) return true;
 		

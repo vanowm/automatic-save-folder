@@ -895,7 +895,7 @@ var automatic_save_folder = {
 			var enabledItems = this.prefManager.getCharPref("extensions.enabledItems");
 		}
 		
-		var addon_GUUID = "{D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F}";
+		var addon_GUUID = "D9808C4D-1CF5-4f67-8DB2-12CF78BBA23F";
 		var DownloadSort = enabledItems.indexOf(addon_GUUID,0);
 		if (DownloadSort >= 0) return true;
 	
