@@ -102,19 +102,26 @@ var automatic_save_folder = {
 			// Setting private variables usable in this function
 			var prefManager = this.prefManager;
 			
-			// Check if the user is in PrivateBrowsing mode.
-			if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0) //not working on FF2 and 3.0
-			{
-				var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
-									.getService(Components.interfaces.nsIPrivateBrowsingService);
-				this.inPrivateBrowsing = pbs.privateBrowsingEnabled;
-				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
-			}
-			
 			// load the domain and the filename of the saved file
 			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
 							   .getService(Components.interfaces.nsIWindowMediator);
 			var mainWindow = wm.getMostRecentWindow("navigator:browser");
+			
+			// Check if the user is in PrivateBrowsing mode.
+			if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)// nsIPrivateBrowsingService supported from FF3.5 to FF20
+			{
+				try
+				{
+					var pbs = Components.classes["@mozilla.org/privatebrowsing;1"]
+										.getService(Components.interfaces.nsIPrivateBrowsingService);
+					this.inPrivateBrowsing = pbs.privateBrowsingEnabled;
+				}
+				catch(e) // FF21+
+				{
+					this.inPrivateBrowsing = mainWindow.gBrowser.docShell.QueryInterface(Components.interfaces.nsILoadContext).usePrivateBrowsing;
+				}
+				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
+			}
 			
 			// since 2012-07-21 gDownloadLastDir uses a per-window privacy status instead of global service. (https://bugzilla.mozilla.org/show_bug.cgi?id=722995 ; https://hg.mozilla.org/mozilla-central/rev/03cd2ad254cc)
 			if (typeof(gDownloadLastDir) != "object" && this.versionChecker.compare(this.appInfo.version, "3.5") >= 0) // gDownloadLastDir is only in 3.5+, prevents error on old Firefox (I'll remove support of old versions soon)

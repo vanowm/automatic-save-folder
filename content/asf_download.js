@@ -46,8 +46,14 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		var appInfo = automatic_save_folder.appInfo;
 		this.checkFirefoxVersion();
 		
+		// Load Window and tab elements from the current active browser.
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+						   .getService(Components.interfaces.nsIWindowMediator);
+		var mainWindow = wm.getMostRecentWindow("navigator:browser");
+		var currentTab = mainWindow.gBrowser.getBrowserAtIndex(mainWindow.gBrowser.tabContainer.selectedIndex);
+		
 		// Check if the user is in PrivateBrowsing mode.
-		if (this.firefoxversion >= 3)
+		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)// nsIPrivateBrowsingService supported from FF3.5 to FF20
 		{
 			try
 			{
@@ -55,16 +61,12 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 									.getService(Components.interfaces.nsIPrivateBrowsingService);
 				this.inPrivateBrowsing = pbs.privateBrowsingEnabled;
 			}
-			catch (e) { // nsIPrivateBrowsingService not working on FF2 and 3.0
+			catch(e) // FF21+
+			{
+				this.inPrivateBrowsing = mainWindow.gBrowser.docShell.QueryInterface(Components.interfaces.nsILoadContext).usePrivateBrowsing;
 			}
 		}
 
-		// Load Window and tab elements from the current active browser.
-		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-						   .getService(Components.interfaces.nsIWindowMediator);
-		var mainWindow = wm.getMostRecentWindow("navigator:browser");
-		var currentTab = mainWindow.gBrowser.getBrowserAtIndex(mainWindow.gBrowser.tabContainer.selectedIndex);
-		
 		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
 		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)
 		{

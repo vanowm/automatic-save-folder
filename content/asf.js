@@ -1746,6 +1746,9 @@ var automatic_save_folder = {
 		addon_GUUID = "dta@downthemall.net";
 		DTA = enabledItems.indexOf(addon_GUUID,0);
 		if (DTA >= 0) return true;
+		addon_GUUID = "dta%40downthemall.net";
+		DTA = enabledItems.indexOf(addon_GUUID,0);
+		if (DTA >= 0) return true;
 		
 		return false;
 	},
