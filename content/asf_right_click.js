@@ -120,15 +120,16 @@ var automatic_save_folder = {
 				{
 					this.inPrivateBrowsing = mainWindow.gBrowser.docShell.QueryInterface(Components.interfaces.nsILoadContext).usePrivateBrowsing;
 				}
+				
 				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
-			}
-			
-			// since 2012-07-21 gDownloadLastDir uses a per-window privacy status instead of global service. (https://bugzilla.mozilla.org/show_bug.cgi?id=722995 ; https://hg.mozilla.org/mozilla-central/rev/03cd2ad254cc)
-			if (typeof(gDownloadLastDir) != "object" && this.versionChecker.compare(this.appInfo.version, "3.5") >= 0) // gDownloadLastDir is only in 3.5+, prevents error on old Firefox (I'll remove support of old versions soon)
-			{
-				var downloadModule = {};
-				Components.utils.import("resource://gre/modules/DownloadLastDir.jsm", downloadModule);
-				gDownloadLastDir = new downloadModule.DownloadLastDir(mainWindow); // Load gDownloadLastDir for the active window
+				
+				// since 2012-07-21 gDownloadLastDir uses a per-window privacy status instead of global service. (https://bugzilla.mozilla.org/show_bug.cgi?id=722995 ; https://hg.mozilla.org/mozilla-central/rev/03cd2ad254cc)
+				if (typeof(gDownloadLastDir) != "object")
+				{
+					var downloadModule = {};
+					Components.utils.import("resource://gre/modules/DownloadLastDir.jsm", downloadModule);
+					gDownloadLastDir = new downloadModule.DownloadLastDir(mainWindow); // Load gDownloadLastDir for the active window
+				}
 			}
 			
 			var tabURL = mainWindow.gURLBar.value;
@@ -373,7 +374,7 @@ var automatic_save_folder = {
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 		
 		// since 2012-07-21 gDownloadLastDir uses a per-window privacy status instead of global service.
-		if (typeof(gDownloadLastDir) != "object" && this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)
+		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0 && typeof(gDownloadLastDir) != "object")
 		{
 			var downloadModule = {};
 			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]

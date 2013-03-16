@@ -65,11 +65,8 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 			{
 				this.inPrivateBrowsing = mainWindow.gBrowser.docShell.QueryInterface(Components.interfaces.nsILoadContext).usePrivateBrowsing;
 			}
-		}
-
-		// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
-		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0)
-		{
+			
+			// Enable Private Browsing support with filepicker - Thanks to Ehsan Akhgari at http://ehsanakhgari.org/
 			Components.utils.import("resource://gre/modules/DownloadLastDir.jsm");
 			
 			// since 2012-07-21, it uses a per-window privacy status instead of global service. (https://bugzilla.mozilla.org/show_bug.cgi?id=722995 ; https://hg.mozilla.org/mozilla-central/rev/03cd2ad254cc)
@@ -395,7 +392,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		var directory = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);		
 		
 		// since 2012-07-21 gDownloadLastDir uses a per-window privacy status instead of global service.
-		if (typeof(gDownloadLastDir) != "object")
+		if (this.versionChecker.compare(this.appInfo.version, "3.5") >= 0 && typeof(gDownloadLastDir) != "object")
 		{
 			var downloadModule = {};
 			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
@@ -1007,7 +1004,7 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		var asf_viewpathselect = this.prefManager.getBoolPref("extensions.asf.viewpathselect");
 		var folderList = this.prefManager.getIntPref("browser.download.folderList");
 		var dTa = false;
-		if (this.DownThemAll_isEnabled) // enable ASF box if dTa is selected and sending folder to dTa is enabled.
+		if (this.DownThemAll_isEnabled()) // enable ASF box if dTa is selected and sending folder to dTa is enabled.
 		{
 			dTa = this.prefManager.getBoolPref("extensions.asf.dta_ASFtoDTA_isActive") && (document.getElementById("downthemall").selected || document.getElementById("turbodta").selected);
 		}
@@ -1303,6 +1300,9 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 		
 		//Same but for beta, nighly release of dTa
 		var addon_GUUID = "dta@downthemall.net";
+		var DTA = enabledItems.indexOf(addon_GUUID,0);
+		if (DTA >= 0) return true;
+		var addon_GUUID = "dta%40downthemall.net";
 		var DTA = enabledItems.indexOf(addon_GUUID,0);
 		if (DTA >= 0) return true;
 		
