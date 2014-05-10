@@ -75,6 +75,19 @@ var automatic_save_folder = {
 							return original_getTargetFile.apply(window, arguments);
 						}
 					}
+					if (window.promiseTargetFile) 
+					{
+						// Save a reference to the original function
+						var original_getTargetFile = window.promiseTargetFile;
+						// Override the original function
+						window.promiseTargetFile = function() 
+						{
+							// Call our function before the original one
+							automatic_save_folder.rightclick_main.apply(automatic_save_folder, arguments);
+							// Execute the original function and propagate the return value
+							return original_getTargetFile.apply(window, arguments);
+						}
+					}
 					
 					// Starting from firefox 3.0 there is a timeout when downloading with right-click to read header(Content-Disposition:) to rename the file in the file_explorer suggested filename.
 					// When timeout is set to 1000 ms (default), ASF right-click filtering is not working.
@@ -771,7 +784,17 @@ var automatic_save_folder = {
 	
 	
 	indexInArray: function (arr,val){
-		val = val.replace(/\\/g,'\\\\');
+		val = val.replace(/\\/g,'\\\\')
+				.replace(/\./gi, "\\.") // thanks ziceptor
+				.replace(/\*/gi, "\\*")
+				.replace(/\$/gi, "\\$")
+				.replace(/\^/gi, "\\^")
+				.replace(/\+/gi, "\\+")
+				.replace(/\?/gi, "\\?")
+				.replace(/\|/gi, "\\|")
+				.replace(/\[/gi, "\\[")
+				.replace(/\]/gi, "\\]")
+				.replace(/\//gi, "\\/");
 		var test_regexp = new RegExp("^"+val+"$");
 		var data = "";
 		for(var i=0;i<arr.length;i++) 

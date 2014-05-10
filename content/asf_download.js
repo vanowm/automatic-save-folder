@@ -1058,7 +1058,17 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 	
 	
 	indexInArray: function (arr,val){
-		val = val.replace(/\\/g,'\\\\');
+		val = val.replace(/\\/g,'\\\\')
+				.replace(/\./gi, "\\.")
+				.replace(/\*/gi, "\\*")
+				.replace(/\$/gi, "\\$")
+				.replace(/\^/gi, "\\^")
+				.replace(/\+/gi, "\\+")
+				.replace(/\?/gi, "\\?")
+				.replace(/\|/gi, "\\|")
+				.replace(/\[/gi, "\\[")
+				.replace(/\]/gi, "\\]")
+				.replace(/\//gi, "\\/");
 		var test_regexp = new RegExp("^"+val+"$");
 		var data = "";
 		for(var i=0;i<arr.length;i++)
@@ -1232,8 +1242,12 @@ Copyright (C) 2007-2012 Éric Cassar (Cyan).
 
 
 	checkFirefoxVersion: function() {
-		
-		if (this.versionChecker.compare(this.appInfo.version, "7.0.1") >= 0)
+
+		if (this.versionChecker.compare(this.appInfo.version, "26.0") >= 0)
+		{
+			this.firefoxversion = "26";
+		}
+		else if (this.versionChecker.compare(this.appInfo.version, "7.0.1") >= 0)
 		{
 			this.firefoxversion = "7.01";
 		}

@@ -38,7 +38,10 @@
 ! Correction de la mémorisation de l'option &quot;Forcer le choix sur...&quot;
 ! Correction de la suggestion du dossier d'enregistrement lors d'un téléchargement utilisant clic-droit avec Firefox 7.0.1+
 ! Correction de la détection de la version d'Automatic Save Folder avec Firefox 19+
-! Correction de la détection des extensions installées.">
+! Correction de la détection des extensions installées.
+! Correction de la Navigation Privée pour Firefox 20.0+
+! Correction du filtrage lorsque le dossier de destination contient des caractères spéciaux pour regexp. (Merci à Ziceptor)
+! Correction de l'enregistrement d'un fichier avec clic-droit pour Firefox 27.0.1+">
 
 <!ENTITY about.version.104 "* Vérification des dossiers proposés sur la fenêtre d'enregistrement afin d'éviter les doublons.
 ! Correction de l'enregistrement d'un fichier avec simple-clic pour Firefox 7.0.1+ si l'URI du site n'est pas présent dans la base de donnée.">

@@ -38,7 +38,10 @@
 ! Fixed memorized state of &quot;Force the radio choice to...&quot; option.
 ! Fixed suggested save path when using right-click downloads with Firefox 7.0.1+
 ! Fixed Automatic Save Folder's version detection on Firefox 19+
-! Fixed other installed add-ons detection.">
+! Fixed other installed add-ons detection.
+! Fixed Private browsing on Firefox 20.0+
+! Fixed filtering while the target folder contains regexp special characters. (Thanks to Ziceptor)
+! Fixed Right-Click saving on firefox 27.0.1+">
 
 <!ENTITY about.version.104 "* Prevent duplicated suggested folders on the save window.
 ! Fixed single-click saving on Firefox 7.0.1+ if the current website URI is not in the database.">
