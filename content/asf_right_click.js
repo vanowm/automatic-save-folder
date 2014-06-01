@@ -208,7 +208,7 @@ var automatic_save_folder = {
 			}
 			
 			// set the last folder path used into asf.lastpath
-			if (this.firefoxversion >= "3")   // take the download.lastDir if it's FF3
+			if (this.firefoxversion >= 3)   // take the download.lastDir if it's FF3
 			{
 				var folder = this.loadUnicodeString("browser.download.lastDir");
 			}
@@ -318,11 +318,11 @@ var automatic_save_folder = {
 					}	
 					else  // else, if domain is the same as the last, and the user checked "use the same folder if same domain"
 					{
-						if (this.firefoxversion >= "3")
+						if (this.firefoxversion >= 3)
 						{
 							var lastpath = this.loadUnicodeString("browser.download.lastDir");
 						}
-						if (this.firefoxversion == "2")
+						if (this.firefoxversion == 2)
 						{
 							var lastpath = this.loadUnicodeString("browser.download.dir");
 						}
@@ -336,11 +336,11 @@ var automatic_save_folder = {
 				}
 				else // else, if savetype == 0  (folder is set to last folder)
 				{
-					if (this.firefoxversion >= "3")
+					if (this.firefoxversion >= 3)
 					{
 						var lastpath = this.loadUnicodeString("browser.download.lastDir");
 					}
-					if (this.firefoxversion == "2")
+					if (this.firefoxversion == 2)
 					{
 						var lastpath = this.loadUnicodeString("browser.download.dir");
 					}
@@ -867,19 +867,19 @@ var automatic_save_folder = {
 		
 		if (this.versionChecker.compare(this.appInfo.version, "7.0.1") >= 0)
 		{
-			this.firefoxversion = "7.01";
+			this.firefoxversion = 7.01;
 		}
 		else if (this.versionChecker.compare(this.appInfo.version, "4.0b1") >= 0)
 		{
-			this.firefoxversion = "4";
+			this.firefoxversion = 4;
 		}
 		else if(this.versionChecker.compare(this.appInfo.version, "3.0") >= 0) 
 		{
-			this.firefoxversion = "3";
+			this.firefoxversion = 3;
 		}
 		else 
 		{
-			this.firefoxversion = "2";
+			this.firefoxversion = 2;
 		}
 	},
 	
