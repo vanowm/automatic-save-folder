@@ -283,9 +283,11 @@ var automatic_save_folder = {
 						case "7":
 							dom_regexp = this.test_regexp(filters[i][0], tabURL, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 7");
+							break;
 						case "8":
 							dom_regexp = this.test_regexp(filters[i][0], tabGroupName, i, "domain");
 							if (dom_regexp && this.logtoconsole && !this.inPrivateBrowsing) this.console_print("Filter "+i+" matched domain type : 8");
+							break;
 						default:
 					}
 					
@@ -522,6 +524,7 @@ var automatic_save_folder = {
 		var mainWindow = wm.getMostRecentWindow("navigator:browser");
 		
 		var tabURL = mainWindow.gURLBar.value;
+		var tabGroupName = this.getActiveGroupName();
 		var currentReferrer = mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.referrer;
 		
 		var tabLocation = 	mainWindow.gBrowser.mCurrentTab.linkedBrowser.contentDocument.location;
@@ -598,6 +601,11 @@ var automatic_save_folder = {
 				case "7":
 					dom_regexp = this.test_regexp(asf_domain, tabURL, idx, "domain");
 					used_domain_string = tabURL;
+					break;
+				case "8":
+					dom_regexp = this.test_regexp(asf_domain, tabGroupName, idx, "domain");
+					used_domain_string = tabGroupName;
+					break;
 				default:
 			}
 			
@@ -794,6 +802,8 @@ var automatic_save_folder = {
 				.replace(/\|/gi, "\\|")
 				.replace(/\[/gi, "\\[")
 				.replace(/\]/gi, "\\]")
+				.replace(/\(/gi, "\\(")
+				.replace(/\)/gi, "\\)")
 				.replace(/\//gi, "\\/");
 		var test_regexp = new RegExp("^"+val+"$");
 		var data = "";
@@ -830,6 +840,7 @@ var automatic_save_folder = {
 													.replace(/\?/gi, ".")
 													.replace(/\|/gi, "\\|")
 													.replace(/\[/gi, "\\[")
+													.replace(/\]/gi, "\\]")
 													.replace(/\//gi, "\\/");
 			filter_data = ".*"+filter_data+".*";
 		}
@@ -841,7 +852,18 @@ var automatic_save_folder = {
 			var test = new RegExp(filter_data, param);
 		}
 		catch(e){
-			alert('\t\tAutomatic Save Folder\n\n-'+e.message+'\nin filter N°'+idx+':\n'+filter_data+'\nregular expression: '+isregexp)
+		
+			// try to fix parentheses if not used for catching purpose (odd number of parentheses). currently replacing all instances, breaking existing catches.
+			filter_data = filter_data.replace(/\(/gi, "\\(")
+									 .replace(/\)/gi, "\\)");
+			
+			try
+			{
+				test = new RegExp(filter_data, param);
+			}
+			catch(e){
+				alert('\t\tAutomatic Save Folder\n\n-'+e.message+'\nin filter N°'+idx+':\n'+filter_data+'\nregular expression: '+isregexp)
+			}
 		}
 		
 		// Thanks to Ted Gifford for the regular expression capture.
